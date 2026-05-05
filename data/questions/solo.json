@@ -1,0 +1,4822 @@
+[
+  {
+    "question": "Halkee ayuu ku dhashay Nabi Muxamed (CSW)?",
+    "options": [
+      "Madiina",
+      "Makka",
+      "Shaam",
+      "Yaman"
+    ],
+    "correct": "Makka"
+  },
+  {
+    "question": "Waa imisa xididka laba jibbaaran ee 144?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Caasimadda dalka Turkiga waa?",
+    "options": [
+      "Istanbul",
+      "Ankara",
+      "Izmir",
+      "Antalya"
+    ],
+    "correct": "Ankara"
+  },
+  {
+    "question": "We ___ to the mosque five times a day.",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "gone"
+    ],
+    "correct": "go"
+  },
+  {
+    "question": "Waa maxay caasimadda Gobolka Sool?",
+    "options": [
+      "Buuhoodle",
+      "Taleex",
+      "Laascaanood",
+      "Caynabo"
+    ],
+    "correct": "Laascaanood"
+  },
+  {
+    "question": "Suuradda loogu magac daray 'Hooyada Qur'aanka' waa?",
+    "options": [
+      "Al-Baqara",
+      "Al-Ikhlaas",
+      "Al-Faatixa",
+      "Yaasiin"
+    ],
+    "correct": "Al-Faatixa"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Qadar?",
+    "options": [
+      "Dubai",
+      "Doha",
+      "Riyadh",
+      "Kuwait City"
+    ],
+    "correct": "Doha"
+  },
+  {
+    "question": "What is the opposite of 'Big'?",
+    "options": [
+      "Large",
+      "Small",
+      "Tall",
+      "Long"
+    ],
+    "correct": "Small"
+  },
+  {
+    "question": "Waa imisa tirada gobollada Soomaaliya?",
+    "options": [
+      "15",
+      "18",
+      "21",
+      "25"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Halkee ayuu ku yaallaa webiga Niil (Nile)?",
+    "options": [
+      "Afrika",
+      "Aasiya",
+      "Yurub",
+      "Ameerika"
+    ],
+    "correct": "Afrika"
+  },
+  {
+    "question": "Waa maxay $25 \\times 4 + 50$?",
+    "options": [
+      "100",
+      "125",
+      "150",
+      "200"
+    ],
+    "correct": "150"
+  },
+  {
+    "question": "Nebigii isaga oo yar laga helay geedka hoostiisa (sanduukha)?",
+    "options": [
+      "Nabi Yuusuf",
+      "Nabi Muuse",
+      "Nabi Ciise",
+      "Nabi Ismaaciil"
+    ],
+    "correct": "Nabi Muuse"
+  },
+  {
+    "question": "Caasimadda dalka Faransiiska waa?",
+    "options": [
+      "London",
+      "Berlin",
+      "Paris",
+      "Rome"
+    ],
+    "correct": "Paris"
+  },
+  {
+    "question": "Xubinta jirka u qaabilsan sifaynta dhiigga waa?",
+    "options": [
+      "Wadnaha",
+      "Beerka",
+      "Kelyaha",
+      "Sambabbada"
+    ],
+    "correct": "Kelyaha"
+  },
+  {
+    "question": "Waa maxay natiijada $120 \\div 2 - 10$?",
+    "options": [
+      "40",
+      "50",
+      "60",
+      "70"
+    ],
+    "correct": "50"
+  },
+  {
+    "question": "Caasimadda dalka Ruushka waa?",
+    "options": [
+      "Kyiv",
+      "Moscow",
+      "Saint Petersburg",
+      "Warsaw"
+    ],
+    "correct": "Moscow"
+  },
+  {
+    "question": "They ___ playing football now.",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "was"
+    ],
+    "correct": "are"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Sucuudiga?",
+    "options": [
+      "Makka",
+      "Madiina",
+      "Jidda",
+      "Riyadh"
+    ],
+    "correct": "Riyadh"
+  },
+  {
+    "question": "Immisa sano ayuu xilka hayay madaxweyne Aadan Cadde?",
+    "options": [
+      "5 sano",
+      "7 sano",
+      "9 sano",
+      "10 sano"
+    ],
+    "correct": "7 sano"
+  },
+  {
+    "question": "Waa maxay dhibcaha ay biyuhu ku karkaraan (Boiling point)?",
+    "options": [
+      "50°C",
+      "80°C",
+      "100°C",
+      "120°C"
+    ],
+    "correct": "100°C"
+  },
+  {
+    "question": "Waa kuma saxaabigii ururiyay Qur'aanka markii ugu horreysay?",
+    "options": [
+      "Abuu Bakr",
+      "Cumar",
+      "Cismaan",
+      "Cali"
+    ],
+    "correct": "Abuu Bakr"
+  },
+  {
+    "question": "Caasimadda dalka Spain waa?",
+    "options": [
+      "Barcelona",
+      "Madrid",
+      "Valencia",
+      "Seville"
+    ],
+    "correct": "Madrid"
+  },
+  {
+    "question": "Waa maxay wadarta xaglaha saddex-xagalka?",
+    "options": [
+      "90°",
+      "180°",
+      "270°",
+      "360°"
+    ],
+    "correct": "180°"
+  },
+  {
+    "question": "She is the ___ girl in the class.",
+    "options": [
+      "smart",
+      "smarter",
+      "smartest",
+      "more smart"
+    ],
+    "correct": "smartest"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Nugaal?",
+    "options": [
+      "Eyl",
+      "Burtinle",
+      "Garoowe",
+      "Garacad"
+    ],
+    "correct": "Garoowe"
+  },
+  {
+    "question": "Waa imisa tirada bilaha sanadka?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Waa kuma ninkii dhisay taalada Taj Mahal?",
+    "options": [
+      "Akbar",
+      "Shah Jahan",
+      "Babur",
+      "Aurangzeb"
+    ],
+    "correct": "Shah Jahan"
+  },
+  {
+    "question": "Waa maxay $9 \\times 8$?",
+    "options": [
+      "64",
+      "72",
+      "81",
+      "90"
+    ],
+    "correct": "72"
+  },
+  {
+    "question": "Which animal is known as the 'Ship of the Desert'?",
+    "options": [
+      "Horse",
+      "Elephant",
+      "Camel",
+      "Donkey"
+    ],
+    "correct": "Camel"
+  },
+  {
+    "question": "Halkee ayay ku taallaa buurta Everest?",
+    "options": [
+      "Africa",
+      "Asia",
+      "Europe",
+      "America"
+    ],
+    "correct": "Asia"
+  },
+  {
+    "question": "Immisa rukni ayuu leeyahay Islaamku?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Caasimadda dalka Germany waa?",
+    "options": [
+      "Munich",
+      "Frankfurt",
+      "Berlin",
+      "Hamburg"
+    ],
+    "correct": "Berlin"
+  },
+  {
+    "question": "Waa maxay $1000 \\times 0$?",
+    "options": [
+      "0",
+      "1",
+      "100",
+      "1000"
+    ],
+    "correct": "0"
+  },
+  {
+    "question": "Look! The baby ___.",
+    "options": [
+      "sleep",
+      "is sleeping",
+      "sleeps",
+      "slept"
+    ],
+    "correct": "is sleeping"
+  },
+  {
+    "question": "Waa kuma qoraagii qoray farta Soomaaliga?",
+    "options": [
+      "Shire Jaamac Axmed",
+      "Muuse Galaal",
+      "Cabdalla Mansuur",
+      "Maxamed Siyaad"
+    ],
+    "correct": "Shire Jaamac Axmed"
+  },
+  {
+    "question": "Waa maxay gaaska aan neefsanno?",
+    "options": [
+      "Nitrogen",
+      "Oxygen",
+      "Carbon Dioxide",
+      "Hydrogen"
+    ],
+    "correct": "Oxygen"
+  },
+  {
+    "question": "Halkee ayay ku taallaa xarunta Midowga Afrika?",
+    "options": [
+      "Nairobi",
+      "Mogadishu",
+      "Addis Ababa",
+      "Cairo"
+    ],
+    "correct": "Addis Ababa"
+  },
+  {
+    "question": "Waa maxay 1/2 ka mid ah 50?",
+    "options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "Waa kuma saxaabigii rumeeyay carruurta kii ugu horreeyay?",
+    "options": [
+      "Cali Bin Abi Taalib",
+      "Zayd Bin Xaaritha",
+      "Anas Bin Maalik",
+      "Cabdullaahi Bin Cabaas"
+    ],
+    "correct": "Cali Bin Abi Taalib"
+  },
+  {
+    "question": "Caasimadda dalka Ruushka waa?",
+    "options": [
+      "Kyiv",
+      "Moscow",
+      "Warsaw",
+      "Prague"
+    ],
+    "correct": "Moscow"
+  },
+  {
+    "question": "Waa maxay xubinta ugu weyn jirka bini'aadamka?",
+    "options": [
+      "Beerka",
+      "Maqaarka",
+      "Sambabka",
+      "Wadnaha"
+    ],
+    "correct": "Maqaarka"
+  },
+  {
+    "question": "Waa maxay $11 \\times 11$?",
+    "options": [
+      "111",
+      "121",
+      "131",
+      "141"
+    ],
+    "correct": "121"
+  },
+  {
+    "question": "English is ___ than Somali.",
+    "options": [
+      "easy",
+      "easier",
+      "easiest",
+      "more easy"
+    ],
+    "correct": "easier"
+  },
+  {
+    "question": "Waa imisa tirada qaaradaha adduunka?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Immisa suuradood ayuu ka kooban yahay Qur'aanka?",
+    "options": [
+      "110",
+      "114",
+      "120",
+      "124"
+    ],
+    "correct": "114"
+  },
+  {
+    "question": "Caasimadda dalka France waa?",
+    "options": [
+      "Lyon",
+      "Marseille",
+      "Paris",
+      "Nice"
+    ],
+    "correct": "Paris"
+  },
+  {
+    "question": "Waa maxay xididka 64?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct": "8"
+  },
+  {
+    "question": "Please ___ the door.",
+    "options": [
+      "close",
+      "closes",
+      "closing",
+      "closed"
+    ],
+    "correct": "close"
+  },
+  {
+    "question": "Waa kuma ninkii helay Ameerika?",
+    "options": [
+      "Vasco da Gama",
+      "Christopher Columbus",
+      "Marco Polo",
+      "James Cook"
+    ],
+    "correct": "Christopher Columbus"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Galgaduud?",
+    "options": [
+      "Cadaado",
+      "Guriceel",
+      "Dhuusamareeb",
+      "Caabudwaaq"
+    ],
+    "correct": "Dhuusamareeb"
+  },
+  {
+    "question": "The sun ___ in the east.",
+    "options": [
+      "rise",
+      "rises",
+      "rising",
+      "rose"
+    ],
+    "correct": "rises"
+  },
+  {
+    "question": "Halkee ayay ku taallaa xarunta Qaramada Midoobay (UN)?",
+    "options": [
+      "Geneva",
+      "London",
+      "New York",
+      "Paris"
+    ],
+    "correct": "New York"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka China?",
+    "options": [
+      "Tokyo",
+      "Beijing",
+      "Seoul",
+      "Bangkok"
+    ],
+    "correct": "Beijing"
+  },
+  {
+    "question": "Immisa sano ayuu noolaa Nabi Muxamed (CSW)?",
+    "options": [
+      "40",
+      "50",
+      "63",
+      "70"
+    ],
+    "correct": "63"
+  },
+  {
+    "question": "Caasimadda dalka India waa?",
+    "options": [
+      "Mumbai",
+      "Delhi",
+      "New Delhi",
+      "Kolkata"
+    ],
+    "correct": "New Delhi"
+  },
+  {
+    "question": "Waa maxay xididka laba jibbaaran ee 100?",
+    "options": [
+      "5",
+      "10",
+      "15",
+      "20"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "I ___ a doctor in the future.",
+    "options": [
+      "am",
+      "will be",
+      "was",
+      "be"
+    ],
+    "correct": "will be"
+  },
+  {
+    "question": "Waa kuma qoraagii qoray buugga Aqoonta Guud?",
+    "options": [
+      "Shire Jaamac",
+      "Muuse Galaal",
+      "Cali Shacbaan",
+      "Cabdalla Mansuur"
+    ],
+    "correct": "Cali Shacbaan"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Italy?",
+    "options": [
+      "Milan",
+      "Venice",
+      "Rome",
+      "Naples"
+    ],
+    "correct": "Rome"
+  },
+  {
+    "question": "Suuradda ugu dheer Qur'aanka waa?",
+    "options": [
+      "Yasin",
+      "Al-Baqara",
+      "Al-Imran",
+      "Al-Ma'idah"
+    ],
+    "correct": "Al-Baqara"
+  },
+  {
+    "question": "Waa maxay $50 \\times 2$?",
+    "options": [
+      "80",
+      "90",
+      "100",
+      "110"
+    ],
+    "correct": "100"
+  },
+  {
+    "question": "Listen! Sarah ___ the piano.",
+    "options": [
+      "play",
+      "plays",
+      "is playing",
+      "played"
+    ],
+    "correct": "is playing"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Bay?",
+    "options": [
+      "Marka",
+      "Afgooye",
+      "Baydhabo",
+      "Xuddur"
+    ],
+    "correct": "Baydhabo"
+  },
+  {
+    "question": "Immisa bilood ayuu ka kooban yahay sanadka Hijriyada?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Webiga ugu dheer adduunka waa?",
+    "options": [
+      "Amazon",
+      "Nile",
+      "Mississippi",
+      "Yangtze"
+    ],
+    "correct": "Nile"
+  },
+  {
+    "question": "Waa maxay $200 \\div 5$?",
+    "options": [
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+    "correct": "40"
+  },
+  {
+    "question": "He ___ football every Friday.",
+    "options": [
+      "play",
+      "plays",
+      "playing",
+      "played"
+    ],
+    "correct": "plays"
+  },
+  {
+    "question": "Halkee ayay ku taallaa buurta ugu dheer Soomaaliya?",
+    "options": [
+      "Sanaag",
+      "Bari",
+      "Woqooyi Galbeed",
+      "Awdal"
+    ],
+    "correct": "Sanaag"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Canada?",
+    "options": [
+      "Toronto",
+      "Vancouver",
+      "Ottawa",
+      "Montreal"
+    ],
+    "correct": "Ottawa"
+  },
+  {
+    "question": "Immisa xaraf ayuu ka kooban yahay alifba'da Af-Soomaaliga?",
+    "options": [
+      "21",
+      "26",
+      "28",
+      "30"
+    ],
+    "correct": "26"
+  },
+  {
+    "question": "Waa maxay $15 + 15 + 15$?",
+    "options": [
+      "30",
+      "40",
+      "45",
+      "50"
+    ],
+    "correct": "45"
+  },
+  {
+    "question": "I ___ breakfast at 7 AM today.",
+    "options": [
+      "eat",
+      "eats",
+      "ate",
+      "eating"
+    ],
+    "correct": "ate"
+  },
+  {
+    "question": "Caasimadda dalka South Korea waa?",
+    "options": [
+      "Tokyo",
+      "Seoul",
+      "Beijing",
+      "Bangkok"
+    ],
+    "correct": "Seoul"
+  },
+  {
+    "question": "Waa kuma saxaabigii ugu horeeyay ee rumeeyay haweenka?",
+    "options": [
+      "Khadiija Bintu Khuwaylid",
+      "Caisha Bintu Abii Bakr",
+      "Faadumo Rasuul",
+      "Sumaya"
+    ],
+    "correct": "Khadiija Bintu Khuwaylid"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Brazil?",
+    "options": [
+      "Rio de Janeiro",
+      "Sao Paulo",
+      "Brasilia",
+      "Salvador"
+    ],
+    "correct": "Brasilia"
+  },
+  {
+    "question": "Waa maxay $10^2$ (toban laba jibbaaran)?",
+    "options": [
+      "20",
+      "100",
+      "200",
+      "1000"
+    ],
+    "correct": "100"
+  },
+  {
+    "question": "She ___ a new book yesterday.",
+    "options": [
+      "buy",
+      "buys",
+      "bought",
+      "buying"
+    ],
+    "correct": "bought"
+  },
+  {
+    "question": "Waa maxay caasimadda Gobolka Gedo?",
+    "options": [
+      "Bardheere",
+      "Luuq",
+      "Garbahaarey",
+      "Baardheere"
+    ],
+    "correct": "Garbahaarey"
+  },
+  {
+    "question": "Immisa xubnood ayuu ka kooban yahay Baarlamaanka Soomaaliya?",
+    "options": [
+      "250",
+      "275",
+      "300",
+      "325"
+    ],
+    "correct": "275"
+  },
+  {
+    "question": "Halkee ayuu ku yaallaa marinka Suways (Suez Canal)?",
+    "options": [
+      "Yaman",
+      "Itoobiya",
+      "Masar",
+      "Suudaan"
+    ],
+    "correct": "Masar"
+  },
+  {
+    "question": "Waa maxay $30 \\times 30$?",
+    "options": [
+      "600",
+      "800",
+      "900",
+      "1200"
+    ],
+    "correct": "900"
+  },
+  {
+    "question": "They ___ a movie last night.",
+    "options": [
+      "watch",
+      "watches",
+      "watched",
+      "watching"
+    ],
+    "correct": "watched"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Australia?",
+    "options": [
+      "Sydney",
+      "Melbourne",
+      "Canberra",
+      "Perth"
+    ],
+    "correct": "Canberra"
+  },
+  {
+    "question": "Halkee ayay ku taallaa Masjidka Al-Aqsa?",
+    "options": [
+      "Makka",
+      "Madiina",
+      "Qudus",
+      "Dimishiq"
+    ],
+    "correct": "Qudus"
+  },
+  {
+    "question": "Waa maxay xubinta jirka u qaabilsan aragga?",
+    "options": [
+      "Dhegta",
+      "Sanka",
+      "Indhaha",
+      "Carrabka"
+    ],
+    "correct": "Indhaha"
+  },
+  {
+    "question": "Waa maxay $500 - 150$?",
+    "options": [
+      "250",
+      "350",
+      "450",
+      "550"
+    ],
+    "correct": "350"
+  },
+  {
+    "question": "English: ___ you like coffee?",
+    "options": [
+      "Do",
+      "Does",
+      "Is",
+      "Are"
+    ],
+    "correct": "Do"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Indonesia?",
+    "options": [
+      "Bali",
+      "Jakarta",
+      "Sumatra",
+      "Nusantara"
+    ],
+    "correct": "Jakarta"
+  },
+  {
+    "question": "Waa kuma saxaabigii loo yaqaanay 'Farruuq'?",
+    "options": [
+      "Abu Bakr",
+      "Cumar",
+      "Cismaan",
+      "Cali"
+    ],
+    "correct": "Cumar"
+  },
+  {
+    "question": "Waa maxay badweynta ugu weyn adduunka?",
+    "options": [
+      "Badweynta Hindiya",
+      "Badweynta Atlaantik",
+      "Badweynta Baasifigga",
+      "Badweynta Arctic"
+    ],
+    "correct": "Badweynta Baasifigga"
+  },
+  {
+    "question": "Waa maxay $12 \\times 12$?",
+    "options": [
+      "124",
+      "134",
+      "144",
+      "154"
+    ],
+    "correct": "144"
+  },
+  {
+    "question": "I am ___ for my exams.",
+    "options": [
+      "study",
+      "studies",
+      "studying",
+      "studied"
+    ],
+    "correct": "studying"
+  },
+  {
+    "question": "Waa maxay caasimadda Gobolka Banaadir?",
+    "options": [
+      "Afgooye",
+      "Muqdisho",
+      "Marka",
+      "Balcad"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Nebigii la hadlay shimbiraha iyo jinka?",
+    "options": [
+      "Nabi Muuse",
+      "Nabi Sulaymaan",
+      "Nabi Nuux",
+      "Nabi Ciise"
+    ],
+    "correct": "Nabi Sulaymaan"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka South Africa?",
+    "options": [
+      "Johannesburg",
+      "Pretoria",
+      "Cape Town",
+      "Durban"
+    ],
+    "correct": "Pretoria"
+  },
+  {
+    "question": "Waa imisa xididka 49?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Where ___ you from?",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "be"
+    ],
+    "correct": "are"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Bari?",
+    "options": [
+      "Qardho",
+      "Boosaaso",
+      "Bandarbeyla",
+      "Galinsoor"
+    ],
+    "correct": "Boosaaso"
+  },
+  {
+    "question": "Suuradda lagu magacaabo 'Qalbiga Qur'aanka'?",
+    "options": [
+      "Al-Faatixa",
+      "Yaasiin",
+      "Al-Mulk",
+      "Al-Waaqica"
+    ],
+    "correct": "Yaasiin"
+  },
+  {
+    "question": "Waa maxay dalka ugu dadka badan adduunka?",
+    "options": [
+      "Shiinaha",
+      "Hindiya",
+      "Mareykanka",
+      "Ruushka"
+    ],
+    "correct": "Hindiya"
+  },
+  {
+    "question": "Waa maxay $100 \\div 4$?",
+    "options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "She ___ a beautiful voice.",
+    "options": [
+      "has",
+      "have",
+      "is",
+      "are"
+    ],
+    "correct": "has"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Pakistan?",
+    "options": [
+      "Karachi",
+      "Lahore",
+      "Islamabad",
+      "Peshawar"
+    ],
+    "correct": "Islamabad"
+  },
+  {
+    "question": "Waa kuma saxaabigii loo yaqaanay 'Dul-nuureyn'?",
+    "options": [
+      "Cali",
+      "Cismaan",
+      "Cumar",
+      "Abuu Bakr"
+    ],
+    "correct": "Cismaan"
+  },
+  {
+    "question": "Badweynta ku dhow Soomaaliya waa?",
+    "options": [
+      "Baasifig",
+      "Hindiya",
+      "Atlaantik",
+      "Arctic"
+    ],
+    "correct": "Hindiya"
+  },
+  {
+    "question": "Waa maxay $8 \\times 8$?",
+    "options": [
+      "56",
+      "64",
+      "72",
+      "80"
+    ],
+    "correct": "64"
+  },
+  {
+    "question": "How ___ is this bag?",
+    "options": [
+      "many",
+      "much",
+      "long",
+      "tall"
+    ],
+    "correct": "much"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Hiiraan?",
+    "options": [
+      "Beledweyne",
+      "Buloburde",
+      "Jalaqsi",
+      "Matabaan"
+    ],
+    "correct": "Beledweyne"
+  },
+  {
+    "question": "Xajku waa rukunka imisaad ee Islaamka?",
+    "options": [
+      "3aad",
+      "4aad",
+      "5aad",
+      "2aad"
+    ],
+    "correct": "5aad"
+  },
+  {
+    "question": "Caasimadda dalka Mexico waa?",
+    "options": [
+      "Cancun",
+      "Tijuana",
+      "Mexico City",
+      "Puebla"
+    ],
+    "correct": "Mexico City"
+  },
+  {
+    "question": "Waa imisa xididka 81?",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correct": "9"
+  },
+  {
+    "question": "They ___ to London next week.",
+    "options": [
+      "go",
+      "are going",
+      "went",
+      "goes"
+    ],
+    "correct": "are going"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Togdheer?",
+    "options": [
+      "Burco",
+      "Buuhoodle",
+      "Oodweyne",
+      "Sheikh"
+    ],
+    "correct": "Burco"
+  },
+  {
+    "question": "Qofka u horeeyay ee lagu aaso jannada Baqiic?",
+    "options": [
+      "Cismaan bin Madcuun",
+      "Abu Bakr",
+      "Faadumo",
+      "Xamsa"
+    ],
+    "correct": "Cismaan bin Madcuun"
+  },
+  {
+    "question": "Waa maxay dalka ugu weyn qaaradda Afrika dhul ahaan?",
+    "options": [
+      "Suudaan",
+      "Algeria",
+      "Nigeria",
+      "Masar"
+    ],
+    "correct": "Algeria"
+  },
+  {
+    "question": "Waa maxay $150 + 150$?",
+    "options": [
+      "200",
+      "250",
+      "300",
+      "350"
+    ],
+    "correct": "300"
+  },
+  {
+    "question": "I ___ a book every night.",
+    "options": [
+      "read",
+      "reads",
+      "reading",
+      "am read"
+    ],
+    "correct": "read"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Iraq?",
+    "options": [
+      "Basra",
+      "Mosul",
+      "Baghdad",
+      "Erbil"
+    ],
+    "correct": "Baghdad"
+  },
+  {
+    "question": "Nebigii u dambeeyay ee laga soo dhex saaro Bani Israa'iil?",
+    "options": [
+      "Nabi Ciise",
+      "Nabi Muuse",
+      "Nabi Yaxye",
+      "Nabi Zakariye"
+    ],
+    "correct": "Nabi Ciise"
+  },
+  {
+    "question": "Waa maxay jasiiradda ugu weyn adduunka?",
+    "options": [
+      "Madagascar",
+      "Greenland",
+      "Australia",
+      "Iceland"
+    ],
+    "correct": "Greenland"
+  },
+  {
+    "question": "Waa maxay $60 \\div 3$?",
+    "options": [
+      "15",
+      "20",
+      "25",
+      "30"
+    ],
+    "correct": "20"
+  },
+  {
+    "question": "English: This is ___ apple.",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "some"
+    ],
+    "correct": "an"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Awdal?",
+    "options": [
+      "Baki",
+      "Saylac",
+      "Boorama",
+      "Lughaya"
+    ],
+    "correct": "Boorama"
+  },
+  {
+    "question": "Waa kuma ninkii dhisay ahraamta Masar kii ugu weynaa?",
+    "options": [
+      "Khufu",
+      "Khafre",
+      "Menkaure",
+      "Ramses"
+    ],
+    "correct": "Khufu"
+  },
+  {
+    "question": "Waa maxay dalka loogu yeero 'Dalka Cadceedu ka soo baxdo'?",
+    "options": [
+      "Shiinaha",
+      "Koonfur Kuuriya",
+      "Japan",
+      "Vietnam"
+    ],
+    "correct": "Japan"
+  },
+  {
+    "question": "Waa maxay $20 \\times 5$?",
+    "options": [
+      "80",
+      "90",
+      "100",
+      "110"
+    ],
+    "correct": "100"
+  },
+  {
+    "question": "Look! The sun ___.",
+    "options": [
+      "shine",
+      "is shining",
+      "shines",
+      "shone"
+    ],
+    "correct": "is shining"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Shabeellaha Hoose?",
+    "options": [
+      "Afgooye",
+      "Wanlaweyn",
+      "Marka",
+      "Qoryooley"
+    ],
+    "correct": "Marka"
+  },
+  {
+    "question": "Tirada malaa'igta ee la yiri waxay qoraan camalka dadka?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": "2"
+  },
+  {
+    "question": "Caasimadda dalka Malaysia waa?",
+    "options": [
+      "Bangkok",
+      "Kuala Lumpur",
+      "Singapore",
+      "Jakarta"
+    ],
+    "correct": "Kuala Lumpur"
+  },
+  {
+    "question": "Waa imisa xididka 121?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "11"
+  },
+  {
+    "question": "He ___ at home yesterday.",
+    "options": [
+      "is",
+      "was",
+      "were",
+      "be"
+    ],
+    "correct": "was"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Mudug?",
+    "options": [
+      "Gaalkacyo",
+      "Hobyo",
+      "Jariban",
+      "Galdogob"
+    ],
+    "correct": "Gaalkacyo"
+  },
+  {
+    "question": "Muxuu ahaa magaca faraskii Nabi Muxamed (CSW)?",
+    "options": [
+      "Al-Buraaq",
+      "Al-Sakab",
+      "Al-Qaswa",
+      "Al-Duldul"
+    ],
+    "correct": "Al-Sakab"
+  },
+  {
+    "question": "Waa maxay dalka ugu yar adduunka?",
+    "options": [
+      "Monaco",
+      "Vatican City",
+      "San Marino",
+      "Maldives"
+    ],
+    "correct": "Vatican City"
+  },
+  {
+    "question": "Waa maxay $7 \\times 9$?",
+    "options": [
+      "56",
+      "63",
+      "72",
+      "81"
+    ],
+    "correct": "63"
+  },
+  {
+    "question": "What is the past tense of 'Go'?",
+    "options": [
+      "Goes",
+      "Going",
+      "Went",
+      "Gone"
+    ],
+    "correct": "Went"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Thailand?",
+    "options": [
+      "Hanoi",
+      "Bangkok",
+      "Manila",
+      "Phnom Penh"
+    ],
+    "correct": "Bangkok"
+  },
+  {
+    "question": "Ruknika 2aad ee Islaamka waa?",
+    "options": [
+      "Soonka",
+      "Ashahaadada",
+      "Salaadda",
+      "Zakada"
+    ],
+    "correct": "Salaadda"
+  },
+  {
+    "question": "Webiga ku dhow magaalada London?",
+    "options": [
+      "Nile",
+      "Thames",
+      "Seine",
+      "Danube"
+    ],
+    "correct": "Thames"
+  },
+  {
+    "question": "Waa maxay $500 \\div 2$?",
+    "options": [
+      "150",
+      "200",
+      "250",
+      "300"
+    ],
+    "correct": "250"
+  },
+  {
+    "question": "She ___ her homework now.",
+    "options": [
+      "do",
+      "does",
+      "is doing",
+      "did"
+    ],
+    "correct": "is doing"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Shabeellaha Dhexe?",
+    "options": [
+      "Balcad",
+      "Jowhar",
+      "Mahaday",
+      "Cadale"
+    ],
+    "correct": "Jowhar"
+  },
+  {
+    "question": "Waa kuma qofkii ugu horreeyay ee rumeeyay Nabi Muxamed (CSW)?",
+    "options": [
+      "Abu Bakr",
+      "Khadiija",
+      "Cali",
+      "Sayid"
+    ],
+    "correct": "Khadiija"
+  },
+  {
+    "question": "Caasimadda dalka Iran waa?",
+    "options": [
+      "Shiraz",
+      "Tehran",
+      "Isfahan",
+      "Mashhad"
+    ],
+    "correct": "Tehran"
+  },
+  {
+    "question": "Waa maxay xididka 16?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "___ you speak English?",
+    "options": [
+      "Do",
+      "Does",
+      "Is",
+      "Are"
+    ],
+    "correct": "Do"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Bakool?",
+    "options": [
+      "Xuddur",
+      "Waajid",
+      "Tiyeeglow",
+      "Ceelbarde"
+    ],
+    "correct": "Xuddur"
+  },
+  {
+    "question": "Imisa sano ayuu jiray Nabi Muxamed (CSW) markii hooyadiis dhimatay?",
+    "options": [
+      "2 sano",
+      "4 sano",
+      "6 sano",
+      "8 sano"
+    ],
+    "correct": "6 sano"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Portugal?",
+    "options": [
+      "Lisbon",
+      "Porto",
+      "Madrid",
+      "Barcelona"
+    ],
+    "correct": "Lisbon"
+  },
+  {
+    "question": "Waa maxay $11 + 12 + 13$?",
+    "options": [
+      "34",
+      "36",
+      "38",
+      "40"
+    ],
+    "correct": "36"
+  },
+  {
+    "question": "They ___ to the park yesterday.",
+    "options": [
+      "go",
+      "goes",
+      "went",
+      "gone"
+    ],
+    "correct": "went"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Greece?",
+    "options": [
+      "Athens",
+      "Thessaloniki",
+      "Sparta",
+      "Corinth"
+    ],
+    "correct": "Athens"
+  },
+  {
+    "question": "Yaa dilay ninkii la oran jiray Abu Jahl?",
+    "options": [
+      "Mu'aad iyo Mucawid",
+      "Abu Bakr",
+      "Cumar",
+      "Cali"
+    ],
+    "correct": "Mu'aad iyo Mucawid"
+  },
+  {
+    "question": "Waa maxay dalka ugu ballaaran adduunka dhul ahaan?",
+    "options": [
+      "Shiinaha",
+      "Mareykanka",
+      "Ruushka",
+      "Canada"
+    ],
+    "correct": "Ruushka"
+  },
+  {
+    "question": "Waa maxay $400 - 250$?",
+    "options": [
+      "100",
+      "150",
+      "200",
+      "250"
+    ],
+    "correct": "150"
+  },
+  {
+    "question": "He is the ___ boy in the room.",
+    "options": [
+      "tall",
+      "taller",
+      "tallest",
+      "more tall"
+    ],
+    "correct": "tallest"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Woqooyi Galbeed?",
+    "options": [
+      "Berbera",
+      "Hargeysa",
+      "Gabiley",
+      "Saylac"
+    ],
+    "correct": "Hargeysa"
+  },
+  {
+    "question": "Soonka bisha Ramadaan waa rukunka imisaad ee Islaamka?",
+    "options": [
+      "2aad",
+      "3aad",
+      "4aad",
+      "5aad"
+    ],
+    "correct": "4aad"
+  },
+  {
+    "question": "Caasimadda dalka Sweden waa?",
+    "options": [
+      "Oslo",
+      "Stockholm",
+      "Helsinki",
+      "Copenhagen"
+    ],
+    "correct": "Stockholm"
+  },
+  {
+    "question": "Waa maxay xididka 25?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "I ___ a new car next year.",
+    "options": [
+      "buy",
+      "will buy",
+      "bought",
+      "buys"
+    ],
+    "correct": "will buy"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Jubbada Hoose?",
+    "options": [
+      "Afmadow",
+      "Jamaame",
+      "Kismaayo",
+      "Badhaadhe"
+    ],
+    "correct": "Kismaayo"
+  },
+  {
+    "question": "Imisa jeer ayaa magaca Nabi Muxamed (CSW) lagu sheegay Qur'aanka?",
+    "options": [
+      "2",
+      "4",
+      "6",
+      "8"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "Caasimadda dalka Norway waa?",
+    "options": [
+      "Stockholm",
+      "Oslo",
+      "Bergen",
+      "Helsinki"
+    ],
+    "correct": "Oslo"
+  },
+  {
+    "question": "Waa maxay $12 \\times 3$?",
+    "options": [
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "correct": "36"
+  },
+  {
+    "question": "English: An apple a day keeps the ___ away.",
+    "options": [
+      "doctor",
+      "teacher",
+      "friend",
+      "police"
+    ],
+    "correct": "doctor"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Sanaag?",
+    "options": [
+      "Badhan",
+      "Laasqoray",
+      "Ceerigaabo",
+      "Ceelafweyn"
+    ],
+    "correct": "Ceerigaabo"
+  },
+  {
+    "question": "Muxuu ahaa magaca adoonkii Nabi Muxamed (CSW) ee uu xoreeyay?",
+    "options": [
+      "Bilaal",
+      "Zayd bin Xaaritha",
+      "Anas",
+      "Camaar"
+    ],
+    "correct": "Zayd bin Xaaritha"
+  },
+  {
+    "question": "Dalka loogu yeero 'Dalka Ahraamta' waa?",
+    "options": [
+      "Suudaan",
+      "Iraaq",
+      "Masar",
+      "Hindiya"
+    ],
+    "correct": "Masar"
+  },
+  {
+    "question": "Waa maxay $1000 - 999$?",
+    "options": [
+      "0",
+      "1",
+      "10",
+      "11"
+    ],
+    "correct": "1"
+  },
+  {
+    "question": "She is ___ a song.",
+    "options": [
+      "sing",
+      "sings",
+      "singing",
+      "sang"
+    ],
+    "correct": "singing"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Finland?",
+    "options": [
+      "Oslo",
+      "Helsinki",
+      "Stockholm",
+      "Tallinn"
+    ],
+    "correct": "Helsinki"
+  },
+  {
+    "question": "Ashahaadada waa rukunka imisaad ee Islaamka?",
+    "options": [
+      "1aad",
+      "2aad",
+      "3aad",
+      "4aad"
+    ],
+    "correct": "1aad"
+  },
+  {
+    "question": "Waa maxay magaca xiddigta ugu dhow dhulka?",
+    "options": [
+      "Moon",
+      "Mars",
+      "Sun",
+      "Venus"
+    ],
+    "correct": "Sun"
+  },
+  {
+    "question": "Waa maxay $90 \\div 10$?",
+    "options": [
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "correct": "9"
+  },
+  {
+    "question": "___ you ever been to Hargeisa?",
+    "options": [
+      "Have",
+      "Has",
+      "Do",
+      "Are"
+    ],
+    "correct": "Have"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Jubbada Dhexe?",
+    "options": [
+      "Jilib",
+      "Saakow",
+      "Buaale",
+      "Dujuma"
+    ],
+    "correct": "Buaale"
+  },
+  {
+    "question": "Imisa sano ayuu Nabi Nuux (CSW) dadkiisa u yeerayay?",
+    "options": [
+      "500",
+      "750",
+      "950",
+      "1000"
+    ],
+    "correct": "950"
+  },
+  {
+    "question": "Caasimadda dalka Poland waa?",
+    "options": [
+      "Warsaw",
+      "Krakow",
+      "Prague",
+      "Berlin"
+    ],
+    "correct": "Warsaw"
+  },
+  {
+    "question": "Waa maxay xididka 36?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "6"
+  },
+  {
+    "question": "They ___ lunch together now.",
+    "options": [
+      "have",
+      "has",
+      "are having",
+      "had"
+    ],
+    "correct": "are having"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Belgium?",
+    "options": [
+      "Paris",
+      "Brussels",
+      "Amsterdam",
+      "Berlin"
+    ],
+    "correct": "Brussels"
+  },
+  {
+    "question": "Qur'aanka dhexdiisa, imisa suuradood ayaa lagu bilaabay magaca Ilaah (Al-xamdulillaah)?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Webiga ugu weyn dalka Mareykanka waa?",
+    "options": [
+      "Nile",
+      "Amazon",
+      "Mississippi",
+      "Colorado"
+    ],
+    "correct": "Mississippi"
+  },
+  {
+    "question": "Waa maxay $25 \\times 2$?",
+    "options": [
+      "40",
+      "45",
+      "50",
+      "55"
+    ],
+    "correct": "50"
+  },
+  {
+    "question": "I ___ my friend last week.",
+    "options": [
+      "meet",
+      "meets",
+      "met",
+      "meeting"
+    ],
+    "correct": "met"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Austria?",
+    "options": [
+      "Vienna",
+      "Salzburg",
+      "Zurich",
+      "Munich"
+    ],
+    "correct": "Vienna"
+  },
+  {
+    "question": "Nebigii u dambeeyay ee laga soo dhex saaro dadka?",
+    "options": [
+      "Nabi Ciise",
+      "Nabi Ibraahim",
+      "Nabi Muxamed (CSW)",
+      "Nabi Muuse"
+    ],
+    "correct": "Nabi Muxamed (CSW)"
+  },
+  {
+    "question": "Badweynta u dhexaysa Ameerika iyo Yurub waa?",
+    "options": [
+      "Hindiya",
+      "Atlaantik",
+      "Baasifig",
+      "Arctic"
+    ],
+    "correct": "Atlaantik"
+  },
+  {
+    "question": "Waa maxay $40 \\div 8$?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "English: Better late than ___.",
+    "options": [
+      "now",
+      "never",
+      "before",
+      "soon"
+    ],
+    "correct": "never"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Switzerland?",
+    "options": [
+      "Zurich",
+      "Geneva",
+      "Bern",
+      "Basel"
+    ],
+    "correct": "Bern"
+  },
+  {
+    "question": "Gabadhii u horreysay ee ku shahiidday Islaamka?",
+    "options": [
+      "Khadiija",
+      "Caisha",
+      "Sumaya",
+      "Faadumo"
+    ],
+    "correct": "Sumaya"
+  },
+  {
+    "question": "Magaalada loogu yeero 'Magaalada aan waligeed seexan'?",
+    "options": [
+      "London",
+      "Tokyo",
+      "New York",
+      "Paris"
+    ],
+    "correct": "New York"
+  },
+  {
+    "question": "Waa maxay xididka 100?",
+    "options": [
+      "10",
+      "20",
+      "30",
+      "40"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "She ___ a doctor next month.",
+    "options": [
+      "is visiting",
+      "visits",
+      "visited",
+      "visit"
+    ],
+    "correct": "is visiting"
+  },
+  {
+    "question": "Qorraxdu waxay ka soo baxdaa galbeed oo ay dhacdo bari.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Biyaha 100°C (heerkulka badda 1 atm) ayay ku karkaraan.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Soomaaliya waxay leedahay xuduud badeed.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Afrika waa qaaradda ugu weyn adduunka.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Qur'aanka wuxuu leeyahay 114 suuradood.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Maalmuhu 24 saacadood ayay qaataan dhulka (qiyaas ahaan).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Dayaxu wuxuu iftiiminayaa naftiisa sida qorraxda.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Oksijiinta waa gaas aadanaha neefsashada u baahan.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Wadnaha wuxuu ku yaalaa dhinaca midig ee laabta (caadi ahaan).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Kelyaha waxay ka saaraan wasakhda dhiigga.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Xisaabta: 12 × 12 = 144.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Xisaabta: 0 ÷ 5 = 5.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Ingiriis: jamaca \"child\" waa \"children\".",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Caasimadda Kenya waa Nairobi.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Caasimadda Itoobiya waa Nairobi.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Muqdisho waa caasimadda dowlad-goboleedka Soomaaliya (Federaal).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Soomaaliya waxay xornimada ka heshay Talyaaniga sanadkii 1960.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Xasan Cali Khayre wuxuu xilligii 2017–2020 u ahaa R/Wasaaraha Xukuumadda Federaalka Soomaaliya.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Xasan Cali Khayre wuxuu xilligaas u ahaa Madaxweyne Soomaaliya.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Ururka Qaramada Midoobay (UN) wuxuu caawiyaa nabadda iyo horumarinta.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "NATO waa urur ganacsi oo keliya (ma aha mid militariga ah).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Qorraxda waa xiddig (star) sida xiddigaha kale.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Dayaxu waa xiddig iskiis iftiiminaya.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Saddex-xagal gudihiisa wadarta xaglaha waa 180°.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Labajibbaar wuxuu leeyahay 6 dhinac oo isku dherer ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Webiga Niil waa mid ka mid ah webiyada ugu waaweyn Afrika.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Badweynta Hindiya waxay u dhaxaysaa Hindiya iyo Afrika.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Koonfur Afrika waxay hore u lahayd nidaam apartheid.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Hargeysa waa caasimadda Somaliland (ma aha caasimadda Federaalka).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "HTTPS wuxuu isticmaalaa encryption badanaa (TLS).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Bluetooth wuxuu u baahan yahay internet si uu u shaqeeyo.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "DNS wuxuu u tarjumayaa magaca domain → cinwaanka IP.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "RAM waa xusuus ku meel gaar ah (ma aha kayd joogto oo keliya).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Phishing waa isku day lagu khiyaaneeyo dadka.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "2FA wuxuu xoojiyaa amniga akoonka.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Password \"123456\" waa mid amaan ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Backup-ka xogta waa caado wanaagsan.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "GPS wuxuu isticmaalaa dayaxyo satellite.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Wi‑Fi iyo internet waa isku macno.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "JSON waa qaab xog (ma aha luqad barnaamij oo buuxa).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "HTML waa luqad calaamadeyn (markup) webka.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Linux waa nidaam hawleed oo furan badanaa.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Malware waa barnaamij xun.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Firewall wuxuu caawiyaa ilaalinta shabakadda.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "CPU waa \"Central Processing Unit\".",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "GPU wuxuu caawiyaa xisaabinta sawirrada iyo AI.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "SSD inta badan waa ka dhaqso badan HDD.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "SQL injection waa nooc weerar ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "HTTPS bog kasta wuxuu ka dhigan yahay in uu sax yahay (100%).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Cookies waxay kaydiyaan macluumaad goobaha.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Incognito mode wuxuu ka dhigayaa inaad noqotid qarsoon 100%.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Cloud storage wuxuu kaydiyaa xog server fog.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Blockchain wuxuu isticmaalaa silsilad blocks.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Bitcoin waa nooc cryptocurrency ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "AI (sirdoonka macmalka ah) wuxuu isticmaali karaa barashada mashiinka.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Machine learning waa qayb ka mid ah AI.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Overfitting waa dhibaato marka moodel uu xasuusto tabaruka.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Correlation macnaheedu waa isku mid causation.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Been"
+  },
+  {
+    "question": "Unicode wuxuu taageerayaa xarfaha luqado badan.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "UTF-8 waa encoding caan ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Big O notation wuxuu qiyaasaa xawaaraha algorithm.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Stack waa LIFO.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Queue waa FIFO.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Recursion wuxuu u baahan yahay xaalad saldhig (base case).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Deadlock waa dhibaato is xannibaada thread-yada.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Virtual memory wuxuu isticmaalaa disk sida xusuus dheeri ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Garbage collection wuxuu xoreeyaa xusuusta aan loo baahnayn.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "REST waa qaab API oo caan ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "GraphQL waa luqad weydiimo API ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Docker wuxuu isticmaalaa containers.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Kubernetes wuxuu maareeyaa containers.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Git waa nidaam maamulka nooca (version control).",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "OAuth waa hab galitaan (login) oo caan ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "JWT waa nooc token authentication ah.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Zero-day vulnerability waa cilad aan weli la hakin.",
+    "options": [
+      "Run",
+      "Been"
+    ],
+    "correct": "Run"
+  },
+  {
+    "question": "Ninkii xilligii 2017–2020 u ahaa R/Wasaaraha Xukuumadda Federaalka Soomaaliya waa kee?",
+    "options": [
+      "Cumar Cabdirashiid Cali Sharmaarke",
+      "Xasan Cali Khayre",
+      "Maxamed Xuseen Rooble",
+      "Cabdullaahi Deni"
+    ],
+    "correct": "Xasan Cali Khayre"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Norway?",
+    "options": [
+      "Oslo",
+      "Jerusalem",
+      "Bogotá",
+      "Bangkok"
+    ],
+    "correct": "Oslo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Sweden?",
+    "options": [
+      "Stockholm",
+      "Khartoum",
+      "Bangkok",
+      "Ljubljana"
+    ],
+    "correct": "Stockholm"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Denmark?",
+    "options": [
+      "Copenhagen",
+      "Stockholm",
+      "Abuja",
+      "Amman"
+    ],
+    "correct": "Copenhagen"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Finland?",
+    "options": [
+      "Libreville",
+      "Beijing",
+      "Helsinki",
+      "Doha"
+    ],
+    "correct": "Helsinki"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Iceland?",
+    "options": [
+      "Zagreb",
+      "Reykjavik",
+      "Paramaribo",
+      "Dublin"
+    ],
+    "correct": "Reykjavik"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Ireland?",
+    "options": [
+      "Helsinki",
+      "Ulaanbaatar",
+      "Brussels",
+      "Dublin"
+    ],
+    "correct": "Dublin"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Portugal?",
+    "options": [
+      "Berlin",
+      "Lisbon",
+      "Wellington",
+      "Sofia"
+    ],
+    "correct": "Lisbon"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Greece?",
+    "options": [
+      "Bangkok",
+      "Vientiane",
+      "Kuala Lumpur",
+      "Athens"
+    ],
+    "correct": "Athens"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Romania?",
+    "options": [
+      "Bucharest",
+      "Tripoli",
+      "Hanoi",
+      "Manama"
+    ],
+    "correct": "Bucharest"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Hungary?",
+    "options": [
+      "Tbilisi",
+      "Budapest",
+      "Podgorica",
+      "Libreville"
+    ],
+    "correct": "Budapest"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Czechia?",
+    "options": [
+      "Jerusalem",
+      "Prague",
+      "Bern",
+      "Stockholm"
+    ],
+    "correct": "Prague"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Slovakia?",
+    "options": [
+      "Bratislava",
+      "Wellington",
+      "Tokyo",
+      "Santiago"
+    ],
+    "correct": "Bratislava"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Croatia?",
+    "options": [
+      "Tripoli",
+      "Montevideo",
+      "Zagreb",
+      "Tokyo"
+    ],
+    "correct": "Zagreb"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Serbia?",
+    "options": [
+      "Belgrade",
+      "Ulaanbaatar",
+      "Budapest",
+      "Paris"
+    ],
+    "correct": "Belgrade"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Slovenia?",
+    "options": [
+      "Oslo",
+      "Mexico City",
+      "Bamako",
+      "Ljubljana"
+    ],
+    "correct": "Ljubljana"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Bulgaria?",
+    "options": [
+      "Djibouti",
+      "Muscat",
+      "Sofia",
+      "Reykjavik"
+    ],
+    "correct": "Sofia"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Poland?",
+    "options": [
+      "Warsaw",
+      "Luanda",
+      "Taipei",
+      "Tallinn"
+    ],
+    "correct": "Warsaw"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Ukraine?",
+    "options": [
+      "Kyiv",
+      "Bogotá",
+      "Santiago",
+      "Tehran"
+    ],
+    "correct": "Kyiv"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Belarus?",
+    "options": [
+      "Paramaribo",
+      "Minsk",
+      "Ankara",
+      "Kuala Lumpur"
+    ],
+    "correct": "Minsk"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Moldova?",
+    "options": [
+      "Chișinău",
+      "Manila",
+      "Singapore",
+      "Kingston"
+    ],
+    "correct": "Chișinău"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Estonia?",
+    "options": [
+      "Kingston",
+      "Tallinn",
+      "Phnom Penh",
+      "Cairo"
+    ],
+    "correct": "Tallinn"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Latvia?",
+    "options": [
+      "Riga",
+      "Rome",
+      "Podgorica",
+      "Tashkent"
+    ],
+    "correct": "Riga"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Lithuania?",
+    "options": [
+      "Luanda",
+      "Lisbon",
+      "Tunis",
+      "Vilnius"
+    ],
+    "correct": "Vilnius"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Turkey?",
+    "options": [
+      "Yamoussoukro",
+      "Lisbon",
+      "Oslo",
+      "Ankara"
+    ],
+    "correct": "Ankara"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Iran?",
+    "options": [
+      "Ottawa",
+      "Tehran",
+      "Dhaka",
+      "Bogotá"
+    ],
+    "correct": "Tehran"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Iraq?",
+    "options": [
+      "Bratislava",
+      "Helsinki",
+      "Baghdad",
+      "Ljubljana"
+    ],
+    "correct": "Baghdad"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Syria?",
+    "options": [
+      "Windhoek",
+      "Niamey",
+      "Rabat",
+      "Damascus"
+    ],
+    "correct": "Damascus"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Lebanon?",
+    "options": [
+      "Riyadh",
+      "Beirut",
+      "Quito",
+      "Cairo"
+    ],
+    "correct": "Beirut"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Jordan?",
+    "options": [
+      "Hanoi",
+      "Islamabad",
+      "Amman",
+      "Pyongyang"
+    ],
+    "correct": "Amman"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Israel?",
+    "options": [
+      "Thimphu",
+      "Belgrade",
+      "Valletta",
+      "Jerusalem"
+    ],
+    "correct": "Jerusalem"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Palestine (caan)?",
+    "options": [
+      "Tashkent",
+      "Canberra",
+      "Helsinki",
+      "Ramallah"
+    ],
+    "correct": "Ramallah"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Saudi Arabia?",
+    "options": [
+      "Taipei",
+      "Warsaw",
+      "Riyadh",
+      "Lima"
+    ],
+    "correct": "Riyadh"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka UAE?",
+    "options": [
+      "Maputo",
+      "Abu Dhabi",
+      "Brussels",
+      "Pyongyang"
+    ],
+    "correct": "Abu Dhabi"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Qatar?",
+    "options": [
+      "Copenhagen",
+      "Vienna",
+      "Bamako",
+      "Doha"
+    ],
+    "correct": "Doha"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Kuwait?",
+    "options": [
+      "Dodoma",
+      "Luanda",
+      "Montevideo",
+      "Kuwait City"
+    ],
+    "correct": "Kuwait City"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Bahrain?",
+    "options": [
+      "Brussels",
+      "Manama",
+      "Jerusalem",
+      "Tirana"
+    ],
+    "correct": "Manama"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Oman?",
+    "options": [
+      "Pyongyang",
+      "Warsaw",
+      "Gitega",
+      "Muscat"
+    ],
+    "correct": "Muscat"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Yemen (caan)?",
+    "options": [
+      "Dodoma",
+      "Lusaka",
+      "Sana'a",
+      "Djibouti"
+    ],
+    "correct": "Sana'a"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Pakistan?",
+    "options": [
+      "Minsk",
+      "Islamabad",
+      "Addis Ababa",
+      "Pyongyang"
+    ],
+    "correct": "Islamabad"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Afghanistan?",
+    "options": [
+      "Muscat",
+      "Bamako",
+      "Singapore",
+      "Kabul"
+    ],
+    "correct": "Kabul"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka India?",
+    "options": [
+      "Dublin",
+      "Kingston",
+      "Singapore",
+      "New Delhi"
+    ],
+    "correct": "New Delhi"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Bangladesh?",
+    "options": [
+      "Prague",
+      "Astana",
+      "Tokyo",
+      "Dhaka"
+    ],
+    "correct": "Dhaka"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Sri Lanka?",
+    "options": [
+      "Colombo",
+      "Abuja",
+      "Tashkent",
+      "Kampala"
+    ],
+    "correct": "Colombo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Nepal?",
+    "options": [
+      "Kathmandu",
+      "Gaborone",
+      "Rabat",
+      "Santiago"
+    ],
+    "correct": "Kathmandu"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Bhutan?",
+    "options": [
+      "Belgrade",
+      "Dhaka",
+      "Addis Ababa",
+      "Thimphu"
+    ],
+    "correct": "Thimphu"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Myanmar?",
+    "options": [
+      "Canberra",
+      "Naypyidaw",
+      "New Delhi",
+      "Riga"
+    ],
+    "correct": "Naypyidaw"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Thailand?",
+    "options": [
+      "Bangkok",
+      "Naypyidaw",
+      "Manama",
+      "Vientiane"
+    ],
+    "correct": "Bangkok"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Cambodia?",
+    "options": [
+      "Santiago",
+      "Kuwait City",
+      "Bangkok",
+      "Phnom Penh"
+    ],
+    "correct": "Phnom Penh"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Laos?",
+    "options": [
+      "Vientiane",
+      "Rome",
+      "Mexico City",
+      "Brazzaville"
+    ],
+    "correct": "Vientiane"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Vietnam?",
+    "options": [
+      "Hanoi",
+      "Ramallah",
+      "Kuala Lumpur",
+      "Belgrade"
+    ],
+    "correct": "Hanoi"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Malaysia?",
+    "options": [
+      "Nicosia",
+      "Reykjavik",
+      "Kuala Lumpur",
+      "Georgetown"
+    ],
+    "correct": "Kuala Lumpur"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Singapore?",
+    "options": [
+      "Bandar Seri Begawan",
+      "Gaborone",
+      "Kuwait City",
+      "Singapore"
+    ],
+    "correct": "Singapore"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Indonesia?",
+    "options": [
+      "Nairobi",
+      "Gitega",
+      "Cairo",
+      "Jakarta"
+    ],
+    "correct": "Jakarta"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Philippines?",
+    "options": [
+      "Manila",
+      "Damascus",
+      "Singapore",
+      "Tripoli"
+    ],
+    "correct": "Manila"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Brunei?",
+    "options": [
+      "Belgrade",
+      "Montevideo",
+      "Riyadh",
+      "Bandar Seri Begawan"
+    ],
+    "correct": "Bandar Seri Begawan"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka China?",
+    "options": [
+      "Chișinău",
+      "Beijing",
+      "Naypyidaw",
+      "Zagreb"
+    ],
+    "correct": "Beijing"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Japan?",
+    "options": [
+      "Tokyo",
+      "Bratislava",
+      "Luxembourg City",
+      "Jakarta"
+    ],
+    "correct": "Tokyo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka South Korea?",
+    "options": [
+      "Oslo",
+      "Santiago",
+      "Lisbon",
+      "Seoul"
+    ],
+    "correct": "Seoul"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka North Korea?",
+    "options": [
+      "Pyongyang",
+      "Sucre",
+      "Colombo",
+      "Ramallah"
+    ],
+    "correct": "Pyongyang"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Mongolia?",
+    "options": [
+      "Warsaw",
+      "Prague",
+      "Kuwait City",
+      "Ulaanbaatar"
+    ],
+    "correct": "Ulaanbaatar"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Taiwan (caan)?",
+    "options": [
+      "Taipei",
+      "Kabul",
+      "Kampala",
+      "Tbilisi"
+    ],
+    "correct": "Taipei"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Australia?",
+    "options": [
+      "Pyongyang",
+      "Helsinki",
+      "New Delhi",
+      "Canberra"
+    ],
+    "correct": "Canberra"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka New Zealand?",
+    "options": [
+      "Cairo",
+      "Wellington",
+      "Juba",
+      "Jerusalem"
+    ],
+    "correct": "Wellington"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Canada?",
+    "options": [
+      "Seoul",
+      "Dodoma",
+      "Ottawa",
+      "Belgrade"
+    ],
+    "correct": "Ottawa"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Mexico?",
+    "options": [
+      "Hanoi",
+      "Dhaka",
+      "Mexico City",
+      "Kuala Lumpur"
+    ],
+    "correct": "Mexico City"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Cuba?",
+    "options": [
+      "Havana",
+      "Accra",
+      "Helsinki",
+      "Ljubljana"
+    ],
+    "correct": "Havana"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Jamaica?",
+    "options": [
+      "Kingston",
+      "Oslo",
+      "Rabat",
+      "Riga"
+    ],
+    "correct": "Kingston"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Brazil?",
+    "options": [
+      "Montevideo",
+      "Brasília",
+      "Khartoum",
+      "Abuja"
+    ],
+    "correct": "Brasília"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Argentina?",
+    "options": [
+      "Buenos Aires",
+      "Madrid",
+      "Copenhagen",
+      "Damascus"
+    ],
+    "correct": "Buenos Aires"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Chile?",
+    "options": [
+      "Algiers",
+      "Asunción",
+      "Kampala",
+      "Santiago"
+    ],
+    "correct": "Santiago"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Peru?",
+    "options": [
+      "Doha",
+      "Oslo",
+      "Lima",
+      "Brussels"
+    ],
+    "correct": "Lima"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Colombia?",
+    "options": [
+      "Ramallah",
+      "Bogotá",
+      "Jerusalem",
+      "Amman"
+    ],
+    "correct": "Bogotá"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Venezuela?",
+    "options": [
+      "Montevideo",
+      "Caracas",
+      "Quito",
+      "Kinshasa"
+    ],
+    "correct": "Caracas"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Ecuador?",
+    "options": [
+      "Quito",
+      "Bangkok",
+      "Libreville",
+      "Warsaw"
+    ],
+    "correct": "Quito"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Bolivia?",
+    "options": [
+      "Buenos Aires",
+      "Sucre",
+      "Sana'a",
+      "Kingston"
+    ],
+    "correct": "Sucre"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Paraguay?",
+    "options": [
+      "Ramallah",
+      "Asunción",
+      "Berlin",
+      "Paramaribo"
+    ],
+    "correct": "Asunción"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Uruguay?",
+    "options": [
+      "Nicosia",
+      "Quito",
+      "Montevideo",
+      "Lima"
+    ],
+    "correct": "Montevideo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Guyana?",
+    "options": [
+      "Brussels",
+      "Gitega",
+      "Georgetown",
+      "Sarajevo"
+    ],
+    "correct": "Georgetown"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Suriname?",
+    "options": [
+      "Prague",
+      "Paramaribo",
+      "Asmara",
+      "Naypyidaw"
+    ],
+    "correct": "Paramaribo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Egypt?",
+    "options": [
+      "Cairo",
+      "Seoul",
+      "Ramallah",
+      "Libreville"
+    ],
+    "correct": "Cairo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Libya?",
+    "options": [
+      "Dublin",
+      "Tripoli",
+      "Ulaanbaatar",
+      "Belgrade"
+    ],
+    "correct": "Tripoli"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Tunisia?",
+    "options": [
+      "Lusaka",
+      "Tunis",
+      "Buenos Aires",
+      "Belgrade"
+    ],
+    "correct": "Tunis"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Algeria?",
+    "options": [
+      "Gitega",
+      "Athens",
+      "Riyadh",
+      "Algiers"
+    ],
+    "correct": "Algiers"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Morocco?",
+    "options": [
+      "Kuwait City",
+      "Valletta",
+      "Rabat",
+      "Zagreb"
+    ],
+    "correct": "Rabat"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Sudan?",
+    "options": [
+      "Khartoum",
+      "Chișinău",
+      "Kathmandu",
+      "Yerevan"
+    ],
+    "correct": "Khartoum"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka South Sudan?",
+    "options": [
+      "Thimphu",
+      "Juba",
+      "Seoul",
+      "Sana'a"
+    ],
+    "correct": "Juba"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Ethiopia?",
+    "options": [
+      "London",
+      "Addis Ababa",
+      "Moscow",
+      "Yaoundé"
+    ],
+    "correct": "Addis Ababa"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Eritrea?",
+    "options": [
+      "Jakarta",
+      "Asmara",
+      "Riyadh",
+      "Naypyidaw"
+    ],
+    "correct": "Asmara"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Djibouti?",
+    "options": [
+      "Oslo",
+      "Djibouti",
+      "Riyadh",
+      "Baku"
+    ],
+    "correct": "Djibouti"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Kenya?",
+    "options": [
+      "Wellington",
+      "Singapore",
+      "Kingston",
+      "Nairobi"
+    ],
+    "correct": "Nairobi"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Uganda?",
+    "options": [
+      "Luanda",
+      "Caracas",
+      "Sucre",
+      "Kampala"
+    ],
+    "correct": "Kampala"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Rwanda?",
+    "options": [
+      "Manila",
+      "Ljubljana",
+      "Caracas",
+      "Kigali"
+    ],
+    "correct": "Kigali"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Burundi?",
+    "options": [
+      "Tripoli",
+      "Athens",
+      "Gitega",
+      "Mexico City"
+    ],
+    "correct": "Gitega"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Tanzania?",
+    "options": [
+      "Pyongyang",
+      "Moscow",
+      "Athens",
+      "Dodoma"
+    ],
+    "correct": "Dodoma"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Zambia?",
+    "options": [
+      "Maputo",
+      "Riga",
+      "Lusaka",
+      "Sana'a"
+    ],
+    "correct": "Lusaka"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Zimbabwe?",
+    "options": [
+      "Manama",
+      "Gitega",
+      "Harare",
+      "Athens"
+    ],
+    "correct": "Harare"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Botswana?",
+    "options": [
+      "Kuwait City",
+      "Abuja",
+      "Gaborone",
+      "Copenhagen"
+    ],
+    "correct": "Gaborone"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Namibia?",
+    "options": [
+      "Windhoek",
+      "Kuwait City",
+      "Muqdisho",
+      "Damascus"
+    ],
+    "correct": "Windhoek"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Mozambique?",
+    "options": [
+      "Buenos Aires",
+      "London",
+      "Maputo",
+      "Rabat"
+    ],
+    "correct": "Maputo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Malawi?",
+    "options": [
+      "Vientiane",
+      "Madrid",
+      "Lilongwe",
+      "Chișinău"
+    ],
+    "correct": "Lilongwe"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Angola?",
+    "options": [
+      "Maputo",
+      "Bogotá",
+      "Valletta",
+      "Luanda"
+    ],
+    "correct": "Luanda"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka DRC?",
+    "options": [
+      "Kinshasa",
+      "Yaoundé",
+      "Libreville",
+      "Skopje"
+    ],
+    "correct": "Kinshasa"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Congo?",
+    "options": [
+      "Athens",
+      "Yamoussoukro",
+      "Beirut",
+      "Brazzaville"
+    ],
+    "correct": "Brazzaville"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Gabon?",
+    "options": [
+      "Kuwait City",
+      "Pyongyang",
+      "Islamabad",
+      "Libreville"
+    ],
+    "correct": "Libreville"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Cameroon?",
+    "options": [
+      "Yaoundé",
+      "Manama",
+      "Sana'a",
+      "Copenhagen"
+    ],
+    "correct": "Yaoundé"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Nigeria?",
+    "options": [
+      "Abuja",
+      "Thimphu",
+      "Colombo",
+      "Addis Ababa"
+    ],
+    "correct": "Abuja"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Ghana?",
+    "options": [
+      "Accra",
+      "Naypyidaw",
+      "Muscat",
+      "Taipei"
+    ],
+    "correct": "Accra"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Ivory Coast?",
+    "options": [
+      "Islamabad",
+      "Chișinău",
+      "Yamoussoukro",
+      "Paris"
+    ],
+    "correct": "Yamoussoukro"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Senegal?",
+    "options": [
+      "Ramallah",
+      "Dakar",
+      "Tirana",
+      "Riga"
+    ],
+    "correct": "Dakar"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Mali?",
+    "options": [
+      "Bamako",
+      "Quito",
+      "Caracas",
+      "Abuja"
+    ],
+    "correct": "Bamako"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Niger?",
+    "options": [
+      "Copenhagen",
+      "Brazzaville",
+      "Thimphu",
+      "Niamey"
+    ],
+    "correct": "Niamey"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Chad?",
+    "options": [
+      "Bamako",
+      "N'Djamena",
+      "Asunción",
+      "Brussels"
+    ],
+    "correct": "N'Djamena"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Somalia?",
+    "options": [
+      "Jerusalem",
+      "Luanda",
+      "Muqdisho",
+      "Beirut"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Kazakhstan?",
+    "options": [
+      "Prague",
+      "Islamabad",
+      "Astana",
+      "Sofia"
+    ],
+    "correct": "Astana"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Uzbekistan?",
+    "options": [
+      "Windhoek",
+      "Tashkent",
+      "Niamey",
+      "Montevideo"
+    ],
+    "correct": "Tashkent"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Russia?",
+    "options": [
+      "Helsinki",
+      "Kabul",
+      "Buenos Aires",
+      "Moscow"
+    ],
+    "correct": "Moscow"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Germany?",
+    "options": [
+      "Djibouti",
+      "Oslo",
+      "Berlin",
+      "Abuja"
+    ],
+    "correct": "Berlin"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka France?",
+    "options": [
+      "Paris",
+      "Amman",
+      "New Delhi",
+      "London"
+    ],
+    "correct": "Paris"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Italy?",
+    "options": [
+      "Lilongwe",
+      "Beirut",
+      "Libreville",
+      "Rome"
+    ],
+    "correct": "Rome"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Spain?",
+    "options": [
+      "N'Djamena",
+      "Madrid",
+      "Montevideo",
+      "Tehran"
+    ],
+    "correct": "Madrid"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka UK?",
+    "options": [
+      "Lisbon",
+      "London",
+      "Kampala",
+      "Vientiane"
+    ],
+    "correct": "London"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Netherlands?",
+    "options": [
+      "Zagreb",
+      "Riyadh",
+      "Amsterdam",
+      "Paramaribo"
+    ],
+    "correct": "Amsterdam"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Belgium?",
+    "options": [
+      "Yamoussoukro",
+      "Brussels",
+      "Cairo",
+      "Kampala"
+    ],
+    "correct": "Brussels"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Switzerland?",
+    "options": [
+      "Bern",
+      "Kigali",
+      "Brasília",
+      "Lisbon"
+    ],
+    "correct": "Bern"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Austria?",
+    "options": [
+      "Colombo",
+      "Brasília",
+      "Vienna",
+      "Sana'a"
+    ],
+    "correct": "Vienna"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Luxembourg?",
+    "options": [
+      "Oslo",
+      "Luxembourg City",
+      "Yamoussoukro",
+      "Budapest"
+    ],
+    "correct": "Luxembourg City"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Malta?",
+    "options": [
+      "Islamabad",
+      "Nicosia",
+      "Valletta",
+      "Lisbon"
+    ],
+    "correct": "Valletta"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Cyprus?",
+    "options": [
+      "Bamako",
+      "Santiago",
+      "Nicosia",
+      "Buenos Aires"
+    ],
+    "correct": "Nicosia"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Albania?",
+    "options": [
+      "Dakar",
+      "Tirana",
+      "Vientiane",
+      "Jakarta"
+    ],
+    "correct": "Tirana"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka North Macedonia?",
+    "options": [
+      "Sana'a",
+      "Skopje",
+      "Dublin",
+      "Riyadh"
+    ],
+    "correct": "Skopje"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Bosnia?",
+    "options": [
+      "Seoul",
+      "Sarajevo",
+      "Paris",
+      "Bratislava"
+    ],
+    "correct": "Sarajevo"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Montenegro?",
+    "options": [
+      "Kigali",
+      "Minsk",
+      "Podgorica",
+      "Colombo"
+    ],
+    "correct": "Podgorica"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Georgia?",
+    "options": [
+      "N'Djamena",
+      "Tbilisi",
+      "Kuwait City",
+      "Singapore"
+    ],
+    "correct": "Tbilisi"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Armenia?",
+    "options": [
+      "Jerusalem",
+      "Muqdisho",
+      "Yerevan",
+      "Tbilisi"
+    ],
+    "correct": "Yerevan"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Azerbaijan?",
+    "options": [
+      "Lilongwe",
+      "Baku",
+      "Havana",
+      "Dublin"
+    ],
+    "correct": "Baku"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka United States?",
+    "options": [
+      "Kinshasa",
+      "Washington, D.C.",
+      "Brazzaville",
+      "Ljubljana"
+    ],
+    "correct": "Washington, D.C."
+  },
+  {
+    "question": "Waa maxay 3 + 10?",
+    "options": [
+      "14",
+      "13",
+      "15",
+      "12"
+    ],
+    "correct": "13"
+  },
+  {
+    "question": "Waa maxay 4 + 5?",
+    "options": [
+      "8",
+      "11",
+      "10",
+      "9"
+    ],
+    "correct": "9"
+  },
+  {
+    "question": "Waa maxay 5 + 12?",
+    "options": [
+      "18",
+      "19",
+      "17",
+      "16"
+    ],
+    "correct": "17"
+  },
+  {
+    "question": "Waa maxay 6 + 7?",
+    "options": [
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "correct": "13"
+  },
+  {
+    "question": "Waa maxay 7 + 14?",
+    "options": [
+      "21",
+      "22",
+      "20",
+      "23"
+    ],
+    "correct": "21"
+  },
+  {
+    "question": "Waa maxay 8 + 9?",
+    "options": [
+      "19",
+      "16",
+      "18",
+      "17"
+    ],
+    "correct": "17"
+  },
+  {
+    "question": "Waa maxay 9 + 4?",
+    "options": [
+      "12",
+      "15",
+      "13",
+      "14"
+    ],
+    "correct": "13"
+  },
+  {
+    "question": "Waa maxay 10 + 11?",
+    "options": [
+      "20",
+      "23",
+      "22",
+      "21"
+    ],
+    "correct": "21"
+  },
+  {
+    "question": "Waa maxay 11 + 6?",
+    "options": [
+      "16",
+      "19",
+      "18",
+      "17"
+    ],
+    "correct": "17"
+  },
+  {
+    "question": "Waa maxay 12 + 13?",
+    "options": [
+      "26",
+      "27",
+      "25",
+      "24"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "Waa maxay 2 + 8?",
+    "options": [
+      "11",
+      "9",
+      "12",
+      "10"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "Waa maxay 3 + 3?",
+    "options": [
+      "6",
+      "8",
+      "5",
+      "7"
+    ],
+    "correct": "6"
+  },
+  {
+    "question": "Waa maxay 4 + 10?",
+    "options": [
+      "13",
+      "15",
+      "14",
+      "16"
+    ],
+    "correct": "14"
+  },
+  {
+    "question": "Waa maxay 5 + 5?",
+    "options": [
+      "11",
+      "12",
+      "9",
+      "10"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "Waa maxay 6 + 12?",
+    "options": [
+      "19",
+      "18",
+      "20",
+      "17"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Waa maxay 7 + 7?",
+    "options": [
+      "14",
+      "15",
+      "16",
+      "13"
+    ],
+    "correct": "14"
+  },
+  {
+    "question": "Waa maxay 8 + 14?",
+    "options": [
+      "23",
+      "24",
+      "22",
+      "21"
+    ],
+    "correct": "22"
+  },
+  {
+    "question": "Waa maxay 9 + 9?",
+    "options": [
+      "20",
+      "19",
+      "17",
+      "18"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Waa maxay 10 + 4?",
+    "options": [
+      "14",
+      "16",
+      "15",
+      "13"
+    ],
+    "correct": "14"
+  },
+  {
+    "question": "Waa maxay 11 + 11?",
+    "options": [
+      "23",
+      "22",
+      "24",
+      "21"
+    ],
+    "correct": "22"
+  },
+  {
+    "question": "Waa maxay 12 + 6?",
+    "options": [
+      "18",
+      "19",
+      "20",
+      "17"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Waa maxay 2 + 13?",
+    "options": [
+      "15",
+      "17",
+      "16",
+      "14"
+    ],
+    "correct": "15"
+  },
+  {
+    "question": "Waa maxay 3 + 8?",
+    "options": [
+      "13",
+      "11",
+      "12",
+      "10"
+    ],
+    "correct": "11"
+  },
+  {
+    "question": "Waa maxay 4 + 3?",
+    "options": [
+      "8",
+      "9",
+      "6",
+      "7"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Waa maxay 5 + 10?",
+    "options": [
+      "17",
+      "16",
+      "14",
+      "15"
+    ],
+    "correct": "15"
+  },
+  {
+    "question": "Waa maxay 6 + 5?",
+    "options": [
+      "13",
+      "10",
+      "11",
+      "12"
+    ],
+    "correct": "11"
+  },
+  {
+    "question": "Waa maxay 7 + 12?",
+    "options": [
+      "21",
+      "18",
+      "19",
+      "20"
+    ],
+    "correct": "19"
+  },
+  {
+    "question": "Waa maxay 8 + 7?",
+    "options": [
+      "17",
+      "14",
+      "15",
+      "16"
+    ],
+    "correct": "15"
+  },
+  {
+    "question": "Waa maxay 9 + 14?",
+    "options": [
+      "24",
+      "23",
+      "22",
+      "25"
+    ],
+    "correct": "23"
+  },
+  {
+    "question": "Waa maxay 10 + 9?",
+    "options": [
+      "19",
+      "21",
+      "20",
+      "18"
+    ],
+    "correct": "19"
+  },
+  {
+    "question": "Waa maxay 11 + 4?",
+    "options": [
+      "15",
+      "14",
+      "17",
+      "16"
+    ],
+    "correct": "15"
+  },
+  {
+    "question": "Waa maxay 12 + 11?",
+    "options": [
+      "23",
+      "22",
+      "25",
+      "24"
+    ],
+    "correct": "23"
+  },
+  {
+    "question": "Waa maxay 2 + 6?",
+    "options": [
+      "9",
+      "8",
+      "10",
+      "7"
+    ],
+    "correct": "8"
+  },
+  {
+    "question": "Waa maxay 3 + 13?",
+    "options": [
+      "15",
+      "17",
+      "16",
+      "18"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 4 + 8?",
+    "options": [
+      "14",
+      "11",
+      "13",
+      "12"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Waa maxay 5 + 3?",
+    "options": [
+      "9",
+      "8",
+      "10",
+      "7"
+    ],
+    "correct": "8"
+  },
+  {
+    "question": "Waa maxay 6 + 10?",
+    "options": [
+      "18",
+      "16",
+      "17",
+      "15"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 7 + 5?",
+    "options": [
+      "14",
+      "11",
+      "13",
+      "12"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Waa maxay 8 + 12?",
+    "options": [
+      "21",
+      "22",
+      "19",
+      "20"
+    ],
+    "correct": "20"
+  },
+  {
+    "question": "Waa maxay 9 + 7?",
+    "options": [
+      "17",
+      "15",
+      "18",
+      "16"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 10 + 14?",
+    "options": [
+      "24",
+      "23",
+      "26",
+      "25"
+    ],
+    "correct": "24"
+  },
+  {
+    "question": "Waa maxay 11 + 9?",
+    "options": [
+      "19",
+      "20",
+      "21",
+      "22"
+    ],
+    "correct": "20"
+  },
+  {
+    "question": "Waa maxay 12 + 4?",
+    "options": [
+      "16",
+      "17",
+      "15",
+      "18"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 2 + 11?",
+    "options": [
+      "15",
+      "14",
+      "13",
+      "12"
+    ],
+    "correct": "13"
+  },
+  {
+    "question": "Waa maxay 3 + 6?",
+    "options": [
+      "10",
+      "9",
+      "11",
+      "8"
+    ],
+    "correct": "9"
+  },
+  {
+    "question": "Waa maxay 4 + 13?",
+    "options": [
+      "19",
+      "18",
+      "16",
+      "17"
+    ],
+    "correct": "17"
+  },
+  {
+    "question": "Waa maxay 5 + 8?",
+    "options": [
+      "13",
+      "14",
+      "12",
+      "15"
+    ],
+    "correct": "13"
+  },
+  {
+    "question": "Waa maxay 6 + 3?",
+    "options": [
+      "10",
+      "8",
+      "11",
+      "9"
+    ],
+    "correct": "9"
+  },
+  {
+    "question": "Waa maxay 7 + 10?",
+    "options": [
+      "18",
+      "16",
+      "19",
+      "17"
+    ],
+    "correct": "17"
+  },
+  {
+    "question": "Waa maxay 8 + 5?",
+    "options": [
+      "13",
+      "12",
+      "15",
+      "14"
+    ],
+    "correct": "13"
+  },
+  {
+    "question": "Waa maxay 9 + 12?",
+    "options": [
+      "22",
+      "20",
+      "23",
+      "21"
+    ],
+    "correct": "21"
+  },
+  {
+    "question": "Waa maxay 10 + 7?",
+    "options": [
+      "16",
+      "18",
+      "17",
+      "19"
+    ],
+    "correct": "17"
+  },
+  {
+    "question": "Waa maxay 11 + 14?",
+    "options": [
+      "24",
+      "25",
+      "27",
+      "26"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "Waa maxay 12 + 9?",
+    "options": [
+      "21",
+      "23",
+      "20",
+      "22"
+    ],
+    "correct": "21"
+  },
+  {
+    "question": "Waa maxay 2 + 4?",
+    "options": [
+      "7",
+      "5",
+      "8",
+      "6"
+    ],
+    "correct": "6"
+  },
+  {
+    "question": "Waa maxay 3 + 11?",
+    "options": [
+      "16",
+      "15",
+      "14",
+      "13"
+    ],
+    "correct": "14"
+  },
+  {
+    "question": "Waa maxay 4 + 6?",
+    "options": [
+      "11",
+      "10",
+      "9",
+      "12"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "Waa maxay 5 + 13?",
+    "options": [
+      "17",
+      "20",
+      "19",
+      "18"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Waa maxay 6 + 8?",
+    "options": [
+      "15",
+      "16",
+      "14",
+      "13"
+    ],
+    "correct": "14"
+  },
+  {
+    "question": "Waa maxay 7 + 3?",
+    "options": [
+      "9",
+      "11",
+      "12",
+      "10"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "Waa maxay 8 + 10?",
+    "options": [
+      "19",
+      "20",
+      "18",
+      "17"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Waa maxay 9 + 5?",
+    "options": [
+      "15",
+      "13",
+      "14",
+      "16"
+    ],
+    "correct": "14"
+  },
+  {
+    "question": "Waa maxay 10 + 12?",
+    "options": [
+      "23",
+      "21",
+      "24",
+      "22"
+    ],
+    "correct": "22"
+  },
+  {
+    "question": "Waa maxay 11 + 7?",
+    "options": [
+      "18",
+      "17",
+      "20",
+      "19"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Waa maxay 12 + 14?",
+    "options": [
+      "26",
+      "27",
+      "28",
+      "25"
+    ],
+    "correct": "26"
+  },
+  {
+    "question": "Waa maxay 2 + 9?",
+    "options": [
+      "13",
+      "11",
+      "10",
+      "12"
+    ],
+    "correct": "11"
+  },
+  {
+    "question": "Waa maxay 3 + 4?",
+    "options": [
+      "9",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Waa maxay 4 + 11?",
+    "options": [
+      "16",
+      "14",
+      "17",
+      "15"
+    ],
+    "correct": "15"
+  },
+  {
+    "question": "Waa maxay 5 + 6?",
+    "options": [
+      "10",
+      "13",
+      "12",
+      "11"
+    ],
+    "correct": "11"
+  },
+  {
+    "question": "Waa maxay 6 + 13?",
+    "options": [
+      "18",
+      "20",
+      "21",
+      "19"
+    ],
+    "correct": "19"
+  },
+  {
+    "question": "Waa maxay 7 + 8?",
+    "options": [
+      "14",
+      "15",
+      "17",
+      "16"
+    ],
+    "correct": "15"
+  },
+  {
+    "question": "Waa maxay 8 + 3?",
+    "options": [
+      "11",
+      "10",
+      "13",
+      "12"
+    ],
+    "correct": "11"
+  },
+  {
+    "question": "Waa maxay 9 + 10?",
+    "options": [
+      "21",
+      "19",
+      "18",
+      "20"
+    ],
+    "correct": "19"
+  },
+  {
+    "question": "Waa maxay 10 + 5?",
+    "options": [
+      "14",
+      "15",
+      "17",
+      "16"
+    ],
+    "correct": "15"
+  },
+  {
+    "question": "Waa maxay 11 + 12?",
+    "options": [
+      "24",
+      "22",
+      "25",
+      "23"
+    ],
+    "correct": "23"
+  },
+  {
+    "question": "Waa maxay 12 + 7?",
+    "options": [
+      "21",
+      "18",
+      "20",
+      "19"
+    ],
+    "correct": "19"
+  },
+  {
+    "question": "Waa maxay 2 + 14?",
+    "options": [
+      "15",
+      "16",
+      "18",
+      "17"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 3 + 9?",
+    "options": [
+      "14",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Waa maxay 4 + 4?",
+    "options": [
+      "10",
+      "7",
+      "9",
+      "8"
+    ],
+    "correct": "8"
+  },
+  {
+    "question": "Waa maxay 5 + 11?",
+    "options": [
+      "15",
+      "17",
+      "18",
+      "16"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 6 + 6?",
+    "options": [
+      "12",
+      "11",
+      "14",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Waa maxay 7 + 13?",
+    "options": [
+      "20",
+      "19",
+      "22",
+      "21"
+    ],
+    "correct": "20"
+  },
+  {
+    "question": "Waa maxay 8 + 8?",
+    "options": [
+      "17",
+      "18",
+      "16",
+      "15"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 9 + 3?",
+    "options": [
+      "13",
+      "14",
+      "11",
+      "12"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Waa maxay 10 + 10?",
+    "options": [
+      "20",
+      "19",
+      "22",
+      "21"
+    ],
+    "correct": "20"
+  },
+  {
+    "question": "Waa maxay 11 + 5?",
+    "options": [
+      "16",
+      "17",
+      "18",
+      "15"
+    ],
+    "correct": "16"
+  },
+  {
+    "question": "Waa maxay 12 + 12?",
+    "options": [
+      "24",
+      "26",
+      "25",
+      "23"
+    ],
+    "correct": "24"
+  },
+  {
+    "question": "Waa maxay 2 + 7?",
+    "options": [
+      "9",
+      "8",
+      "10",
+      "11"
+    ],
+    "correct": "9"
+  }
+]
