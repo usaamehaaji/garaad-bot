@@ -1,0 +1,3667 @@
+[
+  {
+    "question": "Halkee ayuu ku dhashay Nabi Muxamed (CSW)?",
+    "options": [
+      "Madiina",
+      "Makka",
+      "Shaam",
+      "Yaman"
+    ],
+    "correct": "Makka"
+  },
+  {
+    "question": "Waa imisa xididka laba jibbaaran ee 144?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Caasimadda dalka Turkiga waa?",
+    "options": [
+      "Istanbul",
+      "Ankara",
+      "Izmir",
+      "Antalya"
+    ],
+    "correct": "Ankara"
+  },
+  {
+    "question": "We ___ to the mosque five times a day.",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "gone"
+    ],
+    "correct": "go"
+  },
+  {
+    "question": "Waa maxay caasimadda Gobolka Sool?",
+    "options": [
+      "Buuhoodle",
+      "Taleex",
+      "Laascaanood",
+      "Caynabo"
+    ],
+    "correct": "Laascaanood"
+  },
+  {
+    "question": "Suuradda loogu magac daray 'Hooyada Qur'aanka' waa?",
+    "options": [
+      "Al-Baqara",
+      "Al-Ikhlaas",
+      "Al-Faatixa",
+      "Yaasiin"
+    ],
+    "correct": "Al-Faatixa"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Qadar?",
+    "options": [
+      "Dubai",
+      "Doha",
+      "Riyadh",
+      "Kuwait City"
+    ],
+    "correct": "Doha"
+  },
+  {
+    "question": "What is the opposite of 'Big'?",
+    "options": [
+      "Large",
+      "Small",
+      "Tall",
+      "Long"
+    ],
+    "correct": "Small"
+  },
+  {
+    "question": "Waa imisa tirada gobollada Soomaaliya?",
+    "options": [
+      "15",
+      "18",
+      "21",
+      "25"
+    ],
+    "correct": "18"
+  },
+  {
+    "question": "Halkee ayuu ku yaallaa webiga Niil (Nile)?",
+    "options": [
+      "Afrika",
+      "Aasiya",
+      "Yurub",
+      "Ameerika"
+    ],
+    "correct": "Afrika"
+  },
+  {
+    "question": "Waa maxay $25 \\times 4 + 50$?",
+    "options": [
+      "100",
+      "125",
+      "150",
+      "200"
+    ],
+    "correct": "150"
+  },
+  {
+    "question": "Nebigii isaga oo yar laga helay geedka hoostiisa (sanduukha)?",
+    "options": [
+      "Nabi Yuusuf",
+      "Nabi Muuse",
+      "Nabi Ciise",
+      "Nabi Ismaaciil"
+    ],
+    "correct": "Nabi Muuse"
+  },
+  {
+    "question": "Caasimadda dalka Faransiiska waa?",
+    "options": [
+      "London",
+      "Berlin",
+      "Paris",
+      "Rome"
+    ],
+    "correct": "Paris"
+  },
+  {
+    "question": "Xubinta jirka u qaabilsan sifaynta dhiigga waa?",
+    "options": [
+      "Wadnaha",
+      "Beerka",
+      "Kelyaha",
+      "Sambabbada"
+    ],
+    "correct": "Kelyaha"
+  },
+  {
+    "question": "Waa maxay natiijada $120 \\div 2 - 10$?",
+    "options": [
+      "40",
+      "50",
+      "60",
+      "70"
+    ],
+    "correct": "50"
+  },
+  {
+    "question": "Caasimadda dalka Ruushka waa?",
+    "options": [
+      "Kyiv",
+      "Moscow",
+      "Saint Petersburg",
+      "Warsaw"
+    ],
+    "correct": "Moscow"
+  },
+  {
+    "question": "They ___ playing football now.",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "was"
+    ],
+    "correct": "are"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Sucuudiga?",
+    "options": [
+      "Makka",
+      "Madiina",
+      "Jidda",
+      "Riyadh"
+    ],
+    "correct": "Riyadh"
+  },
+  {
+    "question": "Immisa sano ayuu xilka hayay madaxweyne Aadan Cadde?",
+    "options": [
+      "5 sano",
+      "7 sano",
+      "9 sano",
+      "10 sano"
+    ],
+    "correct": "7 sano"
+  },
+  {
+    "question": "Waa maxay dhibcaha ay biyuhu ku karkaraan (Boiling point)?",
+    "options": [
+      "50°C",
+      "80°C",
+      "100°C",
+      "120°C"
+    ],
+    "correct": "100°C"
+  },
+  {
+    "question": "Waa kuma saxaabigii ururiyay Qur'aanka markii ugu horreysay?",
+    "options": [
+      "Abuu Bakr",
+      "Cumar",
+      "Cismaan",
+      "Cali"
+    ],
+    "correct": "Abuu Bakr"
+  },
+  {
+    "question": "Caasimadda dalka Spain waa?",
+    "options": [
+      "Barcelona",
+      "Madrid",
+      "Valencia",
+      "Seville"
+    ],
+    "correct": "Madrid"
+  },
+  {
+    "question": "Waa maxay wadarta xaglaha saddex-xagalka?",
+    "options": [
+      "90°",
+      "180°",
+      "270°",
+      "360°"
+    ],
+    "correct": "180°"
+  },
+  {
+    "question": "She is the ___ girl in the class.",
+    "options": [
+      "smart",
+      "smarter",
+      "smartest",
+      "more smart"
+    ],
+    "correct": "smartest"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Nugaal?",
+    "options": [
+      "Eyl",
+      "Burtinle",
+      "Garoowe",
+      "Garacad"
+    ],
+    "correct": "Garoowe"
+  },
+  {
+    "question": "Waa imisa tirada bilaha sanadka?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Waa kuma ninkii dhisay taalada Taj Mahal?",
+    "options": [
+      "Akbar",
+      "Shah Jahan",
+      "Babur",
+      "Aurangzeb"
+    ],
+    "correct": "Shah Jahan"
+  },
+  {
+    "question": "Waa maxay $9 \\times 8$?",
+    "options": [
+      "64",
+      "72",
+      "81",
+      "90"
+    ],
+    "correct": "72"
+  },
+  {
+    "question": "Which animal is known as the 'Ship of the Desert'?",
+    "options": [
+      "Horse",
+      "Elephant",
+      "Camel",
+      "Donkey"
+    ],
+    "correct": "Camel"
+  },
+  {
+    "question": "Halkee ayay ku taallaa buurta Everest?",
+    "options": [
+      "Africa",
+      "Asia",
+      "Europe",
+      "America"
+    ],
+    "correct": "Asia"
+  },
+  {
+    "question": "Immisa rukni ayuu leeyahay Islaamku?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Caasimadda dalka Germany waa?",
+    "options": [
+      "Munich",
+      "Frankfurt",
+      "Berlin",
+      "Hamburg"
+    ],
+    "correct": "Berlin"
+  },
+  {
+    "question": "Waa maxay $1000 \\times 0$?",
+    "options": [
+      "0",
+      "1",
+      "100",
+      "1000"
+    ],
+    "correct": "0"
+  },
+  {
+    "question": "Look! The baby ___.",
+    "options": [
+      "sleep",
+      "is sleeping",
+      "sleeps",
+      "slept"
+    ],
+    "correct": "is sleeping"
+  },
+  {
+    "question": "Waa kuma qoraagii qoray farta Soomaaliga?",
+    "options": [
+      "Shire Jaamac Axmed",
+      "Muuse Galaal",
+      "Cabdalla Mansuur",
+      "Maxamed Siyaad"
+    ],
+    "correct": "Shire Jaamac Axmed"
+  },
+  {
+    "question": "Waa maxay gaaska aan neefsanno?",
+    "options": [
+      "Nitrogen",
+      "Oxygen",
+      "Carbon Dioxide",
+      "Hydrogen"
+    ],
+    "correct": "Oxygen"
+  },
+  {
+    "question": "Halkee ayay ku taallaa xarunta Midowga Afrika?",
+    "options": [
+      "Nairobi",
+      "Mogadishu",
+      "Addis Ababa",
+      "Cairo"
+    ],
+    "correct": "Addis Ababa"
+  },
+  {
+    "question": "Waa maxay 1/2 ka mid ah 50?",
+    "options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "Waa kuma saxaabigii rumeeyay carruurta kii ugu horreeyay?",
+    "options": [
+      "Cali Bin Abi Taalib",
+      "Zayd Bin Xaaritha",
+      "Anas Bin Maalik",
+      "Cabdullaahi Bin Cabaas"
+    ],
+    "correct": "Cali Bin Abi Taalib"
+  },
+  {
+    "question": "Caasimadda dalka Ruushka waa?",
+    "options": [
+      "Kyiv",
+      "Moscow",
+      "Warsaw",
+      "Prague"
+    ],
+    "correct": "Moscow"
+  },
+  {
+    "question": "Waa maxay xubinta ugu weyn jirka bini'aadamka?",
+    "options": [
+      "Beerka",
+      "Maqaarka",
+      "Sambabka",
+      "Wadnaha"
+    ],
+    "correct": "Maqaarka"
+  },
+  {
+    "question": "Waa maxay $11 \\times 11$?",
+    "options": [
+      "111",
+      "121",
+      "131",
+      "141"
+    ],
+    "correct": "121"
+  },
+  {
+    "question": "English is ___ than Somali.",
+    "options": [
+      "easy",
+      "easier",
+      "easiest",
+      "more easy"
+    ],
+    "correct": "easier"
+  },
+  {
+    "question": "Waa imisa tirada qaaradaha adduunka?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Immisa suuradood ayuu ka kooban yahay Qur'aanka?",
+    "options": [
+      "110",
+      "114",
+      "120",
+      "124"
+    ],
+    "correct": "114"
+  },
+  {
+    "question": "Caasimadda dalka France waa?",
+    "options": [
+      "Lyon",
+      "Marseille",
+      "Paris",
+      "Nice"
+    ],
+    "correct": "Paris"
+  },
+  {
+    "question": "Waa maxay xididka 64?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct": "8"
+  },
+  {
+    "question": "Please ___ the door.",
+    "options": [
+      "close",
+      "closes",
+      "closing",
+      "closed"
+    ],
+    "correct": "close"
+  },
+  {
+    "question": "Waa kuma ninkii helay Ameerika?",
+    "options": [
+      "Vasco da Gama",
+      "Christopher Columbus",
+      "Marco Polo",
+      "James Cook"
+    ],
+    "correct": "Christopher Columbus"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Galgaduud?",
+    "options": [
+      "Cadaado",
+      "Guriceel",
+      "Dhuusamareeb",
+      "Caabudwaaq"
+    ],
+    "correct": "Dhuusamareeb"
+  },
+  {
+    "question": "The sun ___ in the east.",
+    "options": [
+      "rise",
+      "rises",
+      "rising",
+      "rose"
+    ],
+    "correct": "rises"
+  },
+  {
+    "question": "Halkee ayay ku taallaa xarunta Qaramada Midoobay (UN)?",
+    "options": [
+      "Geneva",
+      "London",
+      "New York",
+      "Paris"
+    ],
+    "correct": "New York"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka China?",
+    "options": [
+      "Tokyo",
+      "Beijing",
+      "Seoul",
+      "Bangkok"
+    ],
+    "correct": "Beijing"
+  },
+  {
+    "question": "Immisa sano ayuu noolaa Nabi Muxamed (CSW)?",
+    "options": [
+      "40",
+      "50",
+      "63",
+      "70"
+    ],
+    "correct": "63"
+  },
+  {
+    "question": "Caasimadda dalka India waa?",
+    "options": [
+      "Mumbai",
+      "Delhi",
+      "New Delhi",
+      "Kolkata"
+    ],
+    "correct": "New Delhi"
+  },
+  {
+    "question": "Waa maxay xididka laba jibbaaran ee 100?",
+    "options": [
+      "5",
+      "10",
+      "15",
+      "20"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "I ___ a doctor in the future.",
+    "options": [
+      "am",
+      "will be",
+      "was",
+      "be"
+    ],
+    "correct": "will be"
+  },
+  {
+    "question": "Waa kuma qoraagii qoray buugga Aqoonta Guud?",
+    "options": [
+      "Shire Jaamac",
+      "Muuse Galaal",
+      "Cali Shacbaan",
+      "Cabdalla Mansuur"
+    ],
+    "correct": "Cali Shacbaan"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Italy?",
+    "options": [
+      "Milan",
+      "Venice",
+      "Rome",
+      "Naples"
+    ],
+    "correct": "Rome"
+  },
+  {
+    "question": "Suuradda ugu dheer Qur'aanka waa?",
+    "options": [
+      "Yasin",
+      "Al-Baqara",
+      "Al-Imran",
+      "Al-Ma'idah"
+    ],
+    "correct": "Al-Baqara"
+  },
+  {
+    "question": "Waa maxay $50 \\times 2$?",
+    "options": [
+      "80",
+      "90",
+      "100",
+      "110"
+    ],
+    "correct": "100"
+  },
+  {
+    "question": "Listen! Sarah ___ the piano.",
+    "options": [
+      "play",
+      "plays",
+      "is playing",
+      "played"
+    ],
+    "correct": "is playing"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Bay?",
+    "options": [
+      "Marka",
+      "Afgooye",
+      "Baydhabo",
+      "Xuddur"
+    ],
+    "correct": "Baydhabo"
+  },
+  {
+    "question": "Immisa bilood ayuu ka kooban yahay sanadka Hijriyada?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Webiga ugu dheer adduunka waa?",
+    "options": [
+      "Amazon",
+      "Nile",
+      "Mississippi",
+      "Yangtze"
+    ],
+    "correct": "Nile"
+  },
+  {
+    "question": "Waa maxay $200 \\div 5$?",
+    "options": [
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+    "correct": "40"
+  },
+  {
+    "question": "He ___ football every Friday.",
+    "options": [
+      "play",
+      "plays",
+      "playing",
+      "played"
+    ],
+    "correct": "plays"
+  },
+  {
+    "question": "Halkee ayay ku taallaa buurta ugu dheer Soomaaliya?",
+    "options": [
+      "Sanaag",
+      "Bari",
+      "Woqooyi Galbeed",
+      "Awdal"
+    ],
+    "correct": "Sanaag"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Canada?",
+    "options": [
+      "Toronto",
+      "Vancouver",
+      "Ottawa",
+      "Montreal"
+    ],
+    "correct": "Ottawa"
+  },
+  {
+    "question": "Immisa xaraf ayuu ka kooban yahay alifba'da Af-Soomaaliga?",
+    "options": [
+      "21",
+      "26",
+      "28",
+      "30"
+    ],
+    "correct": "26"
+  },
+  {
+    "question": "Waa maxay $15 + 15 + 15$?",
+    "options": [
+      "30",
+      "40",
+      "45",
+      "50"
+    ],
+    "correct": "45"
+  },
+  {
+    "question": "I ___ breakfast at 7 AM today.",
+    "options": [
+      "eat",
+      "eats",
+      "ate",
+      "eating"
+    ],
+    "correct": "ate"
+  },
+  {
+    "question": "Caasimadda dalka South Korea waa?",
+    "options": [
+      "Tokyo",
+      "Seoul",
+      "Beijing",
+      "Bangkok"
+    ],
+    "correct": "Seoul"
+  },
+  {
+    "question": "Waa kuma saxaabigii ugu horeeyay ee rumeeyay haweenka?",
+    "options": [
+      "Khadiija Bintu Khuwaylid",
+      "Caisha Bintu Abii Bakr",
+      "Faadumo Rasuul",
+      "Sumaya"
+    ],
+    "correct": "Khadiija Bintu Khuwaylid"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Brazil?",
+    "options": [
+      "Rio de Janeiro",
+      "Sao Paulo",
+      "Brasilia",
+      "Salvador"
+    ],
+    "correct": "Brasilia"
+  },
+  {
+    "question": "Waa maxay $10^2$ (toban laba jibbaaran)?",
+    "options": [
+      "20",
+      "100",
+      "200",
+      "1000"
+    ],
+    "correct": "100"
+  },
+  {
+    "question": "She ___ a new book yesterday.",
+    "options": [
+      "buy",
+      "buys",
+      "bought",
+      "buying"
+    ],
+    "correct": "bought"
+  },
+  {
+    "question": "Waa maxay caasimadda Gobolka Gedo?",
+    "options": [
+      "Bardheere",
+      "Luuq",
+      "Garbahaarey",
+      "Baardheere"
+    ],
+    "correct": "Garbahaarey"
+  },
+  {
+    "question": "Immisa xubnood ayuu ka kooban yahay Baarlamaanka Soomaaliya?",
+    "options": [
+      "250",
+      "275",
+      "300",
+      "325"
+    ],
+    "correct": "275"
+  },
+  {
+    "question": "Halkee ayuu ku yaallaa marinka Suways (Suez Canal)?",
+    "options": [
+      "Yaman",
+      "Itoobiya",
+      "Masar",
+      "Suudaan"
+    ],
+    "correct": "Masar"
+  },
+  {
+    "question": "Waa maxay $30 \\times 30$?",
+    "options": [
+      "600",
+      "800",
+      "900",
+      "1200"
+    ],
+    "correct": "900"
+  },
+  {
+    "question": "They ___ a movie last night.",
+    "options": [
+      "watch",
+      "watches",
+      "watched",
+      "watching"
+    ],
+    "correct": "watched"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Australia?",
+    "options": [
+      "Sydney",
+      "Melbourne",
+      "Canberra",
+      "Perth"
+    ],
+    "correct": "Canberra"
+  },
+  {
+    "question": "Halkee ayay ku taallaa Masjidka Al-Aqsa?",
+    "options": [
+      "Makka",
+      "Madiina",
+      "Qudus",
+      "Dimishiq"
+    ],
+    "correct": "Qudus"
+  },
+  {
+    "question": "Waa maxay xubinta jirka u qaabilsan aragga?",
+    "options": [
+      "Dhegta",
+      "Sanka",
+      "Indhaha",
+      "Carrabka"
+    ],
+    "correct": "Indhaha"
+  },
+  {
+    "question": "Waa maxay $500 - 150$?",
+    "options": [
+      "250",
+      "350",
+      "450",
+      "550"
+    ],
+    "correct": "350"
+  },
+  {
+    "question": "English: ___ you like coffee?",
+    "options": [
+      "Do",
+      "Does",
+      "Is",
+      "Are"
+    ],
+    "correct": "Do"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Indonesia?",
+    "options": [
+      "Bali",
+      "Jakarta",
+      "Sumatra",
+      "Nusantara"
+    ],
+    "correct": "Jakarta"
+  },
+  {
+    "question": "Waa kuma saxaabigii loo yaqaanay 'Farruuq'?",
+    "options": [
+      "Abu Bakr",
+      "Cumar",
+      "Cismaan",
+      "Cali"
+    ],
+    "correct": "Cumar"
+  },
+  {
+    "question": "Waa maxay badweynta ugu weyn adduunka?",
+    "options": [
+      "Badweynta Hindiya",
+      "Badweynta Atlaantik",
+      "Badweynta Baasifigga",
+      "Badweynta Arctic"
+    ],
+    "correct": "Badweynta Baasifigga"
+  },
+  {
+    "question": "Waa maxay $12 \\times 12$?",
+    "options": [
+      "124",
+      "134",
+      "144",
+      "154"
+    ],
+    "correct": "144"
+  },
+  {
+    "question": "I am ___ for my exams.",
+    "options": [
+      "study",
+      "studies",
+      "studying",
+      "studied"
+    ],
+    "correct": "studying"
+  },
+  {
+    "question": "Waa maxay caasimadda Gobolka Banaadir?",
+    "options": [
+      "Afgooye",
+      "Muqdisho",
+      "Marka",
+      "Balcad"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Nebigii la hadlay shimbiraha iyo jinka?",
+    "options": [
+      "Nabi Muuse",
+      "Nabi Sulaymaan",
+      "Nabi Nuux",
+      "Nabi Ciise"
+    ],
+    "correct": "Nabi Sulaymaan"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka South Africa?",
+    "options": [
+      "Johannesburg",
+      "Pretoria",
+      "Cape Town",
+      "Durban"
+    ],
+    "correct": "Pretoria"
+  },
+  {
+    "question": "Waa imisa xididka 49?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Where ___ you from?",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "be"
+    ],
+    "correct": "are"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Bari?",
+    "options": [
+      "Qardho",
+      "Boosaaso",
+      "Bandarbeyla",
+      "Galinsoor"
+    ],
+    "correct": "Boosaaso"
+  },
+  {
+    "question": "Suuradda lagu magacaabo 'Qalbiga Qur'aanka'?",
+    "options": [
+      "Al-Faatixa",
+      "Yaasiin",
+      "Al-Mulk",
+      "Al-Waaqica"
+    ],
+    "correct": "Yaasiin"
+  },
+  {
+    "question": "Waa maxay dalka ugu dadka badan adduunka?",
+    "options": [
+      "Shiinaha",
+      "Hindiya",
+      "Mareykanka",
+      "Ruushka"
+    ],
+    "correct": "Hindiya"
+  },
+  {
+    "question": "Waa maxay $100 \\div 4$?",
+    "options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "She ___ a beautiful voice.",
+    "options": [
+      "has",
+      "have",
+      "is",
+      "are"
+    ],
+    "correct": "has"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Pakistan?",
+    "options": [
+      "Karachi",
+      "Lahore",
+      "Islamabad",
+      "Peshawar"
+    ],
+    "correct": "Islamabad"
+  },
+  {
+    "question": "Waa kuma saxaabigii loo yaqaanay 'Dul-nuureyn'?",
+    "options": [
+      "Cali",
+      "Cismaan",
+      "Cumar",
+      "Abuu Bakr"
+    ],
+    "correct": "Cismaan"
+  },
+  {
+    "question": "Badweynta ku dhow Soomaaliya waa?",
+    "options": [
+      "Baasifig",
+      "Hindiya",
+      "Atlaantik",
+      "Arctic"
+    ],
+    "correct": "Hindiya"
+  },
+  {
+    "question": "Waa maxay $8 \\times 8$?",
+    "options": [
+      "56",
+      "64",
+      "72",
+      "80"
+    ],
+    "correct": "64"
+  },
+  {
+    "question": "How ___ is this bag?",
+    "options": [
+      "many",
+      "much",
+      "long",
+      "tall"
+    ],
+    "correct": "much"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Hiiraan?",
+    "options": [
+      "Beledweyne",
+      "Buloburde",
+      "Jalaqsi",
+      "Matabaan"
+    ],
+    "correct": "Beledweyne"
+  },
+  {
+    "question": "Xajku waa rukunka imisaad ee Islaamka?",
+    "options": [
+      "3aad",
+      "4aad",
+      "5aad",
+      "2aad"
+    ],
+    "correct": "5aad"
+  },
+  {
+    "question": "Caasimadda dalka Mexico waa?",
+    "options": [
+      "Cancun",
+      "Tijuana",
+      "Mexico City",
+      "Puebla"
+    ],
+    "correct": "Mexico City"
+  },
+  {
+    "question": "Waa imisa xididka 81?",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correct": "9"
+  },
+  {
+    "question": "They ___ to London next week.",
+    "options": [
+      "go",
+      "are going",
+      "went",
+      "goes"
+    ],
+    "correct": "are going"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Togdheer?",
+    "options": [
+      "Burco",
+      "Buuhoodle",
+      "Oodweyne",
+      "Sheikh"
+    ],
+    "correct": "Burco"
+  },
+  {
+    "question": "Qofka u horeeyay ee lagu aaso jannada Baqiic?",
+    "options": [
+      "Cismaan bin Madcuun",
+      "Abu Bakr",
+      "Faadumo",
+      "Xamsa"
+    ],
+    "correct": "Cismaan bin Madcuun"
+  },
+  {
+    "question": "Waa maxay dalka ugu weyn qaaradda Afrika dhul ahaan?",
+    "options": [
+      "Suudaan",
+      "Algeria",
+      "Nigeria",
+      "Masar"
+    ],
+    "correct": "Algeria"
+  },
+  {
+    "question": "Waa maxay $150 + 150$?",
+    "options": [
+      "200",
+      "250",
+      "300",
+      "350"
+    ],
+    "correct": "300"
+  },
+  {
+    "question": "I ___ a book every night.",
+    "options": [
+      "read",
+      "reads",
+      "reading",
+      "am read"
+    ],
+    "correct": "read"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Iraq?",
+    "options": [
+      "Basra",
+      "Mosul",
+      "Baghdad",
+      "Erbil"
+    ],
+    "correct": "Baghdad"
+  },
+  {
+    "question": "Nebigii u dambeeyay ee laga soo dhex saaro Bani Israa'iil?",
+    "options": [
+      "Nabi Ciise",
+      "Nabi Muuse",
+      "Nabi Yaxye",
+      "Nabi Zakariye"
+    ],
+    "correct": "Nabi Ciise"
+  },
+  {
+    "question": "Waa maxay jasiiradda ugu weyn adduunka?",
+    "options": [
+      "Madagascar",
+      "Greenland",
+      "Australia",
+      "Iceland"
+    ],
+    "correct": "Greenland"
+  },
+  {
+    "question": "Waa maxay $60 \\div 3$?",
+    "options": [
+      "15",
+      "20",
+      "25",
+      "30"
+    ],
+    "correct": "20"
+  },
+  {
+    "question": "English: This is ___ apple.",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "some"
+    ],
+    "correct": "an"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Awdal?",
+    "options": [
+      "Baki",
+      "Saylac",
+      "Boorama",
+      "Lughaya"
+    ],
+    "correct": "Boorama"
+  },
+  {
+    "question": "Waa kuma ninkii dhisay ahraamta Masar kii ugu weynaa?",
+    "options": [
+      "Khufu",
+      "Khafre",
+      "Menkaure",
+      "Ramses"
+    ],
+    "correct": "Khufu"
+  },
+  {
+    "question": "Waa maxay dalka loogu yeero 'Dalka Cadceedu ka soo baxdo'?",
+    "options": [
+      "Shiinaha",
+      "Koonfur Kuuriya",
+      "Japan",
+      "Vietnam"
+    ],
+    "correct": "Japan"
+  },
+  {
+    "question": "Waa maxay $20 \\times 5$?",
+    "options": [
+      "80",
+      "90",
+      "100",
+      "110"
+    ],
+    "correct": "100"
+  },
+  {
+    "question": "Look! The sun ___.",
+    "options": [
+      "shine",
+      "is shining",
+      "shines",
+      "shone"
+    ],
+    "correct": "is shining"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Shabeellaha Hoose?",
+    "options": [
+      "Afgooye",
+      "Wanlaweyn",
+      "Marka",
+      "Qoryooley"
+    ],
+    "correct": "Marka"
+  },
+  {
+    "question": "Tirada malaa'igta ee la yiri waxay qoraan camalka dadka?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": "2"
+  },
+  {
+    "question": "Caasimadda dalka Malaysia waa?",
+    "options": [
+      "Bangkok",
+      "Kuala Lumpur",
+      "Singapore",
+      "Jakarta"
+    ],
+    "correct": "Kuala Lumpur"
+  },
+  {
+    "question": "Waa imisa xididka 121?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "11"
+  },
+  {
+    "question": "He ___ at home yesterday.",
+    "options": [
+      "is",
+      "was",
+      "were",
+      "be"
+    ],
+    "correct": "was"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Mudug?",
+    "options": [
+      "Gaalkacyo",
+      "Hobyo",
+      "Jariban",
+      "Galdogob"
+    ],
+    "correct": "Gaalkacyo"
+  },
+  {
+    "question": "Muxuu ahaa magaca faraskii Nabi Muxamed (CSW)?",
+    "options": [
+      "Al-Buraaq",
+      "Al-Sakab",
+      "Al-Qaswa",
+      "Al-Duldul"
+    ],
+    "correct": "Al-Sakab"
+  },
+  {
+    "question": "Waa maxay dalka ugu yar adduunka?",
+    "options": [
+      "Monaco",
+      "Vatican City",
+      "San Marino",
+      "Maldives"
+    ],
+    "correct": "Vatican City"
+  },
+  {
+    "question": "Waa maxay $7 \\times 9$?",
+    "options": [
+      "56",
+      "63",
+      "72",
+      "81"
+    ],
+    "correct": "63"
+  },
+  {
+    "question": "What is the past tense of 'Go'?",
+    "options": [
+      "Goes",
+      "Going",
+      "Went",
+      "Gone"
+    ],
+    "correct": "Went"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Thailand?",
+    "options": [
+      "Hanoi",
+      "Bangkok",
+      "Manila",
+      "Phnom Penh"
+    ],
+    "correct": "Bangkok"
+  },
+  {
+    "question": "Ruknika 2aad ee Islaamka waa?",
+    "options": [
+      "Soonka",
+      "Ashahaadada",
+      "Salaadda",
+      "Zakada"
+    ],
+    "correct": "Salaadda"
+  },
+  {
+    "question": "Webiga ku dhow magaalada London?",
+    "options": [
+      "Nile",
+      "Thames",
+      "Seine",
+      "Danube"
+    ],
+    "correct": "Thames"
+  },
+  {
+    "question": "Waa maxay $500 \\div 2$?",
+    "options": [
+      "150",
+      "200",
+      "250",
+      "300"
+    ],
+    "correct": "250"
+  },
+  {
+    "question": "She ___ her homework now.",
+    "options": [
+      "do",
+      "does",
+      "is doing",
+      "did"
+    ],
+    "correct": "is doing"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Shabeellaha Dhexe?",
+    "options": [
+      "Balcad",
+      "Jowhar",
+      "Mahaday",
+      "Cadale"
+    ],
+    "correct": "Jowhar"
+  },
+  {
+    "question": "Waa kuma qofkii ugu horreeyay ee rumeeyay Nabi Muxamed (CSW)?",
+    "options": [
+      "Abu Bakr",
+      "Khadiija",
+      "Cali",
+      "Sayid"
+    ],
+    "correct": "Khadiija"
+  },
+  {
+    "question": "Caasimadda dalka Iran waa?",
+    "options": [
+      "Shiraz",
+      "Tehran",
+      "Isfahan",
+      "Mashhad"
+    ],
+    "correct": "Tehran"
+  },
+  {
+    "question": "Waa maxay xididka 16?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "___ you speak English?",
+    "options": [
+      "Do",
+      "Does",
+      "Is",
+      "Are"
+    ],
+    "correct": "Do"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Bakool?",
+    "options": [
+      "Xuddur",
+      "Waajid",
+      "Tiyeeglow",
+      "Ceelbarde"
+    ],
+    "correct": "Xuddur"
+  },
+  {
+    "question": "Imisa sano ayuu jiray Nabi Muxamed (CSW) markii hooyadiis dhimatay?",
+    "options": [
+      "2 sano",
+      "4 sano",
+      "6 sano",
+      "8 sano"
+    ],
+    "correct": "6 sano"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Portugal?",
+    "options": [
+      "Lisbon",
+      "Porto",
+      "Madrid",
+      "Barcelona"
+    ],
+    "correct": "Lisbon"
+  },
+  {
+    "question": "Waa maxay $11 + 12 + 13$?",
+    "options": [
+      "34",
+      "36",
+      "38",
+      "40"
+    ],
+    "correct": "36"
+  },
+  {
+    "question": "They ___ to the park yesterday.",
+    "options": [
+      "go",
+      "goes",
+      "went",
+      "gone"
+    ],
+    "correct": "went"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Greece?",
+    "options": [
+      "Athens",
+      "Thessaloniki",
+      "Sparta",
+      "Corinth"
+    ],
+    "correct": "Athens"
+  },
+  {
+    "question": "Yaa dilay ninkii la oran jiray Abu Jahl?",
+    "options": [
+      "Mu'aad iyo Mucawid",
+      "Abu Bakr",
+      "Cumar",
+      "Cali"
+    ],
+    "correct": "Mu'aad iyo Mucawid"
+  },
+  {
+    "question": "Waa maxay dalka ugu ballaaran adduunka dhul ahaan?",
+    "options": [
+      "Shiinaha",
+      "Mareykanka",
+      "Ruushka",
+      "Canada"
+    ],
+    "correct": "Ruushka"
+  },
+  {
+    "question": "Waa maxay $400 - 250$?",
+    "options": [
+      "100",
+      "150",
+      "200",
+      "250"
+    ],
+    "correct": "150"
+  },
+  {
+    "question": "He is the ___ boy in the room.",
+    "options": [
+      "tall",
+      "taller",
+      "tallest",
+      "more tall"
+    ],
+    "correct": "tallest"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Woqooyi Galbeed?",
+    "options": [
+      "Berbera",
+      "Hargeysa",
+      "Gabiley",
+      "Saylac"
+    ],
+    "correct": "Hargeysa"
+  },
+  {
+    "question": "Soonka bisha Ramadaan waa rukunka imisaad ee Islaamka?",
+    "options": [
+      "2aad",
+      "3aad",
+      "4aad",
+      "5aad"
+    ],
+    "correct": "4aad"
+  },
+  {
+    "question": "Caasimadda dalka Sweden waa?",
+    "options": [
+      "Oslo",
+      "Stockholm",
+      "Helsinki",
+      "Copenhagen"
+    ],
+    "correct": "Stockholm"
+  },
+  {
+    "question": "Waa maxay xididka 25?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "I ___ a new car next year.",
+    "options": [
+      "buy",
+      "will buy",
+      "bought",
+      "buys"
+    ],
+    "correct": "will buy"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Jubbada Hoose?",
+    "options": [
+      "Afmadow",
+      "Jamaame",
+      "Kismaayo",
+      "Badhaadhe"
+    ],
+    "correct": "Kismaayo"
+  },
+  {
+    "question": "Imisa jeer ayaa magaca Nabi Muxamed (CSW) lagu sheegay Qur'aanka?",
+    "options": [
+      "2",
+      "4",
+      "6",
+      "8"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "Caasimadda dalka Norway waa?",
+    "options": [
+      "Stockholm",
+      "Oslo",
+      "Bergen",
+      "Helsinki"
+    ],
+    "correct": "Oslo"
+  },
+  {
+    "question": "Waa maxay $12 \\times 3$?",
+    "options": [
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "correct": "36"
+  },
+  {
+    "question": "English: An apple a day keeps the ___ away.",
+    "options": [
+      "doctor",
+      "teacher",
+      "friend",
+      "police"
+    ],
+    "correct": "doctor"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Sanaag?",
+    "options": [
+      "Badhan",
+      "Laasqoray",
+      "Ceerigaabo",
+      "Ceelafweyn"
+    ],
+    "correct": "Ceerigaabo"
+  },
+  {
+    "question": "Muxuu ahaa magaca adoonkii Nabi Muxamed (CSW) ee uu xoreeyay?",
+    "options": [
+      "Bilaal",
+      "Zayd bin Xaaritha",
+      "Anas",
+      "Camaar"
+    ],
+    "correct": "Zayd bin Xaaritha"
+  },
+  {
+    "question": "Dalka loogu yeero 'Dalka Ahraamta' waa?",
+    "options": [
+      "Suudaan",
+      "Iraaq",
+      "Masar",
+      "Hindiya"
+    ],
+    "correct": "Masar"
+  },
+  {
+    "question": "Waa maxay $1000 - 999$?",
+    "options": [
+      "0",
+      "1",
+      "10",
+      "11"
+    ],
+    "correct": "1"
+  },
+  {
+    "question": "She is ___ a song.",
+    "options": [
+      "sing",
+      "sings",
+      "singing",
+      "sang"
+    ],
+    "correct": "singing"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Finland?",
+    "options": [
+      "Oslo",
+      "Helsinki",
+      "Stockholm",
+      "Tallinn"
+    ],
+    "correct": "Helsinki"
+  },
+  {
+    "question": "Ashahaadada waa rukunka imisaad ee Islaamka?",
+    "options": [
+      "1aad",
+      "2aad",
+      "3aad",
+      "4aad"
+    ],
+    "correct": "1aad"
+  },
+  {
+    "question": "Waa maxay magaca xiddigta ugu dhow dhulka?",
+    "options": [
+      "Moon",
+      "Mars",
+      "Sun",
+      "Venus"
+    ],
+    "correct": "Sun"
+  },
+  {
+    "question": "Waa maxay $90 \\div 10$?",
+    "options": [
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "correct": "9"
+  },
+  {
+    "question": "___ you ever been to Hargeisa?",
+    "options": [
+      "Have",
+      "Has",
+      "Do",
+      "Are"
+    ],
+    "correct": "Have"
+  },
+  {
+    "question": "Waa maxay caasimadda gobolka Jubbada Dhexe?",
+    "options": [
+      "Jilib",
+      "Saakow",
+      "Buaale",
+      "Dujuma"
+    ],
+    "correct": "Buaale"
+  },
+  {
+    "question": "Imisa sano ayuu Nabi Nuux (CSW) dadkiisa u yeerayay?",
+    "options": [
+      "500",
+      "750",
+      "950",
+      "1000"
+    ],
+    "correct": "950"
+  },
+  {
+    "question": "Caasimadda dalka Poland waa?",
+    "options": [
+      "Warsaw",
+      "Krakow",
+      "Prague",
+      "Berlin"
+    ],
+    "correct": "Warsaw"
+  },
+  {
+    "question": "Waa maxay xididka 36?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "6"
+  },
+  {
+    "question": "They ___ lunch together now.",
+    "options": [
+      "have",
+      "has",
+      "are having",
+      "had"
+    ],
+    "correct": "are having"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Belgium?",
+    "options": [
+      "Paris",
+      "Brussels",
+      "Amsterdam",
+      "Berlin"
+    ],
+    "correct": "Brussels"
+  },
+  {
+    "question": "Qur'aanka dhexdiisa, imisa suuradood ayaa lagu bilaabay magaca Ilaah (Al-xamdulillaah)?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Webiga ugu weyn dalka Mareykanka waa?",
+    "options": [
+      "Nile",
+      "Amazon",
+      "Mississippi",
+      "Colorado"
+    ],
+    "correct": "Mississippi"
+  },
+  {
+    "question": "Waa maxay $25 \\times 2$?",
+    "options": [
+      "40",
+      "45",
+      "50",
+      "55"
+    ],
+    "correct": "50"
+  },
+  {
+    "question": "I ___ my friend last week.",
+    "options": [
+      "meet",
+      "meets",
+      "met",
+      "meeting"
+    ],
+    "correct": "met"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Austria?",
+    "options": [
+      "Vienna",
+      "Salzburg",
+      "Zurich",
+      "Munich"
+    ],
+    "correct": "Vienna"
+  },
+  {
+    "question": "Nebigii u dambeeyay ee laga soo dhex saaro dadka?",
+    "options": [
+      "Nabi Ciise",
+      "Nabi Ibraahim",
+      "Nabi Muxamed (CSW)",
+      "Nabi Muuse"
+    ],
+    "correct": "Nabi Muxamed (CSW)"
+  },
+  {
+    "question": "Badweynta u dhexaysa Ameerika iyo Yurub waa?",
+    "options": [
+      "Hindiya",
+      "Atlaantik",
+      "Baasifig",
+      "Arctic"
+    ],
+    "correct": "Atlaantik"
+  },
+  {
+    "question": "Waa maxay $40 \\div 8$?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "English: Better late than ___.",
+    "options": [
+      "now",
+      "never",
+      "before",
+      "soon"
+    ],
+    "correct": "never"
+  },
+  {
+    "question": "Waa maxay caasimadda dalka Switzerland?",
+    "options": [
+      "Zurich",
+      "Geneva",
+      "Bern",
+      "Basel"
+    ],
+    "correct": "Bern"
+  },
+  {
+    "question": "Gabadhii u horreysay ee ku shahiidday Islaamka?",
+    "options": [
+      "Khadiija",
+      "Caisha",
+      "Sumaya",
+      "Faadumo"
+    ],
+    "correct": "Sumaya"
+  },
+  {
+    "question": "Magaalada loogu yeero 'Magaalada aan waligeed seexan'?",
+    "options": [
+      "London",
+      "Tokyo",
+      "New York",
+      "Paris"
+    ],
+    "correct": "New York"
+  },
+  {
+    "question": "Waa maxay xididka 100?",
+    "options": [
+      "10",
+      "20",
+      "30",
+      "40"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "She ___ a doctor next month.",
+    "options": [
+      "is visiting",
+      "visits",
+      "visited",
+      "visit"
+    ],
+    "correct": "is visiting"
+  },
+  {
+    "question": "Nabiyaasha Islaamka tiradoodu waa:",
+    "options": [
+      "24",
+      "100",
+      "124,000",
+      "Shan"
+    ],
+    "correct": "124,000"
+  },
+  {
+    "question": "Kitaabkii Nabi Muuse (CS) waxaa lagu magacaabaa:",
+    "options": [
+      "Injiiliga",
+      "Tawreedda",
+      "Quranka",
+      "Sabuurdaha"
+    ],
+    "correct": "Tawreedda"
+  },
+  {
+    "question": "Kitaabkii Nabi Ciise (CS) waxaa lagu magacaabaa:",
+    "options": [
+      "Injiiliga",
+      "Tawreedda",
+      "Quranka",
+      "Sabuurdaha"
+    ],
+    "correct": "Injiiliga"
+  },
+  {
+    "question": "Kitaabkii Nabi Daa'uud (CS) waxaa lagu magacaabaa:",
+    "options": [
+      "Injiiliga",
+      "Tawreedda",
+      "Quranka",
+      "Sabuurdaha"
+    ],
+    "correct": "Sabuurdaha"
+  },
+  {
+    "question": "Guurka Islaamka wuxuu u baahan yahay:",
+    "options": [
+      "Guri",
+      "Mehrad iyo Shaahidiin",
+      "Lacag badan",
+      "Waalidka oo kaliya"
+    ],
+    "correct": "Mehrad iyo Shaahidiin"
+  },
+  {
+    "question": "Nabi Sulaymaan (CS) wuxuu la xukumi jiray:",
+    "options": [
+      "Bini'aadamka",
+      "Bini'aadamka, jinniga, iyo xayawaanka",
+      "Mala'igta",
+      "Jinnigu kaliya"
+    ],
+    "correct": "Bini'aadamka, jinniga, iyo xayawaanka"
+  },
+  {
+    "question": "Salaadda Witrida waa:",
+    "options": [
+      "Fard",
+      "Sunna muakkada",
+      "Naafil",
+      "Mubaax"
+    ],
+    "correct": "Sunna muakkada"
+  },
+  {
+    "question": "Al-Israa' wuxuu ahaa:",
+    "options": [
+      "Safarkii gabaabsi ee habeenkii",
+      "Safarkii dheer ee maalintii",
+      "Garoonka Makka",
+      "Meel Masar"
+    ],
+    "correct": "Safarkii gabaabsi ee habeenkii"
+  },
+  {
+    "question": "Mi'raaj wuxuu ahaa:",
+    "options": [
+      "Safar dhuleed",
+      "Kicidda samooyinka",
+      "Dagaal",
+      "Indheer"
+    ],
+    "correct": "Kicidda samooyinka"
+  },
+  {
+    "question": "Zakaaddu waxay ahaataa imisa percent?",
+    "options": [
+      "1%",
+      "2.5%",
+      "5%",
+      "10%"
+    ],
+    "correct": "2.5%"
+  },
+  {
+    "question": "Nabi Ibraahim (CS) waxaa loo yaqaan:",
+    "options": [
+      "Baabul Anbiyaa",
+      "Khalilullaah",
+      "Sayfullahi",
+      "Ruuxullahi"
+    ],
+    "correct": "Khalilullaah"
+  },
+  {
+    "question": "Waa maxay Laylat al-Qadr?",
+    "options": [
+      "Habeenka Quranka",
+      "Habeenka ka roon 1000 dayax",
+      "Habeenkii Hijrada",
+      "Habeenkii Mawliidka"
+    ],
+    "correct": "Habeenka ka roon 1000 dayax"
+  },
+  {
+    "question": "Waa maxay suurada 'Al-Ikhlaas'?",
+    "options": [
+      "Suurtii 112aad",
+      "Suurtii 100aad",
+      "Suurtii 114aad",
+      "Suurtii 110aad"
+    ],
+    "correct": "Suurtii 112aad"
+  },
+  {
+    "question": "Fida'a Ramadaanka waa:",
+    "options": [
+      "Sadaqo",
+      "Bixinta cuntada miskiinka wakhtiga soonta",
+      "Salaadda taraawiixda",
+      "Zakaadda"
+    ],
+    "correct": "Bixinta cuntada miskiinka wakhtiga soonta"
+  },
+  {
+    "question": "Malaigaha Israafil wuxuu garaacaa:",
+    "options": [
+      "Taruurada",
+      "Roobka",
+      "Nafaqada",
+      "Diiwaanka"
+    ],
+    "correct": "Taruurada"
+  },
+  {
+    "question": "Masjidil Aqsaa wuxuu ku yaallaa:",
+    "options": [
+      "Makka",
+      "Madiina",
+      "Al-Quds (Falastiinta)",
+      "Shaam"
+    ],
+    "correct": "Al-Quds (Falastiinta)"
+  },
+  {
+    "question": "Baytal Maqdis waxaa lagu magacaabaa sidoo kale:",
+    "options": [
+      "Masjid al-Haram",
+      "Masjid al-Aqsa",
+      "Masjid al-Nabawi",
+      "Masjid al-Qiblatayn"
+    ],
+    "correct": "Masjid al-Aqsa"
+  },
+  {
+    "question": "Waqtigii ugu fiicnaa ee Jimcaha waa:",
+    "options": [
+      "Subixii",
+      "Ka dib Casr",
+      "Wakhtiga Khudbada",
+      "Habeenkii"
+    ],
+    "correct": "Wakhtiga Khudbada"
+  },
+  {
+    "question": "Nabi Yuusuf (CS) wuxuu isku darsaday:",
+    "options": [
+      "Masar",
+      "Baabiloon",
+      "Suuriya",
+      "Canaan"
+    ],
+    "correct": "Masar"
+  },
+  {
+    "question": "Nabi Nuux (CS) Safiinkiisu dhismihiisu qaatay:",
+    "options": [
+      "100 sano",
+      "150 sano",
+      "300 sano",
+      "Hal sano"
+    ],
+    "correct": "100 sano"
+  },
+  {
+    "question": "Ciyid al-Adha waxaa lagu xusuustaa:",
+    "options": [
+      "Ramadaanka",
+      "Dhaqan-celinta Nabiga",
+      "Haji iyo allabari",
+      "Hijrada"
+    ],
+    "correct": "Haji iyo allabari"
+  },
+  {
+    "question": "Allabarta Ciyid waa maxay?",
+    "options": [
+      "Soo dhawayn",
+      "Xayawaan la gowraco",
+      "Sadaqo",
+      "Salaad gaar ah"
+    ],
+    "correct": "Xayawaan la gowraca"
+  },
+  {
+    "question": "Nabi Ciise (CS) hooyadiis magaceeda waa:",
+    "options": [
+      "Khadiija",
+      "Maryam",
+      "Aasiya",
+      "Bilqiis"
+    ],
+    "correct": "Maryam"
+  },
+  {
+    "question": "Nabi Muxamed (CSW) aabbihii wuxuu geeriyooday:",
+    "options": [
+      "Ka hor dhalashadiisa",
+      "Ka dib dhalashadiisa",
+      "Marka uu 10 jiro",
+      "Marka uu 20 jiro"
+    ],
+    "correct": "Ka hor dhalashadiisa"
+  },
+  {
+    "question": "Xadiis Jibraa'iil wuxuu sharaxayaa:",
+    "options": [
+      "Diinta oo dhan",
+      "Salaadda",
+      "Quranka",
+      "Haji"
+    ],
+    "correct": "Diinta oo dhan"
+  },
+  {
+    "question": "Nabi Muxamed (CSW) ayaa Quranka qoray: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Fardiga Hajka waxaa lagu qabataa Makkada Mukarrama: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Salaadda shantaad waxay leedahay 17 rakaad: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Soontu waxay bilaabanaysaa bisha Rajab: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Jibriil waa malaigaha waxyiga: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Masjidil Haraam wuxuu ku yaallaa Madiina: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Muharram waa bisha 1aad ee sanadka Islaamka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Quranka waxaa ku jira 6,236 aayad: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Dhammaan muslimiinta waxay ku tukadaan dhinaca Makka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Malaigaha Israafil wuxuu garaacaa taruurada (Soor): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Af-carabi waa luqadda Quranka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Nabi Muxamed (CSW) wuxuu geeriyooday Makka: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Ciyid al-Adha waxaa lagu xusaa bisha 10aad ee Dhul Xijja: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Nabi Ciise (CS) wuxuu ku dhashay Bayt Lahm (Bethlehem): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Al-Baqara waa suurtii labaad ee Quranka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Makka waxay ku taal Jaziiradda Carabiyeed: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "TFG (Transitional Federal Government) goorma la aasaasay?",
+    "options": [
+      "2000",
+      "2004",
+      "2006",
+      "2008"
+    ],
+    "correct": "2004"
+  },
+  {
+    "question": "Gobolka Puntland goorma la aasaasay?",
+    "options": [
+      "1996",
+      "1998",
+      "2000",
+      "2002"
+    ],
+    "correct": "1998"
+  },
+  {
+    "question": "Gobolka Somaliland goorma u dhawaaqay madaxbannaanida?",
+    "options": [
+      "1990",
+      "1991",
+      "1993",
+      "1995"
+    ],
+    "correct": "1991"
+  },
+  {
+    "question": "Gaalkacyo waxay u tahay xarunta gobolka:",
+    "options": [
+      "Mudug",
+      "Nugaal",
+      "Galgaduud",
+      "Sool"
+    ],
+    "correct": "Mudug"
+  },
+  {
+    "question": "Waxbarashada Af-Soomaaliga (qorid) goorma ay tababarnayd dadweynaha?",
+    "options": [
+      "1969",
+      "1972",
+      "1975",
+      "1980"
+    ],
+    "correct": "1972"
+  },
+  {
+    "question": "Dagaalkii Ogaaden ee 1977–78 — ciyuu guuleystay?",
+    "options": [
+      "Soomaaliya",
+      "Itoobiya",
+      "Labadu waa isku siman",
+      "Xabashida kaliya"
+    ],
+    "correct": "Itoobiya"
+  },
+  {
+    "question": "Baydhabo waxay u tahay xarunta gobolka:",
+    "options": [
+      "Bay",
+      "Bakool",
+      "Hiiraan",
+      "Gedo"
+    ],
+    "correct": "Bay"
+  },
+  {
+    "question": "Abwaan Timacadde magiciisa dhigtaa:",
+    "options": [
+      "Maxamed Xaashi Dhamac",
+      "Axmed Farrax",
+      "Maxamed Ibraahim Warsame",
+      "Cali Dhuxul"
+    ],
+    "correct": "Maxamed Xaashi Dhamac"
+  },
+  {
+    "question": "Badda Cas waxaa ku xidha Gacanka Cadmeed:",
+    "options": [
+      "Xornimadaha",
+      "Bab el-Mandeb",
+      "Suez Canal",
+      "Hormuz"
+    ],
+    "correct": "Bab el-Mandeb"
+  },
+  {
+    "question": "AMISOM goorma ay bilaabatay shaqadeedii Soomaaliya?",
+    "options": [
+      "2005",
+      "2007",
+      "2009",
+      "2011"
+    ],
+    "correct": "2007"
+  },
+  {
+    "question": "Xornimada Soomaaliya Waqooyi (Somaliland) waxay ka timid:",
+    "options": [
+      "Talyaaniga",
+      "Ingiriiska",
+      "Faransiiska",
+      "Itoobiya"
+    ],
+    "correct": "Ingiriiska"
+  },
+  {
+    "question": "Soomaaliya Koonfur waxay xornimadeedii ka heshay:",
+    "options": [
+      "Talyaaniga",
+      "Ingiriiska",
+      "Faransiiska",
+      "Maraykanka"
+    ],
+    "correct": "Talyaaniga"
+  },
+  {
+    "question": "Farmaajo (Maxamed Cabdullaahi Maxamed) goorma ayuu madaxweyne la xilsaaray?",
+    "options": [
+      "2012",
+      "2016",
+      "2017",
+      "2020"
+    ],
+    "correct": "2017"
+  },
+  {
+    "question": "Xasan Sheekh Maxamuud goorma madaxweyne la doortay (koowaad)?",
+    "options": [
+      "2009",
+      "2012",
+      "2016",
+      "2022"
+    ],
+    "correct": "2012"
+  },
+  {
+    "question": "Dastuurkii Soomaaliya ee 2012 goorma la ansixiyay?",
+    "options": [
+      "Juun",
+      "Ogosto",
+      "Seteember",
+      "Noofember"
+    ],
+    "correct": "Ogosto"
+  },
+  {
+    "question": "Codkii Adduunka (VOA Somali) goorma ayuu bilaaday?",
+    "options": [
+      "1950",
+      "1955",
+      "1962",
+      "1970"
+    ],
+    "correct": "1962"
+  },
+  {
+    "question": "Soomaaliya waxay ku biirtay AU meesha asalka ah?",
+    "options": [
+      "OAU 1963",
+      "AU 2002",
+      "OAU 1960",
+      "OAU 1970"
+    ],
+    "correct": "OAU 1963"
+  },
+  {
+    "question": "Somaliland waxay xubnaha ka tahay UN: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Webiga Shabeelle wuxuu ku dhacaa badda: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "SYL waxaa aasaasay 13 dhallinyaro Soomaali ah: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Geeska Afrika Soomaaliya ayaa ugu dhow badda Hindiya: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Kismayo waxay ku taallaa Jubba Dhexe: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Diiwaangelintii qoraalka Soomaaliga 1972 ayaa lagu bilaabay: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Xukuumada Federaalka Soomaaliya waxaa ku jira 5 dowlad-gobol: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Muqdisho waxay lahayd magac duqoobay oo ah 'Xamar': Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Dervishkii Sayidka waxay dagaallameen 20 sano: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Soomaaliya waa waddanka ugu xeebta badan Afrika: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Garoonka Muqdisho waxaa lagu magacaabaa Aden Adde: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Puntland waxay dhawaaqday madaxbanaan buuxda: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Koonfur Soomaaliya waxaa maamuli jiray Itaaly: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Soomaaliya waxay ka mid tahay League of Arab States (AL): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Hargeysa waa magaalada labaad ee Soomaaliya tirada dadka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Sayid Maxamed Cabdulle Xasan wuxuu dhintay 1920: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Bosaso waa dekedda ugu weyn Puntland: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Soomaaliya 18 gobol ayaa ku jira: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Berbera waxay ku taal Woqooyi Galbeed: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Guri Ceel waxay ku taallaa Galgaduud: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Webiga Jubba wuxuu bilaabmaa Itoobiya: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Boosaaso waxay ku taallaa Gobolka Bari: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Soomaalidu waxay leedahay hal koox qowmiyadeed: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Selka jidhka aadanaha waxaa ku jira imisa lafood?",
+    "options": [
+      "196",
+      "206",
+      "216",
+      "226"
+    ],
+    "correct": "206"
+  },
+  {
+    "question": "Heerkulka jidhka aadanaha caadiga ah waa:",
+    "options": [
+      "35°C",
+      "36.5°C",
+      "37°C",
+      "38°C"
+    ],
+    "correct": "37°C"
+  },
+  {
+    "question": "Faraantada DNA waxay ku jirtaa:",
+    "options": [
+      "Mindhicirka",
+      "Sambabka",
+      "Unugga (nucleus)",
+      "Lafta"
+    ],
+    "correct": "Unugga (nucleus)"
+  },
+  {
+    "question": "Newton wuxuu ogaaday:",
+    "options": [
+      "Relativity",
+      "Gravity",
+      "Telephone",
+      "Vaccines"
+    ],
+    "correct": "Gravity"
+  },
+  {
+    "question": "WiFi waxay isticmaasho:",
+    "options": [
+      "Nuurka",
+      "Xarriiqda",
+      "Mowjadaha raadiyaha",
+      "Doogta"
+    ],
+    "correct": "Mowjadaha raadiyaha"
+  },
+  {
+    "question": "Caafimaadka — vaccine-ka shaqadiisu waa:",
+    "options": [
+      "Bukaanta oo xannibaya",
+      "Jirka oo caabuda la baraya",
+      "Maareynta cuntada",
+      "Koritaanka"
+    ],
+    "correct": "Jirka oo caabuda la baraya"
+  },
+  {
+    "question": "Faylasufkii Giriig ee caan ah Socrates wuxuu caan ku ahaa:",
+    "options": [
+      "Xisaabta",
+      "Falsafada",
+      "Nujuumka",
+      "Dhismaha"
+    ],
+    "correct": "Falsafada"
+  },
+  {
+    "question": "Kombiyuutarku markii ugu horeysay wuu ahaa:",
+    "options": [
+      "Yar",
+      "Aad u weyn",
+      "Gacmeed",
+      "Dijital"
+    ],
+    "correct": "Aad u weyn"
+  },
+  {
+    "question": "Nuurku (light) saacada wuxuu u socdo:",
+    "options": [
+      "300,000 km",
+      "150,000 km",
+      "3,000,000 km",
+      "30,000 km"
+    ],
+    "correct": "300,000 km"
+  },
+  {
+    "question": "Caloosha dadka cuntada lagu dheefshiidaa waxaa loogu yaqaan:",
+    "options": [
+      "Maskaxda",
+      "Beerka",
+      "Mindhicirka",
+      "Sambabka"
+    ],
+    "correct": "Mindhicirka"
+  },
+  {
+    "question": "Bayoolojiga — wuxuu baranayaa:",
+    "options": [
+      "Nujuumka",
+      "Nolosha",
+      "Dhulka",
+      "Koronta"
+    ],
+    "correct": "Nolosha"
+  },
+  {
+    "question": "Kimiyada — wuxuu baranayaa:",
+    "options": [
+      "Nujuumka",
+      "Walxaha iyo isbeddelkooda",
+      "Dhulka",
+      "Koronta"
+    ],
+    "correct": "Walxaha iyo isbeddelkooda"
+  },
+  {
+    "question": "Dhaqanka AI (artificial intelligence) waxaa ugu horeeyay:",
+    "options": [
+      "1990s",
+      "1950s",
+      "2000s",
+      "1970s"
+    ],
+    "correct": "1950s"
+  },
+  {
+    "question": "Sayniska dhulka waxaa lagu yaqaan:",
+    "options": [
+      "Geology",
+      "Biology",
+      "Chemistry",
+      "Astronomy"
+    ],
+    "correct": "Geology"
+  },
+  {
+    "question": "Oksijiin — waa gaas u muhiim neefsashada: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Mars waxaa loogu yaqaan 'Red Planet': Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Antarctiga waa meesha ugu qabow dhulka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Moon (dayaxa) wuxuu leeyahay hawada uu la noolaado: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Dhulku wuxuu ku wareegaa nafsigiisa 24 saacadood: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Biyuhu waxay ka kooban yihiin hydrogen iyo oxygen: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Einstein wuxuu ogaaday telefonka: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Bisaddu maqasheeda ayay baashaalka ku cabbirtaa: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Erayga 'photosynthesis' macnaheedu yahay geedo cuntada u soo saara nuurka qorraxda: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Xiddigtu shucaaceeda waxay ka timaaataa hydrogen oo karaya: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Koronto-waxaa-soo-saara (battery) ugu badan ee casriga ah waxay isticmaashaa Lithium: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Dhexdhexaadinta dhiigga jirka waxaa qabta wadnaha: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Calooshii ugu weyn ee jidhka aadanaha waa beerka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Daaweynta antibiotics waxay shaqeeysa fayruuska: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Dhulka 71% waa badda: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Naasi (octopus) wuxuu leeyahay saddex wadne: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Shimbirku (bird) dhiiggiisu waa diiran yahay (warm-blooded): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Shimbirka penguin wuxuu duuli karaa: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Adduunka ugu weyn ee xayawaanka dhulka waa maroodi (elephant): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Jir-dhiska aadanaha wuxuu leeyahay 12 muruqood oo weyn: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Geedka ugu gaaban dunidu waa Bonsai: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Waddanka ugu yar adduunka dhulka ahaan waa:",
+    "options": [
+      "Monaco",
+      "San Marino",
+      "Vatican City",
+      "Liechtenstein"
+    ],
+    "correct": "Vatican City"
+  },
+  {
+    "question": "Waddanka ugu badan dadka adduunka waa:",
+    "options": [
+      "Shiinaha",
+      "Hindiya",
+      "Maraykanka",
+      "Iindunisiya"
+    ],
+    "correct": "Hindiya"
+  },
+  {
+    "question": "Qaaradda Africa tirada wadammadeeda waa:",
+    "options": [
+      "48",
+      "54",
+      "60",
+      "40"
+    ],
+    "correct": "54"
+  },
+  {
+    "question": "Nairobi waa caasimadda:",
+    "options": [
+      "Ugaanda",
+      "Tanzania",
+      "Kenya",
+      "Ethiopia"
+    ],
+    "correct": "Kenya"
+  },
+  {
+    "question": "Addis Ababa waa caasimadda:",
+    "options": [
+      "Eritrea",
+      "Sudan",
+      "Ethiopia",
+      "Kenya"
+    ],
+    "correct": "Ethiopia"
+  },
+  {
+    "question": "Buurta Kilimanjaro waxay ku taal:",
+    "options": [
+      "Kenya",
+      "Ethiopia",
+      "Tanzania",
+      "Uganda"
+    ],
+    "correct": "Tanzania"
+  },
+  {
+    "question": "Nile wuxuu ku dhacaa badda:",
+    "options": [
+      "Badda Cas",
+      "Mediteranean",
+      "Hindiya",
+      "Atlantik"
+    ],
+    "correct": "Mediteranean"
+  },
+  {
+    "question": "Tokyo waa caasimadda:",
+    "options": [
+      "Kuuriya",
+      "Shiinaha",
+      "Jaabaan",
+      "Taaylaan"
+    ],
+    "correct": "Jaabaan"
+  },
+  {
+    "question": "Seoul waa caasimadda:",
+    "options": [
+      "Waqooyi Kuuriya",
+      "Koonfur Kuuriya",
+      "Shiinaha",
+      "Vietnam"
+    ],
+    "correct": "Koonfur Kuuriya"
+  },
+  {
+    "question": "Beijing waa caasimadda:",
+    "options": [
+      "Jaabaan",
+      "Kuuriya",
+      "Shiinaha",
+      "Mongolia"
+    ],
+    "correct": "Shiinaha"
+  },
+  {
+    "question": "Waddanka Brazil caasimaddiisa waa:",
+    "options": [
+      "Rio de Janeiro",
+      "Sao Paulo",
+      "Brasilia",
+      "Salvador"
+    ],
+    "correct": "Brasilia"
+  },
+  {
+    "question": "Cairo waa caasimadda:",
+    "options": [
+      "Libya",
+      "Tunisia",
+      "Masar",
+      "Algeria"
+    ],
+    "correct": "Masar"
+  },
+  {
+    "question": "Accra waa caasimadda:",
+    "options": [
+      "Nigeria",
+      "Ghana",
+      "Ivory Coast",
+      "Senegal"
+    ],
+    "correct": "Ghana"
+  },
+  {
+    "question": "Badda Mediteranean waxay ku xidha:",
+    "options": [
+      "Europe, Africa iyo Asia",
+      "America iyo Africa",
+      "Asia oo kaliya",
+      "Antarkiig"
+    ],
+    "correct": "Europe, Africa iyo Asia"
+  },
+  {
+    "question": "Sydney waa magaalada ugu weyn ee:",
+    "options": [
+      "New Zealand",
+      "Australiya",
+      "Kanada",
+      "Afrika Koonfur"
+    ],
+    "correct": "Australiya"
+  },
+  {
+    "question": "Djibouti (Jabuuti) waxaa xidhiidhsan:",
+    "options": [
+      "Soomaaliya, Itoobiya, Eritrea iyo Badda Cas",
+      "Soomaaliya iyo Kenya",
+      "Itoobiya iyo Sudan",
+      "Badda Cas oo kaliya"
+    ],
+    "correct": "Soomaaliya, Itoobiya, Eritrea iyo Badda Cas"
+  },
+  {
+    "question": "Bariga Afrika waddanka ugu weyn dhulka ahaan:",
+    "options": [
+      "Sudan",
+      "Ethiopia",
+      "Tanzania",
+      "Kenya"
+    ],
+    "correct": "Sudan"
+  },
+  {
+    "question": "Waddanka Gana (Ghana) waxay ku taal:",
+    "options": [
+      "Bariga Africa",
+      "Galbeedka Africa",
+      "Waqooyiga Africa",
+      "Koonfurta Africa"
+    ],
+    "correct": "Galbeedka Africa"
+  },
+  {
+    "question": "Amazon waa hoyga ugub (jungle) ugu weyn adduunka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Suez Canal waxay xidhiisaa Badda Cas iyo Mediteranean: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Australiya waa qaarad iyo waddan: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Sahara waa ugub (desert) ugu weyn adduunka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Paris waa caasimadda Faransiiska: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "London waa caasimadda UK: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Saudi Arabia waa waddanka ugu weyn Bariga Dhexe: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Kanada waa waddanka ugu weyn dhulka Waqooyi Ameerika: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Bariga Dhexe waddanka Saudi Arabia ayaa ugu weyn: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Masar waxay ku taal Afrika iyo Aasiya: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Bahrain waa waddan jasiirad ah: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Buurta Everest waxay ku taal Nepal iyo Tibet: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Antarctiga waa meesha laga helo koonfurta dhulka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Adduunka waxaa ku jira 195 waddan madaxbannaan: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Webiga Nile wuxuu mara 11 waddan: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Waddanka ugu yar tirada dadka waa Vatican: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Waddanka Maraykanka 50 gobol ayuu leeyahay: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Qaaradda Asia waa qaraadda ugu weyn: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Badda Hindiya waxay u dhaxaysaa Afrika, Aasiya iyo Australiya: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Waddanka Ruushka waxuu ku yaallaa laba qaaradood (Europe + Asia): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Tokyo waa magaalada ugu dadka badan adduunka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Shiinaha waxay leeddahay xuduud wadammo 14 ah: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Waddanka Nigeria waa waddanka ugu dadka badan Afrika: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Webiga Volga wuxuu ku yaallaa Ruushka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Caasimadda Kanada waa Toronto: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Peru waxay ku taallaa Koonfur Ameerika: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Hindiya geedka ugu caan badan waa Mango: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Qaaradda Antarkiig cidla ma deggenayn: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Waddanka Albaniya waxay ku taallaa Yurub: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Masar waa caasimadda al-Qahira (Cairo): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Badda Cas waxay ku dhaxaysaa Sacuudiga iyo Masar iyo xeebaha kale: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Magaca (noun) af-Soomaaligga wuxuu leeyahay imisa jinsi?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": "2"
+  },
+  {
+    "question": "Jinsiga labka (masculine) af-Soomaaliga wuxuu noqdaa:",
+    "options": [
+      "Qolka, Miiska",
+      "Qolka, Naagta",
+      "Miiska, Naagta",
+      "Carruurta, Guri"
+    ],
+    "correct": "Qolka, Miiska"
+  },
+  {
+    "question": "Jinsiga dheddigga (feminine) af-Soomaaliga wuxuu leeyahay calaamad:",
+    "options": [
+      "-o",
+      "-ka",
+      "-ta",
+      "-ga"
+    ],
+    "correct": "-o"
+  },
+  {
+    "question": "Erayga 'wanaagsan' wuxuu yahay nooca:",
+    "options": [
+      "Magac",
+      "Feer (adjective)",
+      "Falka",
+      "Xarfaha xidka"
+    ],
+    "correct": "Feer (adjective)"
+  },
+  {
+    "question": "Jumladda Soomaaliga dhismeedu waa:",
+    "options": [
+      "Falku marka hore",
+      "Magaca marka hore",
+      "Magac + Feer + Fal",
+      "Feer + Magac + Fal"
+    ],
+    "correct": "Magac + Feer + Fal"
+  },
+  {
+    "question": "'Buugta' waa jamiaca (plural) erayga:",
+    "options": [
+      "Buug",
+      "Boog",
+      "Biig",
+      "Baag"
+    ],
+    "correct": "Buug"
+  },
+  {
+    "question": "Af-Soomaaliga wuxuu leeyahay imisa codad (vowels) aasaasi?",
+    "options": [
+      "3",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Koobiga af-Soomaaligga (article) waa:",
+    "options": [
+      "Al- sida Carabiga",
+      "Ka / Ta dhameeyey",
+      "Ma / Wa",
+      "Waxan / Waxan"
+    ],
+    "correct": "Ka / Ta dhameeyey"
+  },
+  {
+    "question": "Falka 'tegey' waa wakhtiga:",
+    "options": [
+      "Hadda",
+      "Mustaqbalka",
+      "Dhamaadkii hore",
+      "Sii socda"
+    ],
+    "correct": "Dhamaadkii hore"
+  },
+  {
+    "question": "Falka 'tegeysaa' waa wakhtiga:",
+    "options": [
+      "Hadda",
+      "Mustaqbalka",
+      "Dhamaadkii hore",
+      "Jiray"
+    ],
+    "correct": "Mustaqbalka"
+  },
+  {
+    "question": "'Aniga, Adiga, Isaga' waxay yihiin:",
+    "options": [
+      "Magacyo",
+      "Damiirada shakhsiyeed",
+      "Feero",
+      "Falko"
+    ],
+    "correct": "Damiirada shakhsiyeed"
+  },
+  {
+    "question": "Erayga 'si fiican' naxwaha waa nooca:",
+    "options": [
+      "Magac",
+      "Xaalada farka (adverb)",
+      "Feer",
+      "Fal"
+    ],
+    "correct": "Xaalada farka (adverb)"
+  },
+  {
+    "question": "Jumladda 'Nin wanaagsan baa yimi' — falku waa:",
+    "options": [
+      "Nin",
+      "Wanaagsan",
+      "Yimi",
+      "Baa"
+    ],
+    "correct": "Yimi"
+  },
+  {
+    "question": "Af-Soomaaliga waa luuqadda ugu badan ee Geeska Afrika: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Af-Soomaaliga wuxuu leeyahay harfaha 'p' iyo 'v': Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Af-Soomaaliga waa mid ka mid ah luuqadaha Cushitic: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Jumladda Soomaaliga falku marka ugu horeysa ayuu yimaadaa: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Xarafka 'X' af-Soomaaligga wuxuu dhawaaqa sida 'kh' Carabiga: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Af-Soomaaliga waxaa lagu qori karaa farta Laatiinka: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Damiirka 'Ayaan' waa mid dheddig ah: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Luuqadda Soomaaliga waxaa ku hadla qiyaastii 20 milyan: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Erayga 'guri' waa magac: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Abwaan (poet) af-Soomaaligga waxaa laga baranayaa suugaanta: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Qoraalka Soomaaliga 1972 waxaa soo saaray Maxamed Siyaad Barre: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Af-Soomaaliga wuxuu leeyahay dhawaqyo aan ku jirin luuqado kale: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "'Dhagax' waa magac lab ah: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "'Naag' waa magac dheddig ah: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Falka 'cunayaa' waa wakhtiga hadda: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Af-Soomaaliga waxaa ku jira 5 harfood oo vowel ah: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Erayga 'buug' waa magac: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Tonal system (heesashada erayo) waa muhiim af-Soomaaliga: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Af-Soomaaliga ma lahan qoraal hore (indigenous script) inta aan 1972 la gaadhin: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Suugaanta Soomaaliga asal ahaan waxay ku jiirtay afka (oral tradition): Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Dhammaan magacyada Soomaaliya waxay dambeeyaan '-o' hadday dheddig yihiin: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Af-Soomaaliga waxaa lagu wada isticmaalaa Soomaaliya, Itoobiya, Jabuuti iyo Waqooyiga Kenya: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Erayga 'macallin' waxaa loogu yaqaan 'teacher' Ingiriisiga: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "'Carruurta' waa jamiaca 'Caruur': Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Falka 'akhriyey' wuxuu macnaheedu yahay 'he read (past)': Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Af-Soomaaligga heer (tone) waa qayb ka mid ah micnaha ereyga: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Luuqadda Soomaaliga waxaa lagu baranayaa dugsiyada Soomaaliya: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "144 ÷ 12 = ?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "2⁸ = ?",
+    "options": [
+      "64",
+      "128",
+      "256",
+      "512"
+    ],
+    "correct": "256"
+  },
+  {
+    "question": "√169 = ?",
+    "options": [
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "correct": "13"
+  },
+  {
+    "question": "0.5 × 0.5 = ?",
+    "options": [
+      "0.1",
+      "0.25",
+      "0.5",
+      "1"
+    ],
+    "correct": "0.25"
+  },
+  {
+    "question": "13 × 13 = ?",
+    "options": [
+      "159",
+      "169",
+      "179",
+      "189"
+    ],
+    "correct": "169"
+  },
+  {
+    "question": "1000 ÷ 25 = ?",
+    "options": [
+      "30",
+      "35",
+      "40",
+      "45"
+    ],
+    "correct": "40"
+  },
+  {
+    "question": "Haddii 3x = 21 markaa x = ?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "60% of 150 = ?",
+    "options": [
+      "75",
+      "80",
+      "85",
+      "90"
+    ],
+    "correct": "90"
+  },
+  {
+    "question": "Shanta tiro ee xiga: 3, 6, 12, 24, _?",
+    "options": [
+      "36",
+      "48",
+      "40",
+      "32"
+    ],
+    "correct": "48"
+  },
+  {
+    "question": "99 + 99 + 99 = ?",
+    "options": [
+      "287",
+      "297",
+      "299",
+      "307"
+    ],
+    "correct": "297"
+  },
+  {
+    "question": "Haddii aad iibsato $250 shey, 20% discount, waxaad bixinaysaa:",
+    "options": [
+      "$200",
+      "$210",
+      "$220",
+      "$230"
+    ],
+    "correct": "$200"
+  },
+  {
+    "question": "7! (7 factorial) = ?",
+    "options": [
+      "720",
+      "2520",
+      "5040",
+      "40320"
+    ],
+    "correct": "5040"
+  },
+  {
+    "question": "Haddii 2x + 4 = 14 markaa x = ?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Wareegga dooirada (circumference) haddii diameter = 14 (π=22/7) waa:",
+    "options": [
+      "22",
+      "44",
+      "66",
+      "88"
+    ],
+    "correct": "44"
+  },
+  {
+    "question": "Prime number kii ugu yar ee la yaqaan waa 2: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "0 waa tiro prime ah: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "100² = 10,000: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Tirada π (pi) waa qiyaastii 3.14159: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "√4 = 2: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Xagasha wareegga guud waa 360°: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "1 × 0 = 1: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "10,000 - 9,999 = 1: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Xisaabta algebra waxaa aasaasay Al-Khawarizmi: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "50 × 2 = 100: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Tiro walba waxaad ku qaybiso nafteeda waxaad heshaa 1: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "3 + 3 + 3 = 3 × 3: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Tirada Fibonacci ee 10aad waa 55: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Dhammaan tiro liidada (negative) ma aha prime: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Dhammaan tiraha lays-qeybinaya 6 sidoo kale waxay yihiin mid lays-qeybinaya 3: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "15 waa tiro prime ah: Run — Been",
+    "type": "tf",
+    "correct": false
+  },
+  {
+    "question": "Xagasha saddex-xagalka (triangle) sum-kiisu waa 180°: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "25 × 4 = 100: Run — Been",
+    "type": "tf",
+    "correct": true
+  },
+  {
+    "question": "Labada tiro ee ugu horeeya ee tiro-xiga (sequence) Fibonacci waa 1 iyo 1: Run — Been",
+    "type": "tf",
+    "correct": true
+  }
+]
