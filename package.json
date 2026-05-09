@@ -1,0 +1,21 @@
+{
+  "name": "garaad-bot",
+  "version": "2.0.0",
+  "description": "Garaad Quiz Bot — Discord bot Af-Soomaali ah",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev":   "node --watch index.js"
+  },
+  "keywords": ["discord", "bot", "quiz", "somali", "garaad"],
+  "author": "Garaad",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.26.3",
+    "dotenv":     "^17.4.2"
+  }
+}
