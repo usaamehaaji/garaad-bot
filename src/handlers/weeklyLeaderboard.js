@@ -17,15 +17,19 @@ const MEDALS = ['🥇', '🥈', '🥉'];
 
 // ── Somalia EAT UTC+3 Sunday midnight check ────────────────────────
 
-function getNextSundayMidnightEAT() {
+function getNextSundayEAT() {
     const now = Date.now();
     const eat = new Date(now + 3 * 60 * 60 * 1000); // UTC+3
-    // Find next Sunday 00:00 EAT
-    const day  = eat.getUTCDay(); // 0=Sunday
-    const daysUntilSunday = day === 0 ? 7 : 7 - day;
+    // Find next Sunday 19:00 EAT
+    const day = eat.getUTCDay(); // 0=Sunday
+    let daysUntilSunday = day === 0 ? 0 : 7 - day;
     const next = new Date(eat);
     next.setUTCDate(eat.getUTCDate() + daysUntilSunday);
-    next.setUTCHours(0, 0, 0, 0);
+    next.setUTCHours(19, 0, 0, 0); // 19:00 EAT = 16:00 UTC
+    // If today is Sunday but 19:00 already passed, schedule next Sunday
+    if (next.getTime() - 3 * 60 * 60 * 1000 <= now) {
+        next.setUTCDate(next.getUTCDate() + 7);
+    }
     return next.getTime() - 3 * 60 * 60 * 1000; // back to UTC
 }
 
@@ -125,7 +129,7 @@ async function sendLeaderboard(client) {
             .setTimestamp();
 
         await channel.send({
-            content: '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 **Garaad — Tirakoobka Isbuuceedka**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+            content: '@here\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 **Garaad — Tirakoobka Isbuuceedka**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
             embeds: [ecoEmbed, iqEmbed],
         });
 
@@ -139,11 +143,11 @@ async function sendLeaderboard(client) {
 
 module.exports = function setupWeeklyLeaderboard(client) {
     async function scheduleNext() {
-        const nextMs  = getNextSundayMidnightEAT();
+        const nextMs  = getNextSundayEAT();
         const delayMs = Math.max(0, nextMs - Date.now());
         const days    = Math.floor(delayMs / 86400000);
         const hours   = Math.floor((delayMs % 86400000) / 3600000);
-        console.log(`[WeeklyLB] Xiga: Axad 00:00 EAT (~${days}d ${hours}h)`);
+        console.log(`[WeeklyLB] Xiga: Axad 19:00 EAT (~${days}d ${hours}h)`);
 
         setTimeout(async () => {
             await sendLeaderboard(client);
