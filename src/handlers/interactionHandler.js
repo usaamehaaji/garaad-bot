@@ -1086,6 +1086,46 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.update({ embeds: [buildJeebEmbed(targetId, username)], components: [jeebRow(authorId, targetId)] });
         }
 
+        // ── Team Duel: lobby buttons ──
+        if (id.startsWith('tduel_join_')) {
+            const channelId = id.replace('tduel_join_', '');
+            const { handleJoin } = require('../games/teamDuel');
+            return handleJoin(interaction, channelId);
+        }
+        if (id.startsWith('tduel_leave_')) {
+            const channelId = id.replace('tduel_leave_', '');
+            const { handleLeave } = require('../games/teamDuel');
+            return handleLeave(interaction, channelId);
+        }
+        if (id.startsWith('tduel_start_')) {
+            const rest      = id.replace('tduel_start_', '');
+            const lastUs    = rest.lastIndexOf('_');
+            const hostId    = rest.slice(0, lastUs);
+            const channelId = rest.slice(lastUs + 1);
+            const { handleStart } = require('../games/teamDuel');
+            return handleStart(interaction, hostId, channelId);
+        }
+        if (id.startsWith('tduel_cancel_')) {
+            const rest      = id.replace('tduel_cancel_', '');
+            const lastUs    = rest.lastIndexOf('_');
+            const hostId    = rest.slice(0, lastUs);
+            const channelId = rest.slice(lastUs + 1);
+            const { handleCancel } = require('../games/teamDuel');
+            return handleCancel(interaction, hostId, channelId);
+        }
+        // Team Duel answer buttons — handled by collector; block non-participants
+        if (id.startsWith('tduel_ans_')) {
+            const parts     = id.split('_');
+            // tduel_ans_{channelId}_{qIndex}_{optIndex}_{t|f}
+            const channelId = parts[2];
+            const { activeTeamDuels, handleNonParticipantAnswer } = require('../games/teamDuel');
+            const state = activeTeamDuels.get(channelId);
+            if (state && !([...state.teams[1], ...state.teams[2]]).includes(interaction.user.id)) {
+                return interaction.reply({ content: '⛔ Game kuma jirtid — kama jawaabi kartid.', flags: MessageFlags.Ephemeral });
+            }
+            return; // handled by collector
+        }
+
         // ── Xir (Close) ──
         if (id.startsWith('close_')) {
             const parts   = id.split('_');

@@ -24,6 +24,7 @@ const broadcast       = require('../commands/admin/adminBroadcast');
 const tournament      = require('../games/tournament');
 const connect4        = require('../games/connect4');
 const werewolf        = require('../games/werewolf');
+const teamDuel        = require('../games/teamDuel');
 
 // ── Economy ──
 
@@ -176,6 +177,15 @@ module.exports = function setupMessageHandler(client) {
             case 'tartan_jooji':
             case 'tartan_stop':
                 return tournament.cmdStop(message);
+
+            // ── Team Duel ──
+            case 'deul':
+            case 'tduel':
+                return teamDuel.cmdTeamDuel(message, args);
+
+            case 'remove':
+            case 'tremove':
+                return teamDuel.cmdTeamRemove(message, args);
         }
     });
 };

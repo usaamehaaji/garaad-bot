@@ -39,6 +39,7 @@ function buildEduEmbed(userId) {
             `\n**Education Games**\n` +
             `**\`${PREFIX}solo\`** — Su'aal kuu yimaada, jawaab si degdeg ah\n` +
             `**\`${PREFIX}duel @qof\`** — La ciyaar qof, IQ ayaa danbeeysa\n` +
+            `**\`${PREFIX}deul 2v2 usd 10000\`** — Team duel: 1v1/2v2/3v3, IQ/USD dhig\n` +
             `**\`${PREFIX}quiz\`** — Koox la ciyaar, waa la tartamaa\n` +
             `**\`${PREFIX}tartan\`** — Tartanka weyn — ku diiwaangeli, la ciyaar dadka oo dhan\n\n` +
 

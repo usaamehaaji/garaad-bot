@@ -48,6 +48,13 @@ function isUserBusy(userId) {
     for (const state of activeTournament.values()) {
         if (state.stage === 'play' && state.survivors && state.survivors.has(userId)) return 'tournament';
     }
+    // Team duel check (lazy require to avoid circular deps)
+    try {
+        const { activeTeamDuels } = require('./games/teamDuel');
+        for (const state of activeTeamDuels.values()) {
+            if (state.phase === 'playing' && ([...state.teams[1], ...state.teams[2]]).includes(userId)) return 'tduel';
+        }
+    } catch {}
     return null;
 }
 
