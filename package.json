@@ -6,8 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node index.js",
-    "dev":   "node --watch index.js",
-    "postinstall": "git config pull.rebase false && git fetch origin && git reset --hard origin/main || true"
+    "dev":   "node --watch index.js"
   },
   "keywords": ["discord", "bot", "quiz", "somali", "garaad"],
   "author": "Garaad",
