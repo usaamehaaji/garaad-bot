@@ -1,36 +1,36 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
+const { fmt } = require('../../utils/helpers');
 
-const SERVICE_CHARGE_RATE = 0.10; // 10% maalintii
-const CHARGE_INTERVAL     = 24 * 60 * 60 * 1000;
+// Mandeeq = 2% per day, Garaad = 4% per day interest
+const INTEREST_RATES    = { mandeeq: 0.02, garaad: 0.04 };
+const INTEREST_INTERVAL = 24 * 60 * 60 * 1000;
 
-// Lacagta oo dhan ee dad u dhigeen mid kasta oo bank ah
 function bankTotalDeposits(bankName) {
     return Object.values(econData)
         .reduce((sum, d) => sum + (d.banks?.[bankName] || 0), 0);
 }
 
-// Lacagta oo dhan ee bank ka helay adeegga
-function bankTotalCharges(bankName) {
+function bankTotalInterest(bankName) {
     return Object.values(econData)
-        .reduce((sum, d) => sum + (d.serviceChargesPaid?.[bankName] || 0), 0);
+        .reduce((sum, d) => sum + (d.interestEarned?.[bankName] || 0), 0);
 }
 
-function applyServiceCharge(d) {
+function applyInterest(d) {
     const now = Date.now();
-    d.lastInterest         ??= now;
-    d.serviceChargesPaid   ??= { mandeeq: 0, garaad: 0 };
-    d.serviceChargesPaid.mandeeq ??= 0;
-    d.serviceChargesPaid.garaad  ??= 0;
+    d.lastInterest   ??= now;
+    d.interestEarned ??= { mandeeq: 0, garaad: 0 };
+    d.interestEarned.mandeeq ??= 0;
+    d.interestEarned.garaad  ??= 0;
 
-    const days = Math.floor((now - d.lastInterest) / CHARGE_INTERVAL);
+    const days = Math.floor((now - d.lastInterest) / INTEREST_INTERVAL);
     if (days <= 0) return;
 
     for (const bank of ['mandeeq', 'garaad']) {
         if (d.banks[bank] > 0) {
-            const charge = Math.floor(d.banks[bank] * SERVICE_CHARGE_RATE * days);
-            d.banks[bank]                 = Math.max(0, d.banks[bank] - charge);
-            d.serviceChargesPaid[bank]   += charge;
+            const interest     = Math.floor(d.banks[bank] * INTEREST_RATES[bank] * days);
+            d.banks[bank]     += interest;
+            d.interestEarned[bank] += interest;
         }
     }
     d.lastInterest = now;
@@ -83,15 +83,13 @@ module.exports = async function ebankCmd(message) {
     const userId = message.author.id;
     checkEconUser(userId);
     const d = econData[userId];
-    applyServiceCharge(d);
+    applyInterest(d);
     saveEcon();
 
-    const mDep     = bankTotalDeposits('mandeeq');
-    const gDep     = bankTotalDeposits('garaad');
-    const mCharges = bankTotalCharges('mandeeq');
-    const gCharges = bankTotalCharges('garaad');
-    const grandDep    = mDep + gDep;
-    const grandCharge = mCharges + gCharges;
+    const mDep = bankTotalDeposits('mandeeq');
+    const gDep = bankTotalDeposits('garaad');
+    const mInt = bankTotalInterest('mandeeq');
+    const gInt = bankTotalInterest('garaad');
 
     return message.reply({ embeds: [
         new EmbedBuilder()
@@ -101,46 +99,39 @@ module.exports = async function ebankCmd(message) {
                 {
                     name: '💼 Xisaabkaaga',
                     value:
-                        `🏦 Mandeeq: **$${d.banks.mandeeq.toLocaleString()}**\n` +
-                        `🏦 Garaad:  **$${d.banks.garaad.toLocaleString()}**\n` +
-                        `💵 USD:     **$${d.usd.toLocaleString()}**`,
+                        `🏦 Mandeeq: **$${fmt(d.banks.mandeeq)}**\n` +
+                        `🏦 Garaad:  **$${fmt(d.banks.garaad)}**\n` +
+                        `💵 USD:     **$${fmt(d.usd)}**`,
                     inline: false,
                 },
                 {
-                    name: '📊 Service Charges — Adigu bixisay',
+                    name: '📈 Interest Heshay — Adigu',
                     value:
-                        `Mandeeq: **$${(d.serviceChargesPaid?.mandeeq || 0).toLocaleString()}**\n` +
-                        `Garaad:  **$${(d.serviceChargesPaid?.garaad  || 0).toLocaleString()}**`,
+                        `Mandeeq (**2%**/maalin): **+$${fmt(d.interestEarned?.mandeeq || 0)}**\n` +
+                        `Garaad  (**4%**/maalin): **+$${fmt(d.interestEarned?.garaad  || 0)}**`,
                     inline: false,
                 },
                 {
                     name: '🏦 Mandeeq Bank — Dhammaan Macaamiisha',
                     value:
-                        `💰 Lacag dhiggan: **$${mDep.toLocaleString()}**\n` +
-                        `💸 Charges la helay: **$${mCharges.toLocaleString()}**`,
+                        `💰 Lacag dhiggan: **$${fmt(mDep)}**\n` +
+                        `📈 Interest la helay: **$${fmt(mInt)}**`,
                     inline: true,
                 },
                 {
                     name: '🏦 Garaad Bank — Dhammaan Macaamiisha',
                     value:
-                        `💰 Lacag dhiggan: **$${gDep.toLocaleString()}**\n` +
-                        `💸 Charges la helay: **$${gCharges.toLocaleString()}**`,
+                        `💰 Lacag dhiggan: **$${fmt(gDep)}**\n` +
+                        `📈 Interest la helay: **$${fmt(gInt)}**`,
                     inline: true,
                 },
-                {
-                    name: '📈 Wadarta Guud — Banks Labadaba',
-                    value:
-                        `💰 Lacag dhiggan oo dhan: **$${grandDep.toLocaleString()}**\n` +
-                        `💸 Charges oo dhan: **$${grandCharge.toLocaleString()}**`,
-                    inline: false,
-                },
             )
-            .setFooter({ text: '💸 Service Charge: 10% maalintii • Bank = lacag la ilaaliyaa' }),
+            .setFooter({ text: '📈 Mandeeq 2%/maalin • Garaad 4%/maalin • Lacagtu way kobtaa!' }),
     ], components: [bankSelectRow(userId)] });
 };
 
-module.exports.applyServiceCharge = applyServiceCharge;
-module.exports.bankTotalDeposits  = bankTotalDeposits;
-module.exports.bankTotalCharges   = bankTotalCharges;
-module.exports.actionRow          = actionRow;
-module.exports.closeRow           = closeRow;
+module.exports.applyInterest       = applyInterest;
+module.exports.bankTotalDeposits   = bankTotalDeposits;
+module.exports.bankTotalInterest   = bankTotalInterest;
+module.exports.actionRow           = actionRow;
+module.exports.closeRow            = closeRow;

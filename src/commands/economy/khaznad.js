@@ -1,11 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { getTreasury } = require('../../economy/econStore');
-
-function priceTag(n) {
-    if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
-    if (n >= 1_000)     return `$${(n / 1_000).toFixed(1)}k`;
-    return `$${Math.round(n).toLocaleString()}`;
-}
+const { fmt } = require('../../utils/helpers');
 
 module.exports = async function khaznadCmd(message) {
     const t       = getTreasury();
@@ -27,10 +22,10 @@ module.exports = async function khaznadCmd(message) {
             .setColor('#8e44ad')
             .setDescription(
                 `**💰 Hadda:**\n` +
-                `🏦 Khaznad: **${priceTag(bal)} USD**\n\n` +
+                `🏦 Khaznad: **${fmt(bal)} USD**\n\n` +
                 `**📊 Tirakoobka:**\n` +
-                `📥 Wadarta soo gashay: **${priceTag(totalIn)} USD**\n` +
-                `📤 Wadarta la qaybiyay: **${priceTag(spent)} USD**\n\n` +
+                `📥 Wadarta soo gashay: **${fmt(totalIn)} USD**\n` +
+                `📤 Wadarta la qaybiyay: **${fmt(spent)} USD**\n\n` +
                 `**📌 Lacagta xaga kale:** Title iibsiga iyo Cashflip qasaaraha\n` +
                 `**📌 Lacagta la siiyaa:** Admin ayaa qaybiyaa dadka`
             )

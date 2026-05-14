@@ -1,8 +1,8 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, getTreasury, addToTreasury } = require('../../economy/econStore');
 
-const LOAN_AMOUNT     = 300000;
-const LOAN_OWED       = 330000;
+const LOAN_AMOUNT     = 1000;
+const LOAN_OWED       = 1100;
 const DEDUCT_AFTER_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 const CLOSED_MESSAGES = [
@@ -30,12 +30,12 @@ function buildDeenEmbed(d) {
         const daysLeft   = Math.max(0, 3 - daysPassed);
         loanBlock =
             '\n\n⚠️ **Deen Jirto — La Xisaabi!**\n' +
-            `💵 Xaddad heshay: **$${LOAN_AMOUNT}**\n` +
-            `Faido (10%): **$${LOAN_OWED - LOAN_AMOUNT}**\n` +
-            `Wadarta aad bixineyso: **$${loan.owed}**\n` +
+            `💵 Xaddad heshay: **$${LOAN_AMOUNT.toLocaleString()}**\n` +
+            `Faido (10%): **$${(LOAN_OWED - LOAN_AMOUNT).toLocaleString()}**\n` +
+            `Wadarta aad bixineyso: **$${loan.owed.toLocaleString()}**\n` +
             (daysLeft > 0
                 ? `⏱️ Bangiyada laga jaraa: **${daysLeft} malin** gudahood`
-                : '🔴 **Xilligan la jarayo!** Bangiyada (Mandeeq/Garaad) $110 laga jartay.');
+                : `🔴 **Xilligan la jarayo!** Bangiyada (Mandeeq/Garaad) $${LOAN_OWED.toLocaleString()} laga jartay.`);
     }
 
     const day       = new Date();
@@ -50,9 +50,9 @@ function buildDeenEmbed(d) {
                 : `🔴 **Bangiga maanta XIRAN yahay**\n_${closedMsg}_`) +
             `\n\n🏛️ **Khaznadda:** $${(getTreasury().balance || 0).toLocaleString()} USD\n\n` +
             `**📋 Deen Xukumka:**\n` +
-            `💵 Waxaad helaysaa: **$${LOAN_AMOUNT} USD**\n` +
-            `💸 Waxaad celinsaa: **$${LOAN_OWED} USD** (10% faido)\n\n` +
-            '🔒 **3 malin kadib** — $110 bangiyada kale (Mandeeq/Garaad) laga jaraysaa si toos ah.\n' +
+            `💵 Waxaad helaysaa: **$${LOAN_AMOUNT.toLocaleString()} USD**\n` +
+            `💸 Waxaad celinsaa: **$${LOAN_OWED.toLocaleString()} USD** (10% faido)\n\n` +
+            `🔒 **3 malin kadib** — $${LOAN_OWED.toLocaleString()} bangiyada kale (Mandeeq/Garaad) laga jaraysaa si toos ah.\n` +
             loanBlock
         )
         .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
@@ -62,12 +62,12 @@ function deenRow(userId, hasLoan, open) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(`eco_dn_take_${userId}`)
-            .setLabel('💳 Deen Qaado ($100)')
+            .setLabel(`💳 Deen Qaado ($${LOAN_AMOUNT.toLocaleString()})`)
             .setStyle(ButtonStyle.Primary)
             .setDisabled(!open || hasLoan),
         new ButtonBuilder()
             .setCustomId(`eco_dn_pay_${userId}`)
-            .setLabel('💵 Deen Celi ($110)')
+            .setLabel(`💵 Deen Celi ($${LOAN_OWED.toLocaleString()})`)
             .setStyle(ButtonStyle.Success)
             .setDisabled(!hasLoan),
         new ButtonBuilder()

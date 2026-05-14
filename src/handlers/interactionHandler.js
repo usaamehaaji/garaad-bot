@@ -1204,16 +1204,18 @@ module.exports = function setupInteractionHandler(client) {
             }
 
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { actionRow, applyServiceCharge, bankTotalDeposits, bankTotalCharges } = require('../commands/economy/ebank');
+            const { actionRow, applyInterest, bankTotalDeposits, bankTotalInterest } = require('../commands/economy/ebank');
+            const { fmt } = require('../utils/helpers');
             checkEconUser(userId);
             const d         = eData[userId];
-            applyServiceCharge(d);
+            applyInterest(d);
             saveEcon();
 
             const bankLabel  = bank.charAt(0).toUpperCase() + bank.slice(1);
             const totalDep   = bankTotalDeposits(bank);
-            const totalChg   = bankTotalCharges(bank);
-            const myCharge   = d.serviceChargesPaid?.[bank] || 0;
+            const totalInt   = bankTotalInterest(bank);
+            const myInterest = d.interestEarned?.[bank] || 0;
+            const rate       = bank === 'garaad' ? '4%' : '2%';
 
             return interaction.update({ embeds: [
                 new EmbedBuilder()
@@ -1221,16 +1223,16 @@ module.exports = function setupInteractionHandler(client) {
                     .setColor('#3498db')
                     .setDescription(
                         `💼 **Xisaabkaaga:**\n` +
-                        `🏦 ${bankLabel}: **$${d.banks[bank].toLocaleString()}**\n` +
-                        `💵 USD: **$${d.usd.toLocaleString()}**\n\n` +
-                        `📊 **Service Charges — Adigu bixisay:** $${myCharge.toLocaleString()}\n\n` +
+                        `🏦 ${bankLabel}: **$${fmt(d.banks[bank])}**\n` +
+                        `💵 USD: **$${fmt(d.usd)}**\n\n` +
+                        `📈 **Interest heshay — Adigu:** +$${fmt(myInterest)}\n\n` +
                         `🏛️ **${bankLabel} Bank (Dhammaan):**\n` +
-                        `Lacag dhiggan: **$${totalDep.toLocaleString()}**\n` +
-                        `Charges la helay: **$${totalChg.toLocaleString()}**\n\n` +
-                        `💸 Rate: **10% maalintii**\n\n` +
+                        `Lacag dhiggan: **$${fmt(totalDep)}**\n` +
+                        `Interest la helay: **+$${fmt(totalInt)}**\n\n` +
+                        `📈 Rate: **${rate}/maalin** — Lacagtu way kobtaa!\n\n` +
                         `⬇️ **Falcelinta dooro:**`
                     )
-                    .setFooter({ text: 'Garaad Economy • Bank = lacag la ilaaliyaa' }),
+                    .setFooter({ text: 'Garaad Economy • Lacagta bank dhig si ay u kobto' }),
             ], components: [actionRow(bank, userId)] });
         }
 
