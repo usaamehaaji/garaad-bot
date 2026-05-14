@@ -7,8 +7,8 @@ const { userData } = require('../store');
 const { checkUser, getLevel, getDisplayTitle } = require('../utils/helpers');
 
 const SOLO_HINT =
-    '📘 **Macallin (solo):** `?solo` waxaad ku ciyaartaa su\'aalo. Jawaab sax ah: **+3 IQ**, qalad ama waqti: **−1 IQ**. ' +
-    'Marka hore waxaad heli kartaa **5 IQ** maalin kasta: `?today` — markaas waxaad ku tartami kartaa `?duel` (dhig 5 IQ).';
+    '📘 **Talo:** `?today` maalin kasta ku hel IQ, USD ama asset bilaash ah. ' +
+    '`?solo` ciyaar IQ hel (+3 sax / −1 qalad). `?duel @qof` tartam IQ dhig.';
 
 module.exports = async function profileCommand(message) {
     const target = message.mentions.users.first() || message.author;
@@ -22,10 +22,9 @@ module.exports = async function profileCommand(message) {
 
     const fields = [
         { name: '🧠 IQ', value: `**${data.iq}**`, inline: true },
-        { name: '✨ XP', value: `**${data.xp}**`, inline: true },
         { name: '📈 Level', value: `**${level}**`, inline: true },
-        { name: '🎯 Level xiga', value: `**${nextLvlIq} IQ**`, inline: false },
-        { name: '💱 Dhibco tartan (quiz)', value: `**${data.pendingQuizPoints || 0}** — \`?exchange xp\` / \`?exchange iq\``, inline: false },
+        { name: '🎯 Level xiga', value: `**${nextLvlIq} IQ**`, inline: true },
+        { name: '💱 Dhibco tartan', value: `**${data.pendingQuizPoints || 0}** — \`?exchange\` (IQ ku badal)`, inline: false },
         { name: '🏷️ Cinwaan', value: dispTitle ? `**${dispTitle}**` : '—', inline: false },
     ];
 

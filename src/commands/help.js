@@ -43,11 +43,11 @@ function buildEduEmbed(userId) {
             `**\`${PREFIX}tartan\`** — Tartanka weyn — ku diiwaangeli, la ciyaar dadka oo dhan\n\n` +
 
             `**Dhibcaha & IQ**\n` +
-            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel bilaash ah\n` +
-            `**\`${PREFIX}exchange <iq/xp>\`** — Dhibcaha tartanka ku badal\n\n` +
+            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel (IQ, USD, ama asset)\n` +
+            `**\`${PREFIX}exchange\`** — Dhibcaha tartanka IQ ku badal\n\n` +
 
             `**Profile & Tirakoob**\n` +
-            `**\`${PREFIX}profile\`** — IQ, XP, level iyo dhibcahaaga\n` +
+            `**\`${PREFIX}profile\`** — IQ, level iyo dhibcahaaga\n` +
             `**\`${PREFIX}top\`** — Liiska 15-ka ugu IQ sarreeya\n` +
             `**\`${PREFIX}statistics\`** — Tirakoobkaaga guud\n` +
             `**\`${PREFIX}cilada [fariin]\`** — Cilad soo sheeg`
@@ -61,26 +61,24 @@ function buildEcoEmbed() {
         .setColor('#f39c12')
         .setDescription(
             `👤 **Personal**\n` +
-`**\`${PREFIX}shaqo\`** — Shaqeyso lacag ku hel (9 saacadood)\n` +
-            `**\`${PREFIX}jeeb\`** — Wallet, Banks, iyo Assets-kaaga\n\n` +
+            `**\`${PREFIX}jeeb\`** — Wallet, Banks, iyo Assets-kaaga\n` +
+            `**\`${PREFIX}shaqo\`** — Shaqeyso $300–$500 hel (9 saacadood)\n` +
+            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel (USD, IQ, asset)\n\n` +
 
-            `🏦 **Banks & Exchange**\n` +
-            `**\`${PREFIX}ebank\`** — Bangiga (deposit / withdraw)\n` +
-            `**\`${PREFIX}list\`** — Dadka lacagaha bankiga ku haya\n` +
-
-
+            `🏦 **Bangiga & Deen**\n` +
+            `**\`${PREFIX}ebank\`** — Garaad Bank (deposit 1%/maalin) + Deen (Khamiis–Jimce)\n` +
+            `**\`${PREFIX}list\`** — Dadka lacagaha bankiga ku haya\n\n` +
 
             `🎮 **Ciyaarta**\n` +
-            `**\`${PREFIX}trade\`** — Suuqa live — iibso/iib assets\n` +
-            `**\`${PREFIX}ecoflip\`** — Gamar lacag ku labanlaabo\n` +
-            `**\`${PREFIX}shop\`** — Dukaanka economy (items + xirfad titles)\n` +
+            `**\`${PREFIX}trade\`** — Suuqa live: saadaal UP/DOWN, iibso, iib assets\n` +
+            `**\`${PREFIX}ef\`** — 50/50 gamar — guul +90%, khasaaro −100%\n` +
+            `**\`${PREFIX}shop\`** — Dukaanka economy (xirfad titles)\n` +
             `**\`${PREFIX}etitle [key]\`** — Xirfadahaaga arag / dhig\n\n` +
 
             `🤝 **Bulshada**\n` +
-            `**\`${PREFIX}give @user\`** — Lacag u dir\n` +
+            `**\`${PREFIX}give @user\`** — Lacag u dir (max $5,000/maalin)\n` +
             `**\`${PREFIX}rob @user\`** — Lacag ka xad\n` +
-            `**\`${PREFIX}rich\`** — TOP 10 ugu taajirta\n` +
-            `**\`${PREFIX}shop\`** — Dukaanka economy`
+            `**\`${PREFIX}rich\`** — TOP 10 ugu taajirta`
         )
         .setFooter({ text: `Garaad Economy` });
 }
