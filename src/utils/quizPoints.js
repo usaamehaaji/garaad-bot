@@ -4,7 +4,7 @@
 
 const { userData, saveData } = require('../store');
 const { checkUser, addXp } = require('./helpers');
-const { QUIZ_POINTS_TO_XP, QUIZ_POINTS_TO_IQ } = require('../config');
+const { QUIZ_POINTS_TO_XP, QUIZ_POINTS_PER_IQ } = require('../config');
 
 function exchangeQuizPoints(userId, mode) {
     checkUser(userId);
@@ -25,12 +25,16 @@ function exchangeQuizPoints(userId, mode) {
         };
     }
 
-    const iqGain = pts * QUIZ_POINTS_TO_IQ;
+    const iqGain = Math.floor(pts / QUIZ_POINTS_PER_IQ);
+    if (iqGain < 1) {
+        userData[userId].pendingQuizPoints = pts;
+        return { ok: false, text: `⚠️ Dhibcahaagu aad u yar yihiin. **${QUIZ_POINTS_PER_IQ} dhibcood** = 1 IQ. Haysataa: **${pts}**.` };
+    }
     userData[userId].iq += iqGain;
     saveData();
     return {
         ok: true,
-        text: `✅ **${pts}** dhibcood → **+${iqGain} IQ** (1 dhibic = ${QUIZ_POINTS_TO_IQ} IQ).`,
+        text: `✅ **${pts}** dhibcood → **+${iqGain} IQ** (${QUIZ_POINTS_PER_IQ} dhibcood = 1 IQ).`,
     };
 }
 

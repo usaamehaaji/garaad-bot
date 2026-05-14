@@ -30,7 +30,7 @@ const {
     QUIZ_LOBBY_MS, GLOBAL_WAIT_MS, SOLO_FAST_MS,
     SOLO_MAX_SCORE, SOLO_MIN_SCORE,
     HOST_DAILY_LIMIT,
-    QUIZ_POINTS_TO_XP, QUIZ_POINTS_TO_IQ,
+    QUIZ_POINTS_TO_XP, QUIZ_POINTS_PER_IQ,
 } = require('../config');
 
 // ── Dhibco ku xidhan xawliga (sida solo + tartan) ────────────────────
@@ -419,7 +419,7 @@ async function finishQuiz(state) {
             `**🏆 Liiska Dhammaanba:**\n${leaderLines}\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
             `**Dhibcahaagu waa kaydsan yihiin** — badal marka aad rabto:\n` +
-            `• 1 dhibic = **${QUIZ_POINTS_TO_IQ} IQ** (aqoon)\n` +
+            `• ${QUIZ_POINTS_PER_IQ} dhibcood = **1 IQ** (aqoon)\n` +
             `• 1 dhibic = **${QUIZ_POINTS_TO_XP} XP** (khibrad)\n\n` +
             `Riix si aad u badasho:`
         )

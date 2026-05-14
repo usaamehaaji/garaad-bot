@@ -23,8 +23,8 @@ module.exports = {
 
     /** 1 dhibic tartan = inta XP ee la siiyo marka la badalo */
     QUIZ_POINTS_TO_XP: 5,
-    /** 1 dhibic tartan = inta IQ ee la siiyo marka la badalo */
-    QUIZ_POINTS_TO_IQ: 1,
+    /** Inta dhibcood ee 1 IQ loogu baahdo (60 dhibcood = 1 IQ) */
+    QUIZ_POINTS_PER_IQ: 60,
 
     SOLO_MIN_QUESTIONS:     3,
     SOLO_MAX_QUESTIONS:     25,
