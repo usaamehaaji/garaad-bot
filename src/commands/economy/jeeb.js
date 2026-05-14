@@ -4,9 +4,7 @@ const { getPrice }                = require('../../economy/market');
 const { ECON_TITLES }             = require('./econShop');
 const { fmt }                     = require('../../utils/helpers');
 
-module.exports = async function jeebCmd(message) {
-    const target = message.mentions.users.first() || message.author;
-    const userId = target.id;
+function buildJeebEmbed(userId, username) {
     checkEconUser(userId);
     const d = econData[userId];
 
@@ -37,28 +35,46 @@ module.exports = async function jeebCmd(message) {
         return `\n💳 **Deen:** $${fmt(d.loan.owed)} ${daysLeft > 0 ? `(${daysLeft} malin)` : '🔴 overdue'}`;
     })();
 
-    const closeRow = new ActionRowBuilder().addComponents(
+    return new EmbedBuilder()
+        .setTitle(`👜 Jeebka — ${username}${xirfadLabel}`)
+        .setColor('#f39c12')
+        .setDescription(
+            `**💵 USD:** $${fmt(d.usd)}\n` +
+            `**₿ BTC:** ${d.btc} ≈ $${fmt(Math.round(d.btc * btcPrice))}\n` +
+            `**🥇 Gold:** ${d.gold} ≈ $${fmt(Math.round(d.gold * goldPrice))}\n` +
+            `**💎 Diamond:** ${d.diamond} ≈ $${fmt(Math.round(d.diamond * diaPrice))}\n` +
+            `**💍 Ring:** ${d.ring} ≈ $${fmt(Math.round(d.ring * ringPrice))}\n\n` +
+            `**🏦 Garaad Bank:** $${fmt(d.banks.garaad)}\n` +
+            `**📊 Net Worth: ~$${fmt(Math.round(netWorth))} USD**\n` +
+            `**📈 Maanta dhakhli: +$${fmt(todayEarned)}**` +
+            loanLine
+        )
+        .setFooter({ text: `Garaad Economy • ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}` });
+}
+
+function jeebRow(authorId, targetId) {
+    return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-            .setCustomId(`close_jeeb_${message.author.id}`)
+            .setCustomId(`jeeb_refresh_${authorId}_${targetId}`)
+            .setLabel('🔄 Refresh')
+            .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+            .setCustomId(`close_jeeb_${authorId}`)
             .setLabel('❌ Iska xir')
             .setStyle(ButtonStyle.Danger),
     );
+}
 
-    return message.reply({ embeds: [
-        new EmbedBuilder()
-            .setTitle(`👜 Jeebka — ${target.username}${xirfadLabel}`)
-            .setColor('#f39c12')
-            .setDescription(
-                `**💵 USD:** $${fmt(d.usd)}\n` +
-                `**₿ BTC:** ${d.btc} ≈ $${fmt(Math.round(d.btc * btcPrice))}\n` +
-                `**🥇 Gold:** ${d.gold} ≈ $${fmt(Math.round(d.gold * goldPrice))}\n` +
-                `**💎 Diamond:** ${d.diamond} ≈ $${fmt(Math.round(d.diamond * diaPrice))}\n` +
-                `**💍 Ring:** ${d.ring} ≈ $${fmt(Math.round(d.ring * ringPrice))}\n\n` +
-                `**🏦 Garaad Bank:** $${fmt(d.banks.garaad)}\n` +
-                `**📊 Net Worth: ~$${fmt(Math.round(netWorth))} USD**\n` +
-                `**📈 Maanta dhakhli: +$${fmt(todayEarned)}**` +
-                loanLine
-            )
-            .setFooter({ text: 'Garaad Economy' }),
-    ], components: [closeRow] });
+module.exports = async function jeebCmd(message) {
+    const target   = message.mentions.users.first() || message.author;
+    const authorId = message.author.id;
+    const targetId = target.id;
+
+    return message.reply({
+        embeds:     [buildJeebEmbed(targetId, target.username)],
+        components: [jeebRow(authorId, targetId)],
+    });
 };
+
+module.exports.buildJeebEmbed = buildJeebEmbed;
+module.exports.jeebRow        = jeebRow;

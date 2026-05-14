@@ -1060,6 +1060,19 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
+        // ── Jeeb: Refresh ──
+        if (id.startsWith('jeeb_refresh_')) {
+            const parts    = id.replace('jeeb_refresh_', '').split('_');
+            const targetId = parts[parts.length - 1];
+            const authorId = parts.slice(0, -1).join('_');
+            if (interaction.user.id !== authorId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { buildJeebEmbed, jeebRow } = require('../commands/economy/jeeb');
+            const targetUser = await interaction.client.users.fetch(targetId).catch(() => null);
+            const username   = targetUser ? targetUser.username : targetId;
+            return interaction.update({ embeds: [buildJeebEmbed(targetId, username)], components: [jeebRow(authorId, targetId)] });
+        }
+
         // ── Xir (Close) ──
         if (id.startsWith('close_')) {
             const parts   = id.split('_');
