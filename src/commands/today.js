@@ -14,7 +14,7 @@ function pickReward() {
     } else if (roll < 0.55) {
         return { type: 'xp',  amount: Math.floor(Math.random() * 151) + 50 }; // 50–200 XP
     } else if (roll < 0.80) {
-        return { type: 'usd', amount: Math.floor(Math.random() * 201) + 50 }; // $50–$250
+        return { type: 'usd', amount: Math.floor(Math.random() * 401) + 100 }; // $100–$500
     } else {
         const assets = Object.keys(ASSET_LABELS);
         return { type: 'asset', asset: assets[Math.floor(Math.random() * assets.length)], amount: 1 };
@@ -61,9 +61,18 @@ module.exports = async function todayCommand(message) {
         addXp(userId, reward.amount);
         rewardLine = `✨ **+${reward.amount} XP**`;
     } else if (reward.type === 'usd') {
-        d.usd += reward.amount;
-        trackEarning(userId, reward.amount);
-        rewardLine = `💵 **+$${reward.amount} USD**`;
+        const today = new Date().toISOString().slice(0, 10);
+        d.todayEarned ??= { date: '', usd: 0 };
+        if (d.todayEarned.date !== today) d.todayEarned = { date: today, usd: 0 };
+        const remaining = Math.max(0, 1000 - d.todayEarned.usd);
+        const actual = Math.min(reward.amount, remaining);
+        if (actual <= 0) {
+            rewardLine = `💵 USD — **$1,000 maalin xad gaadhay!** (yaraan berri)`;
+        } else {
+            d.usd += actual;
+            trackEarning(userId, actual);
+            rewardLine = `💵 **+$${actual} USD**${actual < reward.amount ? ` _(xad $1,000/maalin)_` : ''}`;
+        }
     } else {
         d[reward.asset] += reward.amount;
         rewardLine = `${ASSET_LABELS[reward.asset]} **+${reward.amount} ${reward.asset.toUpperCase()}**`;
