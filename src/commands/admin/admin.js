@@ -17,7 +17,8 @@ const giveChampion   = require('./adminGiveChampion');
 const removeChampion = require('./adminRemoveChampion');
 const godMode        = require('./adminGodMode');
 const adminStop      = require('./adminStop');
-const adminEconPanel = require('./adminEconPanel');
+const adminEconPanel   = require('./adminEconPanel');
+const adminEconRestart = require('./adminEconRestart');
 
 module.exports = async function adminCommand(message, args) {
     if (!isAdmin(message.author.id)) {
@@ -77,6 +78,10 @@ module.exports = async function adminCommand(message, args) {
         case 'econ':
         case 'economy':
             return adminEconPanel(message, args);
+
+        case 'restart':
+        case 'bilow':
+            return adminEconRestart(message);
 
         case 'help':
         default:
