@@ -21,7 +21,9 @@ const { GLOBAL_WAIT_MS } = require('../config');
 // channelId → state
 const activeTeamDuels = new Map();
 
-const TDUEL_Q_COUNT = 10;
+const TDUEL_Q_DEFAULT = 10;
+const TDUEL_Q_MIN     = 3;
+const TDUEL_Q_MAX     = 20;
 
 // ── Helpers ───────────────────────────────────────────────────────────
 
@@ -78,7 +80,8 @@ function buildLobbyEmbed(state) {
         .setDescription(
             `**Host:** <@${state.hostId}>\n` +
             `**Dhig qof kasta:** ${stakeStr}\n` +
-            `**Wadarta:** ${totalStr}\n\n` +
+            `**Wadarta:** ${totalStr}\n` +
+            `**Su'aalood:** ${state.totalQ}\n\n` +
             `🔵 **Team 1** (${state.teams[1].length}/${state.maxPerTeam})\n${t1}\n\n` +
             `🔴 **Team 2** (${state.teams[2].length}/${state.maxPerTeam})\n${t2}\n\n` +
             `👥 ${joined}/${needed} qof ayaa ku biiray\n\n` +
@@ -124,6 +127,7 @@ async function cmdTeamDuel(message, args) {
     const modeArg   = (args[0] || '2v2').toLowerCase();
     const typeArg   = (args[1] || 'iq').toLowerCase();
     const amountArg = parseInt(args[2] || '5');
+    const countArg  = args[3] ? parseInt(args[3]) : TDUEL_Q_DEFAULT;
 
     const modeMap = { '1v1': 1, '2v2': 2, '3v3': 3 };
     if (!modeMap[modeArg]) {
@@ -136,7 +140,10 @@ async function cmdTeamDuel(message, args) {
         return message.reply('⚠️ Nooca dhigga waa `iq` ama `usd`.\nTusaale: `?tduel 2v2 usd 10000`');
     }
     if (isNaN(amountArg) || amountArg <= 0) {
-        return message.reply('⚠️ Dhigga qiimihiisu waa inuu ka sarreeyo 0.\nTusaale: `?tduel 2v2 usd 10000`');
+        return message.reply('⚠️ Dhigga qiimihiisu waa inuu ka sarreeyo 0.\nTusaale: `?deul 2v2 usd 10000`');
+    }
+    if (isNaN(countArg) || countArg < TDUEL_Q_MIN || countArg > TDUEL_Q_MAX) {
+        return message.reply(`⚠️ Tirada su'aalaha waa inay u dhexeyso **${TDUEL_Q_MIN}** iyo **${TDUEL_Q_MAX}**.\nTusaale: \`?deul 2v2 usd 10000 10\``);
     }
 
     const state = {
@@ -150,7 +157,7 @@ async function cmdTeamDuel(message, args) {
         phase: 'lobby',
         questions: [],
         currentQ: 0,
-        totalQ: TDUEL_Q_COUNT,
+        totalQ: countArg,
         channelId,
         lobbyMsg: null,
     };
