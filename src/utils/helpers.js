@@ -117,4 +117,17 @@ function getDisplayTitle(userId) {
     return null;
 }
 
-module.exports = { todayKey, checkUser, getLevel, addXp, shuffleArray, getDisplayTitle, saveData };
+function fmt(n) {
+    n = Math.round(n);
+    if (n >= 1_000_000) {
+        const s = (n / 1_000_000).toFixed(1);
+        return (s.endsWith('.0') ? s.slice(0, -2) : s) + 'm';
+    }
+    if (n >= 1_000) {
+        const s = (n / 1_000).toFixed(1);
+        return (s.endsWith('.0') ? s.slice(0, -2) : s) + 'k';
+    }
+    return String(n);
+}
+
+module.exports = { todayKey, checkUser, getLevel, addXp, shuffleArray, getDisplayTitle, saveData, fmt };

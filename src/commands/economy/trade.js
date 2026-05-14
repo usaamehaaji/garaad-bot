@@ -1,20 +1,20 @@
 // =====================================================================
 // AMARKA: ?trade — Garaad Predict (UP / DOWN Binary Trading)
-// Flow: asset select → stake type → amount modal → time → direction → confirm → lock
+// Flow: asset → amount modal → time → direction → confirm → lock
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser }     = require('../../economy/econStore');
-const { getMarketSnapshot, getPrice, nextTickSeconds } = require('../../economy/market');
+const { getMarketSnapshot, getPrice } = require('../../economy/market');
 const { getActivePrediction, WIN_MULTI, LOSE_MULTI, ASSET_LABEL } = require('../../economy/prediction');
+const { fmt } = require('../../utils/helpers');
 
 const ASSETS = ['btc', 'gold', 'diamond', 'ring'];
 
-// ── Embed: Market overview (Step 1) ───────────────────────────────
+// ── Embed: Market overview ─────────────────────────────────────────
 
 function buildMarketEmbed(d) {
-    const snap    = getMarketSnapshot();
-    const secLeft = nextTickSeconds();
+    const snap = getMarketSnapshot();
 
     const lines = snap.map(({ asset, price, change, spark }) => {
         const ind = change > 0 ? `🟢 +${change.toFixed(1)}%`
@@ -23,7 +23,7 @@ function buildMarketEmbed(d) {
         const sig = change > 2   ? ' 📈 *Kor u jeedaa*'
                   : change < -2  ? ' ⚠️ *Hoos u dhacayaa*'
                   : '';
-        return `${ASSET_LABEL[asset]}  **$${price.toLocaleString()}**  ${ind}\n\`${spark}\`${sig}`;
+        return `${ASSET_LABEL[asset]}  **$${fmt(price)}**  ${ind}\n\`${spark}\`${sig}`;
     });
 
     return new EmbedBuilder()
@@ -31,14 +31,13 @@ function buildMarketEmbed(d) {
         .setColor('#1a1a2e')
         .setDescription(
             lines.join('\n\n') +
-            `\n\n💵 USD-kaaga: **$${d.usd.toLocaleString()}**\n` +
-            `⏱️ Qiime cusub: **${secLeft}s** gudahood\n\n` +
+            `\n\n💵 USD-kaaga: **$${fmt(d.usd)}**\n\n` +
             `**⬇️ Asset dooro si aad u saadaaliso:**`
         )
         .setFooter({ text: 'Garaad Predict • Dooro asset → dhig → UP / DOWN → sug natiijahaaga' });
 }
 
-// ── Embed: Stake type (Step 2) ─────────────────────────────────────
+// ── Embed: Stake type (kept for backward compat) ──────────────────
 
 function buildStakeTypeEmbed(asset, d) {
     const price = getPrice(asset);
@@ -47,20 +46,20 @@ function buildStakeTypeEmbed(asset, d) {
         .setTitle(`📊 Saadaalinta ${ASSET_LABEL[asset]}`)
         .setColor('#2980b9')
         .setDescription(
-            `**Qiimaha hadda:** $${price.toLocaleString()}\n\n` +
-            `💵 USD-kaaga: **$${d.usd.toLocaleString()}**\n` +
+            `**Qiimaha hadda:** $${fmt(price)}\n\n` +
+            `💵 USD-kaaga: **$${fmt(d.usd)}**\n` +
             `${ASSET_LABEL[asset]}: **${assetBal}**\n\n` +
             `**Sidee baad lacagta dhigaysaa?**`
         )
         .setFooter({ text: 'Garaad Predict' });
 }
 
-// ── Embed: Time selection (Step 4) ────────────────────────────────
+// ── Embed: Time selection ──────────────────────────────────────────
 
 function buildTimeEmbed(asset, stakeType, stakeAmount, stakeUsd) {
     const stakeLabel = stakeType === 'usd'
-        ? `💵 $${stakeAmount.toLocaleString()} USD`
-        : `${ASSET_LABEL[asset]} ${stakeAmount} (≈ $${stakeUsd.toLocaleString()} USD)`;
+        ? `💵 $${fmt(stakeAmount)} USD`
+        : `${ASSET_LABEL[asset]} ${stakeAmount} (≈ $${fmt(stakeUsd)} USD)`;
     return new EmbedBuilder()
         .setTitle(`⏱️ Dooro Waqtiga — ${ASSET_LABEL[asset]}`)
         .setColor('#8e44ad')
@@ -75,13 +74,13 @@ function buildTimeEmbed(asset, stakeType, stakeAmount, stakeUsd) {
         .setFooter({ text: 'Garaad Predict' });
 }
 
-// ── Embed: Direction (Step 5) ─────────────────────────────────────
+// ── Embed: Direction ──────────────────────────────────────────────
 
 function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
     const price = getPrice(asset);
     const stakeLabel = stakeType === 'usd'
-        ? `$${stakeAmount.toLocaleString()} USD`
-        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${stakeUsd.toLocaleString()})`;
+        ? `$${fmt(stakeAmount)} USD`
+        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${fmt(stakeUsd)})`;
     return new EmbedBuilder()
         .setTitle(`🎯 Dooro Jihada — ${ASSET_LABEL[asset]}`)
         .setColor('#e67e22')
@@ -89,40 +88,40 @@ function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
             `**Asset:** ${ASSET_LABEL[asset]}\n` +
             `**Stake:** ${stakeLabel}\n` +
             `**Waqti:** ${minutes} daqiiqo\n` +
-            `**Qiimaha hadda:** $${price.toLocaleString()}\n\n` +
+            `**Qiimaha hadda:** $${fmt(price)}\n\n` +
             `⬆️ **UP** — Waxaad saadaalinaysaa qiimahu kor buu u kacayaa\n` +
             `⬇️ **DOWN** — Waxaad saadaalinaysaa qiimahu hoos buu u dhacayaa`
         )
         .setFooter({ text: 'Garaad Predict' });
 }
 
-// ── Embed: Confirm (Step 6) ────────────────────────────────────────
+// ── Embed: Confirm ────────────────────────────────────────────────
 
 function buildConfirmEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes, direction) {
-    const price  = getPrice(asset);
-    const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
-    const winPay   = Math.floor(stakeUsd * WIN_MULTI);
-    const losePay  = Math.floor(stakeUsd * LOSE_MULTI);
+    const price     = getPrice(asset);
+    const dirLabel  = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const winPay    = Math.floor(stakeUsd * WIN_MULTI);
+    const losePay   = Math.floor(stakeUsd * LOSE_MULTI);
     const stakeLabel = stakeType === 'usd'
-        ? `$${stakeAmount.toLocaleString()} USD`
-        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${stakeUsd.toLocaleString()})`;
+        ? `$${fmt(stakeAmount)} USD`
+        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${fmt(stakeUsd)})`;
     return new EmbedBuilder()
         .setTitle('✅ Xidh Saadaalinta — Confirm')
         .setColor('#27ae60')
         .setDescription(
             `📌 **Asset:**     ${ASSET_LABEL[asset]}\n` +
-            `📊 **Qiimaha:**   $${price.toLocaleString()}\n` +
+            `📊 **Qiimaha:**   $${fmt(price)}\n` +
             `💰 **Stake:**     ${stakeLabel}\n` +
             `⏱️ **Waqti:**     ${minutes} daqiiqo\n` +
             `🎯 **Saadaal:**   ${dirLabel}\n\n` +
-            `🏆 **Haddii WIN:**  +$${(winPay - stakeUsd).toLocaleString()} faa'iido → dib: **$${winPay.toLocaleString()}**\n` +
-            `💀 **Haddii LOSE:** -$${(stakeUsd - losePay).toLocaleString()} khasaaro → dib: **$${losePay.toLocaleString()}**\n\n` +
+            `🏆 **Haddii WIN:**  +$${fmt(winPay - stakeUsd)} faa'iido → dib: **$${fmt(winPay)}**\n` +
+            `💀 **Haddii LOSE:** -$${fmt(stakeUsd - losePay)} khasaaro → dib: **$${fmt(losePay)}**\n\n` +
             `⚡ Ma diyaar baad tahay?`
         )
         .setFooter({ text: 'Garaad Predict • Ka dib LOCK, waxba la beddeli karo' });
 }
 
-// ── Embed: Active prediction (Step 7) ─────────────────────────────
+// ── Embed: Active prediction ──────────────────────────────────────
 
 function buildActiveEmbed(pred) {
     const remaining = Math.max(0, pred.endTime - Date.now());
@@ -134,13 +133,32 @@ function buildActiveEmbed(pred) {
         .setColor('#f39c12')
         .setDescription(
             `📌 **Asset:**        ${ASSET_LABEL[pred.asset]}\n` +
-            `📊 **Galitaanka:**   $${pred.entryPrice?.toLocaleString()}\n` +
+            `📊 **Galitaanka:**   $${fmt(pred.entryPrice)}\n` +
             `🎯 **Saadaal:**      ${dirLabel}\n` +
-            `💰 **Stake:**        $${pred.stakeUsd?.toLocaleString()} USD\n` +
+            `💰 **Stake:**        $${fmt(pred.stakeUsd)} USD\n` +
             `⏱️ **Inta kale:**    **${mins}m ${secs}s**\n\n` +
             `🔔 Waqtigii dhammaado, DM + channel fariin ayaad helaysaa!`
         )
         .setFooter({ text: 'Garaad Predict • Waxba la beddeli karo marka la xidhay' });
+}
+
+// ── Embed: Asset Shop ─────────────────────────────────────────────
+
+function buildShopEmbed(d) {
+    const snap = getMarketSnapshot();
+    const lines = snap.map(({ asset, price }) => {
+        const units = d[asset] || 0;
+        return `${ASSET_LABEL[asset]}  **$${fmt(price)}** — Haysataa: **${units}**`;
+    });
+    return new EmbedBuilder()
+        .setTitle('🛒 Asset Shop — Iibso Assets')
+        .setColor('#27ae60')
+        .setDescription(
+            lines.join('\n') +
+            `\n\n💵 USD-kaaga: **$${fmt(d.usd)}**\n\n` +
+            `Immisa USD baad ku iibsanaysaa?`
+        )
+        .setFooter({ text: 'Garaad Economy • Qiimaha suuqa ayaa la isticmaalaa' });
 }
 
 // ── Rows ──────────────────────────────────────────────────────────
@@ -167,6 +185,23 @@ function usdAssetRow(userId) {
 function controlRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`pred_refresh_${userId}`).setLabel('🔄 Refresh').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)  .setLabel('🛒 Shop')   .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`) .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+    );
+}
+
+function shopRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`trade_buy_btc_${userId}`)    .setLabel('₿ BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_buy_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_buy_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_buy_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function shopBackRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_back_${userId}`).setLabel('🔙 Dib').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
@@ -217,7 +252,6 @@ module.exports = async function tradeCmd(message) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Haddii saadaalin firfircoon tahay, muuji xaaladda
     const active = getActivePrediction(userId);
     if (active) {
         return message.reply({
@@ -234,19 +268,22 @@ module.exports = async function tradeCmd(message) {
 
 // ── Named exports for interactionHandler ─────────────────────────
 
-module.exports.ASSETS             = ASSETS;
-module.exports.ASSET_LABEL        = ASSET_LABEL;
-module.exports.buildMarketEmbed   = buildMarketEmbed;
+module.exports.ASSETS              = ASSETS;
+module.exports.ASSET_LABEL         = ASSET_LABEL;
+module.exports.buildMarketEmbed    = buildMarketEmbed;
 module.exports.buildStakeTypeEmbed = buildStakeTypeEmbed;
-module.exports.buildTimeEmbed     = buildTimeEmbed;
+module.exports.buildTimeEmbed      = buildTimeEmbed;
 module.exports.buildDirectionEmbed = buildDirectionEmbed;
-module.exports.buildConfirmEmbed  = buildConfirmEmbed;
-module.exports.buildActiveEmbed   = buildActiveEmbed;
-module.exports.assetRow           = assetRow;
-module.exports.usdAssetRow        = usdAssetRow;
-module.exports.controlRow         = controlRow;
-module.exports.stakeTypeRow       = stakeTypeRow;
-module.exports.timeRow            = timeRow;
-module.exports.backRow            = backRow;
-module.exports.directionRow       = directionRow;
-module.exports.confirmRow         = confirmRow;
+module.exports.buildConfirmEmbed   = buildConfirmEmbed;
+module.exports.buildActiveEmbed    = buildActiveEmbed;
+module.exports.buildShopEmbed      = buildShopEmbed;
+module.exports.assetRow            = assetRow;
+module.exports.usdAssetRow         = usdAssetRow;
+module.exports.controlRow          = controlRow;
+module.exports.shopRow             = shopRow;
+module.exports.shopBackRow         = shopBackRow;
+module.exports.stakeTypeRow        = stakeTypeRow;
+module.exports.timeRow             = timeRow;
+module.exports.backRow             = backRow;
+module.exports.directionRow        = directionRow;
+module.exports.confirmRow          = confirmRow;

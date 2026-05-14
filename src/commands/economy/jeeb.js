@@ -2,6 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser } = require('../../economy/econStore');
 const { getPrice }                = require('../../economy/market');
 const { ECON_TITLES }             = require('./econShop');
+const { fmt }                     = require('../../utils/helpers');
 
 module.exports = async function jeebCmd(message) {
     const target = message.mentions.users.first() || message.author;
@@ -43,15 +44,15 @@ module.exports = async function jeebCmd(message) {
             .setTitle(`👜 Jeebka — ${target.username}${xirfadLabel}`)
             .setColor('#f39c12')
             .setDescription(
-                `**💵 USD:** $${d.usd.toLocaleString()}\n` +
-                `**₿ BTC:** ${d.btc} ≈ $${(d.btc * btcPrice).toLocaleString()}\n` +
-                `**🥇 Gold:** ${d.gold} oz ≈ $${(d.gold * goldPrice).toLocaleString()}\n` +
-                `**💎 Diamond:** ${d.diamond} ≈ $${(d.diamond * diaPrice).toLocaleString()}\n` +
-                `**💍 Ring:** ${d.ring} ≈ $${(d.ring * ringPrice).toLocaleString()}\n\n` +
-                `**🏦 Mandeeq Bank:** $${d.banks.mandeeq.toLocaleString()}\n` +
-                `**🏦 Garaad Bank:** $${d.banks.garaad.toLocaleString()}\n\n` +
-                `**📊 Net Worth: ~$${Math.round(netWorth).toLocaleString()} USD**\n` +
-                `**📈 Maanta dhakhli: +$${todayEarned.toLocaleString()}**`
+                `**💵 USD:** $${fmt(d.usd)}\n` +
+                `**₿ BTC:** ${d.btc} ≈ $${fmt(d.btc * btcPrice)}\n` +
+                `**🥇 Gold:** ${d.gold} oz ≈ $${fmt(d.gold * goldPrice)}\n` +
+                `**💎 Diamond:** ${d.diamond} ≈ $${fmt(d.diamond * diaPrice)}\n` +
+                `**💍 Ring:** ${d.ring} ≈ $${fmt(d.ring * ringPrice)}\n\n` +
+                `**🏦 Mandeeq Bank:** $${fmt(d.banks.mandeeq)}\n` +
+                `**🏦 Garaad Bank:** $${fmt(d.banks.garaad)}\n\n` +
+                `**📊 Net Worth: ~$${fmt(Math.round(netWorth))} USD**\n` +
+                `**📈 Maanta dhakhli: +$${fmt(todayEarned)}**`
             )
             .setFooter({ text: 'Garaad Economy' }),
     ], components: [closeRow] });

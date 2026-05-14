@@ -6,7 +6,7 @@ const TICK_MS     = 60 * 1000;       // 1 daqiiqo
 const HISTORY_MAX = 10;              // Taariikhda qiimaha (10 daqiiqo)
 
 const BASE_PRICES = {
-    btc:     45000,
+    btc:     30000,
     gold:    1800,
     diamond: 5000,
     ring:    200,
@@ -19,6 +19,8 @@ const VOLATILITY = {
     ring:    0.035,
 };
 
+const trends = { btc: 0, gold: 0, diamond: 0, ring: 0 };
+
 let marketData = {
     prices:     { ...BASE_PRICES },
     previous:   { ...BASE_PRICES },
@@ -29,7 +31,7 @@ let marketData = {
 try {
     if (fs.existsSync(MARKET_PATH)) {
         const loaded = JSON.parse(fs.readFileSync(MARKET_PATH, 'utf8'));
-        if (loaded && loaded.prices) {
+        if (loaded && loaded.prices && loaded.prices.btc <= 35_000) {
             marketData = {
                 prices:     loaded.prices,
                 previous:   loaded.previous   || { ...BASE_PRICES },
@@ -59,7 +61,10 @@ function tickMarket() {
     for (const asset of Object.keys(BASE_PRICES)) {
         const prev   = marketData.prices[asset];
         const vol    = VOLATILITY[asset];
-        const change = (Math.random() * 2 - 1) * vol;
+        const trend  = trends[asset] || 0;
+        const bias   = trend * vol * 0.35;
+        const change = (Math.random() * 2 - 1) * vol + bias;
+        trends[asset] = change > 0 ? 1 : change < 0 ? -1 : 0;
         const next   = Math.max(
             Math.round(BASE_PRICES[asset] * 0.3),
             Math.round(prev * (1 + change))

@@ -576,6 +576,58 @@ module.exports = function setupInteractionHandler(client) {
                 });
             }
 
+            // ── Trade Shop: buy modal submit ──
+            if (interaction.customId.startsWith('trade_buymod_')) {
+                const rest    = interaction.customId.replace('trade_buymod_', '');
+                const lastUnd = rest.lastIndexOf('_');
+                const asset   = rest.substring(0, lastUnd);
+                const ownerId = rest.substring(lastUnd + 1);
+                if (interaction.user.id !== ownerId)
+                    return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { getPrice }                                  = require('../economy/market');
+                const { ASSET_LABEL }                               = require('../economy/prediction');
+                const { buildShopEmbed, shopRow, shopBackRow }      = require('../commands/economy/trade');
+                checkEconUser(ownerId);
+                const d = eData[ownerId];
+
+                const usdSpend = parseFloat(interaction.fields.getTextInputValue('buy_amount'));
+                if (!usdSpend || isNaN(usdSpend) || usdSpend <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                if (d.usd < usdSpend)
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+
+                const price = getPrice(asset);
+                if (!price || price <= 0)
+                    return interaction.reply({ content: '⚠️ Qiimaha ma heli karo.', flags: MessageFlags.Ephemeral });
+
+                const units = Math.floor(usdSpend / price);
+                if (units < 1)
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid inay hal ${asset.toUpperCase()} iibsato. Qiimaha: **$${price.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+
+                const actualCost = units * price;
+                d.usd    -= actualCost;
+                d[asset]  = (d[asset] || 0) + units;
+                saveEcon();
+
+                return interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setTitle(`✅ Iibsi Guul — ${ASSET_LABEL[asset]}`)
+                            .setColor('#27ae60')
+                            .setDescription(
+                                `**${units} ${ASSET_LABEL[asset]}** la iibsaday\n` +
+                                `💸 Kharash: **$${actualCost.toLocaleString()}** USD\n` +
+                                `💵 USD-kaaga hadda: **$${d.usd.toLocaleString()}**\n` +
+                                `${ASSET_LABEL[asset]} haysataa: **${d[asset]}**`
+                            )
+                            .setFooter({ text: 'Garaad Economy' }),
+                    ],
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+
             return;
         }
 
@@ -907,14 +959,21 @@ module.exports = function setupInteractionHandler(client) {
             const { setPending, ASSET_LABEL }        = require('../economy/prediction');
             checkEconUser(ownerId);
 
-            // USD button → ask which asset to predict on
+            // USD button → directly show USD amount modal (predict on BTC by default)
             if (asset === 'usd') {
-                const { buildMarketEmbed, usdAssetRow, controlRow } = require('../commands/economy/trade');
-                const embed = buildMarketEmbed(eData[ownerId]);
-                return interaction.update({
-                    embeds:     [embed.setTitle('💵 USD — Dooro Asset Saadaalinta').setFooter({ text: 'Garaad Predict • Dooro asset aad saadaalinaysaa (USD ku dhigan)' })],
-                    components: [usdAssetRow(ownerId), controlRow(ownerId)],
-                });
+                setPending(ownerId, { asset: 'btc', stakeType: 'usd' });
+                const modal = new ModalBuilder()
+                    .setCustomId(`pred_amt_usd_${ownerId}`)
+                    .setTitle('💵 Immisa USD baad dhigaysaa?');
+                modal.addComponents(new ActionRowBuilder().addComponents(
+                    new TextInputBuilder()
+                        .setCustomId('pred_amount')
+                        .setLabel(`USD (Haysataa: $${eData[ownerId].usd.toLocaleString()})`)
+                        .setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Tusaale: 500')
+                        .setRequired(true),
+                ));
+                return interaction.showModal(modal);
             }
 
             // Asset button → stakeType = asset, show asset amount modal directly
@@ -1061,6 +1120,47 @@ module.exports = function setupInteractionHandler(client) {
                 embeds:     [buildActiveEmbed(active)],
                 components: [controlRow(ownerId)],
             });
+        }
+
+        // ── Trade Shop: open asset shop ──
+        if (id.startsWith('trade_shop_')) {
+            const ownerId = id.replace('trade_shop_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser } = require('../economy/econStore');
+            const { buildShopEmbed, shopRow, shopBackRow } = require('../commands/economy/trade');
+            checkEconUser(ownerId);
+            return interaction.update({
+                embeds:     [buildShopEmbed(eData[ownerId])],
+                components: [shopRow(ownerId), shopBackRow(ownerId)],
+            });
+        }
+
+        // ── Trade Shop: buy asset → amount modal ──
+        if (id.startsWith('trade_buy_')) {
+            const rest    = id.replace('trade_buy_', '');
+            const lastUnd = rest.lastIndexOf('_');
+            const asset   = rest.substring(0, lastUnd);
+            const ownerId = rest.substring(lastUnd + 1);
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser } = require('../economy/econStore');
+            const { ASSET_LABEL }                    = require('../economy/prediction');
+            const { getPrice }                       = require('../economy/market');
+            checkEconUser(ownerId);
+            const price = getPrice(asset);
+            const modal = new ModalBuilder()
+                .setCustomId(`trade_buymod_${asset}_${ownerId}`)
+                .setTitle(`🛒 Iibso ${ASSET_LABEL[asset] || asset.toUpperCase()}`);
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('buy_amount')
+                    .setLabel(`USD (Qiimaha: $${price?.toLocaleString()} | Haysataa: $${eData[ownerId].usd.toLocaleString()})`)
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('Tusaale: 500')
+                    .setRequired(true),
+            ));
+            return interaction.showModal(modal);
         }
 
         // ── Give: Asset button → amount modal ──

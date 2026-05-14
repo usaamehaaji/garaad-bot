@@ -6,6 +6,7 @@
 
 const { getPrice }  = require('./market');
 const { econData, checkEconUser, saveEcon, trackEarning, addToTreasury } = require('./econStore');
+const { fmt }       = require('../utils/helpers');
 
 const pendingSetup      = new Map();  // userId -> partial setup state
 const activePredictions = new Map();  // userId -> locked prediction
@@ -131,16 +132,16 @@ async function resolvePrediction(userId, client) {
             (showAsset ? `📌 **Asset:**       ${assetLabel}\n` : '') +
             `🎯 **Saadaal:**     ${dirLabel}\n` +
             (showAsset
-                ? `📊 **Galitaanka:**  **$${pred.entryPrice.toLocaleString()}**\n` +
-                  `📊 **Bixitaanka:**  **$${exitPrice.toLocaleString()}** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n`
+                ? `📊 **Galitaanka:**  **$${fmt(pred.entryPrice)}**\n` +
+                  `📊 **Bixitaanka:**  **$${fmt(exitPrice)}** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n`
                 : '\n') +
-            `💰 **Dhigay:**      $${pred.stakeUsd.toLocaleString()} USD\n` +
+            `💰 **Dhigay:**      $${fmt(pred.stakeUsd)} USD\n` +
             (isDraw
-                ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (qiime iskumid — dib oo dhan)`
+                ? `✅ **Dib u celinta:** $${fmt(payout)} (qiime iskumid — dib oo dhan)`
                 : win
-                    ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (+$${profit.toLocaleString()} faa'iido)`
-                    : `❌ **Dib u celinta:** $${payout.toLocaleString()} (-$${Math.abs(profit).toLocaleString()} khasaaro)`) +
-            `\n\n💵 **USD-kaaga hadda:** $${d.usd.toLocaleString()}`
+                    ? `✅ **Dib u celinta:** $${fmt(payout)} (+$${fmt(profit)} faa'iido)`
+                    : `❌ **Dib u celinta:** $${fmt(payout)} (-$${fmt(Math.abs(profit))} khasaaro)`) +
+            `\n\n💵 **USD-kaaga hadda:** $${fmt(d.usd)}`
         )
         .setFooter({ text: 'Garaad Predict • ?trade si aad dib u bilaabasho' });
 
@@ -187,8 +188,8 @@ async function resolvePrediction(userId, client) {
                         .setColor(isDraw ? '#f1c40f' : win ? '#2ecc71' : '#e74c3c')
                         .setDescription(
                             `**${assetLabel}** | **${dirLabel}**\n` +
-                            `💰 Dhigay: **$${pred.stakeUsd.toLocaleString()}** → Heshay: **$${payout.toLocaleString()}**\n` +
-                            `💵 USD-kaaga hadda: **$${d.usd.toLocaleString()}**`
+                            `💰 Dhigay: **$${fmt(pred.stakeUsd)}** → Heshay: **$${fmt(payout)}**\n` +
+                            `💵 USD-kaaga hadda: **$${fmt(d.usd)}**`
                         )
                         .setFooter({ text: 'Garaad Predict' }),
                 ] }).catch(() => {});
