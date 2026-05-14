@@ -66,8 +66,6 @@ function buildEcoEmbed() {
 
             `🏦 **Banks & Exchange**\n` +
             `**\`${PREFIX}ebank\`** — Bangiga (deposit / withdraw)\n` +
-            `**\`${PREFIX}deen\`** — Keedsane Bank — $100 deen qaado (10% faido)\n` +
-            `**\`${PREFIX}khaznad\`** — Khaznadda Garaad — balance iyo tirakoob\n` +
             `**\`${PREFIX}list\`** — Dadka lacagaha bankiga ku haya\n` +
 
 
