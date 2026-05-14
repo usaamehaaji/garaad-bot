@@ -38,6 +38,8 @@ const ebankCmd        = require('../commands/economy/ebank');
 const econShopCmd     = require('../commands/economy/econShop');
 
 const shaqoCmd        = require('../commands/economy/shaqo');
+const deenCmd         = require('../commands/economy/deen');
+const khaznadCmd      = require('../commands/economy/khaznad');
 const bankListCmd     = require('../commands/economy/bankList');
 const econTitleCmd    = require('../commands/economy/econTitle');
 
@@ -117,6 +119,13 @@ module.exports = function setupMessageHandler(client) {
 
             case 'rich':
                 return richCmd(message);
+
+            case 'deen':
+                return deenCmd(message);
+
+            case 'khaznad':
+            case 'treasury':
+                return khaznadCmd(message);
 
             case 'list':
                 return bankListCmd(message);

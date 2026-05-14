@@ -13,10 +13,6 @@ function helpRow(userId, active) {
             .setLabel('🎓 Education')
             .setStyle(active === 'edu' ? ButtonStyle.Success : ButtonStyle.Secondary),
         new ButtonBuilder()
-            .setCustomId(`help_eco_${userId}`)
-            .setLabel('💰 Economy')
-            .setStyle(active === 'eco' ? ButtonStyle.Success : ButtonStyle.Secondary),
-        new ButtonBuilder()
             .setCustomId(`close_help_${userId}`)
             .setLabel('Iska xir')
             .setStyle(ButtonStyle.Danger),

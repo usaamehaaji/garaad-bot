@@ -1,8 +1,8 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, getTreasury, addToTreasury } = require('../../economy/econStore');
 
-const LOAN_AMOUNT     = 1000;
-const LOAN_OWED       = 1100;
+const LOAN_AMOUNT     = 100;
+const LOAN_OWED       = 110;
 const DEDUCT_AFTER_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 const CLOSED_MESSAGES = [
