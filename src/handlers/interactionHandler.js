@@ -671,21 +671,17 @@ module.exports = function setupInteractionHandler(client) {
                 checkEconUser(ownerId);
                 const d = eData[ownerId];
 
-                const usdSpend = parseFloat(interaction.fields.getTextInputValue('buy_amount'));
-                if (!usdSpend || isNaN(usdSpend) || usdSpend <= 0)
-                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
-                if (d.usd < usdSpend)
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                const units = parseInt(interaction.fields.getTextInputValue('buy_amount'));
+                if (!units || isNaN(units) || units < 1)
+                    return interaction.reply({ content: '⚠️ Tirada sax ah geli (tusaale: 1).', flags: MessageFlags.Ephemeral });
 
                 const price = getPrice(asset);
                 if (!price || price <= 0)
                     return interaction.reply({ content: '⚠️ Qiimaha ma heli karo.', flags: MessageFlags.Ephemeral });
 
-                const units = Math.floor(usdSpend / price);
-                if (units < 1)
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid inay hal ${asset.toUpperCase()} iibsato. Qiimaha: **$${price.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
-
                 const actualCost = units * price;
+                if (d.usd < actualCost)
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\n💸 Kharash: **$${actualCost.toLocaleString()}** | Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 d.usd    -= actualCost;
                 d[asset]  = (d[asset] || 0) + units;
                 saveEcon();
@@ -1326,16 +1322,17 @@ module.exports = function setupInteractionHandler(client) {
             const { ASSET_LABEL }                    = require('../economy/prediction');
             const { getPrice }                       = require('../economy/market');
             checkEconUser(ownerId);
-            const price = getPrice(asset);
+            const price   = getPrice(asset);
+            const maxUnits = price > 0 ? Math.floor(eData[ownerId].usd / price) : 0;
             const modal = new ModalBuilder()
                 .setCustomId(`trade_buymod_${asset}_${ownerId}`)
                 .setTitle(`🛒 Iibso ${ASSET_LABEL[asset] || asset.toUpperCase()}`);
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder()
                     .setCustomId('buy_amount')
-                    .setLabel(`USD (Qiimaha: $${price?.toLocaleString()} | Haysataa: $${eData[ownerId].usd.toLocaleString()})`)
+                    .setLabel(`Tirada (Qiimaha: $${price?.toLocaleString()}/unit | Max: ${maxUnits})`)
                     .setStyle(TextInputStyle.Short)
-                    .setPlaceholder('Tusaale: 500')
+                    .setPlaceholder('Tusaale: 1')
                     .setRequired(true),
             ));
             return interaction.showModal(modal);
