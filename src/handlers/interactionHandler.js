@@ -309,19 +309,29 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ <@${targetId}> wuxuu helay **${amount > 0 ? '+' : ''}${amount} IQ**. Hadda: **${uData[targetId].iq} IQ**`, flags: MessageFlags.Ephemeral });
             }
 
-            // ── Admin Aqoon modal: Give XP ──
-            if (interaction.customId.startsWith('admin_aq_m_givexp_')) {
+            // ── Admin Aqoon modal: Reset All ──
+            if (interaction.customId.startsWith('admin_aq_m_resetall_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-                const { userData: uData, saveData } = require('../store');
-                const { checkUser, addXp } = require('../utils/helpers');
-                const targetId = interaction.fields.getTextInputValue('target_id').trim();
-                const amount   = parseInt(interaction.fields.getTextInputValue('amount'), 10);
-                if (isNaN(amount) || amount === 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
-                checkUser(targetId);
-                addXp(targetId, amount);
-                saveData();
-                return interaction.reply({ content: `✅ <@${targetId}> wuxuu helay **${amount > 0 ? '+' : ''}${amount} XP**. Wadarta: **${uData[targetId].xp} XP**`, flags: MessageFlags.Ephemeral });
+                const confirm = interaction.fields.getTextInputValue('confirm').trim().toUpperCase();
+                if (confirm !== 'RESET')
+                    return interaction.reply({ content: '⚠️ "RESET" ayaad qori lahayd. La joojiyay.', flags: MessageFlags.Ephemeral });
+                const { userData: uData, saveData: sd } = require('../store');
+                const { checkUser: cu } = require('../utils/helpers');
+                const users = Object.keys(uData);
+                for (const uid of users) {
+                    cu(uid);
+                    uData[uid].iq = 0;
+                    uData[uid].xp = 0;
+                    uData[uid].stars = 0;
+                    uData[uid].pendingQuizPoints = 0;
+                    uData[uid].ownedTitles  = ['beginner'];
+                    uData[uid].activeTitle  = 'beginner';
+                    uData[uid].customTitle  = null;
+                    uData[uid].stats = { soloPlayed:0, soloCorrect:0, soloWrong:0, duelWins:0, duelLosses:0, duelDraws:0, rushBest:0, quizWins:0, quizPlayed:0, bugsReported:0 };
+                }
+                sd();
+                return interaction.reply({ content: `✅ **${users.length} qof** aqoon dib loo dejiyay — IQ, darajo, stats eber.`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Admin Aqoon modal: Champion ──
@@ -782,15 +792,18 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
-        // ── Admin Aqoon: Give XP button → modal ──
-        if (id.startsWith('admin_aq_givexp_')) {
-            const ownerId = id.replace('admin_aq_givexp_', '');
+        // ── Admin Aqoon: Reset All button → confirm modal ──
+        if (id.startsWith('admin_aq_resetall_')) {
+            const ownerId = id.replace('admin_aq_resetall_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const modal = new ModalBuilder().setCustomId(`admin_aq_m_givexp_${ownerId}`).setTitle('⭐ Give XP');
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_aq_m_resetall_${ownerId}`).setTitle('♻️ Reset All Aqoon');
             modal.addComponents(
-                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
-                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka XP').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 500').setRequired(true)),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('confirm').setLabel('Xaqiiji: qor "RESET"').setStyle(TextInputStyle.Short).setPlaceholder('RESET').setRequired(true)
+                ),
             );
             return interaction.showModal(modal);
         }

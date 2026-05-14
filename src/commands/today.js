@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData, saveData }                       = require('../store');
-const { checkUser, addXp }                         = require('../utils/helpers');
+const { checkUser }                                = require('../utils/helpers');
 const { econData, checkEconUser, saveEcon, trackEarning } = require('../economy/econStore');
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;
@@ -12,7 +12,7 @@ function pickReward() {
     if (roll < 0.30) {
         return { type: 'iq',  amount: Math.floor(Math.random() * 6) + 5 };   // 5–10 IQ
     } else if (roll < 0.55) {
-        return { type: 'xp',  amount: Math.floor(Math.random() * 151) + 50 }; // 50–200 XP
+        return { type: 'usd', amount: Math.floor(Math.random() * 101) + 50 }; // $50–$150 USD
     } else if (roll < 0.80) {
         return { type: 'usd', amount: Math.floor(Math.random() * 401) + 100 }; // $100–$500
     } else {
@@ -57,9 +57,6 @@ module.exports = async function todayCommand(message) {
     if (reward.type === 'iq') {
         u.iq = (u.iq || 0) + reward.amount;
         rewardLine = `🧠 **+${reward.amount} IQ**`;
-    } else if (reward.type === 'xp') {
-        addXp(userId, reward.amount);
-        rewardLine = `✨ **+${reward.amount} XP**`;
     } else if (reward.type === 'usd') {
         const today = new Date().toISOString().slice(0, 10);
         d.todayEarned ??= { date: '', usd: 0 };

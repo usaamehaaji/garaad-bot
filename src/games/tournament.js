@@ -29,7 +29,8 @@ const {
     userData,
     saveData,
 } = require('../store');
-const { checkUser, addXp }   = require('../utils/helpers');
+const { checkUser }          = require('../utils/helpers');
+const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 const { markUserPlayed }     = require('../utils/reminders');
 const {
     pickQuestionsForGame,
@@ -666,7 +667,9 @@ async function finishTournament(state) {
         userData[winId].ownedTitles.push('champion');
     }
     userData[winId].activeTitle = 'champion';
-    addXp(winId, 500); // bonus XP
+    checkEconUser(winId);
+    econData[winId].usd += 500;
+    saveEcon();
     saveData();
 
     const allScores = sorted

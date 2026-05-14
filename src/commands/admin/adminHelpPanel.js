@@ -10,10 +10,9 @@ function buildAdminAqoonEmbed() {
         .setTitle('🧠 Admin — Aqoon Commands')
         .setColor('#3498db')
         .setDescription(
-            `**IQ / XP / Reset**\n` +
+            `**IQ / Reset**\n` +
             `• \`${PREFIX}admin reward @user iq [qad]\` — sii IQ\n` +
-            `• \`${PREFIX}admin reward @user xp [qad]\` — sii XP\n` +
-            `• \`${PREFIX}admin reset @user\` — dib u dejii IQ, XP, darajo\n\n` +
+            `• \`${PREFIX}admin reset @user\` — dib u dejii IQ, darajo\n\n` +
 
             `**Champion**\n` +
             `• \`${PREFIX}admin givechampion @user\` — sii 🏆 Champion\n` +
@@ -33,26 +32,11 @@ function buildAdminAqoonEmbed() {
 
 function adminAqoonActionsRow(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`admin_aq_giveiq_${uid}`)
-            .setLabel('🧠 Give IQ')
-            .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-            .setCustomId(`admin_aq_givexp_${uid}`)
-            .setLabel('⭐ Give XP')
-            .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-            .setCustomId(`admin_aq_champion_${uid}`)
-            .setLabel('🏆 Champion')
-            .setStyle(ButtonStyle.Success),
-        new ButtonBuilder()
-            .setCustomId(`admin_aq_reset_${uid}`)
-            .setLabel('🗑️ Reset')
-            .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder()
-            .setCustomId(`admin_aq_dm_${uid}`)
-            .setLabel('💬 DM User')
-            .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_aq_giveiq_${uid}`).setLabel('🧠 Give IQ').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`).setLabel('🏆 Champion').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`).setLabel('💬 DM User').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_aq_reset_${uid}`).setLabel('🗑️ Reset').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_aq_resetall_${uid}`).setLabel('♻️ Reset All').setStyle(ButtonStyle.Danger),
     );
 }
 
