@@ -26,6 +26,7 @@ function defaultUser() {
         activeEconTitle:     null,
         customEconTitle:     null,
         todayEarned:         { date: '', usd: 0 },
+        dailyGiven:          { date: '', usd: 0 },
     };
 }
 
@@ -61,6 +62,7 @@ function checkEconUser(userId) {
         if (d.activeEconTitle === undefined)  d.activeEconTitle  = null;
         if (d.customEconTitle === undefined)  d.customEconTitle  = null;
         d.todayEarned ??= { date: '', usd: 0 };
+        d.dailyGiven  ??= { date: '', usd: 0 };
     }
     return econData[userId];
 }

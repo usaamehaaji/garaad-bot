@@ -161,6 +161,26 @@ function buildShopEmbed(d) {
         .setFooter({ text: 'Garaad Economy • Qiimaha suuqa ayaa la isticmaalaa' });
 }
 
+// ── Embed: Sell Assets ────────────────────────────────────────────
+
+function buildSellEmbed(d) {
+    const snap = getMarketSnapshot();
+    const lines = snap.map(({ asset, price }) => {
+        const units  = d[asset] || 0;
+        const usdVal = Math.floor(units * price);
+        return `${ASSET_LABEL[asset]}  **$${fmt(price)}** — Haysataa: **${units}** ≈ $${fmt(usdVal)} USD`;
+    });
+    return new EmbedBuilder()
+        .setTitle('💰 Sell Assets — USD ku Badal')
+        .setColor('#e67e22')
+        .setDescription(
+            lines.join('\n') +
+            `\n\n💵 USD-kaaga: **$${fmt(d.usd)}**\n\n` +
+            `Asset dooro si aad u iibsato qiimaha suuqa.`
+        )
+        .setFooter({ text: 'Garaad Economy • Qiimaha suuqa ayaa la isticmaalaa' });
+}
+
 // ── Rows ──────────────────────────────────────────────────────────
 
 function assetRow(userId) {
@@ -169,7 +189,6 @@ function assetRow(userId) {
         new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_a_usd_${userId}`)    .setLabel('💵 USD')   .setStyle(ButtonStyle.Success),
     );
 }
 
@@ -184,8 +203,9 @@ function usdAssetRow(userId) {
 
 function controlRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`pred_refresh_${userId}`).setLabel('🔄 Refresh').setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)  .setLabel('🛒 Shop')   .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`pred_refresh_${userId}`).setLabel('🔄 Refresh') .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)  .setLabel('🛒 Buy')     .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`trade_sell_${userId}`)  .setLabel('💰 Sell')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_trade_${userId}`) .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
@@ -200,6 +220,22 @@ function shopRow(userId) {
 }
 
 function shopBackRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_back_${userId}`).setLabel('🔙 Dib').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+    );
+}
+
+function sellRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`trade_sellasset_btc_${userId}`)    .setLabel('₿ BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_sellasset_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_sellasset_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_sellasset_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function sellBackRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`pred_back_${userId}`).setLabel('🔙 Dib').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
@@ -277,8 +313,11 @@ module.exports.buildDirectionEmbed = buildDirectionEmbed;
 module.exports.buildConfirmEmbed   = buildConfirmEmbed;
 module.exports.buildActiveEmbed    = buildActiveEmbed;
 module.exports.buildShopEmbed      = buildShopEmbed;
+module.exports.buildSellEmbed      = buildSellEmbed;
 module.exports.assetRow            = assetRow;
 module.exports.usdAssetRow         = usdAssetRow;
+module.exports.sellRow             = sellRow;
+module.exports.sellBackRow         = sellBackRow;
 module.exports.controlRow          = controlRow;
 module.exports.shopRow             = shopRow;
 module.exports.shopBackRow         = shopBackRow;

@@ -93,6 +93,7 @@ module.exports = function setupInteractionHandler(client) {
 
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
                 const { ASSET_LABELS, closeRow } = require('../commands/economy/give');
+                const { getPrice: gpGive } = require('../economy/market');
                 checkEconUser(ownerId);
                 checkEconUser(targetId);
                 const sender = eData[ownerId];
@@ -101,6 +102,18 @@ module.exports = function setupInteractionHandler(client) {
                 if (sender[asset] < amount) {
                     return interaction.reply({ content: `⚠️ ${asset.toUpperCase()} kugu filna ma lihid. Haysataa: **${sender[asset]}**`, flags: MessageFlags.Ephemeral });
                 }
+
+                // Daily USD give limit: $5,000/day
+                const GIVE_DAILY_LIMIT = 5_000;
+                const usdAmount = asset === 'usd' ? amount : Math.round(amount * (gpGive(asset) || 0));
+                const today = new Date().toISOString().slice(0, 10);
+                sender.dailyGiven ??= { date: '', usd: 0 };
+                if (sender.dailyGiven.date !== today) sender.dailyGiven = { date: today, usd: 0 };
+                if (sender.dailyGiven.usd + usdAmount > GIVE_DAILY_LIMIT) {
+                    const remaining = Math.max(0, GIVE_DAILY_LIMIT - sender.dailyGiven.usd);
+                    return interaction.reply({ content: `⚠️ **Maalineed $${GIVE_DAILY_LIMIT.toLocaleString()} xad** — hadhay: **$${remaining.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                }
+                sender.dailyGiven.usd += usdAmount;
 
                 sender[asset] -= amount;
                 recv[asset]   += amount;
@@ -217,14 +230,19 @@ module.exports = function setupInteractionHandler(client) {
                         .setFooter({ text: '50/50 chance • Garaad Economy' }),
                 ], components: [] });
 
-                // Wait 1 second then reveal result
-                await new Promise(r => setTimeout(r, 1000));
+                // Wait 1.2 seconds then reveal result
+                await new Promise(r => setTimeout(r, 1200));
 
-                const win = Math.random() < 0.35;
+                const { WIN_MULTI } = require('../commands/economy/cashflip');
+                const { fmt: cfFmt } = require('../utils/helpers');
+                const win = Math.random() < 0.50;
                 if (win) {
-                    d[asset] += amount;
-                    const usdWin = asset === 'usd' ? amount : Math.round(amount * (getPrice(asset) || 0));
-                    trackEarning(ownerId, usdWin);
+                    const profit = Math.floor(amount * WIN_MULTI);
+                    d[asset] += profit;
+                    const fee    = amount - profit;
+                    const feeUsd = asset === 'usd' ? fee : Math.round(fee * (getPrice(asset) || 0));
+                    addToTreasury(feeUsd);
+                    trackEarning(ownerId, asset === 'usd' ? profit : Math.round(profit * (getPrice(asset) || 0)));
                 } else {
                     d[asset] -= amount;
                     const usdLoss = asset === 'usd' ? amount : Math.round(amount * (getPrice(asset) || 0));
@@ -234,12 +252,12 @@ module.exports = function setupInteractionHandler(client) {
 
                 await interaction.editReply({ embeds: [
                     new EmbedBuilder()
-                        .setTitle(win ? '🏆 Cashflip — Guul! Win!' : '😢 Cashflip — Guuldaro | Loss')
+                        .setTitle(win ? '🏆 Ecoflip — Guul!' : '😢 Ecoflip — Guuldaro')
                         .setColor(win ? '#2ecc71' : '#e74c3c')
                         .setDescription(
                             win
-                                ? `✅ **+${amount} ${asset.toUpperCase()}** guul!\n${ASSET_LABELS[asset]}: **${d[asset]}**`
-                                : `❌ **-${amount} ${asset.toUpperCase()}** guuldaro.\n${ASSET_LABELS[asset]}: **${d[asset]}**`
+                                ? `✅ **+${cfFmt(Math.floor(amount * WIN_MULTI))} ${asset.toUpperCase()}** guul!\n${ASSET_LABELS[asset]}: **${cfFmt(d[asset])}**`
+                                : `❌ **-${cfFmt(amount)} ${asset.toUpperCase()}** guuldaro.\n${ASSET_LABELS[asset]}: **${cfFmt(d[asset])}**`
                         )
                         .setFooter({ text: '50/50 chance • Garaad Economy' }),
                 ], components: [closeRow(ownerId)] });
@@ -573,6 +591,52 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.update({
                     embeds:     [buildTimeEmbed(asset, 'asset', amount, stakeUsd)],
                     components: [timeRow(ownerId), backRow(ownerId)],
+                });
+            }
+
+            // ── Trade: sell asset modal submit ──
+            if (interaction.customId.startsWith('trade_sellmod_')) {
+                const rest    = interaction.customId.replace('trade_sellmod_', '');
+                const lastUnd = rest.lastIndexOf('_');
+                const asset   = rest.substring(0, lastUnd);
+                const ownerId = rest.substring(lastUnd + 1);
+                if (interaction.user.id !== ownerId)
+                    return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, checkEconUser, saveEcon, trackEarning } = require('../economy/econStore');
+                const { getPrice: gpSell } = require('../economy/market');
+                const { ASSET_LABEL: AL } = require('../economy/prediction');
+                const { fmt: sfmt }        = require('../utils/helpers');
+                checkEconUser(ownerId);
+                const d = eData[ownerId];
+
+                const sellAmt = parseFloat(interaction.fields.getTextInputValue('sell_amount'));
+                if (!sellAmt || isNaN(sellAmt) || sellAmt <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                if ((d[asset] || 0) < sellAmt)
+                    return interaction.reply({ content: `⚠️ ${asset.toUpperCase()} kugu filna ma lihid. Haysataa: **${d[asset] || 0}**`, flags: MessageFlags.Ephemeral });
+
+                const price   = gpSell(asset);
+                const usdGain = Math.floor(sellAmt * price);
+                d[asset] -= sellAmt;
+                d.usd    += usdGain;
+                trackEarning(ownerId, usdGain);
+                saveEcon();
+
+                return interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setTitle(`✅ Iibso — ${AL[asset]}`)
+                            .setColor('#e67e22')
+                            .setDescription(
+                                `**${sellAmt} ${AL[asset]}** la iibiyay\n` +
+                                `💵 Lacag heshay: **+$${sfmt(usdGain)} USD** (@ $${sfmt(price)})\n` +
+                                `💵 USD-kaaga hadda: **$${sfmt(d.usd)}**\n` +
+                                `${AL[asset]} hadhay: **${d[asset]}**`
+                            )
+                            .setFooter({ text: 'Garaad Economy' }),
+                    ],
+                    flags: MessageFlags.Ephemeral,
                 });
             }
 
@@ -1120,6 +1184,48 @@ module.exports = function setupInteractionHandler(client) {
                 embeds:     [buildActiveEmbed(active)],
                 components: [controlRow(ownerId)],
             });
+        }
+
+        // ── Trade: open sell panel ──
+        if (id.startsWith('trade_sell_') && !id.startsWith('trade_sellasset_') && !id.startsWith('trade_sellmod_')) {
+            const ownerId = id.replace('trade_sell_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser } = require('../economy/econStore');
+            const { buildSellEmbed, sellRow, sellBackRow } = require('../commands/economy/trade');
+            checkEconUser(ownerId);
+            return interaction.update({
+                embeds:     [buildSellEmbed(eData[ownerId])],
+                components: [sellRow(ownerId), sellBackRow(ownerId)],
+            });
+        }
+
+        // ── Trade: select asset to sell → amount modal ──
+        if (id.startsWith('trade_sellasset_')) {
+            const rest    = id.replace('trade_sellasset_', '');
+            const lastUnd = rest.lastIndexOf('_');
+            const asset   = rest.substring(0, lastUnd);
+            const ownerId = rest.substring(lastUnd + 1);
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser } = require('../economy/econStore');
+            const { ASSET_LABEL } = require('../economy/prediction');
+            const { getPrice }    = require('../economy/market');
+            checkEconUser(ownerId);
+            const price = getPrice(asset);
+            const bal   = eData[ownerId][asset] || 0;
+            const modal = new ModalBuilder()
+                .setCustomId(`trade_sellmod_${asset}_${ownerId}`)
+                .setTitle(`💰 Iibso ${ASSET_LABEL[asset] || asset.toUpperCase()}`);
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('sell_amount')
+                    .setLabel(`Xaddad (Qiimaha: $${price?.toLocaleString()} | Haysataa: ${bal})`)
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('Tusaale: 1')
+                    .setRequired(true),
+            ));
+            return interaction.showModal(modal);
         }
 
         // ── Trade Shop: open asset shop ──
