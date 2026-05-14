@@ -110,6 +110,10 @@ function lobbyRow(channelId, hostId) {
 // ── Commands ──────────────────────────────────────────────────────────
 
 async function cmdTeamDuel(message, args) {
+    if (!message.guild) {
+        return message.reply('⛔ `?deul` server channel kaliya ayaa loogu shaqeeyaa — DM kuma shaqeyso.');
+    }
+
     const channelId = message.channel.id;
     const hostId    = message.author.id;
 
