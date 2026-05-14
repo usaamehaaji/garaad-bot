@@ -487,6 +487,32 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **$${fmt(amount)}** khaznadda lagu daray.\n🏛️ Hadda: **$${fmt(t.balance)}**`, flags: MessageFlags.Ephemeral });
             }
 
+            // ── Admin Econ modal: Reset All ──
+            if (interaction.customId.startsWith('admin_eco_m_resetall_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const confirm = interaction.fields.getTextInputValue('confirm').trim().toUpperCase();
+                if (confirm !== 'RESET')
+                    return interaction.reply({ content: '⚠️ "RESET" ayaad qori lahayd. La joojiyay.', flags: MessageFlags.Ephemeral });
+                const { econData: eData, saveEcon } = require('../economy/econStore');
+                const { fmt } = require('../utils/helpers');
+                const users = Object.keys(eData).filter(k => !k.startsWith('__'));
+                for (const uid of users) {
+                    const d = eData[uid];
+                    d.usd = 5000; d.btc = 0; d.gold = 0; d.diamond = 0; d.ring = 0;
+                    d.banks = { mandeeq: 0, garaad: 0 };
+                    d.inventory = { safety: 0, robticket: 0 };
+                    d.loan = null; d.lastLoanTaken = 0; d.lastWork = 0; d.lastDaily = 0; d.lastInterest = 0;
+                    d.todayEarned = { date: '', usd: 0 }; d.dailyGiven = { date: '', usd: 0 };
+                    d.robsToday = { date: '', count: 0 };
+                    d.serviceChargesPaid = { mandeeq: 0, garaad: 0 };
+                    d.interestEarned = { mandeeq: 0, garaad: 0 };
+                    d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
+                }
+                saveEcon();
+                return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n💵 Qof walba: **$${fmt(5000)} USD** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
+            }
+
             // (eco_dnmod_ and eco_dnpay_ removed — deen is now button-only, no modals)
 
             // ── Werewolf: Wolf Pack Chat relay ──
@@ -732,15 +758,15 @@ module.exports = function setupInteractionHandler(client) {
         }
 
         // ── Admin tab: Economy (tab button only — exact prefix admin_eco_ + uid) ──
-        if (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_')) {
+        if (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_') && !id.startsWith('admin_eco_resetall_')) {
             const ownerId = id.replace('admin_eco_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-            const { buildAdminEconEmbed, adminEconActionsRow } = require('../commands/admin/adminEconPanel');
+            const { buildAdminEconEmbed, adminEconActionsRow, adminEconActionsRow2 } = require('../commands/admin/adminEconPanel');
             const { adminTabRow } = require('../commands/admin/adminHelpPanel');
-            return interaction.update({ embeds: [buildAdminEconEmbed()], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId)] });
+            return interaction.update({ embeds: [buildAdminEconEmbed()], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId), adminEconActionsRow2(ownerId)] });
         }
 
         // ── Admin Aqoon: Give IQ button → modal ──
@@ -814,9 +840,9 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-            const { buildAllPlayersEmbed, adminEconActionsRow } = require('../commands/admin/adminEconPanel');
+            const { buildAllPlayersEmbed, adminEconActionsRow, adminEconActionsRow2 } = require('../commands/admin/adminEconPanel');
             const { adminTabRow } = require('../commands/admin/adminHelpPanel');
-            return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId)] });
+            return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId), adminEconActionsRow2(ownerId)] });
         }
 
         // ── Admin Econ: Loans button ──
@@ -835,14 +861,14 @@ module.exports = function setupInteractionHandler(client) {
                     const left = Math.max(0, 3 - days);
                     return `${left === 0 ? '🔴' : '💳'} <@${uid}> — **$${fmt(d.loan.owed)}** | ${left === 0 ? '**OVERDUE**' : `${left}d`}`;
                 });
-            const { adminEconActionsRow, buildAdminEconEmbed } = require('../commands/admin/adminEconPanel');
+            const { adminEconActionsRow, adminEconActionsRow2, buildAdminEconEmbed } = require('../commands/admin/adminEconPanel');
             const { adminTabRow } = require('../commands/admin/adminHelpPanel');
             const loansEmbed = new EmbedBuilder()
                 .setTitle(`💳 Deynta (${loans.length})`)
                 .setColor('#e74c3c')
                 .setDescription(loans.join('\n') || '_Cidna deen kuma jirto._')
                 .setFooter({ text: 'Garaad Admin' });
-            return interaction.update({ embeds: [loansEmbed], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId)] });
+            return interaction.update({ embeds: [loansEmbed], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId), adminEconActionsRow2(ownerId)] });
         }
 
         // ── Admin Econ: Top-up Treasury button → modal ──
@@ -859,6 +885,22 @@ module.exports = function setupInteractionHandler(client) {
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder().setCustomId('amount').setLabel('Xaddad ku dar khaznadda').setStyle(TextInputStyle.Short)
                         .setPlaceholder(`Hadda: $${(t.balance || 0).toLocaleString()}`).setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin Econ: Reset All button → confirm modal ──
+        if (id.startsWith('admin_eco_resetall_')) {
+            const ownerId = id.replace('admin_eco_resetall_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_eco_m_resetall_${ownerId}`).setTitle('♻️ Reset All Economy');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('confirm').setLabel('Xaqiiji: qor "RESET" si aad u xaqiijiso').setStyle(TextInputStyle.Short).setPlaceholder('RESET').setRequired(true)
                 ),
             );
             return interaction.showModal(modal);

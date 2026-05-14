@@ -85,9 +85,11 @@ function buildAllPlayersEmbed(page = 0) {
     const slice = players.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
 
     const lines = slice.map((p, i) => {
-        const rank  = page * PER_PAGE + i + 1;
-        const loan  = p.loan > 0 ? ` 💳$${fmt(p.loan)}` : '';
-        return `**${rank}.** <@${p.uid}> — 💎$${fmt(p.net)} | 💵$${fmt(p.usd)} 🏦$${fmt(p.bank)}${loan}`;
+        const rank = page * PER_PAGE + i + 1;
+        const loan = p.loan > 0 ? ` 💳$${fmt(p.loan)}` : '';
+        const bank = p.bank > 0 ? ` 🏦$${fmt(p.bank)}` : '';
+        const ast  = p.assetsUsd > 0 ? ` 🪙$${fmt(p.assetsUsd)}` : '';
+        return `**${rank}.** <@${p.uid}> — **$${fmt(p.net)}** | 💵$${fmt(p.usd)}${bank}${ast}${loan}`;
     });
 
     return new EmbedBuilder()
@@ -112,8 +114,14 @@ function adminEconActionsRow(uid) {
         new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`).setLabel('💵 Give USD').setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Dadka').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`).setLabel('💳 Deynta').setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function adminEconActionsRow2(uid) {
+    return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`).setLabel('🏛️ Top-up').setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`admin_eco_reset_${uid}`).setLabel('🗑️ Reset').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_eco_resetall_${uid}`).setLabel('♻️ Reset All').setStyle(ButtonStyle.Danger),
     );
 }
 
@@ -127,7 +135,7 @@ module.exports = async function adminEconCmd(message, args) {
     if (!sub || sub === 'help') {
         return message.reply({
             embeds:     [buildAdminEconEmbed()],
-            components: [adminTabRow(userId, 'eco'), adminEconActionsRow(userId)],
+            components: [adminTabRow(userId, 'eco'), adminEconActionsRow(userId), adminEconActionsRow2(userId)],
         });
     }
 
@@ -273,3 +281,4 @@ module.exports.buildAdminEconEmbed   = buildAdminEconEmbed;
 module.exports.buildAllPlayersEmbed  = buildAllPlayersEmbed;
 module.exports.adminTabRow           = adminTabRow;
 module.exports.adminEconActionsRow   = adminEconActionsRow;
+module.exports.adminEconActionsRow2  = adminEconActionsRow2;
