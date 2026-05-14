@@ -2,11 +2,11 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser, saveEcon, getTreasury } = require('../../economy/econStore');
 const { fmt } = require('../../utils/helpers');
 
-const INTEREST_RATE     = 0.04;
+const INTEREST_RATE     = 0.01;
 const INTEREST_INTERVAL = 24 * 60 * 60 * 1000;
 const LOAN_MAX          = 2_000;
-const LOAN_FEE          = 5;
-const LOAN_OWED         = LOAN_MAX + LOAN_FEE; // $2,005
+const LOAN_FEE          = 50;
+const LOAN_OWED         = LOAN_MAX + LOAN_FEE; // $2,050
 const DEDUCT_AFTER_MS   = 3 * 24 * 60 * 60 * 1000;
 const EAT_OFFSET        = 3 * 60 * 60 * 1000; // UTC+3 Somalia
 
@@ -14,7 +14,9 @@ const EAT_OFFSET        = 3 * 60 * 60 * 1000; // UTC+3 Somalia
 
 function isBankOpen() {
     const eat = new Date(Date.now() + EAT_OFFSET);
-    return eat.getUTCDay() === 4 && eat.getUTCHours() >= 1;
+    const day = eat.getUTCDay();
+    // Thursday after 1am OR all day Friday (Somalia EAT)
+    return (day === 4 && eat.getUTCHours() >= 1) || day === 5;
 }
 
 function getThursdayWindowStart() {
@@ -79,7 +81,7 @@ function buildMainEmbed(d) {
             `📈 Interest heshay: **+$${fmt(d.interestEarned?.garaad || 0)}**\n\n` +
             `🏛️ Khaznad: **$${fmt(t.balance || 0)}**`
         )
-        .setFooter({ text: 'Garaad Economy • Garaad Bank 4%/maalin' });
+        .setFooter({ text: 'Garaad Economy • Garaad Bank 1%/maalin' });
 }
 
 function buildBankEmbed(d) {
@@ -97,7 +99,7 @@ function buildBankEmbed(d) {
             `🏦 **Kaydka:** **$${fmt(d.banks.garaad)}**\n` +
             `💵 **USD:** **$${fmt(d.usd)}**\n` +
             `📈 **Interest heshay:** +$${fmt(d.interestEarned?.garaad || 0)}\n\n` +
-            `📈 **Rate:** 4% maalintii — Lacagtu kobceysa!\n` +
+            `📈 **Rate:** 1% maalintii — Lacagtu kobceysa!\n` +
             `🏛️ **Bank oo dhan:** $${fmt(bankTotalDeposits())}` +
             loanLine
         )
@@ -152,11 +154,11 @@ function buildDeenEmbed(d) {
             .setColor('#7f8c8d')
             .setDescription(
                 `🔴 **Bangiga maanta XIRAN yahay**\n` +
-                `_Keedsane Bank Khamiis ayuu furmaa — 1:00 AM_\n\n` +
+                `_Keedsane Bank Khamiis 1:00 AM — Jimce dhamaadka ayuu furmaa_\n\n` +
                 `**📋 Deen Xukumka:**\n` +
                 `💵 Waxaad helaysaa: **$${fmt(LOAN_MAX)} USD**\n` +
                 `💸 Waxaad celinsaa: **$${fmt(LOAN_OWED)} USD** ($${LOAN_FEE} dulsaar)\n` +
-                `🔒 Isbuuc walba hal mar — Khamiis 1am`
+                `🔒 Isbuuc walba hal mar — Khamiis 1am ilaa Jimce dhamaadka`
             )
             .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
     }
@@ -183,7 +185,7 @@ function buildDeenEmbed(d) {
             `💵 Waxaad helaysaa: **$${fmt(LOAN_MAX)} USD**\n` +
             `💸 Waxaad celinsaa: **$${fmt(LOAN_OWED)} USD** ($${LOAN_FEE} dulsaar kaliya)\n\n` +
             `🔒 **3 malin kadib** — Garaad Bank laga jaraysaa si toos ah.\n` +
-            `📅 **Isbuuc walba hal mar** — Khamiis 1am\n\n` +
+            `📅 **Isbuuc walba hal mar** — Khamiis 1am ilaa Jimce dhamaadka\n\n` +
             `🏛️ Khaznad: **$${fmt(t.balance || 0)}** | 💵 USD-kaaga: **$${fmt(d.usd)}**`
         )
         .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
