@@ -23,7 +23,7 @@ const activeTeamDuels = new Map();
 
 const TDUEL_Q_DEFAULT = 10;
 const TDUEL_Q_MIN     = 3;
-const TDUEL_Q_MAX     = 20;
+const TDUEL_Q_MAX     = 25;
 
 // ── Helpers ───────────────────────────────────────────────────────────
 
