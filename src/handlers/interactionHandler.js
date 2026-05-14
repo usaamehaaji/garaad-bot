@@ -1221,7 +1221,7 @@ module.exports = function setupInteractionHandler(client) {
             }
             if (section === 'deen') {
                 const hasLoan = !!(d.loan && d.loan.owed > 0);
-                return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(userId, hasLoan)] });
+                return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(userId, hasLoan, d)] });
             }
             if (section === 'garaad') {
                 return interaction.update({ embeds: [buildBankEmbed(d)], components: [actionRow(userId)] });
@@ -1291,30 +1291,38 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
-        // ── Deen: Take loan — give $5,000 USD ──
+        // ── Deen: Take loan — give $2,000 USD (Thursday only, once/week) ──
         if (id.startsWith('eco_dn_take_')) {
             const ownerId = id.replace('eco_dn_take_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { buildDeenEmbed, deenRow, LOAN_MAX, LOAN_OWED } = require('../commands/economy/ebank');
+            const { buildDeenEmbed, deenRow, isBankOpen, usedWeeklyLoan, LOAN_MAX, LOAN_OWED } = require('../commands/economy/ebank');
             checkEconUser(ownerId);
             const d = eData[ownerId];
+            if (!isBankOpen())
+                return interaction.reply({ content: '⚠️ Keedsane Bank maanta xiran yahay — Khamiis 1am soo noqo.', flags: MessageFlags.Ephemeral });
+            if (usedWeeklyLoan(d))
+                return interaction.reply({ content: '⚠️ Isbuucaan deen horay u qaaday — toddobaadka xiga soo noqo.', flags: MessageFlags.Ephemeral });
             if (d.loan && d.loan.owed > 0)
                 return interaction.reply({ content: '⚠️ Deen jirto — marka hore celib.', flags: MessageFlags.Ephemeral });
-            d.usd  += LOAN_MAX;
-            d.loan  = { asset: 'usd', amount: LOAN_MAX, owed: LOAN_OWED, takenAt: Date.now() };
+            const { getTreasury, deductFromTreasury } = require('../economy/econStore');
+            if (!deductFromTreasury(LOAN_MAX))
+                return interaction.reply({ content: `⚠️ Khaznadda lacag ma filan — admin ayaa toddobaadkiiba lacag ku shubaa.\n🏛️ Hadda: **$${(getTreasury().balance || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+            d.usd           += LOAN_MAX;
+            d.lastLoanTaken  = Date.now();
+            d.loan           = { asset: 'usd', amount: LOAN_MAX, owed: LOAN_OWED, takenAt: Date.now() };
             saveEcon();
-            return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(ownerId, true)] });
+            return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(ownerId, true, d)] });
         }
 
-        // ── Deen: Repay loan — deduct $5,005 from USD ──
+        // ── Deen: Repay loan — $2,005 back to treasury ──
         if (id.startsWith('eco_dn_pay_')) {
             const ownerId = id.replace('eco_dn_pay_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
-            const { buildDeenEmbed, deenRow, LOAN_MAX, LOAN_OWED } = require('../commands/economy/ebank');
+            const { buildDeenEmbed, deenRow, LOAN_OWED } = require('../commands/economy/ebank');
             checkEconUser(ownerId);
             const d = eData[ownerId];
             if (!d.loan || d.loan.owed <= 0)
@@ -1322,10 +1330,10 @@ module.exports = function setupInteractionHandler(client) {
             if (d.usd < d.loan.owed)
                 return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\nDeentaadu: **$${d.loan.owed}** | Haysataa: **$${d.usd}**`, flags: MessageFlags.Ephemeral });
             d.usd  -= d.loan.owed;
-            addToTreasury(LOAN_OWED - LOAN_MAX);
+            addToTreasury(LOAN_OWED);
             d.loan  = null;
             saveEcon();
-            return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(ownerId, false)] });
+            return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(ownerId, false, d)] });
         }
 
         // ── Trade: Refresh market view ──

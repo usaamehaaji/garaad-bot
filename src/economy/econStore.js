@@ -21,6 +21,7 @@ function defaultUser() {
         serviceChargesPaid:  { mandeeq: 0, garaad: 0 },
         interestEarned:      { mandeeq: 0, garaad: 0 },
         loan:                null,
+        lastLoanTaken:       0,
         econTitles:          [],
         activeEconTitle:     null,
         customEconTitle:     null,
@@ -55,6 +56,7 @@ function checkEconUser(userId) {
         d.interestEarned.mandeeq     ??= 0;
         d.interestEarned.garaad      ??= 0;
         if (d.loan === undefined)             d.loan             = null;
+        d.lastLoanTaken ??= 0;
         if (d.econTitles === undefined)       d.econTitles       = [];
         if (d.activeEconTitle === undefined)  d.activeEconTitle  = null;
         if (d.customEconTitle === undefined)  d.customEconTitle  = null;

@@ -2,12 +2,35 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser, saveEcon, getTreasury } = require('../../economy/econStore');
 const { fmt } = require('../../utils/helpers');
 
-const INTEREST_RATE     = 0.04;               // 4% per day — Garaad Bank only
+const INTEREST_RATE     = 0.04;
 const INTEREST_INTERVAL = 24 * 60 * 60 * 1000;
-const LOAN_MAX          = 5_000;
+const LOAN_MAX          = 2_000;
 const LOAN_FEE          = 5;
-const LOAN_OWED         = LOAN_MAX + LOAN_FEE; // $5,005
+const LOAN_OWED         = LOAN_MAX + LOAN_FEE; // $2,005
 const DEDUCT_AFTER_MS   = 3 * 24 * 60 * 60 * 1000;
+const EAT_OFFSET        = 3 * 60 * 60 * 1000; // UTC+3 Somalia
+
+// ── Weekly Thursday loan logic ─────────────────────────────────────
+
+function isBankOpen() {
+    const eat = new Date(Date.now() + EAT_OFFSET);
+    return eat.getUTCDay() === 4 && eat.getUTCHours() >= 1;
+}
+
+function getThursdayWindowStart() {
+    const eat = new Date(Date.now() + EAT_OFFSET);
+    const day = eat.getUTCDay();
+    let daysBack = (day - 4 + 7) % 7;
+    if (day === 4 && eat.getUTCHours() < 1) daysBack = 7;
+    const thu = new Date(eat);
+    thu.setUTCDate(eat.getUTCDate() - daysBack);
+    thu.setUTCHours(1, 0, 0, 0);
+    return thu.getTime() - EAT_OFFSET;
+}
+
+function usedWeeklyLoan(d) {
+    return (d.lastLoanTaken || 0) >= getThursdayWindowStart();
+}
 
 // ── Interest ──────────────────────────────────────────────────────
 
@@ -101,8 +124,11 @@ function buildKhaznadEmbed() {
 }
 
 function buildDeenEmbed(d) {
-    const loan    = d.loan;
-    const hasLoan = !!(loan && loan.owed > 0);
+    const loan      = d.loan;
+    const hasLoan   = !!(loan && loan.owed > 0);
+    const open      = isBankOpen();
+    const usedWeek  = usedWeeklyLoan(d);
+
     if (hasLoan) {
         const daysPassed = Math.floor((Date.now() - loan.takenAt) / 86400000);
         const daysLeft   = Math.max(0, 3 - daysPassed);
@@ -119,15 +145,46 @@ function buildDeenEmbed(d) {
             )
             .setFooter({ text: 'Garaad Economy • Deen si dhaqso ah u celi' });
     }
+
+    if (!open) {
+        return new EmbedBuilder()
+            .setTitle('💳 Deen — Keedsane Bank')
+            .setColor('#7f8c8d')
+            .setDescription(
+                `🔴 **Bangiga maanta XIRAN yahay**\n` +
+                `_Keedsane Bank Khamiis ayuu furmaa — 1:00 AM_\n\n` +
+                `**📋 Deen Xukumka:**\n` +
+                `💵 Waxaad helaysaa: **$${fmt(LOAN_MAX)} USD**\n` +
+                `💸 Waxaad celinsaa: **$${fmt(LOAN_OWED)} USD** ($${LOAN_FEE} dulsaar)\n` +
+                `🔒 Isbuuc walba hal mar — Khamiis 1am`
+            )
+            .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
+    }
+
+    if (usedWeek) {
+        return new EmbedBuilder()
+            .setTitle('💳 Deen — Keedsane Bank')
+            .setColor('#e67e22')
+            .setDescription(
+                `🟡 **Bangiga wuu furan yahay** _(Khamiis)_\n\n` +
+                `⚠️ **Isbuucaan deen horay u qaaday** — toddobaadka xiga soo noqo.\n\n` +
+                `💵 USD-kaaga: **$${fmt(d.usd)}**`
+            )
+            .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
+    }
+
+    const t = getTreasury();
     return new EmbedBuilder()
         .setTitle('💳 Deen — Keedsane Bank')
-        .setColor('#8e44ad')
+        .setColor('#2ecc71')
         .setDescription(
+            `🟢 **Bangiga maanta FURAN yahay** _(Khamiis)_\n\n` +
             `**📋 Deen Xukumka:**\n\n` +
             `💵 Waxaad helaysaa: **$${fmt(LOAN_MAX)} USD**\n` +
             `💸 Waxaad celinsaa: **$${fmt(LOAN_OWED)} USD** ($${LOAN_FEE} dulsaar kaliya)\n\n` +
-            `🔒 **3 malin kadib** — Garaad Bank laga jaraysaa si toos ah.\n\n` +
-            `💵 USD-kaaga: **$${fmt(d.usd)}**`
+            `🔒 **3 malin kadib** — Garaad Bank laga jaraysaa si toos ah.\n` +
+            `📅 **Isbuuc walba hal mar** — Khamiis 1am\n\n` +
+            `🏛️ Khaznad: **$${fmt(t.balance || 0)}** | 💵 USD-kaaga: **$${fmt(d.usd)}**`
         )
         .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
 }
@@ -172,18 +229,20 @@ function actionRow(userId) {
     );
 }
 
-function deenRow(userId, hasLoan) {
+function deenRow(userId, hasLoan, d) {
+    const canTake = !hasLoan && isBankOpen() && !usedWeeklyLoan(d || {});
     return new ActionRowBuilder().addComponents(
-        ...(!hasLoan ? [
-            new ButtonBuilder()
-                .setCustomId(`eco_dn_take_${userId}`)
-                .setLabel(`💳 Deen Qaado ($${fmt(LOAN_MAX)})`)
-                .setStyle(ButtonStyle.Primary),
-        ] : [
+        ...(hasLoan ? [
             new ButtonBuilder()
                 .setCustomId(`eco_dn_pay_${userId}`)
                 .setLabel(`💵 Deen Celi ($${fmt(LOAN_OWED)})`)
                 .setStyle(ButtonStyle.Success),
+        ] : [
+            new ButtonBuilder()
+                .setCustomId(`eco_dn_take_${userId}`)
+                .setLabel(`💳 Deen Qaado ($${fmt(LOAN_MAX)})`)
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(!canTake),
         ]),
         new ButtonBuilder()
             .setCustomId(`eco_eb_garaad_${userId}`)
@@ -246,3 +305,5 @@ module.exports.backRow            = backRow;
 module.exports.closeRow           = closeRow;
 module.exports.LOAN_MAX           = LOAN_MAX;
 module.exports.LOAN_OWED          = LOAN_OWED;
+module.exports.isBankOpen         = isBankOpen;
+module.exports.usedWeeklyLoan     = usedWeeklyLoan;
