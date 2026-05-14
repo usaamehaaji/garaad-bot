@@ -20,7 +20,6 @@ module.exports = async function jeebCmd(message) {
         + d.gold    * goldPrice
         + d.diamond * diaPrice
         + d.ring    * ringPrice
-        + d.banks.mandeeq
         + d.banks.garaad;
 
     const xirfadLabel = (() => {
@@ -31,6 +30,12 @@ module.exports = async function jeebCmd(message) {
 
     const today       = new Date().toISOString().slice(0, 10);
     const todayEarned = (d.todayEarned && d.todayEarned.date === today) ? d.todayEarned.usd : 0;
+
+    const loanLine = (() => {
+        if (!d.loan || !d.loan.owed) return '';
+        const daysLeft = Math.max(0, 3 - Math.floor((Date.now() - d.loan.takenAt) / 86400000));
+        return `\n💳 **Deen:** $${fmt(d.loan.owed)} ${daysLeft > 0 ? `(${daysLeft} malin)` : '🔴 overdue'}`;
+    })();
 
     const closeRow = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -45,14 +50,14 @@ module.exports = async function jeebCmd(message) {
             .setColor('#f39c12')
             .setDescription(
                 `**💵 USD:** $${fmt(d.usd)}\n` +
-                `**₿ BTC:** ${d.btc} ≈ $${fmt(d.btc * btcPrice)}\n` +
-                `**🥇 Gold:** ${d.gold} oz ≈ $${fmt(d.gold * goldPrice)}\n` +
-                `**💎 Diamond:** ${d.diamond} ≈ $${fmt(d.diamond * diaPrice)}\n` +
-                `**💍 Ring:** ${d.ring} ≈ $${fmt(d.ring * ringPrice)}\n\n` +
-                `**🏦 Mandeeq Bank:** $${fmt(d.banks.mandeeq)}\n` +
-                `**🏦 Garaad Bank:** $${fmt(d.banks.garaad)}\n\n` +
+                `**₿ BTC:** ${d.btc} ≈ $${fmt(Math.round(d.btc * btcPrice))}\n` +
+                `**🥇 Gold:** ${d.gold} ≈ $${fmt(Math.round(d.gold * goldPrice))}\n` +
+                `**💎 Diamond:** ${d.diamond} ≈ $${fmt(Math.round(d.diamond * diaPrice))}\n` +
+                `**💍 Ring:** ${d.ring} ≈ $${fmt(Math.round(d.ring * ringPrice))}\n\n` +
+                `**🏦 Garaad Bank:** $${fmt(d.banks.garaad)}\n` +
                 `**📊 Net Worth: ~$${fmt(Math.round(netWorth))} USD**\n` +
-                `**📈 Maanta dhakhli: +$${fmt(todayEarned)}**`
+                `**📈 Maanta dhakhli: +$${fmt(todayEarned)}**` +
+                loanLine
             )
             .setFooter({ text: 'Garaad Economy' }),
     ], components: [closeRow] });
