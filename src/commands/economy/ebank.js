@@ -74,7 +74,7 @@ function buildBankEmbed(d) {
             `🏦 **Kaydka:** **$${fmt(d.banks.garaad)}**\n` +
             `💵 **USD:** **$${fmt(d.usd)}**\n` +
             `📈 **Interest heshay:** +$${fmt(d.interestEarned?.garaad || 0)}\n\n` +
-            `📈 **Rate:** 4% maalintii — Lacagtu way kobtaa!\n` +
+            `📈 **Rate:** 4% maalintii — Lacagtu kobceysa!\n` +
             `🏛️ **Bank oo dhan:** $${fmt(bankTotalDeposits())}` +
             loanLine
         )
