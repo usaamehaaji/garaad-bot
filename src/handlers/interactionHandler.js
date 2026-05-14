@@ -472,6 +472,21 @@ module.exports = function setupInteractionHandler(client) {
                 });
             }
 
+            // ── Admin Econ modal: Top-up Treasury ──
+            if (interaction.customId.startsWith('admin_eco_m_topup_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const amount = parseFloat(interaction.fields.getTextInputValue('amount'));
+                if (isNaN(amount) || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const { topUpTreasury, getTreasury, saveEcon } = require('../economy/econStore');
+                const { fmt } = require('../utils/helpers');
+                topUpTreasury(amount);
+                saveEcon();
+                const t = getTreasury();
+                return interaction.reply({ content: `✅ **$${fmt(amount)}** khaznadda lagu daray.\n🏛️ Hadda: **$${fmt(t.balance)}**`, flags: MessageFlags.Ephemeral });
+            }
+
             // (eco_dnmod_ and eco_dnpay_ removed — deen is now button-only, no modals)
 
             // ── Werewolf: Wolf Pack Chat relay ──
@@ -720,8 +735,8 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.update({ embeds: [bae()], components: [adminTabRow(ownerId, 'aqoon'), adminAqoonActionsRow(ownerId)] });
         }
 
-        // ── Admin tab: Economy ──
-        if (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_')) {
+        // ── Admin tab: Economy (tab button only — exact prefix admin_eco_ + uid) ──
+        if (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_')) {
             const ownerId = id.replace('admin_eco_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
@@ -792,6 +807,63 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('msg').setLabel('Fariinta').setStyle(TextInputStyle.Paragraph).setPlaceholder('Farriinta u dir qofka...').setRequired(true)),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin Econ: All Players button ──
+        if (id.startsWith('admin_eco_allplayers_')) {
+            const ownerId = id.replace('admin_eco_allplayers_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const { buildAllPlayersEmbed, adminEconActionsRow } = require('../commands/admin/adminEconPanel');
+            const { adminTabRow } = require('../commands/admin/adminHelpPanel');
+            return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId)] });
+        }
+
+        // ── Admin Econ: Loans button ──
+        if (id.startsWith('admin_eco_loans_')) {
+            const ownerId = id.replace('admin_eco_loans_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const { econData: eData } = require('../economy/econStore');
+            const { fmt } = require('../utils/helpers');
+            const loans = Object.entries(eData)
+                .filter(([k, d]) => !k.startsWith('__') && d.loan?.owed > 0)
+                .map(([uid, d]) => {
+                    const days = Math.floor((Date.now() - d.loan.takenAt) / 86400000);
+                    const left = Math.max(0, 3 - days);
+                    return `${left === 0 ? '🔴' : '💳'} <@${uid}> — **$${fmt(d.loan.owed)}** | ${left === 0 ? '**OVERDUE**' : `${left}d`}`;
+                });
+            const { adminEconActionsRow, buildAdminEconEmbed } = require('../commands/admin/adminEconPanel');
+            const { adminTabRow } = require('../commands/admin/adminHelpPanel');
+            const loansEmbed = new EmbedBuilder()
+                .setTitle(`💳 Deynta (${loans.length})`)
+                .setColor('#e74c3c')
+                .setDescription(loans.join('\n') || '_Cidna deen kuma jirto._')
+                .setFooter({ text: 'Garaad Admin' });
+            return interaction.update({ embeds: [loansEmbed], components: [adminTabRow(ownerId, 'eco'), adminEconActionsRow(ownerId)] });
+        }
+
+        // ── Admin Econ: Top-up Treasury button → modal ──
+        if (id.startsWith('admin_eco_topup_')) {
+            const ownerId = id.replace('admin_eco_topup_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const { getTreasury } = require('../economy/econStore');
+            const t = getTreasury();
+            const modal = new ModalBuilder().setCustomId(`admin_eco_m_topup_${ownerId}`).setTitle('🏛️ Treasury Top-up');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('amount').setLabel('Xaddad ku dar khaznadda').setStyle(TextInputStyle.Short)
+                        .setPlaceholder(`Hadda: $${(t.balance || 0).toLocaleString()}`).setRequired(true)
+                ),
             );
             return interaction.showModal(modal);
         }

@@ -100,6 +100,13 @@ function addToTreasury(amount) {
     t.totalIn += amount;
 }
 
+function topUpTreasury(amount) {
+    if (!amount || amount <= 0) return;
+    const t = getTreasury();
+    t.balance += amount;
+    // does NOT add to totalIn — admin inject, not player income
+}
+
 function deductFromTreasury(amount) {
     const t = getTreasury();
     if (t.balance < amount) return false;
@@ -118,4 +125,4 @@ function trackEarning(userId, usdAmount) {
     d.todayEarned.usd += usdAmount;
 }
 
-module.exports = { econData, checkEconUser, saveEcon, getTreasury, addToTreasury, deductFromTreasury, trackEarning };
+module.exports = { econData, checkEconUser, saveEcon, getTreasury, addToTreasury, topUpTreasury, deductFromTreasury, trackEarning };
