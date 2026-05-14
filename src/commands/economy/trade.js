@@ -151,6 +151,16 @@ function assetRow(userId) {
         new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_usd_${userId}`)    .setLabel('💵 USD')   .setStyle(ButtonStyle.Success),
+    );
+}
+
+function usdAssetRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_ua_btc_${userId}`)    .setLabel('₿ BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_ua_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_ua_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_ua_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
     );
 }
 
@@ -233,6 +243,7 @@ module.exports.buildDirectionEmbed = buildDirectionEmbed;
 module.exports.buildConfirmEmbed  = buildConfirmEmbed;
 module.exports.buildActiveEmbed   = buildActiveEmbed;
 module.exports.assetRow           = assetRow;
+module.exports.usdAssetRow        = usdAssetRow;
 module.exports.controlRow         = controlRow;
 module.exports.stakeTypeRow       = stakeTypeRow;
 module.exports.timeRow            = timeRow;

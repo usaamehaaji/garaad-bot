@@ -895,7 +895,7 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
-        // ── Prediction: Asset selected → show stake type ──
+        // ── Prediction: Asset selected → skip stake type, go straight to modal ──
         if (id.startsWith('pred_a_')) {
             const rest    = id.replace('pred_a_', '');
             const lastUnd = rest.lastIndexOf('_');
@@ -904,14 +904,60 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { setPending }                     = require('../economy/prediction');
-            const { buildStakeTypeEmbed, stakeTypeRow } = require('../commands/economy/trade');
+            const { setPending, ASSET_LABEL }        = require('../economy/prediction');
             checkEconUser(ownerId);
-            setPending(ownerId, { asset });
-            return interaction.update({
-                embeds:     [buildStakeTypeEmbed(asset, eData[ownerId])],
-                components: [stakeTypeRow(ownerId)],
-            });
+
+            // USD button → ask which asset to predict on
+            if (asset === 'usd') {
+                const { buildMarketEmbed, usdAssetRow, controlRow } = require('../commands/economy/trade');
+                const embed = buildMarketEmbed(eData[ownerId]);
+                return interaction.update({
+                    embeds:     [embed.setTitle('💵 USD — Dooro Asset Saadaalinta').setFooter({ text: 'Garaad Predict • Dooro asset aad saadaalinaysaa (USD ku dhigan)' })],
+                    components: [usdAssetRow(ownerId), controlRow(ownerId)],
+                });
+            }
+
+            // Asset button → stakeType = asset, show asset amount modal directly
+            setPending(ownerId, { asset, stakeType: 'asset' });
+            const bal = eData[ownerId][asset] || 0;
+            const modal = new ModalBuilder()
+                .setCustomId(`pred_amt_ast_${ownerId}`)
+                .setTitle(`${ASSET_LABEL[asset] || asset.toUpperCase()} Immisa baad dhigaysaa?`);
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('pred_amount')
+                    .setLabel(`${asset.toUpperCase()} (Haysataa: ${bal})`)
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('Tusaale: 1')
+                    .setRequired(true),
+            ));
+            return interaction.showModal(modal);
+        }
+
+        // ── Prediction: USD + asset selected → USD amount modal ──
+        if (id.startsWith('pred_ua_')) {
+            const rest    = id.replace('pred_ua_', '');
+            const lastUnd = rest.lastIndexOf('_');
+            const asset   = rest.substring(0, lastUnd);
+            const ownerId = rest.substring(lastUnd + 1);
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser } = require('../economy/econStore');
+            const { setPending }                     = require('../economy/prediction');
+            checkEconUser(ownerId);
+            setPending(ownerId, { asset, stakeType: 'usd' });
+            const modal = new ModalBuilder()
+                .setCustomId(`pred_amt_usd_${ownerId}`)
+                .setTitle('💵 Immisa USD baad dhigaysaa?');
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('pred_amount')
+                    .setLabel(`USD (Haysataa: $${eData[ownerId].usd.toLocaleString()})`)
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('Tusaale: 500')
+                    .setRequired(true),
+            ));
+            return interaction.showModal(modal);
         }
 
         // ── Prediction: Stake with USD → amount modal ──

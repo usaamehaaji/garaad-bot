@@ -119,6 +119,7 @@ async function resolvePrediction(userId, client) {
 
     const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
+    const showAsset = pred.stakeType !== 'usd';
     const resultEmbed = new EmbedBuilder()
         .setTitle(
             isDraw ? '🤝 Saadaalin — Xeerka! (Draw)'
@@ -127,10 +128,12 @@ async function resolvePrediction(userId, client) {
         )
         .setColor(isDraw ? '#f1c40f' : win ? '#2ecc71' : '#e74c3c')
         .setDescription(
-            `📌 **Asset:**       ${assetLabel}\n` +
+            (showAsset ? `📌 **Asset:**       ${assetLabel}\n` : '') +
             `🎯 **Saadaal:**     ${dirLabel}\n` +
-            `📊 **Galitaanka:**  **$${pred.entryPrice.toLocaleString()}**\n` +
-            `📊 **Bixitaanka:**  **$${exitPrice.toLocaleString()}** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n` +
+            (showAsset
+                ? `📊 **Galitaanka:**  **$${pred.entryPrice.toLocaleString()}**\n` +
+                  `📊 **Bixitaanka:**  **$${exitPrice.toLocaleString()}** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n`
+                : '\n') +
             `💰 **Dhigay:**      $${pred.stakeUsd.toLocaleString()} USD\n` +
             (isDraw
                 ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (qiime iskumid — dib oo dhan)`
