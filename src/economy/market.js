@@ -1,0 +1,130 @@
+const fs   = require('fs');
+const path = require('path');
+
+const MARKET_PATH = path.join(__dirname, '../../data/market.json');
+const TICK_MS     = 60 * 1000;       // 1 daqiiqo
+const HISTORY_MAX = 10;              // Taariikhda qiimaha (10 daqiiqo)
+
+const BASE_PRICES = {
+    btc:     45000,
+    gold:    1800,
+    diamond: 5000,
+    ring:    200,
+};
+
+const VOLATILITY = {
+    btc:     0.04,
+    gold:    0.025,
+    diamond: 0.03,
+    ring:    0.035,
+};
+
+let marketData = {
+    prices:     { ...BASE_PRICES },
+    previous:   { ...BASE_PRICES },
+    history:    { btc: [], gold: [], diamond: [], ring: [] },
+    lastUpdate: 0,
+};
+
+try {
+    if (fs.existsSync(MARKET_PATH)) {
+        const loaded = JSON.parse(fs.readFileSync(MARKET_PATH, 'utf8'));
+        if (loaded && loaded.prices) {
+            marketData = {
+                prices:     loaded.prices,
+                previous:   loaded.previous   || { ...BASE_PRICES },
+                history:    loaded.history     || { btc: [], gold: [], diamond: [], ring: [] },
+                lastUpdate: loaded.lastUpdate  || 0,
+            };
+        }
+    }
+} catch (e) {
+    console.error('[Market] Khalad:', e.message);
+}
+
+function saveMarket() {
+    try {
+        const dir = path.dirname(MARKET_PATH);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(MARKET_PATH, JSON.stringify(marketData, null, 2));
+    } catch (e) {
+        console.error('[Market] Khalad keydintiinta:', e.message);
+    }
+}
+
+function tickMarket() {
+    const now = Date.now();
+    if (now - marketData.lastUpdate < TICK_MS) return false;
+
+    for (const asset of Object.keys(BASE_PRICES)) {
+        const prev   = marketData.prices[asset];
+        const vol    = VOLATILITY[asset];
+        const change = (Math.random() * 2 - 1) * vol;
+        const next   = Math.max(
+            Math.round(BASE_PRICES[asset] * 0.3),
+            Math.round(prev * (1 + change))
+        );
+
+        marketData.previous[asset] = prev;
+        marketData.prices[asset]   = next;
+
+        // Taariikh: ku dar, ku xidid HISTORY_MAX
+        marketData.history[asset] ??= [];
+        marketData.history[asset].push(next);
+        if (marketData.history[asset].length > HISTORY_MAX) {
+            marketData.history[asset].shift();
+        }
+    }
+
+    marketData.lastUpdate = now;
+    saveMarket();
+    return true;
+}
+
+// Wakhtiga ugu dhaw ee isbeddelka
+function nextTickSeconds() {
+    const elapsed = Date.now() - marketData.lastUpdate;
+    return Math.max(0, Math.ceil((TICK_MS - elapsed) / 1000));
+}
+
+// Farriinta is-bedelka %
+function getPriceChange(asset) {
+    const cur  = marketData.prices[asset];
+    const prev = marketData.previous[asset] || cur;
+    if (!prev || prev === 0) return 0;
+    return ((cur - prev) / prev) * 100;
+}
+
+// Xarfaha shaxanka yar (sparkline)
+function sparkline(asset) {
+    const hist = marketData.history[asset];
+    if (!hist || hist.length < 2) return '▄▄▄▄▄';
+    const min   = Math.min(...hist);
+    const max   = Math.max(...hist);
+    const range = max - min || 1;
+    const bars  = '▁▂▃▄▅▆▇█';
+    return hist.map(v => bars[Math.min(7, Math.floor(((v - min) / range) * 7))]).join('');
+}
+
+function getPrice(asset) {
+    tickMarket();
+    return marketData.prices[asset.toLowerCase()] ?? null;
+}
+
+function getPrices() {
+    tickMarket();
+    return { ...marketData.prices };
+}
+
+function getMarketSnapshot() {
+    tickMarket();
+    const assets = Object.keys(BASE_PRICES);
+    return assets.map(asset => ({
+        asset,
+        price:    marketData.prices[asset],
+        change:   getPriceChange(asset),
+        spark:    sparkline(asset),
+    }));
+}
+
+module.exports = { getPrice, getPrices, getMarketSnapshot, nextTickSeconds, BASE_PRICES, tickMarket };

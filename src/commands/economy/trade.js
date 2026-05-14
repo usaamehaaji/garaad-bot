@@ -1,0 +1,241 @@
+// =====================================================================
+// AMARKA: ?trade — Garaad Predict (UP / DOWN Binary Trading)
+// Flow: asset select → stake type → amount modal → time → direction → confirm → lock
+// =====================================================================
+
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { econData, checkEconUser }     = require('../../economy/econStore');
+const { getMarketSnapshot, getPrice, nextTickSeconds } = require('../../economy/market');
+const { getActivePrediction, WIN_MULTI, LOSE_MULTI, ASSET_LABEL } = require('../../economy/prediction');
+
+const ASSETS = ['btc', 'gold', 'diamond', 'ring'];
+
+// ── Embed: Market overview (Step 1) ───────────────────────────────
+
+function buildMarketEmbed(d) {
+    const snap    = getMarketSnapshot();
+    const secLeft = nextTickSeconds();
+
+    const lines = snap.map(({ asset, price, change, spark }) => {
+        const ind = change > 0 ? `🟢 +${change.toFixed(1)}%`
+                  : change < 0 ? `🔴 ${change.toFixed(1)}%`
+                  : '⬜ 0.0%';
+        const sig = change > 2   ? ' 📈 *Kor u jeedaa*'
+                  : change < -2  ? ' ⚠️ *Hoos u dhacayaa*'
+                  : '';
+        return `${ASSET_LABEL[asset]}  **$${price.toLocaleString()}**  ${ind}\n\`${spark}\`${sig}`;
+    });
+
+    return new EmbedBuilder()
+        .setTitle('📊 Garaad Predict — Suuqa Lacagta')
+        .setColor('#1a1a2e')
+        .setDescription(
+            lines.join('\n\n') +
+            `\n\n💵 USD-kaaga: **$${d.usd.toLocaleString()}**\n` +
+            `⏱️ Qiime cusub: **${secLeft}s** gudahood\n\n` +
+            `**⬇️ Asset dooro si aad u saadaaliso:**`
+        )
+        .setFooter({ text: 'Garaad Predict • Dooro asset → dhig → UP / DOWN → sug natiijahaaga' });
+}
+
+// ── Embed: Stake type (Step 2) ─────────────────────────────────────
+
+function buildStakeTypeEmbed(asset, d) {
+    const price = getPrice(asset);
+    const assetBal = d[asset] || 0;
+    return new EmbedBuilder()
+        .setTitle(`📊 Saadaalinta ${ASSET_LABEL[asset]}`)
+        .setColor('#2980b9')
+        .setDescription(
+            `**Qiimaha hadda:** $${price.toLocaleString()}\n\n` +
+            `💵 USD-kaaga: **$${d.usd.toLocaleString()}**\n` +
+            `${ASSET_LABEL[asset]}: **${assetBal}**\n\n` +
+            `**Sidee baad lacagta dhigaysaa?**`
+        )
+        .setFooter({ text: 'Garaad Predict' });
+}
+
+// ── Embed: Time selection (Step 4) ────────────────────────────────
+
+function buildTimeEmbed(asset, stakeType, stakeAmount, stakeUsd) {
+    const stakeLabel = stakeType === 'usd'
+        ? `💵 $${stakeAmount.toLocaleString()} USD`
+        : `${ASSET_LABEL[asset]} ${stakeAmount} (≈ $${stakeUsd.toLocaleString()} USD)`;
+    return new EmbedBuilder()
+        .setTitle(`⏱️ Dooro Waqtiga — ${ASSET_LABEL[asset]}`)
+        .setColor('#8e44ad')
+        .setDescription(
+            `**Stake:** ${stakeLabel}\n\n` +
+            `Immisa daqiiqo baad sugi doontaa?\n\n` +
+            `> 🔵 **1 daqiiqo** — Degdeg, khatarta badan\n` +
+            `> 🟢 **3 daqiiqo** — Dhexdhexaad\n` +
+            `> 🟡 **5 daqiiqo** — Xasilloon\n` +
+            `> 🔴 **10 daqiiqo** — Muddo dheer, fursad weyn`
+        )
+        .setFooter({ text: 'Garaad Predict' });
+}
+
+// ── Embed: Direction (Step 5) ─────────────────────────────────────
+
+function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
+    const price = getPrice(asset);
+    const stakeLabel = stakeType === 'usd'
+        ? `$${stakeAmount.toLocaleString()} USD`
+        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${stakeUsd.toLocaleString()})`;
+    return new EmbedBuilder()
+        .setTitle(`🎯 Dooro Jihada — ${ASSET_LABEL[asset]}`)
+        .setColor('#e67e22')
+        .setDescription(
+            `**Asset:** ${ASSET_LABEL[asset]}\n` +
+            `**Stake:** ${stakeLabel}\n` +
+            `**Waqti:** ${minutes} daqiiqo\n` +
+            `**Qiimaha hadda:** $${price.toLocaleString()}\n\n` +
+            `⬆️ **UP** — Waxaad saadaalinaysaa qiimahu kor buu u kacayaa\n` +
+            `⬇️ **DOWN** — Waxaad saadaalinaysaa qiimahu hoos buu u dhacayaa`
+        )
+        .setFooter({ text: 'Garaad Predict' });
+}
+
+// ── Embed: Confirm (Step 6) ────────────────────────────────────────
+
+function buildConfirmEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes, direction) {
+    const price  = getPrice(asset);
+    const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const winPay   = Math.floor(stakeUsd * WIN_MULTI);
+    const losePay  = Math.floor(stakeUsd * LOSE_MULTI);
+    const stakeLabel = stakeType === 'usd'
+        ? `$${stakeAmount.toLocaleString()} USD`
+        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${stakeUsd.toLocaleString()})`;
+    return new EmbedBuilder()
+        .setTitle('✅ Xidh Saadaalinta — Confirm')
+        .setColor('#27ae60')
+        .setDescription(
+            `📌 **Asset:**     ${ASSET_LABEL[asset]}\n` +
+            `📊 **Qiimaha:**   $${price.toLocaleString()}\n` +
+            `💰 **Stake:**     ${stakeLabel}\n` +
+            `⏱️ **Waqti:**     ${minutes} daqiiqo\n` +
+            `🎯 **Saadaal:**   ${dirLabel}\n\n` +
+            `🏆 **Haddii WIN:**  +$${(winPay - stakeUsd).toLocaleString()} faa'iido → dib: **$${winPay.toLocaleString()}**\n` +
+            `💀 **Haddii LOSE:** -$${(stakeUsd - losePay).toLocaleString()} khasaaro → dib: **$${losePay.toLocaleString()}**\n\n` +
+            `⚡ Ma diyaar baad tahay?`
+        )
+        .setFooter({ text: 'Garaad Predict • Ka dib LOCK, waxba la beddeli karo' });
+}
+
+// ── Embed: Active prediction (Step 7) ─────────────────────────────
+
+function buildActiveEmbed(pred) {
+    const remaining = Math.max(0, pred.endTime - Date.now());
+    const mins = Math.floor(remaining / 60000);
+    const secs = Math.floor((remaining % 60000) / 1000);
+    const dirLabel = pred.direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    return new EmbedBuilder()
+        .setTitle('⏳ Saadaalin Firfircoon — Sug!')
+        .setColor('#f39c12')
+        .setDescription(
+            `📌 **Asset:**        ${ASSET_LABEL[pred.asset]}\n` +
+            `📊 **Galitaanka:**   $${pred.entryPrice?.toLocaleString()}\n` +
+            `🎯 **Saadaal:**      ${dirLabel}\n` +
+            `💰 **Stake:**        $${pred.stakeUsd?.toLocaleString()} USD\n` +
+            `⏱️ **Inta kale:**    **${mins}m ${secs}s**\n\n` +
+            `🔔 Waqtigii dhammaado, DM + channel fariin ayaad helaysaa!`
+        )
+        .setFooter({ text: 'Garaad Predict • Waxba la beddeli karo marka la xidhay' });
+}
+
+// ── Rows ──────────────────────────────────────────────────────────
+
+function assetRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_a_btc_${userId}`)    .setLabel('₿ BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function controlRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_refresh_${userId}`).setLabel('🔄 Refresh').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+    );
+}
+
+function stakeTypeRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_st_usd_${userId}`).setLabel('💵 Dhig USD').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`pred_st_ast_${userId}`).setLabel('🪙 Dhig Asset').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`pred_back_${userId}`).setLabel('🔙 Dib').setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function timeRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_t_1_${userId}`) .setLabel('1 min ⚡').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_t_3_${userId}`) .setLabel('3 min').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`pred_t_5_${userId}`) .setLabel('5 min').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`pred_t_10_${userId}`).setLabel('10 min 🎯').setStyle(ButtonStyle.Success),
+    );
+}
+
+function backRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_back_${userId}`).setLabel('🔙 Dib').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Jooji').setStyle(ButtonStyle.Danger),
+    );
+}
+
+function directionRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_d_up_${userId}`)  .setLabel('⬆️ UP — Kor').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`pred_d_down_${userId}`).setLabel('⬇️ DOWN — Hoos').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`pred_back_${userId}`)  .setLabel('🔙 Dib').setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function confirmRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_lock_${userId}`)  .setLabel('🔒 LOCK — Xidh').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`pred_cancel_${userId}`).setLabel('❌ Jooji').setStyle(ButtonStyle.Danger),
+    );
+}
+
+// ── Command entry ─────────────────────────────────────────────────
+
+module.exports = async function tradeCmd(message) {
+    const userId = message.author.id;
+    checkEconUser(userId);
+    const d = econData[userId];
+
+    // Haddii saadaalin firfircoon tahay, muuji xaaladda
+    const active = getActivePrediction(userId);
+    if (active) {
+        return message.reply({
+            embeds:     [buildActiveEmbed(active)],
+            components: [controlRow(userId)],
+        });
+    }
+
+    return message.reply({
+        embeds:     [buildMarketEmbed(d)],
+        components: [assetRow(userId), controlRow(userId)],
+    });
+};
+
+// ── Named exports for interactionHandler ─────────────────────────
+
+module.exports.ASSETS             = ASSETS;
+module.exports.ASSET_LABEL        = ASSET_LABEL;
+module.exports.buildMarketEmbed   = buildMarketEmbed;
+module.exports.buildStakeTypeEmbed = buildStakeTypeEmbed;
+module.exports.buildTimeEmbed     = buildTimeEmbed;
+module.exports.buildDirectionEmbed = buildDirectionEmbed;
+module.exports.buildConfirmEmbed  = buildConfirmEmbed;
+module.exports.buildActiveEmbed   = buildActiveEmbed;
+module.exports.assetRow           = assetRow;
+module.exports.controlRow         = controlRow;
+module.exports.stakeTypeRow       = stakeTypeRow;
+module.exports.timeRow            = timeRow;
+module.exports.backRow            = backRow;
+module.exports.directionRow       = directionRow;
+module.exports.confirmRow         = confirmRow;
