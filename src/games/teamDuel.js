@@ -16,10 +16,16 @@ const {
     noQuestionsLeftEmbed,
 } = require('../utils/questions');
 const { getAnswerOptions } = require('../utils/questionOptions');
-const { GLOBAL_WAIT_MS } = require('../config');
+const { GLOBAL_WAIT_MS, SOLO_FAST_MS, SOLO_MAX_SCORE, SOLO_MIN_SCORE } = require('../config');
 
 // channelId → state
 const activeTeamDuels = new Map();
+
+function calcTimedScore(timeTakenMs) {
+    if (timeTakenMs <= SOLO_FAST_MS) return SOLO_MAX_SCORE;
+    const ratio = (timeTakenMs - SOLO_FAST_MS) / (GLOBAL_WAIT_MS - SOLO_FAST_MS);
+    return Math.max(SOLO_MIN_SCORE, Math.round(SOLO_MAX_SCORE - (SOLO_MAX_SCORE - SOLO_MIN_SCORE) * ratio));
+}
 
 const TDUEL_Q_DEFAULT = 10;
 const TDUEL_Q_MIN     = 3;
@@ -305,7 +311,7 @@ async function handleStart(interaction, hostId, channelId) {
     }
 
     // Pick questions (stakes already deducted on join)
-    const questions = pickQuestionsForGame(state.hostId, 'duel', TDUEL_Q_COUNT);
+    const questions = pickQuestionsForGame(state.hostId, 'duel', state.totalQ);
     if (!questions || questions.length === 0) {
         // Refund all and cancel
         for (const uid of allJoined(state)) { refundStake(state, uid); }
@@ -420,7 +426,8 @@ async function sendTeamDuelQuestion(channel, channelId) {
     }
     state.currentMsg = msg;
 
-    const answeredThisQ = new Set();
+    const answeredThisQ  = new Set();
+    const questionStartMs = Date.now();
 
     const filter = i =>
         i.customId.startsWith(`tduel_ans_${channelId}_${qIndex}_`) &&
@@ -436,10 +443,12 @@ async function sendTeamDuelQuestion(channel, channelId) {
 
         const isCorrect = interaction.customId.endsWith('_t');
         if (isCorrect) {
-            state.scores[interaction.user.id] = (state.scores[interaction.user.id] || 0) + 1;
-            await interaction.reply({ content: '✅ Saxsanaan! +1 dhibic', flags: MessageFlags.Ephemeral }).catch(() => {});
+            const pts  = calcTimedScore(Date.now() - questionStartMs);
+            const secs = ((Date.now() - questionStartMs) / 1000).toFixed(1);
+            state.scores[interaction.user.id] = (state.scores[interaction.user.id] || 0) + pts;
+            await interaction.reply({ content: `✅ Saxsanaan! +${pts} dhibcood · ⏱️ ${secs}s`, flags: MessageFlags.Ephemeral }).catch(() => {});
         } else {
-            await interaction.reply({ content: '❌ Khalad!', flags: MessageFlags.Ephemeral }).catch(() => {});
+            await interaction.reply({ content: '❌ Khalad! 0 dhibcood', flags: MessageFlags.Ephemeral }).catch(() => {});
         }
 
         if (answeredThisQ.size >= players.length) collector.stop('all_answered');
@@ -480,6 +489,18 @@ async function finishTeamDuel(channel, channelId) {
 
     let resultEmbed;
 
+    // IQ bonus from correct answers for all participants
+    const iqBonuses = {};
+    for (const uid of players) {
+        const iq = Math.floor((state.scores[uid] || 0) / 90);
+        if (iq > 0) { checkUser(uid); userData[uid].iq = (userData[uid].iq || 0) + iq; iqBonuses[uid] = iq; }
+    }
+    if (Object.keys(iqBonuses).length > 0) saveData();
+
+    const bonusLine = Object.keys(iqBonuses).length > 0
+        ? `\n\n🧠 **IQ Bonus (suaalaha):** ${players.map(id => iqBonuses[id] ? `<@${id}> +${iqBonuses[id]}` : null).filter(Boolean).join(' · ')}`
+        : '';
+
     if (t1Score === t2Score) {
         for (const uid of players) { refundStake(state, uid); }
 
@@ -489,7 +510,7 @@ async function finishTeamDuel(channel, channelId) {
             .setDescription(
                 `🔵 Team 1: **${t1Score}** dhibic\n` +
                 `🔴 Team 2: **${t2Score}** dhibic\n\n` +
-                `Waa iskumid! Dhigga waa la soo celiyay.`,
+                `Waa iskumid! Dhigga waa la soo celiyay.${bonusLine}`,
             );
     } else {
         const winTeam    = t1Score > t2Score ? 1 : 2;
@@ -513,7 +534,7 @@ async function finishTeamDuel(channel, channelId) {
                 `🥇 **Guulayste:** ${winIds.map(id => `<@${id}>`).join(', ')}\n` +
                 `   Qof kasta: **+${perWinner.toLocaleString()} ${state.stakeType.toUpperCase()}**\n\n` +
                 `💀 **Lumiyay:** ${loseIds.map(id => `<@${id}>`).join(', ')}\n` +
-                `   Qof kasta: −${state.stakeAmount.toLocaleString()} ${state.stakeType.toUpperCase()}`,
+                `   Qof kasta: −${state.stakeAmount.toLocaleString()} ${state.stakeType.toUpperCase()}${bonusLine}`,
             );
     }
 

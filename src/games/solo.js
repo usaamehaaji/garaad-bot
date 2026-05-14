@@ -97,6 +97,8 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         const streak     = game ? (game.bestStreak  || 0) : 0;
         const correct    = game ? (game.correctCount || 0) : 0;
         const wrong      = total - correct;
+        const iqGain     = Math.floor(totalPts / 90);
+        if (iqGain > 0) { userData[userId].iq = (userData[userId].iq || 0) + iqGain; saveData(); }
 
         const finishEmbed = new EmbedBuilder()
             .setTitle('🏁 Ciyaarta Waa Dhamaaday!')
@@ -104,7 +106,8 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 `### 📊 Natiijadaada — <@${userId}>\n\n` +
                 `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}**\n` +
                 `🎯 Dhibco guud: **${totalPts}** pts\n` +
-                `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n\n` +
+                `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
+                `🧠 IQ kasoo helaa: **+${iqGain} IQ** _(${totalPts} pts ÷ 90)_\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | ⭐ XP: **${d.xp || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
             .setColor('#2ecc71');
@@ -238,12 +241,8 @@ async function handleSoloAnswer(interaction) {
             game.correctCount  = (game.correctCount || 0) + 1;
         }
 
-        // IQ ku dar (dhibco-based: keliya +1 IQ per 5 pts, ugu yaraan +1)
-        const iqGain = Math.max(1, Math.floor(totalPts / 8));
-        userData[ownerId].iq = (userData[ownerId].iq || 0) + iqGain;
         userData[ownerId].stats.soloCorrect++;
-
-        msg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n+${iqGain} IQ · ${(timeTaken/1000).toFixed(1)}s`;
+        msg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTaken/1000).toFixed(1)}s`;
     } else {
         // ── Qalad ──
         if (game) {

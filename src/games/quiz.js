@@ -386,23 +386,30 @@ async function finishQuiz(state) {
     const sorted      = Object.entries(state.scores).sort(([, a], [, b]) => b - a);
     const playerCount = state.players.size;
 
-    // Kayd dhibcaha + stats
+    // Kayd dhibcaha + stats + IQ for top 3 + XP for all
     sorted.forEach(([id, sc], i) => {
         checkUser(id);
         userData[id].stats.quizPlayed++;
+        if (i < 3 && sc > 0) {
+            const iq = Math.floor(sc / QUIZ_POINTS_PER_IQ);
+            if (iq > 0) userData[id].iq = (userData[id].iq || 0) + iq;
+        }
         if (sc > 0) {
-            userData[id].pendingQuizPoints = (userData[id].pendingQuizPoints || 0) + sc;
+            userData[id].xp = (userData[id].xp || 0) + Math.floor(sc * QUIZ_POINTS_TO_XP);
         }
         if (i === 0 && sc > 0) userData[id].stats.quizWins++;
     });
     saveData();
 
-    // Leaderboard full
     const medalMap = ['🥇', '🥈', '🥉'];
-    const leaderLines = sorted.map(([id, sc], i) => {
-        const medal = medalMap[i] ?? `${i + 1}.`;
-        return `${medal} <@${id}> — **${sc}** dhibcood`;
+    const top3Lines = sorted.slice(0, Math.min(3, sorted.length)).map(([id, sc], i) => {
+        const iq = Math.floor(sc / QUIZ_POINTS_PER_IQ);
+        return `${medalMap[i]} <@${id}> — **${sc}** pts → **+${iq} IQ**`;
     }).join('\n') || '—';
+
+    const restLines = sorted.slice(3).map(([id, sc], i) =>
+        `${i + 4}. <@${id}> — **${sc}** pts`
+    ).join('\n');
 
     const winner = sorted[0];
     const winnerLine = winner && winner[1] > 0
@@ -416,24 +423,14 @@ async function finishQuiz(state) {
             `${winnerLine}\n\n` +
             `**Hostka:** <@${state.hostId}> · **Ciyaartoy:** ${playerCount}\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `**🏆 Liiska Dhammaanba:**\n${leaderLines}\n\n` +
+            `**🏆 Top 3 — IQ Abaalmarinta:**\n${top3Lines}\n` +
+            (restLines ? `\n**Kale:**\n${restLines}\n` : '') +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `**Dhibcahaagu waa kaydsan yihiin** — badal marka aad rabto:\n` +
-            `• ${QUIZ_POINTS_PER_IQ} dhibcood = **1 IQ** (aqoon)\n` +
-            `• 1 dhibic = **${QUIZ_POINTS_TO_XP} XP** (khibrad)\n\n` +
-            `Riix si aad u badasho:`
+            `🧠 **${QUIZ_POINTS_PER_IQ} dhibcood = 1 IQ** · ⭐ Dhammaan ciyaartoydu XP helaan`
         )
         .setFooter({ text: `Garaad Quiz • ${PREFIX}profile — arag dhibcahaaga` });
 
     const exchRow = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId('quiz_pts_iq')
-            .setLabel('🧠 Badal IQ')
-            .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-            .setCustomId('quiz_pts_xp')
-            .setLabel('⭐ Badal XP')
-            .setStyle(ButtonStyle.Success),
         new ButtonBuilder()
             .setCustomId(`close_quiz_${state.hostId}`)
             .setLabel('❌ Iska xir')
