@@ -323,8 +323,11 @@ async function sendQuizQuestion(state) {
                 flags:   MessageFlags.Ephemeral,
             }).catch(() => {});
         } else {
+            checkUser(uid);
+            userData[uid].iq = Math.max(0, (userData[uid].iq || 0) - 1);
+            saveData();
             await interaction.reply({
-                content: '❌ **Khalad.** Jawaabta sax ma ahayn — 0 dhibcood.',
+                content: '❌ **Khalad.** Jawaabta sax ma ahayn · **−1 IQ** · 0 dhibcood',
                 flags:   MessageFlags.Ephemeral,
             }).catch(() => {});
         }
@@ -336,6 +339,14 @@ async function sendQuizQuestion(state) {
     });
 
     collector.on('end', async () => {
+        // ── Timeout: ku dar −1 IQ dadka aanay jawaab bixin ──
+        const timedOut = [...state.players].filter(id => !answeredBy.has(id));
+        for (const id of timedOut) {
+            checkUser(id);
+            userData[id].iq = Math.max(0, (userData[id].iq || 0) - 1);
+        }
+        if (timedOut.length > 0) saveData();
+
         // ── Natiijada su'aasha ──
         const correctEntries = Object.entries(correctMap)
             .sort(([, a], [, b]) => b.pts - a.pts || a.timeTakenMs - b.timeTakenMs);
@@ -351,6 +362,10 @@ async function sendQuizQuestion(state) {
             }).join('\n');
         }
 
+        const timeoutLine = timedOut.length > 0
+            ? `\n⏰ **Timeout −1 IQ:** ${timedOut.map(id => `<@${id}>`).join(', ')}`
+            : '';
+
         // ── Liiska dhibcaha guud (top 5) ──
         const leaderboard = Object.entries(state.scores)
             .sort(([, a], [, b]) => b - a)
@@ -363,7 +378,7 @@ async function sendQuizQuestion(state) {
             .setDescription(
                 `## ${q.question}\n\n` +
                 `📌 Jawaabta saxda ah: **${correctLabel}**\n\n` +
-                `**Su'aashaas natiijadeeda:**\n${resultLines}\n\n` +
+                `**Su'aashaas natiijadeeda:**\n${resultLines}${timeoutLine}\n\n` +
                 `📊 **Dhibcaha guud (top 5):**\n${leaderboard}`
             )
             .setColor(correctEntries.length > 0 ? '#2ecc71' : '#e74c3c');
