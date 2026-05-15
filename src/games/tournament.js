@@ -711,15 +711,16 @@ async function endRoundPause(state) {
         .sort((a, b) => b[1] - a[1])
         .map(([id, sc], i) => {
             const medal = ['🥇', '🥈', '🥉'][i] || `${i + 1}.`;
-            return `${medal} <@${id}> — **${sc}pts** ${eliminated.includes(id) ? '❌ _baxaya_' : '✅'}`;
+            const tag   = eliminated.includes(id) ? '❌ Eliminated' : '✅ Qualified';
+            return `${medal} <@${id}> — **${sc}pts** · ${tag}`;
         }).join('\n');
 
     const nextRoundName  = state.roundIdx === 1
         ? `Wareegga 2aad (${TOURNAMENT_R2_QUESTIONS} su'aalood)`
         : `Final 🏆 (${TOURNAMENT_FINAL_QUESTIONS} su'aalood)`;
-    const remainingList  = remaining.map((id, i) => `✅ ${i + 1}. <@${id}>`).join('\n');
+    const remainingList  = remaining.map((id, i) => `✅ ${i + 1}. <@${id}> — Qualified`).join('\n');
     const eliminatedList = eliminated.length > 0
-        ? eliminated.map(id => `❌ <@${id}>`).join('\n')
+        ? eliminated.map(id => `❌ <@${id}> — Eliminated · Players Out`).join('\n')
         : '_Cidna ma bixin_';
 
     state.stage      = 'pause';
@@ -736,8 +737,8 @@ async function endRoundPause(state) {
             .setDescription(
                 `**📊 Dhibcaha Guud:**\n${totalBoard}\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `**❌ Dadka baxa (${eliminated.length}):**\n${eliminatedList}\n\n` +
-                `**✅ ${nextRoundName}-ka u gudbaya (${remaining.length}):**\n${remainingList}\n\n` +
+                `**❌ Eliminated — Players Out (${eliminated.length}):**\n${eliminatedList}\n\n` +
+                `**✅ Qualified — ${nextRoundName} (${remaining.length}):**\n${remainingList}\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
                 `⬇️ **Admin:** Riix badhanka si wareegga xiga loo bilaabo`
             )
