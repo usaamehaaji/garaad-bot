@@ -74,7 +74,7 @@ module.exports = async function cashflipCmd(message, args) {
         const balNote  = newBal >= 100_000 ? 'Millionaire! 💎'
                        : newBal >= 50_000  ? 'Aad u sarreysaa! 🔥'
                        : newBal >= 10_000  ? '10k+ club! 🏆'
-                       : newBal >= 5_000   ? 'Ku dhowaad 10k! 🚀'
+                       : newBal >= 5_000   ? 'Sii wad! 🚀'
                        : newBal >= 1_000   ? 'Sii wad! 💪'
                        : 'Isku day! 🎯';
         const balLabel = asset === 'usd' ? `$${fmt(newBal)}` : `${fmt(newBal)} ${asset.toUpperCase()}`;
