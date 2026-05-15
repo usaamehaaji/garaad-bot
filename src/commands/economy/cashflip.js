@@ -69,16 +69,33 @@ module.exports = async function cashflipCmd(message, args) {
         }
         saveEcon();
 
+        const username = message.author.username;
+        const newBal   = d[asset];
+        const balNote  = newBal >= 100_000 ? 'Millionaire! 💎'
+                       : newBal >= 50_000  ? 'Aad u sarreysaa! 🔥'
+                       : newBal >= 10_000  ? '10k+ club! 🏆'
+                       : newBal >= 5_000   ? 'Ku dhowaad 10k! 🚀'
+                       : newBal >= 1_000   ? 'Sii wad! 💪'
+                       : 'Isku day! 🎯';
+        const balLabel = asset === 'usd' ? `$${fmt(newBal)}` : `${fmt(newBal)} ${asset.toUpperCase()}`;
+
+        const desc = win
+            ? `Hambalyo **${username}**! Fursadaada maanta waa mid aad u fiican. 🌟\n\n` +
+              `Natiijada: Guul! ✅\n\n` +
+              `Faa'iidada: **+${asset === 'usd' ? '$' : ''}${fmt(Math.floor(amount * WIN_MULTI))} ${asset !== 'usd' ? asset.toUpperCase() : '💵'}**\n\n` +
+              `Wadarta Cusub: **${balLabel}** (${balNote})\n\n` +
+              `✨ Garaad Economy`
+            : `Nasiib daro **${username}**! Suuqa maanta kuma roonaan. 😔\n\n` +
+              `Natiijada: Guuldaro! ❌\n\n` +
+              `Khasaaraha: **-${asset === 'usd' ? '$' : ''}${fmt(amount)} ${asset !== 'usd' ? asset.toUpperCase() : '💵'}**\n\n` +
+              `Wadarta Cusub: **${balLabel}** (${balNote})\n\n` +
+              `✨ Garaad Economy`;
+
         return flipMsg.edit({ embeds: [
             new EmbedBuilder()
-                .setTitle(win ? '🏆 Ecoflip — Guul!' : '😢 Ecoflip — Guuldaro')
+                .setTitle(win ? '🏆 Natiijada Ecoflip: GUUL! 🏆' : '💸 Natiijada Ecoflip: GUULDARO! 💸')
                 .setColor(win ? '#2ecc71' : '#e74c3c')
-                .setDescription(
-                    win
-                        ? `✅ **+${fmt(Math.floor(amount * WIN_MULTI))} ${asset.toUpperCase()}** guul!\n${ASSET_LABELS[asset]}: **${fmt(d[asset])}**`
-                        : `❌ **-${fmt(amount)} ${asset.toUpperCase()}** guuldaro.\n${ASSET_LABELS[asset]}: **${fmt(d[asset])}**`
-                )
-                .setFooter({ text: '50/50 • 1.9x win • Garaad Economy' }),
+                .setDescription(desc),
         ], components: [closeRow(userId)] });
     }
 
