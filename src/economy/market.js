@@ -31,7 +31,7 @@ let marketData = {
 try {
     if (fs.existsSync(MARKET_PATH)) {
         const loaded = JSON.parse(fs.readFileSync(MARKET_PATH, 'utf8'));
-        if (loaded && loaded.prices && loaded.prices.btc <= 35_000) {
+        if (loaded && loaded.prices) {
             marketData = {
                 prices:     loaded.prices,
                 previous:   loaded.previous   || { ...BASE_PRICES },

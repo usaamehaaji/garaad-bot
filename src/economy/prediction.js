@@ -4,12 +4,49 @@
 // LOSE = stake × 0.4 (dib u celinta 40%)
 // =====================================================================
 
+const fs   = require('fs');
+const path = require('path');
 const { getPrice }  = require('./market');
 const { econData, checkEconUser, saveEcon, trackEarning, addToTreasury } = require('./econStore');
 const { fmt }       = require('../utils/helpers');
 
+const PRED_PATH = path.join(__dirname, '../../data/predictions.json');
+
 const pendingSetup      = new Map();  // userId -> partial setup state
 const activePredictions = new Map();  // userId -> locked prediction
+
+function savePredictions() {
+    try {
+        const obj = {};
+        for (const [uid, pred] of activePredictions) obj[uid] = pred;
+        const dir = path.dirname(PRED_PATH);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(PRED_PATH, JSON.stringify(obj, null, 2));
+    } catch (e) {
+        console.error('[Predictions] Save khalad:', e.message);
+    }
+}
+
+function restorePredictions(client) {
+    try {
+        if (!fs.existsSync(PRED_PATH)) return;
+        const obj = JSON.parse(fs.readFileSync(PRED_PATH, 'utf8'));
+        let count = 0;
+        for (const [uid, pred] of Object.entries(obj)) {
+            activePredictions.set(uid, pred);
+            const remaining = pred.endTime - Date.now();
+            if (remaining <= 0) {
+                setImmediate(() => resolvePrediction(uid, client));
+            } else {
+                setTimeout(() => resolvePrediction(uid, client), remaining);
+            }
+            count++;
+        }
+        if (count > 0) console.log(`[Predictions] ${count} saadaalin dib loo bilaabishay`);
+    } catch (e) {
+        console.error('[Predictions] Restore khalad:', e.message);
+    }
+}
 
 const WIN_MULTI  = 1.8;
 const LOSE_MULTI = 0.4;
@@ -73,6 +110,7 @@ async function lockPrediction(userId, client) {
     };
     activePredictions.set(userId, pred);
     clearPending(userId);
+    savePredictions();
 
     setTimeout(() => resolvePrediction(userId, client), minutes * 60 * 1000);
     return { ok: true };
@@ -112,6 +150,7 @@ async function resolvePrediction(userId, client) {
     }
     saveEcon();
     activePredictions.delete(userId);
+    savePredictions();
 
     const pctChange   = ((exitPrice - pred.entryPrice) / pred.entryPrice * 100).toFixed(2);
     const dirLabel    = pred.direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
@@ -211,4 +250,5 @@ module.exports = {
     getActivePrediction,
     lockPrediction,
     resolvePrediction,
+    restorePredictions,
 };

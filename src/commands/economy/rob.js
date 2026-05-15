@@ -72,9 +72,6 @@ module.exports = async function robCmd(message) {
         ], components: [closeRow(userId)] });
     }
 
-    robber.inventory.robticket -= 1;
-    robber.robsToday.count    += 1;
-
     if (victim.inventory.safety > 0) {
         victim.inventory.safety -= 1;
         saveEcon();
@@ -82,10 +79,13 @@ module.exports = async function robCmd(message) {
             new EmbedBuilder()
                 .setTitle('🛡️ Rob — Laga Difaacay!')
                 .setColor('#f39c12')
-                .setDescription(`❌ ${target} Shield-ka ayuu isticmaalay — rob baa fashilmay!\nTicket-kaagii waa la isticmaalay.`)
+                .setDescription(`❌ ${target} Shield-ka ayuu isticmaalay — rob baa fashilmay!\n✅ Ticket-kaagii waa la keydsaday.`)
                 .setFooter({ text: 'Garaad Economy' }),
         ], components: [closeRow(userId)] });
     }
+
+    robber.inventory.robticket -= 1;
+    robber.robsToday.count    += 1;
 
     const success = Math.random() < ROB_SUCCESS_RATE;
 

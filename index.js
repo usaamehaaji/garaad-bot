@@ -41,6 +41,7 @@ const setupInteractionHandler  = require('./src/handlers/interactionHandler');
 const setupReminderScheduler   = require('./src/handlers/reminderScheduler');
 const setupBankChargeScheduler  = require('./src/handlers/bankChargeScheduler');
 const setupWeeklyLeaderboard    = require('./src/handlers/weeklyLeaderboard');
+const { restorePredictions }    = require('./src/economy/prediction');
 
 // ───── Client ─────
 const client = new Client({
@@ -70,6 +71,7 @@ client.once('clientReady', () => {
     setupReminderScheduler(client);
     setupBankChargeScheduler(client);
     setupWeeklyLeaderboard(client);
+    restorePredictions(client);
 
     const announceId = process.env.ANNOUNCE_CHANNEL_ID;
     if (announceId) {

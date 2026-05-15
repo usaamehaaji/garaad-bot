@@ -61,7 +61,7 @@ module.exports = async function shaqoCmd(message) {
             new EmbedBuilder()
                 .setTitle('🚫 Shaqo — Xad Maalinlaha')
                 .setColor('#e74c3c')
-                .setDescription(`Maanta **$1,000** oo USD baad kasoo shaqeysay.\n\n⏳ Berri dib u tijaabi.`)
+                .setDescription(`Maanta **$1,000** oo USD baad kasoo shaqeysay (shaqo + rob + cashflip + iwm).\n\n⏳ Berri dib u tijaabi.`)
                 .setFooter({ text: 'Garaad Economy • $1,000/maalin max' }),
         ]});
     }
@@ -82,6 +82,7 @@ module.exports = async function shaqoCmd(message) {
             .setStyle(ButtonStyle.Danger),
     );
 
+    const remaining = 1000 - d.todayEarned.usd;
     return message.reply({ embeds: [
         new EmbedBuilder()
             .setTitle(`✅ ${job.title}`)
@@ -89,7 +90,8 @@ module.exports = async function shaqoCmd(message) {
             .setDescription(
                 `${job.desc}\n\n` +
                 `💵 **+$${reward} USD** shaqadaada ah\n` +
-                `💰 USD-kaaga: **$${d.usd.toLocaleString()}**`
+                `💰 USD-kaaga: **$${d.usd.toLocaleString()}**\n` +
+                `📊 Maanta waxaad kasoo heli kartaa: **$${Math.max(0, remaining).toLocaleString()}** oo kale`
             )
             .setFooter({ text: 'Garaad Economy • 9 saacadood gudahood dib u shaqeyso • $300–$500' }),
     ], components: [closeRow] });
