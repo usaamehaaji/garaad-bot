@@ -32,27 +32,27 @@ function priceTag(p) {
 module.exports = async function econShopCmd(message) {
     const userId = message.author.id;
 
-    // Row 1: Items
-    const itemRow = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('eco_shop_safety')   .setLabel(`🛡️ Shield ${priceTag(500)}`).setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId('eco_shop_robticket').setLabel(`🎫 Rob Ticket ${priceTag(9_000)}`).setStyle(ButtonStyle.Success),
-    );
-
-    // Row 2: Titles tier-1 (5 titles)
+    // Row 1: Items + first 3 titles (5 full)
     const titleRow1 = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('eco_shop_master')       .setLabel(`Master 🎓 $5k`)       .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_phd')          .setLabel(`PhD 📚 $5.5k`)        .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_professor')    .setLabel(`Professor 🏛️ $6k`)    .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_director')     .setLabel(`Director 📋 $7k`)     .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_theboss')      .setLabel(`The Boss 🕴️ $8k`)     .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_safety')    .setLabel(`🛡️ Shield $500`)       .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('eco_shop_robticket') .setLabel(`🎫 Rob Ticket $9k`)    .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('eco_shop_master')    .setLabel(`Master 🎓 $5k`)        .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_phd')       .setLabel(`PhD 📚 $5.5k`)         .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_professor') .setLabel(`Professor 🏛️ $6k`)     .setStyle(ButtonStyle.Primary),
     );
 
-    // Row 3: Titles tier-2 + Custom + Close
+    // Row 2: Remaining titles (5 full)
     const titleRow2 = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('eco_shop_businesswomen').setLabel(`Business Women 💼 $9k`).setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId('eco_shop_ceo')          .setLabel(`CEO 🏢 $10k`)         .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId('eco_shop_custom')       .setLabel(`Custom Name ✍️ $20k`) .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_shop_${userId}`)  .setLabel('❌ Iska xir')         .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId('eco_shop_director')      .setLabel(`Director 📋 $7k`)      .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_theboss')       .setLabel(`The Boss 🕴️ $8k`)      .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_businesswomen') .setLabel(`BizWomen 💼 $9k`)      .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId('eco_shop_ceo')           .setLabel(`CEO 🏢 $10k`)          .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId('eco_shop_custom')        .setLabel(`Custom Name ✍️ $20k`)  .setStyle(ButtonStyle.Secondary),
+    );
+
+    // Row 3: Close
+    const itemRow = new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`close_shop_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 
     const titleLines = Object.entries(ECON_TITLES)
@@ -78,7 +78,7 @@ module.exports = async function econShopCmd(message) {
                 },
             )
             .setFooter({ text: 'Garaad Economy • ?etitle <key> si aad u dhigto • Custom Name = magacaaga kuu gaar ah' }),
-    ], components: [itemRow, titleRow1, titleRow2] });
+    ], components: [titleRow1, titleRow2, itemRow] });
 };
 
 module.exports.SHOP_ITEMS  = SHOP_ITEMS;

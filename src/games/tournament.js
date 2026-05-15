@@ -173,50 +173,26 @@ function buildAdminPanelEmbed(state) {
 function buildAdminPanelButtons(stage) {
     if (stage === 'initial') {
         return new ActionRowBuilder().addComponents(
-            new ButtonBuilder()
-                .setCustomId('tartan_panel_announce')
-                .setLabel('📢 Bilow Registration')
-                .setStyle(ButtonStyle.Primary),
-            new ButtonBuilder()
-                .setCustomId('tartan_panel_quick')
-                .setLabel('🚀 Bilow Toos')
-                .setStyle(ButtonStyle.Success),
-            new ButtonBuilder()
-                .setCustomId('tartan_panel_cancel')
-                .setLabel('🛑 Jooji')
-                .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId('tartan_panel_announce').setLabel('📢 Bilow Registration').setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId('tartan_panel_quick')   .setLabel('🚀 Bilow Toos')        .setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId('tartan_panel_cancel')  .setLabel('🛑 Jooji')             .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId('tartan_panel_dismiss') .setLabel('❌ Iska xir')          .setStyle(ButtonStyle.Secondary),
         );
     }
     if (stage === 'registration') {
         return new ActionRowBuilder().addComponents(
-            new ButtonBuilder()
-                .setCustomId('tartan_panel_open')
-                .setLabel('▶️ Fur Game')
-                .setStyle(ButtonStyle.Success),
-            new ButtonBuilder()
-                .setCustomId('tartan_panel_count')
-                .setLabel('👥 Tirada')
-                .setStyle(ButtonStyle.Secondary),
-            new ButtonBuilder()
-                .setCustomId('tartan_panel_cancel')
-                .setLabel('🛑 Jooji')
-                .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId('tartan_panel_open')    .setLabel('▶️ Fur Game')          .setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId('tartan_panel_count')   .setLabel('👥 Tirada')            .setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder().setCustomId('tartan_panel_cancel')  .setLabel('🛑 Jooji')             .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId('tartan_panel_dismiss') .setLabel('❌ Iska xir')          .setStyle(ButtonStyle.Secondary),
         );
     }
     // stage === 'join'
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`tartan_bilow_next_${GAME_CHANNEL_ID}`)
-            .setLabel('🚀 Bilow Wareeg 1aad')
-            .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder()
-            .setCustomId('tartan_panel_count')
-            .setLabel('👥 Players')
-            .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-            .setCustomId('tartan_panel_cancel')
-            .setLabel('🛑 Jooji')
-            .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`tartan_bilow_next_${GAME_CHANNEL_ID}`).setLabel('🚀 Bilow Wareeg 1aad').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId('tartan_panel_count')  .setLabel('👥 Players') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('tartan_panel_cancel') .setLabel('🛑 Jooji')   .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId('tartan_panel_dismiss').setLabel('❌ Iska xir').setStyle(ButtonStyle.Secondary),
     );
 }
 
@@ -338,6 +314,10 @@ async function handlePanelButton(interaction, action) {
             ],
             components: [],
         }).catch(() => {});
+    }
+
+    if (action === 'dismiss') {
+        return interaction.update({ components: [] }).catch(() => {});
     }
 }
 

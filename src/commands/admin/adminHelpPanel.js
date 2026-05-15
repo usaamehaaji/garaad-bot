@@ -57,14 +57,35 @@ function adminTabRow(uid, active) {
     );
 }
 
+// Combined rows for Aqoon tab (5 + 3)
+function adminAqoonMainRow(uid) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`admin_aqoon_${uid}`)       .setLabel('🧠 Aqoon')    .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_eco_${uid}`)         .setLabel('💰 Economy')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_aq_giveiq_${uid}`)   .setLabel('🧠 Give IQ')  .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`) .setLabel('🏆 Champion') .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)       .setLabel('💬 DM User')  .setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function adminAqoonFooterRow(uid) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`admin_aq_reset_${uid}`)    .setLabel('🗑️ Reset')    .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_aq_resetall_${uid}`) .setLabel('♻️ Reset All').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`)  .setLabel('❌ Iska xir') .setStyle(ButtonStyle.Danger),
+    );
+}
+
 module.exports = async function adminHelpPanel(message) {
     const uid = message.author.id;
     return message.reply({
         embeds:     [buildAdminAqoonEmbed()],
-        components: [adminTabRow(uid, 'aqoon'), adminAqoonActionsRow(uid)],
+        components: [adminAqoonMainRow(uid), adminAqoonFooterRow(uid)],
     });
 };
 
 module.exports.buildAdminAqoonEmbed   = buildAdminAqoonEmbed;
 module.exports.adminAqoonActionsRow   = adminAqoonActionsRow;
 module.exports.adminTabRow            = adminTabRow;
+module.exports.adminAqoonMainRow      = adminAqoonMainRow;
+module.exports.adminAqoonFooterRow    = adminAqoonFooterRow;

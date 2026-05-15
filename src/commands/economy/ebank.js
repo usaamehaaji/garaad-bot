@@ -210,6 +210,23 @@ function mainRow(userId) {
     );
 }
 
+// Combined 5-button row: nav tabs + bank actions (no empty space)
+function bankFullRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`eco_eb_khaznad_${userId}`)         .setLabel('🏛️ Khaznad')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eb_garaad_${userId}`)          .setLabel('🏦 Bank')      .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇️ Deposit')  .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆️ Withdraw') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eb_deen_${userId}`)            .setLabel('💳 Deen')      .setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function ebCloseRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+    );
+}
+
 function actionRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -289,7 +306,7 @@ module.exports = async function ebankCmd(message) {
     saveEcon();
     return message.reply({
         embeds:     [buildMainEmbed(d)],
-        components: [mainRow(userId)],
+        components: [bankFullRow(userId), ebCloseRow(userId)],
     });
 };
 
@@ -301,6 +318,8 @@ module.exports.buildBankEmbed     = buildBankEmbed;
 module.exports.buildKhaznadEmbed  = buildKhaznadEmbed;
 module.exports.buildDeenEmbed     = buildDeenEmbed;
 module.exports.mainRow            = mainRow;
+module.exports.bankFullRow        = bankFullRow;
+module.exports.ebCloseRow         = ebCloseRow;
 module.exports.actionRow          = actionRow;
 module.exports.deenRow            = deenRow;
 module.exports.backRow            = backRow;
