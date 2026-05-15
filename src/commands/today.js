@@ -5,7 +5,7 @@ const { econData, checkEconUser, saveEcon, trackEarning } = require('../economy/
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;
 
-const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold', diamond: '💎 Diamond', ring: '💍 Ring' };
+const ASSET_LABELS = { btc: '🪙 BTC', gold: '🥇 Gold', diamond: '💎 Diamond', ring: '💍 Ring' };
 
 function pickReward() {
     const roll = Math.random();

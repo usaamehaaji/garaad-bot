@@ -52,7 +52,7 @@ const WIN_MULTI  = 1.8;
 const LOSE_MULTI = 0.4;
 
 const ASSET_LABEL = {
-    btc:     '₿ BTC',
+    btc:     '🪙 BTC',
     gold:    '🥇 Gold',
     diamond: '💎 Diamond',
     ring:    '💍 Ring',

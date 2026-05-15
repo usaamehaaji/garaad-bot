@@ -40,7 +40,7 @@ function buildJeebEmbed(userId, username) {
         .setColor('#f39c12')
         .setDescription(
             `**💵 USD:** $${fmt(d.usd)}\n` +
-            `**₿ BTC:** ${d.btc} ≈ $${fmt(Math.round(d.btc * btcPrice))}\n` +
+            `**🪙 BTC:** ${d.btc} ≈ $${fmt(Math.round(d.btc * btcPrice))}\n` +
             `**🥇 Gold:** ${d.gold} ≈ $${fmt(Math.round(d.gold * goldPrice))}\n` +
             `**💎 Diamond:** ${d.diamond} ≈ $${fmt(Math.round(d.diamond * diaPrice))}\n` +
             `**💍 Ring:** ${d.ring} ≈ $${fmt(Math.round(d.ring * ringPrice))}\n\n` +
