@@ -85,15 +85,16 @@ module.exports = async function cashflipCmd(message, args) {
               `Faa'iidada: **+${asset === 'usd' ? '$' : ''}${fmt(Math.floor(amount * WIN_MULTI))} ${asset !== 'usd' ? asset.toUpperCase() : '💵'}**\n\n` +
               `Wadarta Cusub: **${balLabel}** (${balNote})\n\n` +
               `✨ Garaad Economy`
-            : `Nasiib daro **${username}**! Suuqa maanta kuma roonaan. 😔\n\n` +
-              `Natiijada: Guuldaro! ❌\n\n` +
-              `Khasaaraha: **-${asset === 'usd' ? '$' : ''}${fmt(amount)} ${asset !== 'usd' ? asset.toUpperCase() : '💵'}**\n\n` +
-              `Wadarta Cusub: **${balLabel}** (${balNote})\n\n` +
+            : `Fursada suuqa kuma tageerin, **${username}**. Mararka qaarkood dib u dhacu waa qayb ka mid ah guusha dambe! 🛡️\n\n` +
+              `Natiijada: Qasaaro 🛑\n\n` +
+              `Khasaaraha: **-${asset === 'usd' ? '$' : ''}${fmt(amount)} ${asset !== 'usd' ? asset.toUpperCase() : '💸'}**\n\n` +
+              `Wadarta Cusub: **${balLabel}** (Ha quusan, weli fursad baa kuu dhiman! 🔄)\n` +
+              `Isticmaal tijaabi fursad ka jiri karto \`?trade\`\n\n` +
               `✨ Garaad Economy`;
 
         return flipMsg.edit({ embeds: [
             new EmbedBuilder()
-                .setTitle(win ? '🏆 Natiijada Ecoflip: GUUL! 🏆' : '💸 Natiijada Ecoflip: GUULDARO! 💸')
+                .setTitle(win ? '🏆 Natiijada Ecoflip: GUUL! 🏆' : '❌ Natiijada Ecoflip: Guuldarro ❌')
                 .setColor(win ? '#2ecc71' : '#e74c3c')
                 .setDescription(desc),
         ], components: [closeRow(userId)] });
