@@ -197,6 +197,23 @@ function usdAssetRow(userId) {
     );
 }
 
+// Main row: assets + controls all in one line (max 5)
+function mainRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`pred_a_btc_${userId}`)    .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)   .setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_refresh_${userId}`)  .setLabel('🔄 Refresh') .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)    .setLabel('🛒 Buy')     .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`trade_sell_${userId}`)    .setLabel('💰 Sell')    .setStyle(ButtonStyle.Secondary),
+    );
+}
+
+function tradeCloseRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+    );
+}
+
 function controlRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`pred_refresh_${userId}`).setLabel('🔄 Refresh') .setStyle(ButtonStyle.Primary),
@@ -290,7 +307,7 @@ module.exports = async function tradeCmd(message) {
 
     return message.reply({
         embeds:     [buildMarketEmbed(d)],
-        components: [assetRow(userId), controlRow(userId)],
+        components: [mainRow(userId), tradeCloseRow(userId)],
     });
 };
 
@@ -308,6 +325,8 @@ module.exports.buildShopEmbed      = buildShopEmbed;
 module.exports.buildSellEmbed      = buildSellEmbed;
 module.exports.assetRow            = assetRow;
 module.exports.usdAssetRow         = usdAssetRow;
+module.exports.mainRow             = mainRow;
+module.exports.tradeCloseRow       = tradeCloseRow;
 module.exports.sellRow             = sellRow;
 module.exports.sellBackRow         = sellBackRow;
 module.exports.controlRow          = controlRow;

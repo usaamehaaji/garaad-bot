@@ -1141,7 +1141,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { getActivePrediction }            = require('../economy/prediction');
-            const { buildMarketEmbed, buildActiveEmbed, assetRow, controlRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, buildActiveEmbed, mainRow, tradeCloseRow, controlRow } = require('../commands/economy/trade');
             checkEconUser(ownerId);
             const active = getActivePrediction(ownerId);
             if (active) {
@@ -1149,7 +1149,7 @@ module.exports = function setupInteractionHandler(client) {
             }
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [assetRow(ownerId), controlRow(ownerId)],
+                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
             });
         }
 
@@ -1160,12 +1160,12 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { clearPending }                   = require('../economy/prediction');
-            const { buildMarketEmbed, assetRow, controlRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
             checkEconUser(ownerId);
             clearPending(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [assetRow(ownerId), controlRow(ownerId)],
+                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
             });
         }
 
@@ -1176,12 +1176,12 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { clearPending }                   = require('../economy/prediction');
-            const { buildMarketEmbed, assetRow, controlRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
             checkEconUser(ownerId);
             clearPending(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [assetRow(ownerId), controlRow(ownerId)],
+                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
             });
         }
 
@@ -1624,11 +1624,11 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             }
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildMarketEmbed, assetRow, controlRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [assetRow(ownerId), controlRow(ownerId)],
+                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
             });
         }
 
@@ -1639,11 +1639,11 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             }
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildMarketEmbed, assetRow, controlRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [assetRow(ownerId), controlRow(ownerId)],
+                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
             });
         }
 
