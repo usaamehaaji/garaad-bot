@@ -11,6 +11,7 @@ function getEconStats() {
     const users = Object.entries(econData).filter(([k]) => !k.startsWith('__'));
     const t     = getTreasury();
 
+    let totalUsd = 0, totalGaraad = 0, totalBtc = 0, totalGold = 0;
     let activeLoans = 0, totalOwed = 0, overdueLoans = 0;
 
     for (const [, d] of users) {
@@ -27,6 +28,7 @@ function getEconStats() {
 
     const btcPrice     = getPrice('btc')     || 0;
     const goldPrice    = getPrice('gold')    || 0;
+    const assetsUsd    = Math.floor(totalBtc * btcPrice + totalGold * goldPrice);
 
     const totalWealth = totalUsd + totalGaraad + assetsUsd;
 
@@ -65,7 +67,7 @@ function buildAllPlayersEmbed(page = 0) {
         .filter(([k]) => !k.startsWith('__'))
         .map(([uid, d]) => {
             const assetsUsd = Math.floor(
-                (d.btc || 0) * btcPrice + (d.gold || 0) * goldPrice +
+                (d.btc || 0) * btcPrice + (d.gold || 0) * goldPrice
             );
             const net = (d.usd || 0) + (d.banks?.garaad || 0) + assetsUsd;
             return { uid, usd: d.usd || 0, bank: d.banks?.garaad || 0, assetsUsd, net, loan: d.loan?.owed || 0 };
