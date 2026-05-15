@@ -340,7 +340,7 @@ async function cmdRegister(message) {
 async function sendRegistrationCode(user, replyTarget) {
     const uid  = user.id;
     const code = genCode();
-    tournamentRegistry.set(uid, { code, at: Date.now() });
+    tournamentRegistry.set(uid, { code, at: Date.now(), username: user.username });
     try {
         await user.send({
             embeds: [new EmbedBuilder()

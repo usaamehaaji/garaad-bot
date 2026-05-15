@@ -2414,19 +2414,20 @@ module.exports = function setupInteractionHandler(client) {
 
         // ── Tournament Count button ──
         if (id === 'tournament_count_admin') {
-            const count = tournamentRegistry ? tournamentRegistry.size : 0;
+            const count = tournamentRegistry?.size || 0;
             if (isAdmin(interaction.user.id)) {
-                const list = [...(tournamentRegistry?.keys() || [])].slice(0, 25).map((uid, i) => `${i + 1}. <@${uid}>`).join('\n');
+                const list = [...(tournamentRegistry?.entries() || [])].slice(0, 25)
+                    .map(([uid, { username }], i) => `${i + 1}. **${username || uid}** (\`${uid}\`)`)
+                    .join('\n');
                 return interaction.reply({
                     content: `👥 **Is-diiwaangashay:** ${count} qof\n\n${list || '_Cidna weli ma diiwaangalin_'}`,
                     flags: MessageFlags.Ephemeral,
                 });
-            } else {
-                return interaction.reply({
-                    content: `👥 **Is-diiwaangashay:** ${count} qof`,
-                    flags: MessageFlags.Ephemeral,
-                });
             }
+            return interaction.reply({
+                content: `👥 **Is-diiwaangashay:** ${count} qof`,
+                flags: MessageFlags.Ephemeral,
+            });
         }
 
         // ── Tournament Register button ──
@@ -2473,7 +2474,9 @@ module.exports = function setupInteractionHandler(client) {
         // ── Tartan: Admin DM panel — Tirada ──
         if (id.startsWith('tartan_reg_count_')) {
             const count = tournamentRegistry?.size || 0;
-            const list  = [...(tournamentRegistry?.keys() || [])].slice(0, 25).map((uid, i) => `${i + 1}. <@${uid}>`).join('\n');
+            const list  = [...(tournamentRegistry?.entries() || [])].slice(0, 25)
+                .map(([uid, { username }], i) => `${i + 1}. **${username || uid}** (\`${uid}\`)`)
+                .join('\n');
             return interaction.reply({
                 content: `👥 **Diiwaangeliyay:** ${count} qof\n\n${list || '_Cidna weli ma diiwaangalin_'}`,
                 flags: MessageFlags.Ephemeral,
