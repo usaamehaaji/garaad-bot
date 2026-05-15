@@ -11,9 +11,10 @@ const VALID_ASSETS = Object.keys(ASSET_LABELS);
 
 function assetRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_cf_usd_${userId}`).setLabel('💵 USD') .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_cf_btc_${userId}`).setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_cf_gold_${userId}`).setLabel('🥇 Gold').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_cf_usd_${userId}`) .setLabel('💵 USD')     .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_cf_btc_${userId}`) .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_cf_gold_${userId}`).setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_cf_${userId}`)   .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
 
@@ -113,7 +114,7 @@ module.exports = async function cashflipCmd(message, args) {
                 `🏆 **Win:** Stake × 1.9 | 💀 **Lose:** Stake dhan`
             )
             .setFooter({ text: '50/50 chance • Garaad Economy' }),
-    ], components: [assetRow(userId), closeRow(userId)] });
+    ], components: [assetRow(userId)] });
 };
 
 module.exports.ASSET_LABELS = ASSET_LABELS;

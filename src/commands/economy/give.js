@@ -5,9 +5,10 @@ const ASSET_LABELS = { usd: '💵 USD', btc: 'BTC', gold: '🥇 Gold' };
 
 function assetRow(targetId, userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_gv_usd_${targetId}_${userId}`).setLabel('💵 USD').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_gv_btc_${targetId}_${userId}`).setLabel('BTC').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_gv_gold_${targetId}_${userId}`).setLabel('🥇 Gold').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_gv_usd_${targetId}_${userId}`) .setLabel('💵 USD')     .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_gv_btc_${targetId}_${userId}`) .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_gv_gold_${targetId}_${userId}`).setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_give_${userId}`)             .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
 
@@ -52,7 +53,7 @@ module.exports = async function giveCmd(message) {
                 `🥇 Gold: **${d.gold}**`
             )
             .setFooter({ text: 'Garaad Economy' }),
-    ], components: [assetRow(target.id, userId), closeRow(userId)] });
+    ], components: [assetRow(target.id, userId)] });
 };
 
 module.exports.ASSET_LABELS = ASSET_LABELS;
