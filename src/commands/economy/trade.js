@@ -185,7 +185,7 @@ function buildSellEmbed(d) {
 
 function assetRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`pred_a_btc_${userId}`)    .setLabel('🪙 BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
@@ -194,7 +194,7 @@ function assetRow(userId) {
 
 function usdAssetRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`pred_ua_btc_${userId}`)    .setLabel('🪙 BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_ua_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_ua_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_ua_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_ua_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
@@ -212,7 +212,7 @@ function controlRow(userId) {
 
 function shopRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`trade_buy_btc_${userId}`)    .setLabel('🪙 BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_buy_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_buy_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_buy_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_buy_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
@@ -228,7 +228,7 @@ function shopBackRow(userId) {
 
 function sellRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`trade_sellasset_btc_${userId}`)    .setLabel('🪙 BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`trade_sellasset_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_sellasset_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_sellasset_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_sellasset_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),

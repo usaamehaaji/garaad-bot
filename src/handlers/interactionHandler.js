@@ -1752,7 +1752,7 @@ module.exports = function setupInteractionHandler(client) {
                         `${isBuy ? buyDesc : `💵 **${amount} ${asset.toUpperCase()}** iibiyay — **$${totalCost.toLocaleString()}**`}\n\n` +
                         `**📊 Jeebkaaga Hadda:**\n` +
                         `💵 USD: **$${d.usd.toLocaleString()}**\n` +
-                        `🪙 BTC: **${d.btc}**\n` +
+                        `BTC: **${d.btc}**\n` +
                         `🥇 Gold: **${d.gold}**\n` +
                         `💎 Diamond: **${d.diamond}**\n` +
                         `💍 Ring: **${d.ring}**\n` +

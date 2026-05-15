@@ -1,12 +1,12 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser } = require('../../economy/econStore');
 
-const ASSET_LABELS = { usd: '💵 USD', btc: '🪙 BTC', gold: '🥇 Gold', diamond: '💎 Diamond', ring: '💍 Ring' };
+const ASSET_LABELS = { usd: '💵 USD', btc: 'BTC', gold: '🥇 Gold', diamond: '💎 Diamond', ring: '💍 Ring' };
 
 function assetRow(targetId, userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`eco_gv_usd_${targetId}_${userId}`).setLabel('💵 USD').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_gv_btc_${targetId}_${userId}`).setLabel('🪙 BTC').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_gv_btc_${targetId}_${userId}`).setLabel('BTC').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`eco_gv_gold_${targetId}_${userId}`).setLabel('🥇 Gold').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`eco_gv_diamond_${targetId}_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`eco_gv_ring_${targetId}_${userId}`).setLabel('💍 Ring').setStyle(ButtonStyle.Secondary),
@@ -50,7 +50,7 @@ module.exports = async function giveCmd(message) {
             .setDescription(
                 `**Asset dooro** aad u diri:\n\n` +
                 `💵 USD: **$${d.usd.toLocaleString()}**\n` +
-                `🪙 BTC: **${d.btc}**\n` +
+                `BTC: **${d.btc}**\n` +
                 `🥇 Gold: **${d.gold}**\n` +
                 `💎 Diamond: **${d.diamond}**\n` +
                 `💍 Ring: **${d.ring}**`
