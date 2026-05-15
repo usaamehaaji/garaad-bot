@@ -13,6 +13,7 @@ const { isAdmin }           = require('../utils/admin');
 const { QUIZ_MIN_PLAYERS, QUIZ_MAX_PLAYERS, DUEL_STAKE_IQ, TOURNAMENT_MIN_PLAYERS, TOURNAMENT_R1_QUESTIONS, TOURNAMENT_R2_QUESTIONS, TOURNAMENT_FINAL_QUESTIONS } = require('../config');
 const { exchangeQuizPoints } = require('../utils/quizPoints');
 const { buildEduEmbed, buildEcoEmbed, helpRow } = require('../commands/help');
+const { handleCoinflipPick } = require('../commands/economy/coinflip');
 
 function genCode() {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -2339,6 +2340,9 @@ module.exports = function setupInteractionHandler(client) {
                 components: [],
             });
         }
+
+        // ── Coin Flip pick ──
+        if (id.startsWith('cf_pick_')) return handleCoinflipPick(interaction);
 
         // ── Solo Answer ──
         if (id.startsWith('q_')) return handleSoloAnswer(interaction);
