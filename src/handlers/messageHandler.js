@@ -31,7 +31,6 @@ const teamDuel        = require('../games/teamDuel');
 const jeebCmd         = require('../commands/economy/jeeb');
 const tradeCmd        = require('../commands/economy/trade');
 const cashflipCmd     = require('../commands/economy/cashflip');
-const coinflipCmd     = require('../commands/economy/coinflip');
 const econExchangeCmd = require('../commands/economy/econExchange');
 const giveCmd         = require('../commands/economy/give');
 const robCmd          = require('../commands/economy/rob');
@@ -110,10 +109,6 @@ module.exports = function setupMessageHandler(client) {
             case 'ecoflip':
             case 'ef':
                 return cashflipCmd(message, args);
-
-            case 'cf':
-            case 'coinflip':
-                return coinflipCmd(message, args);
 
             case 'give':
                 return giveCmd(message, args);
