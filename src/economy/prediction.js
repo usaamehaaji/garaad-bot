@@ -52,10 +52,8 @@ const WIN_MULTI  = 1.8;
 const LOSE_MULTI = 0.4;
 
 const ASSET_LABEL = {
-    btc:     'BTC',
-    gold:    '🥇 Gold',
-    diamond: '💎 Diamond',
-    ring:    '💍 Ring',
+    btc:  'BTC',
+    gold: '🥇 Gold',
 };
 
 // ── Pending state helpers ──────────────────────────────────────────

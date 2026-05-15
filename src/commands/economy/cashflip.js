@@ -6,16 +6,14 @@ const { fmt } = require('../../utils/helpers');
 const WIN_RATE   = 0.50;
 const WIN_MULTI  = 0.90; // net win = 90% of stake (house keeps 10%)
 
-const ASSET_LABELS = { usd: '💵 USD', btc: 'BTC', gold: '🥇 Gold', diamond: '💎 Diamond', ring: '💍 Ring' };
+const ASSET_LABELS = { usd: '💵 USD', btc: 'BTC', gold: '🥇 Gold' };
 const VALID_ASSETS = Object.keys(ASSET_LABELS);
 
 function assetRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_cf_usd_${userId}`)    .setLabel('💵 USD')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_cf_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_cf_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_cf_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_cf_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_cf_usd_${userId}`).setLabel('💵 USD') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_cf_btc_${userId}`).setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_cf_gold_${userId}`).setLabel('🥇 Gold').setStyle(ButtonStyle.Secondary),
     );
 }
 
@@ -93,9 +91,7 @@ module.exports = async function cashflipCmd(message, args) {
                 `**Asset dooro** ama qor toos:\n\`?ecoflip usd 100\`\n\n` +
                 `💵 USD: **$${fmt(d.usd)}**\n` +
                 `BTC: **${d.btc}**\n` +
-                `🥇 Gold: **${d.gold}**\n` +
-                `💎 Diamond: **${d.diamond}**\n` +
-                `💍 Ring: **${d.ring}**\n\n` +
+                `🥇 Gold: **${d.gold}**\n\n` +
                 `🏆 **Win:** Stake × 1.9 | 💀 **Lose:** Stake dhan`
             )
             .setFooter({ text: '50/50 chance • Garaad Economy' }),

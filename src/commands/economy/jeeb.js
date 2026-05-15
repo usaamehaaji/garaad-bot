@@ -10,14 +10,10 @@ function buildJeebEmbed(userId, username) {
 
     const btcPrice  = getPrice('btc');
     const goldPrice = getPrice('gold');
-    const diaPrice  = getPrice('diamond');
-    const ringPrice = getPrice('ring');
 
     const netWorth = d.usd
-        + d.btc     * btcPrice
-        + d.gold    * goldPrice
-        + d.diamond * diaPrice
-        + d.ring    * ringPrice
+        + d.btc  * btcPrice
+        + d.gold * goldPrice
         + d.banks.garaad;
 
     const xirfadLabel = (() => {
@@ -41,9 +37,7 @@ function buildJeebEmbed(userId, username) {
         .setDescription(
             `**💵 USD:** $${fmt(d.usd)}\n` +
             `**BTC:** ${d.btc} ≈ $${fmt(Math.round(d.btc * btcPrice))}\n` +
-            `**🥇 Gold:** ${d.gold} ≈ $${fmt(Math.round(d.gold * goldPrice))}\n` +
-            `**💎 Diamond:** ${d.diamond} ≈ $${fmt(Math.round(d.diamond * diaPrice))}\n` +
-            `**💍 Ring:** ${d.ring} ≈ $${fmt(Math.round(d.ring * ringPrice))}\n\n` +
+            `**🥇 Gold:** ${d.gold} ≈ $${fmt(Math.round(d.gold * goldPrice))}\n\n` +
             `**🏦 Garaad Bank:** $${fmt(d.banks.garaad)}\n` +
             `**📊 Net Worth: ~$${fmt(Math.round(netWorth))} USD**\n` +
             `**📈 Maanta dhakhli: +$${fmt(todayEarned)}**` +

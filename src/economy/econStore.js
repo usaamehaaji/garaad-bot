@@ -10,8 +10,6 @@ function defaultUser() {
         usd: 1000,
         btc: 0,
         gold: 0,
-        diamond: 0,
-        ring: 0,
         banks: { mandeeq: 0, garaad: 0 },
         lastDaily: 0,
         lastInterest: 0,
@@ -38,8 +36,6 @@ function checkEconUser(userId) {
         d.usd             ??= 1000;
         d.btc             ??= 0;
         d.gold            ??= 0;
-        d.diamond         ??= 0;
-        d.ring            ??= 0;
         d.banks           ??= { mandeeq: 0, garaad: 0 };
         d.banks.mandeeq   ??= 0;
         d.banks.garaad    ??= 0;

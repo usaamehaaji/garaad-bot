@@ -20,7 +20,6 @@ Every single week, this leaderboard resets the stage — and every single week, 
 
 Look at the names at the top of this list. They did not get there by accident. They showed up. They played the games. They made the smart trades. They invested in their knowledge. They did not wait for the perfect moment — they built momentum through action, one quiz question at a time, one smart economy decision at a time. That is the Garaad way.
 
-**To the leaders at the top:** Do not get comfortable. The fire behind you is real. There are players in this community who are studying, strategizing, and preparing to take your position. The gap between first and second place has been closed overnight before, and it will happen again. Stay sharp. Stay hungry. The crown is heavy — carry it with purpose.
 
 **To everyone in the middle of the pack:** This is the most dangerous position in any competition — dangerous not because you are failing, but because it is easy to tell yourself that you are "doing okay" and stop pushing. Do not settle. The difference between the middle and the top is rarely talent. It is the decision to take one more step when your body says stop. Make that decision this week. Grind harder on the quizzes. Be smarter with your economy. The top ten is closer than you think.
 
@@ -65,8 +64,6 @@ async function buildEcoLines(client) {
     const prices = {
         btc:     getPrice('btc')     || 0,
         gold:    getPrice('gold')    || 0,
-        diamond: getPrice('diamond') || 0,
-        ring:    getPrice('ring')    || 0,
     };
 
     const entries = Object.entries(econData)
@@ -75,8 +72,6 @@ async function buildEcoLines(client) {
             const net = (d.usd || 0)
                 + (d.btc     || 0) * prices.btc
                 + (d.gold    || 0) * prices.gold
-                + (d.diamond || 0) * prices.diamond
-                + (d.ring    || 0) * prices.ring
                 + (d.banks?.garaad || 0);
             return { uid, net: Math.round(net) };
         })
@@ -91,7 +86,6 @@ async function buildEcoLines(client) {
             name = user.username;
         } catch {}
         const medal = MEDALS[i] || `**${i + 1}.**`;
-        return `${medal} **${name}** — $${net.toLocaleString()}`;
     }));
 
     return lines;
@@ -116,7 +110,6 @@ async function buildIqLines(client) {
         const titlePart = (title && title !== 'Bilow') ? ` [${title}]` : '';
         const lvl   = getLevel(d.iq || 0);
         const medal = MEDALS[i] || `**${i + 1}.**`;
-        return `${medal} **${name}**${titlePart} — 🧠 ${(d.iq || 0).toLocaleString()} IQ · Lvl ${lvl}`;
     }));
 
     return lines;
@@ -138,7 +131,6 @@ async function sendLeaderboard(client) {
         ]);
 
         const now = new Date(Date.now() + 3 * 60 * 60 * 1000); // EAT
-        const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 
         const ecoEmbed = new EmbedBuilder()
             .setTitle('💰 TOP 10 — Ugu Taajirta Isbuucaan')

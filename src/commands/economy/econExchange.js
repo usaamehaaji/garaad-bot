@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 const { getPrice }                          = require('../../economy/market');
 
-const VALID_ASSETS = ['usd', 'btc', 'gold', 'diamond', 'ring'];
+const VALID_ASSETS = ['usd', 'btc', 'gold'];
 
 module.exports = async function econExchangeCmd(message, args) {
     const userId = message.author.id;

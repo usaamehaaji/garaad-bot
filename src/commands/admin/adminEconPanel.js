@@ -11,7 +11,6 @@ function getEconStats() {
     const users = Object.entries(econData).filter(([k]) => !k.startsWith('__'));
     const t     = getTreasury();
 
-    let totalUsd = 0, totalGaraad = 0, totalBtc = 0, totalGold = 0, totalDiamond = 0, totalRing = 0;
     let activeLoans = 0, totalOwed = 0, overdueLoans = 0;
 
     for (const [, d] of users) {
@@ -19,8 +18,6 @@ function getEconStats() {
         totalGaraad  += d.banks?.garaad  || 0;
         totalBtc     += d.btc     || 0;
         totalGold    += d.gold    || 0;
-        totalDiamond += d.diamond || 0;
-        totalRing    += d.ring    || 0;
         if (d.loan && d.loan.owed > 0) {
             activeLoans++;
             totalOwed += d.loan.owed;
@@ -30,10 +27,7 @@ function getEconStats() {
 
     const btcPrice     = getPrice('btc')     || 0;
     const goldPrice    = getPrice('gold')    || 0;
-    const diamondPrice = getPrice('diamond') || 0;
-    const ringPrice    = getPrice('ring')    || 0;
 
-    const assetsUsd = Math.floor(totalBtc * btcPrice + totalGold * goldPrice + totalDiamond * diamondPrice + totalRing * ringPrice);
     const totalWealth = totalUsd + totalGaraad + assetsUsd;
 
     return { users: users.length, totalUsd, totalGaraad, assetsUsd, totalWealth, t, activeLoans, totalOwed, overdueLoans };
@@ -66,15 +60,12 @@ function buildAllPlayersEmbed(page = 0) {
     const PER_PAGE = 10;
     const btcPrice     = getPrice('btc')     || 0;
     const goldPrice    = getPrice('gold')    || 0;
-    const diamondPrice = getPrice('diamond') || 0;
-    const ringPrice    = getPrice('ring')    || 0;
 
     const players = Object.entries(econData)
         .filter(([k]) => !k.startsWith('__'))
         .map(([uid, d]) => {
             const assetsUsd = Math.floor(
                 (d.btc || 0) * btcPrice + (d.gold || 0) * goldPrice +
-                (d.diamond || 0) * diamondPrice + (d.ring || 0) * ringPrice
             );
             const net = (d.usd || 0) + (d.banks?.garaad || 0) + assetsUsd;
             return { uid, usd: d.usd || 0, bank: d.banks?.garaad || 0, assetsUsd, net, loan: d.loan?.owed || 0 };
@@ -141,22 +132,18 @@ module.exports = async function adminEconCmd(message, args) {
 
     // ?admin econ give @user <asset> [amount]
     if (sub === 'give') {
-        if (!target) return message.reply('⚠️ `?admin econ give @user <usd|garaad|btc|gold|diamond|ring> [xad]`');
         const rest   = args.filter(a => !/<@!?\d+>/.test(a));
         const asset  = (rest[1] || '').toLowerCase();
         const amount = parseFloat(rest[2]);
         if (!asset || isNaN(amount) || amount <= 0)
-            return message.reply('⚠️ `?admin econ give @user <usd|garaad|btc|gold|diamond|ring> [xad]`');
         checkEconUser(target.id);
         const d = econData[target.id];
         if (asset === 'usd') {
             d.usd += amount;
         } else if (asset === 'garaad') {
             d.banks.garaad = (d.banks.garaad || 0) + amount;
-        } else if (['btc', 'gold', 'diamond', 'ring'].includes(asset)) {
             d[asset] = (d[asset] || 0) + amount;
         } else {
-            return message.reply('⚠️ Asset: `usd`, `garaad`, `btc`, `gold`, `diamond`, `ring`');
         }
         saveEcon();
         const val = asset === 'garaad' ? d.banks.garaad : d[asset];
@@ -234,7 +221,6 @@ module.exports = async function adminEconCmd(message, args) {
         if (!target) return message.reply('⚠️ `?admin econ reset @user`');
         checkEconUser(target.id);
         const d = econData[target.id];
-        d.usd = 0; d.btc = 0; d.gold = 0; d.diamond = 0; d.ring = 0;
         d.banks = { mandeeq: 0, garaad: 0 };
         d.inventory = { safety: 0, robticket: 0 };
         d.loan = null; d.lastLoanTaken = 0; d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;

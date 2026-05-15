@@ -9,7 +9,7 @@ const { getMarketSnapshot, getPrice } = require('../../economy/market');
 const { getActivePrediction, WIN_MULTI, LOSE_MULTI, ASSET_LABEL } = require('../../economy/prediction');
 const { fmt } = require('../../utils/helpers');
 
-const ASSETS = ['btc', 'gold', 'diamond', 'ring'];
+const ASSETS = ['btc', 'gold'];
 
 // ── Embed: Market overview ─────────────────────────────────────────
 
@@ -187,8 +187,6 @@ function assetRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`pred_a_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_a_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_a_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
     );
 }
 
@@ -196,8 +194,6 @@ function usdAssetRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`pred_ua_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_ua_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_ua_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_ua_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
     );
 }
 
@@ -214,8 +210,6 @@ function shopRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`trade_buy_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_buy_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`trade_buy_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`trade_buy_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
     );
 }
 
@@ -230,8 +224,6 @@ function sellRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`trade_sellasset_btc_${userId}`)    .setLabel('BTC')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_sellasset_gold_${userId}`)   .setLabel('🥇 Gold')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`trade_sellasset_diamond_${userId}`).setLabel('💎 Diamond').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`trade_sellasset_ring_${userId}`)   .setLabel('💍 Ring')  .setStyle(ButtonStyle.Secondary),
     );
 }
 

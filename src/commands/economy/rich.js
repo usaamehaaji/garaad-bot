@@ -4,18 +4,14 @@ const { getPrice }    = require('../../economy/market');
 
 module.exports = async function richCmd(message) {
     const prices = {
-        btc:     getPrice('btc'),
-        gold:    getPrice('gold'),
-        diamond: getPrice('diamond'),
-        ring:    getPrice('ring'),
+        btc:  getPrice('btc'),
+        gold: getPrice('gold'),
     };
 
     const entries = Object.entries(econData).map(([uid, d]) => {
         const net = (d.usd || 0)
-            + (d.btc     || 0) * prices.btc
-            + (d.gold    || 0) * prices.gold
-            + (d.diamond || 0) * prices.diamond
-            + (d.ring    || 0) * prices.ring
+            + (d.btc  || 0) * prices.btc
+            + (d.gold || 0) * prices.gold
             + (d.banks?.mandeeq || 0)
             + (d.banks?.garaad  || 0);
         return { uid, net };

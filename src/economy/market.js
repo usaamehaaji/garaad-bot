@@ -8,23 +8,19 @@ const HISTORY_MAX = 10;              // Taariikhda qiimaha (10 daqiiqo)
 const BASE_PRICES = {
     btc:     30000,
     gold:    1800,
-    diamond: 5000,
-    ring:    200,
 };
 
 const VOLATILITY = {
     btc:     0.04,
     gold:    0.025,
-    diamond: 0.03,
-    ring:    0.035,
 };
 
-const trends = { btc: 0, gold: 0, diamond: 0, ring: 0 };
+const trends = { btc: 0, gold: 0 };
 
 let marketData = {
     prices:     { ...BASE_PRICES },
     previous:   { ...BASE_PRICES },
-    history:    { btc: [], gold: [], diamond: [], ring: [] },
+    history:    { btc: [], gold: [] },
     lastUpdate: 0,
 };
 
@@ -35,7 +31,7 @@ try {
             marketData = {
                 prices:     loaded.prices,
                 previous:   loaded.previous   || { ...BASE_PRICES },
-                history:    loaded.history     || { btc: [], gold: [], diamond: [], ring: [] },
+                history:    loaded.history     || { btc: [], gold: [] },
                 lastUpdate: loaded.lastUpdate  || 0,
             };
         }

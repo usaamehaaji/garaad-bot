@@ -431,7 +431,6 @@ module.exports = function setupInteractionHandler(client) {
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 checkEconUser(targetId);
                 const d = eData[targetId];
-                d.usd = 0; d.btc = 0; d.gold = 0; d.diamond = 0; d.ring = 0;
                 d.banks = { mandeeq: 0, garaad: 0 };
                 d.inventory = { safety: 0, robticket: 0 };
                 d.loan = null; d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
@@ -509,7 +508,6 @@ module.exports = function setupInteractionHandler(client) {
                 const users = Object.keys(eData).filter(k => !k.startsWith('__'));
                 for (const uid of users) {
                     const d = eData[uid];
-                    d.usd = 5000; d.btc = 0; d.gold = 0; d.diamond = 0; d.ring = 0;
                     d.banks = { mandeeq: 0, garaad: 0 };
                     d.inventory = { safety: 0, robticket: 0 };
                     d.loan = null; d.lastLoanTaken = 0; d.lastWork = 0; d.lastDaily = 0; d.lastInterest = 0;
@@ -1722,8 +1720,8 @@ module.exports = function setupInteractionHandler(client) {
                 d.usd    += totalCost;
             }
             saveEcon();
-            const btcP = gp('btc'), goldP = gp('gold'), diaP = gp('diamond'), ringP = gp('ring');
-            const net  = d.usd + d.btc * btcP + d.gold * goldP + d.diamond * diaP + d.ring * ringP
+            const btcP = gp('btc'), goldP = gp('gold');
+            const net  = d.usd + d.btc * btcP + d.gold * goldP
                        + d.banks.mandeeq + d.banks.garaad;
 
             const resultRow = new ActionRowBuilder().addComponents(
@@ -1754,8 +1752,6 @@ module.exports = function setupInteractionHandler(client) {
                         `💵 USD: **$${d.usd.toLocaleString()}**\n` +
                         `BTC: **${d.btc}**\n` +
                         `🥇 Gold: **${d.gold}**\n` +
-                        `💎 Diamond: **${d.diamond}**\n` +
-                        `💍 Ring: **${d.ring}**\n` +
                         `🏦 Banks: **$${(d.banks.mandeeq + d.banks.garaad).toLocaleString()}**\n\n` +
                         `📊 **Net Worth: ~$${Math.round(net).toLocaleString()}**`
                     )
