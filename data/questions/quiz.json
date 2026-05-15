@@ -5343,5 +5343,4655 @@
       "220"
     ],
     "correct": "211"
+  },
+  {
+    "question": "Boqortoyada Ajuuraan goorma la aasaasay?",
+    "options": [
+      "13aad qarnigii (1200s)",
+      "10aad qarnigii (900s)",
+      "15aad qarnigii (1400s)",
+      "7aad qarnigii (600s)"
+    ],
+    "correct": "13aad qarnigii (1200s)"
+  },
+  {
+    "question": "Boqortoyada Ajuuraan goorma burburtay?",
+    "options": [
+      "17aad qarnigii (1600s)",
+      "15aad qarnigii (1400s)",
+      "18aad qarnigii (1700s)",
+      "20aad qarnigii (1900s)"
+    ],
+    "correct": "17aad qarnigii (1600s)"
+  },
+  {
+    "question": "Boqortoyada Ajuuraan maxay ku caan tahay?",
+    "options": [
+      "Biyo kaydiyada (cisterns) iyo dhismaha biyaha",
+      "Dagaallada badan",
+      "Ganacsiga oo kaliya",
+      "Waxbarashada"
+    ],
+    "correct": "Biyo kaydiyada (cisterns) iyo dhismaha biyaha"
+  },
+  {
+    "question": "Boqortoyada Ajuuraan cidda ay la dagaallamayd?",
+    "options": [
+      "Bortuqiiska (Portugal)",
+      "Ingiriiska (Britain)",
+      "Faransiiska (France)",
+      "Talyaaniga (Italy)"
+    ],
+    "correct": "Bortuqiiska (Portugal)"
+  },
+  {
+    "question": "Boqortoyada Ajuuraan webiga ugu muhiimsan?",
+    "options": [
+      "Jubba iyo Shabeelle",
+      "Nile iyo Tigris",
+      "Congo iyo Niger",
+      "Zambezi iyo Limpopo"
+    ],
+    "correct": "Jubba iyo Shabeelle"
+  },
+  {
+    "question": "Ajuuraan ganacsi ahaan waxay xukumtay?",
+    "options": [
+      "Badda Hindiya (Indian Ocean)",
+      "Wadada Xariirka (Silk Road)",
+      "Badda Atlantiga",
+      "Badda Dhexe"
+    ],
+    "correct": "Badda Hindiya (Indian Ocean)"
+  },
+  {
+    "question": "Boqortoyada Ajuuraan ku taallaa qayb kee Soomaaliya?",
+    "options": [
+      "Konfurta iyo Bartamaha",
+      "Waqooyi",
+      "Bariga kaliya",
+      "Dhexe oo kaliya"
+    ],
+    "correct": "Konfurta iyo Bartamaha"
+  },
+  {
+    "question": "Qarniga 16aad waxaa Ajuuraan weerar ku heshay cidda?",
+    "options": [
+      "Oromo (Galla)",
+      "Masar (Egypt)",
+      "Ciraaqa (Iraq)",
+      "Hindiya"
+    ],
+    "correct": "Oromo (Galla)"
+  },
+  {
+    "question": "Ka dib Ajuuraan boqortoyada soo baxay waxay ahayd?",
+    "options": [
+      "Geel-Jecle iyo Geledi",
+      "Wadaad iyo Ifat",
+      "Adal iyo Warsangeli",
+      "Harar iyo Zeila"
+    ],
+    "correct": "Geel-Jecle iyo Geledi"
+  },
+  {
+    "question": "Ajuuraan taariikhda Soomaalida waxay ka mid tahay boqortoyada?",
+    "options": [
+      "Ugu awood badnaa qarniyadii dhexe",
+      "Ugu gaaban",
+      "Ugu cusub",
+      "Ugu hore ee qarniga 20aad"
+    ],
+    "correct": "Ugu awood badnaa qarniyadii dhexe"
+  },
+  {
+    "question": "Ajuuraan sidee ayay u xukumaysay deegaankeedii?",
+    "options": [
+      "Maamul dhexe oo adag",
+      "Qabiil kasta oo madax ah",
+      "Askari oo kaliya",
+      "Culimo oo kaliya"
+    ],
+    "correct": "Maamul dhexe oo adag"
+  },
+  {
+    "question": "Ajuuraan dhismayaasheeda marag ka ah maxay sheegaan?",
+    "options": [
+      "Xirfad dhisme oo horumarsan",
+      "Dagaal badan oo jiray",
+      "Ganacsiga oo kaliya",
+      "Waxbarasho la'aan"
+    ],
+    "correct": "Xirfad dhisme oo horumarsan"
+  },
+  {
+    "question": "Ajuuraan muxuu ka tarjumay Soomaalida taariikhda?",
+    "options": [
+      "Boqortoyad Soomaaliyeed oo awood lahayd",
+      "Dal yar oo aan muhiim ahayn",
+      "Maamul Carabeed ah",
+      "Boqornimo Itoobiyaan ah"
+    ],
+    "correct": "Boqortoyad Soomaaliyeed oo awood lahayd"
+  },
+  {
+    "question": "Ajuuraan dhanka badda maxay saameyn ku lahayd?",
+    "options": [
+      "Waxay xukumtay ganacsi badeed muhiim ah",
+      "Ma lahayn xiriir badeed",
+      "Kaliya dhulka ayay xukumtay",
+      "Badda ayay ka carootay"
+    ],
+    "correct": "Waxay xukumtay ganacsi badeed muhiim ah"
+  },
+  {
+    "question": "Boqortoyada Ajuuraan magaciisu halkee ka yimid?",
+    "options": [
+      "Ajuuraan — qabiil Soomaaliyeed",
+      "Magaalo Carabeed",
+      "Boqor Itoobiyaan",
+      "Maamul Islaamiyeed"
+    ],
+    "correct": "Ajuuraan — qabiil Soomaaliyeed"
+  },
+  {
+    "question": "Cadan (Aden) waxay ku taallaa dalka?",
+    "options": [
+      "Yaman",
+      "Soomaaliya",
+      "Jabuuti",
+      "Eritrea"
+    ],
+    "correct": "Yaman"
+  },
+  {
+    "question": "Cidda Cadan xukuntay 1839 ilaa 1967?",
+    "options": [
+      "Ingiriiska (Britain)",
+      "Faransiiska",
+      "Talyaaniga",
+      "Ruushka"
+    ],
+    "correct": "Ingiriiska (Britain)"
+  },
+  {
+    "question": "Goorma Cadan ay ka xoroobeen Ingiriiska?",
+    "options": [
+      "1967",
+      "1956",
+      "1975",
+      "1990"
+    ],
+    "correct": "1967"
+  },
+  {
+    "question": "Cadan Soomaalida maxay ugu muhiim tahay taariikhiyan?",
+    "options": [
+      "Xarun ganacsi iyo shaqo",
+      "Xarun dagaal",
+      "Xarun diini",
+      "Xarun waxbarasho"
+    ],
+    "correct": "Xarun ganacsi iyo shaqo"
+  },
+  {
+    "question": "Cadan magaca Ingiriis ah waa?",
+    "options": [
+      "Aden",
+      "Adam",
+      "Eden",
+      "Adon"
+    ],
+    "correct": "Aden"
+  },
+  {
+    "question": "Cadan xeebta kee ayay ku taallaa?",
+    "options": [
+      "Koonfurta Yaman",
+      "Waqooyi Yaman",
+      "Bartamaha Yaman",
+      "Bariga Yaman"
+    ],
+    "correct": "Koonfurta Yaman"
+  },
+  {
+    "question": "Xilligii Ingiriiska, Cadan waxay ahayd?",
+    "options": [
+      "Gumeystaha (Colony)",
+      "Gobol xor ah",
+      "Dal madax-bannaan",
+      "Xarun diini"
+    ],
+    "correct": "Gumeystaha (Colony)"
+  },
+  {
+    "question": "Cadan badeed ahaan waxay ku taallaa?",
+    "options": [
+      "Khaliijka Cadan",
+      "Badda Cas",
+      "Badda Hindiya",
+      "Badda Dhexe"
+    ],
+    "correct": "Khaliijka Cadan"
+  },
+  {
+    "question": "Soomaalidii Cadan ku noolayd inta badan waxay ahaayeen?",
+    "options": [
+      "Ganacsato iyo shaqaale",
+      "Askari",
+      "Culimo",
+      "Xukuumad"
+    ],
+    "correct": "Ganacsato iyo shaqaale"
+  },
+  {
+    "question": "1967 ka dib Cadan waxay noqotay qayb ka mid ah?",
+    "options": [
+      "Jamhuuriyadda Dimuqraadiga Shacabka Yaman",
+      "Soomaaliya",
+      "Ethiopia",
+      "Jabuuti"
+    ],
+    "correct": "Jamhuuriyadda Dimuqraadiga Shacabka Yaman"
+  },
+  {
+    "question": "Maxamed Siyaad Barre goorma talada qabtay?",
+    "options": [
+      "21 Oktoobar 1969",
+      "1 Julaay 1960",
+      "26 Janaayo 1991",
+      "15 Oktoobar 1969"
+    ],
+    "correct": "21 Oktoobar 1969"
+  },
+  {
+    "question": "Maxamed Siyaad Barre sidee talada u qabtay?",
+    "options": [
+      "Kacaan milateri",
+      "Doorasho",
+      "Dhaxal",
+      "Xukun diini"
+    ],
+    "correct": "Kacaan milateri"
+  },
+  {
+    "question": "Siyaad Barre naftiisa magaca uu u bixiyay?",
+    "options": [
+      "Guulwade",
+      "Madaxweyne",
+      "Amiir",
+      "Boqor"
+    ],
+    "correct": "Guulwade"
+  },
+  {
+    "question": "Siyaad Barre xisaabtiisa siyaasadeed?",
+    "options": [
+      "Hantiwadaagga Sayniska ah",
+      "Dimuqraadiyad",
+      "Boqornimo",
+      "Federalism"
+    ],
+    "correct": "Hantiwadaagga Sayniska ah"
+  },
+  {
+    "question": "Goorma si rasmi ah loo aasaasay fartiisa Soomaaliyeed?",
+    "options": [
+      "1972",
+      "1960",
+      "1969",
+      "1980"
+    ],
+    "correct": "1972"
+  },
+  {
+    "question": "Dagaalkii Ogaadeen goorma dhacay?",
+    "options": [
+      "1977–1978",
+      "1969–1970",
+      "1990–1991",
+      "1985–1986"
+    ],
+    "correct": "1977–1978"
+  },
+  {
+    "question": "Dagaalkii Ogaadeen cidda ku adkaysatay?",
+    "options": [
+      "Itoobiya (Ruushka iyo Kuubaaga la caawintiisa)",
+      "Soomaaliya",
+      "Labaduba si isku mid ah",
+      "Midowga Afrika"
+    ],
+    "correct": "Itoobiya (Ruushka iyo Kuubaaga la caawintiisa)"
+  },
+  {
+    "question": "Siyaad Barre goorma xilkiisii ka tuuray?",
+    "options": [
+      "26 Janaayo 1991",
+      "21 Oktoobar 1969",
+      "1 Julaay 1960",
+      "2 Janaayo 1995"
+    ],
+    "correct": "26 Janaayo 1991"
+  },
+  {
+    "question": "Siyaad Barre halkee ku dhintay?",
+    "options": [
+      "Lagos, Nigeria",
+      "Muqdisho",
+      "Nairobi, Kenya",
+      "Rome, Italy"
+    ],
+    "correct": "Lagos, Nigeria"
+  },
+  {
+    "question": "Siyaad Barre goorma dhintay?",
+    "options": [
+      "2 Janaayo 1995",
+      "26 Janaayo 1991",
+      "21 Oktoobar 1969",
+      "1 Julaay 1960"
+    ],
+    "correct": "2 Janaayo 1995"
+  },
+  {
+    "question": "Siyaad Barre halkee ku dhashay?",
+    "options": [
+      "Shiilaabo (Ogaadeen)",
+      "Muqdisho",
+      "Kismaayo",
+      "Berbera"
+    ],
+    "correct": "Shiilaabo (Ogaadeen)"
+  },
+  {
+    "question": "Siyaad Barre taariikhiyan goorma dhashay?",
+    "options": [
+      "1919",
+      "1930",
+      "1910",
+      "1925"
+    ],
+    "correct": "1919"
+  },
+  {
+    "question": "21kii Oktoobar 1969 Soomaaliya maxaa lagu magacaabaa?",
+    "options": [
+      "Maalinta Kacaanka",
+      "Maalinta Xornimada",
+      "Maalinta Taariikha",
+      "Maalinta Dhalashada"
+    ],
+    "correct": "Maalinta Kacaanka"
+  },
+  {
+    "question": "Ruushku goorma ka baxay Somalia?",
+    "options": [
+      "1977 (dagaalkii Ogaadeen ka hor)",
+      "1969 (kacaankii)",
+      "1991 (burbuurkii)",
+      "1984"
+    ],
+    "correct": "1977 (dagaalkii Ogaadeen ka hor)"
+  },
+  {
+    "question": "Siyaad Barre wuxuu joojiyay?",
+    "options": [
+      "Xisbiyada siyaasadeed oo dhan",
+      "Doorashada oo kaliya",
+      "Ciidamada",
+      "Ganacsiga"
+    ],
+    "correct": "Xisbiyada siyaasadeed oo dhan"
+  },
+  {
+    "question": "Hantiwadaagga Sayniska ah ee Siyaad uu raacay wuxuu ka soo qaatay?",
+    "options": [
+      "Karl Marx iyo Lenin",
+      "Diinta Islaamka",
+      "Galbeedka",
+      "Pan-Africanism"
+    ],
+    "correct": "Karl Marx iyo Lenin"
+  },
+  {
+    "question": "Siyaad Barre qabiilka uu ka soo jeedo?",
+    "options": [
+      "Mareehan (Darood)",
+      "Hawiye",
+      "Dir",
+      "Isaaq"
+    ],
+    "correct": "Mareehan (Darood)"
+  },
+  {
+    "question": "Xoogaga soo roonayd Siyaad Barre?",
+    "options": [
+      "USC, SNM, SPM",
+      "SNA, SDF, SSDF",
+      "TNG, TFG, ICU",
+      "AMISOM, IGAD, AU"
+    ],
+    "correct": "USC, SNM, SPM"
+  },
+  {
+    "question": "Dagaalkii Ogaadeen ka dib, Somalia waxay helday?",
+    "options": [
+      "Qaxooti badan oo ka yimid Ogaadeen",
+      "Guul weyn",
+      "Dhul cusub",
+      "Nabadda"
+    ],
+    "correct": "Qaxooti badan oo ka yimid Ogaadeen"
+  },
+  {
+    "question": "Siyaad Barre mudadii uu xukumay?",
+    "options": [
+      "~22 sano (1969–1991)",
+      "10 sano",
+      "5 sano",
+      "30 sano"
+    ],
+    "correct": "~22 sano (1969–1991)"
+  },
+  {
+    "question": "Sayid Maxamed Cabdille Xasan cidda uu ku dagaallamay?",
+    "options": [
+      "Ingiriiska, Itoobiya, Talyaaniga",
+      "Faransiiska oo kaliya",
+      "Ruushka",
+      "Carabta"
+    ],
+    "correct": "Ingiriiska, Itoobiya, Talyaaniga"
+  },
+  {
+    "question": "Sayid Maxamed Cabdille Xasan dagaalladiisii goorma socday?",
+    "options": [
+      "1899–1920",
+      "1960–1969",
+      "1977–1978",
+      "1910–1930"
+    ],
+    "correct": "1899–1920"
+  },
+  {
+    "question": "Sayid Maxamed goorma dhintay?",
+    "options": [
+      "1920",
+      "1935",
+      "1960",
+      "1900"
+    ],
+    "correct": "1920"
+  },
+  {
+    "question": "Deegaankii caanka ahaa ee Sayid Maxamed?",
+    "options": [
+      "Taleh (Taleexi)",
+      "Muqdisho",
+      "Berbera",
+      "Kismaayo"
+    ],
+    "correct": "Taleh (Taleexi)"
+  },
+  {
+    "question": "Sayid Maxamed Cabdille Xasan wuxuu ahaa?",
+    "options": [
+      "Gabayaa, siyaasi, iyo dagaalle",
+      "Kaliya askari",
+      "Ganacsade",
+      "Culimo oo kaliya"
+    ],
+    "correct": "Gabayaa, siyaasi, iyo dagaalle"
+  },
+  {
+    "question": "Sayid Maxamed wuxuu ka soo jeedo qabiilkee?",
+    "options": [
+      "Ogaadeen (Darood)",
+      "Hawiye",
+      "Isaaq",
+      "Rahanweyn"
+    ],
+    "correct": "Ogaadeen (Darood)"
+  },
+  {
+    "question": "Gabaygii 'Deelley' yaa qoray?",
+    "options": [
+      "Sayid Maxamed Cabdille Xasan",
+      "Aadan Cadde",
+      "Cali Dhuux",
+      "Cabdullahi Qarshe"
+    ],
+    "correct": "Sayid Maxamed Cabdille Xasan"
+  },
+  {
+    "question": "Gabayga Soomaaliyeed noociisa caanka ah ee dagaalka?",
+    "options": [
+      "Geeraar",
+      "Masafo",
+      "Buranbur",
+      "Heello"
+    ],
+    "correct": "Geeraar"
+  },
+  {
+    "question": "Ingiriisiinta Sayid Maxamed u bixiyay magac?",
+    "options": [
+      "Mad Mullah",
+      "The Warrior",
+      "The Poet",
+      "The Lion"
+    ],
+    "correct": "Mad Mullah"
+  },
+  {
+    "question": "Gabayaasha Soomaaliyeed ee hore, xilligooda gabayga waxay lahaa? ",
+    "options": [
+      "Ahmiyad siyaasadeed iyo bulsheed",
+      "Kaliya xiiso",
+      "Kaliya diini",
+      "Kaliya geesinimo"
+    ],
+    "correct": "Ahmiyad siyaasadeed iyo bulsheed"
+  },
+  {
+    "question": "Madaxweynihii 1aad ee Jamhuuriyadda Soomaaliya?",
+    "options": [
+      "Aadan Cabdille Cismaan (Aadan Cadde)",
+      "Cabdirashid Cali Sharmaarke",
+      "Siyaad Barre",
+      "Cabdiqaasim Salaad Xasan"
+    ],
+    "correct": "Aadan Cabdille Cismaan (Aadan Cadde)"
+  },
+  {
+    "question": "Madaxweynihii 2aad ee Jamhuuriyadda Soomaaliya?",
+    "options": [
+      "Cabdirashid Cali Sharmaarke",
+      "Aadan Cadde",
+      "Siyaad Barre",
+      "Cali Mahdi"
+    ],
+    "correct": "Cabdirashid Cali Sharmaarke"
+  },
+  {
+    "question": "Cabdirashid Cali Sharmaarke goorma la dillay?",
+    "options": [
+      "15 Oktoobar 1969",
+      "1 Julaay 1960",
+      "21 Oktoobar 1969",
+      "26 Janaayo 1991"
+    ],
+    "correct": "15 Oktoobar 1969"
+  },
+  {
+    "question": "Halkee lagu dilay Madaxweyne Cabdirashid?",
+    "options": [
+      "Kismaayo",
+      "Muqdisho",
+      "Berbera",
+      "Baidoa"
+    ],
+    "correct": "Kismaayo"
+  },
+  {
+    "question": "Madaxweynihii Soomaaliya 2000–2004?",
+    "options": [
+      "Cabdiqaasim Salaad Xasan",
+      "Cabdullahi Yuusuf",
+      "Shariif Sheekh",
+      "Xasan Sheekh"
+    ],
+    "correct": "Cabdiqaasim Salaad Xasan"
+  },
+  {
+    "question": "Madaxweynihii Soomaaliya 2004–2008?",
+    "options": [
+      "Cabdullahi Yuusuf Axmed",
+      "Cabdiqaasim Salaad Xasan",
+      "Shariif Sheekh Axmed",
+      "Xasan Sheekh Maxamuud"
+    ],
+    "correct": "Cabdullahi Yuusuf Axmed"
+  },
+  {
+    "question": "Madaxweynihii Soomaaliya 2009–2012?",
+    "options": [
+      "Shariif Sheekh Axmed",
+      "Cabdullahi Yuusuf",
+      "Xasan Sheekh Maxamuud",
+      "Farmaajo"
+    ],
+    "correct": "Shariif Sheekh Axmed"
+  },
+  {
+    "question": "Madaxweynihii Soomaaliya 2012–2017?",
+    "options": [
+      "Xasan Sheekh Maxamuud",
+      "Shariif Sheekh Axmed",
+      "Farmaajo",
+      "Cabdiqaasim"
+    ],
+    "correct": "Xasan Sheekh Maxamuud"
+  },
+  {
+    "question": "Madaxweynihii Soomaaliya 2017–2022?",
+    "options": [
+      "Maxamed Cabdullahi Maxamed (Farmaajo)",
+      "Xasan Sheekh",
+      "Shariif Sheekh",
+      "Cabdullahi Yuusuf"
+    ],
+    "correct": "Maxamed Cabdullahi Maxamed (Farmaajo)"
+  },
+  {
+    "question": "Madaxweynaha Soomaaliya ee hadda (2022–)?",
+    "options": [
+      "Xasan Sheekh Maxamuud (muddo 2aad)",
+      "Farmaajo",
+      "Shariif Sheekh",
+      "Cabdiqaasim"
+    ],
+    "correct": "Xasan Sheekh Maxamuud (muddo 2aad)"
+  },
+  {
+    "question": "Cabdullahi Yuusuf Axmed wuxuu ka soo jeedo?",
+    "options": [
+      "Puntland",
+      "Jubaland",
+      "Galmudug",
+      "Hirshabelle"
+    ],
+    "correct": "Puntland"
+  },
+  {
+    "question": "Shariif Sheekh Axmed wuxuu ka soo jeedo?",
+    "options": [
+      "Hiiraan",
+      "Puntland",
+      "Galmudug",
+      "Baay"
+    ],
+    "correct": "Hiiraan"
+  },
+  {
+    "question": "Madaxweynihii ugu xilkii dheerayd Soomaaliya?",
+    "options": [
+      "Maxamed Siyaad Barre (~22 sano)",
+      "Aadan Cadde",
+      "Farmaajo",
+      "Xasan Sheekh"
+    ],
+    "correct": "Maxamed Siyaad Barre (~22 sano)"
+  },
+  {
+    "question": "Farmaajo magaciisa buuxa?",
+    "options": [
+      "Maxamed Cabdullahi Maxamed",
+      "Maxamed Cali Farmaajo",
+      "Cabdullahi Maxamed Farmaajo",
+      "Maxamed Siyaad Farmaajo"
+    ],
+    "correct": "Maxamed Cabdullahi Maxamed"
+  },
+  {
+    "question": "Aadan Cadde goorma xilkiisii dhammaday?",
+    "options": [
+      "1967",
+      "1969",
+      "1960",
+      "1975"
+    ],
+    "correct": "1967"
+  },
+  {
+    "question": "Madaxweynaha xilka qabtay markii xornimada la gaartay?",
+    "options": [
+      "Aadan Cabdille Cismaan",
+      "Cabdirashid Cali Sharmaarke",
+      "Siyaad Barre",
+      "Cali Mahdi"
+    ],
+    "correct": "Aadan Cabdille Cismaan"
+  },
+  {
+    "question": "Cabdiqaasim Salaad Xasan goorma xilka qabtay?",
+    "options": [
+      "2000 — Shirka Djibouti ka dib",
+      "2004 Nairobi",
+      "1991 Muqdisho",
+      "2009"
+    ],
+    "correct": "2000 — Shirka Djibouti ka dib"
+  },
+  {
+    "question": "Soomaaliya qaab maamul noocee?",
+    "options": [
+      "Federal (Federalism)",
+      "Unitary",
+      "Confederation",
+      "Boqornimo"
+    ],
+    "correct": "Federal (Federalism)"
+  },
+  {
+    "question": "Shariif Sheekh Axmed ka hor wuxuu ahaa madaxweynaha?",
+    "options": [
+      "ICU (Maxkamadaha Islaamka)",
+      "Askari",
+      "Ganacsade",
+      "Macallin"
+    ],
+    "correct": "ICU (Maxkamadaha Islaamka)"
+  },
+  {
+    "question": "Xasan Sheekh Maxamuud xilkiisa 2aad goorma bilaabmay?",
+    "options": [
+      "2022",
+      "2017",
+      "2012",
+      "2009"
+    ],
+    "correct": "2022"
+  },
+  {
+    "question": "Soomaaliya xornimada goorma qabtay?",
+    "options": [
+      "1 Julaay 1960",
+      "26 Janaayo 1991",
+      "21 Oktoobar 1969",
+      "1 Janaayo 1960"
+    ],
+    "correct": "1 Julaay 1960"
+  },
+  {
+    "question": "Soomaaliya Waqooyi (Somaliland Ingiriis) iyo Koonfur (Talyaaniga) goorma midoobeen?",
+    "options": [
+      "1 Julaay 1960",
+      "26 Janaayo 1991",
+      "21 Oktoobar 1969",
+      "15 Oktoobar 1969"
+    ],
+    "correct": "1 Julaay 1960"
+  },
+  {
+    "question": "Boqortoyada Ifat goorma la aasaasay?",
+    "options": [
+      "1285",
+      "1100",
+      "1400",
+      "900"
+    ],
+    "correct": "1285"
+  },
+  {
+    "question": "Axmed Gurrey (Ahmed ibn Ibrahim al-Ghazi) dagaalladiisii goorma?",
+    "options": [
+      "1529–1543",
+      "1699–1720",
+      "1800–1820",
+      "1900–1910"
+    ],
+    "correct": "1529–1543"
+  },
+  {
+    "question": "Axmed Gurrey wuxuu dagaallamay xukuumadda?",
+    "options": [
+      "Itoobiya (Habashida)",
+      "Ingiriiska",
+      "Bortuqiiska",
+      "Talyaaniga"
+    ],
+    "correct": "Itoobiya (Habashida)"
+  },
+  {
+    "question": "Somaliland caasimadeeda?",
+    "options": [
+      "Hargeysa",
+      "Berbera",
+      "Burco",
+      "Ceerigaavo"
+    ],
+    "correct": "Hargeysa"
+  },
+  {
+    "question": "Jabuuti goorma xornimada qabtay?",
+    "options": [
+      "1977",
+      "1960",
+      "1967",
+      "1990"
+    ],
+    "correct": "1977"
+  },
+  {
+    "question": "NFD (Northern Frontier District) hadda waxay ku taallaa dalka?",
+    "options": [
+      "Kenya",
+      "Ethiopia",
+      "Somalia",
+      "Djibouti"
+    ],
+    "correct": "Kenya"
+  },
+  {
+    "question": "Somaliland go'doomay goorma?",
+    "options": [
+      "18 May 1991",
+      "26 Jan 1991",
+      "1 July 1960",
+      "1 Jan 1991"
+    ],
+    "correct": "18 May 1991"
+  },
+  {
+    "question": "Soomaaliya caasimadeeda?",
+    "options": [
+      "Muqdisho (Mogadishu)",
+      "Kismaayo",
+      "Hargeysa",
+      "Berbera"
+    ],
+    "correct": "Muqdisho (Mogadishu)"
+  },
+  {
+    "question": "Talyaaniga Somalia xukumay muddo?",
+    "options": [
+      "~70 sano (1889–1960)",
+      "30 sano",
+      "100 sano",
+      "50 sano"
+    ],
+    "correct": "~70 sano (1889–1960)"
+  },
+  {
+    "question": "Ingiriiska Waqooyi Soomaaliya xukumay muddo?",
+    "options": [
+      "~80 sano (1884–1960)",
+      "40 sano",
+      "100 sano",
+      "50 sano"
+    ],
+    "correct": "~80 sano (1884–1960)"
+  },
+  {
+    "question": "Farcimadii xornimada Soomaaliya goorma bilaabmay madadaalo ahaan?",
+    "options": [
+      "1950aadkii",
+      "1930aadkii",
+      "1970aadkii",
+      "1940aadkii"
+    ],
+    "correct": "1950aadkii"
+  },
+  {
+    "question": "Xisbiga SYL (Somali Youth League) goorma la aasaasay?",
+    "options": [
+      "1943",
+      "1960",
+      "1950",
+      "1935"
+    ],
+    "correct": "1943"
+  },
+  {
+    "question": "SYL (Somali Youth League) waxay u dagaallamayd?",
+    "options": [
+      "Xornimada Soomaaliya",
+      "Talyaaniga",
+      "Ingiriiska oo kaliya",
+      "Dimuqraadiyada"
+    ],
+    "correct": "Xornimada Soomaaliya"
+  },
+  {
+    "question": "Soomaaliya waqooyiga (SNM) goorma go'doomay?",
+    "options": [
+      "1991",
+      "1994",
+      "2000",
+      "1988"
+    ],
+    "correct": "1991"
+  },
+  {
+    "question": "Muqdisho magaciisii hore ee Talyaaniga?",
+    "options": [
+      "Mogadiscio",
+      "Mogadishu",
+      "Muqdishu",
+      "Magadoxo"
+    ],
+    "correct": "Mogadiscio"
+  },
+  {
+    "question": "Zilayl (Zeila) taariikhiyan waxay ahayd?",
+    "options": [
+      "Magaalo ganacsi muhiim ah oo hore",
+      "Caasimadda Somalia",
+      "Dal madax-bannaan",
+      "Xarun milateri"
+    ],
+    "correct": "Magaalo ganacsi muhiim ah oo hore"
+  },
+  {
+    "question": "Puntland goorma la aasaasay?",
+    "options": [
+      "1998",
+      "1991",
+      "2000",
+      "2004"
+    ],
+    "correct": "1998"
+  },
+  {
+    "question": "Puntland caasimadeeda?",
+    "options": [
+      "Garoowe",
+      "Boosaaso",
+      "Qardho",
+      "Galkacyo"
+    ],
+    "correct": "Garoowe"
+  },
+  {
+    "question": "Dagaalkii Sokeeye ee Soomaaliya marka ugu horeysay ayuu si xoog leh bilaabmay?",
+    "options": [
+      "1988 (SNM iyo Siyaad)",
+      "1991 (burbuurkii)",
+      "1977 (Ogaadeen)",
+      "1969 (kacaanka)"
+    ],
+    "correct": "1988 (SNM iyo Siyaad)"
+  },
+  {
+    "question": "AMISOM waxay ahayd?",
+    "options": [
+      "Ciidamo midowga Afrika Somalia ku jira",
+      "Xisbiga Soomaaliyeed",
+      "Ururka ganacsiga",
+      "Xukuumad ku meel gaar ah"
+    ],
+    "correct": "Ciidamo midowga Afrika Somalia ku jira"
+  },
+  {
+    "question": "Soomaaliya dalka Afrika ka tirsan, baaxaddaa ah, waxay ku taallaa?",
+    "options": [
+      "Geeska Afrika (Horn of Africa)",
+      "Bartamaha Afrika",
+      "Galbeedka Afrika",
+      "Koonfurta Afrika"
+    ],
+    "correct": "Geeska Afrika (Horn of Africa)"
+  },
+  {
+    "question": "Soomaalida af-afsoomaaliga si rasmi ah goorma loo qoray?",
+    "options": [
+      "1972 — xilligii Siyaad Barre",
+      "1960 — xornimada",
+      "1991 — ka dib burbuurka",
+      "1950 — xilligii Talyaaniga"
+    ],
+    "correct": "1972 — xilligii Siyaad Barre"
+  },
+  {
+    "question": "Boqortoyadii Adal ee Axmed Gurrey cidda u digtay in ay Itoobiya qabsato?",
+    "options": [
+      "Bortuqiis (Portugal) oo Itoobiya la soo gaadhay",
+      "Ingiriis",
+      "Faransiis",
+      "Ruush"
+    ],
+    "correct": "Bortuqiis (Portugal) oo Itoobiya la soo gaadhay"
+  },
+  {
+    "question": "Nabi Maxamed (CSW) halkee ku dhashay?",
+    "options": [
+      "Makkah",
+      "Madiina",
+      "Shaam",
+      "Yaman"
+    ],
+    "correct": "Makkah"
+  },
+  {
+    "question": "Nabi Maxamed (CSW) goorma dhashay?",
+    "options": [
+      "570 CE — Sanadkii Maraakiibta",
+      "610 CE",
+      "622 CE",
+      "632 CE"
+    ],
+    "correct": "570 CE — Sanadkii Maraakiibta"
+  },
+  {
+    "question": "Aabaha Nabi Maxamed magaciis?",
+    "options": [
+      "Cabdullaahi",
+      "Abu Talib",
+      "Cabdul Mudaalib",
+      "Waraqa"
+    ],
+    "correct": "Cabdullaahi"
+  },
+  {
+    "question": "Hooyadii Nabi Maxamed magaciis?",
+    "options": [
+      "Aamina",
+      "Khadiija",
+      "Faadumo",
+      "Maryam"
+    ],
+    "correct": "Aamina"
+  },
+  {
+    "question": "Awowgii Nabi Maxamed magaciis?",
+    "options": [
+      "Cabdul Mudaalib",
+      "Abu Talib",
+      "Abu Bakr",
+      "Haamid"
+    ],
+    "correct": "Cabdul Mudaalib"
+  },
+  {
+    "question": "Adeerka uu Nabi Maxamed ku soo koray?",
+    "options": [
+      "Abu Talib",
+      "Abu Lahab",
+      "Hamza",
+      "Abbas"
+    ],
+    "correct": "Abu Talib"
+  },
+  {
+    "question": "Xaaskiisii Nabi ugu horreysay?",
+    "options": [
+      "Khadiija bint Khuwaylid",
+      "Aayisha",
+      "Hafsaa",
+      "Zaynab"
+    ],
+    "correct": "Khadiija bint Khuwaylid"
+  },
+  {
+    "question": "Nabi Maxamed Khadiija markuu guursaday wuxuu ahaa?",
+    "options": [
+      "25 jir",
+      "30 jir",
+      "40 jir",
+      "20 jir"
+    ],
+    "correct": "25 jir"
+  },
+  {
+    "question": "Khadiija Nabi guursatay waxay ahayd?",
+    "options": [
+      "40 jir",
+      "25 jir",
+      "35 jir",
+      "45 jir"
+    ],
+    "correct": "40 jir"
+  },
+  {
+    "question": "Nabi Maxamed Waxyiga ugu horeysay goorma helay?",
+    "options": [
+      "40 jir (610 CE)",
+      "25 jir",
+      "50 jir",
+      "35 jir"
+    ],
+    "correct": "40 jir (610 CE)"
+  },
+  {
+    "question": "Waxyiga ugu horeysay halkee ku soo degay?",
+    "options": [
+      "Gaar Xiraa' (Cave Hira)",
+      "Masjid Al-Haram",
+      "Madiina",
+      "Baytal Maqdis"
+    ],
+    "correct": "Gaar Xiraa' (Cave Hira)"
+  },
+  {
+    "question": "Ereyga ugu horeysay ee Waxyiga?",
+    "options": [
+      "Iqra (Akhri)",
+      "Bismillaah",
+      "Al-Hamd",
+      "Laa Ilaaha"
+    ],
+    "correct": "Iqra (Akhri)"
+  },
+  {
+    "question": "Suradda Waxyiga ugu horeysay?",
+    "options": [
+      "Al-Calaqa (Alaq)",
+      "Al-Fatixa",
+      "Al-Baqara",
+      "Al-Ikhlaas"
+    ],
+    "correct": "Al-Calaqa (Alaq)"
+  },
+  {
+    "question": "Hijradii Nabi (Makka → Madiina) goorma dhacday?",
+    "options": [
+      "622 CE",
+      "610 CE",
+      "632 CE",
+      "615 CE"
+    ],
+    "correct": "622 CE"
+  },
+  {
+    "question": "Nabi Maxamed Madiina markuu yimid magaceedii hore ee Madiina?",
+    "options": [
+      "Yathrib",
+      "Madiinatun Nabi",
+      "Al-Munawarrah",
+      "Taybah"
+    ],
+    "correct": "Yathrib"
+  },
+  {
+    "question": "Dagaalkii Badar goorma dhacay?",
+    "options": [
+      "624 CE (2 AH)",
+      "625 CE (3 AH)",
+      "627 CE (5 AH)",
+      "630 CE (8 AH)"
+    ],
+    "correct": "624 CE (2 AH)"
+  },
+  {
+    "question": "Dagaalkii Badar, Muslimiinta tiradooda?",
+    "options": [
+      "313",
+      "500",
+      "1000",
+      "200"
+    ],
+    "correct": "313"
+  },
+  {
+    "question": "Dagaalkii Badar, Qurayshta tiradooda?",
+    "options": [
+      "~1000",
+      "313",
+      "500",
+      "2000"
+    ],
+    "correct": "~1000"
+  },
+  {
+    "question": "Dagaalkii Uhud goorma dhacay?",
+    "options": [
+      "625 CE (3 AH)",
+      "624 CE (2 AH)",
+      "627 CE (5 AH)",
+      "630 CE (8 AH)"
+    ],
+    "correct": "625 CE (3 AH)"
+  },
+  {
+    "question": "Dagaalkii Uhud sabab u noqday guuldarrada Muslimiinta?",
+    "options": [
+      "Tireeraha goobtooda ka wareegtay",
+      "Nabi waa la dilay",
+      "Asxaabtu waa carareen",
+      "Hubka la waayey"
+    ],
+    "correct": "Tireeraha goobtooda ka wareegtay"
+  },
+  {
+    "question": "Dagaalkii Khandaq (Trench) goorma dhacay?",
+    "options": [
+      "627 CE (5 AH)",
+      "624 CE",
+      "625 CE",
+      "628 CE"
+    ],
+    "correct": "627 CE (5 AH)"
+  },
+  {
+    "question": "Cidda ka soo jeediyey qodista Khandaq?",
+    "options": [
+      "Salmaan Al-Faarisi",
+      "Umar ibn Khattab",
+      "Abu Bakr",
+      "Ali ibn Abi Talib"
+    ],
+    "correct": "Salmaan Al-Faarisi"
+  },
+  {
+    "question": "Heshiiskii Xudaybiyya goorma la gaartay?",
+    "options": [
+      "628 CE (6 AH)",
+      "627 CE",
+      "630 CE",
+      "622 CE"
+    ],
+    "correct": "628 CE (6 AH)"
+  },
+  {
+    "question": "Fataxu Makkah (Conquest of Mecca) goorma dhacay?",
+    "options": [
+      "630 CE (8 AH)",
+      "628 CE",
+      "632 CE",
+      "625 CE"
+    ],
+    "correct": "630 CE (8 AH)"
+  },
+  {
+    "question": "Nabi Maxamed goorma dhintay?",
+    "options": [
+      "632 CE (11 AH)",
+      "630 CE",
+      "628 CE",
+      "634 CE"
+    ],
+    "correct": "632 CE (11 AH)"
+  },
+  {
+    "question": "Nabi Maxamed geeriyoday jirkiisa?",
+    "options": [
+      "63 jir",
+      "60 jir",
+      "70 jir",
+      "55 jir"
+    ],
+    "correct": "63 jir"
+  },
+  {
+    "question": "Nabi Maxamed halkee ku aasay?",
+    "options": [
+      "Madiina (qolkiisii)",
+      "Makkah",
+      "Badar",
+      "Uhud"
+    ],
+    "correct": "Madiina (qolkiisii)"
+  },
+  {
+    "question": "Gabdhihiisii Nabi Maxamed tiradooda?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "5"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "Gabdhihiisii Nabi Maxamed magacyadooda?",
+    "options": [
+      "Zeynaab, Ruqayyo, Ummu Kulthuum, Faadumo",
+      "Faadumo, Maryam, Aayisha, Hafsaa",
+      "Khadiija, Faadumo, Aayisha, Ruqayyo",
+      "Zeynaab, Hafsaa, Ummu Kulthuum, Maryam"
+    ],
+    "correct": "Zeynaab, Ruqayyo, Ummu Kulthuum, Faadumo"
+  },
+  {
+    "question": "Nabi Maxamed wiilashiisii goorma dhimanayeen?",
+    "options": [
+      "Dhammantood yar yar bay dhimanayeen",
+      "Waxay noolaan jireen",
+      "Waxay noqdeen Nabiyaasha",
+      "Waxay taliyeen ka dib"
+    ],
+    "correct": "Dhammantood yar yar bay dhimanayeen"
+  },
+  {
+    "question": "Sanadkii Baar-barrow (Year of Sorrow) goorma ahaa?",
+    "options": [
+      "619 CE",
+      "610 CE",
+      "622 CE",
+      "625 CE"
+    ],
+    "correct": "619 CE"
+  },
+  {
+    "question": "Sanadkii Baar-barrow cidda geeriyootay?",
+    "options": [
+      "Khadiija iyo Abu Talib",
+      "Abu Bakr iyo Umar",
+      "Hamza iyo Jafar",
+      "Ali iyo Uthman"
+    ],
+    "correct": "Khadiija iyo Abu Talib"
+  },
+  {
+    "question": "Isrankii iyo Meraajka goorma dhacday?",
+    "options": [
+      "621 CE (1 sano ka hor Hijrada)",
+      "610 CE",
+      "622 CE",
+      "625 CE"
+    ],
+    "correct": "621 CE (1 sano ka hor Hijrada)"
+  },
+  {
+    "question": "Isrankii, Nabi Maxamed wuxuu u safaray?",
+    "options": [
+      "Masjid Al-Aqsa (Quds)",
+      "Makkah → Madiina",
+      "Makkah → Shaam",
+      "Madiina → Makkah"
+    ],
+    "correct": "Masjid Al-Aqsa (Quds)"
+  },
+  {
+    "question": "Meraajka, Nabi Maxamed wuxuu u kordhay?",
+    "options": [
+      "Samaawadda 7 jibaaraha",
+      "Dhulka",
+      "Badda",
+      "Buurtaha"
+    ],
+    "correct": "Samaawadda 7 jibaaraha"
+  },
+  {
+    "question": "Asxaabihii ugu horeysay ee Islaamka aqbalay (haweenka)?",
+    "options": [
+      "Khadiija",
+      "Aayisha",
+      "Faadumo",
+      "Hafsaa"
+    ],
+    "correct": "Khadiija"
+  },
+  {
+    "question": "Asxaabihii ugu horeysay (ragga)?",
+    "options": [
+      "Abu Bakr As-Siddiq",
+      "Umar ibn Khattab",
+      "Ali ibn Abi Talib",
+      "Uthman ibn Affan"
+    ],
+    "correct": "Abu Bakr As-Siddiq"
+  },
+  {
+    "question": "Asxaabihii ugu horeysay (wiilasha)?",
+    "options": [
+      "Ali ibn Abi Talib",
+      "Abu Bakr",
+      "Umar",
+      "Uthman"
+    ],
+    "correct": "Ali ibn Abi Talib"
+  },
+  {
+    "question": "Asxaabihii ugu horeysay (addoomaha)?",
+    "options": [
+      "Bilaal ibn Rabaax",
+      "Salmaan",
+      "Ammar",
+      "Khabbab"
+    ],
+    "correct": "Bilaal ibn Rabaax"
+  },
+  {
+    "question": "Hajjiga Farewell (Wadaacadda) goorma dhacay?",
+    "options": [
+      "632 CE (10 AH)",
+      "630 CE",
+      "628 CE",
+      "625 CE"
+    ],
+    "correct": "632 CE (10 AH)"
+  },
+  {
+    "question": "Nabi Maxamed wuxuu u diray ergada ugu dambaysay, asxaabtiisii wuxuu ku amray?",
+    "options": [
+      "In Quranku ku hanuunaan, Sunnah ku dhaqmaan",
+      "In ay dagaallamaan",
+      "In ay guri joogaan",
+      "In ay ganacsi tagaan"
+    ],
+    "correct": "In Quranku ku hanuunaan, Sunnah ku dhaqmaan"
+  },
+  {
+    "question": "Nabi Maxamed loo yaqaan magaciisa kale ee ammaan leh?",
+    "options": [
+      "Al-Amiin (Aamin)",
+      "Al-Hakim",
+      "Al-Qaadir",
+      "Al-Kariim"
+    ],
+    "correct": "Al-Amiin (Aamin)"
+  },
+  {
+    "question": "Dagaalkii Muuta goorma dhacay?",
+    "options": [
+      "629 CE (7 AH)",
+      "625 CE",
+      "630 CE",
+      "622 CE"
+    ],
+    "correct": "629 CE (7 AH)"
+  },
+  {
+    "question": "Dagaalkii Tabuk goorma dhacay?",
+    "options": [
+      "630 CE (9 AH)",
+      "628 CE",
+      "632 CE",
+      "625 CE"
+    ],
+    "correct": "630 CE (9 AH)"
+  },
+  {
+    "question": "Dagaalkii Tabuk Nabi wuxuu ku dagaallamay xukuumadda?",
+    "options": [
+      "Byzantine (Rum)",
+      "Persia",
+      "Habasha",
+      "Yaman"
+    ],
+    "correct": "Byzantine (Rum)"
+  },
+  {
+    "question": "Nabi Maxamed xaaskiisa ugu jecel ee ugu dambaysay?",
+    "options": [
+      "Aayisha bint Abi Bakr",
+      "Khadiija",
+      "Hafsaa",
+      "Zaynab"
+    ],
+    "correct": "Aayisha bint Abi Bakr"
+  },
+  {
+    "question": "Nabi Maxamed wiilkiisii u geeriyooday ugu dambe?",
+    "options": [
+      "Ibraahim (dhallay Maariya)",
+      "Qaasim",
+      "Cabdullaahi",
+      "Ma lahayn wiil"
+    ],
+    "correct": "Ibraahim (dhallay Maariya)"
+  },
+  {
+    "question": "Faadumo (Fatimah) waxay ahayd xaasadii?",
+    "options": [
+      "Ali ibn Abi Talib",
+      "Abu Bakr",
+      "Umar",
+      "Uthman"
+    ],
+    "correct": "Ali ibn Abi Talib"
+  },
+  {
+    "question": "Nabi Maxamed suradda Quraanka gaar ah ee loogu soo dirin?",
+    "options": [
+      "Al-Axzaab (33:40) — 'Khaatamun Nabiyiin'",
+      "Al-Faatixa",
+      "Al-Ikhlaas",
+      "Al-Baqara"
+    ],
+    "correct": "Al-Axzaab (33:40) — 'Khaatamun Nabiyiin'"
+  },
+  {
+    "question": "Maalinta Nabi Maxamed dhashay waa?",
+    "options": [
+      "12 Rabii Al-Awwal",
+      "10 Muharram",
+      "27 Rajab",
+      "17 Ramadan"
+    ],
+    "correct": "12 Rabii Al-Awwal"
+  },
+  {
+    "question": "Nabi Maxamed shaqadii hore ee uu qabtay?",
+    "options": [
+      "Dhaq-dhaqaaqii geel iyo ganacsiga",
+      "Xukun",
+      "Dagaal",
+      "Waxbarasho"
+    ],
+    "correct": "Dhaq-dhaqaaqii geel iyo ganacsiga"
+  },
+  {
+    "question": "Khadiija goorma geeriyootay?",
+    "options": [
+      "619 CE (sanadkii baar-barrow)",
+      "622 CE",
+      "632 CE",
+      "615 CE"
+    ],
+    "correct": "619 CE (sanadkii baar-barrow)"
+  },
+  {
+    "question": "Nabi Maxamed xiddigaha ugu talo galayaan Asharatul Mubashshirin (10 Janno la ballamay)?",
+    "options": [
+      "Abu Bakr, Umar, Uthman, Ali, Talha, Zubayr, Saad, Sacid, Cabduraxmaan, Abu Cubaydah",
+      "Kaliya Abu Bakr iyo Umar",
+      "Kaliya 4 Khaliifadii",
+      "Sahabada 100ka"
+    ],
+    "correct": "Abu Bakr, Umar, Uthman, Ali, Talha, Zubayr, Saad, Sacid, Cabduraxmaan, Abu Cubaydah"
+  },
+  {
+    "question": "Nabi Maxamed Khadiija intuu la guursan jiray, xaas kale ma qaadan?",
+    "options": [
+      "Maya — Khadiija oo keliya ilaa geeriyootay",
+      "Haa — xaas badan",
+      "Haa — 2 xaas",
+      "Ma garanno"
+    ],
+    "correct": "Maya — Khadiija oo keliya ilaa geeriyootay"
+  },
+  {
+    "question": "Hamza ibn Cabdul Mudaalib wuxuu ahaa?",
+    "options": [
+      "Adeerka Nabi iyo geesiga Islaamka",
+      "Aabbaha Nabi",
+      "Wiilka Nabi",
+      "Asxaabta ugu dambe"
+    ],
+    "correct": "Adeerka Nabi iyo geesiga Islaamka"
+  },
+  {
+    "question": "Hamza (RA) goorma shahiid noqday?",
+    "options": [
+      "Dagaalkii Uhud (625 CE)",
+      "Dagaalkii Badar",
+      "Dagaalkii Khandaq",
+      "Dagaalkii Tabuk"
+    ],
+    "correct": "Dagaalkii Uhud (625 CE)"
+  },
+  {
+    "question": "Nabi Maxamed markuu Madiina yimid, muxuu ugu horeysay dhisay?",
+    "options": [
+      "Masjid Qubaa' (Masjid Al-Taqwaa)",
+      "Gurigiisii",
+      "Suuq",
+      "Xukuumad"
+    ],
+    "correct": "Masjid Qubaa' (Masjid Al-Taqwaa)"
+  },
+  {
+    "question": "Nabi Maxamed wuxuu ahaanayey Nabiyul Ummiyy — macneheedu waa?",
+    "options": [
+      "Nabigu wuu akhrisan jiray laakiin qori kari waayey (aqoonta Alle)",
+      "Nabigu wuu akhrin kari waayey",
+      "Nabigu wuu qori kari waayey",
+      "Nabigu wuu yar yahay"
+    ],
+    "correct": "Nabigu wuu akhrisan jiray laakiin qori kari waayey (aqoonta Alle)"
+  },
+  {
+    "question": "Dagaalkii Hunayn goorma dhacay?",
+    "options": [
+      "630 CE — ka dib Fataxu Makkah",
+      "628 CE",
+      "625 CE",
+      "622 CE"
+    ],
+    "correct": "630 CE — ka dib Fataxu Makkah"
+  },
+  {
+    "question": "Nabi Maxamed markuu dhintay, xukumka cidda qabtay?",
+    "options": [
+      "Abu Bakr As-Siddiq",
+      "Ali ibn Abi Talib",
+      "Umar ibn Khattab",
+      "Uthman ibn Affan"
+    ],
+    "correct": "Abu Bakr As-Siddiq"
+  },
+  {
+    "question": "Quraanka kariimka juzuuyaasha (parts) tiradooda?",
+    "options": [
+      "30",
+      "20",
+      "40",
+      "25"
+    ],
+    "correct": "30"
+  },
+  {
+    "question": "Quraanka suradihiisa (chapters) tiradooda?",
+    "options": [
+      "114",
+      "112",
+      "120",
+      "100"
+    ],
+    "correct": "114"
+  },
+  {
+    "question": "Suradda ugu horreysay ee Quraanka?",
+    "options": [
+      "Al-Faatixa",
+      "Al-Baqara",
+      "Al-Ikhlaas",
+      "Al-Alaq"
+    ],
+    "correct": "Al-Faatixa"
+  },
+  {
+    "question": "Suradda ugu dheer ee Quraanka?",
+    "options": [
+      "Al-Baqara (286 aayad)",
+      "Al-Nisa'",
+      "Al-Imraan",
+      "Al-Maaidah"
+    ],
+    "correct": "Al-Baqara (286 aayad)"
+  },
+  {
+    "question": "Suradda ugu gaaban ee Quraanka?",
+    "options": [
+      "Al-Kawthar (3 aayad)",
+      "Al-Naas",
+      "Al-Falaq",
+      "Al-Ikhlaas"
+    ],
+    "correct": "Al-Kawthar (3 aayad)"
+  },
+  {
+    "question": "Ayadda ugu dheer ee Quraanka?",
+    "options": [
+      "Aayatul Dayn (2:282)",
+      "Aayatul Kursi (2:255)",
+      "Suradda Al-Faatixa",
+      "Al-Baqara 286"
+    ],
+    "correct": "Aayatul Dayn (2:282)"
+  },
+  {
+    "question": "Aayatul Kursi waxay ku jirtaa surad kee?",
+    "options": [
+      "Al-Baqara (2:255)",
+      "Ali Imraan",
+      "Al-Nisa'",
+      "Al-Maaidah"
+    ],
+    "correct": "Al-Baqara (2:255)"
+  },
+  {
+    "question": "Quraanka koowaad ee lagu ururiyey buug (mushaf) waqtiga?",
+    "options": [
+      "Abu Bakr As-Siddiq",
+      "Umar",
+      "Uthman",
+      "Ali"
+    ],
+    "correct": "Abu Bakr As-Siddiq"
+  },
+  {
+    "question": "Quraanka si rasmi ah loo habsaday nuskhad rasmi ah xilligii?",
+    "options": [
+      "Uthman ibn Affan",
+      "Abu Bakr",
+      "Umar",
+      "Ali"
+    ],
+    "correct": "Uthman ibn Affan"
+  },
+  {
+    "question": "Bismillaah Quraanka ku timaadda maran?",
+    "options": [
+      "114 jeer (mar walba surad bilaabmeysa, maadaa At-Tawbah)",
+      "100 jeer",
+      "99 jeer",
+      "27 jeer (An-Naml 27 ka labajibbaarka)"
+    ],
+    "correct": "114 jeer (mar walba surad bilaabmeysa, maadaa At-Tawbah)"
+  },
+  {
+    "question": "Suradda kaliya ee aan Bismillaah ku bilaabneyn?",
+    "options": [
+      "At-Tawbah (Bara'ah)",
+      "Al-Baqara",
+      "Al-Faatixa",
+      "Al-Naas"
+    ],
+    "correct": "At-Tawbah (Bara'ah)"
+  },
+  {
+    "question": "Suradda laba Bismillaah ku leedahay?",
+    "options": [
+      "An-Naml (27:30)",
+      "Al-Faatixa",
+      "Al-Baqara",
+      "Al-Ikhlaas"
+    ],
+    "correct": "An-Naml (27:30)"
+  },
+  {
+    "question": "Quraanka suradihiisa ugu gaaban gaar ah ee loo garto?",
+    "options": [
+      "Al-Ikhlaas, Al-Falaq, Al-Naas, Al-Kawthar",
+      "Al-Faatixa, Al-Baqara, Al-Naas",
+      "Al-Bayyinah, Al-Zilzal",
+      "Al-Fil, Quraysh"
+    ],
+    "correct": "Al-Ikhlaas, Al-Falaq, Al-Naas, Al-Kawthar"
+  },
+  {
+    "question": "Surad caanka ah oo loogu yaqaan 'Qalb al-Quran' (Wadnaha Quraanka)?",
+    "options": [
+      "Yaasiin (Surah 36)",
+      "Al-Faatixa",
+      "Al-Baqara",
+      "Al-Kahf"
+    ],
+    "correct": "Yaasiin (Surah 36)"
+  },
+  {
+    "question": "Suradda lagu akhristo khamiis caawa iyo jimce?",
+    "options": [
+      "Al-Kahf (Surah 18)",
+      "Al-Baqara",
+      "Yaasiin",
+      "Al-Mulk"
+    ],
+    "correct": "Al-Kahf (Surah 18)"
+  },
+  {
+    "question": "Quraanka ruqyada (dawo diini) ugu waxtar badan?",
+    "options": [
+      "Al-Faatixa, Aayatul Kursi, Al-Ikhlaas, Al-Falaq, Al-Naas",
+      "Al-Baqara oo dhan",
+      "Al-Kawthar oo kaliya",
+      "Al-Mulk"
+    ],
+    "correct": "Al-Faatixa, Aayatul Kursi, Al-Ikhlaas, Al-Falaq, Al-Naas"
+  },
+  {
+    "question": "Suradda Quraanka ku xusan 'Maryam' (hooyadii Ciise)?",
+    "options": [
+      "Surah Maryam (19)",
+      "Surah Al-Imraan",
+      "Surah An-Nisa'",
+      "Surah Al-Baqara"
+    ],
+    "correct": "Surah Maryam (19)"
+  },
+  {
+    "question": "Quraanka nabiyaasha lagu xusay tiradooda (suradaha lagu magacaabay)?",
+    "options": [
+      "Badan — Yuunus, Hud, Yusuf, Ibrahim, Nuh, Maxamed iwm",
+      "Kaliya 4",
+      "Kaliya 2",
+      "Keliya 1 (Maxamed)"
+    ],
+    "correct": "Badan — Yuunus, Hud, Yusuf, Ibrahim, Nuh, Maxamed iwm"
+  },
+  {
+    "question": "Quraanka magaca Nabi Maxamed (CSW) maran ku xusan yahay?",
+    "options": [
+      "4 jeer",
+      "1 jeer",
+      "10 jeer",
+      "100 jeer"
+    ],
+    "correct": "4 jeer"
+  },
+  {
+    "question": "Quraanka ayadaha tiradooda (approximate)?",
+    "options": [
+      "6236",
+      "6000",
+      "7000",
+      "5000"
+    ],
+    "correct": "6236"
+  },
+  {
+    "question": "Suradda Quraanka ku xusan Luqmaan xikmadiisa?",
+    "options": [
+      "Surah Luqmaan (31)",
+      "Surah Yusuf",
+      "Surah Ibrahim",
+      "Surah Nuh"
+    ],
+    "correct": "Surah Luqmaan (31)"
+  },
+  {
+    "question": "Suradda Quraanka loo yaqaan 'Al-Azeem' (Weynta)?",
+    "options": [
+      "Al-Baqara — 'Sanamul Quran'",
+      "Al-Faatixa",
+      "Yaasiin",
+      "Al-Mulk"
+    ],
+    "correct": "Al-Baqara — 'Sanamul Quran'"
+  },
+  {
+    "question": "Quraanka 'Hawaamishu' (margins) tilmaamaya waa?",
+    "options": [
+      "Juzuuyaasha iyo ayadaha",
+      "Suradaha kaliya",
+      "Nabiyaasha",
+      "Tafsiirka"
+    ],
+    "correct": "Juzuuyaasha iyo ayadaha"
+  },
+  {
+    "question": "Quraanka suradda Al-Faatixa ayadaha tiradooda?",
+    "options": [
+      "7",
+      "6",
+      "8",
+      "5"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Suradda Quraanka loogu yaqaan 'Umm Al-Kitab' (Hooyadii Kitaabka)?",
+    "options": [
+      "Al-Faatixa",
+      "Al-Baqara",
+      "Al-Ikhlaas",
+      "Al-Alaq"
+    ],
+    "correct": "Al-Faatixa"
+  },
+  {
+    "question": "Quraanka 'Makki' suradaha waa?",
+    "options": [
+      "Suradihii Makkah lagu soo dejiyey (ka hor Hijrada)",
+      "Suradihii Madiina",
+      "Suradaha dhaadheer",
+      "Suradaha gaagaaban"
+    ],
+    "correct": "Suradihii Makkah lagu soo dejiyey (ka hor Hijrada)"
+  },
+  {
+    "question": "Quraanka 'Madani' suradaha waa?",
+    "options": [
+      "Suradihii Madiina lagu soo dejiyey (ka dib Hijrada)",
+      "Suradihii Makkah",
+      "Suradaha badan ayadaha",
+      "Suradaha cusub"
+    ],
+    "correct": "Suradihii Madiina lagu soo dejiyey (ka dib Hijrada)"
+  },
+  {
+    "question": "Suradda Quraanka koowaad ee la soo dejiyey?",
+    "options": [
+      "Al-Alaq (Iqra) — 5 ayadood",
+      "Al-Faatixa",
+      "Al-Mudaththir",
+      "Al-Muzzammil"
+    ],
+    "correct": "Al-Alaq (Iqra) — 5 ayadood"
+  },
+  {
+    "question": "Suradda Quraanka ugu dambaysay ee la soo dejiyey?",
+    "options": [
+      "Al-Nasr ama Al-Maaidah (3:3)",
+      "Al-Naas",
+      "Al-Kawthar",
+      "Al-Falaq"
+    ],
+    "correct": "Al-Nasr ama Al-Maaidah (3:3)"
+  },
+  {
+    "question": "Quraanka 'Tajweed' macnaheedu waa?",
+    "options": [
+      "Akhrinta Quraanka si fiican oo xukumadihiisa la raacayo",
+      "Qorista Quraanka",
+      "Xifdin Quraanka",
+      "Turjumida Quraanka"
+    ],
+    "correct": "Akhrinta Quraanka si fiican oo xukumadihiisa la raacayo"
+  },
+  {
+    "question": "Quraanka Xaafidka macnaheedu waa?",
+    "options": [
+      "Qofka Quraanka xifdin (memorized)",
+      "Qofka akhriya",
+      "Qofka qora",
+      "Culimada"
+    ],
+    "correct": "Qofka Quraanka xifdin (memorized)"
+  },
+  {
+    "question": "Suradda Quraanka ku xusan 'Yusuf' (Yoosuf) sheekadii?",
+    "options": [
+      "Surah Yusuf (12) — oo sheekooyinka ugu quruxda badan",
+      "Surah Al-Baqara",
+      "Surah Al-Anbiya'",
+      "Surah Al-Kahf"
+    ],
+    "correct": "Surah Yusuf (12) — oo sheekooyinka ugu quruxda badan"
+  },
+  {
+    "question": "Quraanka suradda lagu xusay 'Ashaabu Al-Kahf' (Ragtii Godka)?",
+    "options": [
+      "Al-Kahf (18)",
+      "Al-Anbiya'",
+      "Al-Baqara",
+      "Al-Nisa'"
+    ],
+    "correct": "Al-Kahf (18)"
+  },
+  {
+    "question": "Suradda Quraanka lagu xusay 'Dhul Qarnayn'?",
+    "options": [
+      "Al-Kahf (18)",
+      "Al-Anbiya'",
+      "Yaasiin",
+      "Al-Mulk"
+    ],
+    "correct": "Al-Kahf (18)"
+  },
+  {
+    "question": "Quraanka goorma la soo dejin bilaabay?",
+    "options": [
+      "Ramadaan — Laylatul Qadr (610 CE)",
+      "Muharram",
+      "Rabii Al-Awwal",
+      "Dhul Hijjah"
+    ],
+    "correct": "Ramadaan — Laylatul Qadr (610 CE)"
+  },
+  {
+    "question": "Nabiga ugu horeysay ee Islaamka?",
+    "options": [
+      "Nabi Aadam (AS)",
+      "Nabi Nuh",
+      "Nabi Ibrahim",
+      "Nabi Musa"
+    ],
+    "correct": "Nabi Aadam (AS)"
+  },
+  {
+    "question": "Nabiga ugu dambeeya?",
+    "options": [
+      "Nabi Maxamed (CSW)",
+      "Nabi Ciise",
+      "Nabi Musa",
+      "Nabi Ibrahim"
+    ],
+    "correct": "Nabi Maxamed (CSW)"
+  },
+  {
+    "question": "Quraanka nabiyaasha magacyadooda lagu xusey tiradooda?",
+    "options": [
+      "25",
+      "12",
+      "50",
+      "100"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "Nabi Nuh (AS) — maxaa la yaqaannaa isaga?",
+    "options": [
+      "Dooniga (Ark) dhisay, Daadku dhacay",
+      "Naruurta shidday",
+      "Badda kala gooyay",
+      "Jiilaalka keenay"
+    ],
+    "correct": "Dooniga (Ark) dhisay, Daadku dhacay"
+  },
+  {
+    "question": "Nabi Ibrahim (AS) maxaa la yaqaannaa isaga?",
+    "options": [
+      "Aabbaha Nabiyaasha, Kacbaha dhisay",
+      "Dooniga dhisay",
+      "Ciiddan uu dhacay",
+      "Baadiyaha ku noolaa"
+    ],
+    "correct": "Aabbaha Nabiyaasha, Kacbaha dhisay"
+  },
+  {
+    "question": "Nabi Ibrahim Kacbaha yuu la dhisay?",
+    "options": [
+      "Ismaaciil (Ishmael)",
+      "Isxaaq (Isaac)",
+      "Yacqub (Jacob)",
+      "Yuusuf (Joseph)"
+    ],
+    "correct": "Ismaaciil (Ishmael)"
+  },
+  {
+    "question": "Nabi Musa (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Tawreedda heshay, Badda Cas kala gooyay",
+      "Naaruurta shidday",
+      "Dooniga dhisay",
+      "Janno ka yimid"
+    ],
+    "correct": "Tawreedda heshay, Badda Cas kala gooyay"
+  },
+  {
+    "question": "Nabi Musa wuxuu ula dagaallamay?",
+    "options": [
+      "Firicoon (Pharaoh) — Masar",
+      "Niinmrud — Babiloon",
+      "Qibtiga",
+      "Rooma"
+    ],
+    "correct": "Firicoon (Pharaoh) — Masar"
+  },
+  {
+    "question": "Nabi Yuusuf (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Riyooyinka fasirida, xabsiga, heerka gaadhay Masar",
+      "Dooniga dhisay",
+      "Badda kala gooyay",
+      "Naaruurta shidday"
+    ],
+    "correct": "Riyooyinka fasirida, xabsiga, heerka gaadhay Masar"
+  },
+  {
+    "question": "Nabi Ciise (Isa/Jesus) (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Injeel heshay, hooyo bikrad leh, miiraakulada badan",
+      "Tawreedda heshay",
+      "Kacbaha dhisay",
+      "Dooniga dhisay"
+    ],
+    "correct": "Injeel heshay, hooyo bikrad leh, miiraakulada badan"
+  },
+  {
+    "question": "Nabi Ciise hooyadiis magaciis?",
+    "options": [
+      "Maryam (Virgin Mary)",
+      "Aamina",
+      "Khadiija",
+      "Faadumo"
+    ],
+    "correct": "Maryam (Virgin Mary)"
+  },
+  {
+    "question": "Nabi Daawuud (Dawud/David) (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Zabuura heshay, Jaaluuta (Goliath) dilay",
+      "Dooniga dhisay",
+      "Tawreedda heshay",
+      "Kacbaha dhisay"
+    ],
+    "correct": "Zabuura heshay, Jaaluuta (Goliath) dilay"
+  },
+  {
+    "question": "Nabi Sulaxmaan (Solomon) (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Xukumkiisa jinniha iyo xayawaanka, Baytal Maqdis dhisay",
+      "Dooniga dhisay",
+      "Badda kala gooyay",
+      "Tawreedda heshay"
+    ],
+    "correct": "Xukumkiisa jinniha iyo xayawaanka, Baytal Maqdis dhisay"
+  },
+  {
+    "question": "Nabi Yuunus (Jonah) (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Kalluunka (whale) cuntay, ka dib la soo saaray",
+      "Dooniga dhisay",
+      "Jaaluuta dilay",
+      "Naaruurta shidday"
+    ],
+    "correct": "Kalluunka (whale) cuntay, ka dib la soo saaray"
+  },
+  {
+    "question": "Nabi Ibrahim naruurta la shiiday, Alle maxuu sameeyay?",
+    "options": [
+      "Naaruurta ayuu Alle u qaboojiyey",
+      "Nabi geeriyooday",
+      "Nabi ka baxsaday",
+      "Naruuurta damtay"
+    ],
+    "correct": "Naaruurta ayuu Alle u qaboojiyey"
+  },
+  {
+    "question": "Ulul Azm — Nabiyaasha awooda leh (5)?",
+    "options": [
+      "Nuh, Ibrahim, Musa, Ciise, Maxamed",
+      "Adam, Idris, Nuh, Hud, Maxamed",
+      "Ibrahim, Musa, Ciise, Yuusuf, Maxamed",
+      "Adam, Ibrahim, Musa, Maxamed, Ciise"
+    ],
+    "correct": "Nuh, Ibrahim, Musa, Ciise, Maxamed"
+  },
+  {
+    "question": "Nabi Ibliriim (Ibrahim) hooyadii Ismaaciil?",
+    "options": [
+      "Haajar (Hajar)",
+      "Saarah",
+      "Maryam",
+      "Aamina"
+    ],
+    "correct": "Haajar (Hajar)"
+  },
+  {
+    "question": "Nabi Isxaaq (Isaac) hooyadiis?",
+    "options": [
+      "Saarah (Sara)",
+      "Haajar",
+      "Maryam",
+      "Aamina"
+    ],
+    "correct": "Saarah (Sara)"
+  },
+  {
+    "question": "Nabi Yacquub (Jacob) magaciisa kale?",
+    "options": [
+      "Israa'iil (Israel)",
+      "Ismaaciil",
+      "Isxaaq",
+      "Ibrahim"
+    ],
+    "correct": "Israa'iil (Israel)"
+  },
+  {
+    "question": "Nabi Ayyuub (Job) (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Sabriyaasha, Alle waxaa uu ku dhibay jirro, wuu darro sabtay",
+      "Dagaalka",
+      "Dooniga",
+      "Badda"
+    ],
+    "correct": "Sabriyaasha, Alle waxaa uu ku dhibay jirro, wuu darro sabtay"
+  },
+  {
+    "question": "Nabi Hud (AS) cidda loogu diray?",
+    "options": [
+      "Qoomkii Caad (People of Aad)",
+      "Qoomkii Thamuud",
+      "Qoomkii Lut",
+      "Qoomkii Nuh"
+    ],
+    "correct": "Qoomkii Caad (People of Aad)"
+  },
+  {
+    "question": "Nabi Saaliix (Salih) (AS) cidda loogu diray?",
+    "options": [
+      "Qoomkii Thamuud",
+      "Qoomkii Caad",
+      "Qoomkii Lut",
+      "Masar"
+    ],
+    "correct": "Qoomkii Thamuud"
+  },
+  {
+    "question": "Nabi Shuucayb (Jethro) (AS) cidda loogu diray?",
+    "options": [
+      "Qoomkii Madyan",
+      "Qoomkii Caad",
+      "Masar",
+      "Babiloon"
+    ],
+    "correct": "Qoomkii Madyan"
+  },
+  {
+    "question": "Nabi Lut (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Qoomkii Saduuma (Sodom) uu ka dilay, Alle burburiyey",
+      "Dooniga dhisay",
+      "Tawreedda heshay",
+      "Badda kala gooyay"
+    ],
+    "correct": "Qoomkii Saduuma (Sodom) uu ka dilay, Alle burburiyey"
+  },
+  {
+    "question": "Nabi Idrris (Enoch) (AS) Quraanka lagu xusay sidee?",
+    "options": [
+      "'Rafacnaahu makaanan caliyyan' — Meel sare ayaa loo qaadey",
+      "Dooniga dhisay",
+      "Jaaluuta dilay",
+      "Badda kala gooyay"
+    ],
+    "correct": "'Rafacnaahu makaanan caliyyan' — Meel sare ayaa loo qaadey"
+  },
+  {
+    "question": "Nabi Zakariyyaa (AS) wiilkiis?",
+    "options": [
+      "Yahya (John the Baptist)",
+      "Ciise",
+      "Yuusuf",
+      "Ibrahim"
+    ],
+    "correct": "Yahya (John the Baptist)"
+  },
+  {
+    "question": "Nabi Yahya (John the Baptist) (AS) maxaa la yaqaannaa?",
+    "options": [
+      "Wiilka Zakariyya, weynaa gaboobow la helay",
+      "Dooniga dhisay",
+      "Badda kala gooyay",
+      "Kacbaha dhisay"
+    ],
+    "correct": "Wiilka Zakariyya, weynaa gaboobow la helay"
+  },
+  {
+    "question": "Nabi Ismaaciil markuu aabbihii ibaahin doonayey, Alle cidda beddalay?",
+    "options": [
+      "Waxaa la geeyay geel (ram/sheep)",
+      "Nafs Ismaaciil la qal-qaalay",
+      "Malaa'ig yimid",
+      "Nabi dhintay"
+    ],
+    "correct": "Waxaa la geeyay geel (ram/sheep)"
+  },
+  {
+    "question": "Kitaabta la soo dejiyey Nabi Ibrahim?",
+    "options": [
+      "Saxiifada Ibrahim (Scrolls of Ibrahim)",
+      "Quraanka",
+      "Tawreedda",
+      "Injilka"
+    ],
+    "correct": "Saxiifada Ibrahim (Scrolls of Ibrahim)"
+  },
+  {
+    "question": "Nabiga koowaad ee magaciisu Quraanka ku xusan?",
+    "options": [
+      "Aadam (AS)",
+      "Nuh",
+      "Ibrahim",
+      "Idris"
+    ],
+    "correct": "Aadam (AS)"
+  },
+  {
+    "question": "Nabi Aadam iyo Hawwaa' halkeey ka soo dageen?",
+    "options": [
+      "Jannada (Paradise)",
+      "Dhulka",
+      "Badda",
+      "Samaawadda"
+    ],
+    "correct": "Jannada (Paradise)"
+  },
+  {
+    "question": "Nabi Musa (AS) kitaabtiisii?",
+    "options": [
+      "Tawreed (Torah)",
+      "Injil",
+      "Zabuura",
+      "Quraan"
+    ],
+    "correct": "Tawreed (Torah)"
+  },
+  {
+    "question": "Nabi Ciise (AS) kitaabtiisii?",
+    "options": [
+      "Injil (Gospel)",
+      "Tawreed",
+      "Zabuura",
+      "Quraan"
+    ],
+    "correct": "Injil (Gospel)"
+  },
+  {
+    "question": "Nabi Daawuud (AS) kitaabtiisii?",
+    "options": [
+      "Zabuura (Psalms)",
+      "Tawreed",
+      "Injil",
+      "Quraan"
+    ],
+    "correct": "Zabuura (Psalms)"
+  },
+  {
+    "question": "Nabi Maxamed (CSW) kitaabtiisii?",
+    "options": [
+      "Quraan Al-Kariim",
+      "Tawreed",
+      "Injil",
+      "Zabuura"
+    ],
+    "correct": "Quraan Al-Kariim"
+  },
+  {
+    "question": "Nabiyaasha Alle loogu soo diray sabab ugu weyn?",
+    "options": [
+      "In dadku Alle ku caabudaan, bidcada ka fogaadaan",
+      "In dagaallamaan",
+      "In boqornimo ku noolaadaan",
+      "In ganacsi tagaan"
+    ],
+    "correct": "In dadku Alle ku caabudaan, bidcada ka fogaadaan"
+  },
+  {
+    "question": "Khaliifadii Raashidiin tiradooda?",
+    "options": [
+      "4",
+      "3",
+      "5",
+      "6"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "Khaliifadii 1aad?",
+    "options": [
+      "Abu Bakr As-Siddiq (RA)",
+      "Umar ibn Khattab",
+      "Uthman ibn Affan",
+      "Ali ibn Abi Talib"
+    ],
+    "correct": "Abu Bakr As-Siddiq (RA)"
+  },
+  {
+    "question": "Khaliifadii 2aad?",
+    "options": [
+      "Umar ibn Khattab (RA)",
+      "Abu Bakr",
+      "Uthman",
+      "Ali"
+    ],
+    "correct": "Umar ibn Khattab (RA)"
+  },
+  {
+    "question": "Khaliifadii 3aad?",
+    "options": [
+      "Uthman ibn Affan (RA)",
+      "Abu Bakr",
+      "Umar",
+      "Ali"
+    ],
+    "correct": "Uthman ibn Affan (RA)"
+  },
+  {
+    "question": "Khaliifadii 4aad?",
+    "options": [
+      "Ali ibn Abi Talib (RA)",
+      "Abu Bakr",
+      "Umar",
+      "Uthman"
+    ],
+    "correct": "Ali ibn Abi Talib (RA)"
+  },
+  {
+    "question": "Abu Bakr As-Siddiq (RA) goorma xukumay?",
+    "options": [
+      "632–634 CE (2 sano)",
+      "634–644 CE",
+      "644–656 CE",
+      "656–661 CE"
+    ],
+    "correct": "632–634 CE (2 sano)"
+  },
+  {
+    "question": "Umar ibn Khattab (RA) goorma xukumay?",
+    "options": [
+      "634–644 CE (10 sano)",
+      "632–634 CE",
+      "644–656 CE",
+      "656–661 CE"
+    ],
+    "correct": "634–644 CE (10 sano)"
+  },
+  {
+    "question": "Uthman ibn Affan (RA) goorma xukumay?",
+    "options": [
+      "644–656 CE (12 sano)",
+      "632–634 CE",
+      "634–644 CE",
+      "656–661 CE"
+    ],
+    "correct": "644–656 CE (12 sano)"
+  },
+  {
+    "question": "Ali ibn Abi Talib (RA) goorma xukumay?",
+    "options": [
+      "656–661 CE (5 sano)",
+      "632–634 CE",
+      "634–644 CE",
+      "644–656 CE"
+    ],
+    "correct": "656–661 CE (5 sano)"
+  },
+  {
+    "question": "Abu Bakr (RA) geeriyoday sidee?",
+    "options": [
+      "Jirro (daran) — 634 CE",
+      "La dilay",
+      "Dagaalkii Badar",
+      "Sanad duub"
+    ],
+    "correct": "Jirro (daran) — 634 CE"
+  },
+  {
+    "question": "Umar ibn Khattab (RA) sidee la dilay?",
+    "options": [
+      "Abu Lu'lu'ah — addoom Faaris ah — 644 CE",
+      "Dagaalkii Badar",
+      "Jirro",
+      "Sanad duub"
+    ],
+    "correct": "Abu Lu'lu'ah — addoom Faaris ah — 644 CE"
+  },
+  {
+    "question": "Uthman ibn Affan (RA) sidee la dilay?",
+    "options": [
+      "Mutagharribiinta oo gurigiisii gashay — 656 CE",
+      "Dagaalkii Badar",
+      "Jirro",
+      "Umar uu dilay"
+    ],
+    "correct": "Mutagharribiinta oo gurigiisii gashay — 656 CE"
+  },
+  {
+    "question": "Ali ibn Abi Talib (RA) sidee la dilay?",
+    "options": [
+      "Khaarijiyiin — Ibn Muljam — 661 CE",
+      "Dagaalkii Badar",
+      "Jirro",
+      "Muawiyah"
+    ],
+    "correct": "Khaarijiyiin — Ibn Muljam — 661 CE"
+  },
+  {
+    "question": "Abu Bakr (RA) ganacsigii weynaa ee uu qabtay?",
+    "options": [
+      "Dagaallada Ridda — wuxuu la dagaallamay qabiilada ka doogtay Islaamka",
+      "Quraanka uruuriyay",
+      "Madiina dhisay",
+      "Dagaalkii Badar"
+    ],
+    "correct": "Dagaallada Ridda — wuxuu la dagaallamay qabiilada ka doogtay Islaamka"
+  },
+  {
+    "question": "Umar (RA) ganacsigii weynaa?",
+    "options": [
+      "Dowladda Islaamka loo ballaariyey Faaris iyo Rum",
+      "Dagaallada Ridda",
+      "Quraanka uruuriyay",
+      "Makkah furay"
+    ],
+    "correct": "Dowladda Islaamka loo ballaariyey Faaris iyo Rum"
+  },
+  {
+    "question": "Uthman (RA) ganacsigii weynaa?",
+    "options": [
+      "Quraanka nuskhada rasmiga ah la habsaday",
+      "Dagaallada Ridda",
+      "Faaris la adkaaday",
+      "Makkah furay"
+    ],
+    "correct": "Quraanka nuskhada rasmiga ah la habsaday"
+  },
+  {
+    "question": "Ali (RA) xiriirkiisii Nabi Maxamed?",
+    "options": [
+      "Indheer-gacalka iyo xaaskii wiilashiisii Faadumo",
+      "Abu Bakr oo kale",
+      "Addoonkii",
+      "Xilligii ka dib Nabi"
+    ],
+    "correct": "Indheer-gacalka iyo xaaskii wiilashiisii Faadumo"
+  },
+  {
+    "question": "Umar (RA) magacaabay goorma 'Al-Farooq'?",
+    "options": [
+      "Nabi Maxamed isaga siiyay magaca — kala-soocaha xaqa iyo baadilka",
+      "Ka dib Badar",
+      "Ka dib Khaliifad",
+      "Isagu naftiisa u bixiyay"
+    ],
+    "correct": "Nabi Maxamed isaga siiyay magaca — kala-soocaha xaqa iyo baadilka"
+  },
+  {
+    "question": "Dagaalkii Qadisiyyah goorma dhacay?",
+    "options": [
+      "636 CE — Khaliifkii Umar",
+      "624 CE",
+      "630 CE",
+      "632 CE"
+    ],
+    "correct": "636 CE — Khaliifkii Umar"
+  },
+  {
+    "question": "Dagaalkii Qaadisiyyah cidda ku adkaaday?",
+    "options": [
+      "Muslimiinta — dowladda Faaris (Sassanid) la burburiyey",
+      "Faaris",
+      "Byzantine",
+      "Rum"
+    ],
+    "correct": "Muslimiinta — dowladda Faaris (Sassanid) la burburiyey"
+  },
+  {
+    "question": "Dagaalkii Yarmuuk goorma dhacay?",
+    "options": [
+      "636 CE — Khaliifkii Umar",
+      "624 CE",
+      "630 CE",
+      "640 CE"
+    ],
+    "correct": "636 CE — Khaliifkii Umar"
+  },
+  {
+    "question": "Dagaalkii Yarmuuk cidda ku adkaaday?",
+    "options": [
+      "Muslimiinta — Byzantine la burburiyey",
+      "Byzantine",
+      "Faaris",
+      "Rum"
+    ],
+    "correct": "Muslimiinta — Byzantine la burburiyey"
+  },
+  {
+    "question": "Abu Bakr (RA) magaca 'As-Siddiq' maxaa loola jeedaa?",
+    "options": [
+      "Rumeeyihii — wuxuu rumeeyey Isrankii iyo Meraajkii Nabi",
+      "Xoogga badan",
+      "Ganacsade",
+      "Dagaalle"
+    ],
+    "correct": "Rumeeyihii — wuxuu rumeeyey Isrankii iyo Meraajkii Nabi"
+  },
+  {
+    "question": "Khaliifadii Raashidiin ugu yar ee xukumay?",
+    "options": [
+      "Abu Bakr (2 sano)",
+      "Ali (5 sano)",
+      "Umar (10 sano)",
+      "Uthman (12 sano)"
+    ],
+    "correct": "Abu Bakr (2 sano)"
+  },
+  {
+    "question": "Khaliifadii Raashidiin ugu dheer ee xukumay?",
+    "options": [
+      "Uthman ibn Affan (12 sano)",
+      "Umar (10 sano)",
+      "Ali (5 sano)",
+      "Abu Bakr (2 sano)"
+    ],
+    "correct": "Uthman ibn Affan (12 sano)"
+  },
+  {
+    "question": "Khaliifadii Raashidiin xukumkoodii intuu socday?",
+    "options": [
+      "632–661 CE (~30 sano)",
+      "610–632 CE",
+      "661–750 CE",
+      "750–1258 CE"
+    ],
+    "correct": "632–661 CE (~30 sano)"
+  },
+  {
+    "question": "Ali (RA) markuu Khaliif noqday, waxaa ka dhacay xaaladda?",
+    "options": [
+      "Aafad sokeeye — Dagaalkii Gamlaha iyo Siffiin",
+      "Nabad",
+      "Hore u maray",
+      "Dagaal dibedda"
+    ],
+    "correct": "Aafad sokeeye — Dagaalkii Gamlaha iyo Siffiin"
+  },
+  {
+    "question": "Dagaalkii Gamlaha (Battle of the Camel) cidda u dagaallamay?",
+    "options": [
+      "Ali (RA) iyo Aayisha + Talha + Zubayr",
+      "Ali iyo Muawiyah",
+      "Ali iyo Khawarij",
+      "Abu Bakr iyo Umar"
+    ],
+    "correct": "Ali (RA) iyo Aayisha + Talha + Zubayr"
+  },
+  {
+    "question": "Dagaalkii Siffiin cidda u dagaallamay?",
+    "options": [
+      "Ali (RA) iyo Muawiyah ibn Abi Sufyan",
+      "Ali iyo Aayisha",
+      "Umar iyo Khaarijiyiin",
+      "Uthman iyo Ali"
+    ],
+    "correct": "Ali (RA) iyo Muawiyah ibn Abi Sufyan"
+  },
+  {
+    "question": "Muawiyah ibn Abi Sufyan goorma Khaliifad qabtay?",
+    "options": [
+      "661 CE — Bilowgii Dowladda Umayyiyiinta",
+      "632 CE",
+      "656 CE",
+      "636 CE"
+    ],
+    "correct": "661 CE — Bilowgii Dowladda Umayyiyiinta"
+  },
+  {
+    "question": "Umar (RA) ka dibna cidda khaliifka dooratay?",
+    "options": [
+      "Shura (Golaha 6ka) — Uthman la doortay",
+      "Abu Bakr uu magacaabay",
+      "Dadku doortay",
+      "Askari uu dooray"
+    ],
+    "correct": "Shura (Golaha 6ka) — Uthman la doortay"
+  },
+  {
+    "question": "Timaama Islaamka (5 Pillars of Islam)?",
+    "options": [
+      "Shahaada, Salaad, Zakaat, Sawm, Xajj",
+      "Shahaada, Salaad, Soom, Jihaad, Xajj",
+      "Shahaada, Salaad, Zakaat, Jihaad, Xajj",
+      "Salaad, Zakaat, Soom, Xajj, Jihad"
+    ],
+    "correct": "Shahaada, Salaad, Zakaat, Sawm, Xajj"
+  },
+  {
+    "question": "Timaama Iimaan (6 Pillars of Faith)?",
+    "options": [
+      "Alle, Malaa'igta, Kitaabka, Nabiyaasha, Qiyaame, Qadar",
+      "Alle, Nabi, Quraan, Salaad, Xajj, Zakaat",
+      "Alle, Malaa'ig, Nabi, Quraan, Aakhiro, Salaad",
+      "Alle, Nabi, Kitaab, Qiyaame, Jihaad, Zakaat"
+    ],
+    "correct": "Alle, Malaa'igta, Kitaabka, Nabiyaasha, Qiyaame, Qadar"
+  },
+  {
+    "question": "Salaadda maalintii shanta ah oo kala ah?",
+    "options": [
+      "Subax, Zuhr, Casar, Maqrib, Cisho",
+      "Subax, Zuhr, Casar, Maqrib, Soor",
+      "Fajr, Duhr, Asr, Maqrib, Cisho, Witr",
+      "Subax, Dhuhur, Casr, Maqrib, Layl"
+    ],
+    "correct": "Subax, Zuhr, Casar, Maqrib, Cisho"
+  },
+  {
+    "question": "Zakaat tirada la bixineysa?",
+    "options": [
+      "2.5% hantida la kaydiyey sanad",
+      "10%",
+      "5%",
+      "1%"
+    ],
+    "correct": "2.5% hantida la kaydiyey sanad"
+  },
+  {
+    "question": "Soomda Ramadaan goorma yahay?",
+    "options": [
+      "Bishii 9aad ee islaamiga (Ramadaan)",
+      "Bishii 10aad",
+      "Bishii 12aad",
+      "Bishii 1aad"
+    ],
+    "correct": "Bishii 9aad ee islaamiga (Ramadaan)"
+  },
+  {
+    "question": "Ciidda Fitr (Eid Al-Fitr) goorma tahay?",
+    "options": [
+      "1 Shawwal — ka dib Ramadaan",
+      "10 Dhul Hijjah",
+      "1 Muharram",
+      "12 Rabii Al-Awwal"
+    ],
+    "correct": "1 Shawwal — ka dib Ramadaan"
+  },
+  {
+    "question": "Ciidda Axxa (Eid Al-Adha) goorma tahay?",
+    "options": [
+      "10 Dhul Hijjah",
+      "1 Shawwal",
+      "1 Muharram",
+      "27 Rajab"
+    ],
+    "correct": "10 Dhul Hijjah"
+  },
+  {
+    "question": "Xajjiga 5ta maalmood ugu muhiimsan? (heeraha xajjiga)",
+    "options": [
+      "8–12 Dhul Hijjah — Mina, Carafat, Muzdalifa, Mina, Makkah",
+      "Ramadaan oo dhan",
+      "Muharram",
+      "Safar"
+    ],
+    "correct": "8–12 Dhul Hijjah — Mina, Carafat, Muzdalifa, Mina, Makkah"
+  },
+  {
+    "question": "Carafat maalmeed muhimkeed xajjiga?",
+    "options": [
+      "9 Dhul Hijjah — 'Xajjigu waa Carafat'",
+      "10 Dhul Hijjah",
+      "8 Dhul Hijjah",
+      "12 Dhul Hijjah"
+    ],
+    "correct": "9 Dhul Hijjah — 'Xajjigu waa Carafat'"
+  },
+  {
+    "question": "Wudu (ablution) tallaabooyinkiisa ugu muhiimsan?",
+    "options": [
+      "Gacmaha, afka, san, wejiga, gacmaha xubta, madaxa, dhegaha, cagaha",
+      "Wejiga oo kaliya",
+      "Afka iyo san",
+      "Gacmaha oo kaliya"
+    ],
+    "correct": "Gacmaha, afka, san, wejiga, gacmaha xubta, madaxa, dhegaha, cagaha"
+  },
+  {
+    "question": "Arkaanul Salaad (waajibka salaadda) tiradooda?",
+    "options": [
+      "Niyyad, Takbiiratul Ixraam, Qiyaam, Qiraa'ah, Rukuu, Sujuud, Jalsa, Salaam",
+      "Takbeer oo kaliya",
+      "Qiyaam iyo Sujuud",
+      "Rukuu iyo Salaam"
+    ],
+    "correct": "Niyyad, Takbiiratul Ixraam, Qiyaam, Qiraa'ah, Rukuu, Sujuud, Jalsa, Salaam"
+  },
+  {
+    "question": "Salaadda Subax rac'adaheeda tiradooda?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "correct": "2"
+  },
+  {
+    "question": "Salaadda Zuhr rac'adaheeda tiradooda?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "5"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "Salaadda Casar rac'adaheeda tiradooda?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "5"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "Salaadda Maqrib rac'adaheeda tiradooda?",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "5"
+    ],
+    "correct": "3"
+  },
+  {
+    "question": "Salaadda Cisho rac'adaheeda tiradooda?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "5"
+    ],
+    "correct": "4"
+  },
+  {
+    "question": "Aasanka (Adhan) yaa ugu horeysay u qaaday?",
+    "options": [
+      "Bilaal ibn Rabaax (RA)",
+      "Abu Bakr",
+      "Umar",
+      "Ali"
+    ],
+    "correct": "Bilaal ibn Rabaax (RA)"
+  },
+  {
+    "question": "Bilaal (RA) hore wuxuu ahaa?",
+    "options": [
+      "Addoon — Umayyah ibn Khalaf uu lahaanjiray",
+      "Ganacsade",
+      "Askari",
+      "Culima"
+    ],
+    "correct": "Addoon — Umayyah ibn Khalaf uu lahaanjiray"
+  },
+  {
+    "question": "Zakaat fardka lagu bixiyo goorma?",
+    "options": [
+      "Haddii Nisaab (xaddiga) la gaaro oo Hawl (sanad) dhaafto",
+      "Marka lacagta la helo oo dhan",
+      "Sanad walba oo keliya",
+      "Ramadaan oo kaliya"
+    ],
+    "correct": "Haddii Nisaab (xaddiga) la gaaro oo Hawl (sanad) dhaafto"
+  },
+  {
+    "question": "Zakaat sidee looga kala soocaa Sadaqah?",
+    "options": [
+      "Zakaat waa waajib, Sadaqah waa naafi (ikhtiyaari)",
+      "Labaduba waa isku mid",
+      "Sadaqah waa waajib",
+      "Zakaat waa ikhtiyaari"
+    ],
+    "correct": "Zakaat waa waajib, Sadaqah waa naafi (ikhtiyaari)"
+  },
+  {
+    "question": "Siyaamo noocyadiisa waa?",
+    "options": [
+      "Ramadaan (fard), naafi, kafaarad, Manadhir",
+      "Ramadaan oo kaliya",
+      "Naafi oo kaliya",
+      "Fard oo kaliya"
+    ],
+    "correct": "Ramadaan (fard), naafi, kafaarad, Manadhir"
+  },
+  {
+    "question": "Laylatul Qadr goorma tahay?",
+    "options": [
+      "Bisha Ramadaan — dhexdeeda 27ka (Witigii Ugu Dambe)",
+      "1 Ramadaan",
+      "15 Ramadaan",
+      "Eid Fitr"
+    ],
+    "correct": "Bisha Ramadaan — dhexdeeda 27ka (Witigii Ugu Dambe)"
+  },
+  {
+    "question": "Laylatul Qadr muhimkeed?",
+    "options": [
+      "Waxay ka wanaagsan tahay 1000 bilood",
+      "Maalin caadi ah",
+      "Ramadaan 1aad",
+      "Ciidda Fitr"
+    ],
+    "correct": "Waxay ka wanaagsan tahay 1000 bilood"
+  },
+  {
+    "question": "Xajjiga Fardka noqda goorma?",
+    "options": [
+      "Marka mid awoodiisu tahay — jirka, maalkiisa, xilliyaasna ayaa",
+      "Mar oo kaliya noloshaada",
+      "Sanad walba",
+      "Ramadaan"
+    ],
+    "correct": "Marka mid awoodiisu tahay — jirka, maalkiisa, xilliyaasna ayaa"
+  },
+  {
+    "question": "Tawwaaf macnaheedu waa?",
+    "options": [
+      "Ku wareegida Kacbaha 7 jeer — markii xajjiga ama Cuumrada",
+      "Salaadda",
+      "Siyaamada",
+      "Adhan"
+    ],
+    "correct": "Ku wareegida Kacbaha 7 jeer — markii xajjiga ama Cuumrada"
+  },
+  {
+    "question": "Sacy (Sacyii) xajjiga macnaheedu waa?",
+    "options": [
+      "Socodka dhexdooda Safa iyo Marwah 7 jeer",
+      "Tawwaafka Kacbaha",
+      "Waqfada Carafat",
+      "Xajratu Al-Aswad taabashada"
+    ],
+    "correct": "Socodka dhexdooda Safa iyo Marwah 7 jeer"
+  },
+  {
+    "question": "Xajrul Aswad (Black Stone) halkee ku jiraa?",
+    "options": [
+      "Geeska bariga-koonfur ee Kacbaha",
+      "Gudaha Kacbaha",
+      "Buurtii Carafat",
+      "Masjid Al-Aqsa"
+    ],
+    "correct": "Geeska bariga-koonfur ee Kacbaha"
+  },
+  {
+    "question": "Masjid Al-Haram waxay ku taallaa?",
+    "options": [
+      "Makkah Al-Mukarramah",
+      "Madiina",
+      "Quds",
+      "Taif"
+    ],
+    "correct": "Makkah Al-Mukarramah"
+  },
+  {
+    "question": "Masjid An-Nabawi waxay ku taallaa?",
+    "options": [
+      "Madiina Al-Munawwarah",
+      "Makkah",
+      "Quds",
+      "Taif"
+    ],
+    "correct": "Madiina Al-Munawwarah"
+  },
+  {
+    "question": "Masjid Al-Aqsa waxay ku taallaa?",
+    "options": [
+      "Quds (Jerusalem)",
+      "Makkah",
+      "Madiina",
+      "Shaam"
+    ],
+    "correct": "Quds (Jerusalem)"
+  },
+  {
+    "question": "Masaajidda 3 ee ugu quduusan ee Islaamka?",
+    "options": [
+      "Masjid Al-Haram, Masjid An-Nabawi, Masjid Al-Aqsa",
+      "Makkah, Madiina, Baghdad",
+      "Makkah, Taif, Madiina",
+      "Makkah, Quds, Kairo"
+    ],
+    "correct": "Masjid Al-Haram, Masjid An-Nabawi, Masjid Al-Aqsa"
+  },
+  {
+    "question": "Nifaaq macnaheedu waa?",
+    "options": [
+      "Laba-dacalanimada — xaajada dibedda Islaam u muujin, gudahana kufri",
+      "Shirka",
+      "Bidcada",
+      "Jaahliyada"
+    ],
+    "correct": "Laba-dacalanimada — xaajada dibedda Islaam u muujin, gudahana kufri"
+  },
+  {
+    "question": "Shirka weynaa ee Islaamka?",
+    "options": [
+      "In la qeybiyo xukumkii Alle qof ama wax kale",
+      "Khiyaano",
+      "Laba-dacalanimo",
+      "Sinnaan darro"
+    ],
+    "correct": "In la qeybiyo xukumkii Alle qof ama wax kale"
+  },
+  {
+    "question": "Tawbada Shuruudaheeda?",
+    "options": [
+      "Ka aamusid dembi, ka xumaysiid, in kala soconayn, xuquuqda la celiyo",
+      "Oo kaliya Istighfaar la yiraahdo",
+      "Salaad kaliya",
+      "Xajj kaliya"
+    ],
+    "correct": "Ka aamusid dembi, ka xumaysiid, in kala soconayn, xuquuqda la celiyo"
+  },
+  {
+    "question": "Jinsi waa nooc kee?",
+    "options": [
+      "Khalaqyada Alle ee neefta leh — mid diinta raacan, mid kafarsan",
+      "Naas oo kaliya",
+      "Malaa'ig oo kaliya",
+      "Daanyeer"
+    ],
+    "correct": "Khalaqyada Alle ee neefta leh — mid diinta raacan, mid kafarsan"
+  },
+  {
+    "question": "Malaa'igta waa?",
+    "options": [
+      "Khalaqyada Alle oo nuur ka samaysan, xukunkiisa raaca oo qura",
+      "Jinni",
+      "Naas",
+      "Xayawaan xil leh"
+    ],
+    "correct": "Khalaqyada Alle oo nuur ka samaysan, xukunkiisa raaca oo qura"
+  },
+  {
+    "question": "Jibriiliga (AS) xilkiisii?",
+    "options": [
+      "Waxyiga u gaarsiinta Nabiyaasha",
+      "Roobka",
+      "Nafta qaadashada",
+      "Rizqiga"
+    ],
+    "correct": "Waxyiga u gaarsiinta Nabiyaasha"
+  },
+  {
+    "question": "Malaa'igta Mikaa'iil xilkiisii?",
+    "options": [
+      "Roobka iyo Rizqiga",
+      "Waxyiga",
+      "Nafta qaadashada",
+      "Buuntiga"
+    ],
+    "correct": "Roobka iyo Rizqiga"
+  },
+  {
+    "question": "Malaa'igta Israafiil xilkiisii?",
+    "options": [
+      "Buuntiga Qiyaame (Suur)",
+      "Waxyiga",
+      "Nafta qaadashada",
+      "Roobka"
+    ],
+    "correct": "Buuntiga Qiyaame (Suur)"
+  },
+  {
+    "question": "Malaa'igta Cizraa'iil xilkiisii?",
+    "options": [
+      "Nafta qaadashada (Malakul Mawt)",
+      "Waxyiga",
+      "Roobka",
+      "Buuntiga"
+    ],
+    "correct": "Nafta qaadashada (Malakul Mawt)"
+  },
+  {
+    "question": "Bilowgii Ramaadaan sunnada weyn?",
+    "options": [
+      "Suhuur (cunto saakii hore)",
+      "Iftar goor hore",
+      "Salaad badan",
+      "Xajj"
+    ],
+    "correct": "Suhuur (cunto saakii hore)"
+  },
+  {
+    "question": "Iftar goorta saxda ah?",
+    "options": [
+      "Qorraxda dhaceysa (Maqrib xilli)",
+      "Subaxnimada",
+      "Duhurka",
+      "Cisho"
+    ],
+    "correct": "Qorraxda dhaceysa (Maqrib xilli)"
+  },
+  {
+    "question": "Taraawiix (Tarawih) goorma la tuko?",
+    "options": [
+      "Habeennada Ramadaan ka dib Cisho",
+      "Sanad walba Jimcaha",
+      "Ciidda",
+      "Subax"
+    ],
+    "correct": "Habeennada Ramadaan ka dib Cisho"
+  },
+  {
+    "question": "Zakat Al-Fitr goorma bixinta?",
+    "options": [
+      "Ka hor Salaadda Ciidda Fitr",
+      "Ramadaan gudihiisa",
+      "Ka dib Ciidda Fitr",
+      "Hore"
+    ],
+    "correct": "Ka hor Salaadda Ciidda Fitr"
+  },
+  {
+    "question": "Qurbooniga Ciidda Axxa (Udhiyah) noocyadiisa?",
+    "options": [
+      "Geel, lo', ido, ri — xalaal iyo caafimaad qaba",
+      "Kaliya geel",
+      "Kaliya lo'",
+      "Kaliya ido"
+    ],
+    "correct": "Geel, lo', ido, ri — xalaal iyo caafimaad qaba"
+  },
+  {
+    "question": "Jimcaha (Jumu'ah) salaadda goorma yahay?",
+    "options": [
+      "Dhuhurka Jimcaha — Xutbad + 2 rac'ad",
+      "Subax Jimcaha",
+      "Cisho Jimcaha",
+      "Maqrib Jimcaha"
+    ],
+    "correct": "Dhuhurka Jimcaha — Xutbad + 2 rac'ad"
+  },
+  {
+    "question": "Fardiga Salaadda ee ay kor leedahay?",
+    "options": [
+      "In la tuko — cidna kama ruqsad leh (marka awood la'aana la fududaystaa)",
+      "Naafi",
+      "Sunnah",
+      "Ikhtiyaari"
+    ],
+    "correct": "In la tuko — cidna kama ruqsad leh (marka awood la'aana la fududaystaa)"
+  },
+  {
+    "question": "Tayammum goorma la sameeya?",
+    "options": [
+      "Marka biyo la waayo ama adeegsiga biyo cidhib ku ah",
+      "Sanad walba",
+      "Ramadaan",
+      "Hore salaadda"
+    ],
+    "correct": "Marka biyo la waayo ama adeegsiga biyo cidhib ku ah"
+  },
+  {
+    "question": "Ghusl (xaraashada dhammaystiran) goorma waa waajib?",
+    "options": [
+      "Ka dib xaal janaba, wareegga haweenka, dhalashada, iyo geerida",
+      "Jimcaha oo kaliya",
+      "Sanad walba",
+      "Ramadaan"
+    ],
+    "correct": "Ka dib xaal janaba, wareegga haweenka, dhalashada, iyo geerida"
+  },
+  {
+    "question": "Khitaan (circumcision) Islaamka waa?",
+    "options": [
+      "Sunnah rasmiga ah — xirfad taariikhiga leh",
+      "Fard",
+      "Xaaraan",
+      "Ikhtiyaari oo kaliya"
+    ],
+    "correct": "Sunnah rasmiga ah — xirfad taariikhiga leh"
+  },
+  {
+    "question": "Niyyadda salaadda halkee ka tirsan tahay?",
+    "options": [
+      "Qalbiga — ma loo baahna af ah",
+      "Afsiga oo keliya",
+      "Calaamad",
+      "Dabada"
+    ],
+    "correct": "Qalbiga — ma loo baahna af ah"
+  },
+  {
+    "question": "Qiblada (direction of prayer) waa?",
+    "options": [
+      "Kacbaha — Makkah",
+      "Quds",
+      "Madiina",
+      "Baytul Maqdis"
+    ],
+    "correct": "Kacbaha — Makkah"
+  },
+  {
+    "question": "Marka la tuko salaadda jamaat, imaamkiisu halkee joogaa?",
+    "options": [
+      "Horta — kooxda hor",
+      "Dambe",
+      "Dhanka midig",
+      "Dhanka bidix"
+    ],
+    "correct": "Horta — kooxda hor"
+  },
+  {
+    "question": "Fidya (badal siyaam) cidda loogu ogol yahay?",
+    "options": [
+      "Kuwa taagta darraysan ee xaaladda joogtada ah",
+      "Musaafiirta oo kaliya",
+      "Cudurada oo kaliya",
+      "Dhammaan dadka"
+    ],
+    "correct": "Kuwa taagta darraysan ee xaaladda joogtada ah"
+  },
+  {
+    "question": "Xajjul Ifraad, Qiraan, Tamattu' macnahoodaa?",
+    "options": [
+      "Xajj oo keliya, Xajj+Cuumro isla mar, Cuumro hore ka dib Xajj",
+      "Isku mid",
+      "Nooc kasta oo Cuumro",
+      "Nooc kasta oo Xajj"
+    ],
+    "correct": "Xajj oo keliya, Xajj+Cuumro isla mar, Cuumro hore ka dib Xajj"
+  },
+  {
+    "question": "Muxarramatul Xajj (xaaraanta Xajjiga)?",
+    "options": [
+      "Guur, kacsi, dagaal, dabinkii xayawaanka, naxariis la'aanta",
+      "Cuni oo keliya",
+      "Guurka oo kaliya",
+      "Guri ka bixid"
+    ],
+    "correct": "Guur, kacsi, dagaal, dabinkii xayawaanka, naxariis la'aanta"
+  },
+  {
+    "question": "Dagaalkii koowaad ee Islaamka?",
+    "options": [
+      "Dagaalkii Badar — 624 CE",
+      "Dagaalkii Uhud",
+      "Dagaalkii Khandaq",
+      "Dagaalkii Tabuk"
+    ],
+    "correct": "Dagaalkii Badar — 624 CE"
+  },
+  {
+    "question": "Dagaalkii Badar — cidda ku guulaysay?",
+    "options": [
+      "Muslimiinta — 313 oo ka adkaaday ~1000",
+      "Quraysh",
+      "Labaduba isku mid",
+      "Ma dhicin"
+    ],
+    "correct": "Muslimiinta — 313 oo ka adkaaday ~1000"
+  },
+  {
+    "question": "Dagaalkii Uhud — maxaa ka dhacay?",
+    "options": [
+      "Muslimiintu khasaaro bay galeen — tireeraha goobta ka baxeen",
+      "Muslimiintu guulaystay",
+      "Labaduba dhumeen",
+      "Nabi la dilay"
+    ],
+    "correct": "Muslimiintu khasaaro bay galeen — tireeraha goobta ka baxeen"
+  },
+  {
+    "question": "Dagaalkii Khandaq — maxaa la yiqiin?",
+    "options": [
+      "Khanaaq (trench) la qoday — Salmaan Al-Faarisi talada siiyay",
+      "Dagaalkii ugu weynaa",
+      "Dagaalkii ugu dambeeyay",
+      "Dagaalkii ugu horeeya"
+    ],
+    "correct": "Khanaaq (trench) la qoday — Salmaan Al-Faarisi talada siiyay"
+  },
+  {
+    "question": "Dagaalkii Muuta — cidda ka shahiid noqday?",
+    "options": [
+      "Zayd ibn Haaritha, Jafar ibn Abi Talib, Cabdullaahi ibn Rawaaxah",
+      "Abu Bakr, Umar, Uthman",
+      "Ali iyo Hamza",
+      "Bilaal iyo Salmaan"
+    ],
+    "correct": "Zayd ibn Haaritha, Jafar ibn Abi Talib, Cabdullaahi ibn Rawaaxah"
+  },
+  {
+    "question": "Dagaalkii Ridda — cidda ku dagaallamay?",
+    "options": [
+      "Abu Bakr (RA) — qabiilada ka doogtay Islaamka uu la dagaallamay",
+      "Ali oo kaliya",
+      "Umar oo kaliya",
+      "Sahabada oo dhan"
+    ],
+    "correct": "Abu Bakr (RA) — qabiilada ka doogtay Islaamka uu la dagaallamay"
+  },
+  {
+    "question": "Dagaalkii Qaadisiyyah — cidda ku dagaallamay?",
+    "options": [
+      "Muslimiinta (Saad ibn Abi Waqqaas) iyo Faaris (Sassanid)",
+      "Muslimiinta iyo Byzantine",
+      "Muslimiinta iyo Rum",
+      "Muslimiinta iyo Masar"
+    ],
+    "correct": "Muslimiinta (Saad ibn Abi Waqqaas) iyo Faaris (Sassanid)"
+  },
+  {
+    "question": "Dagaalkii Yarmuuk — cidda ku dagaallamay?",
+    "options": [
+      "Muslimiinta (Khalid ibn Al-Walid) iyo Byzantine",
+      "Muslimiinta iyo Faaris",
+      "Muslimiinta iyo Rum",
+      "Muslimiinta iyo Habasha"
+    ],
+    "correct": "Muslimiinta (Khalid ibn Al-Walid) iyo Byzantine"
+  },
+  {
+    "question": "Khalid ibn Al-Walid (RA) maxaa loola jeedaa 'Sayfullah'?",
+    "options": [
+      "Seefta Alle — sababtoo ah ma laga adkaan karo",
+      "Guulaha badan",
+      "Dagaallada badan",
+      "Geesinnimada"
+    ],
+    "correct": "Seefta Alle — sababtoo ah ma laga adkaan karo"
+  },
+  {
+    "question": "Dagaalkii Badar — Nabi Maxamed maxuu u sameeyay ka hor?",
+    "options": [
+      "Du'a iyo baryashada Alle",
+      "Ciidanka shir",
+      "Hubka cabsi geliyay",
+      "Heshiis"
+    ],
+    "correct": "Du'a iyo baryashada Alle"
+  },
+  {
+    "question": "Hamza (RA) goorma shahiid noqday?",
+    "options": [
+      "Dagaalkii Uhud — 625 CE",
+      "Dagaalkii Badar",
+      "Dagaalkii Khandaq",
+      "Dagaalkii Tabuk"
+    ],
+    "correct": "Dagaalkii Uhud — 625 CE"
+  },
+  {
+    "question": "Dagaalkii Hunayn — goorma dhacay?",
+    "options": [
+      "630 CE — ka dib Fataxu Makkah",
+      "628 CE",
+      "625 CE",
+      "622 CE"
+    ],
+    "correct": "630 CE — ka dib Fataxu Makkah"
+  },
+  {
+    "question": "Dagaalkii Hunayn — cidda?",
+    "options": [
+      "Muslimiinta iyo qabiilada Hawazin iyo Thaqif",
+      "Muslimiinta iyo Quraysh",
+      "Muslimiinta iyo Byzantine",
+      "Muslimiinta iyo Faaris"
+    ],
+    "correct": "Muslimiinta iyo qabiilada Hawazin iyo Thaqif"
+  },
+  {
+    "question": "Fataxu Makkah — goorma?",
+    "options": [
+      "630 CE (8 AH) — Ramadaan 20ka",
+      "628 CE",
+      "625 CE",
+      "632 CE"
+    ],
+    "correct": "630 CE (8 AH) — Ramadaan 20ka"
+  },
+  {
+    "question": "Fataxu Makkah — Nabi Maxamed maxuu sameeyay markuu galay?",
+    "options": [
+      "Cafw (afooryada) — Banu Makhzum iyo Banu Hashim ma aas-aasiin",
+      "Intuu dilay munaafiqiinta",
+      "Intuu aasaasay xukun cusub",
+      "Intuu dagaallamay"
+    ],
+    "correct": "Cafw (afooryada) — Banu Makhzum iyo Banu Hashim ma aas-aasiin"
+  },
+  {
+    "question": "Dagaalkii Tabuk — saabbiisii?",
+    "options": [
+      "Byzantine-yada la soo ogaaday in ay kahor imaanayaan",
+      "Faaris",
+      "Muslimiinta gudaha",
+      "Qabiilada Yaman"
+    ],
+    "correct": "Byzantine-yada la soo ogaaday in ay kahor imaanayaan"
+  },
+  {
+    "question": "Dagaalkii Siffiin — goorma?",
+    "options": [
+      "657 CE — Khaliifkii Ali (RA)",
+      "636 CE",
+      "650 CE",
+      "661 CE"
+    ],
+    "correct": "657 CE — Khaliifkii Ali (RA)"
+  },
+  {
+    "question": "Dagaalkii Karbala — goorma iyo cidda?",
+    "options": [
+      "680 CE — Xuseen ibn Ali (RA) — Yazid ibn Muawiyah ciidankiisa",
+      "656 CE",
+      "661 CE",
+      "700 CE"
+    ],
+    "correct": "680 CE — Xuseen ibn Ali (RA) — Yazid ibn Muawiyah ciidankiisa"
+  },
+  {
+    "question": "Xuseen ibn Ali (RA) goorma shahiid noqday?",
+    "options": [
+      "10 Muharram 61 AH (680 CE) — Karbala",
+      "656 CE",
+      "661 CE",
+      "700 CE"
+    ],
+    "correct": "10 Muharram 61 AH (680 CE) — Karbala"
+  },
+  {
+    "question": "Gaashaankii Al-Walid ibn Yazid ee Umayyiyiinta ee ugu weynaa?",
+    "options": [
+      "Muslimiintu Spain (Andalus) gasheen — 711 CE",
+      "Muslimiintu Hindiya gasheen",
+      "Muslimiintu Afrika gasheen",
+      "Muslimiintu Ruum gasheen"
+    ],
+    "correct": "Muslimiintu Spain (Andalus) gasheen — 711 CE"
+  },
+  {
+    "question": "Tariq ibn Ziyad — cidda ah?",
+    "options": [
+      "Gaashaankii Muslimiinta ee Spain — 711 CE",
+      "Khalid ibn Al-Walid",
+      "Saad ibn Abi Waqqaas",
+      "Abu Ubaydah"
+    ],
+    "correct": "Gaashaankii Muslimiinta ee Spain — 711 CE"
+  },
+  {
+    "question": "Salahuddiin Al-Ayyuubi (Saladin) — maxaa la yaqaannaa?",
+    "options": [
+      "Jerusalem (Al-Quds) u soo celiyay Muslimiinta — 1187 CE",
+      "Xulafaa'ur Raashidiin",
+      "Dagaalkii Yarmuuk",
+      "Ottoman Empire"
+    ],
+    "correct": "Jerusalem (Al-Quds) u soo celiyay Muslimiinta — 1187 CE"
+  },
+  {
+    "question": "Dagaalkii Khaybar — goorma iyo cidda?",
+    "options": [
+      "628 CE — Muslimiinta iyo Yuhuudda Khaybar",
+      "625 CE Uhud",
+      "630 CE Hunayn",
+      "622 CE Hijra"
+    ],
+    "correct": "628 CE — Muslimiinta iyo Yuhuudda Khaybar"
+  },
+  {
+    "question": "Dagaalkii Badr — Nabi Maxamed maxuu ka soo hadlay?",
+    "options": [
+      "'Dhiillo alla dhibtiisii hore' — Guusha Alle ka timid",
+      "Guul shakhsi ah",
+      "Awood milateri",
+      "Ciidanka"
+    ],
+    "correct": "'Dhiillo alla dhibtiisii hore' — Guusha Alle ka timid"
+  },
+  {
+    "question": "Ameerul Mu'miniin — macnaheedu waa?",
+    "options": [
+      "Taliyaha Mu'miniinta — xilka Khaliifku leeyahay",
+      "Nabi",
+      "Imaam",
+      "Wali"
+    ],
+    "correct": "Taliyaha Mu'miniinta — xilka Khaliifku leeyahay"
+  },
+  {
+    "question": "Dagaalkii Ain Jalut goorma dhacay?",
+    "options": [
+      "1260 CE — Muslimiinta iyo Mongoliyiinta",
+      "1187 CE",
+      "1099 CE",
+      "1453 CE"
+    ],
+    "correct": "1260 CE — Muslimiinta iyo Mongoliyiinta"
+  },
+  {
+    "question": "Dagaalkii Ain Jalut cidda ku adkaaday?",
+    "options": [
+      "Muslimiinta (Mamelukes — Masar) — Mongoliyiinta la adkaaday",
+      "Mongoliyiinta",
+      "Crusaders",
+      "Byzantine"
+    ],
+    "correct": "Muslimiinta (Mamelukes — Masar) — Mongoliyiinta la adkaaday"
+  },
+  {
+    "question": "Crusades (Dagaallada Salib) — goorma bilaabmeen?",
+    "options": [
+      "1096 CE — Pope Urban II amarka siiyay",
+      "900 CE",
+      "1200 CE",
+      "800 CE"
+    ],
+    "correct": "1096 CE — Pope Urban II amarka siiyay"
+  },
+  {
+    "question": "Crusaders goorma Quds qabsadeen?",
+    "options": [
+      "1099 CE",
+      "1187 CE",
+      "1096 CE",
+      "1291 CE"
+    ],
+    "correct": "1099 CE"
+  },
+  {
+    "question": "Salahuddiin goorma Quds soo celiyay?",
+    "options": [
+      "1187 CE — Dagaalkii Hattin ka dib",
+      "1099 CE",
+      "1260 CE",
+      "1291 CE"
+    ],
+    "correct": "1187 CE — Dagaalkii Hattin ka dib"
+  },
+  {
+    "question": "Dowladda Umayyiyiinta goorma la aasaasay?",
+    "options": [
+      "661 CE — Muawiyah ibn Abi Sufyan",
+      "632 CE",
+      "750 CE",
+      "610 CE"
+    ],
+    "correct": "661 CE — Muawiyah ibn Abi Sufyan"
+  },
+  {
+    "question": "Caasimadda Dowladda Umayyiyiinta?",
+    "options": [
+      "Damashq (Damascus — Shaam)",
+      "Baghdad",
+      "Kairo",
+      "Makkah"
+    ],
+    "correct": "Damashq (Damascus — Shaam)"
+  },
+  {
+    "question": "Dowladda Umayyiyiinta goorma burburtay?",
+    "options": [
+      "750 CE — Abbaasiyiintu reebi jireen",
+      "661 CE",
+      "800 CE",
+      "632 CE"
+    ],
+    "correct": "750 CE — Abbaasiyiintu reebi jireen"
+  },
+  {
+    "question": "Dowladda Abbaasiyiinta goorma la aasaasay?",
+    "options": [
+      "750 CE",
+      "661 CE",
+      "632 CE",
+      "1258 CE"
+    ],
+    "correct": "750 CE"
+  },
+  {
+    "question": "Caasimadda Dowladda Abbaasiyiinta?",
+    "options": [
+      "Baghdad",
+      "Damashq",
+      "Kairo",
+      "Makkah"
+    ],
+    "correct": "Baghdad"
+  },
+  {
+    "question": "Dowladda Abbaasiyiinta goorma burburtay?",
+    "options": [
+      "1258 CE — Mongoliyiintu Baghdad la dhaceen",
+      "750 CE",
+      "1000 CE",
+      "1200 CE"
+    ],
+    "correct": "1258 CE — Mongoliyiintu Baghdad la dhaceen"
+  },
+  {
+    "question": "Hulaagu Khan goorma Baghdad la dhacay?",
+    "options": [
+      "1258 CE",
+      "1200 CE",
+      "1300 CE",
+      "1100 CE"
+    ],
+    "correct": "1258 CE"
+  },
+  {
+    "question": "Dowladda Fatimiyiinta goorma la aasaasay?",
+    "options": [
+      "909 CE — Waqooyi Afrika (Tunisia)",
+      "750 CE",
+      "661 CE",
+      "1000 CE"
+    ],
+    "correct": "909 CE — Waqooyi Afrika (Tunisia)"
+  },
+  {
+    "question": "Caasimadda Dowladda Fatimiyiinta marka Masar la qabsaday?",
+    "options": [
+      "Kairo (Al-Qaahira) — 969 CE",
+      "Baghdad",
+      "Damashq",
+      "Makkah"
+    ],
+    "correct": "Kairo (Al-Qaahira) — 969 CE"
+  },
+  {
+    "question": "Dowladda Ootomaan (Ottoman) goorma la aasaasay?",
+    "options": [
+      "1299 CE — Uthman I (Bey)",
+      "661 CE",
+      "750 CE",
+      "1453 CE"
+    ],
+    "correct": "1299 CE — Uthman I (Bey)"
+  },
+  {
+    "question": "Dowladda Ootomaan goorma Constantinople (Istanbul) qabsatay?",
+    "options": [
+      "1453 CE — Sultaan Muhammad Al-Fatix",
+      "1299 CE",
+      "1500 CE",
+      "1600 CE"
+    ],
+    "correct": "1453 CE — Sultaan Muhammad Al-Fatix"
+  },
+  {
+    "question": "Sultaan Muhammad Al-Fatix goorma Constantinople qabsaday?",
+    "options": [
+      "1453 CE — 21 sano jir",
+      "1299 CE",
+      "1500 CE",
+      "1400 CE"
+    ],
+    "correct": "1453 CE — 21 sano jir"
+  },
+  {
+    "question": "Dowladda Ootomaan goorma burburtay?",
+    "options": [
+      "1922 CE — ka dib Dagaalkii Aduunyada 1aad",
+      "1900 CE",
+      "1800 CE",
+      "1453 CE"
+    ],
+    "correct": "1922 CE — ka dib Dagaalkii Aduunyada 1aad"
+  },
+  {
+    "question": "Caaradda Islaamka (Islamic Golden Age) goorma ahayd?",
+    "options": [
+      "8aad–13aad qarnigii CE",
+      "1aad–5aad qarnigii",
+      "15aad–18aad qarnigii",
+      "1aad–8aad qarnigii"
+    ],
+    "correct": "8aad–13aad qarnigii CE"
+  },
+  {
+    "question": "Caaradda Islaamka maxaa lagu xusan?",
+    "options": [
+      "Sayniska, Xisaabta, Cilmiga, Fanka — Muslimiintu hoggaamiyeen",
+      "Dagaallada badan",
+      "Ganacsiga oo kaliya",
+      "Waxbarashada oo kaliya"
+    ],
+    "correct": "Sayniska, Xisaabta, Cilmiga, Fanka — Muslimiintu hoggaamiyeen"
+  },
+  {
+    "question": "Ibn Khaldun (1332–1406) — cidda ah?",
+    "options": [
+      "Taariikhyahan iyo macbuul Carabiyeed oo caan ah — 'Al-Muqaddimah'",
+      "Xisaabtahan",
+      "Culimo diini",
+      "Boqor"
+    ],
+    "correct": "Taariikhyahan iyo macbuul Carabiyeed oo caan ah — 'Al-Muqaddimah'"
+  },
+  {
+    "question": "Averroes (Ibn Rushd) — cidda ah?",
+    "options": [
+      "Faylasuuf iyo dhakhtar Muslim — Spain (Andalus)",
+      "Taariikhyahan",
+      "Boqor",
+      "Nabi"
+    ],
+    "correct": "Faylasuuf iyo dhakhtar Muslim — Spain (Andalus)"
+  },
+  {
+    "question": "Islaamka goorma Africa gaadhay?",
+    "options": [
+      "Qarni 7aad CE — xilligii Nabi iyo Sahabada",
+      "1000 CE",
+      "1400 CE",
+      "500 CE"
+    ],
+    "correct": "Qarni 7aad CE — xilligii Nabi iyo Sahabada"
+  },
+  {
+    "question": "Hijra koowaad — Muslimiintii koowaad halkee u hijrooday?",
+    "options": [
+      "Habasha (Ethiopia) — Boqor Najashi (Negus)",
+      "Yaman",
+      "Masar",
+      "Shaam"
+    ],
+    "correct": "Habasha (Ethiopia) — Boqor Najashi (Negus)"
+  },
+  {
+    "question": "Boqor Najashi (Negus of Abyssinia) — maxuu sameeyay Muslimiintii?",
+    "options": [
+      "Daryeelay oo ximaayaday — ma u celinin Qurayshta",
+      "Celiyay",
+      "La dagaallamay",
+      "Diidday"
+    ],
+    "correct": "Daryeelay oo ximaayaday — ma u celinin Qurayshta"
+  },
+  {
+    "question": "Islaamka Spain (Andalus) goorma gaadhay?",
+    "options": [
+      "711 CE — Tariq ibn Ziyad",
+      "800 CE",
+      "900 CE",
+      "600 CE"
+    ],
+    "correct": "711 CE — Tariq ibn Ziyad"
+  },
+  {
+    "question": "Timbuktu (Mali) taariikhiyan — xirfad leeyahay?",
+    "options": [
+      "Xarun waxbarasho Islaamiyeed caan ah (Sankore University)",
+      "Ganacsiga oo kaliya",
+      "Dagaalada",
+      "Xarun milateri"
+    ],
+    "correct": "Xarun waxbarasho Islaamiyeed caan ah (Sankore University)"
+  },
+  {
+    "question": "Mansa Musa (King of Mali) goorma Xajj tagay?",
+    "options": [
+      "1324 CE — xafladii dahab ee caan ahayd",
+      "1200 CE",
+      "1400 CE",
+      "1100 CE"
+    ],
+    "correct": "1324 CE — xafladii dahab ee caan ahayd"
+  },
+  {
+    "question": "Islaamka Hindiya goorma gaadhay?",
+    "options": [
+      "Qarni 7aad — Ganacsato iyo guulayste",
+      "1200 CE",
+      "1500 CE",
+      "500 CE"
+    ],
+    "correct": "Qarni 7aad — Ganacsato iyo guulayste"
+  },
+  {
+    "question": "Mughal Empire (Hindiya) — cidda aasaasay?",
+    "options": [
+      "Babur — 1526 CE",
+      "Akbar",
+      "Aurangzeb",
+      "Shah Jahan"
+    ],
+    "correct": "Babur — 1526 CE"
+  },
+  {
+    "question": "Taj Mahal cidda dhisay?",
+    "options": [
+      "Shah Jahan (Mughal) — xusuus xaaskiisa Mumtaz",
+      "Akbar",
+      "Babur",
+      "Aurangzeb"
+    ],
+    "correct": "Shah Jahan (Mughal) — xusuus xaaskiisa Mumtaz"
+  },
+  {
+    "question": "Islaamka China goorma gaadhay?",
+    "options": [
+      "Qarni 7aad — xilligii Tang Dynasty — ganacsato iyo ergooyin",
+      "1200 CE",
+      "1000 CE",
+      "500 CE"
+    ],
+    "correct": "Qarni 7aad — xilligii Tang Dynasty — ganacsato iyo ergooyin"
+  },
+  {
+    "question": "Dowladda Safawiiyinta (Persia/Iran) — maxay gaar ka ahaayeen?",
+    "options": [
+      "Shiica Xukuumad — 1501–1736 CE",
+      "Sunni",
+      "Sufi",
+      "Wahaabi"
+    ],
+    "correct": "Shiica Xukuumad — 1501–1736 CE"
+  },
+  {
+    "question": "1924 CE Khilaafahda Ootomaan goorma burburisay?",
+    "options": [
+      "Mustafa Kemal Ataturk — Turkey",
+      "Ingiriiska",
+      "Faransiiska",
+      "Ruushka"
+    ],
+    "correct": "Mustafa Kemal Ataturk — Turkey"
+  },
+  {
+    "question": "Islaamka halka ugu badan ee adduunka manta?",
+    "options": [
+      "Indonesia (200M+ Muslimiin)",
+      "Saudi Arabia",
+      "Pakistan",
+      "Bangladesh"
+    ],
+    "correct": "Indonesia (200M+ Muslimiin)"
+  },
+  {
+    "question": "Tirada Muslimiinta adduunka manta (~)?",
+    "options": [
+      "~1.8–2 Bilyan",
+      "~1 Bilyan",
+      "~500 Milyan",
+      "~3 Bilyan"
+    ],
+    "correct": "~1.8–2 Bilyan"
+  },
+  {
+    "question": "OIC (Organisation of Islamic Cooperation) goorma la aasaasay?",
+    "options": [
+      "1969 CE — ka dib Masjid Al-Aqsa gubistii",
+      "1945 CE",
+      "1980 CE",
+      "2000 CE"
+    ],
+    "correct": "1969 CE — ka dib Masjid Al-Aqsa gubistii"
+  },
+  {
+    "question": "OIC caasimadeeda/xarunteeda?",
+    "options": [
+      "Jeddah, Saudi Arabia",
+      "Makkah",
+      "Baghdad",
+      "Kairo"
+    ],
+    "correct": "Jeddah, Saudi Arabia"
+  },
+  {
+    "question": "Saudi Arabia goorma la aasaasay si rasmi ah?",
+    "options": [
+      "1932 CE — Ibn Saud",
+      "1900 CE",
+      "1950 CE",
+      "1920 CE"
+    ],
+    "correct": "1932 CE — Ibn Saud"
+  },
+  {
+    "question": "Islaamka bishii Muharram — muxuu muhiim u yahay?",
+    "options": [
+      "Bishii 1aad ee Hijri — sannad cusub Islaamiyeed",
+      "Ciidda Fitr",
+      "Ramadaan",
+      "Dhul Hijjah"
+    ],
+    "correct": "Bishii 1aad ee Hijri — sannad cusub Islaamiyeed"
+  },
+  {
+    "question": "Caashuura (10 Muharram) Muslimiinta Sunni siyaam?",
+    "options": [
+      "Sunnah — taariikhiyan waa maalinta Nabi Musa badda laga badbaaday",
+      "Fard",
+      "Xaaraan",
+      "Ikhtiyaari oo kaliya"
+    ],
+    "correct": "Sunnah — taariikhiyan waa maalinta Nabi Musa badda laga badbaaday"
+  },
+  {
+    "question": "Rabii Al-Awwal bishii 12 — maxaa ah?",
+    "options": [
+      "Dhalashada Nabi Maxamed (CSW) — Mawlid An-Nabawi",
+      "Wafaatii Nabi",
+      "Hijradii",
+      "Badar"
+    ],
+    "correct": "Dhalashada Nabi Maxamed (CSW) — Mawlid An-Nabawi"
+  },
+  {
+    "question": "Rajab 27 — maxaa ku xusan?",
+    "options": [
+      "Isrankii iyo Meraajka Nabi",
+      "Dhalashada Nabi",
+      "Fataxu Makkah",
+      "Dagaalkii Badar"
+    ],
+    "correct": "Isrankii iyo Meraajka Nabi"
+  },
+  {
+    "question": "Ramadaan 17 — maxaa ku xusan?",
+    "options": [
+      "Dagaalkii Badar — Yawmul Furqaan",
+      "Isrankii",
+      "Fataxu Makkah",
+      "Dhalashada Nabi"
+    ],
+    "correct": "Dagaalkii Badar — Yawmul Furqaan"
+  },
+  {
+    "question": "Ramadaan 20 — maxaa ku xusan?",
+    "options": [
+      "Fataxu Makkah (8 AH)",
+      "Dagaalkii Badar",
+      "Isrankii",
+      "Dhalashada Nabi"
+    ],
+    "correct": "Fataxu Makkah (8 AH)"
+  },
+  {
+    "question": "Imam Maalik ibn Anas — cidda ah?",
+    "options": [
+      "Aasaasaha Madhhabta Maalikiyya — Madiina",
+      "Aasaasaha Shaficiyya",
+      "Aasaasaha Xanafiyya",
+      "Aasaasaha Xanbaliyya"
+    ],
+    "correct": "Aasaasaha Madhhabta Maalikiyya — Madiina"
+  },
+  {
+    "question": "Imam Shafici — cidda ah?",
+    "options": [
+      "Aasaasaha Madhhabta Shaficiyya — 767–820 CE",
+      "Aasaasaha Maalikiyya",
+      "Aasaasaha Xanafiyya",
+      "Aasaasaha Xanbaliyya"
+    ],
+    "correct": "Aasaasaha Madhhabta Shaficiyya — 767–820 CE"
+  },
+  {
+    "question": "Imam Abu Xanifa — cidda ah?",
+    "options": [
+      "Aasaasaha Madhhabta Xanafiyya — 699–767 CE — Kuufa, Iraq",
+      "Aasaasaha Maalikiyya",
+      "Aasaasaha Shaficiyya",
+      "Aasaasaha Xanbaliyya"
+    ],
+    "correct": "Aasaasaha Madhhabta Xanafiyya — 699–767 CE — Kuufa, Iraq"
+  },
+  {
+    "question": "Imam Ahmad ibn Hanbal — cidda ah?",
+    "options": [
+      "Aasaasaha Madhhabta Xanbaliyya — 780–855 CE — Baghdad",
+      "Aasaasaha Maalikiyya",
+      "Aasaasaha Shaficiyya",
+      "Aasaasaha Xanafiyya"
+    ],
+    "correct": "Aasaasaha Madhhabta Xanbaliyya — 780–855 CE — Baghdad"
+  },
+  {
+    "question": "Madhahabta 4 ee Islaamka?",
+    "options": [
+      "Xanafi, Maaliki, Shafici, Xanbali",
+      "Xanafi, Maaliki, Shafici, Shiica",
+      "Xanafi, Maaliki, Suufi, Xanbali",
+      "Xanbali, Wahaabi, Salafi, Suufi"
+    ],
+    "correct": "Xanafi, Maaliki, Shafici, Xanbali"
+  },
+  {
+    "question": "Imam Bukhari — cidda ah?",
+    "options": [
+      "Ururiyaha Saxiix Al-Bukhari — ugu xukunta Hadiidhka",
+      "Imam Fiqhiga",
+      "Imam Tafsiirka",
+      "Aasaasaha Madhhabta"
+    ],
+    "correct": "Ururiyaha Saxiix Al-Bukhari — ugu xukunta Hadiidhka"
+  },
+  {
+    "question": "Imam Muslim — cidda ah?",
+    "options": [
+      "Ururiyaha Saxiix Muslim — 2aad Hadiidhka",
+      "Imam Fiqhiga",
+      "Imam Tafsiirka",
+      "Aasaasaha Madhhabta"
+    ],
+    "correct": "Ururiyaha Saxiix Muslim — 2aad Hadiidhka"
+  },
+  {
+    "question": "Kutubul Sittah (6 Buugaagta Hadiidhka) ee waaweyn?",
+    "options": [
+      "Bukhari, Muslim, Tirmidhi, Abu Dawud, Nasaa'i, Ibn Majah",
+      "Bukhari, Muslim, Quraan, Muwatta, Ahmad, Nasaa'i",
+      "Bukhari, Muslim, Tirmidhi, Muwatta, Nasaa'i, Abu Dawud",
+      "Bukhari, Muslim, Tirmidhi, Abu Dawud, Ahmad, Ibn Majah"
+    ],
+    "correct": "Bukhari, Muslim, Tirmidhi, Abu Dawud, Nasaa'i, Ibn Majah"
+  },
+  {
+    "question": "Al-Ghazali — cidda ah?",
+    "options": [
+      "Faylasuuf, culimo, iyo Suufi — 'Ihya Ulumid-Diin' — 1058–1111 CE",
+      "Imam Fiqhiga",
+      "Taariikhyahan",
+      "Boqor Islaamiyeed"
+    ],
+    "correct": "Faylasuuf, culimo, iyo Suufi — 'Ihya Ulumid-Diin' — 1058–1111 CE"
+  },
+  {
+    "question": "Ibn Taymiyyah — cidda ah?",
+    "options": [
+      "Culimo Xanbali caan ah — 1263–1328 CE — Shaam",
+      "Imam Abu Xanifa",
+      "Imam Shafici",
+      "Al-Ghazali"
+    ],
+    "correct": "Culimo Xanbali caan ah — 1263–1328 CE — Shaam"
+  },
+  {
+    "question": "Ibn Al-Qayyim — cidda ah?",
+    "options": [
+      "Ardayaha Ibn Taymiyyah — culimada Xanbali",
+      "Imam Shafici",
+      "Imam Maaliki",
+      "Al-Ghazali"
+    ],
+    "correct": "Ardayaha Ibn Taymiyyah — culimada Xanbali"
+  },
+  {
+    "question": "Hadiisyada (Ahadith) noocyadooda muhiimsan?",
+    "options": [
+      "Sahih, Hasan, Da'if (Xasansan, Xasan, Daciif)",
+      "Sahih oo kaliya",
+      "Da'if iyo Sahih",
+      "Hasan oo kaliya"
+    ],
+    "correct": "Sahih, Hasan, Da'if (Xasansan, Xasan, Daciif)"
+  },
+  {
+    "question": "Isnaad macnaheedu waa?",
+    "options": [
+      "Silsilada rawiyaha Hadiiska — laga bilaabo caqliga ilaa Nabi",
+      "Hadiis Sahih",
+      "Quraanka ayadiisa",
+      "Tafsiirka"
+    ],
+    "correct": "Silsilada rawiyaha Hadiiska — laga bilaabo caqliga ilaa Nabi"
+  },
+  {
+    "question": "Fiqhiga (Islamic Law) 4 xigmadihiisa waaweyn?",
+    "options": [
+      "Quraan, Sunnah, Ijmaa', Qiyaas",
+      "Quraan, Sunnah, Ijmaa', Ijtihad",
+      "Quraan, Hadiis, Fiqh, Siyaasah",
+      "Quraan, Sunnah, Tafsiir, Hadiis"
+    ],
+    "correct": "Quraan, Sunnah, Ijmaa', Qiyaas"
+  },
+  {
+    "question": "Ijtihad macnaheedu waa?",
+    "options": [
+      "Sayniska sharci ee ah in culimadu si xoog leh u bahsadaan mas'alada",
+      "Hadiis",
+      "Qiyaas",
+      "Ijmaa'"
+    ],
+    "correct": "Sayniska sharci ee ah in culimadu si xoog leh u bahsadaan mas'alada"
+  },
+  {
+    "question": "Sharia macnaheedu waa?",
+    "options": [
+      "Sharci Islaamiyeed — Quraanka iyo Sunnada ka soo baxa",
+      "Xeer dowladeed",
+      "Xeer qabiil",
+      "Xeer dhaqan"
+    ],
+    "correct": "Sharci Islaamiyeed — Quraanka iyo Sunnada ka soo baxa"
+  },
+  {
+    "question": "Fatwa macnaheedu waa?",
+    "options": [
+      "Ra'yi culimada sharci Islaamiyeed — mas'alad gaar ah",
+      "Xukun maxkamad",
+      "Amarka Boqorka",
+      "Codsi dadweyne"
+    ],
+    "correct": "Ra'yi culimada sharci Islaamiyeed — mas'alad gaar ah"
+  },
+  {
+    "question": "Ibn Rushd (Averroes) shaqadiisa weyn?",
+    "options": [
+      "Falsafada Aristotle u sharaxay — Andalus (Spain)",
+      "Hadiisyada uruuriyey",
+      "Xulafaa'ur Raashidiin",
+      "Fiqhiga"
+    ],
+    "correct": "Falsafada Aristotle u sharaxay — Andalus (Spain)"
+  },
+  {
+    "question": "Al-Farabi — cidda ah?",
+    "options": [
+      "Faylasuuf Muslim — 'Al-Muallim Al-Thani' (2nd Teacher — Aristotle 1st)",
+      "Culimo Hadiis",
+      "Taariikhyahan",
+      "Boqor Islaamiyeed"
+    ],
+    "correct": "Faylasuuf Muslim — 'Al-Muallim Al-Thani' (2nd Teacher — Aristotle 1st)"
+  },
+  {
+    "question": "Ibn Sina (Avicenna) — cidda ah?",
+    "options": [
+      "Dhakhtar iyo faylasuuf Muslim — 'Canon of Medicine'",
+      "Culimo Fiqh",
+      "Taariikhyahan",
+      "Gabayaa"
+    ],
+    "correct": "Dhakhtar iyo faylasuuf Muslim — 'Canon of Medicine'"
+  },
+  {
+    "question": "Islaamka Soomaaliya goorma gaadhay?",
+    "options": [
+      "Qarni 7aad CE — xilligii Nabi iyo Sahabada",
+      "1000 CE",
+      "1400 CE",
+      "500 BCE"
+    ],
+    "correct": "Qarni 7aad CE — xilligii Nabi iyo Sahabada"
+  },
+  {
+    "question": "Magaalada ugu horeysay ee Islaamka Soomaaliya?",
+    "options": [
+      "Zeila (Zilayl) iyo Berbera — Waqooyiga",
+      "Muqdisho",
+      "Kismaayo",
+      "Baidoa"
+    ],
+    "correct": "Zeila (Zilayl) iyo Berbera — Waqooyiga"
+  },
+  {
+    "question": "Boqortoyada Islaamiyeed ugu horeysay ee Geeska Afrika?",
+    "options": [
+      "Boqortoyada Ifat — 1285 CE",
+      "Boqortoyada Ajuuraan",
+      "Boqortoyada Adal",
+      "Boqortoyada Warsangeli"
+    ],
+    "correct": "Boqortoyada Ifat — 1285 CE"
+  },
+  {
+    "question": "Boqortoyada Adal — maxay ahayd?",
+    "options": [
+      "Boqortoyad Islaamiyeed oo dagaallamay Itoobiya (15-16 qarni)",
+      "Boqortoyad Soomaaliyeed oo nabadgelyada leh",
+      "Ganacsiga oo kaliya",
+      "Waxbarashada"
+    ],
+    "correct": "Boqortoyad Islaamiyeed oo dagaallamay Itoobiya (15-16 qarni)"
+  },
+  {
+    "question": "Ahmed ibn Ibrahim Al-Ghazi ('Gran') — cidda ah?",
+    "options": [
+      "Taliyihii Boqortoyada Adal — 1529–1543 CE",
+      "Nabi Soomaaliyeed",
+      "Taariikhyahan",
+      "Culimo"
+    ],
+    "correct": "Taliyihii Boqortoyada Adal — 1529–1543 CE"
+  },
+  {
+    "question": "Sheikh Awees Maxamed Al-Baraawi — cidda ah?",
+    "options": [
+      "Culimo Soomaaliyeed caan ah — Qaadiriyya tariiqa",
+      "Boqor",
+      "Dagaalle",
+      "Taariikhyahan"
+    ],
+    "correct": "Culimo Soomaaliyeed caan ah — Qaadiriyya tariiqa"
+  },
+  {
+    "question": "Sheikh Awees Al-Baraawi halkeey ku xidnaa?",
+    "options": [
+      "Baraawe — Koonfurta Soomaaliya",
+      "Muqdisho",
+      "Hargeysa",
+      "Zeila"
+    ],
+    "correct": "Baraawe — Koonfurta Soomaaliya"
+  },
+  {
+    "question": "Tariiqa Qaadiriyya Soomaaliya cidda keenay?",
+    "options": [
+      "Sheikh Awees Maxamed Al-Baraawi iyo culimada kale",
+      "Sayid Maxamed",
+      "Nabi oo qudha",
+      "Khaliifada"
+    ],
+    "correct": "Sheikh Awees Maxamed Al-Baraawi iyo culimada kale"
+  },
+  {
+    "question": "Sayid Maxamed Cabdille Xasan wuxuu ka tirsanaa Tariiqa?",
+    "options": [
+      "Salihiyya (Saalixiyya) — saldhig Maxamed Salih ka soo qaatay",
+      "Qaadiriyya",
+      "Tijaniyya",
+      "Naqshbandiyya"
+    ],
+    "correct": "Salihiyya (Saalixiyya) — saldhig Maxamed Salih ka soo qaatay"
+  },
+  {
+    "question": "Soomaalida inta badan waxay raacaan Madhhabta?",
+    "options": [
+      "Shaficiyya",
+      "Xanafiyya",
+      "Maalikiyya",
+      "Xanbaliyya"
+    ],
+    "correct": "Shaficiyya"
+  },
+  {
+    "question": "Jaamicadda Islaamiyeed ee caan ahayd ee Somalia (Muqdisho)?",
+    "options": [
+      "Jaamicadda Islaamiyeed ee Muqdisho (SIMAD)",
+      "Jaamicadda Harvard",
+      "Jaamicadda Al-Azhar",
+      "Jaamicadda Madiina"
+    ],
+    "correct": "Jaamicadda Islaamiyeed ee Muqdisho (SIMAD)"
+  },
+  {
+    "question": "Masjidka ugu weyn Soomaaliya?",
+    "options": [
+      "Masjid Al-Xasan Muqdisho (Islamic Centre)",
+      "Masjid Hargeysa",
+      "Masjid Berbera",
+      "Masjid Kismaayo"
+    ],
+    "correct": "Masjid Al-Xasan Muqdisho (Islamic Centre)"
+  },
+  {
+    "question": "Cuqubta Soomaaliya — noocee ah?",
+    "options": [
+      "Shaficiyya — Fiqh Shafici raacaan",
+      "Xanafiyya",
+      "Maalikiyya",
+      "Xanbaliyya"
+    ],
+    "correct": "Shaficiyya — Fiqh Shafici raacaan"
+  },
+  {
+    "question": "Af Soomaaliga iyo Islaamka — xiriirkii?",
+    "options": [
+      "Qaar badan oo ereyada Soomaaliyeed waa Carabiyeed — difaaciyada",
+      "Ma jirto xiriir",
+      "Kaliya ganacsiga",
+      "Kaliya waxbarashada"
+    ],
+    "correct": "Qaar badan oo ereyada Soomaaliyeed waa Carabiyeed — difaaciyada"
+  },
+  {
+    "question": "Sheikh Xuseen Axmed Jabarte — cidda ah?",
+    "options": [
+      "Culimada Islaamka iyo taariikhyahanka Geeska Afrika — 18aad qarni",
+      "Boqor Soomaaliyeed",
+      "Dagaalle",
+      "Nabi"
+    ],
+    "correct": "Culimada Islaamka iyo taariikhyahanka Geeska Afrika — 18aad qarni"
+  },
+  {
+    "question": "Maktabadda islaamiyeed ee caan ahayd ee Timbuktu lagu macneeyaa?",
+    "options": [
+      "Jaamicadda Sankore — Galbeedka Afrika",
+      "Makkah",
+      "Madiina",
+      "Baghdad"
+    ],
+    "correct": "Jaamicadda Sankore — Galbeedka Afrika"
+  },
+  {
+    "question": "Islam iyo Soomaalida — waqtiga ugu badan ee sunta sida diinta qaran?",
+    "options": [
+      "Wixii ka soo baxay 7aad qarnigii — muddo dheer",
+      "1960 xornimada",
+      "1991 dagaalkii",
+      "1400 CE"
+    ],
+    "correct": "Wixii ka soo baxay 7aad qarnigii — muddo dheer"
+  },
+  {
+    "question": "Siyaad Barre iyo Islaamka — xiriirkii?",
+    "options": [
+      "Hantiwadaagga Sayniska ah uu ka hor yimid Islaamka — culimada uu xasuuqay",
+      "Taageero xoog leh",
+      "Mid la mid ah",
+      "Culimada u dardaariyey"
+    ],
+    "correct": "Hantiwadaagga Sayniska ah uu ka hor yimid Islaamka — culimada uu xasuuqay"
+  },
+  {
+    "question": "ICU (Maxkamadaha Islaamka) Soomaaliya goorma xukumtay Muqdisho?",
+    "options": [
+      "2006 CE (gaaban)",
+      "2000 CE",
+      "2009 CE",
+      "1991 CE"
+    ],
+    "correct": "2006 CE (gaaban)"
+  },
+  {
+    "question": "Diinta Islaamka Soomaalida noloshiisa waxa ugu weyn?",
+    "options": [
+      "Qoyska, dhaqanka, xukumka bulshada, hawlaha maalinta",
+      "Kaliya salaadda",
+      "Kaliya zakaat",
+      "Kaliya xajjiga"
+    ],
+    "correct": "Qoyska, dhaqanka, xukumka bulshada, hawlaha maalinta"
+  },
+  {
+    "question": "Ugbaad (Mahr) macnaheedu waa?",
+    "options": [
+      "Hadiyad guurka — rag bixiya xaaska",
+      "Zakaat",
+      "Sadaqah",
+      "Gelin aroos"
+    ],
+    "correct": "Hadiyad guurka — rag bixiya xaaska"
+  },
+  {
+    "question": "Quraanka Soomaaliya goorma la turjumay?",
+    "options": [
+      "Turjumaadaha hore 1900s, rasmiga ah 2000aadkii",
+      "1960",
+      "1800s",
+      "1400s"
+    ],
+    "correct": "Turjumaadaha hore 1900s, rasmiga ah 2000aadkii"
+  },
+  {
+    "question": "Sheikh Nuur Xuseen (Nuurow) Soomaaliya — cidda ah?",
+    "options": [
+      "Culimo caan ah oo waxbar faafiyay qarnigii 20aad",
+      "Boqor",
+      "Dagaalle",
+      "Taariikhyahan"
+    ],
+    "correct": "Culimo caan ah oo waxbar faafiyay qarnigii 20aad"
+  },
+  {
+    "question": "Soomaalida Carabiga waxbarashada — xiriirkeed?",
+    "options": [
+      "Af Carabi waa af diinta, culimadu waxbarasho ku qaataan",
+      "Laba af oo kala gaar ah",
+      "Af Soomaali oo keliya",
+      "Ingiriis oo keliya"
+    ],
+    "correct": "Af Carabi waa af diinta, culimadu waxbarasho ku qaataan"
+  },
+  {
+    "question": "Masaajidda Soomaaliya muhimkood bulsheed?",
+    "options": [
+      "Salaad, waxbarasho (dugsi), xalinta munaasabadaha, bulsho ururnimada",
+      "Salaad oo kaliya",
+      "Xafladaha oo kaliya",
+      "Ganacsiga oo kaliya"
+    ],
+    "correct": "Salaad, waxbarasho (dugsi), xalinta munaasabadaha, bulsho ururnimada"
+  },
+  {
+    "question": "Dugsiga Quraanka (Kuttab/Dugsi) Soomaaliya wuxuu baraa?",
+    "options": [
+      "Xifdinida Quraanka, qorista Af Carabiga, fiqhiga aasaasiga ah",
+      "Kaliya xifdinida",
+      "Kaliya qorista",
+      "Kaliya xisaabta"
+    ],
+    "correct": "Xifdinida Quraanka, qorista Af Carabiga, fiqhiga aasaasiga ah"
+  },
+  {
+    "question": "Soomaalida heerka tacliinta Islaamiyeed ee sare?",
+    "options": [
+      "Jaamicadaha Carabiga ah — Azhar, Madiina, iyo kuwa kale",
+      "Jaamicadaha Galbeedka",
+      "Kaliya gudaha Soomaaliya",
+      "Ma jiraan"
+    ],
+    "correct": "Jaamicadaha Carabiga ah — Azhar, Madiina, iyo kuwa kale"
+  },
+  {
+    "question": "Ziyaarada (visiting shrines) Soomaaliya — culimadu maxay ka dhahaan?",
+    "options": [
+      "Kala duwan — qaar ogol (sida taariikhiga), qaarna diidaan (shirk khawfkeeda)",
+      "Dhammu ogol yihiin",
+      "Dhammu diidaan",
+      "Ma xiriirto diinta"
+    ],
+    "correct": "Kala duwan — qaar ogol (sida taariikhiga), qaarna diidaan (shirk khawfkeeda)"
+  },
+  {
+    "question": "Soomaalida Islaamku guud ahaan sida loo kala saaro?",
+    "options": [
+      "Sunni — Madhaab Shafici — Suufi tariiqa badan",
+      "Shiica",
+      "Ibadhi",
+      "Khawarij"
+    ],
+    "correct": "Sunni — Madhaab Shafici — Suufi tariiqa badan"
+  },
+  {
+    "question": "Sheikh Abubakar ibn Sheikh Awadh iyo Soomaaliya?",
+    "options": [
+      "Culimada Soomaalida ugu caansan Zanzibar/Kenya/Soomaaliya",
+      "Boqor Soomaaliyeed",
+      "Dagaalle",
+      "Nabi"
+    ],
+    "correct": "Culimada Soomaalida ugu caansan Zanzibar/Kenya/Soomaaliya"
+  },
+  {
+    "question": "Sahabada ugu badan oo hadith diiwaan-galiyay?",
+    "options": [
+      "Abu Huraira (RA) — 5374 hadiis",
+      "Aayisha",
+      "Anas ibn Maalik",
+      "Ibn Abbas"
+    ],
+    "correct": "Abu Huraira (RA) — 5374 hadiis"
+  },
+  {
+    "question": "Aayisha (RA) hadiisyada tiradooda?",
+    "options": [
+      "~2210 hadiis — 6aad ugu badan",
+      "5374 hadiis",
+      "1000 hadiis",
+      "500 hadiis"
+    ],
+    "correct": "~2210 hadiis — 6aad ugu badan"
+  },
+  {
+    "question": "Anas ibn Maalik (RA) — cidda ah?",
+    "options": [
+      "Khaadimkii Nabi Maxamed — 10 sano",
+      "Xaaskii Nabi",
+      "Adeerka Nabi",
+      "Wiilkii Nabi"
+    ],
+    "correct": "Khaadimkii Nabi Maxamed — 10 sano"
+  },
+  {
+    "question": "Abdullah ibn Abbas (RA) — cidda ah?",
+    "options": [
+      "Indheer-gacalka Nabi — culimo Quraanka",
+      "Xaaskii Nabi",
+      "Adeerka Nabi",
+      "Wiilkii Nabi"
+    ],
+    "correct": "Indheer-gacalka Nabi — culimo Quraanka"
+  },
+  {
+    "question": "Umar ibn Al-Khattab (RA) Islaamka goorma aqbalay?",
+    "options": [
+      "~616 CE — 6 sano ka dib waxyiga — ka dib dhibaatada badan",
+      "610 CE",
+      "622 CE",
+      "624 CE"
+    ],
+    "correct": "~616 CE — 6 sano ka dib waxyiga — ka dib dhibaatada badan"
+  },
+  {
+    "question": "Hijri (Islamic) sanadka markii la bilaabay laga jiro?",
+    "options": [
+      "622 CE — Hijradii Nabi Maxamed",
+      "610 CE waxyiga",
+      "632 CE geerida Nabi",
+      "570 CE dhalashada"
+    ],
+    "correct": "622 CE — Hijradii Nabi Maxamed"
+  },
+  {
+    "question": "Bisha ugu quduusan ee Islaamiga?",
+    "options": [
+      "Ramadaan",
+      "Muharram",
+      "Dhul Hijjah",
+      "Rabii Al-Awwal"
+    ],
+    "correct": "Ramadaan"
+  },
+  {
+    "question": "4ta Ashhur Al-Xurum (Bilaha Xurma Leh)?",
+    "options": [
+      "Dhul Qacda, Dhul Hijjah, Muharram, Rajab",
+      "Ramadaan, Shawwal, Muharram, Rajab",
+      "Muharram, Safar, Rabii, Rajab",
+      "Dhul Hijjah, Muharram, Rajab, Shaabaan"
+    ],
+    "correct": "Dhul Qacda, Dhul Hijjah, Muharram, Rajab"
+  },
+  {
+    "question": "Nabi Ibrahim Kacbaha dhisay — Alle muxuu ku amray?",
+    "options": [
+      "In uu aasaaso baytka Alle, dadkana Xajj ugu baahiyo",
+      "Naruurtii in uu galo",
+      "In Madiina dhiso",
+      "In uu Quds dhiso"
+    ],
+    "correct": "In uu aasaaso baytka Alle, dadkana Xajj ugu baahiyo"
+  },
+  {
+    "question": "Zamzam biyo — halkeey ka soo jeedaan?",
+    "options": [
+      "Makkah — Haajar markay Ismaaciil biyo u raadisay, Alle biyo ka soo burqiyey",
+      "Madiina",
+      "Quds",
+      "Shaam"
+    ],
+    "correct": "Makkah — Haajar markay Ismaaciil biyo u raadisay, Alle biyo ka soo burqiyey"
+  },
+  {
+    "question": "Jibril (AS) Nabi Maxamed goorma markii ugu horeysay ku yimid?",
+    "options": [
+      "Gaar Xiraa — 610 CE — 'Iqra Bismi Rabbikallazi Khalaq'",
+      "Madiina",
+      "Baytul Maqdis",
+      "Meraajka"
+    ],
+    "correct": "Gaar Xiraa — 610 CE — 'Iqra Bismi Rabbikallazi Khalaq'"
+  },
+  {
+    "question": "Waxaa la yiri Nabi Maxamed waa Rahmatun lil-caalamiinta — macnaheedu?",
+    "options": [
+      "Naxariis u ah adduunka oo dhan — aadanaha iyo jinniha",
+      "Kaliya Muslimiinta",
+      "Kaliya Carabta",
+      "Kaliya ummadiisa"
+    ],
+    "correct": "Naxariis u ah adduunka oo dhan — aadanaha iyo jinniha"
+  },
+  {
+    "question": "Ashura (10 Muharram) — Nabi Maxamed goorma siyaamka bilaabay?",
+    "options": [
+      "Markuu Madiina yimid — wuxuu arkay Yuhuudda siyeemaysa — Musa sharaftiisa",
+      "Ka hor Hijrada",
+      "Ramadaan xilli",
+      "Fataxu Makkah ka dib"
+    ],
+    "correct": "Markuu Madiina yimid — wuxuu arkay Yuhuudda siyeemaysa — Musa sharaftiisa"
+  },
+  {
+    "question": "Nabi Maxamed (CSW) wuxuu noqday Yatiim (orphan) goorma?",
+    "options": [
+      "Aabihii waa geeray ka hor dhalashada, hooyadii 6 jir",
+      "Markuu 10 jir ahaa",
+      "Markuu 15 jir ahaa",
+      "Markuu waa weynaaday"
+    ],
+    "correct": "Aabihii waa geeray ka hor dhalashada, hooyadii 6 jir"
+  },
+  {
+    "question": "Ka dib hooyadii, cidda Nabi korsatay?",
+    "options": [
+      "Awowgiis Cabdul Mudaalib — ka dib Adeerka Abu Talib",
+      "Aabihii",
+      "Xaaskiisii",
+      "Sahabada"
+    ],
+    "correct": "Awowgiis Cabdul Mudaalib — ka dib Adeerka Abu Talib"
+  },
+  {
+    "question": "Nabi Maxamed markuu ganacsadaa uu ka shaqayn jiray, safarada ugu weyn?",
+    "options": [
+      "Shaam (Syria) — Khadiija maalkeeda ku shaqayn jiray",
+      "Madiina",
+      "Yaman",
+      "Masar"
+    ],
+    "correct": "Shaam (Syria) — Khadiija maalkeeda ku shaqayn jiray"
+  },
+  {
+    "question": "Waraqa ibn Nawfal cidda ah?",
+    "options": [
+      "Indheer-gacalka Khadiija — culimo Kitaabka — u sheegay Nabi Waxyigiisii",
+      "Sahabada",
+      "Khaliifada",
+      "Dagaalle"
+    ],
+    "correct": "Indheer-gacalka Khadiija — culimo Kitaabka — u sheegay Nabi Waxyigiisii"
+  },
+  {
+    "question": "Nabi Maxamed Makka markuu tegay Xajjiga 10 AH — muxuu ku qiray?",
+    "options": [
+      "'Waan geeyay — waan la taagnaa diinta — ma dhamin kartaan' — Hajjul Wadaac",
+      "Dagaal cusub",
+      "Xukun cusub",
+      "Safarada ganacsiga"
+    ],
+    "correct": "'Waan geeyay — waan la taagnaa diinta — ma dhamin kartaan' — Hajjul Wadaac"
+  },
+  {
+    "question": "Shaytaanka (Iblis) sababtii Alle uu ka eriyey?",
+    "options": [
+      "Inuu diidey in uu Aadam u sujuudo — kibir uu u muujiyey",
+      "Dembi kale",
+      "Shirka",
+      "Qashin"
+    ],
+    "correct": "Inuu diidey in uu Aadam u sujuudo — kibir uu u muujiyey"
+  },
+  {
+    "question": "Qiyaame maalintii — nafsaheennu maxaa na weeydiin doona?",
+    "options": [
+      "Cumarada, Dhalinyarada, Maalkiisa, Aqoonta, Jirka",
+      "Salaad oo kaliya",
+      "Ganacsiga",
+      "Xajjiga"
+    ],
+    "correct": "Cumarada, Dhalinyarada, Maalkiisa, Aqoonta, Jirka"
+  },
+  {
+    "question": "Jannada iyo Naar — cidda ku geli?",
+    "options": [
+      "Janno: Mu'miniinta — Naar: Gaalada — Allaahu wax uga ogyahay",
+      "Dhammu Janno",
+      "Dhammu Naar",
+      "Cidna ma gelin"
+    ],
+    "correct": "Janno: Mu'miniinta — Naar: Gaalada — Allaahu wax uga ogyahay"
+  },
+  {
+    "question": "Barzakh macnaheedu waa?",
+    "options": [
+      "Xaalka dhex mara dhimashada iyo qiyaame — xabaasha nolosha",
+      "Janno",
+      "Naar",
+      "Dunida"
+    ],
+    "correct": "Xaalka dhex mara dhimashada iyo qiyaame — xabaasha nolosha"
+  },
+  {
+    "question": "Siiratul Mustaqiim macnaheedu waa?",
+    "options": [
+      "Jidka toosan — ku muuqdaan Quraanka 1:6",
+      "Jidka cidla",
+      "Jidka ganacsiga",
+      "Jidka dagaalka"
+    ],
+    "correct": "Jidka toosan — ku muuqdaan Quraanka 1:6"
+  },
+  {
+    "question": "Alle asmaa'ihii waaweyn (99 Names) loo yaqaan?",
+    "options": [
+      "Asmaa'ul Xusna — magacyada quruxda badan",
+      "Suradaha Quraanka",
+      "Hadiisyada",
+      "Malaa'igta"
+    ],
+    "correct": "Asmaa'ul Xusna — magacyada quruxda badan"
+  },
+  {
+    "question": "Dhikr macnaheedu waa?",
+    "options": [
+      "Xusuusta Alle — Subxanallah, Alxamdulillah, Allaahu Akbar iwm",
+      "Qorista",
+      "Akhrinta",
+      "Salaadda"
+    ],
+    "correct": "Xusuusta Alle — Subxanallah, Alxamdulillah, Allaahu Akbar iwm"
+  },
+  {
+    "question": "Tawakkul macnaheedu waa?",
+    "options": [
+      "Ku tiirsanaanta Alle iyadoo la qaadanayo ficilada loo baahan yahay",
+      "Shaqo la'aanta",
+      "Geed joogid",
+      "Salaad oo kaliya"
+    ],
+    "correct": "Ku tiirsanaanta Alle iyadoo la qaadanayo ficilada loo baahan yahay"
+  },
+  {
+    "question": "Sabr macnaheedu waa?",
+    "options": [
+      "Dulqaadashada — waa xoog ruuxiga ah — Alle jeceshahay dadka sabra",
+      "Xanaaq",
+      "Cafis",
+      "Xukun"
+    ],
+    "correct": "Dulqaadashada — waa xoog ruuxiga ah — Alle jeceshahay dadka sabra"
   }
 ]
