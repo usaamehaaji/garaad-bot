@@ -80,12 +80,12 @@ module.exports = async function cashflipCmd(message, args) {
         const balLabel = asset === 'usd' ? `$${fmt(newBal)}` : `${fmt(newBal)} ${asset.toUpperCase()}`;
 
         const desc = win
-            ? `Hambalyo **${username}**! Fursadaada maanta waa mid aad u fiican. 🌟\n\n` +
+            ? `Hambalyo! Fursadaada maanta waa mid aad u fiican. 🌟\n\n` +
               `Natiijada: Guul! ✅\n\n` +
               `Faa'iidada: **+${asset === 'usd' ? '$' : ''}${fmt(Math.floor(amount * WIN_MULTI))} ${asset !== 'usd' ? asset.toUpperCase() : '💵'}**\n\n` +
               `Wadarta Cusub: **${balLabel}** (${balNote})\n\n` +
               `✨ Garaad Economy`
-            : `Fursada suuqa kuma tageerin, **${username}**. Mararka qaarkood dib u dhacu waa qayb ka mid ah guusha dambe! 🛡️\n\n` +
+            : `Fursada suuqa kuma tageerin. Mararka qaarkood dib u dhacu waa qayb ka mid ah guusha dambe! 🛡️\n\n` +
               `Natiijada: Qasaaro 🛑\n\n` +
               `Khasaaraha: **-${asset === 'usd' ? '$' : ''}${fmt(amount)} ${asset !== 'usd' ? asset.toUpperCase() : '💸'}**\n\n` +
               `Wadarta Cusub: **${balLabel}** (Ha quusan, weli fursad baa kuu dhiman! 🔄)\n` +

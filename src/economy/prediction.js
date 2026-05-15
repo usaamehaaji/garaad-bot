@@ -214,25 +214,6 @@ async function resolvePrediction(userId, client) {
         } catch {}
     }
 
-    // DM notification
-    if (client) {
-        try {
-            const user = await client.users.fetch(userId).catch(() => null);
-            if (user) {
-                await user.send({ embeds: [
-                    new EmbedBuilder()
-                        .setTitle(isDraw ? '🤝 Garaad Predict — Xeerka' : win ? '🏆 Garaad Predict — Guul!' : '😢 Garaad Predict — Khasaaro')
-                        .setColor(isDraw ? '#f1c40f' : win ? '#2ecc71' : '#e74c3c')
-                        .setDescription(
-                            `**${pred.stakeType === 'usd' ? '💵 USD' : assetLabel}** | **${dirLabel}**\n` +
-                            `💰 Dhigay: **$${fmt(pred.stakeUsd)}** → Heshay: **$${fmt(payout)}**\n` +
-                            `💵 USD-kaaga hadda: **$${fmt(d.usd)}**`
-                        )
-                        .setFooter({ text: 'Garaad Predict' }),
-                ] }).catch(() => {});
-            }
-        } catch {}
-    }
 }
 
 module.exports = {
