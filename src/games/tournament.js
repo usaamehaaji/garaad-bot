@@ -146,6 +146,202 @@ function buildAnnounceButtons(disabled = false) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Admin Panel (persistent, updates per stage)
+// ─────────────────────────────────────────────────────────────────────
+function buildAdminPanelEmbed(state) {
+    const regCount  = tournamentRegistry.size;
+    const joinCount = state.players?.size || 0;
+    const stageText = {
+        initial:      '⚙️ Heer: Diyaargarow — door habka',
+        registration: `📝 Heer: Diiwaangelinta socdaa · **${regCount}** qof diiwaangeliyay`,
+        join:         `🟢 Heer: Game furan · **${regCount}** diiwaangeliyay · **${joinCount}** ku biirtay`,
+    }[state.stage] || state.stage;
+
+    return new EmbedBuilder()
+        .setTitle('🏆 Tartan — Admin Panel')
+        .setColor('#e67e22')
+        .setDescription(
+            `**${stageText}**\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n` +
+            `📢 Announcement: <#${ANNOUNCE_CHANNEL_ID}>\n` +
+            `🎮 Game channel: <#${GAME_CHANNEL_ID}>\n` +
+            `🎙️ VC: <#${VC_CHANNEL_ID}>`
+        )
+        .setFooter({ text: 'Garaad Quiz — Admin Control Panel' });
+}
+
+function buildAdminPanelButtons(stage) {
+    if (stage === 'initial') {
+        return new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setCustomId('tartan_panel_announce')
+                .setLabel('📢 Bilow Registration')
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
+                .setCustomId('tartan_panel_quick')
+                .setLabel('🚀 Bilow Toos')
+                .setStyle(ButtonStyle.Success),
+            new ButtonBuilder()
+                .setCustomId('tartan_panel_cancel')
+                .setLabel('🛑 Jooji')
+                .setStyle(ButtonStyle.Danger),
+        );
+    }
+    if (stage === 'registration') {
+        return new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setCustomId('tartan_panel_open')
+                .setLabel('▶️ Fur Game')
+                .setStyle(ButtonStyle.Success),
+            new ButtonBuilder()
+                .setCustomId('tartan_panel_count')
+                .setLabel('👥 Tirada')
+                .setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder()
+                .setCustomId('tartan_panel_cancel')
+                .setLabel('🛑 Jooji')
+                .setStyle(ButtonStyle.Danger),
+        );
+    }
+    // stage === 'join'
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`tartan_bilow_next_${GAME_CHANNEL_ID}`)
+            .setLabel('🚀 Bilow Wareeg 1aad')
+            .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder()
+            .setCustomId('tartan_panel_count')
+            .setLabel('👥 Players')
+            .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder()
+            .setCustomId('tartan_panel_cancel')
+            .setLabel('🛑 Jooji')
+            .setStyle(ButtonStyle.Danger),
+    );
+}
+
+async function updateAdminPanel(state) {
+    if (!state.panelMsgId || !state.panelChannelId) return;
+    try {
+        const ch  = await state.client.channels.fetch(state.panelChannelId);
+        const msg = await ch.messages.fetch(state.panelMsgId);
+        await msg.edit({
+            embeds:     [buildAdminPanelEmbed(state)],
+            components: [buildAdminPanelButtons(state.stage)],
+        });
+    } catch {}
+}
+
+async function handlePanelButton(interaction, action) {
+    if (!isAdmin(interaction.user.id)) {
+        return interaction.reply({ content: '⛔ Kaliya admin.', flags: MessageFlags.Ephemeral }).catch(() => {});
+    }
+    const state = activeTournament.get(GAME_CHANNEL_ID);
+
+    if (action === 'announce') {
+        if (!state || state.stage !== 'initial') {
+            return interaction.reply({ content: '⚠️ Tartan heer khalad ah.', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
+        const announceChannel = await interaction.client.channels.fetch(ANNOUNCE_CHANNEL_ID).catch(() => null);
+        if (!announceChannel) {
+            return interaction.reply({ content: '⚠️ Announcement channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
+        const deadline = Date.now() + REG_DURATION_MS;
+        tournamentRegistry.clear();
+        state.registrationDeadline = deadline;
+        state.stage = 'registration';
+
+        const annMsg = await announceChannel.send({
+            content:    '@everyone',
+            embeds:     [buildAnnounceEmbed(deadline, 0)],
+            components: [buildAnnounceButtons(false)],
+        });
+        state.announceMsgId = annMsg.id;
+        state._regTimer = setTimeout(() => closeRegistration(state), REG_DURATION_MS);
+
+        return interaction.update({
+            embeds:     [buildAdminPanelEmbed(state)],
+            components: [buildAdminPanelButtons('registration')],
+        }).catch(() => {});
+    }
+
+    if (action === 'quick') {
+        if (!state || state.stage !== 'initial') {
+            return interaction.reply({ content: '⚠️ Tartan heer khalad ah.', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
+        tournamentRegistry.clear();
+        state.stage = 'join';
+
+        const ok = await openGamePhase(interaction.client, interaction.user.id);
+        if (!ok) {
+            state.stage = 'initial';
+            return interaction.reply({ content: '⚠️ Game channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
+
+        return interaction.update({
+            embeds:     [buildAdminPanelEmbed(state)],
+            components: [buildAdminPanelButtons('join')],
+        }).catch(() => {});
+    }
+
+    if (action === 'open') {
+        if (!state || (state.stage !== 'registration' && state.stage !== 'initial')) {
+            return interaction.reply({ content: '⚠️ Diiwaangelinta weli ma bilaabin.', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
+        if (state._regTimer) { clearTimeout(state._regTimer); state._regTimer = null; }
+        if (state.announceMsgId) {
+            try {
+                const ch = await interaction.client.channels.fetch(ANNOUNCE_CHANNEL_ID);
+                const m  = await ch.messages.fetch(state.announceMsgId);
+                await m.edit({
+                    embeds:     [buildAnnounceEmbed(0, tournamentRegistry.size, true)],
+                    components: [buildAnnounceButtons(true)],
+                });
+            } catch {}
+        }
+        state.stage = 'join';
+
+        const ok = await openGamePhase(interaction.client, interaction.user.id);
+        if (!ok) {
+            return interaction.reply({ content: '⚠️ Game channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
+
+        return interaction.update({
+            embeds:     [buildAdminPanelEmbed(state)],
+            components: [buildAdminPanelButtons('join')],
+        }).catch(() => {});
+    }
+
+    if (action === 'count') {
+        const regCount = tournamentRegistry.size;
+        const list     = [...tournamentRegistry.entries()].slice(0, 25)
+            .map(([uid, { username }], i) => `${i + 1}. **${username || uid}** (\`${uid}\`)`)
+            .join('\n');
+        const joinCount = state?.players?.size || 0;
+        const joinList  = state && joinCount > 0
+            ? '\n\n**Ku biirtay game:**\n' + [...state.players].map((id, i) => `${i + 1}. <@${id}>`).join('\n')
+            : '';
+        return interaction.reply({
+            content: `👥 **Diiwaangeliyay:** ${regCount} qof\n${list || '_Cidna weli ma diiwaangalin_'}${joinList}`,
+            flags: MessageFlags.Ephemeral,
+        }).catch(() => {});
+    }
+
+    if (action === 'cancel') {
+        if (state?._regTimer) clearTimeout(state._regTimer);
+        activeTournament.delete(GAME_CHANNEL_ID);
+        return interaction.update({
+            embeds: [new EmbedBuilder()
+                .setTitle('🛑 Tartan Waa La Joojiyay')
+                .setColor('#e74c3c')
+                .setDescription('Admin ayaa tartanka joojiyay.')
+            ],
+            components: [],
+        }).catch(() => {});
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Auto-close registration after 24h → DM admin panel
 // ─────────────────────────────────────────────────────────────────────
 async function closeRegistration(state) {
@@ -166,38 +362,11 @@ async function closeRegistration(state) {
         });
     } catch {}
 
-    // Send admin DM with control panel
-    try {
-        const admin = await state.client.users.fetch(state.adminId);
-        await admin.send({
-            embeds: [new EmbedBuilder()
-                .setTitle('🏁 Tartan — Diiwaangelinta Waa Dhammaatay')
-                .setColor('#2ecc71')
-                .setDescription(
-                    `✅ **24 saacadood waa dhammaadeen**\n\n` +
-                    `👥 **Diiwaangeliyay:** **${regCount}** qof\n\n` +
-                    `━━━━━━━━━━━━━━━━━━━━\n` +
-                    `**Marka aad diyaar tahay:**\n` +
-                    `Riix **▶️ Fur Tartanka** — bot wuxuu <#${GAME_CHANNEL_ID}> ku qori doonaa\n` +
-                    `Kadib dadka waxay qori karaan \`${PREFIX}gal CODE\``
-                )
-            ],
-            components: [new ActionRowBuilder().addComponents(
-                new ButtonBuilder()
-                    .setCustomId(`tartan_open_${GAME_CHANNEL_ID}`)
-                    .setLabel('▶️ Fur Tartanka')
-                    .setStyle(ButtonStyle.Success),
-                new ButtonBuilder()
-                    .setCustomId(`tartan_reg_count_${GAME_CHANNEL_ID}`)
-                    .setLabel('👥 Tirada')
-                    .setStyle(ButtonStyle.Secondary),
-                new ButtonBuilder()
-                    .setCustomId(`tartan_cancel_${GAME_CHANNEL_ID}`)
-                    .setLabel('🛑 Jooji')
-                    .setStyle(ButtonStyle.Danger),
-            )],
-        });
-    } catch {}
+    // Open game phase automatically
+    await openGamePhase(state.client, state.adminId).catch(() => {});
+
+    // Update admin panel to 'join' buttons
+    await updateAdminPanel(state).catch(() => {});
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -254,19 +423,11 @@ async function cmdAnnounce(message) {
         return message.reply(`⚠️ Tartan horeba socdaa. Jooji marka hore: \`${PREFIX}tartan_jooji\``);
     }
 
-    const announceChannel = await message.client.channels.fetch(ANNOUNCE_CHANNEL_ID).catch(() => null);
-    if (!announceChannel) {
-        return message.reply('⚠️ Announcement channel-ka la heyn waayay.');
-    }
-
-    const deadline = Date.now() + REG_DURATION_MS;
-    tournamentRegistry.clear();
-
     const state = {
         channelId:            GAME_CHANNEL_ID,
         adminId:              message.author.id,
         client:               message.client,
-        stage:                'registration',
+        stage:                'initial',
         roundIdx:             0,
         players:              new Set(),
         survivors:            new Set(),
@@ -277,27 +438,20 @@ async function cmdAnnounce(message) {
         questions:            [],
         currentQ:             0,
         channel:              null,
-        registrationDeadline: deadline,
+        registrationDeadline: null,
         announceMsgId:        null,
+        panelMsgId:           null,
+        panelChannelId:       message.channel.id,
         _regTimer:            null,
     };
     activeTournament.set(GAME_CHANNEL_ID, state);
 
-    const msg = await announceChannel.send({
-        content:    '@everyone',
-        embeds:     [buildAnnounceEmbed(deadline, 0)],
-        components: [buildAnnounceButtons(false)],
+    const panelMsg = await message.reply({
+        embeds:     [buildAdminPanelEmbed(state)],
+        components: [buildAdminPanelButtons('initial')],
+        fetchReply: true,
     });
-    state.announceMsgId = msg.id;
-
-    // 24h auto-close
-    state._regTimer = setTimeout(() => closeRegistration(state), REG_DURATION_MS);
-
-    return message.reply(
-        `✅ **Announcement waa la daabacay!** → <#${ANNOUNCE_CHANNEL_ID}>\n` +
-        `⏰ Diiwaangelinta waxay xirnaanaysaa **24 saacadood** kadib.\n` +
-        `Marka ay xirnaato waxaad heli doontaa **DM panel** si aad tartanka u furato.`
-    );
+    state.panelMsgId = panelMsg.id;
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -806,6 +960,42 @@ async function finishTournament(state) {
                 .setFooter({ text: 'Garaad Quiz — Tournament' })],
         });
     }
+
+    // DM winner
+    try {
+        const winUser = await state.client.users.fetch(winId);
+        await winUser.send({
+            embeds: [new EmbedBuilder()
+                .setTitle('🏆 Hambalyo — Champion!')
+                .setColor('#FFD700')
+                .setDescription(
+                    `👑 **Tartanka Garaad Quiz ayaad ku guulaysatay!**\n\n` +
+                    `🏆 **Champion** title ayaa kuu galay!\n` +
+                    `💰 **+$500 USD** abaalmarintaada\n` +
+                    `📊 Dhibcahaaga guud: **${winScore}pts**\n\n` +
+                    `_Mahadsanid ka qaybgalashadaada — Garaad Quiz_`
+                )
+            ],
+        });
+    } catch {}
+
+    // DM all other participants
+    for (const [pid, sc] of sorted.slice(1)) {
+        try {
+            const u = await state.client.users.fetch(pid);
+            await u.send({
+                embeds: [new EmbedBuilder()
+                    .setTitle('🏁 Tartan — Mahadsanid!')
+                    .setColor('#3498db')
+                    .setDescription(
+                        `**Mahadsanid ka qaybgalashadaada Tartan Garaad Quiz!** 🎉\n\n` +
+                        `📊 Dhibcahaaga guud: **${sc}pts**\n\n` +
+                        `_Tartanka xiga sug — aad baad u xoog badnaatay!_`
+                    )
+                ],
+            });
+        } catch {}
+    }
 }
 
 module.exports = {
@@ -819,6 +1009,7 @@ module.exports = {
     beginRound,
     openGamePhase,
     sendRegistrationCode,
+    handlePanelButton,
     GAME_CHANNEL_ID,
     ANNOUNCE_CHANNEL_ID,
 };

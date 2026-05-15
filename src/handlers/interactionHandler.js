@@ -6,7 +6,7 @@ const { MessageFlags, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle
 const { handleSoloAnswer, handleSoloLeaderboard } = require('../games/solo');
 const { startDuelGame }     = require('../games/duel');
 const { beginQuizGame, refreshLobby: refreshQuizLobby } = require('../games/quiz');
-const { beginRound, openGamePhase, sendRegistrationCode, GAME_CHANNEL_ID, ANNOUNCE_CHANNEL_ID } = require('../games/tournament');
+const { beginRound, openGamePhase, sendRegistrationCode, handlePanelButton, GAME_CHANNEL_ID, ANNOUNCE_CHANNEL_ID } = require('../games/tournament');
 const { userData, activeQuiz, activeTournament, isUserBusy, tournamentRegistry } = require('../store');
 const { checkUser }         = require('../utils/helpers');
 const { isAdmin }           = require('../utils/admin');
@@ -2499,6 +2499,12 @@ module.exports = function setupInteractionHandler(client) {
                 ],
                 components: [],
             }).catch(() => {});
+        }
+
+        // ── Tartan: Admin Panel buttons ──
+        if (id.startsWith('tartan_panel_')) {
+            const action = id.replace('tartan_panel_', '');
+            return handlePanelButton(interaction, action);
         }
 
         // ── Tartan Bilow: Next (admin only) ──
