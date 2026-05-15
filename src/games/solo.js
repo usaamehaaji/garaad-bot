@@ -271,7 +271,7 @@ async function handleSoloLeaderboard(interaction) {
         return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: 64 });
     }
     const lbEmbed = buildLeaderboardEmbed(ownerId, 0, 0);
-    return interaction.reply({ embeds: [lbEmbed], ephemeral: true });
+    return interaction.reply({ embeds: [lbEmbed], flags: 64 });
 }
 
 module.exports = { sendQuestion, handleSoloAnswer, handleSoloLeaderboard };
