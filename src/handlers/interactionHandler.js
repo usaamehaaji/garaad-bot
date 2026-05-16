@@ -388,6 +388,23 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **$${amount.toLocaleString()} USD** waxaad u diray <@${targetId}>. Hadda: **$${eData[targetId].usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
             }
 
+            // ── Admin Econ modal: Give Asset ──
+            if (interaction.customId.startsWith('admin_eco_m_giveasset_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const targetId = interaction.fields.getTextInputValue('target_id').trim();
+                const asset    = interaction.fields.getTextInputValue('asset').trim().toLowerCase();
+                const amount   = parseFloat(interaction.fields.getTextInputValue('amount'));
+                if (!['btc', 'gold'].includes(asset)) return interaction.reply({ content: '⚠️ Asset: `btc` ama `gold`', flags: MessageFlags.Ephemeral });
+                if (isNaN(amount) || amount <= 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                checkEconUser(targetId);
+                eData[targetId][asset] = (eData[targetId][asset] || 0) + amount;
+                saveEcon();
+                const label = asset === 'btc' ? 'BTC' : '🥇 Gold';
+                return interaction.reply({ content: `✅ **${amount} ${label}** waxaad u diray <@${targetId}>. Hadda: **${eData[targetId][asset]}**`, flags: MessageFlags.Ephemeral });
+            }
+
             // ── Admin Econ modal: Give Bank ──
             if (interaction.customId.startsWith('admin_eco_m_givebank_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -923,6 +940,20 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka USD').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 5000').setRequired(true)),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin Econ: Give Asset button → modal ──
+        if (id.startsWith('admin_eco_giveasset_')) {
+            const ownerId = id.replace('admin_eco_giveasset_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_eco_m_giveasset_${ownerId}`).setTitle('🪙 Give Asset');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('asset').setLabel('Asset (btc ama gold)').setStyle(TextInputStyle.Short).setPlaceholder('btc').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 1').setRequired(true)),
             );
             return interaction.showModal(modal);
         }
