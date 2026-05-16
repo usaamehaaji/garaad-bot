@@ -210,21 +210,21 @@ function mainRow(userId) {
     );
 }
 
-// Nav + actions row (4 buttons)
+// Row 1: Khaznad | Bank | Deposit
 function bankFullRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eb_khaznad_${userId}`)         .setLabel('🏛️ Khaznad')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_eb_garaad_${userId}`)          .setLabel('🏦 Bank')      .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇️ Deposit')  .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆️ Withdraw') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eb_khaznad_${userId}`)         .setLabel('🏛️ Khaznad') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eb_garaad_${userId}`)          .setLabel('🏦 Bank')     .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇️ Deposit') .setStyle(ButtonStyle.Success),
     );
 }
 
-// Deen + Iska xir on same row
+// Row 2: Withdraw | Deen | Iska xir
 function ebCloseRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eb_deen_${userId}`) .setLabel('💳 Deen')      .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆️ Withdraw') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eb_deen_${userId}`)           .setLabel('💳 Deen')      .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)           .setLabel('❌ Iska xir')  .setStyle(ButtonStyle.Danger),
     );
 }
 
