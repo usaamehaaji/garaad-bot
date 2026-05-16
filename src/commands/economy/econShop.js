@@ -34,20 +34,20 @@ module.exports = async function econShopCmd(message) {
 
     // Row 1: Items + first 3 titles (5 full)
     const titleRow1 = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('eco_shop_safety')    .setLabel(`🛡️ Shield $500`)       .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId('eco_shop_robticket') .setLabel(`🎫 Rob Ticket $9k`)    .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId('eco_shop_master')    .setLabel(`Master 🎓 $5k`)        .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_phd')       .setLabel(`PhD 📚 $5.5k`)         .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_professor') .setLabel(`Professor 🏛️ $6k`)     .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_safety')    .setLabel(`🛡️ Shield $500`)   .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('eco_shop_robticket') .setLabel(`🎫 Rob $9k`)       .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('eco_shop_master')    .setLabel(`Master $5k`)       .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_phd')       .setLabel(`PhD $5.5k`)        .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_professor') .setLabel(`Prof $6k`)         .setStyle(ButtonStyle.Primary),
     );
 
     // Row 2: Remaining titles (5 full)
     const titleRow2 = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('eco_shop_director')      .setLabel(`Director 📋 $7k`)      .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_theboss')       .setLabel(`The Boss 🕴️ $8k`)      .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('eco_shop_businesswomen') .setLabel(`BizWomen 💼 $9k`)      .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId('eco_shop_ceo')           .setLabel(`CEO 🏢 $10k`)          .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId('eco_shop_custom')        .setLabel(`Custom Name ✍️ $20k`)  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('eco_shop_director')      .setLabel(`Director $7k`) .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_theboss')       .setLabel(`Boss $8k`)     .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId('eco_shop_businesswomen') .setLabel(`BizWomen $9k`) .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId('eco_shop_ceo')           .setLabel(`CEO $10k`)     .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId('eco_shop_custom')        .setLabel(`Custom $20k`)  .setStyle(ButtonStyle.Secondary),
     );
 
     // Row 3: Close

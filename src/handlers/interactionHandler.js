@@ -1394,11 +1394,11 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildSellEmbed, sellRow, sellBackRow } = require('../commands/economy/trade');
+            const { buildSellEmbed, sellRow } = require('../commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildSellEmbed(eData[ownerId])],
-                components: [sellRow(ownerId), sellBackRow(ownerId)],
+                components: [sellRow(ownerId)],
             });
         }
 
@@ -1436,11 +1436,11 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildShopEmbed, shopRow, shopBackRow } = require('../commands/economy/trade');
+            const { buildShopEmbed, shopRow } = require('../commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildShopEmbed(eData[ownerId])],
-                components: [shopRow(ownerId), shopBackRow(ownerId)],
+                components: [shopRow(ownerId)],
             });
         }
 
