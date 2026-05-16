@@ -66,12 +66,12 @@ function buildTimeEmbed(asset, stakeType, stakeAmount, stakeUsd) {
         .setDescription(
             `**Stake:** ${stakeLabel}\n\n` +
             `Immisa daqiiqo baad sugi doontaa?\n\n` +
-            `> 🔵 **1 daqiiqo** — Degdeg, khatarta badan\n` +
-            `> 🟢 **3 daqiiqo** — Dhexdhexaad\n` +
             `> 🟡 **5 daqiiqo** — Xasilloon\n` +
-            `> 🔴 **10 daqiiqo** — Muddo dheer, fursad weyn`
+            `> 🔴 **10 daqiiqo** — Muddo dheer, fursad weyn\n` +
+            `> 🟣 **15 daqiiqo** — Dheerna, khatartu yartahay\n` +
+            `> ⭐ **30 daqiiqo** — Dheer, fursad ugu weyn`
         )
-        .setFooter({ text: 'Garaad Predict' });
+        .setFooter({ text: 'Garaad Predict • Ugu yaraan 5 daqiiqo' });
 }
 
 // ── Embed: Direction ──────────────────────────────────────────────
@@ -261,10 +261,10 @@ function stakeTypeRow(userId) {
 
 function timeRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`pred_t_1_${userId}`) .setLabel('1 min ⚡').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_t_3_${userId}`) .setLabel('3 min').setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`pred_t_5_${userId}`) .setLabel('5 min').setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`pred_t_10_${userId}`).setLabel('10 min 🎯').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`pred_t_15_${userId}`).setLabel('15 min').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_t_30_${userId}`).setLabel('30 min ⭐').setStyle(ButtonStyle.Danger),
     );
 }
 
