@@ -58,7 +58,7 @@ module.exports = function setupMessageHandler(client) {
             if (command !== 'caawin' && command !== 'caaawin' && command !== 'help') {
                 return message.reply(
                     `⛔ Amarkan DM-ka kama shaqeeyo.\n\n` +
-                    `📍 Tag **server-kaaga** oo halkaas ku isticmaal, ama ku biir server-ka Garaad:\n` +
+                    `📍 Tag **server-kaaga** oo halkaas ku isticmaal, ama ku biir server-kan:\n` +
                     `🔗 **https://discord.gg/FyNKRyAKc9**\n\n` +
                     `_(Haddaad u baahan tahay caawimad, isticmaal \`?caawin\`)_`
                 ).catch(() => {});
