@@ -189,20 +189,24 @@ async function resolvePrediction(userId, client) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    // Edit original message + send channel ping
-    if (client && pred.channelId) {
+    // Edit original message (silent update in channel)
+    if (client && pred.channelId && pred.messageId) {
         try {
             const ch = await client.channels.fetch(pred.channelId).catch(() => null);
             if (ch) {
-                // Edit original message if still accessible
-                if (pred.messageId) {
-                    const msg = await ch.messages.fetch(pred.messageId).catch(() => null);
-                    if (msg) await msg.edit({ embeds: [resultEmbed], components: [closeRow] }).catch(() => {});
-                }
-                // Always send a fresh ping so user sees it
-                await ch.send({
-                    content: `<@${userId}>`,
-                    embeds:  [resultEmbed],
+                const msg = await ch.messages.fetch(pred.messageId).catch(() => null);
+                if (msg) await msg.edit({ embeds: [resultEmbed], components: [closeRow] }).catch(() => {});
+            }
+        } catch {}
+    }
+
+    // DM user privately — only they see the result
+    if (client) {
+        try {
+            const user = await client.users.fetch(userId).catch(() => null);
+            if (user) {
+                await user.send({
+                    embeds:     [resultEmbed],
                     components: [closeRow],
                 }).catch(() => {});
             }

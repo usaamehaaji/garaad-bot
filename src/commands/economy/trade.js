@@ -312,6 +312,7 @@ function disclaimerRow(userId) {
 module.exports = async function tradeCmd(message) {
     const userId = message.author.id;
     checkEconUser(userId);
+    const d = econData[userId];
 
     const active = getActivePrediction(userId);
     if (active) {
@@ -321,10 +322,9 @@ module.exports = async function tradeCmd(message) {
         });
     }
 
-    // Show disclaimer first — user must accept before seeing market
     return message.reply({
-        embeds:     [buildDisclaimerEmbed()],
-        components: [disclaimerRow(userId)],
+        embeds:     [buildMarketEmbed(d)],
+        components: [mainRow(userId), tradeCloseRow(userId)],
     });
 };
 
