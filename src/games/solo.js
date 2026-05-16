@@ -119,7 +119,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}**\n` +
                 `🎯 Dhibco guud: **${totalPts}** pts\n` +
                 `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
-                `🧠 IQ kasoo helaa: **+${iqGain} IQ** _(${correct} sax ÷ 3)_\n` +
+                `🧠 IQ aad heshay game kan waa: **+${iqGain} IQ** _(${correct} sax ÷ 3)_\n` +
                 `📅 Maanta solo IQ: **${dayUsed}/30**\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | ⭐ XP: **${d.xp || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
