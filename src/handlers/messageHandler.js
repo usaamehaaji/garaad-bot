@@ -42,18 +42,6 @@ const shaqoCmd        = require('../commands/economy/shaqo');
 const bankListCmd     = require('../commands/economy/bankList');
 const econTitleCmd    = require('../commands/economy/econTitle');
 
-const SAVER_INVITE = 'https://discord.gg/FyNKRyAKc9';
-
-async function dmRedirect(message) {
-    try {
-        const cmd = message.content.split(' ')[0];
-        await message.author.send(
-            `👋 **${message.author.username}**, amarka \`${cmd}\` waa inuu ka shaqeeya **Saver** channel-ka oo keliya.\n\n` +
-            `📍 **Tag Saver channel-ka:** ${SAVER_INVITE}\n\n` +
-            `_Halkaas ku isticmaal amarkaaga._`
-        ).catch(() => {});
-    } catch {}
-}
 
 module.exports = function setupMessageHandler(client) {
     client.on('messageCreate', async (message) => {
@@ -66,15 +54,6 @@ module.exports = function setupMessageHandler(client) {
 
         checkUser(userId);
 
-        // Redirect non-admins to saver channel for ALL commands
-        if (
-            SAVER_CHANNEL_ID &&
-            message.channel.id !== SAVER_CHANNEL_ID &&
-            !isAdmin(userId)
-        ) {
-            await dmRedirect(message);
-            return message.delete().catch(() => {});
-        }
 
         switch (command) {
             // ── Caawinaad ──
