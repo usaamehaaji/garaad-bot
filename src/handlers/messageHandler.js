@@ -42,12 +42,6 @@ const shaqoCmd        = require('../commands/economy/shaqo');
 const bankListCmd     = require('../commands/economy/bankList');
 const econTitleCmd    = require('../commands/economy/econTitle');
 
-// Commands that only work in the saver channel (non-admins redirected via DM)
-const SAVER_ONLY_CMDS = new Set([
-    'ef', 'ecoflip', 'trade', 'shaqo', 'jeeb', 'give', 'rob',
-    'rich', 'ebank', 'shop', 'list', 'etitle', 'exchange',
-]);
-
 const SAVER_INVITE = 'https://discord.gg/FyNKRyAKc9';
 
 async function dmRedirect(message) {
@@ -72,10 +66,9 @@ module.exports = function setupMessageHandler(client) {
 
         checkUser(userId);
 
-        // Redirect non-admins to saver channel for economy commands
+        // Redirect non-admins to saver channel for ALL commands
         if (
             SAVER_CHANNEL_ID &&
-            SAVER_ONLY_CMDS.has(command) &&
             message.channel.id !== SAVER_CHANNEL_ID &&
             !isAdmin(userId)
         ) {
