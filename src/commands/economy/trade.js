@@ -197,20 +197,21 @@ function usdAssetRow(userId) {
     );
 }
 
-// Main row: assets + controls all in one line (max 5)
+// Row 1: assets + refresh
 function mainRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`pred_a_btc_${userId}`)    .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)   .setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`pred_refresh_${userId}`)  .setLabel('🔄 Refresh') .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)    .setLabel('🛒 Buy')     .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`trade_sell_${userId}`)    .setLabel('💰 Sell')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_btc_${userId}`)   .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_a_gold_${userId}`)  .setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`pred_refresh_${userId}`) .setLabel('🔄 Refresh') .setStyle(ButtonStyle.Primary),
     );
 }
 
+// Row 2: buy + sell + close
 function tradeCloseRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)   .setLabel('🛒 Buy')     .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`trade_sell_${userId}`)   .setLabel('💰 Sell')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`)  .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
 
