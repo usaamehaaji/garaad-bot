@@ -42,6 +42,22 @@ const shaqoCmd        = require('../commands/economy/shaqo');
 const bankListCmd     = require('../commands/economy/bankList');
 const econTitleCmd    = require('../commands/economy/econTitle');
 
+// Commands that only work in the saver channel (non-admins redirected via DM)
+const SAVER_ONLY_CMDS = new Set([
+    'ef', 'ecoflip', 'trade', 'shaqo', 'jeeb', 'give', 'rob',
+    'rich', 'ebank', 'shop', 'list', 'etitle', 'exchange',
+]);
+
+async function dmRedirect(message, channelId) {
+    try {
+        const ch = channelId ? `<#${channelId}>` : '**saver** channel-ka';
+        await message.author.send(
+            `👋 **${message.author.username}**, amarka \`${message.content.split(' ')[0]}\` oo aad isticmaashay waa inuu ka shaqeeyaa ${ch} oo keliya.\n\n` +
+            `📍 Fadlan tag ${ch} oo halkaas ku isticmaal.`
+        ).catch(() => {});
+    } catch {}
+}
+
 module.exports = function setupMessageHandler(client) {
     client.on('messageCreate', async (message) => {
         if (message.author.bot)                  return;
@@ -52,6 +68,18 @@ module.exports = function setupMessageHandler(client) {
         const userId  = message.author.id;
 
         checkUser(userId);
+
+        // Redirect non-admins to saver channel for economy commands
+        const saverChannelId = process.env.SAVER_CHANNEL_ID;
+        if (
+            saverChannelId &&
+            SAVER_ONLY_CMDS.has(command) &&
+            message.channel.id !== saverChannelId &&
+            !isAdmin(userId)
+        ) {
+            await dmRedirect(message, saverChannelId);
+            return message.delete().catch(() => {});
+        }
 
         switch (command) {
             // ── Caawinaad ──
