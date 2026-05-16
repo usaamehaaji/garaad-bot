@@ -778,8 +778,8 @@ module.exports = function setupInteractionHandler(client) {
             const ownerId = id.replace('admin_aqoon_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { buildAdminAqoonEmbed: bae, adminAqoonMainRow, adminAqoonFooterRow } = require('../commands/admin/adminHelpPanel');
-            return interaction.update({ embeds: [bae()], components: [adminAqoonMainRow(ownerId), adminAqoonFooterRow(ownerId)] });
+            const { buildAdminAqoonEmbed: bae, adminAqoonMainRow, adminAqoonMidRow, adminAqoonFooterRow } = require('../commands/admin/adminHelpPanel');
+            return interaction.update({ embeds: [bae()], components: [adminAqoonMainRow(ownerId), adminAqoonMidRow(ownerId), adminAqoonFooterRow(ownerId)] });
         }
 
         // ── Admin tab: Economy (tab button only — exact prefix admin_eco_ + uid) ──
@@ -789,8 +789,8 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-            const { buildAdminEconEmbed, adminEcoMainRow, adminEcoFooterRow } = require('../commands/admin/adminEconPanel');
-            return interaction.update({ embeds: [buildAdminEconEmbed()], components: [adminEcoMainRow(ownerId), adminEcoFooterRow(ownerId)] });
+            const { buildAdminEconEmbed, adminEcoMainRow, adminEcoMidRow, adminEcoFooterRow, adminEcoCloseRow } = require('../commands/admin/adminEconPanel');
+            return interaction.update({ embeds: [buildAdminEconEmbed()], components: [adminEcoMainRow(ownerId), adminEcoMidRow(ownerId), adminEcoFooterRow(ownerId), adminEcoCloseRow(ownerId)] });
         }
 
         // ── Admin Aqoon: Give IQ button → modal ──
@@ -867,8 +867,8 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-            const { buildAllPlayersEmbed, adminEcoMainRow, adminEcoFooterRow } = require('../commands/admin/adminEconPanel');
-            return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: [adminEcoMainRow(ownerId), adminEcoFooterRow(ownerId)] });
+            const { buildAllPlayersEmbed, adminEcoMainRow, adminEcoMidRow, adminEcoFooterRow, adminEcoCloseRow } = require('../commands/admin/adminEconPanel');
+            return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: [adminEcoMainRow(ownerId), adminEcoMidRow(ownerId), adminEcoFooterRow(ownerId), adminEcoCloseRow(ownerId)] });
         }
 
         // ── Admin Econ: Loans button ──
@@ -887,13 +887,13 @@ module.exports = function setupInteractionHandler(client) {
                     const left = Math.max(0, 3 - days);
                     return `${left === 0 ? '🔴' : '💳'} <@${uid}> — **$${fmt(d.loan.owed)}** | ${left === 0 ? '**OVERDUE**' : `${left}d`}`;
                 });
-            const { adminEcoMainRow, adminEcoFooterRow } = require('../commands/admin/adminEconPanel');
+            const { adminEcoMainRow, adminEcoMidRow, adminEcoFooterRow, adminEcoCloseRow } = require('../commands/admin/adminEconPanel');
             const loansEmbed = new EmbedBuilder()
                 .setTitle(`💳 Deynta (${loans.length})`)
                 .setColor('#e74c3c')
                 .setDescription(loans.join('\n') || '_Cidna deen kuma jirto._')
                 .setFooter({ text: 'Garaad Admin' });
-            return interaction.update({ embeds: [loansEmbed], components: [adminEcoMainRow(ownerId), adminEcoFooterRow(ownerId)] });
+            return interaction.update({ embeds: [loansEmbed], components: [adminEcoMainRow(ownerId), adminEcoMidRow(ownerId), adminEcoFooterRow(ownerId), adminEcoCloseRow(ownerId)] });
         }
 
         // ── Admin Econ: Top-up Treasury button → modal ──

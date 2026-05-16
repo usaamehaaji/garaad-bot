@@ -118,25 +118,37 @@ function adminEconActionsRow2(uid) {
     );
 }
 
-// Row 1: Aqoon | Economy | Give USD | Give Asset | Dadka
+// Row 1 (3): Aqoon | Economy | Give USD
 function adminEcoMainRow(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_aqoon_${uid}`)           .setLabel('🧠 Aqoon')      .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_eco_${uid}`)             .setLabel('💰 Economy')    .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`)     .setLabel('💵 Give USD')   .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_eco_giveasset_${uid}`)   .setLabel('🪙 Give Asset') .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`)  .setLabel('👥 Dadka')      .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_aqoon_${uid}`)         .setLabel('🧠 Aqoon')      .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_eco_${uid}`)           .setLabel('💰 Economy')    .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`)   .setLabel('💵 Give USD')   .setStyle(ButtonStyle.Success),
     );
 }
 
-// Row 2: Top-up | Deynta | Reset | Reset All | Iska xir
+// Row 2 (3): Give Asset | Dadka | Top-up
+function adminEcoMidRow(uid) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`admin_eco_giveasset_${uid}`)  .setLabel('🪙 Give Asset') .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`) .setLabel('👥 Dadka')      .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`)      .setLabel('🏛️ Top-up')    .setStyle(ButtonStyle.Primary),
+    );
+}
+
+// Row 3 (3): Deynta | Reset | Reset All
 function adminEcoFooterRow(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`)    .setLabel('🏛️ Top-up')   .setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`)    .setLabel('💳 Deynta')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_reset_${uid}`)    .setLabel('🗑️ Reset')    .setStyle(ButtonStyle.Danger),
         new ButtonBuilder().setCustomId(`admin_eco_resetall_${uid}`) .setLabel('♻️ Reset All').setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`)   .setLabel('❌ Iska xir') .setStyle(ButtonStyle.Danger),
+    );
+}
+
+// Row 4 (1): Iska xir
+function adminEcoCloseRow(uid) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
 
@@ -150,7 +162,7 @@ module.exports = async function adminEconCmd(message, args) {
     if (!sub || sub === 'help') {
         return message.reply({
             embeds:     [buildAdminEconEmbed()],
-            components: [adminEcoMainRow(userId), adminEcoFooterRow(userId)],
+            components: [adminEcoMainRow(userId), adminEcoMidRow(userId), adminEcoFooterRow(userId), adminEcoCloseRow(userId)],
         });
     }
 
@@ -293,4 +305,6 @@ module.exports.adminTabRow           = adminTabRow;
 module.exports.adminEconActionsRow   = adminEconActionsRow;
 module.exports.adminEconActionsRow2  = adminEconActionsRow2;
 module.exports.adminEcoMainRow       = adminEcoMainRow;
+module.exports.adminEcoMidRow        = adminEcoMidRow;
 module.exports.adminEcoFooterRow     = adminEcoFooterRow;
+module.exports.adminEcoCloseRow      = adminEcoCloseRow;
