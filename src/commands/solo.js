@@ -30,6 +30,26 @@ async function startSoloGame(message, count) {
 
     checkUser(userId);
     const d = userData[userId];
+
+    // Hubi xadka 30 IQ maalintiiba
+    const dayKey = new Date().toISOString().slice(0, 10);
+    if (d.soloIqDayKey !== dayKey) { d.soloIqDayKey = dayKey; d.soloIqToday = 0; saveData(); }
+    if ((d.soloIqToday || 0) >= 30) {
+        const { EmbedBuilder } = require('discord.js');
+        return message.reply({ embeds: [
+            new EmbedBuilder()
+                .setTitle('🚫 Solo — Xadka Maanta Waad Gaartay!')
+                .setDescription(
+                    `✅ Maanta **30 IQ** solo kasoo helatay — xad maalinlaha ah.\n\n` +
+                    `Ciyaar kuwa kale si aad IQ u hesho:\n` +
+                    `🎓 \`${PREFIX}quiz\` — Tartan koox\n` +
+                    `⚔️ \`${PREFIX}duel @qof\` — Tartam qof kale\n\n` +
+                    `_Solo dib ayuu u furmayaa berri._`
+                )
+                .setColor('#e74c3c'),
+        ]});
+    }
+
     if (!d.seenSoloIntro || d.iq <= 0) {
         await message.reply({ embeds: [soloIntroEmbed()] });
         if (d.iq > 0) {
