@@ -284,12 +284,34 @@ function confirmRow(userId) {
     );
 }
 
+// ── Disclaimer embed ──────────────────────────────────────────────
+
+function buildDisclaimerEmbed() {
+    return new EmbedBuilder()
+        .setTitle('⚠️ Garaad Predict — Ogolaanshaha Khatarta')
+        .setColor('#e67e22')
+        .setDescription(
+            `**Saadaalinta kasta waxay leedahay faa'iido iyo khataro.**\n\n` +
+            `Kahor intaadan xidhin saadaalin kasta, **natiijada dhamaan** — faa'iido든 qasaaro든 — waa in adigu shakhsi ahaan aqbasho.\n\n` +
+            `**Mas'uuliyadda fulinta, maamulka, iyo go'aanka ugu dambeeya** waxay rasmiga ahaan kugu xidhan tahay adiga.\n\n` +
+            `📌 _Saadaalinta waxaa lagu maamulay si xirfadaysan, istiraatijiyad leh, iyo xisaab ku saleysan khatarta si loo xoojiyo xasilloonida iyo fursadda._\n\n` +
+            `Ma aqbasaysaa xaaladdan?`
+        )
+        .setFooter({ text: 'Garaad Predict • Aqbal si aad u sii wadato' });
+}
+
+function disclaimerRow(userId) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`trade_accept_${userId}`).setLabel('✅ Aqbal — Gal Suuqa').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`) .setLabel('❌ Jooji')             .setStyle(ButtonStyle.Danger),
+    );
+}
+
 // ── Command entry ─────────────────────────────────────────────────
 
 module.exports = async function tradeCmd(message) {
     const userId = message.author.id;
     checkEconUser(userId);
-    const d = econData[userId];
 
     const active = getActivePrediction(userId);
     if (active) {
@@ -299,14 +321,17 @@ module.exports = async function tradeCmd(message) {
         });
     }
 
+    // Show disclaimer first — user must accept before seeing market
     return message.reply({
-        embeds:     [buildMarketEmbed(d)],
-        components: [mainRow(userId), tradeCloseRow(userId)],
+        embeds:     [buildDisclaimerEmbed()],
+        components: [disclaimerRow(userId)],
     });
 };
 
 // ── Named exports for interactionHandler ─────────────────────────
 
+module.exports.buildDisclaimerEmbed = buildDisclaimerEmbed;
+module.exports.disclaimerRow        = disclaimerRow;
 module.exports.ASSETS              = ASSETS;
 module.exports.ASSET_LABEL         = ASSET_LABEL;
 module.exports.buildMarketEmbed    = buildMarketEmbed;

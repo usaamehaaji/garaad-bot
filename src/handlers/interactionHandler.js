@@ -1162,6 +1162,20 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.message.delete().catch(() => {});
         }
 
+        // ── Trade: Accept disclaimer → open market ──
+        if (id.startsWith('trade_accept_')) {
+            const ownerId = id.replace('trade_accept_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser } = require('../economy/econStore');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
+            checkEconUser(ownerId);
+            return interaction.update({
+                embeds:     [buildMarketEmbed(eData[ownerId])],
+                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
+            });
+        }
+
         // ── Prediction: Refresh market ──
         if (id.startsWith('pred_refresh_')) {
             const ownerId = id.replace('pred_refresh_', '');
