@@ -15,6 +15,7 @@ const {
     SOLO_FAST_MS,
     SOLO_MAX_SCORE,
     SOLO_MIN_SCORE,
+    SOLO_DEFAULT_QUESTIONS,
     STREAK_BONUS_2,
     STREAK_BONUS_5,
     STREAK_BONUS_10,
@@ -85,7 +86,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     const isInteraction = !!(messageOrInteraction.isButton && messageOrInteraction.isButton());
     const userId        = isInteraction ? messageOrInteraction.user.id : messageOrInteraction.author.id;
     const game          = activeGames.get(userId);
-    const total         = game ? game.total : 13;
+    const total         = game ? game.total : SOLO_DEFAULT_QUESTIONS;
 
     if (!game || qNumber > total) {
         activeGames.delete(userId);
@@ -97,7 +98,8 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         const streak     = game ? (game.bestStreak  || 0) : 0;
         const correct    = game ? (game.correctCount || 0) : 0;
         const wrong      = total - correct;
-        const iqGain     = Math.floor(totalPts / 90);
+        // 1 IQ per 2.5 sax = 10 IQ for 25/25 correct (min 1 haddii 3+ sax)
+        const iqGain     = Math.floor(correct * 2 / 5);
         if (iqGain > 0) { userData[userId].iq = (userData[userId].iq || 0) + iqGain; saveData(); }
 
         const finishEmbed = new EmbedBuilder()
@@ -107,7 +109,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}**\n` +
                 `🎯 Dhibco guud: **${totalPts}** pts\n` +
                 `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
-                `🧠 IQ kasoo helaa: **+${iqGain} IQ** _(${totalPts} pts ÷ 90)_\n\n` +
+                `🧠 IQ kasoo helaa: **+${iqGain} IQ** _(${correct} sax × 0.4)_\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | ⭐ XP: **${d.xp || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
             .setColor('#2ecc71');
