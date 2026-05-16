@@ -98,9 +98,19 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         const streak     = game ? (game.bestStreak  || 0) : 0;
         const correct    = game ? (game.correctCount || 0) : 0;
         const wrong      = total - correct;
-        // 1 IQ per 2.5 sax = 10 IQ for 25/25 correct (min 1 haddii 3+ sax)
-        const iqGain     = Math.floor(correct * 2 / 5);
-        if (iqGain > 0) { userData[userId].iq = (userData[userId].iq || 0) + iqGain; saveData(); }
+        // 3 sax = 1 IQ, xad 30 IQ bishii solo
+        const monthKey = new Date().toISOString().slice(0, 7);
+        const dd = userData[userId];
+        if (dd.soloIqMonthKey !== monthKey) { dd.soloIqMonthKey = monthKey; dd.soloIqThisMonth = 0; }
+        const soloLeft   = Math.max(0, 30 - (dd.soloIqThisMonth || 0));
+        const rawIqGain  = Math.floor(correct / 3);
+        const iqGain     = Math.min(rawIqGain, soloLeft);
+        if (iqGain > 0) {
+            userData[userId].iq = (userData[userId].iq || 0) + iqGain;
+            dd.soloIqThisMonth = (dd.soloIqThisMonth || 0) + iqGain;
+            saveData();
+        }
+        const monthUsed = dd.soloIqThisMonth || 0;
 
         const finishEmbed = new EmbedBuilder()
             .setTitle('🏁 Ciyaarta Waa Dhamaaday!')
@@ -109,7 +119,8 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}**\n` +
                 `🎯 Dhibco guud: **${totalPts}** pts\n` +
                 `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
-                `🧠 IQ kasoo helaa: **+${iqGain} IQ** _(${correct} sax × 0.4)_\n\n` +
+                `🧠 IQ kasoo helaa: **+${iqGain} IQ** _(${correct} sax ÷ 3)_\n` +
+                `📅 Bishii solo IQ: **${monthUsed}/30**\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | ⭐ XP: **${d.xp || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
             .setColor('#2ecc71');
@@ -131,12 +142,6 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
             await messageOrInteraction.reply({ embeds: [finishEmbed], components: [row] });
         }
 
-        // Muuji leaderboard embed si toos ah channel-ka
-        const channel = isInteraction ? messageOrInteraction.channel : messageOrInteraction.channel;
-        if (channel) {
-            const lbEmbed = buildLeaderboardEmbed(userId, totalPts, total);
-            await channel.send({ embeds: [lbEmbed] }).catch(() => {});
-        }
         return;
     }
 
