@@ -46,6 +46,7 @@ const econTitleCmd    = require('../commands/economy/econTitle');
 module.exports = function setupMessageHandler(client) {
     client.on('messageCreate', async (message) => {
         if (message.author.bot)                  return;
+        if (!message.guild)                      return;
         if (!message.content.startsWith(PREFIX)) return;
 
         const args    = message.content.slice(PREFIX.length).trim().split(/ +/g);
