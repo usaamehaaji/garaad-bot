@@ -403,11 +403,14 @@ async function cmdAnnounce(message) {
         return message.reply(`⚠️ Tartan horeba socdaa. Jooji marka hore: \`${PREFIX}tartan_jooji\``);
     }
 
+    const deadline = Date.now() + REG_DURATION_MS;
+    tournamentRegistry.clear();
+
     const state = {
         channelId:            GAME_CHANNEL_ID,
         adminId:              message.author.id,
         client:               message.client,
-        stage:                'initial',
+        stage:                'registration',
         roundIdx:             0,
         players:              new Set(),
         survivors:            new Set(),
@@ -418,7 +421,7 @@ async function cmdAnnounce(message) {
         questions:            [],
         currentQ:             0,
         channel:              null,
-        registrationDeadline: null,
+        registrationDeadline: deadline,
         announceMsgId:        null,
         panelMsgId:           null,
         panelChannelId:       message.channel.id,
@@ -426,9 +429,40 @@ async function cmdAnnounce(message) {
     };
     activeTournament.set(GAME_CHANNEL_ID, state);
 
+    // 1. Post announcement to ANNOUNCE channel immediately
+    const announceChannel = await message.client.channels.fetch(ANNOUNCE_CHANNEL_ID).catch(() => null);
+    if (announceChannel) {
+        const annMsg = await announceChannel.send({
+            content:    '@everyone',
+            embeds:     [buildAnnounceEmbed(deadline, 0)],
+            components: [buildAnnounceButtons(false)],
+        }).catch(() => null);
+        if (annMsg) state.announceMsgId = annMsg.id;
+    }
+
+    // 2. Post notification to VC tournament chat
+    const vcChannel = await message.client.channels.fetch(VC_CHANNEL_ID).catch(() => null);
+    if (vcChannel) {
+        await vcChannel.send({
+            embeds: [new EmbedBuilder()
+                .setTitle('🏆 Tartan — Diiwaangelinta Waa Furan Tahay!')
+                .setColor('#e67e22')
+                .setDescription(
+                    `@everyone 🎉 **Tartan ayaa bilaabmaya!**\n\n` +
+                    `📋 Tag <#${ANNOUNCE_CHANNEL_ID}> si aad u diiwaangeliso.\n` +
+                    `⏰ **Diiwaangelinta:** 24 saacadood\n\n` +
+                    `_Riix 📝 Diiwaan Geli si aad code DM u hesho._`
+                )
+                .setFooter({ text: 'Garaad Quiz Tournament' })],
+        }).catch(() => {});
+    }
+
+    // 3. Admin panel back to admin
+    state._regTimer = setTimeout(() => closeRegistration(state), REG_DURATION_MS);
+
     const panelMsg = await message.reply({
         embeds:     [buildAdminPanelEmbed(state)],
-        components: [buildAdminPanelButtons('initial')],
+        components: [buildAdminPanelButtons('registration')],
         fetchReply: true,
     });
     state.panelMsgId = panelMsg.id;
