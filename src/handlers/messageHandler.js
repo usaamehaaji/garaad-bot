@@ -2,7 +2,7 @@
 // GARAAD BOT - Maareynta Farriimaha (Message Handler)
 // =====================================================================
 
-const { PREFIX }      = require('../config');
+const { PREFIX, SAVER_CHANNEL_ID } = require('../config');
 const { checkUser }   = require('../utils/helpers');
 const { isAdmin }     = require('../utils/admin');
 
@@ -70,14 +70,13 @@ module.exports = function setupMessageHandler(client) {
         checkUser(userId);
 
         // Redirect non-admins to saver channel for economy commands
-        const saverChannelId = process.env.SAVER_CHANNEL_ID;
         if (
-            saverChannelId &&
+            SAVER_CHANNEL_ID &&
             SAVER_ONLY_CMDS.has(command) &&
-            message.channel.id !== saverChannelId &&
+            message.channel.id !== SAVER_CHANNEL_ID &&
             !isAdmin(userId)
         ) {
-            await dmRedirect(message, saverChannelId);
+            await dmRedirect(message, SAVER_CHANNEL_ID);
             return message.delete().catch(() => {});
         }
 

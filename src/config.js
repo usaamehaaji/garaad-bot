@@ -5,6 +5,9 @@
 module.exports = {
     PREFIX: '?',
 
+    // Channel economy commands kaliya ku shaqeeyaan (non-admins redirect)
+    SAVER_CHANNEL_ID: process.env.SAVER_CHANNEL_ID || '1483269768873246794',
+
     // ───── Waqtiyo (Milliseconds) ─────
     TWO_WEEKS_MS:    14 * 24 * 60 * 60 * 1000,
     GLOBAL_WAIT_MS:  18000,
