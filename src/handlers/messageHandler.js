@@ -48,12 +48,15 @@ const SAVER_ONLY_CMDS = new Set([
     'rich', 'ebank', 'shop', 'list', 'etitle', 'exchange',
 ]);
 
-async function dmRedirect(message, channelId) {
+const SAVER_INVITE = 'https://discord.gg/FyNKRyAKc9';
+
+async function dmRedirect(message) {
     try {
-        const ch = channelId ? `<#${channelId}>` : '**saver** channel-ka';
+        const cmd = message.content.split(' ')[0];
         await message.author.send(
-            `👋 **${message.author.username}**, amarka \`${message.content.split(' ')[0]}\` oo aad isticmaashay waa inuu ka shaqeeyaa ${ch} oo keliya.\n\n` +
-            `📍 Fadlan tag ${ch} oo halkaas ku isticmaal.`
+            `👋 **${message.author.username}**, amarka \`${cmd}\` waa inuu ka shaqeeya **Saver** channel-ka oo keliya.\n\n` +
+            `📍 **Tag Saver channel-ka:** ${SAVER_INVITE}\n\n` +
+            `_Halkaas ku isticmaal amarkaaga._`
         ).catch(() => {});
     } catch {}
 }
@@ -76,7 +79,7 @@ module.exports = function setupMessageHandler(client) {
             message.channel.id !== SAVER_CHANNEL_ID &&
             !isAdmin(userId)
         ) {
-            await dmRedirect(message, SAVER_CHANNEL_ID);
+            await dmRedirect(message);
             return message.delete().catch(() => {});
         }
 
