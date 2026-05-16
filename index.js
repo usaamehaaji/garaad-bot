@@ -81,7 +81,7 @@ client.once('clientReady', () => {
     // Activity status: ?caawin | X servers
     function updateStatus() {
         const count = client.guilds.cache.size;
-        client.user.setActivity(`?caawin | ${count} servers dee`, { type: 3 }); // 3 = Watching
+        client.user.setActivity(`?caawin | ${count} servers`, { type: 3 }); // 3 = Watching
     }
     updateStatus();
     client.on('guildCreate', updateStatus);
