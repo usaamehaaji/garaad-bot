@@ -50,10 +50,7 @@ function saveMarket() {
     }
 }
 
-function tickMarket() {
-    const now = Date.now();
-    if (now - marketData.lastUpdate < TICK_MS) return false;
-
+function doOneTick() {
     for (const asset of Object.keys(BASE_PRICES)) {
         const prev   = marketData.prices[asset];
         const vol    = VOLATILITY[asset];
@@ -65,17 +62,24 @@ function tickMarket() {
             Math.round(BASE_PRICES[asset] * 0.3),
             Math.round(prev * (1 + change))
         );
-
         marketData.previous[asset] = prev;
         marketData.prices[asset]   = next;
-
-        // Taariikh: ku dar, ku xidid HISTORY_MAX
         marketData.history[asset] ??= [];
         marketData.history[asset].push(next);
         if (marketData.history[asset].length > HISTORY_MAX) {
             marketData.history[asset].shift();
         }
     }
+}
+
+function tickMarket() {
+    const now      = Date.now();
+    const elapsed  = now - marketData.lastUpdate;
+    if (elapsed < TICK_MS) return false;
+
+    // Catch-up: advance one tick per missed minute (max 60)
+    const ticks = Math.min(60, Math.floor(elapsed / TICK_MS));
+    for (let i = 0; i < ticks; i++) doOneTick();
 
     marketData.lastUpdate = now;
     saveMarket();

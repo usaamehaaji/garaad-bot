@@ -189,24 +189,19 @@ async function resolvePrediction(userId, client) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    // Edit original message
-    if (client && pred.channelId && pred.messageId) {
-        try {
-            const ch  = await client.channels.fetch(pred.channelId).catch(() => null);
-            if (ch) {
-                const msg = await ch.messages.fetch(pred.messageId).catch(() => null);
-                if (msg) await msg.edit({ embeds: [resultEmbed], components: [closeRow] }).catch(() => {});
-            }
-        } catch {}
-    }
-
-    // Channel ping
+    // Edit original message + send channel ping
     if (client && pred.channelId) {
         try {
             const ch = await client.channels.fetch(pred.channelId).catch(() => null);
             if (ch) {
+                // Edit original message if still accessible
+                if (pred.messageId) {
+                    const msg = await ch.messages.fetch(pred.messageId).catch(() => null);
+                    if (msg) await msg.edit({ embeds: [resultEmbed], components: [closeRow] }).catch(() => {});
+                }
+                // Always send a fresh ping so user sees it
                 await ch.send({
-                    content: `<@${userId}> — natiijahaaga saadaalinta:`,
+                    content: `<@${userId}>`,
                     embeds:  [resultEmbed],
                     components: [closeRow],
                 }).catch(() => {});
