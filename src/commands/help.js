@@ -36,24 +36,34 @@ function buildEduEmbed(userId) {
         .setColor('#2ecc71')
         .setDescription(
             statusLine +
-            `\n**Education Games**\n` +
+            `\n**🎮 Ciyaaraha**\n` +
             `**\`${PREFIX}solo\`** — Su'aal kuu yimaada, jawaab si degdeg ah\n` +
             `**\`${PREFIX}duel @qof\`** — La ciyaar qof, IQ ayaa danbeeysa\n` +
-            `**\`${PREFIX}deul 2v2 usd 10000\`** — Team duel: 1v1/2v2/3v3, IQ/USD dhig\n` +
-            `**\`${PREFIX}quiz\`** — Koox la ciyaar, waa la tartamaa\n` +
-            `**\`${PREFIX}tartan\`** — Tartanka weyn — ku diiwaangeli, la ciyaar dadka oo dhan\n\n` +
+            `**\`${PREFIX}deul 2v2 usd 10000\`** — Team duel: 1v1/2v2/3v3\n` +
+            `**\`${PREFIX}quiz\`** — Koox la ciyaar, waa la tartamaa\n\n` +
 
-            `**Dhibcaha & IQ**\n` +
-            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel (IQ, USD, ama asset)\n` +
-            `**\`${PREFIX}exchange\`** — Dhibcaha tartanka IQ ku badal\n\n` +
+            `**🏆 Tartan (Tournament)**\n` +
+            `**\`${PREFIX}tartan\`** — ⚙️ \`Admin\` Bilow tartan cusub\n` +
+            `**\`${PREFIX}tartan_bilow\`** — ⚙️ \`Admin\` Degdeg u fur wareegga\n` +
+            `**\`${PREFIX}tartan_jooji\`** — ⚙️ \`Admin\` Tartan jooji\n` +
+            `**\`${PREFIX}tartan_status\`** — Xaaladda tartanka hadda\n` +
+            `**\`${PREFIX}isdiiwaangeli\`** — Ku diiwaangeli tartanka\n` +
+            `**\`${PREFIX}gal CODE\`** — Game ku biir (code-ka DM-kaaga)\n\n` +
 
-            `**Profile & Tirakoob**\n` +
+            `**📊 Dhibcaha & IQ**\n` +
+            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel\n` +
+            `**\`${PREFIX}exchange\`** — Dhibcaha IQ ku badal\n\n` +
+
+            `**👤 Profile**\n` +
             `**\`${PREFIX}profile\`** — IQ, level iyo dhibcahaaga\n` +
             `**\`${PREFIX}top\`** — Liiska 15-ka ugu IQ sarreeya\n` +
-            `**\`${PREFIX}statistics\`** — Tirakoobkaaga guud\n` +
+            `**\`${PREFIX}statistics\`** — Tirakoobkaaga guud\n\n` +
+
+            `**💬 Kale**\n` +
+            `**\`${PREFIX}dm <fariin>\`** — Admin u dir fikrad ama talo\n` +
             `**\`${PREFIX}cilada [fariin]\`** — Cilad soo sheeg`
         )
-        .setFooter({ text: `Prefix: ${PREFIX}` });
+        .setFooter({ text: `Prefix: ${PREFIX} • ⚙️ = Admin kaliya` });
 }
 
 function buildEcoEmbed() {
