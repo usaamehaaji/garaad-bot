@@ -52,8 +52,17 @@ module.exports = function setupMessageHandler(client) {
         const command = args.shift().toLowerCase();
         const userId  = message.author.id;
 
-        // ?caawin DM-ka ka shaqeyn
-        if (!message.guild && (command === 'caawin' || command === 'caaawin' || command === 'help')) return;
+        // DM-ka: ?caawin kaliya shaqeeya, kuwa kale redirect
+        if (!message.guild) {
+            if (command !== 'caawin' && command !== 'caaawin' && command !== 'help') {
+                return message.reply(
+                    `⛔ Amarkan DM-ka kama shaqeeyo.\n\n` +
+                    `📍 **Tag Saver channel-ka** si aad u isticmaasho:\n` +
+                    `🔗 https://discord.gg/FyNKRyAKc9\n\n` +
+                    `_(Haddaad u baahan tahay caawimad, isticmaal \`?caawin\`)_`
+                ).catch(() => {});
+            }
+        }
 
         checkUser(userId);
 
