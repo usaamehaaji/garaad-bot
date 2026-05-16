@@ -1,15 +1,16 @@
 // =====================================================================
 // TARTAN — Tournament (New Flow)
 //
-// 1. Admin: ?tartan → Bot posts to ANNOUNCE channel (24h registration)
-// 2. Users click "📝 Diiwaan Geli" → code DM instantly
-// 3. After 24h → auto-close, admin gets DM panel
-// 4. Admin: clicks "▶️ Fur Tartanka" in DM (or ?tartan_bilow)
+// 1. Admin: ?tartan → bot weydiiyaa 3 channel ID (announce, game, vc)
+// 2. Admin ku gala IDs → bot "✅ Ok" dhahaa, panel bilaabaa
+// 3. Users click "📝 Diiwaan Geli" → code DM instantly
+// 4. Admin panel: Bilow Registration / Bilow Toos
 // 5. Bot posts in GAME channel: ?gal CODE
 // 6. Users join with code, admin starts rounds
 //
 // Wareegyada: R1=25 | R2=20 | Final=15 su'aalood
 // Dhibco: < 5s = 40pts | 18s = 5pts (timed)
+// Keyed by guild ID — servers kasta tournament gaar ah
 // =====================================================================
 
 const {
@@ -47,11 +48,11 @@ const {
     TOURNAMENT_FINAL_QUESTIONS,
 } = require('../config');
 
-// ── Channel IDs ──────────────────────────────────────────────────────
+// Fallback channel IDs (used in button handlers where state key = guildId)
 const ANNOUNCE_CHANNEL_ID = '1490233695624364123';
 const GAME_CHANNEL_ID     = '1504430434895921193';
 const VC_CHANNEL_ID       = '1504130784368525553';
-const REG_DURATION_MS     = 24 * 60 * 60 * 1000; // 24 saacadood
+const REG_DURATION_MS     = 24 * 60 * 60 * 1000;
 
 const ROUND_LABELS = {
     1: { name: 'Wareegga 1aad',        color: '#e67e22', questions: TOURNAMENT_R1_QUESTIONS    },
@@ -93,10 +94,18 @@ function computeSurvivors(survivorIds, roundScoreMap, roundIdx) {
     return list.slice(0, keepCount).map(x => x[0]);
 }
 
+// Helper: get state by guildId (falls back to old GAME_CHANNEL_ID key)
+function getState(guildId) {
+    return activeTournament.get(guildId) || activeTournament.get(GAME_CHANNEL_ID);
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // Announcement Embed & Buttons
 // ─────────────────────────────────────────────────────────────────────
-function buildAnnounceEmbed(deadline, regCount, closed = false) {
+function buildAnnounceEmbed(deadline, regCount, closed, state) {
+    const gameChId = state?.gameChannelId || GAME_CHANNEL_ID;
+    const vcChId   = state?.vcChannelId   || VC_CHANNEL_ID;
+
     const timeLeft = Math.max(0, deadline - Date.now());
     const hours    = Math.floor(timeLeft / 3600000);
     const mins     = Math.floor((timeLeft % 3600000) / 60000);
@@ -120,9 +129,9 @@ function buildAnnounceEmbed(deadline, regCount, closed = false) {
             `━━━━━━━━━━━━━━━━━━━━\n` +
             `📌 **TILAABOOYINKA:**\n` +
             `**1.** Riix **📝 Diiwaan Geli** — code DM-kaaga ku yimaadaa isla markiiba\n` +
-            `**2.** Marka admin game furo: tag 💬 <#${GAME_CHANNEL_ID}>\n` +
+            `**2.** Marka admin game furo: tag 💬 <#${gameChId}>\n` +
             `**3.** Qor: \`${PREFIX}gal CODE\` (code-kaagu DM-ka ayuu ku jiraa)\n\n` +
-            `🎙️ **Voice Channel:** <#${VC_CHANNEL_ID}>\n\n` +
+            `🎙️ **Voice Channel:** <#${vcChId}>\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
             `🏆 **Guuleystaha:** **Champion 🏆** title + abaalmarin\n\n` +
             regStatus
@@ -146,9 +155,12 @@ function buildAnnounceButtons(disabled = false) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Admin Panel (persistent, updates per stage)
+// Admin Panel
 // ─────────────────────────────────────────────────────────────────────
 function buildAdminPanelEmbed(state) {
+    const annChId  = state.announceChannelId || ANNOUNCE_CHANNEL_ID;
+    const gameChId = state.gameChannelId     || GAME_CHANNEL_ID;
+    const vcChId   = state.vcChannelId       || VC_CHANNEL_ID;
     const regCount  = tournamentRegistry.size;
     const joinCount = state.players?.size || 0;
     const stageText = {
@@ -163,14 +175,15 @@ function buildAdminPanelEmbed(state) {
         .setDescription(
             `**${stageText}**\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `📢 Announcement: <#${ANNOUNCE_CHANNEL_ID}>\n` +
-            `🎮 Game channel: <#${GAME_CHANNEL_ID}>\n` +
-            `🎙️ VC: <#${VC_CHANNEL_ID}>`
+            `📢 Announcement: <#${annChId}>\n` +
+            `🎮 Game channel: <#${gameChId}>\n` +
+            `🎙️ VC: <#${vcChId}>`
         )
         .setFooter({ text: 'Garaad Quiz — Admin Control Panel' });
 }
 
-function buildAdminPanelButtons(stage) {
+function buildAdminPanelButtons(stage, gameChId) {
+    const gch = gameChId || GAME_CHANNEL_ID;
     if (stage === 'initial') {
         return new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId('tartan_panel_announce').setLabel('📢 Bilow Registration').setStyle(ButtonStyle.Primary),
@@ -187,9 +200,8 @@ function buildAdminPanelButtons(stage) {
             new ButtonBuilder().setCustomId('tartan_panel_dismiss') .setLabel('❌ Iska xir')          .setStyle(ButtonStyle.Secondary),
         );
     }
-    // stage === 'join'
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`tartan_bilow_next_${GAME_CHANNEL_ID}`).setLabel('🚀 Bilow Wareeg 1aad').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`tartan_bilow_next_${gch}`).setLabel('🚀 Bilow Wareeg 1aad').setStyle(ButtonStyle.Danger),
         new ButtonBuilder().setCustomId('tartan_panel_count')  .setLabel('👥 Players') .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId('tartan_panel_cancel') .setLabel('🛑 Jooji')   .setStyle(ButtonStyle.Danger),
         new ButtonBuilder().setCustomId('tartan_panel_dismiss').setLabel('❌ Iska xir').setStyle(ButtonStyle.Secondary),
@@ -203,7 +215,7 @@ async function updateAdminPanel(state) {
         const msg = await ch.messages.fetch(state.panelMsgId);
         await msg.edit({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons(state.stage)],
+            components: [buildAdminPanelButtons(state.stage, state.gameChannelId)],
         });
     } catch {}
 }
@@ -212,13 +224,15 @@ async function handlePanelButton(interaction, action) {
     if (!isAdmin(interaction.user.id)) {
         return interaction.reply({ content: '⛔ Kaliya admin.', flags: MessageFlags.Ephemeral }).catch(() => {});
     }
-    const state = activeTournament.get(GAME_CHANNEL_ID);
+    const guildId = interaction.guildId;
+    const state   = getState(guildId);
+    const annChId = state?.announceChannelId || ANNOUNCE_CHANNEL_ID;
 
     if (action === 'announce') {
         if (!state || state.stage !== 'initial') {
             return interaction.reply({ content: '⚠️ Tartan heer khalad ah.', flags: MessageFlags.Ephemeral }).catch(() => {});
         }
-        const announceChannel = await interaction.client.channels.fetch(ANNOUNCE_CHANNEL_ID).catch(() => null);
+        const announceChannel = await interaction.client.channels.fetch(annChId).catch(() => null);
         if (!announceChannel) {
             return interaction.reply({ content: '⚠️ Announcement channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
         }
@@ -229,7 +243,7 @@ async function handlePanelButton(interaction, action) {
 
         const annMsg = await announceChannel.send({
             content:    '@everyone',
-            embeds:     [buildAnnounceEmbed(deadline, 0)],
+            embeds:     [buildAnnounceEmbed(deadline, 0, false, state)],
             components: [buildAnnounceButtons(false)],
         });
         state.announceMsgId = annMsg.id;
@@ -237,7 +251,7 @@ async function handlePanelButton(interaction, action) {
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons('registration')],
+            components: [buildAdminPanelButtons('registration', state.gameChannelId)],
         }).catch(() => {});
     }
 
@@ -248,7 +262,7 @@ async function handlePanelButton(interaction, action) {
         tournamentRegistry.clear();
         state.stage = 'join';
 
-        const ok = await openGamePhase(interaction.client, interaction.user.id);
+        const ok = await openGamePhase(interaction.client, interaction.user.id, state);
         if (!ok) {
             state.stage = 'initial';
             return interaction.reply({ content: '⚠️ Game channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
@@ -256,7 +270,7 @@ async function handlePanelButton(interaction, action) {
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons('join')],
+            components: [buildAdminPanelButtons('join', state.gameChannelId)],
         }).catch(() => {});
     }
 
@@ -267,24 +281,24 @@ async function handlePanelButton(interaction, action) {
         if (state._regTimer) { clearTimeout(state._regTimer); state._regTimer = null; }
         if (state.announceMsgId) {
             try {
-                const ch = await interaction.client.channels.fetch(ANNOUNCE_CHANNEL_ID);
+                const ch = await interaction.client.channels.fetch(annChId);
                 const m  = await ch.messages.fetch(state.announceMsgId);
                 await m.edit({
-                    embeds:     [buildAnnounceEmbed(0, tournamentRegistry.size, true)],
+                    embeds:     [buildAnnounceEmbed(0, tournamentRegistry.size, true, state)],
                     components: [buildAnnounceButtons(true)],
                 });
             } catch {}
         }
         state.stage = 'join';
 
-        const ok = await openGamePhase(interaction.client, interaction.user.id);
+        const ok = await openGamePhase(interaction.client, interaction.user.id, state);
         if (!ok) {
             return interaction.reply({ content: '⚠️ Game channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
         }
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons('join')],
+            components: [buildAdminPanelButtons('join', state.gameChannelId)],
         }).catch(() => {});
     }
 
@@ -305,6 +319,7 @@ async function handlePanelButton(interaction, action) {
 
     if (action === 'cancel') {
         if (state?._regTimer) clearTimeout(state._regTimer);
+        activeTournament.delete(guildId);
         activeTournament.delete(GAME_CHANNEL_ID);
         return interaction.update({
             embeds: [new EmbedBuilder()
@@ -322,41 +337,40 @@ async function handlePanelButton(interaction, action) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Auto-close registration after 24h → DM admin panel
+// Auto-close registration after 24h
 // ─────────────────────────────────────────────────────────────────────
 async function closeRegistration(state) {
-    if (!activeTournament.has(GAME_CHANNEL_ID)) return;
+    const key = state.guildId || GAME_CHANNEL_ID;
+    if (!activeTournament.has(key)) return;
     if (state._regTimer) { clearTimeout(state._regTimer); state._regTimer = null; }
     if (state.stage !== 'registration') return;
     state.stage = 'join';
 
+    const annChId  = state.announceChannelId || ANNOUNCE_CHANNEL_ID;
     const regCount = tournamentRegistry.size;
 
-    // Disable buttons on announcement message
     try {
-        const ch  = await state.client.channels.fetch(ANNOUNCE_CHANNEL_ID);
+        const ch  = await state.client.channels.fetch(annChId);
         const msg = await ch.messages.fetch(state.announceMsgId);
         await msg.edit({
-            embeds:     [buildAnnounceEmbed(0, regCount, true)],
+            embeds:     [buildAnnounceEmbed(0, regCount, true, state)],
             components: [buildAnnounceButtons(true)],
         });
     } catch {}
 
-    // Open game phase automatically
-    await openGamePhase(state.client, state.adminId).catch(() => {});
-
-    // Update admin panel to 'join' buttons
+    await openGamePhase(state.client, state.adminId, state).catch(() => {});
     await updateAdminPanel(state).catch(() => {});
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Open game phase — post in GAME channel (called by button or cmdOpen)
+// Open game phase
 // ─────────────────────────────────────────────────────────────────────
-async function openGamePhase(client, adminId) {
-    const state = activeTournament.get(GAME_CHANNEL_ID);
+async function openGamePhase(client, adminId, state) {
     if (!state || state.stage !== 'join') return false;
 
-    const gameChannel = await client.channels.fetch(GAME_CHANNEL_ID).catch(() => null);
+    const gameChId = state.gameChannelId || GAME_CHANNEL_ID;
+    const vcChId   = state.vcChannelId   || VC_CHANNEL_ID;
+    const gameChannel = await client.channels.fetch(gameChId).catch(() => null);
     if (!gameChannel) return false;
 
     state.channel = gameChannel;
@@ -373,18 +387,18 @@ async function openGamePhase(client, adminId) {
                 `📝 **Si aad u biirtid tartanka:**\n` +
                 `Qor: \`${PREFIX}gal CODE\`\n` +
                 `_(code-kaagu DM-kaaga tartan ayuu ku jiraa)_\n\n` +
-                `🎙️ Voice Channel: <#${VC_CHANNEL_ID}>\n\n` +
+                `🎙️ Voice Channel: <#${vcChId}>\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
                 `_Marka dadku diyaar yihiin, admin ayaa wareegga bilaabi doona._`
             )
         ],
         components: [new ActionRowBuilder().addComponents(
             new ButtonBuilder()
-                .setCustomId(`tartan_bilow_next_${GAME_CHANNEL_ID}`)
+                .setCustomId(`tartan_bilow_next_${gameChId}`)
                 .setLabel('🚀 Bilow Wareeg 1aad (Admin Only)')
                 .setStyle(ButtonStyle.Danger),
             new ButtonBuilder()
-                .setCustomId(`tartan_bilow_status_${GAME_CHANNEL_ID}`)
+                .setCustomId(`tartan_bilow_status_${gameChId}`)
                 .setLabel('👥 Tirada Hadda')
                 .setStyle(ButtonStyle.Secondary),
         )],
@@ -393,18 +407,72 @@ async function openGamePhase(client, adminId) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// ?tartan — Admin: dhawaaq + bilow 24h registration
+// ?tartan — collect 3 channel IDs then show panel
 // ─────────────────────────────────────────────────────────────────────
 async function cmdAnnounce(message) {
     if (!isAdmin(message.author.id)) {
         return message.reply('⛔ Kaliya **admin** ayaa tartan ku dhawaaqin kara.');
     }
-    if (activeTournament.has(GAME_CHANNEL_ID)) {
+
+    const guildId = message.guild?.id || GAME_CHANNEL_ID;
+    if (activeTournament.has(guildId)) {
         return message.reply(`⚠️ Tartan horeba socdaa. Jooji marka hore: \`${PREFIX}tartan_jooji\``);
     }
 
+    const filter  = m => m.author.id === message.author.id;
+    const colOpts = { filter, max: 1, time: 60_000, errors: ['time'] };
+
+    // Step 1 — Announcement channel ID
+    const q1 = await message.reply('📢 **Gali ID Announcement channel-ka:**');
+    let annChId;
+    try {
+        const col = await message.channel.awaitMessages(colOpts);
+        annChId   = col.first().content.trim().replace(/[<#>]/g, '');
+        await col.first().delete().catch(() => {});
+    } catch {
+        return q1.edit('⏰ Waqtiga ayaa dhamaaday. Isku day mar kale.').catch(() => {});
+    }
+    await q1.delete().catch(() => {});
+
+    // Step 2 — Tournament (game) channel ID
+    const q2 = await message.channel.send('🎮 **Gali ID Tournament chat channel-ka:**');
+    let gameChId;
+    try {
+        const col = await message.channel.awaitMessages(colOpts);
+        gameChId  = col.first().content.trim().replace(/[<#>]/g, '');
+        await col.first().delete().catch(() => {});
+    } catch {
+        return q2.edit('⏰ Waqtiga ayaa dhamaaday. Isku day mar kale.').catch(() => {});
+    }
+    await q2.delete().catch(() => {});
+
+    // Step 3 — VC channel ID
+    const q3 = await message.channel.send('🎙️ **Gali ID VC Tournament channel-ka:**');
+    let vcChId;
+    try {
+        const col = await message.channel.awaitMessages(colOpts);
+        vcChId    = col.first().content.trim().replace(/[<#>]/g, '');
+        await col.first().delete().catch(() => {});
+    } catch {
+        return q3.edit('⏰ Waqtiga ayaa dhamaaday. Isku day mar kale.').catch(() => {});
+    }
+    await q3.delete().catch(() => {});
+
+    // Confirm
+    const ok = await message.channel.send(
+        `✅ **Ok!**\n` +
+        `📢 Announcement: <#${annChId}>\n` +
+        `🎮 Tournament chat: <#${gameChId}>\n` +
+        `🎙️ VC: <#${vcChId}>\n\n` +
+        `_Shaqada waa bilaabatay..._`
+    );
+    setTimeout(() => ok.delete().catch(() => {}), 5000);
+
     const state = {
-        channelId:            GAME_CHANNEL_ID,
+        guildId,
+        announceChannelId:    annChId,
+        gameChannelId:        gameChId,
+        vcChannelId:          vcChId,
         adminId:              message.author.id,
         client:               message.client,
         stage:                'initial',
@@ -424,56 +492,57 @@ async function cmdAnnounce(message) {
         panelChannelId:       message.channel.id,
         _regTimer:            null,
     };
-    activeTournament.set(GAME_CHANNEL_ID, state);
+    activeTournament.set(guildId, state);
 
-    const panelMsg = await message.reply({
+    const panelMsg = await message.channel.send({
         embeds:     [buildAdminPanelEmbed(state)],
-        components: [buildAdminPanelButtons('initial')],
-        fetchReply: true,
+        components: [buildAdminPanelButtons('initial', gameChId)],
     });
-    state.panelMsgId = panelMsg.id;
+    state.panelMsgId     = panelMsg.id;
+    state.panelChannelId = message.channel.id;
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// ?tartan_bilow — Admin: force-open game (early or after 24h)
+// ?tartan_bilow
 // ─────────────────────────────────────────────────────────────────────
 async function cmdOpen(message) {
     if (!isAdmin(message.author.id)) return message.reply('⛔ Kaliya admin.');
 
-    const state = activeTournament.get(GAME_CHANNEL_ID);
+    const guildId = message.guild?.id || GAME_CHANNEL_ID;
+    const state   = getState(guildId);
     if (!state) return message.reply(`⚠️ Tartan ma jiro. Ugu horreyn \`${PREFIX}tartan\` qoro.`);
 
     if (state.stage === 'registration') {
-        // Early close
         if (state._regTimer) { clearTimeout(state._regTimer); state._regTimer = null; }
         await closeRegistration(state);
-        // closeRegistration sets stage to 'join'
     }
 
     if (state.stage !== 'join') {
         return message.reply('⚠️ Tartan heer kale ayuu ku jiraa (play ama pause).');
     }
 
-    const ok = await openGamePhase(message.client, message.author.id);
+    const ok = await openGamePhase(message.client, message.author.id, state);
     if (!ok) return message.reply('⚠️ Game channel-ka la heyn waayay.');
-    return message.reply(`✅ **Game channel waa la furay!** → <#${GAME_CHANNEL_ID}>`);
+    return message.reply(`✅ **Game channel waa la furay!** → <#${state.gameChannelId || GAME_CHANNEL_ID}>`);
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// ?isdiiwaangeli / ?diiwaan — User: hel code (command backup)
+// ?isdiiwaangeli / ?diiwaan
 // ─────────────────────────────────────────────────────────────────────
 async function cmdRegister(message) {
-    const state = activeTournament.get(GAME_CHANNEL_ID);
+    const guildId = message.guild?.id || GAME_CHANNEL_ID;
+    const state   = getState(guildId);
     if (!state || state.stage !== 'registration') {
         return message.reply('⚠️ Diiwaangelinta waa la xiray ama tartan ma jiro.');
     }
-    await sendRegistrationCode(message.author, { reply: (o) => message.reply(o) });
+    const gameChId = state.gameChannelId || GAME_CHANNEL_ID;
+    await sendRegistrationCode(message.author, { reply: (o) => message.reply(o) }, gameChId);
 }
 
-// Shared helper — send code via DM (used by button + command)
-async function sendRegistrationCode(user, replyTarget) {
-    const uid  = user.id;
-    const code = genCode();
+async function sendRegistrationCode(user, replyTarget, gameChId) {
+    const uid     = user.id;
+    const code    = genCode();
+    const gCh     = gameChId || GAME_CHANNEL_ID;
     tournamentRegistry.set(uid, { code, at: Date.now(), username: user.username });
     try {
         await user.send({
@@ -484,7 +553,7 @@ async function sendRegistrationCode(user, replyTarget) {
                     `Code-gaaga waa:\n\n# \`${code}\`\n\n` +
                     `━━━━━━━━━━━━━━━━━━━━\n` +
                     `**Marka admin game furo:**\n` +
-                    `1. Tag 💬 <#${GAME_CHANNEL_ID}>\n` +
+                    `1. Tag 💬 <#${gCh}>\n` +
                     `2. Qor: \`${PREFIX}gal ${code}\`\n\n` +
                     `⚠️ **Code-kan ha u shegin qof kale — kuu gaarka ah!**`
                 )
@@ -498,17 +567,21 @@ async function sendRegistrationCode(user, replyTarget) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// ?gal [code] — Join (game channel only)
+// ?gal [code]
 // ─────────────────────────────────────────────────────────────────────
 async function cmdJoin(message, args) {
-    if (message.channel.id !== GAME_CHANNEL_ID) {
-        return message.reply(`⚠️ \`${PREFIX}gal\` kaliya <#${GAME_CHANNEL_ID}> ku qor!`);
+    const guildId  = message.guild?.id || GAME_CHANNEL_ID;
+    const state    = getState(guildId);
+    const gameChId = state?.gameChannelId || GAME_CHANNEL_ID;
+    const annChId  = state?.announceChannelId || ANNOUNCE_CHANNEL_ID;
+
+    if (message.channel.id !== gameChId) {
+        return message.reply(`⚠️ \`${PREFIX}gal\` kaliya <#${gameChId}> ku qor!`);
     }
 
     const code = (args[0] || '').trim().toUpperCase();
     if (!code) return message.reply(`⚠️ Code-ka qor! Tusaale: \`${PREFIX}gal ABC123\``);
 
-    const state = activeTournament.get(GAME_CHANNEL_ID);
     if (!state || state.stage !== 'join') {
         return message.reply(`⚠️ Albaabka tartanka weli ma furan. Sug admin.`);
     }
@@ -518,7 +591,7 @@ async function cmdJoin(message, args) {
         return message.reply(
             `❌ **Code khalad** ama **maadan diiwaangelinin!**\n\n` +
             `• Haddii code-kaagu DM-ka ku jiro: hubi saxnimada\n` +
-            `• Haddii kale: riix **📝 Diiwaan Geli** <#${ANNOUNCE_CHANNEL_ID}>`
+            `• Haddii kale: riix **📝 Diiwaan Geli** <#${annChId}>`
         );
     }
     if (state.players.has(message.author.id)) {
@@ -537,13 +610,14 @@ async function cmdJoin(message, args) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// ?admin_next — bilow / sii wad wareeg
+// ?admin_next
 // ─────────────────────────────────────────────────────────────────────
 async function cmdAdminNext(message) {
     if (!isAdmin(message.author.id)) return message.reply('⛔ Kaliya admin.');
     message.delete().catch(() => {});
 
-    const state = activeTournament.get(GAME_CHANNEL_ID);
+    const guildId = message.guild?.id || GAME_CHANNEL_ID;
+    const state   = getState(guildId);
     if (!state) return message.channel.send(`⚠️ Tartan ma jiro.`);
 
     if (state.prevRoundQuestions?.length > 0) {
@@ -579,7 +653,7 @@ async function cmdAdminNext(message) {
         state.survivors      = new Set(next);
         state._nextSurvivors = null;
         if (state.survivors.size === 0) {
-            activeTournament.delete(GAME_CHANNEL_ID);
+            activeTournament.delete(guildId);
             return message.channel.send('❌ Cidna kuma hartay — tartan waa la joojiyay.');
         }
         state.roundIdx += 1;
@@ -593,9 +667,11 @@ async function cmdAdminNext(message) {
 // ─────────────────────────────────────────────────────────────────────
 async function cmdStop(message) {
     if (!isAdmin(message.author.id)) return message.reply('⛔ Kaliya admin.');
-    if (!activeTournament.has(GAME_CHANNEL_ID)) return message.reply('⚠️ Tartan ma jiro.');
-    const state = activeTournament.get(GAME_CHANNEL_ID);
+    const guildId = message.guild?.id || GAME_CHANNEL_ID;
+    const state   = getState(guildId);
+    if (!state) return message.reply('⚠️ Tartan ma jiro.');
     if (state?._regTimer) clearTimeout(state._regTimer);
+    activeTournament.delete(guildId);
     activeTournament.delete(GAME_CHANNEL_ID);
     return message.reply('🛑 **Tartan-ka waa la joojiyay.**');
 }
@@ -604,7 +680,8 @@ async function cmdStop(message) {
 // ?tartan_status
 // ─────────────────────────────────────────────────────────────────────
 async function cmdStatus(message) {
-    const state = activeTournament.get(GAME_CHANNEL_ID);
+    const guildId = message.guild?.id || GAME_CHANNEL_ID;
+    const state   = getState(guildId);
     if (!state) return message.reply('⚠️ Hadda ma jiro tartan soconaya.');
 
     const stageLabels = {
@@ -653,7 +730,8 @@ async function beginRound(state, channel) {
     const picked = pickQuestionsForGame(state.adminId, 'tournament', n);
 
     if (!picked || picked.length === 0) {
-        activeTournament.delete(GAME_CHANNEL_ID);
+        const guildId = state.guildId || GAME_CHANNEL_ID;
+        activeTournament.delete(guildId);
         return channel.send({ embeds: [noQuestionsLeftEmbed('Admin')] });
     }
 
@@ -709,7 +787,10 @@ async function beginRound(state, channel) {
 // sendQuestion
 // ─────────────────────────────────────────────────────────────────────
 async function sendQuestion(state) {
-    if (!activeTournament.has(GAME_CHANNEL_ID) || state.stage !== 'play') return;
+    const guildId  = state.guildId || GAME_CHANNEL_ID;
+    const gameChId = state.gameChannelId || GAME_CHANNEL_ID;
+    if (!activeTournament.has(guildId) && !activeTournament.has(GAME_CHANNEL_ID)) return;
+    if (state.stage !== 'play') return;
     const totalQ = state.questions.length;
 
     if (state.currentQ >= totalQ) {
@@ -721,7 +802,7 @@ async function sendQuestion(state) {
     }
 
     const channel = state.channel;
-    if (!channel) { activeTournament.delete(GAME_CHANNEL_ID); return; }
+    if (!channel) { activeTournament.delete(guildId); return; }
 
     const q         = state.questions[state.currentQ];
     const playerIds = [...state.survivors];
@@ -758,7 +839,7 @@ async function sendQuestion(state) {
 
     const buttons = qEntries.map((e, index) =>
         new ButtonBuilder()
-            .setCustomId(`tna_${GAME_CHANNEL_ID}_${state.roundIdx}_${state.currentQ}_${index}_${e.isCorrect ? 't' : 'f'}`)
+            .setCustomId(`tna_${gameChId}_${state.roundIdx}_${state.currentQ}_${index}_${e.isCorrect ? 't' : 'f'}`)
             .setLabel(e.label.slice(0, 80))
             .setStyle(isTF
                 ? (e.label === 'Run' ? ButtonStyle.Success : ButtonStyle.Danger)
@@ -767,9 +848,9 @@ async function sendQuestion(state) {
 
     const row = new ActionRowBuilder().addComponents(buttons);
     const msg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
-    if (!msg) { activeTournament.delete(GAME_CHANNEL_ID); return; }
+    if (!msg) { activeTournament.delete(guildId); return; }
 
-    const prefix    = `tna_${GAME_CHANNEL_ID}_${state.roundIdx}_${state.currentQ}_`;
+    const prefix    = `tna_${gameChId}_${state.roundIdx}_${state.currentQ}_`;
     const filter    = (i) => i.customId.startsWith(prefix) && state.survivors.has(i.user.id);
     const collector = msg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS });
 
@@ -834,6 +915,7 @@ async function sendQuestion(state) {
 // ─────────────────────────────────────────────────────────────────────
 async function endRoundPause(state) {
     const channel        = state.channel;
+    const gameChId       = state.gameChannelId || GAME_CHANNEL_ID;
     const nextSurvivors  = computeSurvivors(state.survivors, state.roundScores, state.roundIdx);
     state._nextSurvivors = nextSurvivors;
 
@@ -879,7 +961,7 @@ async function endRoundPause(state) {
             .setColor('#f39c12')],
         components: [new ActionRowBuilder().addComponents(
             new ButtonBuilder()
-                .setCustomId(`tournament_admin_next_${GAME_CHANNEL_ID}`)
+                .setCustomId(`tournament_admin_next_${gameChId}`)
                 .setLabel(nextLabel)
                 .setStyle(ButtonStyle.Danger),
         )],
@@ -891,6 +973,8 @@ async function endRoundPause(state) {
 // ─────────────────────────────────────────────────────────────────────
 async function finishTournament(state) {
     const channel = state.channel;
+    const guildId = state.guildId || GAME_CHANNEL_ID;
+    activeTournament.delete(guildId);
     activeTournament.delete(GAME_CHANNEL_ID);
 
     const sorted = [...state.survivors]
@@ -941,7 +1025,6 @@ async function finishTournament(state) {
         });
     }
 
-    // DM winner
     try {
         const winUser = await state.client.users.fetch(winId);
         await winUser.send({
@@ -959,7 +1042,6 @@ async function finishTournament(state) {
         });
     } catch {}
 
-    // DM all other participants
     for (const [pid, sc] of sorted.slice(1)) {
         try {
             const u = await state.client.users.fetch(pid);
