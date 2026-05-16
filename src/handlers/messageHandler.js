@@ -41,6 +41,7 @@ const econShopCmd     = require('../commands/economy/econShop');
 const shaqoCmd        = require('../commands/economy/shaqo');
 const bankListCmd     = require('../commands/economy/bankList');
 const econTitleCmd    = require('../commands/economy/econTitle');
+const dmCmd           = require('../commands/dm');
 
 
 module.exports = function setupMessageHandler(client) {
@@ -57,8 +58,7 @@ module.exports = function setupMessageHandler(client) {
             if (command !== 'caawin' && command !== 'caaawin' && command !== 'help') {
                 return message.reply(
                     `⛔ Amarkan DM-ka kama shaqeeyo.\n\n` +
-                    `📍 **Tag Saver channel-ka** si aad u isticmaasho:\n` +
-                    `🔗 https://discord.gg/FyNKRyAKc9\n\n` +
+                    `📍 Tag **server-ka** oo halkaas ku isticmaal.\n\n` +
                     `_(Haddaad u baahan tahay caawimad, isticmaal \`?caawin\`)_`
                 ).catch(() => {});
             }
@@ -200,6 +200,9 @@ module.exports = function setupMessageHandler(client) {
             case 'remove':
             case 'tremove':
                 return teamDuel.cmdTeamRemove(message, args);
+
+            case 'dm':
+                return dmCmd(message, args);
         }
     });
 };

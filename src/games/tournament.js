@@ -911,13 +911,15 @@ async function sendQuestion(state) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// endRoundPause
+// endRoundPause — 1 daqiiqad discussion, kadibna toos bilaab
 // ─────────────────────────────────────────────────────────────────────
 async function endRoundPause(state) {
     const channel        = state.channel;
-    const gameChId       = state.gameChannelId || GAME_CHANNEL_ID;
     const nextSurvivors  = computeSurvivors(state.survivors, state.roundScores, state.roundIdx);
     state._nextSurvivors = nextSurvivors;
+    state.stage          = 'pause';
+    state.roundScores    = {};
+    if (!channel) return;
 
     const eliminated = [...state.survivors].filter(id => !nextSurvivors.includes(id));
     const remaining  = nextSurvivors;
@@ -931,41 +933,67 @@ async function endRoundPause(state) {
             return `${medal} <@${id}> — **${sc}pts** · ${tag}`;
         }).join('\n');
 
-    const nextRoundName  = state.roundIdx === 1
+    const nextRoundName = state.roundIdx === 1
         ? `Wareegga 2aad (${TOURNAMENT_R2_QUESTIONS} su'aalood)`
         : `Final 🏆 (${TOURNAMENT_FINAL_QUESTIONS} su'aalood)`;
-    const remainingList  = remaining.map((id, i) => `✅ ${i + 1}. <@${id}> — Qualified`).join('\n');
+
+    const remainingList  = remaining.map((id, i) => `🔥 ${i + 1}. <@${id}>`).join('\n');
     const eliminatedList = eliminated.length > 0
-        ? eliminated.map(id => `❌ <@${id}> — Eliminated · Players Out`).join('\n')
+        ? eliminated.map(id => `❌ <@${id}>`).join('\n')
         : '_Cidna ma bixin_';
 
-    state.stage      = 'pause';
-    state.roundScores = {};
-    if (!channel) return;
+    const vcChId = state.vcChannelId || VC_CHANNEL_ID;
 
-    const nextLabel = state.roundIdx === 1
-        ? `🚀 Bilow Wareeg 2aad (${TOURNAMENT_R2_QUESTIONS} su'aalood)`
-        : `🏆 Bilow Final (${TOURNAMENT_FINAL_QUESTIONS} su'aalood)`;
-
+    // Results + discussion countdown
     await channel.send({
         embeds: [new EmbedBuilder()
             .setTitle(`⏸️ ${ROUND_LABELS[state.roundIdx].name} — Dhamaaday!`)
+            .setColor('#f39c12')
             .setDescription(
                 `**📊 Dhibcaha Guud:**\n${totalBoard}\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `**❌ Eliminated — Players Out (${eliminated.length}):**\n${eliminatedList}\n\n` +
-                `**✅ Qualified — ${nextRoundName} (${remaining.length}):**\n${remainingList}\n\n` +
+                `**❌ Baxay (${eliminated.length}):**\n${eliminatedList}\n\n` +
+                `**✅ Hartay — ${nextRoundName} (${remaining.length}):**\n${remainingList}\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `⬇️ **Admin:** Riix badhanka si wareegga xiga loo bilaabo`
+                `🎙️ **Xilliga Wadahaddalka** — <#${vcChId}>\n` +
+                `💬 Kala hadla, is dhiiri gali, isku soo arki!\n\n` +
+                `⏰ **Wareegga xiga wuxuu bilaabmayaa 1 daqiiqad gudahood — diyaar noqda!**`
             )
-            .setColor('#f39c12')],
-        components: [new ActionRowBuilder().addComponents(
-            new ButtonBuilder()
-                .setCustomId(`tournament_admin_next_${gameChId}`)
-                .setLabel(nextLabel)
-                .setStyle(ButtonStyle.Danger),
-        )],
+            .setFooter({ text: 'Toos ayuu bilaabmayaa — admin ma baahna' })],
     });
+
+    // Auto-advance after 60 seconds
+    setTimeout(async () => {
+        const guildId = state.guildId || GAME_CHANNEL_ID;
+        if (!activeTournament.has(guildId) && !activeTournament.has(GAME_CHANNEL_ID)) return;
+        if (state.stage !== 'pause') return;
+
+        const next = state._nextSurvivors || [];
+        state.survivors      = new Set(next);
+        state._nextSurvivors = null;
+
+        if (state.survivors.size === 0) {
+            activeTournament.delete(guildId);
+            return channel.send('❌ Cidna kuma hartay — tartan waa la joojiyay.');
+        }
+
+        state.roundIdx += 1;
+
+        // Encourage message before starting
+        const encourageList = [...state.survivors].map(id => `<@${id}>`).join(' ');
+        await channel.send({
+            embeds: [new EmbedBuilder()
+                .setTitle(`🚀 ${ROUND_LABELS[state.roundIdx]?.name || 'Wareeg Cusub'} — Bilaabmayaa!`)
+                .setColor('#2ecc71')
+                .setDescription(
+                    `💪 **Dhiirigalinta tartamayaasha haray:**\n${encourageList}\n\n` +
+                    `🏆 Waxaad u dhow tahay guusha — sii wad!\n` +
+                    `_Su'aalaha waxay bilaabmayaan 3 ilbiriqsi gudahood..._`
+                )],
+        });
+
+        await beginRound(state, channel);
+    }, 60_000);
 }
 
 // ─────────────────────────────────────────────────────────────────────
