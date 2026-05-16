@@ -53,8 +53,8 @@ module.exports = function setupMessageHandler(client) {
         const command = args.shift().toLowerCase();
         const userId  = message.author.id;
 
-        // DM-ka: ?caawin kaliya shaqeeya, kuwa kale redirect
-        if (!message.guild) {
+        // DM-ka: admin wax walba, players ?caawin kaliya
+        if (!message.guild && !isAdmin(userId)) {
             if (command !== 'caawin' && command !== 'caaawin' && command !== 'help') {
                 return message.reply(
                     `⛔ Amarkan DM-ka kama shaqeeyo.\n\n` +
