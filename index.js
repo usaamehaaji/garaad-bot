@@ -78,6 +78,15 @@ client.once('clientReady', () => {
     tickMarket();
     setInterval(tickMarket, 60 * 1000);
 
+    // Activity status: ?caawin | X servers
+    function updateStatus() {
+        const count = client.guilds.cache.size;
+        client.user.setActivity(`?caawin | ${count} servers`, { type: 3 }); // 3 = Watching
+    }
+    updateStatus();
+    client.on('guildCreate', updateStatus);
+    client.on('guildDelete', updateStatus);
+
     const announceId = process.env.ANNOUNCE_CHANNEL_ID;
     if (announceId) {
         const ch = client.channels.cache.get(announceId);
