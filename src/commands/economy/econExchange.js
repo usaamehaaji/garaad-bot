@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require('discord.js');
-const { fmt } = require('../../../utils/helpers');
 const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 const { getPrice }                          = require('../../economy/market');
 

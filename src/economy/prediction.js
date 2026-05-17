@@ -88,7 +88,7 @@ async function lockPrediction(userId, client) {
 
     if (stakeType === 'usd') {
         if (d.usd < stakeAmount)
-            return { ok: false, msg: `⚠️ USD kugu filna ma lihid. Haysataa: **$${fmt(d.usd)}**` };
+            return { ok: false, msg: `⚠️ USD kugu filna ma lihid. Haysataa: **$${d.usd.toLocaleString()}**` };
         d.usd -= stakeAmount;
     } else {
         if ((d[asset] || 0) < stakeAmount)
@@ -169,16 +169,16 @@ async function resolvePrediction(userId, client) {
             (showAsset ? `📌 **Asset:**       ${assetLabel}\n` : '') +
             `🎯 **Saadaal:**     ${dirLabel}\n` +
             (showAsset
-                ? `📊 **Galitaanka:**  **$${fmt(pred.entryPrice)}**\n` +
-                  `📊 **Bixitaanka:**  **$${fmt(exitPrice)}** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n`
+                ? `📊 **Galitaanka:**  **$${pred.entryPrice.toLocaleString()}**\n` +
+                  `📊 **Bixitaanka:**  **$${exitPrice.toLocaleString()}** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n`
                 : '\n') +
-            `💰 **Dhigay:**      $${fmt(pred.stakeUsd)} USD\n` +
+            `💰 **Dhigay:**      $${pred.stakeUsd.toLocaleString()} USD\n` +
             (isDraw
-                ? `✅ **Dib u celinta:** $${fmt(payout)} (qiime iskumid — dib oo dhan)`
+                ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (qiime iskumid — dib oo dhan)`
                 : win
-                    ? `✅ **Dib u celinta:** $${fmt(payout)} (+$${fmt(profit)} faa'iido)`
-                    : `❌ **Dib u celinta:** $${fmt(payout)} (-$${fmt(Math.abs(profit))} khasaaro)`) +
-            `\n\n💵 **USD-kaaga hadda:** $${fmt(d.usd)}`
+                    ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (+$${profit.toLocaleString()} faa'iido)`
+                    : `❌ **Dib u celinta:** $${payout.toLocaleString()} (-$${fmt(Math.abs(profit))} khasaaro)`) +
+            `\n\n💵 **USD-kaaga hadda:** $${d.usd.toLocaleString()}`
         )
         .setFooter({ text: 'Garaad Predict • ?trade si aad dib u bilaabasho' });
 

@@ -111,7 +111,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (sender.dailyGiven.date !== today) sender.dailyGiven = { date: today, usd: 0 };
                 if (sender.dailyGiven.usd + usdAmount > GIVE_DAILY_LIMIT) {
                     const remaining = Math.max(0, GIVE_DAILY_LIMIT - sender.dailyGiven.usd);
-                    return interaction.reply({ content: `⚠️ **Maalineed $${fmt(GIVE_DAILY_LIMIT)} xad** — hadhay: **$${fmt(remaining)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ **Maalineed $${GIVE_DAILY_LIMIT.toLocaleString()} xad** — hadhay: **$${remaining.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
                 sender.dailyGiven.usd += usdAmount;
 
@@ -156,7 +156,7 @@ module.exports = function setupInteractionHandler(client) {
 
                 if (action === 'deposit') {
                     if (d.usd < amount) {
-                        return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${fmt(d.usd)}**`, flags: MessageFlags.Ephemeral });
+                        return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                     }
                     d.usd         -= amount;
                     d.banks[bank] += amount;
@@ -166,15 +166,15 @@ module.exports = function setupInteractionHandler(client) {
                             .setTitle(`🏦 ${bankLabel} Bank — Lacag la Dhigay`)
                             .setColor('#2ecc71')
                             .setDescription(
-                                `✅ **$${fmt(amount)}** dhigatay\n\n` +
-                                `🏦 ${bankLabel}: **$${fmt(d.banks[bank])}**\n` +
-                                `💵 USD: **$${fmt(d.usd)}**`
+                                `✅ **$${amount.toLocaleString()}** dhigatay\n\n` +
+                                `🏦 ${bankLabel}: **$${d.banks[bank].toLocaleString()}**\n` +
+                                `💵 USD: **$${d.usd.toLocaleString()}**`
                             )
                             .setFooter({ text: 'Garaad Economy' }),
                     ], components: [closeRow(ownerId)] });
                 } else {
                     if (d.banks[bank] < amount) {
-                        return interaction.reply({ content: `⚠️ ${bankLabel} lacag ku filan ma lahan. Haysataa: **$${fmt(d.banks[bank])}**`, flags: MessageFlags.Ephemeral });
+                        return interaction.reply({ content: `⚠️ ${bankLabel} lacag ku filan ma lahan. Haysataa: **$${d.banks[bank].toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                     }
                     d.banks[bank] -= amount;
                     d.usd         += amount;
@@ -184,9 +184,9 @@ module.exports = function setupInteractionHandler(client) {
                             .setTitle(`🏦 ${bankLabel} Bank — Lacag la Bixiyay`)
                             .setColor('#2ecc71')
                             .setDescription(
-                                `✅ **$${fmt(amount)}** la bixiyay\n\n` +
-                                `🏦 ${bankLabel}: **$${fmt(d.banks[bank])}**\n` +
-                                `💵 USD: **$${fmt(d.usd)}**`
+                                `✅ **$${amount.toLocaleString()}** la bixiyay\n\n` +
+                                `🏦 ${bankLabel}: **$${d.banks[bank].toLocaleString()}**\n` +
+                                `💵 USD: **$${d.usd.toLocaleString()}**`
                             )
                             .setFooter({ text: 'Garaad Economy' }),
                     ], components: [closeRow(ownerId)] });
@@ -385,7 +385,7 @@ module.exports = function setupInteractionHandler(client) {
                 checkEconUser(targetId);
                 eData[targetId].usd += amount;
                 saveEcon();
-                return interaction.reply({ content: `✅ **$${fmt(amount)} USD** waxaad u diray <@${targetId}>. Hadda: **$${fmt(eData[targetId].usd)}**`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **$${amount.toLocaleString()} USD** waxaad u diray <@${targetId}>. Hadda: **$${eData[targetId].usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Admin Econ modal: Give Asset ──
@@ -419,7 +419,7 @@ module.exports = function setupInteractionHandler(client) {
                 eData[targetId].banks[bank] = (eData[targetId].banks[bank] || 0) + amount;
                 saveEcon();
                 const bankLabel = bank.charAt(0).toUpperCase() + bank.slice(1);
-                return interaction.reply({ content: `✅ **$${fmt(amount)}** waxaad u dejisay <@${targetId}> — 🏦 ${bankLabel} Bank. Hadda: **$${fmt(eData[targetId].banks[bank])}**`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **$${amount.toLocaleString()}** waxaad u dejisay <@${targetId}> — 🏦 ${bankLabel} Bank. Hadda: **$${eData[targetId].banks[bank].toLocaleString()}**`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Admin Econ modal: Give Title ──
@@ -475,7 +475,7 @@ module.exports = function setupInteractionHandler(client) {
                         return interaction.reply({ content: `⚠️ Khaznadda ma filna. Hadda: **$${fmt((t.balance || 0))}**`, flags: MessageFlags.Ephemeral });
                     for (const uid of users) { checkEconUser(uid); eData[uid].usd += perUser; }
                     saveEcon();
-                    return interaction.reply({ content: `✅ **$${fmt(perUser)}** waxaa la siiyay **${users.length}** qof.\n🏛️ Khaznad hadhay: **$${fmt((t.balance || 0))}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `✅ **$${perUser.toLocaleString()}** waxaa la siiyay **${users.length}** qof.\n🏛️ Khaznad hadhay: **$${fmt((t.balance || 0))}**`, flags: MessageFlags.Ephemeral });
                 }
 
                 if (action === 'give' || action === 'sii') {
@@ -488,7 +488,7 @@ module.exports = function setupInteractionHandler(client) {
                     checkEconUser(targetId);
                     eData[targetId].usd += amount;
                     saveEcon();
-                    return interaction.reply({ content: `✅ Khaznadda **$${fmt(amount)}** waxaa laga siiyay <@${targetId}>.\n🏛️ Khaznad hadhay: **$${fmt((t.balance || 0))}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `✅ Khaznadda **$${amount.toLocaleString()}** waxaa laga siiyay <@${targetId}>.\n🏛️ Khaznad hadhay: **$${fmt((t.balance || 0))}**`, flags: MessageFlags.Ephemeral });
                 }
 
                 // view
@@ -510,7 +510,7 @@ module.exports = function setupInteractionHandler(client) {
                 topUpTreasury(amount);
                 saveEcon();
                 const t = getTreasury();
-                return interaction.reply({ content: `✅ **$${fmt(amount)}** khaznadda lagu daray.\n🏛️ Hadda: **$${fmt(t.balance)}**`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **$${amount.toLocaleString()}** khaznadda lagu daray.\n🏛️ Hadda: **$${t.balance.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Admin Econ modal: Reset All ──
@@ -535,7 +535,7 @@ module.exports = function setupInteractionHandler(client) {
                     d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
                 }
                 saveEcon();
-                return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n💵 Qof walba: **$${fmt(5000)} USD** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n💵 Qof walba: **$${5000.toLocaleString()} USD** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
             }
 
             // (eco_dnmod_ and eco_dnpay_ removed — deen is now button-only, no modals)
@@ -584,7 +584,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (!name || name.length < 2)
                     return interaction.reply({ content: '⚠️ Magaca aad gaaban yahay — ugu yaraan 2 xaraf.', flags: MessageFlags.Ephemeral });
                 if (d.usd < item.price)
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Qiimaha: **$${fmt(item.price)}** | Haysataa: **$${fmt(d.usd)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Qiimaha: **$${item.price.toLocaleString()}** | Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
 
                 d.usd -= item.price;
                 d.customEconTitle ??= null;
@@ -593,7 +593,7 @@ module.exports = function setupInteractionHandler(client) {
                 d.activeEconTitle = 'custom';
                 addToTreasury(item.price);
                 saveEcon();
-                return interaction.reply({ content: `✅ Custom title la sameeay: **${name}** ✍️\nTitle-kaagu hadda wuu firfircoon yahay! **$${fmt(item.price)}** la bixiyay.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ Custom title la sameeay: **${name}** ✍️\nTitle-kaagu hadda wuu firfircoon yahay! **$${item.price.toLocaleString()}** la bixiyay.`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Prediction: USD amount modal ──
@@ -615,7 +615,7 @@ module.exports = function setupInteractionHandler(client) {
                 const { econData: eData, checkEconUser } = require('../economy/econStore');
                 checkEconUser(ownerId);
                 if (eData[ownerId].usd < amount)
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${fmt(eData[ownerId].usd)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${eData[ownerId].usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
 
                 setPending(ownerId, { stakeType: 'usd', stakeAmount: amount, stakeUsd: amount });
                 const newPend = getPending(ownerId);
@@ -732,7 +732,7 @@ module.exports = function setupInteractionHandler(client) {
 
                 const actualCost = units * price;
                 if (d.usd < actualCost)
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\n💸 Kharash: **$${fmt(actualCost)}** | Haysataa: **$${fmt(d.usd)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\n💸 Kharash: **$${actualCost.toLocaleString()}** | Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 d.usd    -= actualCost;
                 d[asset]  = (d[asset] || 0) + units;
                 saveEcon();
@@ -744,8 +744,8 @@ module.exports = function setupInteractionHandler(client) {
                             .setColor('#27ae60')
                             .setDescription(
                                 `**${units} ${ASSET_LABEL[asset]}** la iibsaday\n` +
-                                `💸 Kharash: **$${fmt(actualCost)}** USD\n` +
-                                `💵 USD-kaaga hadda: **$${fmt(d.usd)}**\n` +
+                                `💸 Kharash: **$${actualCost.toLocaleString()}** USD\n` +
+                                `💵 USD-kaaga hadda: **$${d.usd.toLocaleString()}**\n` +
                                 `${ASSET_LABEL[asset]} haysataa: **${d[asset]}**`
                             )
                             .setFooter({ text: 'Garaad Economy' }),
@@ -885,7 +885,7 @@ module.exports = function setupInteractionHandler(client) {
                 .map(([uid, d]) => {
                     const days = Math.floor((Date.now() - d.loan.takenAt) / 86400000);
                     const left = Math.max(0, 3 - days);
-                    return `${left === 0 ? '🔴' : '💳'} <@${uid}> — **$${fmt(d.loan.owed)}** | ${left === 0 ? '**OVERDUE**' : `${left}d`}`;
+                    return `${left === 0 ? '🔴' : '💳'} <@${uid}> — **$${d.loan.owed.toLocaleString()}** | ${left === 0 ? '**OVERDUE**' : `${left}d`}`;
                 });
             const { adminEcoMainRow, adminEcoMidRow, adminEcoFooterRow, adminEcoCloseRow } = require('../commands/admin/adminEconPanel');
             const loansEmbed = new EmbedBuilder()
@@ -1248,7 +1248,7 @@ module.exports = function setupInteractionHandler(client) {
                 modal.addComponents(new ActionRowBuilder().addComponents(
                     new TextInputBuilder()
                         .setCustomId('pred_amount')
-                        .setLabel(`USD (Haysataa: $${fmt(eData[ownerId].usd)})`)
+                        .setLabel(`USD (Haysataa: $${eData[ownerId].usd.toLocaleString()})`)
                         .setStyle(TextInputStyle.Short)
                         .setPlaceholder('Tusaale: 500')
                         .setRequired(true),
@@ -1291,7 +1291,7 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder()
                     .setCustomId('pred_amount')
-                    .setLabel(`USD (Haysataa: $${fmt(eData[ownerId].usd)})`)
+                    .setLabel(`USD (Haysataa: $${eData[ownerId].usd.toLocaleString()})`)
                     .setStyle(TextInputStyle.Short)
                     .setPlaceholder('Tusaale: 500')
                     .setRequired(true),
@@ -1312,7 +1312,7 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder()
                     .setCustomId('pred_amount')
-                    .setLabel(`USD (Haysataa: $${fmt(eData[ownerId].usd)})`)
+                    .setLabel(`USD (Haysataa: $${eData[ownerId].usd.toLocaleString()})`)
                     .setStyle(TextInputStyle.Short)
                     .setPlaceholder('Tusaale: 500')
                     .setRequired(true),
@@ -1436,7 +1436,7 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder()
                     .setCustomId('sell_amount')
-                    .setLabel(`Xaddad (Qiimaha: $${fmt(price?)} | Haysataa: ${bal})`)
+                    .setLabel(`Xaddad (Qiimaha: $${price?.toLocaleString()} | Haysataa: ${bal})`)
                     .setStyle(TextInputStyle.Short)
                     .setPlaceholder('Tusaale: 1')
                     .setRequired(true),
@@ -1478,7 +1478,7 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder()
                     .setCustomId('buy_amount')
-                    .setLabel(`Tirada (Qiimaha: $${fmt(price?)}/unit | Max: ${maxUnits})`)
+                    .setLabel(`Tirada (Qiimaha: $${price?.toLocaleString()}/unit | Max: ${maxUnits})`)
                     .setStyle(TextInputStyle.Short)
                     .setPlaceholder('Tusaale: 1')
                     .setRequired(true),
@@ -1568,7 +1568,7 @@ module.exports = function setupInteractionHandler(client) {
             const bankLabel = bank.charAt(0).toUpperCase() + bank.slice(1);
             const isDeposit = action === 'deposit';
             const maxAmt    = isDeposit ? d.usd : d.banks[bank];
-            const label     = isDeposit ? `Dhig (Max: $${fmt(maxAmt)})` : `Bax (Max: $${fmt(maxAmt)})`;
+            const label     = isDeposit ? `Dhig (Max: $${maxAmt.toLocaleString()})` : `Bax (Max: $${maxAmt.toLocaleString()})`;
 
             const modal = new ModalBuilder()
                 .setCustomId(`eco_ebmod_${action}_${bank}_${userId}`)
@@ -1710,7 +1710,7 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder()
                     .setCustomId('eco_trade_amount')
-                    .setLabel(`Xaddadka (Qiimaha: $${fmt(price)} / mid)`)
+                    .setLabel(`Xaddadka (Qiimaha: $${price.toLocaleString()} / mid)`)
                     .setStyle(TextInputStyle.Short)
                     .setPlaceholder('Tusaale: 2')
                     .setRequired(true),
@@ -1742,7 +1742,7 @@ module.exports = function setupInteractionHandler(client) {
             let tradeWin = true;
             if (isBuy) {
                 if (d.usd < totalCost) {
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${fmt(d.usd)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid. Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
                 // Market-weighted win probability: rising=50%, stable=45%, falling=40%
                 const mktChange = getMarketSnapshot().find(s => s.asset === asset)?.change || 0;
@@ -1781,17 +1781,17 @@ module.exports = function setupInteractionHandler(client) {
                 ? `✅ Iibsashada — ${ASSET_LABEL[asset] || asset.toUpperCase()}`
                 : `📉 Khasaaro — ${ASSET_LABEL[asset] || asset.toUpperCase()}`;
             const buyDesc = tradeWin
-                ? `✅ **${amount} ${asset.toUpperCase()}** iibsatay — **$${fmt(totalCost)}**`
-                : `❌ Suuqa si xun u guuray — **$${fmt(totalCost)}** baad lumisay, asset ma helin.`;
+                ? `✅ **${amount} ${asset.toUpperCase()}** iibsatay — **$${totalCost.toLocaleString()}**`
+                : `❌ Suuqa si xun u guuray — **$${totalCost.toLocaleString()}** baad lumisay, asset ma helin.`;
 
             return interaction.update({ embeds: [
                 new EmbedBuilder()
                     .setTitle(isBuy ? buyTitle : `💵 Iibinta — ${ASSET_LABEL[asset] || asset.toUpperCase()}`)
                     .setColor(isBuy ? (tradeWin ? '#2ecc71' : '#e74c3c') : '#3498db')
                     .setDescription(
-                        `${isBuy ? buyDesc : `💵 **${amount} ${asset.toUpperCase()}** iibiyay — **$${fmt(totalCost)}**`}\n\n` +
+                        `${isBuy ? buyDesc : `💵 **${amount} ${asset.toUpperCase()}** iibiyay — **$${totalCost.toLocaleString()}**`}\n\n` +
                         `**📊 Jeebkaaga Hadda:**\n` +
-                        `💵 USD: **$${fmt(d.usd)}**\n` +
+                        `💵 USD: **$${d.usd.toLocaleString()}**\n` +
                         `BTC: **${d.btc}**\n` +
                         `🥇 Gold: **${d.gold}**\n` +
                         `🏦 Banks: **$${fmt((d.banks.mandeeq + d.banks.garaad))}**\n\n` +
@@ -1873,7 +1873,7 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: `⚠️ **${item.label}** hormar haysataa.\n\`?etitle ${key}\` si aad u dhigto.`, flags: MessageFlags.Ephemeral });
                 }
                 if (d.usd < item.price) {
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\nQiimaha: **$${fmt(item.price)}** | Haysataa: **$${fmt(d.usd)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\nQiimaha: **$${item.price.toLocaleString()}** | Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
                 d.usd -= item.price;
                 d.econTitles.push(key);
@@ -1885,7 +1885,7 @@ module.exports = function setupInteractionHandler(client) {
 
             if (item.type === 'item') {
                 if (d.usd < item.price) {
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\nQiimaha: **$${fmt(item.price)}** | Haysataa: **$${fmt(d.usd)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\nQiimaha: **$${item.price.toLocaleString()}** | Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
                 d.usd -= item.price;
                 d.inventory        ??= {};
@@ -1897,7 +1897,7 @@ module.exports = function setupInteractionHandler(client) {
             // Custom name title — show modal
             if (item.type === 'custom') {
                 if (d.usd < item.price) {
-                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\nQiimaha: **$${fmt(item.price)}** | Haysataa: **$${fmt(d.usd)}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ USD kugu filna ma lihid.\nQiimaha: **$${item.price.toLocaleString()}** | Haysataa: **$${d.usd.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
                 const modal = new ModalBuilder()
                     .setCustomId(`eco_shop_custom_mod_${userId}`)

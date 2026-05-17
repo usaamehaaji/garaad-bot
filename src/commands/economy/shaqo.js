@@ -1,6 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
 
 const WORK_COOLDOWN  = 9 * 60 * 60 * 1000;
 const WORK_REWARD_MIN = 300;
@@ -91,8 +90,8 @@ module.exports = async function shaqoCmd(message) {
             .setDescription(
                 `${job.desc}\n\n` +
                 `💵 **+$${reward} USD** shaqadaada ah\n` +
-                `💰 USD-kaaga: **$${fmt(d.usd)}**\n` +
-                `📊 Maanta waxaad kasoo heli kartaa: **$${fmt(Math.max(0, remaining))}** oo kale`
+                `💰 USD-kaaga: **$${d.usd.toLocaleString()}**\n` +
+                `📊 Maanta waxaad kasoo heli kartaa: **$${Math.max(0, remaining).toLocaleString()}** oo kale`
             )
             .setFooter({ text: 'Garaad Economy • 9 saacadood gudahood dib u shaqeyso • $300–$500' }),
     ], components: [closeRow] });

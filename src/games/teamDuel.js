@@ -1,5 +1,4 @@
 // =====================================================================
-const { fmt } = require('../../utils/helpers');
 // GARAAD BOT — Team Duel (1v1 / 2v2 / 3v3)
 // Host: ?tduel 2v2 usd 10000  |  Kick: ?tremove @user
 // Stakes deducted on join, refunded on leave/kick/cancel
@@ -78,7 +77,7 @@ function buildLobbyEmbed(state) {
     const t2 = state.teams[2].map(id => `<@${id}>`).join(', ') || '—';
     const joined   = allJoined(state).length;
     const needed   = totalNeeded(state);
-    const stakeStr = `${fmt(state.stakeAmount)} ${state.stakeType.toUpperCase()}`;
+    const stakeStr = `${state.stakeAmount.toLocaleString()} ${state.stakeType.toUpperCase()}`;
     const totalStr = `${fmt((state.stakeAmount * needed))} ${state.stakeType.toUpperCase()}`;
 
     return new EmbedBuilder()
@@ -230,10 +229,10 @@ async function handleJoin(interaction, channelId) {
     if (!hasEnough(state, userId)) {
         const have = state.stakeType === 'iq'
             ? `${userData[userId].iq} IQ`
-            : `$${fmt(econData[userId].usd)}`;
+            : `$${econData[userId].usd.toLocaleString()}`;
         const need = state.stakeType === 'iq'
             ? `${state.stakeAmount} IQ`
-            : `$${fmt(state.stakeAmount)}`;
+            : `$${state.stakeAmount.toLocaleString()}`;
         return interaction.reply({
             content: `⚠️ ${state.stakeType.toUpperCase()} kugu filna ma lihid.\nHaysataa: **${have}** — Dhig: **${need}**`,
             flags: MessageFlags.Ephemeral,
@@ -342,7 +341,7 @@ async function handleStart(interaction, hostId, channelId) {
         .setDescription(
             `🔵 **Team 1:** ${state.teams[1].map(id => `<@${id}>`).join(', ')}\n` +
             `🔴 **Team 2:** ${state.teams[2].map(id => `<@${id}>`).join(', ')}\n\n` +
-            `**Wadarta:** ${fmt(totalPrize)} ${state.stakeType.toUpperCase()}\n` +
+            `**Wadarta:** ${totalPrize.toLocaleString()} ${state.stakeType.toUpperCase()}\n` +
             `**${state.totalQ}** su'aalood — qof kasta si gooni ah ayuu jawaabaa!\n\n` +
             `Bilaabaya 3 ilbiriqsi gudahood...`,
         );
@@ -533,9 +532,9 @@ async function finishTeamDuel(channel, channelId) {
                 `${winColor} **Team ${winTeam}:** **${Math.max(t1Score, t2Score)}** dhibic 🏆\n` +
                 `${winTeam === 1 ? '🔴' : '🔵'} **Team ${loseTeam}:** **${Math.min(t1Score, t2Score)}** dhibic\n\n` +
                 `🥇 **Guulayste:** ${winIds.map(id => `<@${id}>`).join(', ')}\n` +
-                `   Qof kasta: **+${fmt(perWinner)} ${state.stakeType.toUpperCase()}**\n\n` +
+                `   Qof kasta: **+${perWinner.toLocaleString()} ${state.stakeType.toUpperCase()}**\n\n` +
                 `💀 **Lumiyay:** ${loseIds.map(id => `<@${id}>`).join(', ')}\n` +
-                `   Qof kasta: −${fmt(state.stakeAmount)} ${state.stakeType.toUpperCase()}${bonusLine}`,
+                `   Qof kasta: −${state.stakeAmount.toLocaleString()} ${state.stakeType.toUpperCase()}${bonusLine}`,
             );
     }
 

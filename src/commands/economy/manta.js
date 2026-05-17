@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require('discord.js');
-const { fmt } = require('../../../utils/helpers');
 const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
 
 const DAILY_AMOUNT = 500;
@@ -32,7 +31,7 @@ module.exports = async function mantaCmd(message) {
     return message.reply({ embeds: [
         new EmbedBuilder()
             .setTitle('💰 Manta — Lacagta Maanta')
-            .setDescription(`✅ **$${DAILY_AMOUNT} USD** heshay!\n\n💵 USD-kaaga: **$${fmt(d.usd)}**`)
+            .setDescription(`✅ **$${DAILY_AMOUNT} USD** heshay!\n\n💵 USD-kaaga: **$${d.usd.toLocaleString()}**`)
             .setColor('#2ecc71')
             .setFooter({ text: 'Berri dib u kaalay • Garaad Economy' }),
     ]});

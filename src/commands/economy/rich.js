@@ -30,7 +30,7 @@ module.exports = async function richCmd(message) {
             name = `<@${uid}>`;
         }
         const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `**${i + 1}.**`;
-        return `${medal} ${name} — $${fmt(net)}`;
+        return `${medal} ${name} — $${net.toLocaleString()}`;
     }));
 
     const closeRow = new ActionRowBuilder().addComponents(
