@@ -1,9 +1,10 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 
-const WORK_COOLDOWN  = 9 * 60 * 60 * 1000;
-const WORK_REWARD_MIN = 300;
-const WORK_REWARD_MAX = 500;
+const WORK_COOLDOWN = 9 * 60 * 60 * 1000;
+const WORK_GOLD     = 250;
+
+const GOLD_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/xau.png';
 
 const JOBS = [
     {
@@ -53,24 +54,8 @@ module.exports = async function shaqoCmd(message) {
         ]});
     }
 
-    const today  = new Date().toISOString().slice(0, 10);
-    d.todayEarned ??= { date: '', usd: 0 };
-    if (d.todayEarned.date !== today) d.todayEarned = { date: today, usd: 0 };
-    if (d.todayEarned.usd >= 1000) {
-        return message.reply({ embeds: [
-            new EmbedBuilder()
-                .setTitle('🚫 Shaqo — Xad Maalinlaha')
-                .setColor('#e74c3c')
-                .setDescription(`Maanta **$1,000** oo USD baad kasoo shaqeysay (shaqo + rob + cashflip + iwm).\n\n⏳ Berri dib u tijaabi.`)
-                .setFooter({ text: 'Garaad Economy • $1,000/maalin max' }),
-        ]});
-    }
-
-    const raw    = Math.floor(Math.random() * (WORK_REWARD_MAX - WORK_REWARD_MIN + 1)) + WORK_REWARD_MIN;
-    const reward = Math.min(raw, 1000 - d.todayEarned.usd);
-    d.usd      += reward;
-    d.lastWork  = Date.now();
-    trackEarning(userId, reward);
+    d.gold     = (d.gold || 0) + WORK_GOLD;
+    d.lastWork = Date.now();
     saveEcon();
 
     const job = JOBS[Math.floor(Math.random() * JOBS.length)];
@@ -82,17 +67,16 @@ module.exports = async function shaqoCmd(message) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    const remaining = 1000 - d.todayEarned.usd;
     return message.reply({ embeds: [
         new EmbedBuilder()
             .setTitle(`✅ ${job.title}`)
+            .setThumbnail(GOLD_ICON)
             .setColor('#2ecc71')
             .setDescription(
                 `${job.desc}\n\n` +
-                `💵 **+$${reward} USD** shaqadaada ah\n` +
-                `💰 USD-kaaga: **$${d.usd.toLocaleString()}**\n` +
-                `📊 Maanta waxaad kasoo heli kartaa: **$${Math.max(0, remaining).toLocaleString()}** oo kale`
+                `🥇 **+${WORK_GOLD} Gold** shaqadaada ah\n` +
+                `🥇 Gold-kaaga: **${(d.gold).toLocaleString()} Gold**`
             )
-            .setFooter({ text: 'Garaad Economy • 9 saacadood gudahood dib u shaqeyso • $300–$500' }),
+            .setFooter({ text: 'Garaad Economy • 9 saacadood gudahood dib u shaqeyso', iconURL: GOLD_ICON }),
     ], components: [closeRow] });
 };

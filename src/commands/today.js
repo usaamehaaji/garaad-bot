@@ -5,8 +5,7 @@ const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;
 const BTC_ICON  = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
-const GOLD_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/xau.png';
-const DAILY_REWARD = 250;
+const DAILY_BTC = 250;
 
 module.exports = async function todayCommand(message) {
     const userId = message.author.id;
@@ -43,28 +42,24 @@ module.exports = async function todayCommand(message) {
     const iqGain = Math.floor(Math.random() * 8) + 5;
     u.iq = (u.iq || 0) + iqGain;
 
-    // 250 BTC ama 250 Gold — random
-    const asset = Math.random() < 0.5 ? 'btc' : 'gold';
-    d[asset] = (d[asset] || 0) + DAILY_REWARD;
+    // 250 BTC + IQ
+    d.btc = (d.btc || 0) + DAILY_BTC;
 
     saveData();
     saveEcon();
 
-    const ICON       = asset === 'gold' ? GOLD_ICON : BTC_ICON;
-    const assetLabel = asset === 'gold' ? `🥇 **+${DAILY_REWARD} Gold**` : `₿ **+${DAILY_REWARD} BTC**`;
-
     return message.reply({
         embeds: [new EmbedBuilder()
             .setTitle('🎁 Dhibco Maalinlaha — Waxaad Heshay!')
-            .setThumbnail(ICON)
+            .setThumbnail(BTC_ICON)
             .setDescription(
                 `✅ Maanta abaalmarinta:\n\n` +
                 `🧠 **+${iqGain} IQ**\n` +
-                `${assetLabel}\n\n` +
+                `₿ **+${DAILY_BTC} BTC**\n\n` +
                 `Berri hore u soo noqo!`
             )
             .setColor('#2ecc71')
-            .setFooter({ text: '24 saacadood kadib waa dib loo cusboonaysiinayaa.', iconURL: ICON })],
+            .setFooter({ text: '24 saacadood kadib waa dib loo cusboonaysiinayaa.', iconURL: BTC_ICON })],
         components: [row],
     });
 };
