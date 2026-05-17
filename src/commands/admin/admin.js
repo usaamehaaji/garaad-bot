@@ -19,6 +19,7 @@ const godMode        = require('./adminGodMode');
 const adminStop      = require('./adminStop');
 const adminEconPanel   = require('./adminEconPanel');
 const adminEconRestart = require('./adminEconRestart');
+const adminGiveAll     = require('./adminGiveAll');
 
 module.exports = async function adminCommand(message, args) {
     if (!isAdmin(message.author.id)) {
@@ -78,6 +79,10 @@ module.exports = async function adminCommand(message, args) {
         case 'econ':
         case 'economy':
             return adminEconPanel(message, args);
+
+        case 'giveall':
+        case 'siidhamaan':
+            return adminGiveAll(message, args);
 
         case 'restart':
         case 'bilow':
