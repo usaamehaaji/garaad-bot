@@ -535,7 +535,7 @@ module.exports = function setupInteractionHandler(client) {
                     d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
                 }
                 saveEcon();
-                return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n💵 Qof walba: **$${5000.toLocaleString()} USD** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n💵 Qof walba: **$${(5000).toLocaleString()} USD** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
             }
 
             // (eco_dnmod_ and eco_dnpay_ removed — deen is now button-only, no modals)
