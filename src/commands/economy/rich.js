@@ -1,27 +1,17 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData }    = require('../../economy/econStore');
-const { getPrice }    = require('../../economy/market');
-const { fmt }         = require('../../utils/helpers');
+const { econData } = require('../../economy/econStore');
+const { fmt }      = require('../../utils/helpers');
+
+const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 
 module.exports = async function richCmd(message) {
-    const prices = {
-        btc:  getPrice('btc'),
-        gold: getPrice('gold'),
-    };
+    const entries = Object.entries(econData)
+        .filter(([, d]) => d && typeof d === 'object' && !d.__treasury__)
+        .map(([uid, d]) => ({ uid, btc: d.btc || 0 }))
+        .sort((a, b) => b.btc - a.btc)
+        .slice(0, 10);
 
-    const entries = Object.entries(econData).map(([uid, d]) => {
-        const net = (d.usd || 0)
-            + (d.btc  || 0) * prices.btc
-            + (d.gold || 0) * prices.gold
-            + (d.banks?.mandeeq || 0)
-            + (d.banks?.garaad  || 0);
-        return { uid, net };
-    });
-
-    entries.sort((a, b) => b.net - a.net);
-    const top10 = entries.slice(0, 10);
-
-    const lines = await Promise.all(top10.map(async ({ uid, net }, i) => {
+    const lines = await Promise.all(entries.map(async ({ uid, btc }, i) => {
         let name;
         try {
             const member = await message.guild.members.fetch(uid).catch(() => null);
@@ -30,7 +20,7 @@ module.exports = async function richCmd(message) {
             name = `<@${uid}>`;
         }
         const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `**${i + 1}.**`;
-        return `${medal} ${name} — $${net.toLocaleString()}`;
+        return `${medal} ${name} — ₿ **${fmt(btc)} BTC**`;
     }));
 
     const closeRow = new ActionRowBuilder().addComponents(
@@ -42,9 +32,10 @@ module.exports = async function richCmd(message) {
 
     return message.reply({ embeds: [
         new EmbedBuilder()
-            .setTitle('💰 TOP 10 — Ugu Taajirta')
+            .setTitle('₿ TOP 10 — Ugu Taajirta')
             .setColor('#f39c12')
+            .setThumbnail(BTC_ICON)
             .setDescription(lines.join('\n') || '_Wali xog ma jirto._')
-            .setFooter({ text: 'Garaad Economy • Net Worth (USD equivalent)' }),
+            .setFooter({ text: 'Garaad Economy • BTC Leaderboard', iconURL: BTC_ICON }),
     ], components: [closeRow] });
 };
