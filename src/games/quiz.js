@@ -18,6 +18,7 @@ const { checkUser }                                                      = requi
 const { canHostQuiz, bumpHostQuiz }                                      = require('../utils/hostQuota');
 const {
     pickQuestionsForGame,
+    pickQuestionsForUsers,
     markSeenForUsersInGame,
     noQuestionsLeftEmbed,
 } = require('../utils/questions');
@@ -201,11 +202,12 @@ async function beginQuizGame(state) {
     saveData();
 
     let totalQ  = state.questionCount || QUIZ_QUESTION_COUNT;
-    const picked = pickQuestionsForGame(state.hostId, 'quiz', totalQ);
+    // Dooro su'aalo aan la arkin player kasta (ma aha host kaliya)
+    const picked = pickQuestionsForUsers([...state.players], 'quiz', totalQ);
     if (!picked || picked.length === 0) {
         activeQuiz.delete(state.channelId);
         if (state.message) {
-            await state.message.edit({ embeds: [noQuestionsLeftEmbed('Hostka')], components: [] }).catch(() => {});
+            await state.message.edit({ embeds: [noQuestionsLeftEmbed('Dhammaan ciyaartoyda')], components: [] }).catch(() => {});
         }
         return;
     }

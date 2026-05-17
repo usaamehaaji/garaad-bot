@@ -61,11 +61,9 @@ function cleanExpiredSeenTexts(userId) {
 
 // ─────────────────────────────────────────────────────────────────────
 // Dooro su'aalo aan WELIGOOD la arkin (per-game + global text)
+// Su'aal la arkay weligeed dib looma soo celin
 // ─────────────────────────────────────────────────────────────────────
 function pickQuestionsForGame(userId, game, count) {
-    cleanExpiredSeenForGame(userId, game);
-    cleanExpiredSeenTexts(userId);
-
     const pool        = questionsByGame[game] || [];
     const seenIdx     = getSeenForGame(userId, game);
     const seenTxt     = getSeenTexts(userId);
@@ -77,6 +75,42 @@ function pickQuestionsForGame(userId, game, count) {
         if (i in seenIdx)                continue;
         if (q.question in seenTxt)       continue;
         if (pickedTxts.has(q.question))  continue;
+        pickedTxts.add(q.question);
+        unseenIdx.push(i);
+    }
+
+    if (unseenIdx.length === 0) return null;
+
+    return shuffleArray(unseenIdx)
+        .slice(0, count)
+        .map(i => ({ ...pool[i], _idx: i, _game: game }));
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Dooro su'aalo aan WELIGOOD la arkin — koox (dhammaan players)
+// Su'aal player kasta arkay waxaa laga saara pool-ka
+// ─────────────────────────────────────────────────────────────────────
+function pickQuestionsForUsers(userIds, game, count) {
+    const pool = questionsByGame[game] || [];
+
+    // Isku dar seen-ka dhammaan players-ka
+    const combinedSeenIdx = new Set();
+    const combinedSeenTxt = new Set();
+    for (const uid of userIds) {
+        const seenIdx = getSeenForGame(uid, game);
+        const seenTxt = getSeenTexts(uid);
+        for (const idx of Object.keys(seenIdx)) combinedSeenIdx.add(Number(idx));
+        for (const txt of Object.keys(seenTxt))  combinedSeenTxt.add(txt);
+    }
+
+    const unseenIdx  = [];
+    const pickedTxts = new Set();
+
+    for (let i = 0; i < pool.length; i++) {
+        const q = pool[i];
+        if (combinedSeenIdx.has(i))           continue;
+        if (combinedSeenTxt.has(q.question))  continue;
+        if (pickedTxts.has(q.question))        continue;
         pickedTxts.add(q.question);
         unseenIdx.push(i);
     }
@@ -114,7 +148,7 @@ function noQuestionsLeftEmbed(username) {
         .setTitle("📚 Su'aalihii waa dhammaadeen")
         .setDescription(
             `**${username}**, su'aalaha aad u baahnayd waad dhameystay.\n\n` +
-            `⏳ Sug ilaa la cusboonaysiiyo — su'aalo cusub ayaa kuu furmaya kadib marka muddada laba toddobaad ee hore ka dhammaato.\n\n` +
+            `⏳ Su'aalahaas oo dhan waad ka jawaabeen. Sugga adminka inuu su'aalo cusub ku daro.\n\n` +
             `🎮 Weli waxaad ciyaari kartaa:\n` +
             `• \`${PREFIX}duel @ciyaaryahan\` — tartan labo qof ah\n` +
             `• \`${PREFIX}quiz\` — tartanka kooxda\n` +
@@ -131,6 +165,7 @@ const markSeenForUsers    = (userIds, idx)  => markSeenForUsersInGame(userIds, '
 
 module.exports = {
     pickQuestionsForGame,
+    pickQuestionsForUsers,
     markSeenForGame,
     markSeenForUsersInGame,
     pickUnseenQuestions,
