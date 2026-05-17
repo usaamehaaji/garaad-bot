@@ -34,15 +34,9 @@ module.exports = async function todayCommand(message) {
         });
     }
 
-    const u = userData[userId];
     const d = econData[userId];
-    u.lastDaily = Date.now();
+    userData[userId].lastDaily = Date.now();
 
-    // IQ: 5–12
-    const iqGain = Math.floor(Math.random() * 8) + 5;
-    u.iq = (u.iq || 0) + iqGain;
-
-    // 250 BTC + IQ
     d.btc = (d.btc || 0) + DAILY_BTC;
 
     saveData();
@@ -54,7 +48,6 @@ module.exports = async function todayCommand(message) {
             .setThumbnail(BTC_ICON)
             .setDescription(
                 `✅ Maanta abaalmarinta:\n\n` +
-                `🧠 **+${iqGain} IQ**\n` +
                 `₿ **+${DAILY_BTC} BTC**\n\n` +
                 `Berri hore u soo noqo!`
             )
