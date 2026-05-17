@@ -8,6 +8,8 @@ const {
     EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags,
 } = require('discord.js');
 const { userData, saveData } = require('../store');
+
+const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 const { econData, saveEcon, checkEconUser } = require('../economy/econStore');
 const { checkUser, stripQuestionNumber } = require('../utils/helpers');
 const {
@@ -401,6 +403,7 @@ async function sendTeamDuelQuestion(channel, channelId) {
 
     const qEmbed = new EmbedBuilder()
         .setTitle(`⚔️ Team Duel — Su'aal ${qIndex + 1}/${state.totalQ}`)
+        .setThumbnail(BTC_ICON)
         .setColor('#9b59b6')
         .setDescription(
             `## ${stripQuestionNumber(q.question)}\n\n` +
@@ -464,6 +467,7 @@ async function sendTeamDuelQuestion(channel, channelId) {
 
         const summaryEmbed = new EmbedBuilder()
             .setTitle(`⚔️ Team Duel — Su'aal ${qIndex + 1}/${cur.totalQ}`)
+            .setThumbnail(BTC_ICON)
             .setColor('#2ecc71')
             .setDescription(
                 `## ${stripQuestionNumber(q.question)}\n\n` +
@@ -506,6 +510,7 @@ async function finishTeamDuel(channel, channelId) {
 
         resultEmbed = new EmbedBuilder()
             .setTitle('🤝 Team Duel — Iskumid!')
+            .setThumbnail(BTC_ICON)
             .setColor('#f1c40f')
             .setDescription(
                 `🔵 Team 1: **${t1Score}** dhibic\n` +
@@ -527,6 +532,7 @@ async function finishTeamDuel(channel, channelId) {
         const winColor = winTeam === 1 ? '🔵' : '🔴';
         resultEmbed = new EmbedBuilder()
             .setTitle('🏆 Team Duel — Dhamaatay!')
+            .setThumbnail(BTC_ICON)
             .setColor('#2ecc71')
             .setDescription(
                 `${winColor} **Team ${winTeam}:** **${Math.max(t1Score, t2Score)}** dhibic 🏆\n` +

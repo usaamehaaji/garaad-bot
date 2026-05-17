@@ -5,6 +5,7 @@ const { fmt } = require('../../utils/helpers');
 
 const WIN_RATE   = 0.50;
 const WIN_MULTI  = 0.90;
+const BTC_ICON   = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 
 const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold' };
 const VALID_ASSETS = Object.keys(ASSET_LABELS);
@@ -84,21 +85,23 @@ module.exports = async function cashflipCmd(message, args) {
             ? new EmbedBuilder()
                 .setTitle('✅ ECONOMY FLIP ✅')
                 .setColor('#2ecc71')
+                .setThumbnail(BTC_ICON)
                 .setDescription(`─────── **GUUL!** ───────\n\n📈 **Suuqa ayaa kuu shaqeeyay.**`)
                 .addFields(
-                    { name: '🪙 Faa\'iido',     value: `**+${profitAmt}**`, inline: true },
-                    { name: '🪙 Balance Cusub', value: `**${balLabel}**`,   inline: true },
+                    { name: '₿ Faa\'iido',     value: `**+${profitAmt}**`, inline: true },
+                    { name: '₿ Balance Cusub', value: `**${balLabel}**`,   inline: true },
                 )
-                .setFooter({ text: `🔄 ?ef si aad u tijaabiso mar kale  •  ✨ Garaad Economy` })
+                .setFooter({ text: `🔄 ?ef si aad u tijaabiso mar kale  •  ✨ Garaad Economy`, iconURL: BTC_ICON })
             : new EmbedBuilder()
                 .setTitle('❌ ECONOMY FLIP ❌')
                 .setColor('#e74c3c')
+                .setThumbnail(BTC_ICON)
                 .setDescription(`─────── **QASAARO!** ───────\n\n📉 **Suuqa ayaa kaa hooseeyay.**`)
                 .addFields(
-                    { name: '🪙 Khasaaro',      value: `**-${lossAmt}**`,  inline: true },
-                    { name: '🪙 Balance Cusub', value: `**${balLabel}**`,   inline: true },
+                    { name: '₿ Khasaaro',      value: `**-${lossAmt}**`,  inline: true },
+                    { name: '₿ Balance Cusub', value: `**${balLabel}**`,   inline: true },
                 )
-                .setFooter({ text: `🔄 ?ef si aad u isku daydo mar kale  •  ✨ Garaad Economy` });
+                .setFooter({ text: `🔄 ?ef si aad u isku daydo mar kale  •  ✨ Garaad Economy`, iconURL: BTC_ICON });
 
         return flipMsg.edit({ embeds: [resultEmbed], components: [closeRow(userId)] });
     }
@@ -108,6 +111,7 @@ module.exports = async function cashflipCmd(message, args) {
         new EmbedBuilder()
             .setTitle('🎰 ECONOMY FLIP — 50/50')
             .setColor('#9b59b6')
+            .setThumbnail(BTC_ICON)
             .setDescription(
                 `**Asset dooro** ama qor toos:\n\`?ef 100\` ama \`?ef gold 100\`\n\n` +
                 `₿ BTC: **${fmt(d.btc || 0)} BTC**\n` +

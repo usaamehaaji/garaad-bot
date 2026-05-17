@@ -8,6 +8,8 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData, saveData, activeGames } = require('../store');
 const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
+
+const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 const { markSeenForGame } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
 const {
@@ -114,6 +116,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
 
         const finishEmbed = new EmbedBuilder()
             .setTitle('🏁 Ciyaarta Waa Dhamaaday!')
+            .setThumbnail(BTC_ICON)
             .setDescription(
                 `### 📊 Natiijadaada — <@${userId}>\n\n` +
                 `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}**\n` +
@@ -171,6 +174,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
 
     const embed = new EmbedBuilder()
         .setTitle(`📊 Su'aal ${qNumber}/${total}`)
+        .setThumbnail(BTC_ICON)
         .setDescription(
             `## ${stripQuestionNumber(q.question)}\n\n` +
             `${scoreHint}\n` +

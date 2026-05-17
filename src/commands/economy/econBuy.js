@@ -24,7 +24,7 @@ module.exports = async function econBuyCmd(message, args) {
         if (d[currency] < shopItem.price) {
             return message.reply({ embeds: [
                 new EmbedBuilder()
-                    .setDescription(`⚠️ **$${shopItem.price.toLocaleString()} USD** ayaad u baahan tahay.\nHaysataa: **$${d[currency].toLocaleString()}**`)
+                    .setDescription(`⚠️ **${shopItem.price.toLocaleString()} BTC** ayaad u baahan tahay.\nHaysataa: **${(d[currency] || 0).toLocaleString()} BTC**`)
                     .setColor('#e74c3c'),
             ]});
         }
@@ -39,7 +39,7 @@ module.exports = async function econBuyCmd(message, args) {
                 .setColor('#2ecc71')
                 .setDescription(
                     `✅ **${shopItem.label}** heshay!\n` +
-                    `💵 USD hadhay: **$${d[currency].toLocaleString()}**\n\n` +
+                    `₿ BTC hadhay: **${(d[currency] || 0).toLocaleString()} BTC**\n\n` +
                     `Isticmaal **\`?etitle ${item}\`** si aad u muujiso.`
                 )
                 .setFooter({ text: 'Garaad Economy' }),
@@ -49,7 +49,7 @@ module.exports = async function econBuyCmd(message, args) {
     if (d[currency] < shopItem.price) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription(`⚠️ **$${shopItem.price.toLocaleString()} USD** ayaad u baahan tahay.\nHaysataa: **$${d[currency].toLocaleString()}**`)
+                .setDescription(`⚠️ **${shopItem.price.toLocaleString()} BTC** ayaad u baahan tahay.\nHaysataa: **${(d[currency] || 0).toLocaleString()} BTC**`)
                 .setColor('#e74c3c'),
         ]});
     }
@@ -64,7 +64,7 @@ module.exports = async function econBuyCmd(message, args) {
             .setColor('#2ecc71')
             .setDescription(
                 `✅ **${shopItem.label}** heshay!\n` +
-                `💵 USD hadhay: **$${d[currency].toLocaleString()}**\n` +
+                `₿ BTC hadhay: **${(d[currency] || 0).toLocaleString()} BTC**\n` +
                 `Kaydka: **${d.inventory[item]}x ${shopItem.label}**`
             )
             .setFooter({ text: 'Garaad Economy' }),

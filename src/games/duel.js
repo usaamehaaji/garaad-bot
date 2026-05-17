@@ -5,6 +5,8 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 const { userData, saveData, activeDuels } = require('../store');
+
+const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
 const { pickQuestionsForGame, markSeenForUsersInGame, noQuestionsLeftEmbed } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
@@ -148,6 +150,7 @@ async function sendDuelQuestion(channel, currentMsg = null) {
 
     const embed = new EmbedBuilder()
         .setTitle(`⚔️ Duel — Su'aal ${qIndex + 1}/${state.totalQ}`)
+        .setThumbnail(BTC_ICON)
         .setDescription(
             `## ${stripQuestionNumber(q.question)}\n\n` +
             `⏱️ ${GLOBAL_WAIT_MS / 1000} ilbiriqsi — qofka ugu horreeya ee sax ayaa dhibic helaya!\n\n` +
@@ -220,6 +223,7 @@ async function sendDuelQuestion(channel, currentMsg = null) {
 
         const summaryEmbed = new EmbedBuilder()
             .setTitle(`⚔️ Duel — Su'aal ${qIndex + 1}/${cur.totalQ}`)
+            .setThumbnail(BTC_ICON)
             .setDescription(
                 `## ${stripQuestionNumber(q.question)}\n\n${resultLine}\n\n` +
                 `📊 <@${cur.p1}>: **${cur.scores[cur.p1]}** | <@${cur.p2}>: **${cur.scores[cur.p2]}**`
@@ -253,6 +257,7 @@ async function finishDuel(channel, currentMsg = null) {
 
         resultEmbed = new EmbedBuilder()
             .setTitle('🤝 Dagaalku wuu iskumid noqday!')
+            .setThumbnail(BTC_ICON)
             .setDescription(
                 `<@${state.p1}> **${s1}** — **${s2}** <@${state.p2}>\n\n` +
                 `Dhigga **${DUEL_STAKE_IQ} IQ** waa la soo celiyay labadaba.`
@@ -270,6 +275,7 @@ async function finishDuel(channel, currentMsg = null) {
 
         resultEmbed = new EmbedBuilder()
             .setTitle('🏆 Dagaalku wuu dhamaaday!')
+            .setThumbnail(BTC_ICON)
             .setDescription(
                 `<@${state.p1}> **${s1}** — **${s2}** <@${state.p2}>\n\n` +
                 `🥇 Guulaystay: <@${winnerId}> (**+${DUEL_WIN_IQ} IQ**)\n` +

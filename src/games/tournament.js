@@ -20,6 +20,8 @@ const {
     ButtonStyle,
     MessageFlags,
 } = require('discord.js');
+const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
+
 const { isAdmin }            = require('../utils/admin');
 const {
     activeTournament,
@@ -821,6 +823,7 @@ async function sendQuestion(state) {
 
     const embed = new EmbedBuilder()
         .setTitle(`🏁 ${meta.name} — Su'aal ${state.currentQ + 1}/${totalQ}`)
+        .setThumbnail(BTC_ICON)
         .setDescription(
             `## ${stripQuestionNumber(q.question)}\n\n` +
             `${typeTag} · ⏱️ ${GLOBAL_WAIT_MS / 1000}s\n` +
@@ -1036,13 +1039,14 @@ async function finishTournament(state) {
             content: '@everyone',
             embeds: [new EmbedBuilder()
                 .setTitle('🏆  T A R T A N  —  D H A M A A D A Y !')
+                .setThumbnail(BTC_ICON)
                 .setDescription(
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
                     `👑  **GUULEYSTAHA**\n` +
                     `## <@${winId}>\n` +
                     `🏆 **Champion** title ayaa kuu galay!\n` +
                     `📊 Dhibcahaaga guud: **${winScore}pts**\n` +
-                    `💰 Bonus: **+$500 USD**\n\n` +
+                    `💰 Bonus: **+500 BTC**\n\n` +
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
                     `**🏅 Natiijada Guud:**\n\n${allScores}\n\n` +
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
@@ -1062,7 +1066,7 @@ async function finishTournament(state) {
                 .setDescription(
                     `👑 **Tartanka Garaad Quiz ayaad ku guulaysatay!**\n\n` +
                     `🏆 **Champion** title ayaa kuu galay!\n` +
-                    `💰 **+$500 USD** abaalmarintaada\n` +
+                    `💰 **+500 BTC** abaalmarintaada\n` +
                     `📊 Dhibcahaaga guud: **${winScore}pts**\n\n` +
                     `_Mahadsanid ka qaybgalashadaada — Garaad Quiz_`
                 )
