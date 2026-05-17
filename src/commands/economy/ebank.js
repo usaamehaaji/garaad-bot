@@ -76,10 +76,11 @@ function buildMainEmbed(d) {
         .setColor('#3498db')
         .setDescription(
             `**💼 Xisaabkaaga:**\n` +
-            `🏦 Garaad Bank: **$${fmt(d.banks.garaad)}**\n` +
-            `💵 USD: **$${fmt(d.usd)}**\n\n` +
-            `📈 Interest heshay: **+$${fmt(d.interestEarned?.garaad || 0)}**\n\n` +
-            `🏛️ Khaznad: **$${fmt(t.balance || 0)}**`
+            `🏦 Garaad Bank: **${fmt(d.banks.garaad)} BTC**\n` +
+            `₿ BTC: **${fmt(d.btc || 0)} BTC**\n` +
+            `🥇 Gold: **${fmt(d.gold || 0)} Gold**\n\n` +
+            `📈 Interest heshay: **+${fmt(d.interestEarned?.garaad || 0)} BTC**\n\n` +
+            `🏛️ Khaznad: **${fmt(t.balance || 0)} BTC**`
         )
         .setFooter({ text: 'Garaad Economy • Garaad Bank 1%/maalin' });
 }
@@ -90,17 +91,18 @@ function buildBankEmbed(d) {
     let loanLine  = '';
     if (hasLoan) {
         const daysLeft = Math.max(0, 3 - Math.floor((Date.now() - loan.takenAt) / 86400000));
-        loanLine = `\n⚠️ **Deen jirto:** $${fmt(loan.owed)} bixin | ${daysLeft > 0 ? `${daysLeft} malin hadhay` : '🔴 La jari doonaa!'}`;
+        loanLine = `\n⚠️ **Deen jirto:** ${fmt(loan.owed)} BTC bixin | ${daysLeft > 0 ? `${daysLeft} malin hadhay` : '🔴 La jari doonaa!'}`;
     }
     return new EmbedBuilder()
         .setTitle('🏦 Garaad Bank')
         .setColor('#2980b9')
         .setDescription(
-            `🏦 **Kaydka:** **$${fmt(d.banks.garaad)}**\n` +
-            `💵 **USD:** **$${fmt(d.usd)}**\n` +
-            `📈 **Interest heshay:** +$${fmt(d.interestEarned?.garaad || 0)}\n\n` +
+            `🏦 **Kaydka:** **${fmt(d.banks.garaad)} BTC**\n` +
+            `₿ **BTC:** **${fmt(d.btc || 0)} BTC**\n` +
+            `🥇 **Gold:** **${fmt(d.gold || 0)} Gold**\n` +
+            `📈 **Interest heshay:** +${fmt(d.interestEarned?.garaad || 0)} BTC\n\n` +
             `📈 **Rate:** 1% maalintii — Lacagtu kobceysa!\n` +
-            `🏛️ **Bank oo dhan:** $${fmt(bankTotalDeposits())}` +
+            `🏛️ **Bank oo dhan:** ${fmt(bankTotalDeposits())} BTC` +
             loanLine
         )
         .setFooter({ text: 'Garaad Economy • Dhig si ay u kobto' });
@@ -116,10 +118,10 @@ function buildKhaznadEmbed() {
         .setColor('#8e44ad')
         .setDescription(
             `**💰 Hadda:**\n` +
-            `🏦 Khaznad: **$${fmt(bal)} USD**\n\n` +
+            `🏦 Khaznad: **${fmt(bal)} BTC**\n\n` +
             `**📊 Tirakoobka:**\n` +
-            `📥 Wadarta soo gashay: **$${fmt(total)} USD**\n` +
-            `📤 Wadarta la bixiyay: **$${fmt(spent)} USD**\n\n` +
+            `📥 Wadarta soo gashay: **${fmt(total)} BTC**\n` +
+            `📤 Wadarta la bixiyay: **${fmt(spent)} BTC**\n\n` +
             `**📌 Xaga kale:** Shop iibsiga, Cashflip qasaaraha, Deen faa'iidada`
         )
         .setFooter({ text: 'Garaad Economy • Keedsane Bank Treasury' });
@@ -139,8 +141,8 @@ function buildDeenEmbed(d) {
             .setColor('#e74c3c')
             .setDescription(
                 `⚠️ **Deen Jirto — La Xisaabi!**\n\n` +
-                `💵 Heshay: **$${fmt(LOAN_MAX)}**\n` +
-                `💸 Bixin: **$${fmt(loan.owed)}**\n` +
+                `₿ Heshay: **${fmt(LOAN_MAX)} BTC**\n` +
+                `💸 Bixin: **${fmt(loan.owed)} BTC**\n` +
                 (daysLeft > 0
                     ? `⏱️ Auto-deduct: **${daysLeft} malin** gudahood`
                     : `🔴 **Xilligan la jarayo!** Garaad Bank laga jaraysaa.`)
@@ -156,8 +158,8 @@ function buildDeenEmbed(d) {
                 `🔴 **Bangiga maanta XIRAN yahay**\n` +
                 `_Keedsane Bank Khamiis 1:00 AM — Jimce dhamaadka ayuu furmaa_\n\n` +
                 `**📋 Deen Xukumka:**\n` +
-                `💵 Waxaad helaysaa: **$${fmt(LOAN_MAX)} USD**\n` +
-                `💸 Waxaad celinsaa: **$${fmt(LOAN_OWED)} USD** ($${LOAN_FEE} dulsaar)\n` +
+                `₿ Waxaad helaysaa: **${fmt(LOAN_MAX)} BTC**\n` +
+                `💸 Waxaad celinsaa: **${fmt(LOAN_OWED)} BTC** (${LOAN_FEE} BTC dulsaar)\n` +
                 `🔒 Isbuuc walba hal mar — Khamiis 1am ilaa Jimce dhamaadka`
             )
             .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
@@ -170,7 +172,7 @@ function buildDeenEmbed(d) {
             .setDescription(
                 `🟡 **Bangiga wuu furan yahay** _(Khamiis)_\n\n` +
                 `⚠️ **Isbuucaan deen horay u qaaday** — toddobaadka xiga soo noqo.\n\n` +
-                `💵 USD-kaaga: **$${fmt(d.usd)}**`
+                `₿ BTC-gaaga: **${fmt(d.btc || 0)} BTC**`
             )
             .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
     }
@@ -182,11 +184,11 @@ function buildDeenEmbed(d) {
         .setDescription(
             `🟢 **Bangiga maanta FURAN yahay** _(Khamiis)_\n\n` +
             `**📋 Deen Xukumka:**\n\n` +
-            `💵 Waxaad helaysaa: **$${fmt(LOAN_MAX)} USD**\n` +
-            `💸 Waxaad celinsaa: **$${fmt(LOAN_OWED)} USD** ($${LOAN_FEE} dulsaar kaliya)\n\n` +
+            `₿ Waxaad helaysaa: **${fmt(LOAN_MAX)} BTC**\n` +
+            `💸 Waxaad celinsaa: **${fmt(LOAN_OWED)} BTC** (${LOAN_FEE} BTC dulsaar kaliya)\n\n` +
             `🔒 **3 malin kadib** — Garaad Bank laga jaraysaa si toos ah.\n` +
             `📅 **Isbuuc walba hal mar** — Khamiis 1am ilaa Jimce dhamaadka\n\n` +
-            `🏛️ Khaznad: **$${fmt(t.balance || 0)}** | 💵 USD-kaaga: **$${fmt(d.usd)}**`
+            `🏛️ Khaznad: **${fmt(t.balance || 0)} BTC** | ₿ BTC-gaaga: **${fmt(d.btc || 0)} BTC**`
         )
         .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
 }
@@ -255,12 +257,12 @@ function deenRow(userId, hasLoan, d) {
         ...(hasLoan ? [
             new ButtonBuilder()
                 .setCustomId(`eco_dn_pay_${userId}`)
-                .setLabel(`💵 Deen Celi ($${fmt(LOAN_OWED)})`)
+                .setLabel(`₿ Deen Celi (${fmt(LOAN_OWED)} BTC)`)
                 .setStyle(ButtonStyle.Success),
         ] : [
             new ButtonBuilder()
                 .setCustomId(`eco_dn_take_${userId}`)
-                .setLabel(`💳 Deen Qaado ($${fmt(LOAN_MAX)})`)
+                .setLabel(`💳 Deen Qaado (${fmt(LOAN_MAX)} BTC)`)
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(!canTake),
         ]),
