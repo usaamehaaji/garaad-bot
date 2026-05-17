@@ -26,7 +26,7 @@ module.exports = async function khaznadCmd(message) {
                 `**📊 Tirakoobka:**\n` +
                 `📥 Wadarta soo gashay: **${fmt(totalIn)} USD**\n` +
                 `📤 Wadarta la qaybiyay: **${fmt(spent)} USD**\n\n` +
-                `**📌 Lacagta xaga kale:** Title iibsiga iyo Cashflip qasaaraha\n` +
+                `**📌 Lacagta xaga kale:** Title iibsiga iyo Ecoflip qasaaraha\n` +
                 `**📌 Lacagta la siiyaa:** Admin ayaa qaybiyaa dadka`
             )
             .setFooter({ text: 'Garaad Economy • Keedsane Bank Treasury' }),

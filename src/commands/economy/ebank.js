@@ -122,7 +122,7 @@ function buildKhaznadEmbed() {
             `**📊 Tirakoobka:**\n` +
             `📥 Wadarta soo gashay: **${fmt(total)} BTC**\n` +
             `📤 Wadarta la bixiyay: **${fmt(spent)} BTC**\n\n` +
-            `**📌 Xaga kale:** Shop iibsiga, Cashflip qasaaraha, Deen faa'iidada`
+            `**📌 Xaga kale:** Shop iibsiga, Ecoflip qasaaraha, Deen faa'iidada`
         )
         .setFooter({ text: 'Garaad Economy • Keedsane Bank Treasury' });
 }
