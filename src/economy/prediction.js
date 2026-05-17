@@ -150,7 +150,7 @@ async function resolvePrediction(userId, client) {
     savePredictions();
 
     const pctChange   = ((exitPrice - pred.entryPrice) / pred.entryPrice * 100).toFixed(2);
-    const dirLabel    = pred.direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const dirLabel    = pred.direction === 'up' ? '⬆️ KOR U KAC' : '⬇️ HOOS U DHAC';
     const assetLabel  = ASSET_LABEL[pred.asset] || pred.asset.toUpperCase();
     const profit      = payout - pred.stakeUsd;
 

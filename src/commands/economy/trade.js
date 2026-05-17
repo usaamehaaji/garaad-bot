@@ -89,8 +89,8 @@ function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
             `**Stake:** ${stakeLabel}\n` +
             `**Waqti:** ${minutes} daqiiqo\n` +
             `**Qiimaha hadda:** $${pfmt(price)}\n\n` +
-            `⬆️ **UP** — Waxaad saadaalinaysaa qiimahu kor buu u kacayaa\n` +
-            `⬇️ **DOWN** — Waxaad saadaalinaysaa qiimahu hoos buu u dhacayaa`
+            `⬆️ **KOR U KAC** — Waxaad saadaalinaysaa qiimahu kor buu u kacayaa\n` +
+            `⬇️ **HOOS U DHAC** — Waxaad saadaalinaysaa qiimahu hoos buu u dhacayaa`
         )
         .setFooter({ text: 'Garaad Predict' });
 }
@@ -99,26 +99,26 @@ function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
 
 function buildConfirmEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes, direction) {
     const price     = getPrice(asset);
-    const dirLabel  = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const dirLabel  = direction === 'up' ? '⬆️ KOR U KAC' : '⬇️ HOOS U DHAC';
     const winPay    = Math.floor(stakeUsd * WIN_MULTI);
     const losePay   = Math.floor(stakeUsd * LOSE_MULTI);
     const stakeLabel = stakeType === 'usd'
         ? `$${pfmt(stakeAmount)} USD`
         : `${stakeAmount} ${asset.toUpperCase()} (≈ $${pfmt(stakeUsd)})`;
     return new EmbedBuilder()
-        .setTitle('✅ Xidh Saadaalinta — Confirm')
+        .setTitle('📌 Saadaasha La Xidhay — Xaqiijin')
         .setColor('#27ae60')
         .setDescription(
-            `📌 **Asset:**     ${ASSET_LABEL[asset]}\n` +
-            `📊 **Qiimaha:**   $${pfmt(price)}\n` +
-            `💰 **Stake:**     ${stakeLabel}\n` +
-            `⏱️ **Waqti:**     ${minutes} daqiiqo\n` +
-            `🎯 **Saadaal:**   ${dirLabel}\n\n` +
-            `🏆 **Haddii WIN:**  +$${pfmt(winPay - stakeUsd)} faa'iido → dib: **$${pfmt(winPay)}**\n` +
-            `💀 **Haddii LOSE:** -$${pfmt(stakeUsd - losePay)} khasaaro → dib: **$${pfmt(losePay)}**\n\n` +
-            `⚡ Ma diyaar baad tahay?`
+            `🥇 **Asset:** ${ASSET_LABEL[asset]}\n` +
+            `📊 **Qiimaha:** $${pfmt(price)}\n` +
+            `💰 **Khatarta (Stake):** ${stakeLabel}\n` +
+            `⏱️ **Muddada:** ${minutes} daqiiqo\n` +
+            `🎯 **Saadaal:** ${dirLabel}\n\n` +
+            `🏆 **Haddii aad guulaysato:** +$${pfmt(winPay - stakeUsd)} faa'iido → wadarta: **$${pfmt(winPay)}**\n` +
+            `💀 **Haddii aad guuldarreysato:** -$${pfmt(stakeUsd - losePay)} khasaaro → hadhaaga: **$${pfmt(losePay)}**\n\n` +
+            `⚡ **Saadaasha waa la xidhay (LOCKED)**`
         )
-        .setFooter({ text: 'Garaad Predict • Ka dib LOCK, waxba la beddeli karo' });
+        .setFooter({ text: 'Garaad Predict • Marka la xiro lama beddeli karo' });
 }
 
 // ── Embed: Active prediction ──────────────────────────────────────
@@ -127,7 +127,7 @@ function buildActiveEmbed(pred) {
     const remaining = Math.max(0, pred.endTime - Date.now());
     const mins = Math.floor(remaining / 60000);
     const secs = Math.floor((remaining % 60000) / 1000);
-    const dirLabel = pred.direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const dirLabel = pred.direction === 'up' ? '⬆️ KOR U KAC' : '⬇️ HOOS U DHAC';
     return new EmbedBuilder()
         .setTitle('⏳ Saadaalin Firfircoon — Sug!')
         .setColor('#f39c12')
@@ -272,8 +272,8 @@ function backRow(userId) {
 
 function directionRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`pred_d_up_${userId}`)  .setLabel('⬆️ UP — Kor').setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`pred_d_down_${userId}`).setLabel('⬇️ DOWN — Hoos').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`pred_d_up_${userId}`)  .setLabel('⬆️ KOR U KAC').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`pred_d_down_${userId}`).setLabel('⬇️ HOOS U DHAC').setStyle(ButtonStyle.Danger),
         new ButtonBuilder().setCustomId(`pred_back_${userId}`)  .setLabel('🔙 Dib').setStyle(ButtonStyle.Secondary),
     );
 }
