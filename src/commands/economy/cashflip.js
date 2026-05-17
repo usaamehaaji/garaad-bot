@@ -32,17 +32,25 @@ module.exports = async function cashflipCmd(message, args) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Direct: ?ecoflip usd 100
-    if (args && args.length >= 2) {
-        const asset  = args[0].toLowerCase();
-        const amount = parseFloat(args[1]);
+    // Qaabka cusub: ?ef 100  ama  ?ef btc 100
+    let asset, amount;
+    if (args && args.length >= 2 && isNaN(parseFloat(args[0]))) {
+        // ?ef btc 100
+        asset  = args[0].toLowerCase();
+        amount = parseFloat(args[1]);
+    } else if (args && args.length >= 1 && !isNaN(parseFloat(args[0]))) {
+        // ?ef 100 → default usd
+        asset  = 'usd';
+        amount = parseFloat(args[0]);
+    }
 
+    if (asset !== undefined) {
         if (!VALID_ASSETS.includes(asset))
-            return message.reply(`⚠️ Asset saxda ah geli: **${VALID_ASSETS.join(', ')}**`);
+            return message.reply(`⚠️ Asset saxda ah geli: **${VALID_ASSETS.join(', ')}**\nTusaale: \`?ef 100\` ama \`?ef btc 100\``);
         if (!amount || isNaN(amount) || amount <= 0)
-            return message.reply('⚠️ Xaddad sax ah geli (tusaale: `?ecoflip usd 100`)');
+            return message.reply('⚠️ Xaddad sax ah geli.\nTusaale: `?ef 100` ama `?ef btc 100`');
         if (d[asset] < amount)
-            return message.reply(`⚠️ ${asset.toUpperCase()} kugu filna ma lihid. Haysataa: **${d[asset]}**`);
+            return message.reply(`⚠️ ${asset.toUpperCase()} kugu filna ma lihid. Haysataa: **${fmt(d[asset])}**`);
 
         const flipMsg = await message.reply({ embeds: [
             new EmbedBuilder()
@@ -78,21 +86,20 @@ module.exports = async function cashflipCmd(message, args) {
                        : newBal >= 5_000   ? 'Sii wad! 🚀'
                        : newBal >= 1_000   ? 'Sii wad! 💪'
                        : 'Isku day! 🎯';
-        const balLabel = asset === 'usd' ? `$${fmt(newBal)}` : `${fmt(newBal)} ${asset.toUpperCase()}`;
-
-        const profitAmt = asset === 'usd' ? `$${fmt(Math.floor(amount * WIN_MULTI))}` : `${fmt(Math.floor(amount * WIN_MULTI))} ${asset.toUpperCase()}`;
-        const lossAmt   = asset === 'usd' ? `$${fmt(amount)}` : `${fmt(amount)} ${asset.toUpperCase()}`;
+        const balLabel  = `${fmt(newBal)} ${asset.toUpperCase()}`;
+        const profitAmt = `${fmt(Math.floor(amount * WIN_MULTI))} ${asset.toUpperCase()}`;
+        const lossAmt   = `${fmt(amount)} ${asset.toUpperCase()}`;
 
         const desc = win
             ? `Suuqa ayaa kuu shaqeeyay. 📈\n\n` +
               `💸 **Faa'iido:** +${profitAmt}\n` +
               `💰 **Balance Cusub:** ${balLabel}\n\n` +
-              `🔄 Isticmaal \`?trade\` si aad u tijaabiso mar kale.\n\n` +
+              `🔄 Isticmaal \`?ef\` si aad u tijaabiso mar kale.\n\n` +
               `✨ **Garaad Economy**`
-            : `Suuqa kuma taageerin. 📉\n\n` +
-              `💸 **Qasaaro:** -${lossAmt}\n` +
+            : `Suuqa ayaa kaa hooseeyay. 📉\n\n` +
+              `💸 **Khasaaro:** -${lossAmt}\n` +
               `💰 **Balance Cusub:** ${balLabel}\n\n` +
-              `🔄 Isticmaal \`?trade\` si aad u tijaabiso fursad kale.\n\n` +
+              `🔄 Isticmaal \`?ef\` si aad u isku daydo mar kale.\n\n` +
               `✨ **Garaad Economy**`;
 
         return flipMsg.edit({ embeds: [
@@ -109,10 +116,10 @@ module.exports = async function cashflipCmd(message, args) {
             .setTitle('🎰 Ecoflip — 50/50')
             .setColor('#9b59b6')
             .setDescription(
-                `**Asset dooro** ama qor toos:\n\`?ecoflip usd 100\`\n\n` +
-                `💵 USD: **$${fmt(d.usd)}**\n` +
-                `BTC: **${d.btc}**\n` +
-                `🥇 Gold: **${d.gold}**\n\n` +
+                `**Asset dooro** ama qor toos:\n\`?ef 100\` ama \`?ef btc 100\`\n\n` +
+                `💵 USD: **${fmt(d.usd)} USD**\n` +
+                `BTC: **${fmt(d.btc)} BTC**\n` +
+                `🥇 Gold: **${fmt(d.gold)} Gold**\n\n` +
                 `🏆 **Win:** Stake × 1.9 | 💀 **Lose:** Stake dhan`
             )
             .setFooter({ text: '50/50 chance • Garaad Economy' }),
