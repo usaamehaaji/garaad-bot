@@ -1,6 +1,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData }    = require('../../economy/econStore');
 const { getPrice }    = require('../../economy/market');
+const { fmt }         = require('../../utils/helpers');
 
 module.exports = async function richCmd(message) {
     const prices = {
@@ -29,7 +30,7 @@ module.exports = async function richCmd(message) {
             name = `<@${uid}>`;
         }
         const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `**${i + 1}.**`;
-        return `${medal} ${name} — $${Math.round(net).toLocaleString()}`;
+        return `${medal} ${name} — $${fmt(net)}`;
     }));
 
     const closeRow = new ActionRowBuilder().addComponents(

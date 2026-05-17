@@ -1,5 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser } = require('../../economy/econStore');
+const { fmt } = require('../../utils/helpers');
 
 const ASSET_LABELS = { usd: '💵 USD', btc: 'BTC', gold: '🥇 Gold' };
 
@@ -48,7 +49,7 @@ module.exports = async function giveCmd(message) {
             .setColor('#3498db')
             .setDescription(
                 `**Asset dooro** aad u diri:\n\n` +
-                `💵 USD: **$${d.usd.toLocaleString()}**\n` +
+                `💵 USD: **$${fmt(d.usd)}**\n` +
                 `BTC: **${d.btc}**\n` +
                 `🥇 Gold: **${d.gold}**`
             )

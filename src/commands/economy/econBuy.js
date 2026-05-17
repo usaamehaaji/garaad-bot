@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
+const { fmt } = require('../../../utils/helpers');
 const { econData, checkEconUser, saveEcon, addToTreasury } = require('../../economy/econStore');
 const { SHOP_ITEMS } = require('./econShop');
 
@@ -24,7 +25,7 @@ module.exports = async function econBuyCmd(message, args) {
         if (d[currency] < shopItem.price) {
             return message.reply({ embeds: [
                 new EmbedBuilder()
-                    .setDescription(`⚠️ **$${shopItem.price.toLocaleString()} USD** ayaad u baahan tahay.\nHaysataa: **$${d[currency].toLocaleString()}**`)
+                    .setDescription(`⚠️ **$${fmt(shopItem.price)} USD** ayaad u baahan tahay.\nHaysataa: **$${fmt(d[currency])}**`)
                     .setColor('#e74c3c'),
             ]});
         }
@@ -39,7 +40,7 @@ module.exports = async function econBuyCmd(message, args) {
                 .setColor('#2ecc71')
                 .setDescription(
                     `✅ **${shopItem.label}** heshay!\n` +
-                    `💵 USD hadhay: **$${d[currency].toLocaleString()}**\n\n` +
+                    `💵 USD hadhay: **$${fmt(d[currency])}**\n\n` +
                     `Isticmaal **\`?etitle ${item}\`** si aad u muujiso.`
                 )
                 .setFooter({ text: 'Garaad Economy' }),
@@ -49,7 +50,7 @@ module.exports = async function econBuyCmd(message, args) {
     if (d[currency] < shopItem.price) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription(`⚠️ **$${shopItem.price.toLocaleString()} USD** ayaad u baahan tahay.\nHaysataa: **$${d[currency].toLocaleString()}**`)
+                .setDescription(`⚠️ **$${fmt(shopItem.price)} USD** ayaad u baahan tahay.\nHaysataa: **$${fmt(d[currency])}**`)
                 .setColor('#e74c3c'),
         ]});
     }
@@ -64,7 +65,7 @@ module.exports = async function econBuyCmd(message, args) {
             .setColor('#2ecc71')
             .setDescription(
                 `✅ **${shopItem.label}** heshay!\n` +
-                `💵 USD hadhay: **$${d[currency].toLocaleString()}**\n` +
+                `💵 USD hadhay: **$${fmt(d[currency])}**\n` +
                 `Kaydka: **${d.inventory[item]}x ${shopItem.label}**`
             )
             .setFooter({ text: 'Garaad Economy' }),

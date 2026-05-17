@@ -1,4 +1,5 @@
 // =====================================================================
+const { fmt } = require('../../utils/helpers');
 // GARAAD BOT - Bank Scheduler (loan auto-deduction + interest)
 // =====================================================================
 
@@ -19,7 +20,7 @@ async function sendLoanDM(client, userId, owed) {
                 .setColor('#e74c3c')
                 .setDescription(
                     `⚠️ **3 malin ayaa dhaaftay** — deentaadii bangiyada laga jaray.\n\n` +
-                    `💸 **Wadarta la jaray: $${owed.toLocaleString()}**\n\n` +
+                    `💸 **Wadarta la jaray: $${fmt(owed)}**\n\n` +
                     `_?ebank si aad dib u bilaabasho._`
                 )
                 .setFooter({ text: 'Garaad Economy • Garaad Bank' }),

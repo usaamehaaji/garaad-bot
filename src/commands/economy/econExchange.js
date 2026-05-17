@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
+const { fmt } = require('../../../utils/helpers');
 const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 const { getPrice }                          = require('../../economy/market');
 
@@ -65,7 +66,7 @@ module.exports = async function econExchangeCmd(message, args) {
             .setColor('#2ecc71')
             .setDescription(
                 `✅ **${amount} ${from.toUpperCase()}** → **${received.toFixed(6)} ${to.toUpperCase()}**\n\n` +
-                `Qiimaha USD: ~$${Math.round(usdValue).toLocaleString()}`
+                `Qiimaha USD: ~$${fmt(Math.round(usdValue))}`
             )
             .setFooter({ text: 'Garaad Economy' }),
     ]});

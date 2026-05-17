@@ -1,5 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
+const { fmt } = require('../../utils/helpers');
 
 const ROB_SUCCESS_RATE   = 0.45;
 const ROB_MIN_USD        = 7_000;
@@ -67,7 +68,7 @@ module.exports = async function robCmd(message) {
     if (victim.usd < ROB_MIN_USD) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription(`⚠️ ${target} lacag ku filan ma lahan (min **$${ROB_MIN_USD.toLocaleString()}**). Rob ma faa'idayso.`)
+                .setDescription(`⚠️ ${target} lacag ku filan ma lahan (min **$${fmt(ROB_MIN_USD)}**). Rob ma faa'idayso.`)
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
@@ -98,7 +99,7 @@ module.exports = async function robCmd(message) {
             new EmbedBuilder()
                 .setTitle('🔫 Rob — Guulaysatay!')
                 .setColor('#2ecc71')
-                .setDescription(`✅ **$${stolen.toLocaleString()} USD** ka xaday ${target}!\n💵 USD-kaaga: **$${robber.usd.toLocaleString()}**`)
+                .setDescription(`✅ **$${fmt(stolen)} USD** ka xaday ${target}!\n💵 USD-kaaga: **$${fmt(robber.usd)}**`)
                 .setFooter({ text: 'Garaad Economy' }),
         ], components: [closeRow(userId)] });
     } else {
@@ -109,7 +110,7 @@ module.exports = async function robCmd(message) {
             new EmbedBuilder()
                 .setTitle('🚔 Rob — Fashilmay!')
                 .setColor('#e74c3c')
-                .setDescription(`❌ Rob baa fashilmay! **$${fine} USD** ayaa laga jaray.\n💵 USD-kaaga: **$${robber.usd.toLocaleString()}**`)
+                .setDescription(`❌ Rob baa fashilmay! **$${fmt(fine)} USD** ayaa laga jaray.\n💵 USD-kaaga: **$${fmt(robber.usd)}**`)
                 .setFooter({ text: 'Garaad Economy' }),
         ], components: [closeRow(userId)] });
     }

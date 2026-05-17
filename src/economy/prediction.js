@@ -88,7 +88,7 @@ async function lockPrediction(userId, client) {
 
     if (stakeType === 'usd') {
         if (d.usd < stakeAmount)
-            return { ok: false, msg: `⚠️ USD kugu filna ma lihid. Haysataa: **$${d.usd.toLocaleString()}**` };
+            return { ok: false, msg: `⚠️ USD kugu filna ma lihid. Haysataa: **$${fmt(d.usd)}**` };
         d.usd -= stakeAmount;
     } else {
         if ((d[asset] || 0) < stakeAmount)
