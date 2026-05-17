@@ -3,7 +3,8 @@ const { econData, checkEconUser } = require('../../economy/econStore');
 const { ECON_TITLES }             = require('./econShop');
 const { fmt }                     = require('../../utils/helpers');
 
-const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
+const BTC_ICON  = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
+const GOLD_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/xau.png';
 
 function buildJeebEmbed(userId, username) {
     checkEconUser(userId);
@@ -25,17 +26,19 @@ function buildJeebEmbed(userId, username) {
         return `\n💳 **Deen:** ${fmt(d.loan.owed)} BTC ${daysLeft > 0 ? `(${daysLeft} malin)` : '🔴 overdue'}`;
     })();
 
+    const thumb = gold > btc ? GOLD_ICON : BTC_ICON;
+
     return new EmbedBuilder()
         .setTitle(`👜 Jeebka — ${username}${xirfadLabel}`)
         .setColor('#f39c12')
-        .setThumbnail(BTC_ICON)
+        .setThumbnail(thumb)
         .setDescription(
             `₿ **BTC:** ${fmt(btc)}\n` +
             `🥇 **Gold:** ${fmt(gold)}\n\n` +
             `🏦 **Garaad Bank:** ${fmt(bank)} BTC` +
             loanLine
         )
-        .setFooter({ text: `Garaad Economy • ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, iconURL: BTC_ICON });
+        .setFooter({ text: `Garaad Economy • ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, iconURL: thumb });
 }
 
 function jeebRow(authorId, targetId) {
