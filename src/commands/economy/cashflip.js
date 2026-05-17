@@ -80,22 +80,24 @@ module.exports = async function cashflipCmd(message, args) {
                        : 'Isku day! 🎯';
         const balLabel = asset === 'usd' ? `$${fmt(newBal)}` : `${fmt(newBal)} ${asset.toUpperCase()}`;
 
+        const profitAmt = asset === 'usd' ? `$${fmt(Math.floor(amount * WIN_MULTI))}` : `${fmt(Math.floor(amount * WIN_MULTI))} ${asset.toUpperCase()}`;
+        const lossAmt   = asset === 'usd' ? `$${fmt(amount)}` : `${fmt(amount)} ${asset.toUpperCase()}`;
+
         const desc = win
-            ? `Hambalyo! Fursadaada maanta waa mid aad u fiican. 🌟\n\n` +
-              `Natiijada: Guul! ✅\n\n` +
-              `Faa'iidada: **+${asset === 'usd' ? '$' : ''}${fmt(Math.floor(amount * WIN_MULTI))} ${asset !== 'usd' ? asset.toUpperCase() : '💵'}**\n\n` +
-              `Wadarta Cusub: **${balLabel}** (${balNote})\n\n` +
-              `✨ Garaad Economy`
-            : `Fursada suuqa kuma tageerin. Mararka qaarkood dib u dhacu waa qayb ka mid ah guusha dambe! 🛡️\n\n` +
-              `Natiijada: Qasaaro 🛑\n\n` +
-              `Khasaaraha: **-${asset === 'usd' ? '$' : ''}${fmt(amount)} ${asset !== 'usd' ? asset.toUpperCase() : '💸'}**\n\n` +
-              `Wadarta Cusub: **${balLabel}** (Ha quusan, weli fursad baa kuu dhiman! 🔄)\n` +
-              `Isticmaal tijaabi fursad ka jiri karto \`?trade\`\n\n` +
-              `✨ Garaad Economy`;
+            ? `Suuqa ayaa kuu shaqeeyay. 📈\n\n` +
+              `💸 **Faa'iido:** +${profitAmt}\n` +
+              `💰 **Balance Cusub:** ${balLabel}\n\n` +
+              `🔄 Isticmaal \`?trade\` si aad u tijaabiso mar kale.\n\n` +
+              `✨ **Garaad Economy**`
+            : `Suuqa kuma taageerin. 📉\n\n` +
+              `💸 **Qasaaro:** -${lossAmt}\n` +
+              `💰 **Balance Cusub:** ${balLabel}\n\n` +
+              `🔄 Isticmaal \`?trade\` si aad u tijaabiso fursad kale.\n\n` +
+              `✨ **Garaad Economy**`;
 
         return flipMsg.edit({ embeds: [
             new EmbedBuilder()
-                .setTitle(win ? '🏆 Natiijada Ecoflip: GUUL! 🏆' : '❌ Natiijada Ecoflip: Guuldarro ❌')
+                .setTitle(win ? '✅ Ecoflip: Guul ✅' : '❌ Ecoflip: Guuldarro ❌')
                 .setColor(win ? '#2ecc71' : '#e74c3c')
                 .setDescription(desc),
         ], components: [closeRow(userId)] });

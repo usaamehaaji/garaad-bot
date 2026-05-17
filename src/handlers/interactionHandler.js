@@ -250,16 +250,19 @@ module.exports = function setupInteractionHandler(client) {
                 }
                 saveEcon();
 
+                const profitAmt = asset === 'usd' ? `$${cfFmt(Math.floor(amount * WIN_MULTI))}` : `${cfFmt(Math.floor(amount * WIN_MULTI))} ${asset.toUpperCase()}`;
+                const lossAmt   = asset === 'usd' ? `$${cfFmt(amount)}` : `${cfFmt(amount)} ${asset.toUpperCase()}`;
+                const balLabel  = asset === 'usd' ? `$${cfFmt(d[asset])}` : `${cfFmt(d[asset])} ${asset.toUpperCase()}`;
+
                 await interaction.editReply({ embeds: [
                     new EmbedBuilder()
-                        .setTitle(win ? '🏆 Ecoflip — Guul!' : '😢 Ecoflip — Guuldaro')
+                        .setTitle(win ? '✅ Ecoflip: Guul ✅' : '❌ Ecoflip: Guuldarro ❌')
                         .setColor(win ? '#2ecc71' : '#e74c3c')
                         .setDescription(
                             win
-                                ? `✅ **+${cfFmt(Math.floor(amount * WIN_MULTI))} ${asset.toUpperCase()}** guul!\n${ASSET_LABELS[asset]}: **${cfFmt(d[asset])}**`
-                                : `❌ **-${cfFmt(amount)} ${asset.toUpperCase()}** guuldaro.\n${ASSET_LABELS[asset]}: **${cfFmt(d[asset])}**`
-                        )
-                        .setFooter({ text: '50/50 chance • Garaad Economy' }),
+                                ? `Suuqa ayaa kuu shaqeeyay. 📈\n\n💸 **Faa'iido:** +${profitAmt}\n💰 **Balance Cusub:** ${balLabel}\n\n🔄 Isticmaal \`?trade\` si aad u tijaabiso mar kale.\n\n✨ **Garaad Economy**`
+                                : `Suuqa kuma taageerin. 📉\n\n💸 **Qasaaro:** -${lossAmt}\n💰 **Balance Cusub:** ${balLabel}\n\n🔄 Isticmaal \`?trade\` si aad u tijaabiso fursad kale.\n\n✨ **Garaad Economy**`
+                        ),
                 ], components: [closeRow(ownerId)] });
             }
 
