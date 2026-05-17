@@ -8,7 +8,6 @@ const fs   = require('fs');
 const path = require('path');
 const { getPrice }  = require('./market');
 const { econData, checkEconUser, saveEcon, trackEarning, addToTreasury } = require('./econStore');
-const { fmt }       = require('../utils/helpers');
 
 const PRED_PATH = path.join(__dirname, '../../data/predictions.json');
 
@@ -177,7 +176,7 @@ async function resolvePrediction(userId, client) {
                 ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (qiime iskumid — dib oo dhan)`
                 : win
                     ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (+$${profit.toLocaleString()} faa'iido)`
-                    : `❌ **Dib u celinta:** $${payout.toLocaleString()} (-$${fmt(Math.abs(profit))} khasaaro)`) +
+                    : `❌ **Dib u celinta:** $${payout.toLocaleString()} (-$${Math.round(Math.abs(profit)).toLocaleString()} khasaaro)`) +
             `\n\n💵 **USD-kaaga hadda:** $${d.usd.toLocaleString()}`
         )
         .setFooter({ text: 'Garaad Predict • ?trade si aad dib u bilaabasho' });

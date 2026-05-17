@@ -7,7 +7,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser }     = require('../../economy/econStore');
 const { getMarketSnapshot, getPrice } = require('../../economy/market');
 const { getActivePrediction, WIN_MULTI, LOSE_MULTI, ASSET_LABEL } = require('../../economy/prediction');
-const { fmt } = require('../../utils/helpers');
+const pfmt = n => Math.round(n).toLocaleString();
 
 const ASSETS = ['btc', 'gold'];
 
@@ -23,7 +23,7 @@ function buildMarketEmbed(d) {
         const sig = change > 2   ? ' 📈 *Kor u jeedaa*'
                   : change < -2  ? ' ⚠️ *Hoos u dhacayaa*'
                   : '';
-        return `${ASSET_LABEL[asset]}  **$${fmt(price)}**  ${ind}\n\`${spark}\`${sig}`;
+        return `${ASSET_LABEL[asset]}  **$${pfmt(price)}**  ${ind}\n\`${spark}\`${sig}`;
     });
 
     return new EmbedBuilder()
@@ -31,7 +31,7 @@ function buildMarketEmbed(d) {
         .setColor('#1a1a2e')
         .setDescription(
             lines.join('\n\n') +
-            `\n\n💵 USD-kaaga: **$${fmt(d.usd)}**\n\n` +
+            `\n\n💵 USD-kaaga: **$${pfmt(d.usd)}**\n\n` +
             `**⬇️ Asset dooro si aad u saadaaliso:**`
         )
         .setFooter({ text: 'Garaad Predict • Dooro asset → dhig → UP / DOWN → sug natiijahaaga' });
@@ -46,8 +46,8 @@ function buildStakeTypeEmbed(asset, d) {
         .setTitle(`📊 Saadaalinta ${ASSET_LABEL[asset]}`)
         .setColor('#2980b9')
         .setDescription(
-            `**Qiimaha hadda:** $${fmt(price)}\n\n` +
-            `💵 USD-kaaga: **$${fmt(d.usd)}**\n` +
+            `**Qiimaha hadda:** $${pfmt(price)}\n\n` +
+            `💵 USD-kaaga: **$${pfmt(d.usd)}**\n` +
             `${ASSET_LABEL[asset]}: **${assetBal}**\n\n` +
             `**Sidee baad lacagta dhigaysaa?**`
         )
@@ -58,8 +58,8 @@ function buildStakeTypeEmbed(asset, d) {
 
 function buildTimeEmbed(asset, stakeType, stakeAmount, stakeUsd) {
     const stakeLabel = stakeType === 'usd'
-        ? `💵 $${fmt(stakeAmount)} USD`
-        : `${ASSET_LABEL[asset]} ${stakeAmount} (≈ $${fmt(stakeUsd)} USD)`;
+        ? `💵 $${pfmt(stakeAmount)} USD`
+        : `${ASSET_LABEL[asset]} ${stakeAmount} (≈ $${pfmt(stakeUsd)} USD)`;
     return new EmbedBuilder()
         .setTitle(`⏱️ Dooro Waqtiga — ${ASSET_LABEL[asset]}`)
         .setColor('#8e44ad')
@@ -79,8 +79,8 @@ function buildTimeEmbed(asset, stakeType, stakeAmount, stakeUsd) {
 function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
     const price = getPrice(asset);
     const stakeLabel = stakeType === 'usd'
-        ? `$${fmt(stakeAmount)} USD`
-        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${fmt(stakeUsd)})`;
+        ? `$${pfmt(stakeAmount)} USD`
+        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${pfmt(stakeUsd)})`;
     return new EmbedBuilder()
         .setTitle(`🎯 Dooro Jihada — ${ASSET_LABEL[asset]}`)
         .setColor('#e67e22')
@@ -88,7 +88,7 @@ function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
             `**Asset:** ${ASSET_LABEL[asset]}\n` +
             `**Stake:** ${stakeLabel}\n` +
             `**Waqti:** ${minutes} daqiiqo\n` +
-            `**Qiimaha hadda:** $${fmt(price)}\n\n` +
+            `**Qiimaha hadda:** $${pfmt(price)}\n\n` +
             `⬆️ **UP** — Waxaad saadaalinaysaa qiimahu kor buu u kacayaa\n` +
             `⬇️ **DOWN** — Waxaad saadaalinaysaa qiimahu hoos buu u dhacayaa`
         )
@@ -103,19 +103,19 @@ function buildConfirmEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes, dir
     const winPay    = Math.floor(stakeUsd * WIN_MULTI);
     const losePay   = Math.floor(stakeUsd * LOSE_MULTI);
     const stakeLabel = stakeType === 'usd'
-        ? `$${fmt(stakeAmount)} USD`
-        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${fmt(stakeUsd)})`;
+        ? `$${pfmt(stakeAmount)} USD`
+        : `${stakeAmount} ${asset.toUpperCase()} (≈ $${pfmt(stakeUsd)})`;
     return new EmbedBuilder()
         .setTitle('✅ Xidh Saadaalinta — Confirm')
         .setColor('#27ae60')
         .setDescription(
             `📌 **Asset:**     ${ASSET_LABEL[asset]}\n` +
-            `📊 **Qiimaha:**   $${fmt(price)}\n` +
+            `📊 **Qiimaha:**   $${pfmt(price)}\n` +
             `💰 **Stake:**     ${stakeLabel}\n` +
             `⏱️ **Waqti:**     ${minutes} daqiiqo\n` +
             `🎯 **Saadaal:**   ${dirLabel}\n\n` +
-            `🏆 **Haddii WIN:**  +$${fmt(winPay - stakeUsd)} faa'iido → dib: **$${fmt(winPay)}**\n` +
-            `💀 **Haddii LOSE:** -$${fmt(stakeUsd - losePay)} khasaaro → dib: **$${fmt(losePay)}**\n\n` +
+            `🏆 **Haddii WIN:**  +$${pfmt(winPay - stakeUsd)} faa'iido → dib: **$${pfmt(winPay)}**\n` +
+            `💀 **Haddii LOSE:** -$${pfmt(stakeUsd - losePay)} khasaaro → dib: **$${pfmt(losePay)}**\n\n` +
             `⚡ Ma diyaar baad tahay?`
         )
         .setFooter({ text: 'Garaad Predict • Ka dib LOCK, waxba la beddeli karo' });
@@ -133,9 +133,9 @@ function buildActiveEmbed(pred) {
         .setColor('#f39c12')
         .setDescription(
             `📌 **Asset:**        ${ASSET_LABEL[pred.asset]}\n` +
-            `📊 **Galitaanka:**   $${fmt(pred.entryPrice)}\n` +
+            `📊 **Galitaanka:**   $${pfmt(pred.entryPrice)}\n` +
             `🎯 **Saadaal:**      ${dirLabel}\n` +
-            `💰 **Stake:**        $${fmt(pred.stakeUsd)} USD\n` +
+            `💰 **Stake:**        $${pfmt(pred.stakeUsd)} USD\n` +
             `⏱️ **Inta kale:**    **${mins}m ${secs}s**\n\n` +
             `🔔 Waqtigii dhammaado, DM + channel fariin ayaad helaysaa!`
         )
@@ -148,14 +148,14 @@ function buildShopEmbed(d) {
     const snap = getMarketSnapshot();
     const lines = snap.map(({ asset, price }) => {
         const units = d[asset] || 0;
-        return `${ASSET_LABEL[asset]}  **$${fmt(price)}** — Haysataa: **${units}**`;
+        return `${ASSET_LABEL[asset]}  **$${pfmt(price)}** — Haysataa: **${units}**`;
     });
     return new EmbedBuilder()
         .setTitle('🛒 Asset Shop — Iibso Assets')
         .setColor('#27ae60')
         .setDescription(
             lines.join('\n') +
-            `\n\n💵 USD-kaaga: **$${fmt(d.usd)}**\n\n` +
+            `\n\n💵 USD-kaaga: **$${pfmt(d.usd)}**\n\n` +
             `Immisa USD baad ku iibsanaysaa?`
         )
         .setFooter({ text: 'Garaad Economy • Qiimaha suuqa ayaa la isticmaalaa' });
@@ -168,14 +168,14 @@ function buildSellEmbed(d) {
     const lines = snap.map(({ asset, price }) => {
         const units  = d[asset] || 0;
         const usdVal = Math.floor(units * price);
-        return `${ASSET_LABEL[asset]}  **$${fmt(price)}** — Haysataa: **${units}** ≈ $${fmt(usdVal)} USD`;
+        return `${ASSET_LABEL[asset]}  **$${pfmt(price)}** — Haysataa: **${units}** ≈ $${pfmt(usdVal)} USD`;
     });
     return new EmbedBuilder()
         .setTitle('💰 Sell Assets — USD ku Badal')
         .setColor('#e67e22')
         .setDescription(
             lines.join('\n') +
-            `\n\n💵 USD-kaaga: **$${fmt(d.usd)}**\n\n` +
+            `\n\n💵 USD-kaaga: **$${pfmt(d.usd)}**\n\n` +
             `Asset dooro si aad u iibsato qiimaha suuqa.`
         )
         .setFooter({ text: 'Garaad Economy • Qiimaha suuqa ayaa la isticmaalaa' });
