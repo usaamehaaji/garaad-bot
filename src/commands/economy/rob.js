@@ -2,7 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 
 const ROB_SUCCESS_RATE   = 0.45;
-const ROB_MIN_USD        = 7_000;
+const ROB_MIN_USD        = 7_000; // min BTC victim must have
 const MAX_STEAL_FRACTION = 0.25;
 const MAX_ROBS_PER_DAY   = 3;
 
@@ -64,10 +64,10 @@ module.exports = async function robCmd(message) {
         ], components: [closeRow(userId)] });
     }
 
-    if (victim.usd < ROB_MIN_USD) {
+    if ((victim.btc || 0) < ROB_MIN_USD) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription(`⚠️ ${target} lacag ku filan ma lahan (min **$${ROB_MIN_USD.toLocaleString()}**). Rob ma faa'idayso.`)
+                .setDescription(`⚠️ ${target} BTC ku filan ma lahan (min **${ROB_MIN_USD.toLocaleString()} BTC**). Rob ma faa'idayso.`)
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
@@ -90,26 +90,26 @@ module.exports = async function robCmd(message) {
     const success = Math.random() < ROB_SUCCESS_RATE;
 
     if (success) {
-        const stolen = Math.floor(victim.usd * MAX_STEAL_FRACTION);
-        victim.usd  -= stolen;
-        robber.usd  += stolen;
+        const stolen = Math.floor((victim.btc || 0) * MAX_STEAL_FRACTION);
+        victim.btc  = (victim.btc || 0) - stolen;
+        robber.btc  = (robber.btc || 0) + stolen;
         saveEcon();
         return message.reply({ embeds: [
             new EmbedBuilder()
                 .setTitle('🔫 Rob — Guulaysatay!')
                 .setColor('#2ecc71')
-                .setDescription(`✅ **$${stolen.toLocaleString()} USD** ka xaday ${target}!\n💵 USD-kaaga: **$${robber.usd.toLocaleString()}**`)
+                .setDescription(`✅ **${stolen.toLocaleString()} BTC** ka xaday ${target}!\n₿ BTC-kaaga: **${(robber.btc || 0).toLocaleString()} BTC**`)
                 .setFooter({ text: 'Garaad Economy' }),
         ], components: [closeRow(userId)] });
     } else {
-        const fine  = Math.min(200, Math.floor(robber.usd * 0.1));
-        robber.usd  = Math.max(0, robber.usd - fine);
+        const fine  = Math.min(200, Math.floor((robber.btc || 0) * 0.1));
+        robber.btc  = Math.max(0, (robber.btc || 0) - fine);
         saveEcon();
         return message.reply({ embeds: [
             new EmbedBuilder()
                 .setTitle('🚔 Rob — Fashilmay!')
                 .setColor('#e74c3c')
-                .setDescription(`❌ Rob baa fashilmay! **$${fine.toLocaleString()} USD** ayaa laga jaray.\n💵 USD-kaaga: **$${robber.usd.toLocaleString()}**`)
+                .setDescription(`❌ Rob baa fashilmay! **${fine.toLocaleString()} BTC** ayaa laga jaray.\n₿ BTC-kaaga: **${(robber.btc || 0).toLocaleString()} BTC**`)
                 .setFooter({ text: 'Garaad Economy' }),
         ], components: [closeRow(userId)] });
     }

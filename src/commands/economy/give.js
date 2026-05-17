@@ -1,12 +1,12 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser } = require('../../economy/econStore');
+const { fmt } = require('../../utils/helpers');
 
-const ASSET_LABELS = { usd: '💵 USD', btc: 'BTC', gold: '🥇 Gold' };
+const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold' };
 
 function assetRow(targetId, userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_gv_usd_${targetId}_${userId}`) .setLabel('💵 USD')     .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_gv_btc_${targetId}_${userId}`) .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_gv_btc_${targetId}_${userId}`) .setLabel('₿ BTC')      .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`eco_gv_gold_${targetId}_${userId}`).setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_give_${userId}`)             .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
@@ -48,9 +48,8 @@ module.exports = async function giveCmd(message) {
             .setColor('#3498db')
             .setDescription(
                 `**Asset dooro** aad u diri:\n\n` +
-                `💵 USD: **$${d.usd.toLocaleString()}**\n` +
-                `BTC: **${d.btc}**\n` +
-                `🥇 Gold: **${d.gold}**`
+                `₿ BTC: **${fmt(d.btc || 0)}**\n` +
+                `🥇 Gold: **${fmt(d.gold || 0)}**`
             )
             .setFooter({ text: 'Garaad Economy' }),
     ], components: [assetRow(target.id, userId)] });

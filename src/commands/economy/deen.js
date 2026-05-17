@@ -48,11 +48,11 @@ function buildDeenEmbed(d) {
             (open
                 ? '🟢 **Bangiga maanta wuu furan yahay**'
                 : `🔴 **Bangiga maanta XIRAN yahay**\n_${closedMsg}_`) +
-            `\n\n🏛️ **Khaznadda:** $${fmt((getTreasury().balance || 0))} USD\n\n` +
+            `\n\n🏛️ **Khaznadda:** ${fmt((getTreasury().balance || 0))} BTC\n\n` +
             `**📋 Deen Xukumka:**\n` +
-            `💵 Waxaad helaysaa: **$${LOAN_AMOUNT.toLocaleString()} USD**\n` +
-            `💸 Waxaad celinsaa: **$${LOAN_OWED.toLocaleString()} USD** (10% faido)\n\n` +
-            `🔒 **3 malin kadib** — $${LOAN_OWED.toLocaleString()} bangiyada kale (Mandeeq/Garaad) laga jaraysaa si toos ah.\n` +
+            `₿ Waxaad helaysaa: **${LOAN_AMOUNT.toLocaleString()} BTC**\n` +
+            `💸 Waxaad celinsaa: **${LOAN_OWED.toLocaleString()} BTC** (10% faido)\n\n` +
+            `🔒 **3 malin kadib** — ${LOAN_OWED.toLocaleString()} BTC bangiyada kale (Mandeeq/Garaad) laga jaraysaa si toos ah.\n` +
             loanBlock
         )
         .setFooter({ text: 'Garaad Economy • Keedsane Bank' });
@@ -94,9 +94,9 @@ function applyLoanDeduction(d) {
         remaining        -= take;
     }
 
-    if (remaining > 0 && d.usd > 0) {
-        const take = Math.min(remaining, d.usd);
-        d.usd     -= take;
+    if (remaining > 0 && (d.btc || 0) > 0) {
+        const take = Math.min(remaining, d.btc || 0);
+        d.btc     = (d.btc || 0) - take;
         remaining  -= take;
     }
 

@@ -7,7 +7,7 @@ const { userData } = require('../store');
 const { checkUser, getLevel, getDisplayTitle } = require('../utils/helpers');
 
 const SOLO_HINT =
-    '📘 **Talo:** `?today` maalin kasta ku hel IQ, USD ama asset bilaash ah. ' +
+    '📘 **Talo:** `?today` maalin kasta 250 BTC + IQ ku hel bilaash ah. ' +
     '`?solo` ciyaar IQ hel (+3 sax / −1 qalad). `?duel @qof` tartam IQ dhig.';
 
 module.exports = async function profileCommand(message) {

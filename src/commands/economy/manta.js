@@ -1,8 +1,9 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 
 const DAILY_AMOUNT = 500;
 const ONE_DAY_MS   = 24 * 60 * 60 * 1000;
+const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 
 module.exports = async function mantaCmd(message) {
     const userId = message.author.id;
@@ -23,16 +24,16 @@ module.exports = async function mantaCmd(message) {
         ]});
     }
 
-    d.usd      += DAILY_AMOUNT;
+    d.btc       = (d.btc || 0) + DAILY_AMOUNT;
     d.lastDaily = Date.now();
-    trackEarning(userId, DAILY_AMOUNT);
     saveEcon();
 
     return message.reply({ embeds: [
         new EmbedBuilder()
             .setTitle('💰 Manta — Lacagta Maanta')
-            .setDescription(`✅ **$${DAILY_AMOUNT} USD** heshay!\n\n💵 USD-kaaga: **$${d.usd.toLocaleString()}**`)
+            .setThumbnail(BTC_ICON)
+            .setDescription(`✅ **₿ ${DAILY_AMOUNT} BTC** heshay!\n\n₿ BTC-kaaga: **${d.btc.toLocaleString()} BTC**`)
             .setColor('#2ecc71')
-            .setFooter({ text: 'Berri dib u kaalay • Garaad Economy' }),
+            .setFooter({ text: 'Berri dib u kaalay • Garaad Economy', iconURL: BTC_ICON }),
     ]});
 };

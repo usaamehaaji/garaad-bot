@@ -65,7 +65,7 @@ module.exports = async function econExchangeCmd(message, args) {
             .setColor('#2ecc71')
             .setDescription(
                 `✅ **${amount} ${from.toUpperCase()}** → **${received.toFixed(6)} ${to.toUpperCase()}**\n\n` +
-                `Qiimaha USD: ~$${fmt(Math.round(usdValue))}`
+                `Qiimaha BTC: ~${fmt(Math.round(usdValue))} BTC`
             )
             .setFooter({ text: 'Garaad Economy' }),
     ]});

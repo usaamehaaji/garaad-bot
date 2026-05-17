@@ -73,8 +73,8 @@ function buildEcoEmbed() {
         .setDescription(
             `👤 **Personal**\n` +
             `**\`${PREFIX}jeeb\`** — Wallet, Banks, iyo Assets-kaaga\n` +
-            `**\`${PREFIX}shaqo\`** — Shaqeyso $300–$500 hel (9 saacadood)\n` +
-            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel (USD, IQ, asset)\n\n` +
+            `**\`${PREFIX}shaqo\`** — Shaqeyso 250 Gold hel (9 saacadood)\n` +
+            `**\`${PREFIX}today\`** — Maalin kasta 250 BTC + IQ hel\n\n` +
 
             `🏦 **Bangiga & Deen**\n` +
             `**\`${PREFIX}ebank\`** — Garaad Bank (deposit 1%/maalin) + Deen (Khamiis–Jimce)\n` +

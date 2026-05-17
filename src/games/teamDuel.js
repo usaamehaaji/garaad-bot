@@ -55,17 +55,17 @@ function hasEnough(state, userId) {
         return userData[userId].iq >= state.stakeAmount;
     }
     checkEconUser(userId);
-    return econData[userId].usd >= state.stakeAmount;
+    return (econData[userId].btc || 0) >= state.stakeAmount;
 }
 
 function deductStake(state, userId) {
     if (state.stakeType === 'iq') { checkUser(userId); userData[userId].iq -= state.stakeAmount; }
-    else { checkEconUser(userId); econData[userId].usd -= state.stakeAmount; }
+    else { checkEconUser(userId); econData[userId].btc = (econData[userId].btc || 0) - state.stakeAmount; }
 }
 
 function refundStake(state, userId) {
     if (state.stakeType === 'iq') { checkUser(userId); userData[userId].iq += state.stakeAmount; }
-    else { checkEconUser(userId); econData[userId].usd += state.stakeAmount; }
+    else { checkEconUser(userId); econData[userId].btc = (econData[userId].btc || 0) + state.stakeAmount; }
 }
 
 function persistStakes(state) {
@@ -526,7 +526,7 @@ async function finishTeamDuel(channel, channelId) {
 
         for (const uid of winIds) {
             if (state.stakeType === 'iq') { checkUser(uid); userData[uid].iq += perWinner; }
-            else { checkEconUser(uid); econData[uid].usd += perWinner; }
+            else { checkEconUser(uid); econData[uid].btc = (econData[uid].btc || 0) + perWinner; }
         }
 
         const winColor = winTeam === 1 ? '🔵' : '🔴';

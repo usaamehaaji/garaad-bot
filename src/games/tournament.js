@@ -1024,7 +1024,7 @@ async function finishTournament(state) {
     if (!userData[winId].ownedTitles.includes('champion')) userData[winId].ownedTitles.push('champion');
     userData[winId].activeTitle = 'champion';
     checkEconUser(winId);
-    econData[winId].usd += 500;
+    econData[winId].btc = (econData[winId].btc || 0) + 500;
     saveEcon();
     saveData();
 

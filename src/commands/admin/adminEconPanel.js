@@ -11,14 +11,13 @@ function getEconStats() {
     const users = Object.entries(econData).filter(([k]) => !k.startsWith('__'));
     const t     = getTreasury();
 
-    let totalUsd = 0, totalGaraad = 0, totalBtc = 0, totalGold = 0;
+    let totalBtc = 0, totalGold = 0, totalGaraad = 0;
     let activeLoans = 0, totalOwed = 0, overdueLoans = 0;
 
     for (const [, d] of users) {
-        totalUsd     += d.usd     || 0;
-        totalGaraad  += d.banks?.garaad  || 0;
-        totalBtc     += d.btc     || 0;
-        totalGold    += d.gold    || 0;
+        totalBtc    += d.btc          || 0;
+        totalGold   += d.gold         || 0;
+        totalGaraad += d.banks?.garaad || 0;
         if (d.loan && d.loan.owed > 0) {
             activeLoans++;
             totalOwed += d.loan.owed;
@@ -26,13 +25,7 @@ function getEconStats() {
         }
     }
 
-    const btcPrice     = getPrice('btc')     || 0;
-    const goldPrice    = getPrice('gold')    || 0;
-    const assetsUsd    = Math.floor(totalBtc * btcPrice + totalGold * goldPrice);
-
-    const totalWealth = totalUsd + totalGaraad + assetsUsd;
-
-    return { users: users.length, totalUsd, totalGaraad, assetsUsd, totalWealth, t, activeLoans, totalOwed, overdueLoans };
+    return { users: users.length, totalBtc, totalGold, totalGaraad, t, activeLoans, totalOwed, overdueLoans };
 }
 
 // ── Main embed ─────────────────────────────────────────────────────
@@ -44,14 +37,13 @@ function buildAdminEconEmbed() {
         .setColor('#f39c12')
         .setDescription(
             `**🏛️ Treasury**\n` +
-            `💰 Balance: **$${fmt(s.t.balance)}** | 📥 Total in: **$${fmt(s.t.totalIn)}**\n\n` +
+            `💰 Balance: **${fmt(s.t.balance)} BTC** | 📥 Total in: **${fmt(s.t.totalIn)} BTC**\n\n` +
             `**📊 Circulation** _(${s.users} qof)_\n` +
-            `💵 USD: **$${fmt(s.totalUsd)}**\n` +
-            `🏦 Garaad Bank: **$${fmt(s.totalGaraad)}**\n` +
-            `🪙 Assets (USD): **$${fmt(s.assetsUsd)}**\n` +
-            `💎 **Wadarta dhammaan: $${fmt(s.totalWealth)}**\n\n` +
+            `₿ BTC: **${fmt(s.totalBtc)}**\n` +
+            `🥇 Gold: **${fmt(s.totalGold)}**\n` +
+            `🏦 Garaad Bank: **${fmt(s.totalGaraad)} BTC**\n\n` +
             `**💳 Deynta**\n` +
-            `Active: **${s.activeLoans}** | Owed: **$${fmt(s.totalOwed)}** | 🔴 Overdue: **${s.overdueLoans}**`
+            `Active: **${s.activeLoans}** | Owed: **${fmt(s.totalOwed)} BTC** | 🔴 Overdue: **${s.overdueLoans}**`
         )
         .setFooter({ text: 'Garaad Admin • Economy' });
 }
@@ -65,24 +57,23 @@ function buildAllPlayersEmbed(page = 0) {
 
     const players = Object.entries(econData)
         .filter(([k]) => !k.startsWith('__'))
-        .map(([uid, d]) => {
-            const assetsUsd = Math.floor(
-                (d.btc || 0) * btcPrice + (d.gold || 0) * goldPrice
-            );
-            const net = (d.usd || 0) + (d.banks?.garaad || 0) + assetsUsd;
-            return { uid, usd: d.usd || 0, bank: d.banks?.garaad || 0, assetsUsd, net, loan: d.loan?.owed || 0 };
-        })
-        .sort((a, b) => b.net - a.net);
+        .map(([uid, d]) => ({
+            uid,
+            btc:  d.btc  || 0,
+            gold: d.gold || 0,
+            bank: d.banks?.garaad || 0,
+            loan: d.loan?.owed || 0,
+        }))
+        .sort((a, b) => b.btc - a.btc);
 
     const totalPages = Math.ceil(players.length / PER_PAGE);
     const slice = players.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
 
     const lines = slice.map((p, i) => {
         const rank = page * PER_PAGE + i + 1;
-        const loan = p.loan > 0 ? ` 💳$${fmt(p.loan)}` : '';
-        const bank = p.bank > 0 ? ` 🏦$${fmt(p.bank)}` : '';
-        const ast  = p.assetsUsd > 0 ? ` 🪙$${fmt(p.assetsUsd)}` : '';
-        return `**${rank}.** <@${p.uid}> — **$${fmt(p.net)}** | 💵$${fmt(p.usd)}${bank}${ast}${loan}`;
+        const loan = p.loan > 0 ? ` 💳${fmt(p.loan)}BTC` : '';
+        const bank = p.bank > 0 ? ` 🏦${fmt(p.bank)}` : '';
+        return `**${rank}.** <@${p.uid}> — ₿ **${fmt(p.btc)}** 🥇 ${fmt(p.gold)}${bank}${loan}`;
     });
 
     return new EmbedBuilder()
@@ -104,7 +95,7 @@ function adminTabRow(uid, active) {
 
 function adminEconActionsRow(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`).setLabel('💵 Give USD').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`).setLabel('₿ Give BTC').setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Dadka').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`).setLabel('💳 Deynta').setStyle(ButtonStyle.Secondary),
     );
@@ -123,7 +114,7 @@ function adminEcoMainRow(uid) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`admin_aqoon_${uid}`)         .setLabel('🧠 Aqoon')      .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_${uid}`)           .setLabel('💰 Economy')    .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`)   .setLabel('💵 Give USD')   .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`)   .setLabel('₿ Give BTC')   .setStyle(ButtonStyle.Success),
     );
 }
 
@@ -174,9 +165,7 @@ module.exports = async function adminEconCmd(message, args) {
         if (!asset || isNaN(amount) || amount <= 0)
         checkEconUser(target.id);
         const d = econData[target.id];
-        if (asset === 'usd') {
-            d.usd += amount;
-        } else if (asset === 'garaad') {
+        if (asset === 'garaad') {
             d.banks.garaad = (d.banks.garaad || 0) + amount;
             d[asset] = (d[asset] || 0) + amount;
         } else {
@@ -211,9 +200,9 @@ module.exports = async function adminEconCmd(message, args) {
         if (!action || action === 'view') {
             return message.reply({ embeds: [new EmbedBuilder().setTitle('🏛️ Treasury').setColor('#8e44ad')
                 .setDescription(
-                    `💰 **Balance:** $${fmt(t.balance)}\n` +
-                    `📥 **Total in:** $${fmt(t.totalIn)}\n` +
-                    `📤 **Spent:** $${fmt((t.totalIn || 0) - (t.balance || 0))}`
+                    `💰 **Balance:** ${fmt(t.balance)} BTC\n` +
+                    `📥 **Total in:** ${fmt(t.totalIn)} BTC\n` +
+                    `📤 **Spent:** ${fmt((t.totalIn || 0) - (t.balance || 0))} BTC`
                 )] });
         }
 
@@ -223,7 +212,7 @@ module.exports = async function adminEconCmd(message, args) {
             topUpTreasury(amount);
             saveEcon();
             return message.reply({ embeds: [new EmbedBuilder().setColor('#2ecc71')
-                .setDescription(`✅ **$${fmt(amount)}** khaznadda lagu daray.\n🏛️ Hadda: **$${fmt(t.balance)}**`)] });
+                .setDescription(`✅ **${fmt(amount)} BTC** khaznadda lagu daray.\n🏛️ Hadda: **${fmt(t.balance)} BTC**`)] });
         }
 
         if (action === 'distribute') {
@@ -232,23 +221,23 @@ module.exports = async function adminEconCmd(message, args) {
             const users   = Object.keys(econData).filter(k => !k.startsWith('__'));
             const perUser = Math.floor(amount / users.length);
             if (perUser < 1) return message.reply('⚠️ Xaddadka aad yar.');
-            if (!deductFromTreasury(amount)) return message.reply(`⚠️ Khaznadda ma filna. Hadda: **$${fmt(t.balance)}**`);
-            for (const uid of users) { checkEconUser(uid); econData[uid].usd += perUser; }
+            if (!deductFromTreasury(amount)) return message.reply(`⚠️ Khaznadda ma filna. Hadda: **${fmt(t.balance)} BTC**`);
+            for (const uid of users) { checkEconUser(uid); econData[uid].btc = (econData[uid].btc || 0) + perUser; }
             saveEcon();
             return message.reply({ embeds: [new EmbedBuilder().setColor('#2ecc71')
-                .setDescription(`✅ **$${fmt(perUser)}** × **${users.length}** qof.\n🏛️ Hadhay: **$${fmt(t.balance)}**`)] });
+                .setDescription(`✅ **${fmt(perUser)} BTC** × **${users.length}** qof.\n🏛️ Hadhay: **${fmt(t.balance)} BTC**`)] });
         }
 
         if (action === 'give') {
             if (!target) return message.reply('⚠️ `?admin econ treasury give @user [xad]`');
             const amount = parseFloat(args.filter(a => !/<@!?\d+>/.test(a))[2]);
             if (isNaN(amount) || amount <= 0) return message.reply('⚠️ Xaddad sax ah geli.');
-            if (!deductFromTreasury(amount)) return message.reply(`⚠️ Khaznadda ma filna. Hadda: **$${fmt(t.balance)}**`);
+            if (!deductFromTreasury(amount)) return message.reply(`⚠️ Khaznadda ma filna. Hadda: **${fmt(t.balance)} BTC**`);
             checkEconUser(target.id);
-            econData[target.id].usd += amount;
+            econData[target.id].btc = (econData[target.id].btc || 0) + amount;
             saveEcon();
             return message.reply({ embeds: [new EmbedBuilder().setColor('#2ecc71')
-                .setDescription(`✅ **$${fmt(amount)}** waxaa laga siiyay <@${target.id}>.\n🏛️ Hadhay: **$${fmt(t.balance)}**`)] });
+                .setDescription(`✅ **${fmt(amount)} BTC** waxaa laga siiyay <@${target.id}>.\n🏛️ Hadhay: **${fmt(t.balance)} BTC**`)] });
         }
     }
 
@@ -287,7 +276,7 @@ module.exports = async function adminEconCmd(message, args) {
                 const days = Math.floor((Date.now() - d.loan.takenAt) / 86400000);
                 const left = Math.max(0, 3 - days);
                 const overdue = left === 0;
-                return `${overdue ? '🔴' : '💳'} <@${uid}> — **$${fmt(d.loan.owed)}** | ${overdue ? '**OVERDUE**' : `${left}d hadhay`}`;
+                return `${overdue ? '🔴' : '💳'} <@${uid}> — **${fmt(d.loan.owed)} BTC** | ${overdue ? '**OVERDUE**' : `${left}d hadhay`}`;
             });
         return message.reply({ embeds: [new EmbedBuilder()
             .setTitle(`💳 Active Loans (${loans.length})`)

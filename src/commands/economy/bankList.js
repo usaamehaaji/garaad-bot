@@ -15,7 +15,7 @@ module.exports = async function bankListCmd(message) {
 
     const bankLines = bankEntries.slice(0, 15).map((e, i) => {
         const rank = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`;
-        return `${rank} <@${e.uid}> — **$${fmt(e.garaad)}**`;
+        return `${rank} <@${e.uid}> — **${fmt(e.garaad)} BTC**`;
     });
 
     // Active loans
@@ -30,7 +30,7 @@ module.exports = async function bankListCmd(message) {
     const loanLines = loanEntries.map((e, i) => {
         const urgency = e.daysLeft === 0 ? '🔴' : e.daysLeft === 1 ? '⚠️' : '💳';
         const timeStr = e.daysLeft > 0 ? `${e.daysLeft}m hadhay` : 'la jarayo!';
-        return `${urgency} <@${e.uid}> — **$${fmt(e.owed)}** bixin | ${timeStr}`;
+        return `${urgency} <@${e.uid}> — **${fmt(e.owed)} BTC** bixin | ${timeStr}`;
     });
 
     const embed = new EmbedBuilder()
@@ -40,7 +40,7 @@ module.exports = async function bankListCmd(message) {
     let desc = '';
     if (bankLines.length > 0) {
         desc += `**🏦 Garaad Bank Macaamiisha:**\n${bankLines.join('\n')}\n\n`;
-        desc += `💰 **Wadarta dhiggan:** $${fmt(grandGaraad)}\n\n`;
+        desc += `💰 **Wadarta dhiggan:** ${fmt(grandGaraad)} BTC\n\n`;
     } else {
         desc += '_Cidna lacag Garaad Bank kuma dhigin._\n\n';
     }

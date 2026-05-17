@@ -11,7 +11,7 @@ const { getLevel, getDisplayTitle, checkUser } = require('../utils/helpers');
 const CHANNEL_ID    = '1504517873673048185';
 const WEEK_MS       = 7 * 24 * 60 * 60 * 1000;
 const FIRST_TICK_MS = 30 * 1000;
-const PRIZE_USD     = 2000; // winner prize
+const PRIZE_USD     = 2000; // winner prize (BTC)
 
 const MEDALS = ['🥇', '🥈', '🥉'];
 
@@ -89,9 +89,9 @@ async function sendLeaderboard(client) {
         let prizeLine = '';
         if (winner) {
             checkEconUser(winner.uid);
-            econData[winner.uid].usd += PRIZE_USD;
+            econData[winner.uid].btc = (econData[winner.uid].btc || 0) + PRIZE_USD;
             saveEcon();
-            prizeLine = `\n\n🏆 **Winner-ka Isbuucaan:** <@${winner.uid}>\n💰 **+$${PRIZE_USD.toLocaleString()} USD** abaalmarintii`;
+            prizeLine = `\n\n🏆 **Winner-ka Isbuucaan:** <@${winner.uid}>\n₿ **+${PRIZE_USD.toLocaleString()} BTC** abaalmarintii`;
         }
 
         const ecoEmbed = new EmbedBuilder()

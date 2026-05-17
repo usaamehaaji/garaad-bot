@@ -11,8 +11,8 @@ module.exports = async function adminEconRestart(message) {
 
     for (const uid of users) {
         const d = econData[uid];
-        d.usd             = START_CASH;
-        d.btc             = 0;
+        d.btc             = START_CASH;
+        d.usd             = 0;
         d.gold            = 0;
         d.banks           = { mandeeq: 0, garaad: 0 };
         d.inventory       = { safety: 0, robticket: 0 };
@@ -39,7 +39,7 @@ module.exports = async function adminEconRestart(message) {
             .setColor('#2ecc71')
             .setDescription(
                 `✅ **${users.length} qof** economy dib loo dejiyay.\n\n` +
-                `💵 Qof walba wuxuu hadda leeyahay: **$${fmt(START_CASH)} USD**\n` +
+                `₿ Qof walba wuxuu hadda leeyahay: **${fmt(START_CASH)} BTC**\n` +
                 `💳 Dhamaan deynihii waa la cafiyay.\n` +
                 `🏦 Bangiyada iyo assets dhamaan eber.`
             )

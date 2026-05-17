@@ -85,10 +85,10 @@ async function lockPrediction(userId, client) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    if (stakeType === 'usd') {
-        if (d.usd < stakeAmount)
-            return { ok: false, msg: `⚠️ USD kugu filna ma lihid. Haysataa: **$${d.usd.toLocaleString()}**` };
-        d.usd -= stakeAmount;
+    if (stakeType === 'btc') {
+        if ((d.btc || 0) < stakeAmount)
+            return { ok: false, msg: `⚠️ BTC kugu filna ma lihid. Haysataa: **${(d.btc || 0).toLocaleString()} BTC**` };
+        d.btc = (d.btc || 0) - stakeAmount;
     } else {
         if ((d[asset] || 0) < stakeAmount)
             return { ok: false, msg: `⚠️ ${asset.toUpperCase()} kugu filna ma lihid. Haysataa: **${d[asset] || 0}**` };
@@ -139,7 +139,7 @@ async function resolvePrediction(userId, client) {
 
     checkEconUser(userId);
     const d = econData[userId];
-    d.usd += payout;
+    d.btc = (d.btc || 0) + payout;
 
     if (!isDraw) {
         if (win) trackEarning(userId, payout - pred.stakeUsd);
@@ -156,7 +156,6 @@ async function resolvePrediction(userId, client) {
 
     const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
-    const showAsset = pred.stakeType !== 'usd';
     const resultEmbed = new EmbedBuilder()
         .setTitle(
             isDraw ? '🤝 Saadaalin — Xeerka! (Draw)'
@@ -165,19 +164,17 @@ async function resolvePrediction(userId, client) {
         )
         .setColor(isDraw ? '#f1c40f' : win ? '#2ecc71' : '#e74c3c')
         .setDescription(
-            (showAsset ? `📌 **Asset:**       ${assetLabel}\n` : '') +
+            `📌 **Asset:**       ${assetLabel}\n` +
             `🎯 **Saadaal:**     ${dirLabel}\n` +
-            (showAsset
-                ? `📊 **Galitaanka:**  **$${pred.entryPrice.toLocaleString()}**\n` +
-                  `📊 **Bixitaanka:**  **$${exitPrice.toLocaleString()}** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n`
-                : '\n') +
-            `💰 **Dhigay:**      $${pred.stakeUsd.toLocaleString()} USD\n` +
+            `📊 **Galitaanka:**  **${pred.entryPrice.toLocaleString()} BTC**\n` +
+            `📊 **Bixitaanka:**  **${exitPrice.toLocaleString()} BTC** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n` +
+            `💰 **Dhigay:**      ${pred.stakeUsd.toLocaleString()} BTC\n` +
             (isDraw
-                ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (qiime iskumid — dib oo dhan)`
+                ? `✅ **Dib u celinta:** ${payout.toLocaleString()} BTC (qiime iskumid — dib oo dhan)`
                 : win
-                    ? `✅ **Dib u celinta:** $${payout.toLocaleString()} (+$${profit.toLocaleString()} faa'iido)`
-                    : `❌ **Dib u celinta:** $${payout.toLocaleString()} (-$${Math.round(Math.abs(profit)).toLocaleString()} khasaaro)`) +
-            `\n\n💵 **USD-kaaga hadda:** $${d.usd.toLocaleString()}`
+                    ? `✅ **Dib u celinta:** ${payout.toLocaleString()} BTC (+${profit.toLocaleString()} BTC faa'iido)`
+                    : `❌ **Dib u celinta:** ${payout.toLocaleString()} BTC (-${Math.round(Math.abs(profit)).toLocaleString()} BTC khasaaro)`) +
+            `\n\n₿ **BTC-kaaga hadda:** ${(d.btc || 0).toLocaleString()} BTC`
         )
         .setFooter({ text: 'Garaad Predict • ?trade si aad dib u bilaabasho' });
 

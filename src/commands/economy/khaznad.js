@@ -22,10 +22,10 @@ module.exports = async function khaznadCmd(message) {
             .setColor('#8e44ad')
             .setDescription(
                 `**💰 Hadda:**\n` +
-                `🏦 Khaznad: **${fmt(bal)} USD**\n\n` +
+                `🏦 Khaznad: **${fmt(bal)} BTC**\n\n` +
                 `**📊 Tirakoobka:**\n` +
-                `📥 Wadarta soo gashay: **${fmt(totalIn)} USD**\n` +
-                `📤 Wadarta la qaybiyay: **${fmt(spent)} USD**\n\n` +
+                `📥 Wadarta soo gashay: **${fmt(totalIn)} BTC**\n` +
+                `📤 Wadarta la qaybiyay: **${fmt(spent)} BTC**\n\n` +
                 `**📌 Lacagta xaga kale:** Title iibsiga iyo Ecoflip qasaaraha\n` +
                 `**📌 Lacagta la siiyaa:** Admin ayaa qaybiyaa dadka`
             )

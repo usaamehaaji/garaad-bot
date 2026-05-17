@@ -77,10 +77,10 @@ function guessHeist(robberId, guessCode) {
     if (guessCode[state.revealIndex] !== state.revealedDigit) {
         state.attemptsLeft -= 1;
         if (state.attemptsLeft <= 0) {
-            robberEcon.usd = Math.max(0, (robberEcon.usd || 0) - 100);
+            robberEcon.btc = Math.max(0, (robberEcon.btc || 0) - 100);
             saveEcon();
             activeHeists.delete(robberId);
-            return { failure: true, attemptsLeft: 0, penalty: { cash: 100 }, message: 'Qiyaastaada waa khalad xad dhaaf ah. $100 ayaa lagaa jaray.' };
+            return { failure: true, attemptsLeft: 0, penalty: { cash: 100 }, message: 'Qiyaastaada waa khalad xad dhaaf ah. 100 BTC ayaa lagaa jaray.' };
         }
         return { failure: true, attemptsLeft: state.attemptsLeft, message: `Lambarka la soo bandhigay waa khalad ama ma lahan meel sax ah. Waxaa kugu harsan ${state.attemptsLeft} isku day.` };
     }
@@ -88,26 +88,26 @@ function guessHeist(robberId, guessCode) {
     if (guessCode !== victimUser.password) {
         state.attemptsLeft -= 1;
         if (state.attemptsLeft <= 0) {
-            robberEcon.usd = Math.max(0, (robberEcon.usd || 0) - 100);
+            robberEcon.btc = Math.max(0, (robberEcon.btc || 0) - 100);
             saveEcon();
             activeHeists.delete(robberId);
-            return { failure: true, attemptsLeft: 0, penalty: { cash: 100 }, message: 'Qiyaastaada waa khalad. Waxaa lagaa jaray $100.' };
+            return { failure: true, attemptsLeft: 0, penalty: { cash: 100 }, message: 'Qiyaastaada waa khalad. Waxaa lagaa jaray 100 BTC.' };
         }
         return { failure: true, attemptsLeft: state.attemptsLeft, message: `Qiyaasuhu ma aha mid sax ah. Waxaa kugu harsan ${state.attemptsLeft} isku day.` };
     }
 
     const stealPercent = 0.18 + Math.random() * 0.12;
-    const stolenCash   = Math.max(1, Math.floor((victimEcon.usd || 0) * stealPercent));
+    const stolenCash   = Math.max(1, Math.floor((victimEcon.btc || 0) * stealPercent));
 
-    victimEcon.usd = Math.max(0, (victimEcon.usd || 0) - stolenCash);
-    robberEcon.usd = (robberEcon.usd || 0) + stolenCash;
+    victimEcon.btc = Math.max(0, (victimEcon.btc || 0) - stolenCash);
+    robberEcon.btc = (robberEcon.btc || 0) + stolenCash;
     saveEcon();
     activeHeists.delete(robberId);
 
     return {
         success: true,
         stolenCash,
-        message: `Xatooyadii waa guuleysatay! Waxaad ka xaday $${stolenCash} USD.`,
+        message: `Xatooyadii waa guuleysatay! Waxaad ka xaday ${stolenCash} BTC.`,
     };
 }
 
