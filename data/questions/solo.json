@@ -200,5803 +200,2853 @@
     "correct": "2012"
   },
   {
-    "question": "21. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Qorraxdu waxay ka soo baxdaa galbeed oo ay dhacdo bari.",
     "options": [
-      "1945",
-      "1950",
-      "1960",
-      "1943"
+      "Run",
+      "Been"
     ],
-    "correct": "1943"
+    "correct": "Been"
   },
   {
-    "question": "22. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Biyaha 100°C (heerkulka badda 1 atm) ayay ku karkaraan.",
     "options": [
-      "Aadan Cadde",
-      "Cali Mahdi",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre"
+      "Run",
+      "Been"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Run"
   },
   {
-    "question": "23. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Soomaaliya waxay leedahay xuduud badeed.",
     "options": [
-      "1958",
-      "1970",
-      "1965",
-      "1960"
+      "Run",
+      "Been"
     ],
-    "correct": "1960"
+    "correct": "Run"
   },
   {
-    "question": "24. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Afrika waa qaaradda ugu weyn adduunka.",
     "options": [
-      "SYL",
-      "Xisbigii SDP",
-      "Maxkamadaha",
-      "Daraawiishta"
+      "Run",
+      "Been"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Been"
   },
   {
-    "question": "25. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Qur'aanka wuxuu leeyahay 114 suuradood.",
     "options": [
-      "15 sano",
-      "10 sano",
-      "30 sano",
-      "20 sano"
+      "Run",
+      "Been"
     ],
-    "correct": "20 sano"
+    "correct": "Run"
   },
   {
-    "question": "26. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Maalmuhu 24 saacadood ayay qaataan dhulka (qiyaas ahaan).",
     "options": [
-      "1980",
-      "1969",
-      "1975",
-      "1972"
+      "Run",
+      "Been"
     ],
-    "correct": "1972"
+    "correct": "Run"
   },
   {
-    "question": "27. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Dayaxu wuxuu iftiiminayaa naftiisa sida qorraxda.",
     "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
+      "Run",
+      "Been"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Been"
   },
   {
-    "question": "28. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Oksijiinta waa gaas aadanaha neefsashada u baahan.",
     "options": [
-      "1969",
-      "1960",
-      "1977",
-      "1991"
+      "Run",
+      "Been"
     ],
-    "correct": "1969"
+    "correct": "Run"
   },
   {
-    "question": "29. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Wadnaha wuxuu ku yaalaa dhinaca midig ee laabta (caadi ahaan).",
     "options": [
-      "Afgambi",
-      "Heshiis",
-      "Dagaal",
-      "Doorasho"
+      "Run",
+      "Been"
     ],
-    "correct": "Afgambi"
+    "correct": "Been"
   },
   {
-    "question": "30. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Kelyaha waxay ka saaraan wasakhda dhiigga.",
     "options": [
-      "1977",
-      "1965",
-      "1982",
-      "1991"
+      "Run",
+      "Been"
     ],
-    "correct": "1977"
+    "correct": "Run"
   },
   {
-    "question": "31. Ururkii SYL micnihiisu waa?",
+    "question": "Xisaabta: 12 × 12 = 144.",
     "options": [
-      "Somali Youth League",
-      "Somali Youth Liberty",
-      "Somali Year League",
-      "Somali League Union"
+      "Run",
+      "Been"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Run"
   },
   {
-    "question": "32. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Xisaabta: 0 ÷ 5 = 5.",
     "options": [
-      "1991",
-      "1988",
-      "1995",
-      "2000"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Been"
   },
   {
-    "question": "33. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Ingiriis: jamaca \"child\" waa \"children\".",
     "options": [
-      "1995",
-      "1991",
-      "1988",
-      "1990"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Run"
   },
   {
-    "question": "34. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Caasimadda Kenya waa Nairobi.",
     "options": [
-      "2000",
-      "1995",
-      "1998",
-      "2004"
+      "Run",
+      "Been"
     ],
-    "correct": "1998"
+    "correct": "Run"
   },
   {
-    "question": "35. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Caasimadda Itoobiya waa Nairobi.",
     "options": [
-      "Itoobiya",
-      "Jabuuti",
-      "Yemen",
-      "Kenya"
+      "Run",
+      "Been"
     ],
-    "correct": "Jabuuti"
+    "correct": "Been"
   },
   {
-    "question": "36. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Muqdisho waa caasimadda dowlad-goboleedka Soomaaliya (Federaal).",
     "options": [
-      "2004",
-      "2006",
-      "2000",
-      "1998"
+      "Run",
+      "Been"
     ],
-    "correct": "2000"
+    "correct": "Run"
   },
   {
-    "question": "37. TFG waxaa la aasaasay sanadkee?",
+    "question": "Soomaaliya waxay xornimada ka heshay Talyaaniga sanadkii 1960.",
     "options": [
-      "2012",
-      "2004",
-      "2000",
-      "2008"
+      "Run",
+      "Been"
     ],
-    "correct": "2004"
+    "correct": "Run"
   },
   {
-    "question": "38. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Xasan Cali Khayre wuxuu xilligii 2017–2020 u ahaa R/Wasaaraha Xukuumadda Federaalka Soomaaliya.",
     "options": [
-      "2007",
-      "2012",
-      "2010",
-      "2005"
+      "Run",
+      "Been"
     ],
-    "correct": "2007"
+    "correct": "Run"
   },
   {
-    "question": "39. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Xasan Cali Khayre wuxuu xilligaas u ahaa Madaxweyne Soomaaliya.",
     "options": [
-      "2004",
-      "2012",
-      "2016",
-      "2008"
+      "Run",
+      "Been"
     ],
-    "correct": "2012"
+    "correct": "Been"
   },
   {
-    "question": "40. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Ururka Qaramada Midoobay (UN) wuxuu caawiyaa nabadda iyo horumarinta.",
     "options": [
-      "2012",
-      "2017",
-      "2010",
-      "2022"
+      "Run",
+      "Been"
     ],
-    "correct": "2012"
+    "correct": "Run"
   },
   {
-    "question": "41. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "NATO waa urur ganacsi oo keliya (ma aha mid militariga ah).",
     "options": [
-      "1943",
-      "1945",
-      "1960",
-      "1950"
+      "Run",
+      "Been"
     ],
-    "correct": "1943"
+    "correct": "Been"
   },
   {
-    "question": "42. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Qorraxda waa xiddig (star) sida xiddigaha kale.",
     "options": [
-      "Cabdirashiid Sharmaarke",
-      "Cali Mahdi",
-      "Siyaad Barre",
-      "Aadan Cadde"
+      "Run",
+      "Been"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Run"
   },
   {
-    "question": "43. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Dayaxu waa xiddig iskiis iftiiminaya.",
     "options": [
-      "1965",
-      "1970",
-      "1958",
-      "1960"
+      "Run",
+      "Been"
     ],
-    "correct": "1960"
+    "correct": "Been"
   },
   {
-    "question": "44. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Saddex-xagal gudihiisa wadarta xaglaha waa 180°.",
     "options": [
-      "SYL",
-      "Maxkamadaha",
-      "Daraawiishta",
-      "Xisbigii SDP"
+      "Run",
+      "Been"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Run"
   },
   {
-    "question": "45. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Labajibbaar wuxuu leeyahay 6 dhinac oo isku dherer ah.",
     "options": [
-      "30 sano",
-      "20 sano",
-      "10 sano",
-      "15 sano"
+      "Run",
+      "Been"
     ],
-    "correct": "20 sano"
+    "correct": "Been"
   },
   {
-    "question": "46. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Webiga Niil waa mid ka mid ah webiyada ugu waaweyn Afrika.",
     "options": [
-      "1969",
-      "1980",
-      "1975",
-      "1972"
+      "Run",
+      "Been"
     ],
-    "correct": "1972"
+    "correct": "Run"
   },
   {
-    "question": "47. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Badweynta Hindiya waxay u dhaxaysaa Hindiya iyo Afrika.",
     "options": [
-      "Siyaad Barre",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Cumar Carte"
+      "Run",
+      "Been"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Been"
   },
   {
-    "question": "48. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Koonfur Afrika waxay hore u lahayd nidaam apartheid.",
     "options": [
-      "1960",
-      "1977",
-      "1991",
-      "1969"
+      "Run",
+      "Been"
     ],
-    "correct": "1969"
+    "correct": "Run"
   },
   {
-    "question": "49. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Hargeysa waa caasimadda Somaliland (ma aha caasimadda Federaalka).",
     "options": [
-      "Dagaal",
-      "Heshiis",
-      "Afgambi",
-      "Doorasho"
+      "Run",
+      "Been"
     ],
-    "correct": "Afgambi"
+    "correct": "Run"
   },
   {
-    "question": "50. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "HTTPS wuxuu isticmaalaa encryption badanaa (TLS).",
     "options": [
-      "1991",
-      "1977",
-      "1965",
-      "1982"
+      "Run",
+      "Been"
     ],
-    "correct": "1977"
+    "correct": "Run"
   },
   {
-    "question": "51. Ururkii SYL micnihiisu waa?",
+    "question": "Bluetooth wuxuu u baahan yahay internet si uu u shaqeeyo.",
     "options": [
-      "Somali Youth League",
-      "Somali Year League",
-      "Somali League Union",
-      "Somali Youth Liberty"
+      "Run",
+      "Been"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Been"
   },
   {
-    "question": "52. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "DNS wuxuu u tarjumayaa magaca domain → cinwaanka IP.",
     "options": [
-      "1988",
-      "1995",
-      "2000",
-      "1991"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Run"
   },
   {
-    "question": "53. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "RAM waa xusuus ku meel gaar ah (ma aha kayd joogto oo keliya).",
     "options": [
-      "1995",
-      "1988",
-      "1990",
-      "1991"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Run"
   },
   {
-    "question": "54. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Phishing waa isku day lagu khiyaaneeyo dadka.",
     "options": [
-      "1995",
-      "2000",
-      "1998",
-      "2004"
+      "Run",
+      "Been"
     ],
-    "correct": "1998"
+    "correct": "Run"
   },
   {
-    "question": "55. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "2FA wuxuu xoojiyaa amniga akoonka.",
     "options": [
-      "Itoobiya",
-      "Kenya",
-      "Yemen",
-      "Jabuuti"
+      "Run",
+      "Been"
     ],
-    "correct": "Jabuuti"
+    "correct": "Run"
   },
   {
-    "question": "56. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Password \"123456\" waa mid amaan ah.",
     "options": [
-      "1998",
-      "2000",
-      "2004",
-      "2006"
+      "Run",
+      "Been"
     ],
-    "correct": "2000"
+    "correct": "Been"
   },
   {
-    "question": "57. TFG waxaa la aasaasay sanadkee?",
+    "question": "Backup-ka xogta waa caado wanaagsan.",
     "options": [
-      "2000",
-      "2008",
-      "2012",
-      "2004"
+      "Run",
+      "Been"
     ],
-    "correct": "2004"
+    "correct": "Run"
   },
   {
-    "question": "58. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "GPS wuxuu isticmaalaa dayaxyo satellite.",
     "options": [
-      "2007",
-      "2010",
-      "2012",
-      "2005"
+      "Run",
+      "Been"
     ],
-    "correct": "2007"
+    "correct": "Run"
   },
   {
-    "question": "59. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Wi‑Fi iyo internet waa isku macno.",
     "options": [
-      "2012",
-      "2004",
-      "2008",
-      "2016"
+      "Run",
+      "Been"
     ],
-    "correct": "2012"
+    "correct": "Been"
   },
   {
-    "question": "60. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "JSON waa qaab xog (ma aha luqad barnaamij oo buuxa).",
     "options": [
-      "2022",
-      "2010",
-      "2017",
-      "2012"
+      "Run",
+      "Been"
     ],
-    "correct": "2012"
+    "correct": "Run"
   },
   {
-    "question": "61. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "HTML waa luqad calaamadeyn (markup) webka.",
     "options": [
-      "1950",
-      "1960",
-      "1945",
-      "1943"
+      "Run",
+      "Been"
     ],
-    "correct": "1943"
+    "correct": "Run"
   },
   {
-    "question": "62. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Linux waa nidaam hawleed oo furan badanaa.",
     "options": [
-      "Cabdirashiid Sharmaarke",
-      "Cali Mahdi",
-      "Aadan Cadde",
-      "Siyaad Barre"
+      "Run",
+      "Been"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Run"
   },
   {
-    "question": "63. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Malware waa barnaamij xun.",
     "options": [
-      "1958",
-      "1960",
-      "1970",
-      "1965"
+      "Run",
+      "Been"
     ],
-    "correct": "1960"
+    "correct": "Run"
   },
   {
-    "question": "64. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Firewall wuxuu caawiyaa ilaalinta shabakadda.",
     "options": [
-      "Maxkamadaha",
-      "Xisbigii SDP",
-      "Daraawiishta",
-      "SYL"
+      "Run",
+      "Been"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Run"
   },
   {
-    "question": "65. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "CPU waa \"Central Processing Unit\".",
     "options": [
-      "20 sano",
-      "15 sano",
-      "10 sano",
-      "30 sano"
+      "Run",
+      "Been"
     ],
-    "correct": "20 sano"
+    "correct": "Run"
   },
   {
-    "question": "66. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "GPU wuxuu caawiyaa xisaabinta sawirrada iyo AI.",
     "options": [
-      "1975",
-      "1969",
-      "1980",
-      "1972"
+      "Run",
+      "Been"
     ],
-    "correct": "1972"
+    "correct": "Run"
   },
   {
-    "question": "67. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "SSD inta badan waa ka dhaqso badan HDD.",
     "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde"
+      "Run",
+      "Been"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Run"
   },
   {
-    "question": "68. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "SQL injection waa nooc weerar ah.",
     "options": [
-      "1969",
-      "1977",
-      "1960",
-      "1991"
+      "Run",
+      "Been"
     ],
-    "correct": "1969"
+    "correct": "Run"
   },
   {
-    "question": "69. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "HTTPS bog kasta wuxuu ka dhigan yahay in uu sax yahay (100%).",
     "options": [
-      "Dagaal",
-      "Afgambi",
-      "Heshiis",
-      "Doorasho"
+      "Run",
+      "Been"
     ],
-    "correct": "Afgambi"
+    "correct": "Been"
   },
   {
-    "question": "70. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Cookies waxay kaydiyaan macluumaad goobaha.",
     "options": [
-      "1991",
-      "1982",
-      "1977",
-      "1965"
+      "Run",
+      "Been"
     ],
-    "correct": "1977"
+    "correct": "Run"
   },
   {
-    "question": "71. Ururkii SYL micnihiisu waa?",
+    "question": "Incognito mode wuxuu ka dhigayaa inaad noqotid qarsoon 100%.",
     "options": [
-      "Somali Year League",
-      "Somali Youth Liberty",
-      "Somali Youth League",
-      "Somali League Union"
+      "Run",
+      "Been"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Been"
   },
   {
-    "question": "72. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Cloud storage wuxuu kaydiyaa xog server fog.",
     "options": [
-      "1988",
-      "1991",
-      "2000",
-      "1995"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Run"
   },
   {
-    "question": "73. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Blockchain wuxuu isticmaalaa silsilad blocks.",
     "options": [
-      "1991",
-      "1988",
-      "1995",
-      "1990"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Run"
   },
   {
-    "question": "74. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Bitcoin waa nooc cryptocurrency ah.",
     "options": [
-      "1998",
-      "2000",
-      "1995",
-      "2004"
+      "Run",
+      "Been"
     ],
-    "correct": "1998"
+    "correct": "Run"
   },
   {
-    "question": "75. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "AI (sirdoonka macmalka ah) wuxuu isticmaali karaa barashada mashiinka.",
     "options": [
-      "Itoobiya",
-      "Yemen",
-      "Kenya",
-      "Jabuuti"
+      "Run",
+      "Been"
     ],
-    "correct": "Jabuuti"
+    "correct": "Run"
   },
   {
-    "question": "76. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Machine learning waa qayb ka mid ah AI.",
     "options": [
-      "2000",
-      "2006",
-      "2004",
-      "1998"
+      "Run",
+      "Been"
     ],
-    "correct": "2000"
+    "correct": "Run"
   },
   {
-    "question": "77. TFG waxaa la aasaasay sanadkee?",
+    "question": "Overfitting waa dhibaato marka moodel uu xasuusto tabaruka.",
     "options": [
-      "2000",
-      "2008",
-      "2012",
-      "2004"
+      "Run",
+      "Been"
     ],
-    "correct": "2004"
+    "correct": "Run"
   },
   {
-    "question": "78. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Correlation macnaheedu waa isku mid causation.",
     "options": [
-      "2007",
-      "2012",
-      "2005",
-      "2010"
+      "Run",
+      "Been"
     ],
-    "correct": "2007"
+    "correct": "Been"
   },
   {
-    "question": "79. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Unicode wuxuu taageerayaa xarfaha luqado badan.",
     "options": [
-      "2016",
-      "2004",
-      "2008",
-      "2012"
+      "Run",
+      "Been"
     ],
-    "correct": "2012"
+    "correct": "Run"
   },
   {
-    "question": "80. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "UTF-8 waa encoding caan ah.",
     "options": [
-      "2012",
-      "2017",
-      "2010",
-      "2022"
+      "Run",
+      "Been"
     ],
-    "correct": "2012"
+    "correct": "Run"
   },
   {
-    "question": "81. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Big O notation wuxuu qiyaasaa xawaaraha algorithm.",
     "options": [
-      "1950",
-      "1943",
-      "1960",
-      "1945"
+      "Run",
+      "Been"
     ],
-    "correct": "1943"
+    "correct": "Run"
   },
   {
-    "question": "82. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Stack waa LIFO.",
     "options": [
-      "Aadan Cadde",
-      "Cali Mahdi",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke"
+      "Run",
+      "Been"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Run"
   },
   {
-    "question": "83. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Queue waa FIFO.",
     "options": [
-      "1958",
-      "1960",
-      "1970",
-      "1965"
+      "Run",
+      "Been"
     ],
-    "correct": "1960"
+    "correct": "Run"
   },
   {
-    "question": "84. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Recursion wuxuu u baahan yahay xaalad saldhig (base case).",
     "options": [
-      "SYL",
-      "Daraawiishta",
-      "Xisbigii SDP",
-      "Maxkamadaha"
+      "Run",
+      "Been"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Run"
   },
   {
-    "question": "85. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Deadlock waa dhibaato is xannibaada thread-yada.",
     "options": [
-      "15 sano",
-      "30 sano",
-      "20 sano",
-      "10 sano"
+      "Run",
+      "Been"
     ],
-    "correct": "20 sano"
+    "correct": "Run"
   },
   {
-    "question": "86. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Virtual memory wuxuu isticmaalaa disk sida xusuus dheeri ah.",
     "options": [
-      "1972",
-      "1969",
-      "1975",
-      "1980"
+      "Run",
+      "Been"
     ],
-    "correct": "1972"
+    "correct": "Run"
   },
   {
-    "question": "87. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Garbage collection wuxuu xoreeyaa xusuusta aan loo baahnayn.",
     "options": [
-      "Cumar Carte",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre"
+      "Run",
+      "Been"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Run"
   },
   {
-    "question": "88. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "REST waa qaab API oo caan ah.",
     "options": [
-      "1991",
-      "1969",
-      "1960",
-      "1977"
+      "Run",
+      "Been"
     ],
-    "correct": "1969"
+    "correct": "Run"
   },
   {
-    "question": "89. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "GraphQL waa luqad weydiimo API ah.",
     "options": [
-      "Afgambi",
-      "Heshiis",
-      "Dagaal",
-      "Doorasho"
+      "Run",
+      "Been"
     ],
-    "correct": "Afgambi"
+    "correct": "Run"
   },
   {
-    "question": "90. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Docker wuxuu isticmaalaa containers.",
     "options": [
-      "1991",
-      "1977",
-      "1982",
-      "1965"
+      "Run",
+      "Been"
     ],
-    "correct": "1977"
+    "correct": "Run"
   },
   {
-    "question": "91. Ururkii SYL micnihiisu waa?",
+    "question": "Kubernetes wuxuu maareeyaa containers.",
     "options": [
-      "Somali League Union",
-      "Somali Year League",
-      "Somali Youth League",
-      "Somali Youth Liberty"
+      "Run",
+      "Been"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Run"
   },
   {
-    "question": "92. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Git waa nidaam maamulka nooca (version control).",
     "options": [
-      "1988",
-      "1995",
-      "1991",
-      "2000"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Run"
   },
   {
-    "question": "93. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "OAuth waa hab galitaan (login) oo caan ah.",
     "options": [
-      "1991",
-      "1990",
-      "1995",
-      "1988"
+      "Run",
+      "Been"
     ],
-    "correct": "1991"
+    "correct": "Run"
   },
   {
-    "question": "94. Puntland waxaa la aasaasay sanadkee?",
+    "question": "JWT waa nooc token authentication ah.",
     "options": [
-      "1998",
-      "1995",
-      "2000",
-      "2004"
+      "Run",
+      "Been"
     ],
-    "correct": "1998"
+    "correct": "Run"
   },
   {
-    "question": "95. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Zero-day vulnerability waa cilad aan weli la hakin.",
     "options": [
-      "Jabuuti",
-      "Kenya",
-      "Yemen",
-      "Itoobiya"
+      "Run",
+      "Been"
     ],
-    "correct": "Jabuuti"
+    "correct": "Run"
   },
   {
-    "question": "96. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Ninkii xilligii 2017–2020 u ahaa R/Wasaaraha Xukuumadda Federaalka Soomaaliya waa kee?",
     "options": [
-      "1998",
-      "2006",
-      "2000",
-      "2004"
+      "Cabdullaahi Deni",
+      "Xasan Cali Khayre",
+      "Cumar Cabdirashiid Cali Sharmaarke",
+      "Maxamed Xuseen Rooble"
     ],
-    "correct": "2000"
+    "correct": "Xasan Cali Khayre"
   },
   {
-    "question": "97. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Norway?",
     "options": [
-      "2000",
-      "2012",
-      "2008",
-      "2004"
+      "Oslo",
+      "Sofia",
+      "Astana",
+      "Prague"
     ],
-    "correct": "2004"
+    "correct": "Oslo"
   },
   {
-    "question": "98. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay caasimadda dalka Sweden?",
     "options": [
-      "2005",
-      "2007",
-      "2010",
-      "2012"
+      "Prague",
+      "Tallinn",
+      "Dublin",
+      "Stockholm"
     ],
-    "correct": "2007"
+    "correct": "Stockholm"
   },
   {
-    "question": "99. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Denmark?",
     "options": [
-      "2016",
-      "2008",
-      "2004",
-      "2012"
+      "Copenhagen",
+      "Lisbon",
+      "Asunción",
+      "Mexico City"
     ],
-    "correct": "2012"
+    "correct": "Copenhagen"
   },
   {
-    "question": "100. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay caasimadda dalka Finland?",
     "options": [
-      "2012",
-      "2022",
-      "2017",
-      "2010"
+      "Ankara",
+      "Tripoli",
+      "Helsinki",
+      "Santiago"
     ],
-    "correct": "2012"
+    "correct": "Helsinki"
   },
   {
-    "question": "101. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Iceland?",
     "options": [
-      "1945",
-      "1943",
-      "1960",
-      "1950"
+      "Reykjavik",
+      "Sofia",
+      "Wellington",
+      "Kinshasa"
     ],
-    "correct": "1943"
+    "correct": "Reykjavik"
   },
   {
-    "question": "102. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay caasimadda dalka Ireland?",
     "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cali Mahdi"
+      "Wellington",
+      "Dublin",
+      "Helsinki",
+      "Islamabad"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Dublin"
   },
   {
-    "question": "103. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Portugal?",
     "options": [
-      "1958",
-      "1960",
-      "1970",
-      "1965"
+      "Valletta",
+      "Lisbon",
+      "Ljubljana",
+      "New Delhi"
     ],
-    "correct": "1960"
+    "correct": "Lisbon"
   },
   {
-    "question": "104. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay caasimadda dalka Greece?",
     "options": [
-      "Maxkamadaha",
-      "Daraawiishta",
-      "Xisbigii SDP",
-      "SYL"
+      "Athens",
+      "Astana",
+      "Libreville",
+      "Budapest"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Athens"
   },
   {
-    "question": "105. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay caasimadda dalka Romania?",
     "options": [
-      "30 sano",
-      "10 sano",
-      "20 sano",
-      "15 sano"
+      "Bogotá",
+      "Bucharest",
+      "Sofia",
+      "Stockholm"
     ],
-    "correct": "20 sano"
+    "correct": "Bucharest"
   },
   {
-    "question": "106. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Hungary?",
     "options": [
-      "1972",
-      "1975",
-      "1969",
-      "1980"
+      "Kyiv",
+      "Budapest",
+      "Podgorica",
+      "Damascus"
     ],
-    "correct": "1972"
+    "correct": "Budapest"
   },
   {
-    "question": "107. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay caasimadda dalka Czechia?",
     "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cumar Carte"
+      "Lisbon",
+      "Prague",
+      "Bern",
+      "Bratislava"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Prague"
   },
   {
-    "question": "108. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Slovakia?",
     "options": [
-      "1960",
-      "1991",
-      "1977",
-      "1969"
+      "Bratislava",
+      "Zagreb",
+      "Tirana",
+      "Copenhagen"
     ],
-    "correct": "1969"
+    "correct": "Bratislava"
   },
   {
-    "question": "109. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay caasimadda dalka Croatia?",
     "options": [
-      "Dagaal",
-      "Heshiis",
-      "Afgambi",
-      "Doorasho"
+      "Yamoussoukro",
+      "London",
+      "Accra",
+      "Zagreb"
     ],
-    "correct": "Afgambi"
+    "correct": "Zagreb"
   },
   {
-    "question": "110. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Serbia?",
     "options": [
-      "1965",
-      "1991",
-      "1982",
-      "1977"
+      "Belgrade",
+      "Bratislava",
+      "Ottawa",
+      "Dublin"
     ],
-    "correct": "1977"
+    "correct": "Belgrade"
   },
   {
-    "question": "111. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay caasimadda dalka Slovenia?",
     "options": [
-      "Somali Youth League",
-      "Somali League Union",
-      "Somali Youth Liberty",
-      "Somali Year League"
+      "Stockholm",
+      "Tunis",
+      "Sofia",
+      "Ljubljana"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Ljubljana"
   },
   {
-    "question": "112. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay caasimadda dalka Bulgaria?",
     "options": [
-      "1988",
-      "1995",
-      "1991",
-      "2000"
+      "Sofia",
+      "Kingston",
+      "Manama",
+      "Lima"
     ],
-    "correct": "1991"
+    "correct": "Sofia"
   },
   {
-    "question": "113. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay caasimadda dalka Poland?",
     "options": [
-      "1988",
-      "1991",
-      "1990",
-      "1995"
+      "Kabul",
+      "Singapore",
+      "Djibouti",
+      "Warsaw"
     ],
-    "correct": "1991"
+    "correct": "Warsaw"
   },
   {
-    "question": "114. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Ukraine?",
     "options": [
-      "1995",
-      "1998",
-      "2000",
-      "2004"
+      "Reykjavik",
+      "Santiago",
+      "Libreville",
+      "Kyiv"
     ],
-    "correct": "1998"
+    "correct": "Kyiv"
   },
   {
-    "question": "115. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay caasimadda dalka Belarus?",
     "options": [
-      "Itoobiya",
-      "Jabuuti",
-      "Kenya",
-      "Yemen"
+      "Havana",
+      "Rabat",
+      "Minsk",
+      "Vientiane"
     ],
-    "correct": "Jabuuti"
+    "correct": "Minsk"
   },
   {
-    "question": "116. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Moldova?",
     "options": [
-      "2004",
-      "2006",
-      "2000",
-      "1998"
+      "Bucharest",
+      "Chișinău",
+      "Havana",
+      "Abuja"
     ],
-    "correct": "2000"
+    "correct": "Chișinău"
   },
   {
-    "question": "117. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Estonia?",
     "options": [
-      "2012",
-      "2004",
-      "2000",
-      "2008"
+      "Tallinn",
+      "Bogotá",
+      "Beirut",
+      "Damascus"
     ],
-    "correct": "2004"
+    "correct": "Tallinn"
   },
   {
-    "question": "118. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay caasimadda dalka Latvia?",
     "options": [
-      "2007",
-      "2005",
-      "2010",
-      "2012"
+      "Riga",
+      "N'Djamena",
+      "Abu Dhabi",
+      "Thimphu"
     ],
-    "correct": "2007"
+    "correct": "Riga"
   },
   {
-    "question": "119. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Lithuania?",
     "options": [
-      "2012",
-      "2008",
-      "2016",
-      "2004"
+      "Sana'a",
+      "Vilnius",
+      "Athens",
+      "Muqdisho"
     ],
-    "correct": "2012"
+    "correct": "Vilnius"
   },
   {
-    "question": "120. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay caasimadda dalka Turkey?",
     "options": [
-      "2012",
-      "2010",
-      "2017",
-      "2022"
+      "Libreville",
+      "Tokyo",
+      "Ankara",
+      "Kuala Lumpur"
     ],
-    "correct": "2012"
+    "correct": "Ankara"
   },
   {
-    "question": "121. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Iran?",
     "options": [
-      "1943",
-      "1960",
-      "1945",
-      "1950"
+      "Manama",
+      "Tallinn",
+      "Lusaka",
+      "Tehran"
     ],
-    "correct": "1943"
+    "correct": "Tehran"
   },
   {
-    "question": "122. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay caasimadda dalka Iraq?",
     "options": [
-      "Cali Mahdi",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde"
+      "Muqdisho",
+      "Baghdad",
+      "Caracas",
+      "Accra"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Baghdad"
   },
   {
-    "question": "123. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Syria?",
     "options": [
-      "1965",
-      "1970",
-      "1960",
-      "1958"
+      "Maputo",
+      "Bandar Seri Begawan",
+      "Damascus",
+      "Prague"
     ],
-    "correct": "1960"
+    "correct": "Damascus"
   },
   {
-    "question": "124. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay caasimadda dalka Lebanon?",
     "options": [
-      "Xisbigii SDP",
-      "SYL",
-      "Maxkamadaha",
-      "Daraawiishta"
+      "Bamako",
+      "Sofia",
+      "Beirut",
+      "Taipei"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Beirut"
   },
   {
-    "question": "125. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay caasimadda dalka Jordan?",
     "options": [
-      "30 sano",
-      "15 sano",
-      "20 sano",
-      "10 sano"
+      "Kyiv",
+      "Amman",
+      "Djibouti",
+      "Baghdad"
     ],
-    "correct": "20 sano"
+    "correct": "Amman"
   },
   {
-    "question": "126. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Israel?",
     "options": [
-      "1975",
-      "1980",
-      "1972",
-      "1969"
+      "Jerusalem",
+      "Tehran",
+      "Juba",
+      "Dublin"
     ],
-    "correct": "1972"
+    "correct": "Jerusalem"
   },
   {
-    "question": "127. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay caasimadda dalka Palestine (caan)?",
     "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde"
+      "Rabat",
+      "Hanoi",
+      "Ramallah",
+      "Kuala Lumpur"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Ramallah"
   },
   {
-    "question": "128. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Saudi Arabia?",
     "options": [
-      "1960",
-      "1991",
-      "1977",
-      "1969"
+      "Georgetown",
+      "Tripoli",
+      "Riyadh",
+      "Yamoussoukro"
     ],
-    "correct": "1969"
+    "correct": "Riyadh"
   },
   {
-    "question": "129. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay caasimadda dalka UAE?",
     "options": [
-      "Heshiis",
-      "Dagaal",
-      "Afgambi",
-      "Doorasho"
+      "Abu Dhabi",
+      "Ljubljana",
+      "Oslo",
+      "Muscat"
     ],
-    "correct": "Afgambi"
+    "correct": "Abu Dhabi"
   },
   {
-    "question": "130. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Qatar?",
     "options": [
-      "1991",
-      "1977",
-      "1965",
-      "1982"
+      "Jerusalem",
+      "Oslo",
+      "Doha",
+      "Tunis"
     ],
-    "correct": "1977"
+    "correct": "Doha"
   },
   {
-    "question": "131. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay caasimadda dalka Kuwait?",
     "options": [
-      "Somali Year League",
-      "Somali Youth Liberty",
-      "Somali Youth League",
-      "Somali League Union"
+      "Kuala Lumpur",
+      "Kathmandu",
+      "Caracas",
+      "Kuwait City"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Kuwait City"
   },
   {
-    "question": "132. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay caasimadda dalka Bahrain?",
     "options": [
-      "1988",
-      "1991",
-      "2000",
-      "1995"
+      "Lima",
+      "Ramallah",
+      "Stockholm",
+      "Manama"
     ],
-    "correct": "1991"
+    "correct": "Manama"
   },
   {
-    "question": "133. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay caasimadda dalka Oman?",
     "options": [
-      "1988",
-      "1995",
-      "1991",
-      "1990"
+      "Kuwait City",
+      "Wellington",
+      "Manama",
+      "Muscat"
     ],
-    "correct": "1991"
+    "correct": "Muscat"
   },
   {
-    "question": "134. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Yemen (caan)?",
     "options": [
-      "2000",
-      "1998",
-      "1995",
-      "2004"
+      "Dhaka",
+      "Bern",
+      "Sana'a",
+      "Lisbon"
     ],
-    "correct": "1998"
+    "correct": "Sana'a"
   },
   {
-    "question": "135. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay caasimadda dalka Pakistan?",
     "options": [
-      "Yemen",
-      "Itoobiya",
-      "Jabuuti",
-      "Kenya"
+      "Islamabad",
+      "Zagreb",
+      "Berlin",
+      "Canberra"
     ],
-    "correct": "Jabuuti"
+    "correct": "Islamabad"
   },
   {
-    "question": "136. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Afghanistan?",
     "options": [
-      "2000",
-      "1998",
-      "2006",
-      "2004"
+      "Kabul",
+      "Vientiane",
+      "Maputo",
+      "Budapest"
     ],
-    "correct": "2000"
+    "correct": "Kabul"
   },
   {
-    "question": "137. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka India?",
     "options": [
-      "2004",
-      "2012",
-      "2008",
-      "2000"
+      "Beijing",
+      "Vilnius",
+      "New Delhi",
+      "Tbilisi"
     ],
-    "correct": "2004"
+    "correct": "New Delhi"
   },
   {
-    "question": "138. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay caasimadda dalka Bangladesh?",
     "options": [
-      "2005",
-      "2010",
-      "2012",
-      "2007"
+      "Vilnius",
+      "Baku",
+      "Dhaka",
+      "Jerusalem"
     ],
-    "correct": "2007"
+    "correct": "Dhaka"
   },
   {
-    "question": "139. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Sri Lanka?",
     "options": [
-      "2004",
-      "2016",
-      "2012",
-      "2008"
+      "Moscow",
+      "Khartoum",
+      "Colombo",
+      "Amsterdam"
     ],
-    "correct": "2012"
+    "correct": "Colombo"
   },
   {
-    "question": "140. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay caasimadda dalka Nepal?",
     "options": [
-      "2010",
-      "2012",
-      "2022",
-      "2017"
+      "Quito",
+      "Libreville",
+      "Kathmandu",
+      "Caracas"
     ],
-    "correct": "2012"
+    "correct": "Kathmandu"
   },
   {
-    "question": "141. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Bhutan?",
     "options": [
-      "1960",
-      "1945",
-      "1950",
-      "1943"
+      "Sofia",
+      "Kathmandu",
+      "New Delhi",
+      "Thimphu"
     ],
-    "correct": "1943"
+    "correct": "Thimphu"
   },
   {
-    "question": "142. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay caasimadda dalka Myanmar?",
     "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Cali Mahdi",
-      "Aadan Cadde"
+      "Djibouti",
+      "Naypyidaw",
+      "Luxembourg City",
+      "Reykjavik"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Naypyidaw"
   },
   {
-    "question": "143. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Thailand?",
     "options": [
-      "1958",
-      "1970",
-      "1960",
-      "1965"
+      "Juba",
+      "Tripoli",
+      "Bangkok",
+      "Naypyidaw"
     ],
-    "correct": "1960"
+    "correct": "Bangkok"
   },
   {
-    "question": "144. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay caasimadda dalka Cambodia?",
     "options": [
-      "Maxkamadaha",
-      "SYL",
-      "Daraawiishta",
-      "Xisbigii SDP"
+      "Sarajevo",
+      "Phnom Penh",
+      "Bangkok",
+      "Oslo"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Phnom Penh"
   },
   {
-    "question": "145. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay caasimadda dalka Laos?",
     "options": [
-      "30 sano",
-      "20 sano",
-      "10 sano",
-      "15 sano"
+      "Vientiane",
+      "Warsaw",
+      "Bratislava",
+      "Prague"
     ],
-    "correct": "20 sano"
+    "correct": "Vientiane"
   },
   {
-    "question": "146. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Vietnam?",
     "options": [
-      "1972",
-      "1969",
-      "1980",
-      "1975"
+      "Libreville",
+      "Hanoi",
+      "Oslo",
+      "Astana"
     ],
-    "correct": "1972"
+    "correct": "Hanoi"
   },
   {
-    "question": "147. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay caasimadda dalka Malaysia?",
     "options": [
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Aadan Cadde"
+      "Athens",
+      "Sana'a",
+      "Helsinki",
+      "Kuala Lumpur"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Kuala Lumpur"
   },
   {
-    "question": "148. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Singapore?",
     "options": [
-      "1969",
-      "1960",
-      "1977",
-      "1991"
+      "Thimphu",
+      "Singapore",
+      "Tunis",
+      "Paris"
     ],
-    "correct": "1969"
+    "correct": "Singapore"
   },
   {
-    "question": "149. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay caasimadda dalka Indonesia?",
     "options": [
-      "Doorasho",
-      "Afgambi",
-      "Dagaal",
-      "Heshiis"
+      "Sofia",
+      "Jakarta",
+      "Gaborone",
+      "Canberra"
     ],
-    "correct": "Afgambi"
+    "correct": "Jakarta"
   },
   {
-    "question": "150. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Philippines?",
     "options": [
-      "1965",
-      "1991",
-      "1977",
-      "1982"
+      "Algiers",
+      "Thimphu",
+      "Jerusalem",
+      "Manila"
     ],
-    "correct": "1977"
+    "correct": "Manila"
   },
   {
-    "question": "151. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay caasimadda dalka Brunei?",
     "options": [
-      "Somali League Union",
-      "Somali Youth League",
-      "Somali Year League",
-      "Somali Youth Liberty"
+      "Bandar Seri Begawan",
+      "Tunis",
+      "Dakar",
+      "Zagreb"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Bandar Seri Begawan"
   },
   {
-    "question": "152. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay caasimadda dalka China?",
     "options": [
-      "1991",
-      "2000",
-      "1988",
-      "1995"
+      "Paris",
+      "Libreville",
+      "Beijing",
+      "Mexico City"
     ],
-    "correct": "1991"
+    "correct": "Beijing"
   },
   {
-    "question": "153. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay caasimadda dalka Japan?",
     "options": [
-      "1988",
-      "1995",
-      "1991",
-      "1990"
+      "Dakar",
+      "Sana'a",
+      "Kuwait City",
+      "Tokyo"
     ],
-    "correct": "1991"
+    "correct": "Tokyo"
   },
   {
-    "question": "154. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka South Korea?",
     "options": [
-      "2004",
-      "2000",
-      "1998",
-      "1995"
+      "Sofia",
+      "Rabat",
+      "Caracas",
+      "Seoul"
     ],
-    "correct": "1998"
+    "correct": "Seoul"
   },
   {
-    "question": "155. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay caasimadda dalka North Korea?",
     "options": [
-      "Jabuuti",
-      "Itoobiya",
-      "Kenya",
-      "Yemen"
+      "Asunción",
+      "Algiers",
+      "Nairobi",
+      "Pyongyang"
     ],
-    "correct": "Jabuuti"
+    "correct": "Pyongyang"
   },
   {
-    "question": "156. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Mongolia?",
     "options": [
-      "2000",
-      "2006",
-      "2004",
-      "1998"
+      "Sofia",
+      "Ulaanbaatar",
+      "Dakar",
+      "Lima"
     ],
-    "correct": "2000"
+    "correct": "Ulaanbaatar"
   },
   {
-    "question": "157. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Taiwan (caan)?",
     "options": [
-      "2004",
-      "2008",
-      "2012",
-      "2000"
+      "Addis Ababa",
+      "Vientiane",
+      "Dublin",
+      "Taipei"
     ],
-    "correct": "2004"
+    "correct": "Taipei"
   },
   {
-    "question": "158. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay caasimadda dalka Australia?",
     "options": [
-      "2012",
-      "2007",
-      "2010",
-      "2005"
+      "Madrid",
+      "Canberra",
+      "Kabul",
+      "Sana'a"
     ],
-    "correct": "2007"
+    "correct": "Canberra"
   },
   {
-    "question": "159. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka New Zealand?",
     "options": [
-      "2004",
-      "2008",
-      "2016",
-      "2012"
+      "Tbilisi",
+      "Wellington",
+      "Gitega",
+      "Rome"
     ],
-    "correct": "2012"
+    "correct": "Wellington"
   },
   {
-    "question": "160. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay caasimadda dalka Canada?",
     "options": [
-      "2012",
-      "2010",
-      "2022",
-      "2017"
+      "Ulaanbaatar",
+      "Vientiane",
+      "Havana",
+      "Ottawa"
     ],
-    "correct": "2012"
+    "correct": "Ottawa"
   },
   {
-    "question": "161. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Mexico?",
     "options": [
-      "1943",
-      "1945",
-      "1960",
-      "1950"
+      "Mexico City",
+      "Windhoek",
+      "Kinshasa",
+      "Asunción"
     ],
-    "correct": "1943"
+    "correct": "Mexico City"
   },
   {
-    "question": "162. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay caasimadda dalka Cuba?",
     "options": [
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Cali Mahdi"
+      "Vienna",
+      "Tripoli",
+      "Asunción",
+      "Havana"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Havana"
   },
   {
-    "question": "163. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Jamaica?",
     "options": [
-      "1965",
-      "1970",
-      "1958",
-      "1960"
+      "Naypyidaw",
+      "Kingston",
+      "Beijing",
+      "Phnom Penh"
     ],
-    "correct": "1960"
+    "correct": "Kingston"
   },
   {
-    "question": "164. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay caasimadda dalka Brazil?",
     "options": [
-      "SYL",
-      "Maxkamadaha",
-      "Daraawiishta",
-      "Xisbigii SDP"
+      "Zagreb",
+      "Oslo",
+      "Brasília",
+      "Chișinău"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Brasília"
   },
   {
-    "question": "165. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay caasimadda dalka Argentina?",
     "options": [
-      "30 sano",
-      "20 sano",
-      "10 sano",
-      "15 sano"
+      "Buenos Aires",
+      "Seoul",
+      "Niamey",
+      "Warsaw"
     ],
-    "correct": "20 sano"
+    "correct": "Buenos Aires"
   },
   {
-    "question": "166. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Chile?",
     "options": [
-      "1975",
-      "1972",
-      "1980",
-      "1969"
+      "Santiago",
+      "Gitega",
+      "Georgetown",
+      "Nicosia"
     ],
-    "correct": "1972"
+    "correct": "Santiago"
   },
   {
-    "question": "167. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay caasimadda dalka Peru?",
     "options": [
-      "Cumar Carte",
-      "Siyaad Barre",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
+      "Tbilisi",
+      "Lima",
+      "Berlin",
+      "Tashkent"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Lima"
   },
   {
-    "question": "168. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Colombia?",
     "options": [
-      "1960",
-      "1977",
-      "1969",
-      "1991"
+      "Kuwait City",
+      "Djibouti",
+      "Bogotá",
+      "Tehran"
     ],
-    "correct": "1969"
+    "correct": "Bogotá"
   },
   {
-    "question": "169. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay caasimadda dalka Venezuela?",
     "options": [
-      "Doorasho",
-      "Afgambi",
-      "Heshiis",
-      "Dagaal"
+      "Nicosia",
+      "Bandar Seri Begawan",
+      "Lisbon",
+      "Caracas"
     ],
-    "correct": "Afgambi"
+    "correct": "Caracas"
   },
   {
-    "question": "170. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Ecuador?",
     "options": [
-      "1977",
-      "1991",
-      "1965",
-      "1982"
+      "Georgetown",
+      "Vienna",
+      "Quito",
+      "Libreville"
     ],
-    "correct": "1977"
+    "correct": "Quito"
   },
   {
-    "question": "171. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay caasimadda dalka Bolivia?",
     "options": [
-      "Somali Youth League",
-      "Somali Year League",
-      "Somali Youth Liberty",
-      "Somali League Union"
+      "Copenhagen",
+      "Asmara",
+      "Helsinki",
+      "Sucre"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Sucre"
   },
   {
-    "question": "172. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay caasimadda dalka Paraguay?",
     "options": [
-      "1995",
-      "1988",
-      "2000",
-      "1991"
+      "Tashkent",
+      "Asunción",
+      "Bucharest",
+      "Dhaka"
     ],
-    "correct": "1991"
+    "correct": "Asunción"
   },
   {
-    "question": "173. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay caasimadda dalka Uruguay?",
     "options": [
-      "1991",
-      "1988",
-      "1990",
-      "1995"
+      "Quito",
+      "Stockholm",
+      "Montevideo",
+      "Khartoum"
     ],
-    "correct": "1991"
+    "correct": "Montevideo"
   },
   {
-    "question": "174. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Guyana?",
     "options": [
-      "1998",
-      "2004",
-      "2000",
-      "1995"
+      "Kabul",
+      "New Delhi",
+      "Buenos Aires",
+      "Georgetown"
     ],
-    "correct": "1998"
+    "correct": "Georgetown"
   },
   {
-    "question": "175. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay caasimadda dalka Suriname?",
     "options": [
-      "Itoobiya",
-      "Yemen",
-      "Kenya",
-      "Jabuuti"
+      "Thimphu",
+      "Tripoli",
+      "Paramaribo",
+      "Tehran"
     ],
-    "correct": "Jabuuti"
+    "correct": "Paramaribo"
   },
   {
-    "question": "176. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Egypt?",
     "options": [
-      "1998",
-      "2006",
-      "2004",
-      "2000"
+      "Kathmandu",
+      "Kingston",
+      "Kuwait City",
+      "Cairo"
     ],
-    "correct": "2000"
+    "correct": "Cairo"
   },
   {
-    "question": "177. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Libya?",
     "options": [
-      "2012",
-      "2008",
-      "2000",
-      "2004"
+      "Cairo",
+      "Reykjavik",
+      "Tripoli",
+      "Ottawa"
     ],
-    "correct": "2004"
+    "correct": "Tripoli"
   },
   {
-    "question": "178. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay caasimadda dalka Tunisia?",
     "options": [
-      "2012",
-      "2010",
-      "2005",
-      "2007"
+      "Tokyo",
+      "Bangkok",
+      "Tunis",
+      "Kuwait City"
     ],
-    "correct": "2007"
+    "correct": "Tunis"
   },
   {
-    "question": "179. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Algeria?",
     "options": [
-      "2016",
-      "2008",
-      "2004",
-      "2012"
+      "Rabat",
+      "Doha",
+      "Algiers",
+      "Cairo"
     ],
-    "correct": "2012"
+    "correct": "Algiers"
   },
   {
-    "question": "180. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay caasimadda dalka Morocco?",
     "options": [
-      "2012",
-      "2022",
-      "2017",
-      "2010"
+      "Kigali",
+      "Maputo",
+      "Jerusalem",
+      "Rabat"
     ],
-    "correct": "2012"
+    "correct": "Rabat"
   },
   {
-    "question": "181. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Sudan?",
     "options": [
-      "1943",
-      "1960",
-      "1950",
-      "1945"
+      "Oslo",
+      "New Delhi",
+      "Montevideo",
+      "Khartoum"
     ],
-    "correct": "1943"
+    "correct": "Khartoum"
   },
   {
-    "question": "182. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay caasimadda dalka South Sudan?",
     "options": [
-      "Siyaad Barre",
-      "Cali Mahdi",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
+      "Ramallah",
+      "Kingston",
+      "Juba",
+      "Beijing"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Juba"
   },
   {
-    "question": "183. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Ethiopia?",
     "options": [
-      "1960",
-      "1970",
-      "1965",
-      "1958"
+      "Ljubljana",
+      "Ramallah",
+      "Addis Ababa",
+      "Thimphu"
     ],
-    "correct": "1960"
+    "correct": "Addis Ababa"
   },
   {
-    "question": "184. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay caasimadda dalka Eritrea?",
     "options": [
-      "Maxkamadaha",
-      "Daraawiishta",
-      "SYL",
-      "Xisbigii SDP"
+      "Skopje",
+      "Georgetown",
+      "Dodoma",
+      "Asmara"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Asmara"
   },
   {
-    "question": "185. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay caasimadda dalka Djibouti?",
     "options": [
-      "15 sano",
-      "30 sano",
-      "20 sano",
-      "10 sano"
+      "Windhoek",
+      "Stockholm",
+      "Oslo",
+      "Djibouti"
     ],
-    "correct": "20 sano"
+    "correct": "Djibouti"
   },
   {
-    "question": "186. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Kenya?",
     "options": [
-      "1975",
-      "1969",
-      "1980",
-      "1972"
+      "Wellington",
+      "Dhaka",
+      "Nairobi",
+      "Stockholm"
     ],
-    "correct": "1972"
+    "correct": "Nairobi"
   },
   {
-    "question": "187. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay caasimadda dalka Uganda?",
     "options": [
-      "Cumar Carte",
-      "Siyaad Barre",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
+      "Moscow",
+      "Kuwait City",
+      "Kampala",
+      "Nairobi"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Kampala"
   },
   {
-    "question": "188. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Rwanda?",
     "options": [
-      "1969",
-      "1960",
-      "1977",
-      "1991"
+      "Ottawa",
+      "Doha",
+      "Damascus",
+      "Kigali"
     ],
-    "correct": "1969"
+    "correct": "Kigali"
   },
   {
-    "question": "189. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay caasimadda dalka Burundi?",
     "options": [
-      "Dagaal",
-      "Heshiis",
-      "Doorasho",
-      "Afgambi"
+      "Djibouti",
+      "Berlin",
+      "Luanda",
+      "Gitega"
     ],
-    "correct": "Afgambi"
+    "correct": "Gitega"
   },
   {
-    "question": "190. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Tanzania?",
     "options": [
-      "1977",
-      "1982",
-      "1991",
-      "1965"
+      "Dodoma",
+      "Tunis",
+      "Ankara",
+      "Asunción"
     ],
-    "correct": "1977"
+    "correct": "Dodoma"
   },
   {
-    "question": "191. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay caasimadda dalka Zambia?",
     "options": [
-      "Somali Youth League",
-      "Somali Youth Liberty",
-      "Somali Year League",
-      "Somali League Union"
+      "Sana'a",
+      "Lusaka",
+      "Brussels",
+      "Ottawa"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Lusaka"
   },
   {
-    "question": "192. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay caasimadda dalka Zimbabwe?",
     "options": [
-      "2000",
-      "1991",
-      "1995",
-      "1988"
+      "Harare",
+      "Copenhagen",
+      "Ankara",
+      "Kabul"
     ],
-    "correct": "1991"
+    "correct": "Harare"
   },
   {
-    "question": "193. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay caasimadda dalka Botswana?",
     "options": [
-      "1988",
-      "1991",
-      "1990",
-      "1995"
+      "Astana",
+      "Canberra",
+      "Oslo",
+      "Gaborone"
     ],
-    "correct": "1991"
+    "correct": "Gaborone"
   },
   {
-    "question": "194. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Namibia?",
     "options": [
-      "2000",
-      "2004",
-      "1998",
-      "1995"
+      "Warsaw",
+      "Brussels",
+      "Amman",
+      "Windhoek"
     ],
-    "correct": "1998"
+    "correct": "Windhoek"
   },
   {
-    "question": "195. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay caasimadda dalka Mozambique?",
     "options": [
-      "Yemen",
-      "Itoobiya",
-      "Jabuuti",
-      "Kenya"
+      "Phnom Penh",
+      "Athens",
+      "Maputo",
+      "Ljubljana"
     ],
-    "correct": "Jabuuti"
+    "correct": "Maputo"
   },
   {
-    "question": "196. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Malawi?",
     "options": [
-      "2000",
-      "1998",
-      "2004",
-      "2006"
+      "Lilongwe",
+      "Dhaka",
+      "Copenhagen",
+      "Libreville"
     ],
-    "correct": "2000"
+    "correct": "Lilongwe"
   },
   {
-    "question": "197. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Angola?",
     "options": [
-      "2000",
-      "2012",
-      "2008",
-      "2004"
+      "Vilnius",
+      "Luanda",
+      "Ljubljana",
+      "Harare"
     ],
-    "correct": "2004"
+    "correct": "Luanda"
   },
   {
-    "question": "198. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay caasimadda dalka DRC?",
     "options": [
-      "2010",
-      "2005",
-      "2007",
-      "2012"
+      "Prague",
+      "Kinshasa",
+      "Jerusalem",
+      "New Delhi"
     ],
-    "correct": "2007"
+    "correct": "Kinshasa"
   },
   {
-    "question": "199. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Congo?",
     "options": [
-      "2008",
-      "2016",
-      "2012",
-      "2004"
+      "Muscat",
+      "Luxembourg City",
+      "Tirana",
+      "Brazzaville"
     ],
-    "correct": "2012"
+    "correct": "Brazzaville"
   },
   {
-    "question": "200. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay caasimadda dalka Gabon?",
     "options": [
-      "2022",
-      "2012",
-      "2010",
-      "2017"
+      "Ljubljana",
+      "Beirut",
+      "Tunis",
+      "Libreville"
     ],
-    "correct": "2012"
+    "correct": "Libreville"
   },
   {
-    "question": "201. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Cameroon?",
     "options": [
-      "1950",
-      "1945",
-      "1943",
-      "1960"
+      "Belgrade",
+      "Muscat",
+      "Yaoundé",
+      "Helsinki"
     ],
-    "correct": "1943"
+    "correct": "Yaoundé"
   },
   {
-    "question": "202. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay caasimadda dalka Nigeria?",
     "options": [
-      "Siyaad Barre",
-      "Cali Mahdi",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
+      "Luanda",
+      "Yerevan",
+      "Helsinki",
+      "Abuja"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Abuja"
   },
   {
-    "question": "203. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Ghana?",
     "options": [
-      "1958",
-      "1965",
-      "1970",
-      "1960"
+      "Athens",
+      "Vientiane",
+      "Havana",
+      "Accra"
     ],
-    "correct": "1960"
+    "correct": "Accra"
   },
   {
-    "question": "204. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay caasimadda dalka Ivory Coast?",
     "options": [
-      "SYL",
-      "Xisbigii SDP",
-      "Daraawiishta",
-      "Maxkamadaha"
+      "Bucharest",
+      "Gitega",
+      "Yamoussoukro",
+      "Oslo"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Yamoussoukro"
   },
   {
-    "question": "205. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay caasimadda dalka Senegal?",
     "options": [
-      "15 sano",
-      "30 sano",
-      "20 sano",
-      "10 sano"
+      "Beijing",
+      "Montevideo",
+      "Dakar",
+      "Sofia"
     ],
-    "correct": "20 sano"
+    "correct": "Dakar"
   },
   {
-    "question": "206. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Mali?",
     "options": [
-      "1975",
-      "1969",
-      "1972",
-      "1980"
+      "Bamako",
+      "Kathmandu",
+      "Ankara",
+      "Muscat"
     ],
-    "correct": "1972"
+    "correct": "Bamako"
   },
   {
-    "question": "207. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay caasimadda dalka Niger?",
     "options": [
-      "Aadan Cadde",
-      "Cumar Carte",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke"
+      "Windhoek",
+      "Damascus",
+      "Niamey",
+      "Sana'a"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Niamey"
   },
   {
-    "question": "208. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Chad?",
     "options": [
-      "1991",
-      "1960",
-      "1977",
-      "1969"
+      "N'Djamena",
+      "Thimphu",
+      "Tallinn",
+      "Tokyo"
     ],
-    "correct": "1969"
+    "correct": "N'Djamena"
   },
   {
-    "question": "209. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay caasimadda dalka Somalia?",
     "options": [
-      "Afgambi",
-      "Doorasho",
-      "Heshiis",
-      "Dagaal"
+      "Stockholm",
+      "Sucre",
+      "Kathmandu",
+      "Muqdisho"
     ],
-    "correct": "Afgambi"
+    "correct": "Muqdisho"
   },
   {
-    "question": "210. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Kazakhstan?",
     "options": [
-      "1965",
-      "1977",
-      "1991",
-      "1982"
+      "Chișinău",
+      "Yaoundé",
+      "New Delhi",
+      "Astana"
     ],
-    "correct": "1977"
+    "correct": "Astana"
   },
   {
-    "question": "211. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay caasimadda dalka Uzbekistan?",
     "options": [
-      "Somali Youth Liberty",
-      "Somali League Union",
-      "Somali Year League",
-      "Somali Youth League"
+      "Bamako",
+      "Tashkent",
+      "Doha",
+      "New Delhi"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Tashkent"
   },
   {
-    "question": "212. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay caasimadda dalka Russia?",
     "options": [
-      "1988",
-      "1995",
-      "1991",
-      "2000"
+      "Tehran",
+      "Moscow",
+      "Oslo",
+      "Ljubljana"
     ],
-    "correct": "1991"
+    "correct": "Moscow"
   },
   {
-    "question": "213. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay caasimadda dalka Germany?",
     "options": [
-      "1988",
-      "1995",
-      "1990",
-      "1991"
+      "London",
+      "Rome",
+      "Tbilisi",
+      "Berlin"
     ],
-    "correct": "1991"
+    "correct": "Berlin"
   },
   {
-    "question": "214. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka France?",
     "options": [
-      "1995",
-      "2004",
-      "1998",
-      "2000"
+      "Paris",
+      "Kuwait City",
+      "Kabul",
+      "Tunis"
     ],
-    "correct": "1998"
+    "correct": "Paris"
   },
   {
-    "question": "215. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay caasimadda dalka Italy?",
     "options": [
-      "Yemen",
-      "Jabuuti",
-      "Kenya",
-      "Itoobiya"
+      "Rome",
+      "Madrid",
+      "Stockholm",
+      "Buenos Aires"
     ],
-    "correct": "Jabuuti"
+    "correct": "Rome"
   },
   {
-    "question": "216. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Spain?",
     "options": [
-      "2000",
-      "2006",
-      "1998",
-      "2004"
+      "Brussels",
+      "Madrid",
+      "Ljubljana",
+      "Beirut"
     ],
-    "correct": "2000"
+    "correct": "Madrid"
   },
   {
-    "question": "217. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka UK?",
     "options": [
-      "2012",
-      "2000",
-      "2004",
-      "2008"
+      "Tirana",
+      "London",
+      "Phnom Penh",
+      "Stockholm"
     ],
-    "correct": "2004"
+    "correct": "London"
   },
   {
-    "question": "218. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay caasimadda dalka Netherlands?",
     "options": [
-      "2010",
-      "2012",
-      "2005",
-      "2007"
+      "Brussels",
+      "Kampala",
+      "Amsterdam",
+      "Lilongwe"
     ],
-    "correct": "2007"
+    "correct": "Amsterdam"
   },
   {
-    "question": "219. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Belgium?",
     "options": [
-      "2004",
-      "2012",
-      "2016",
-      "2008"
+      "Lima",
+      "Brussels",
+      "Sarajevo",
+      "Canberra"
     ],
-    "correct": "2012"
+    "correct": "Brussels"
   },
   {
-    "question": "220. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay caasimadda dalka Switzerland?",
     "options": [
-      "2012",
-      "2022",
-      "2017",
-      "2010"
+      "Taipei",
+      "Reykjavik",
+      "Bern",
+      "Ramallah"
     ],
-    "correct": "2012"
+    "correct": "Bern"
   },
   {
-    "question": "221. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Austria?",
     "options": [
-      "1943",
-      "1945",
-      "1960",
-      "1950"
+      "Brussels",
+      "Amman",
+      "Vienna",
+      "Athens"
     ],
-    "correct": "1943"
+    "correct": "Vienna"
   },
   {
-    "question": "222. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay caasimadda dalka Luxembourg?",
     "options": [
-      "Cali Mahdi",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre"
+      "Tokyo",
+      "Luxembourg City",
+      "Oslo",
+      "Thimphu"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "Luxembourg City"
   },
   {
-    "question": "223. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay caasimadda dalka Malta?",
     "options": [
-      "1958",
-      "1965",
-      "1960",
-      "1970"
+      "Valletta",
+      "Yerevan",
+      "Lusaka",
+      "Vientiane"
     ],
-    "correct": "1960"
+    "correct": "Valletta"
   },
   {
-    "question": "224. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay caasimadda dalka Cyprus?",
     "options": [
-      "Maxkamadaha",
-      "Xisbigii SDP",
-      "Daraawiishta",
-      "SYL"
+      "Cairo",
+      "Helsinki",
+      "Sucre",
+      "Nicosia"
     ],
-    "correct": "Daraawiishta"
+    "correct": "Nicosia"
   },
   {
-    "question": "225. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay caasimadda dalka Albania?",
     "options": [
-      "15 sano",
-      "10 sano",
-      "30 sano",
-      "20 sano"
+      "Belgrade",
+      "Lima",
+      "Beijing",
+      "Tirana"
     ],
-    "correct": "20 sano"
+    "correct": "Tirana"
   },
   {
-    "question": "226. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay caasimadda dalka North Macedonia?",
     "options": [
-      "1969",
-      "1975",
-      "1972",
-      "1980"
+      "Skopje",
+      "Algiers",
+      "Pyongyang",
+      "Kuwait City"
     ],
-    "correct": "1972"
+    "correct": "Skopje"
   },
   {
-    "question": "227. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay caasimadda dalka Bosnia?",
     "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
+      "Sarajevo",
+      "Prague",
+      "Asunción",
+      "Kuwait City"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "Sarajevo"
   },
   {
-    "question": "228. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Montenegro?",
     "options": [
-      "1977",
-      "1960",
-      "1969",
-      "1991"
+      "Helsinki",
+      "Podgorica",
+      "Bratislava",
+      "Astana"
     ],
-    "correct": "1969"
+    "correct": "Podgorica"
   },
   {
-    "question": "229. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay caasimadda dalka Georgia?",
     "options": [
-      "Afgambi",
-      "Heshiis",
-      "Dagaal",
-      "Doorasho"
+      "Oslo",
+      "Canberra",
+      "Tbilisi",
+      "Havana"
     ],
-    "correct": "Afgambi"
+    "correct": "Tbilisi"
   },
   {
-    "question": "230. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay caasimadda dalka Armenia?",
     "options": [
-      "1965",
-      "1982",
-      "1977",
-      "1991"
+      "Yerevan",
+      "Bogotá",
+      "Yamoussoukro",
+      "Santiago"
     ],
-    "correct": "1977"
+    "correct": "Yerevan"
   },
   {
-    "question": "231. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay caasimadda dalka Azerbaijan?",
     "options": [
-      "Somali League Union",
-      "Somali Youth Liberty",
-      "Somali Year League",
-      "Somali Youth League"
+      "Zagreb",
+      "Baku",
+      "Yerevan",
+      "Tehran"
     ],
-    "correct": "Somali Youth League"
+    "correct": "Baku"
   },
   {
-    "question": "232. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay caasimadda dalka United States?",
     "options": [
-      "2000",
-      "1988",
-      "1991",
-      "1995"
+      "Brazzaville",
+      "Dhaka",
+      "Tbilisi",
+      "Washington, D.C."
     ],
-    "correct": "1991"
+    "correct": "Washington, D.C."
   },
   {
-    "question": "233. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay 3 + 10?",
     "options": [
-      "1988",
-      "1990",
-      "1991",
-      "1995"
+      "15",
+      "12",
+      "13",
+      "14"
     ],
-    "correct": "1991"
+    "correct": "13"
   },
   {
-    "question": "234. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 4 + 5?",
     "options": [
-      "2000",
-      "2004",
-      "1998",
-      "1995"
+      "10",
+      "11",
+      "9",
+      "8"
     ],
-    "correct": "1998"
+    "correct": "9"
   },
   {
-    "question": "235. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay 5 + 12?",
     "options": [
-      "Yemen",
-      "Itoobiya",
-      "Kenya",
-      "Jabuuti"
+      "16",
+      "17",
+      "19",
+      "18"
     ],
-    "correct": "Jabuuti"
+    "correct": "17"
   },
   {
-    "question": "236. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay 6 + 7?",
     "options": [
-      "1998",
-      "2000",
-      "2004",
-      "2006"
+      "12",
+      "14",
+      "15",
+      "13"
     ],
-    "correct": "2000"
+    "correct": "13"
   },
   {
-    "question": "237. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 7 + 14?",
     "options": [
-      "2004",
-      "2012",
-      "2008",
-      "2000"
+      "22",
+      "21",
+      "20",
+      "23"
     ],
-    "correct": "2004"
+    "correct": "21"
   },
   {
-    "question": "238. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay 8 + 9?",
     "options": [
-      "2010",
-      "2007",
-      "2005",
-      "2012"
+      "19",
+      "17",
+      "16",
+      "18"
     ],
-    "correct": "2007"
+    "correct": "17"
   },
   {
-    "question": "239. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay 9 + 4?",
     "options": [
-      "2008",
-      "2004",
-      "2012",
-      "2016"
+      "13",
+      "15",
+      "12",
+      "14"
     ],
-    "correct": "2012"
+    "correct": "13"
   },
   {
-    "question": "240. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay 10 + 11?",
     "options": [
-      "2010",
-      "2012",
-      "2017",
-      "2022"
+      "22",
+      "20",
+      "23",
+      "21"
     ],
-    "correct": "2012"
+    "correct": "21"
   },
   {
-    "question": "241. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 11 + 6?",
     "options": [
-      "1960",
-      "1945",
-      "1950",
-      "1943"
+      "17",
+      "18",
+      "19",
+      "16"
     ],
-    "correct": "1943"
+    "correct": "17"
   },
   {
-    "question": "242. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay 12 + 13?",
     "options": [
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Cali Mahdi",
-      "Siyaad Barre"
+      "27",
+      "25",
+      "24",
+      "26"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "25"
   },
   {
-    "question": "243. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay 2 + 8?",
     "options": [
-      "1965",
-      "1970",
-      "1960",
-      "1958"
+      "9",
+      "12",
+      "11",
+      "10"
     ],
-    "correct": "1960"
+    "correct": "10"
   },
   {
-    "question": "244. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay 3 + 3?",
     "options": [
-      "Daraawiishta",
-      "Maxkamadaha",
-      "Xisbigii SDP",
-      "SYL"
+      "5",
+      "8",
+      "7",
+      "6"
     ],
-    "correct": "Daraawiishta"
+    "correct": "6"
   },
   {
-    "question": "245. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay 4 + 10?",
     "options": [
-      "30 sano",
-      "20 sano",
-      "15 sano",
-      "10 sano"
+      "13",
+      "14",
+      "15",
+      "16"
     ],
-    "correct": "20 sano"
+    "correct": "14"
   },
   {
-    "question": "246. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay 5 + 5?",
     "options": [
-      "1980",
-      "1969",
-      "1972",
-      "1975"
+      "9",
+      "11",
+      "12",
+      "10"
     ],
-    "correct": "1972"
+    "correct": "10"
   },
   {
-    "question": "247. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay 6 + 12?",
     "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cumar Carte"
+      "19",
+      "18",
+      "20",
+      "17"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "18"
   },
   {
-    "question": "248. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay 7 + 7?",
     "options": [
-      "1977",
-      "1960",
-      "1969",
-      "1991"
+      "13",
+      "14",
+      "16",
+      "15"
     ],
-    "correct": "1969"
+    "correct": "14"
   },
   {
-    "question": "249. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay 8 + 14?",
     "options": [
-      "Afgambi",
-      "Doorasho",
-      "Heshiis",
-      "Dagaal"
+      "23",
+      "24",
+      "22",
+      "21"
     ],
-    "correct": "Afgambi"
+    "correct": "22"
   },
   {
-    "question": "250. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay 9 + 9?",
     "options": [
-      "1982",
-      "1977",
-      "1991",
-      "1965"
+      "17",
+      "20",
+      "19",
+      "18"
     ],
-    "correct": "1977"
+    "correct": "18"
   },
   {
-    "question": "251. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay 10 + 4?",
     "options": [
-      "Somali Youth Liberty",
-      "Somali Youth League",
-      "Somali Year League",
-      "Somali League Union"
+      "16",
+      "13",
+      "15",
+      "14"
     ],
-    "correct": "Somali Youth League"
+    "correct": "14"
   },
   {
-    "question": "252. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay 11 + 11?",
     "options": [
-      "2000",
-      "1991",
-      "1988",
-      "1995"
+      "24",
+      "21",
+      "23",
+      "22"
     ],
-    "correct": "1991"
+    "correct": "22"
   },
   {
-    "question": "253. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay 12 + 6?",
     "options": [
-      "1990",
-      "1991",
-      "1988",
-      "1995"
+      "20",
+      "19",
+      "17",
+      "18"
     ],
-    "correct": "1991"
+    "correct": "18"
   },
   {
-    "question": "254. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 2 + 13?",
     "options": [
-      "1995",
-      "2000",
-      "1998",
-      "2004"
+      "17",
+      "16",
+      "15",
+      "14"
     ],
-    "correct": "1998"
+    "correct": "15"
   },
   {
-    "question": "255. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay 3 + 8?",
     "options": [
-      "Jabuuti",
-      "Yemen",
-      "Itoobiya",
-      "Kenya"
+      "13",
+      "10",
+      "12",
+      "11"
     ],
-    "correct": "Jabuuti"
+    "correct": "11"
   },
   {
-    "question": "256. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay 4 + 3?",
     "options": [
-      "1998",
-      "2006",
-      "2004",
-      "2000"
+      "9",
+      "6",
+      "7",
+      "8"
     ],
-    "correct": "2000"
+    "correct": "7"
   },
   {
-    "question": "257. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 5 + 10?",
     "options": [
-      "2004",
-      "2000",
-      "2012",
-      "2008"
+      "14",
+      "15",
+      "16",
+      "17"
     ],
-    "correct": "2004"
+    "correct": "15"
   },
   {
-    "question": "258. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay 6 + 5?",
     "options": [
-      "2012",
-      "2005",
-      "2010",
-      "2007"
+      "13",
+      "12",
+      "10",
+      "11"
     ],
-    "correct": "2007"
+    "correct": "11"
   },
   {
-    "question": "259. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay 7 + 12?",
     "options": [
-      "2016",
-      "2004",
-      "2008",
-      "2012"
+      "18",
+      "21",
+      "19",
+      "20"
     ],
-    "correct": "2012"
+    "correct": "19"
   },
   {
-    "question": "260. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay 8 + 7?",
     "options": [
-      "2010",
-      "2017",
-      "2012",
-      "2022"
+      "16",
+      "17",
+      "15",
+      "14"
     ],
-    "correct": "2012"
+    "correct": "15"
   },
   {
-    "question": "261. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 9 + 14?",
     "options": [
-      "1943",
-      "1945",
-      "1950",
-      "1960"
+      "22",
+      "24",
+      "25",
+      "23"
     ],
-    "correct": "1943"
+    "correct": "23"
   },
   {
-    "question": "262. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay 10 + 9?",
     "options": [
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Aadan Cadde",
-      "Cali Mahdi"
+      "18",
+      "19",
+      "21",
+      "20"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "19"
   },
   {
-    "question": "263. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay 11 + 4?",
     "options": [
-      "1965",
-      "1960",
-      "1958",
-      "1970"
+      "17",
+      "16",
+      "14",
+      "15"
     ],
-    "correct": "1960"
+    "correct": "15"
   },
   {
-    "question": "264. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay 12 + 11?",
     "options": [
-      "Maxkamadaha",
-      "Xisbigii SDP",
-      "Daraawiishta",
-      "SYL"
+      "24",
+      "23",
+      "22",
+      "25"
     ],
-    "correct": "Daraawiishta"
+    "correct": "23"
   },
   {
-    "question": "265. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay 2 + 6?",
     "options": [
-      "20 sano",
-      "15 sano",
-      "10 sano",
-      "30 sano"
+      "9",
+      "8",
+      "10",
+      "7"
     ],
-    "correct": "20 sano"
+    "correct": "8"
   },
   {
-    "question": "266. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay 3 + 13?",
     "options": [
-      "1969",
-      "1972",
-      "1980",
-      "1975"
+      "18",
+      "16",
+      "17",
+      "15"
     ],
-    "correct": "1972"
+    "correct": "16"
   },
   {
-    "question": "267. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay 4 + 8?",
     "options": [
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Aadan Cadde"
+      "14",
+      "12",
+      "11",
+      "13"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "12"
   },
   {
-    "question": "268. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay 5 + 3?",
     "options": [
-      "1991",
-      "1977",
-      "1960",
-      "1969"
+      "8",
+      "7",
+      "10",
+      "9"
     ],
-    "correct": "1969"
+    "correct": "8"
   },
   {
-    "question": "269. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay 6 + 10?",
     "options": [
-      "Afgambi",
-      "Doorasho",
-      "Dagaal",
-      "Heshiis"
+      "16",
+      "18",
+      "15",
+      "17"
     ],
-    "correct": "Afgambi"
+    "correct": "16"
   },
   {
-    "question": "270. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay 7 + 5?",
     "options": [
-      "1982",
-      "1965",
-      "1977",
-      "1991"
+      "13",
+      "14",
+      "11",
+      "12"
     ],
-    "correct": "1977"
+    "correct": "12"
   },
   {
-    "question": "271. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay 8 + 12?",
     "options": [
-      "Somali Year League",
-      "Somali Youth League",
-      "Somali League Union",
-      "Somali Youth Liberty"
+      "19",
+      "21",
+      "22",
+      "20"
     ],
-    "correct": "Somali Youth League"
+    "correct": "20"
   },
   {
-    "question": "272. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay 9 + 7?",
     "options": [
-      "1991",
-      "1995",
-      "2000",
-      "1988"
+      "16",
+      "15",
+      "17",
+      "18"
     ],
-    "correct": "1991"
+    "correct": "16"
   },
   {
-    "question": "273. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay 10 + 14?",
     "options": [
-      "1991",
-      "1988",
-      "1990",
-      "1995"
+      "23",
+      "26",
+      "25",
+      "24"
     ],
-    "correct": "1991"
+    "correct": "24"
   },
   {
-    "question": "274. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 11 + 9?",
     "options": [
-      "1995",
-      "2000",
-      "2004",
-      "1998"
+      "20",
+      "19",
+      "22",
+      "21"
     ],
-    "correct": "1998"
+    "correct": "20"
   },
   {
-    "question": "275. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay 12 + 4?",
     "options": [
-      "Yemen",
-      "Itoobiya",
-      "Jabuuti",
-      "Kenya"
+      "16",
+      "17",
+      "15",
+      "18"
     ],
-    "correct": "Jabuuti"
+    "correct": "16"
   },
   {
-    "question": "276. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay 2 + 11?",
     "options": [
-      "2000",
-      "1998",
-      "2006",
-      "2004"
+      "15",
+      "13",
+      "12",
+      "14"
     ],
-    "correct": "2000"
+    "correct": "13"
   },
   {
-    "question": "277. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 3 + 6?",
     "options": [
-      "2008",
-      "2012",
-      "2004",
-      "2000"
+      "8",
+      "9",
+      "11",
+      "10"
     ],
-    "correct": "2004"
+    "correct": "9"
   },
   {
-    "question": "278. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay 4 + 13?",
     "options": [
-      "2005",
-      "2012",
-      "2007",
-      "2010"
+      "17",
+      "19",
+      "16",
+      "18"
     ],
-    "correct": "2007"
+    "correct": "17"
   },
   {
-    "question": "279. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay 5 + 8?",
     "options": [
-      "2012",
-      "2008",
-      "2016",
-      "2004"
+      "12",
+      "13",
+      "14",
+      "15"
     ],
-    "correct": "2012"
+    "correct": "13"
   },
   {
-    "question": "280. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay 6 + 3?",
     "options": [
-      "2012",
-      "2017",
-      "2022",
-      "2010"
+      "11",
+      "8",
+      "9",
+      "10"
     ],
-    "correct": "2012"
+    "correct": "9"
   },
   {
-    "question": "281. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 7 + 10?",
     "options": [
-      "1943",
-      "1950",
-      "1945",
-      "1960"
+      "19",
+      "18",
+      "16",
+      "17"
     ],
-    "correct": "1943"
+    "correct": "17"
   },
   {
-    "question": "282. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay 8 + 5?",
     "options": [
-      "Cali Mahdi",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre"
+      "12",
+      "13",
+      "15",
+      "14"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "13"
   },
   {
-    "question": "283. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay 9 + 12?",
     "options": [
-      "1960",
-      "1965",
-      "1958",
-      "1970"
+      "22",
+      "20",
+      "23",
+      "21"
     ],
-    "correct": "1960"
+    "correct": "21"
   },
   {
-    "question": "284. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay 10 + 7?",
     "options": [
-      "SYL",
-      "Maxkamadaha",
-      "Daraawiishta",
-      "Xisbigii SDP"
+      "19",
+      "17",
+      "18",
+      "16"
     ],
-    "correct": "Daraawiishta"
+    "correct": "17"
   },
   {
-    "question": "285. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay 11 + 14?",
     "options": [
-      "30 sano",
-      "15 sano",
-      "20 sano",
-      "10 sano"
+      "24",
+      "27",
+      "26",
+      "25"
     ],
-    "correct": "20 sano"
+    "correct": "25"
   },
   {
-    "question": "286. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay 12 + 9?",
     "options": [
-      "1972",
-      "1969",
-      "1975",
-      "1980"
+      "23",
+      "22",
+      "20",
+      "21"
     ],
-    "correct": "1972"
+    "correct": "21"
   },
   {
-    "question": "287. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay 2 + 4?",
     "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cumar Carte"
+      "5",
+      "7",
+      "6",
+      "8"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "6"
   },
   {
-    "question": "288. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay 3 + 11?",
     "options": [
-      "1991",
-      "1969",
-      "1977",
-      "1960"
+      "15",
+      "16",
+      "13",
+      "14"
     ],
-    "correct": "1969"
+    "correct": "14"
   },
   {
-    "question": "289. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay 4 + 6?",
     "options": [
-      "Doorasho",
-      "Dagaal",
-      "Afgambi",
-      "Heshiis"
+      "11",
+      "12",
+      "9",
+      "10"
     ],
-    "correct": "Afgambi"
+    "correct": "10"
   },
   {
-    "question": "290. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay 5 + 13?",
     "options": [
-      "1991",
-      "1965",
-      "1977",
-      "1982"
+      "20",
+      "17",
+      "18",
+      "19"
     ],
-    "correct": "1977"
+    "correct": "18"
   },
   {
-    "question": "291. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay 6 + 8?",
     "options": [
-      "Somali Youth League",
-      "Somali League Union",
-      "Somali Year League",
-      "Somali Youth Liberty"
+      "13",
+      "14",
+      "15",
+      "16"
     ],
-    "correct": "Somali Youth League"
+    "correct": "14"
   },
   {
-    "question": "292. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay 7 + 3?",
     "options": [
-      "1988",
-      "1995",
-      "2000",
-      "1991"
+      "11",
+      "12",
+      "10",
+      "9"
     ],
-    "correct": "1991"
+    "correct": "10"
   },
   {
-    "question": "293. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay 8 + 10?",
     "options": [
-      "1988",
-      "1991",
-      "1990",
-      "1995"
+      "17",
+      "18",
+      "19",
+      "20"
     ],
-    "correct": "1991"
+    "correct": "18"
   },
   {
-    "question": "294. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 9 + 5?",
     "options": [
-      "2000",
-      "1995",
-      "1998",
-      "2004"
+      "13",
+      "16",
+      "14",
+      "15"
     ],
-    "correct": "1998"
+    "correct": "14"
   },
   {
-    "question": "295. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay 10 + 12?",
     "options": [
-      "Kenya",
-      "Jabuuti",
-      "Itoobiya",
-      "Yemen"
+      "22",
+      "24",
+      "23",
+      "21"
     ],
-    "correct": "Jabuuti"
+    "correct": "22"
   },
   {
-    "question": "296. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay 11 + 7?",
     "options": [
-      "2006",
-      "1998",
-      "2000",
-      "2004"
+      "20",
+      "17",
+      "19",
+      "18"
     ],
-    "correct": "2000"
+    "correct": "18"
   },
   {
-    "question": "297. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 12 + 14?",
     "options": [
-      "2004",
-      "2012",
-      "2008",
-      "2000"
+      "25",
+      "27",
+      "28",
+      "26"
     ],
-    "correct": "2004"
+    "correct": "26"
   },
   {
-    "question": "298. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay 2 + 9?",
     "options": [
-      "2010",
-      "2005",
-      "2012",
-      "2007"
+      "12",
+      "11",
+      "13",
+      "10"
     ],
-    "correct": "2007"
+    "correct": "11"
   },
   {
-    "question": "299. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay 3 + 4?",
     "options": [
-      "2012",
-      "2008",
-      "2004",
-      "2016"
+      "6",
+      "9",
+      "8",
+      "7"
     ],
-    "correct": "2012"
+    "correct": "7"
   },
   {
-    "question": "300. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay 4 + 11?",
     "options": [
-      "2012",
-      "2022",
-      "2017",
-      "2010"
+      "17",
+      "16",
+      "15",
+      "14"
     ],
-    "correct": "2012"
+    "correct": "15"
   },
   {
-    "question": "301. Ururkii SYL waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 5 + 6?",
     "options": [
-      "1945",
-      "1960",
-      "1950",
-      "1943"
+      "13",
+      "11",
+      "10",
+      "12"
     ],
-    "correct": "1943"
+    "correct": "11"
   },
   {
-    "question": "302. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
+    "question": "Waa maxay 6 + 13?",
     "options": [
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Cali Mahdi"
+      "19",
+      "18",
+      "20",
+      "21"
     ],
-    "correct": "Aadan Cadde"
+    "correct": "19"
   },
   {
-    "question": "303. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
+    "question": "Waa maxay 7 + 8?",
     "options": [
-      "1960",
-      "1965",
-      "1970",
-      "1958"
+      "16",
+      "17",
+      "15",
+      "14"
     ],
-    "correct": "1960"
+    "correct": "15"
   },
   {
-    "question": "304. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
+    "question": "Waa maxay 8 + 3?",
     "options": [
-      "Xisbigii SDP",
-      "Daraawiishta",
-      "SYL",
-      "Maxkamadaha"
+      "10",
+      "13",
+      "12",
+      "11"
     ],
-    "correct": "Daraawiishta"
+    "correct": "11"
   },
   {
-    "question": "305. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
+    "question": "Waa maxay 9 + 10?",
     "options": [
-      "30 sano",
-      "15 sano",
-      "10 sano",
-      "20 sano"
+      "20",
+      "19",
+      "18",
+      "21"
     ],
-    "correct": "20 sano"
+    "correct": "19"
   },
   {
-    "question": "306. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
+    "question": "Waa maxay 10 + 5?",
     "options": [
-      "1972",
-      "1969",
-      "1975",
-      "1980"
+      "16",
+      "14",
+      "15",
+      "17"
     ],
-    "correct": "1972"
+    "correct": "15"
   },
   {
-    "question": "307. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
+    "question": "Waa maxay 11 + 12?",
     "options": [
-      "Cumar Carte",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre"
+      "25",
+      "22",
+      "24",
+      "23"
     ],
-    "correct": "Cabdirashiid Sharmaarke"
+    "correct": "23"
   },
   {
-    "question": "308. Kacaankii militariga Soomaaliya wuxuu dhacay?",
+    "question": "Waa maxay 12 + 7?",
     "options": [
-      "1991",
-      "1977",
-      "1960",
-      "1969"
+      "21",
+      "20",
+      "19",
+      "18"
     ],
-    "correct": "1969"
+    "correct": "19"
   },
   {
-    "question": "309. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
+    "question": "Waa maxay 2 + 14?",
     "options": [
-      "Afgambi",
-      "Doorasho",
-      "Dagaal",
-      "Heshiis"
+      "15",
+      "16",
+      "17",
+      "18"
     ],
-    "correct": "Afgambi"
+    "correct": "16"
   },
   {
-    "question": "310. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
+    "question": "Waa maxay 3 + 9?",
     "options": [
-      "1977",
-      "1991",
-      "1965",
-      "1982"
+      "13",
+      "11",
+      "14",
+      "12"
     ],
-    "correct": "1977"
+    "correct": "12"
   },
   {
-    "question": "311. Ururkii SYL micnihiisu waa?",
+    "question": "Waa maxay 4 + 4?",
     "options": [
-      "Somali League Union",
-      "Somali Youth Liberty",
-      "Somali Youth League",
-      "Somali Year League"
+      "9",
+      "7",
+      "10",
+      "8"
     ],
-    "correct": "Somali Youth League"
+    "correct": "8"
   },
   {
-    "question": "312. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
+    "question": "Waa maxay 5 + 11?",
     "options": [
-      "1995",
-      "1991",
-      "2000",
-      "1988"
+      "16",
+      "15",
+      "18",
+      "17"
     ],
-    "correct": "1991"
+    "correct": "16"
   },
   {
-    "question": "313. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
+    "question": "Waa maxay 6 + 6?",
     "options": [
-      "1988",
-      "1991",
-      "1990",
-      "1995"
+      "13",
+      "11",
+      "12",
+      "14"
     ],
-    "correct": "1991"
+    "correct": "12"
   },
   {
-    "question": "314. Puntland waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 7 + 13?",
     "options": [
-      "1998",
-      "1995",
-      "2004",
-      "2000"
+      "19",
+      "20",
+      "21",
+      "22"
     ],
-    "correct": "1998"
+    "correct": "20"
   },
   {
-    "question": "315. Magaalada Carta waxay ku taallaa dalka?",
+    "question": "Waa maxay 8 + 8?",
     "options": [
-      "Jabuuti",
-      "Itoobiya",
-      "Yemen",
-      "Kenya"
+      "17",
+      "15",
+      "16",
+      "18"
     ],
-    "correct": "Jabuuti"
+    "correct": "16"
   },
   {
-    "question": "316. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
+    "question": "Waa maxay 9 + 3?",
     "options": [
-      "1998",
-      "2004",
-      "2006",
-      "2000"
+      "14",
+      "12",
+      "13",
+      "11"
     ],
-    "correct": "2000"
+    "correct": "12"
   },
   {
-    "question": "317. TFG waxaa la aasaasay sanadkee?",
+    "question": "Waa maxay 10 + 10?",
     "options": [
-      "2012",
-      "2000",
-      "2004",
-      "2008"
+      "22",
+      "19",
+      "20",
+      "21"
     ],
-    "correct": "2004"
+    "correct": "20"
   },
   {
-    "question": "318. AMISOM waxay Soomaaliya timid sanadkee?",
+    "question": "Waa maxay 11 + 5?",
     "options": [
-      "2012",
-      "2005",
-      "2007",
-      "2010"
+      "18",
+      "17",
+      "15",
+      "16"
     ],
-    "correct": "2007"
+    "correct": "16"
   },
   {
-    "question": "319. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
+    "question": "Waa maxay 12 + 12?",
     "options": [
-      "2016",
-      "2012",
-      "2008",
-      "2004"
+      "26",
+      "24",
+      "25",
+      "23"
     ],
-    "correct": "2012"
+    "correct": "24"
   },
   {
-    "question": "320. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
+    "question": "Waa maxay 2 + 7?",
     "options": [
-      "2017",
-      "2022",
-      "2012",
-      "2010"
+      "10",
+      "11",
+      "9",
+      "8"
     ],
-    "correct": "2012"
-  },
-  {
-    "question": "321. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1943",
-      "1950",
-      "1960",
-      "1945"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "322. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Cali Mahdi"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "323. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1958",
-      "1965",
-      "1970",
-      "1960"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "324. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Xisbigii SDP",
-      "Daraawiishta",
-      "Maxkamadaha",
-      "SYL"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "325. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "10 sano",
-      "30 sano",
-      "15 sano",
-      "20 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "326. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1980",
-      "1975",
-      "1972",
-      "1969"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "327. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Cabdirashiid Sharmaarke",
-      "Cumar Carte",
-      "Siyaad Barre",
-      "Aadan Cadde"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "328. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1960",
-      "1991",
-      "1969",
-      "1977"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "329. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Dagaal",
-      "Afgambi",
-      "Heshiis",
-      "Doorasho"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "330. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1977",
-      "1982",
-      "1991",
-      "1965"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "331. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali League Union",
-      "Somali Youth League",
-      "Somali Year League",
-      "Somali Youth Liberty"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "332. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1995",
-      "1988",
-      "2000",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "333. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1995",
-      "1990",
-      "1988",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "334. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1995",
-      "2000",
-      "2004",
-      "1998"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "335. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Yemen",
-      "Itoobiya",
-      "Kenya"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "336. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2004",
-      "1998",
-      "2000",
-      "2006"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "337. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2008",
-      "2000",
-      "2012",
-      "2004"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "338. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2005",
-      "2012",
-      "2007",
-      "2010"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "339. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2012",
-      "2008",
-      "2016",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "340. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2012",
-      "2010",
-      "2022",
-      "2017"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "341. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1943",
-      "1960",
-      "1945",
-      "1950"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "342. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Aadan Cadde",
-      "Cali Mahdi",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "343. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1970",
-      "1960",
-      "1958",
-      "1965"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "344. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Maxkamadaha",
-      "Daraawiishta",
-      "Xisbigii SDP",
-      "SYL"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "345. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "30 sano",
-      "15 sano",
-      "20 sano",
-      "10 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "346. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1969",
-      "1975",
-      "1972",
-      "1980"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "347. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Aadan Cadde",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Cumar Carte"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "348. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1960",
-      "1991",
-      "1969",
-      "1977"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "349. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Heshiis",
-      "Afgambi",
-      "Doorasho",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "350. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1982",
-      "1977",
-      "1991",
-      "1965"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "351. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali League Union",
-      "Somali Youth Liberty",
-      "Somali Youth League",
-      "Somali Year League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "352. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1995",
-      "1988",
-      "2000",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "353. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1988",
-      "1991",
-      "1990",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "354. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "2000",
-      "2004",
-      "1998",
-      "1995"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "355. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Itoobiya",
-      "Kenya",
-      "Yemen"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "356. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2006",
-      "1998",
-      "2004",
-      "2000"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "357. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2008",
-      "2000",
-      "2004",
-      "2012"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "358. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2010",
-      "2007",
-      "2005",
-      "2012"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "359. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2008",
-      "2016",
-      "2004",
-      "2012"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "360. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2012",
-      "2010",
-      "2022",
-      "2017"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "361. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1943",
-      "1945",
-      "1960",
-      "1950"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "362. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cali Mahdi"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "363. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1960",
-      "1965",
-      "1970",
-      "1958"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "364. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Daraawiishta",
-      "SYL",
-      "Xisbigii SDP",
-      "Maxkamadaha"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "365. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "20 sano",
-      "30 sano",
-      "10 sano",
-      "15 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "366. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1980",
-      "1969",
-      "1975",
-      "1972"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "367. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Cumar Carte",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "368. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1977",
-      "1991",
-      "1960",
-      "1969"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "369. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Afgambi",
-      "Doorasho",
-      "Heshiis",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "370. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1982",
-      "1991",
-      "1977",
-      "1965"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "371. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth Liberty",
-      "Somali Year League",
-      "Somali League Union",
-      "Somali Youth League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "372. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "2000",
-      "1995",
-      "1991",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "373. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1988",
-      "1991",
-      "1995",
-      "1990"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "374. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1998",
-      "1995",
-      "2004",
-      "2000"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "375. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Itoobiya",
-      "Kenya",
-      "Yemen",
-      "Jabuuti"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "376. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2004",
-      "2000",
-      "2006",
-      "1998"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "377. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2012",
-      "2008",
-      "2000",
-      "2004"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "378. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2012",
-      "2010",
-      "2007",
-      "2005"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "379. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2012",
-      "2008",
-      "2016",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "380. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2022",
-      "2012",
-      "2017",
-      "2010"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "381. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1960",
-      "1950",
-      "1943",
-      "1945"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "382. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Siyaad Barre",
-      "Cali Mahdi"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "383. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1960",
-      "1970",
-      "1958",
-      "1965"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "384. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Daraawiishta",
-      "Maxkamadaha",
-      "Xisbigii SDP",
-      "SYL"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "385. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "10 sano",
-      "30 sano",
-      "20 sano",
-      "15 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "386. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1972",
-      "1980",
-      "1969",
-      "1975"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "387. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cumar Carte",
-      "Siyaad Barre"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "388. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1969",
-      "1991",
-      "1960",
-      "1977"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "389. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Heshiis",
-      "Doorasho",
-      "Afgambi",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "390. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1982",
-      "1991",
-      "1965",
-      "1977"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "391. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth Liberty",
-      "Somali League Union",
-      "Somali Youth League",
-      "Somali Year League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "392. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "2000",
-      "1991",
-      "1995",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "393. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1995",
-      "1991",
-      "1990",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "394. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "2004",
-      "1995",
-      "2000",
-      "1998"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "395. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Itoobiya",
-      "Jabuuti",
-      "Yemen",
-      "Kenya"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "396. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2000",
-      "2006",
-      "2004",
-      "1998"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "397. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2008",
-      "2012",
-      "2004",
-      "2000"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "398. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2012",
-      "2010",
-      "2007",
-      "2005"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "399. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2004",
-      "2008",
-      "2016",
-      "2012"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "400. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2012",
-      "2017",
-      "2022",
-      "2010"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "401. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1945",
-      "1960",
-      "1943",
-      "1950"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "402. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Aadan Cadde",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Cali Mahdi"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "403. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1965",
-      "1960",
-      "1958",
-      "1970"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "404. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Xisbigii SDP",
-      "SYL",
-      "Daraawiishta",
-      "Maxkamadaha"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "405. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "10 sano",
-      "15 sano",
-      "30 sano",
-      "20 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "406. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1975",
-      "1969",
-      "1980",
-      "1972"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "407. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "408. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1960",
-      "1991",
-      "1969",
-      "1977"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "409. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Heshiis",
-      "Doorasho",
-      "Afgambi",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "410. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1982",
-      "1977",
-      "1965"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "411. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali League Union",
-      "Somali Year League",
-      "Somali Youth League",
-      "Somali Youth Liberty"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "412. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1995",
-      "2000",
-      "1988",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "413. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1995",
-      "1988",
-      "1991",
-      "1990"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "414. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "2004",
-      "1995",
-      "1998",
-      "2000"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "415. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Yemen",
-      "Kenya",
-      "Itoobiya"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "416. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2006",
-      "2000",
-      "2004",
-      "1998"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "417. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2012",
-      "2000",
-      "2004",
-      "2008"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "418. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2005",
-      "2012",
-      "2007",
-      "2010"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "419. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2016",
-      "2008",
-      "2012",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "420. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2010",
-      "2017",
-      "2012",
-      "2022"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "421. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1950",
-      "1960",
-      "1945",
-      "1943"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "422. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Aadan Cadde",
-      "Cali Mahdi",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "423. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1960",
-      "1970",
-      "1958",
-      "1965"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "424. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Maxkamadaha",
-      "Daraawiishta",
-      "SYL",
-      "Xisbigii SDP"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "425. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "15 sano",
-      "20 sano",
-      "10 sano",
-      "30 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "426. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1980",
-      "1972",
-      "1969",
-      "1975"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "427. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Aadan Cadde",
-      "Cumar Carte",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "428. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1969",
-      "1960",
-      "1977"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "429. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Heshiis",
-      "Doorasho",
-      "Afgambi",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "430. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1965",
-      "1982",
-      "1977"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "431. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth League",
-      "Somali Year League",
-      "Somali League Union",
-      "Somali Youth Liberty"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "432. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1988",
-      "2000",
-      "1995",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "433. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1995",
-      "1990",
-      "1988",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "434. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "2000",
-      "2004",
-      "1998",
-      "1995"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "435. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Itoobiya",
-      "Kenya",
-      "Yemen",
-      "Jabuuti"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "436. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "1998",
-      "2000",
-      "2006",
-      "2004"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "437. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2012",
-      "2000",
-      "2004",
-      "2008"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "438. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2010",
-      "2007",
-      "2012",
-      "2005"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "439. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2008",
-      "2016",
-      "2012",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "440. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2022",
-      "2017",
-      "2012",
-      "2010"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "441. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1950",
-      "1945",
-      "1960",
-      "1943"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "442. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Cali Mahdi",
-      "Aadan Cadde"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "443. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1970",
-      "1965",
-      "1960",
-      "1958"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "444. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "SYL",
-      "Maxkamadaha",
-      "Daraawiishta",
-      "Xisbigii SDP"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "445. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "20 sano",
-      "10 sano",
-      "15 sano",
-      "30 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "446. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1975",
-      "1969",
-      "1980",
-      "1972"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "447. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Aadan Cadde",
-      "Cumar Carte",
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "448. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1977",
-      "1960",
-      "1969"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "449. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Doorasho",
-      "Dagaal",
-      "Afgambi",
-      "Heshiis"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "450. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1982",
-      "1977",
-      "1965",
-      "1991"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "451. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali League Union",
-      "Somali Youth Liberty",
-      "Somali Year League",
-      "Somali Youth League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "452. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1995",
-      "1988",
-      "2000",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "453. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1991",
-      "1995",
-      "1990",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "454. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1998",
-      "2000",
-      "2004",
-      "1995"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "455. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Yemen",
-      "Itoobiya",
-      "Kenya"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "456. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "1998",
-      "2000",
-      "2004",
-      "2006"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "457. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2000",
-      "2004",
-      "2008",
-      "2012"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "458. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2007",
-      "2005",
-      "2012",
-      "2010"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "459. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2008",
-      "2012",
-      "2016",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "460. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2017",
-      "2012",
-      "2010",
-      "2022"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "461. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1943",
-      "1950",
-      "1960",
-      "1945"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "462. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Aadan Cadde",
-      "Cali Mahdi"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "463. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1970",
-      "1960",
-      "1965",
-      "1958"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "464. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Maxkamadaha",
-      "SYL",
-      "Xisbigii SDP",
-      "Daraawiishta"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "465. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "15 sano",
-      "30 sano",
-      "10 sano",
-      "20 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "466. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1980",
-      "1972",
-      "1969",
-      "1975"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "467. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Aadan Cadde",
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "468. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1960",
-      "1969",
-      "1977"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "469. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Heshiis",
-      "Dagaal",
-      "Doorasho",
-      "Afgambi"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "470. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1965",
-      "1982",
-      "1977"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "471. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth Liberty",
-      "Somali Year League",
-      "Somali League Union",
-      "Somali Youth League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "472. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1991",
-      "1988",
-      "2000",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "473. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1990",
-      "1995",
-      "1991",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "474. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1995",
-      "2000",
-      "2004",
-      "1998"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "475. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Itoobiya",
-      "Kenya",
-      "Yemen"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "476. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2006",
-      "2000",
-      "1998",
-      "2004"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "477. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2008",
-      "2012",
-      "2004",
-      "2000"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "478. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2005",
-      "2012",
-      "2010",
-      "2007"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "479. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2012",
-      "2004",
-      "2016",
-      "2008"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "480. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2017",
-      "2022",
-      "2010",
-      "2012"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "481. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1945",
-      "1960",
-      "1943",
-      "1950"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "482. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Siyaad Barre",
-      "Cali Mahdi",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "483. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1965",
-      "1960",
-      "1970",
-      "1958"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "484. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Daraawiishta",
-      "Maxkamadaha",
-      "SYL",
-      "Xisbigii SDP"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "485. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "15 sano",
-      "30 sano",
-      "20 sano",
-      "10 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "486. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1980",
-      "1972",
-      "1975",
-      "1969"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "487. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cumar Carte",
-      "Siyaad Barre"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "488. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1977",
-      "1960",
-      "1969",
-      "1991"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "489. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Doorasho",
-      "Heshiis",
-      "Afgambi",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "490. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1982",
-      "1991",
-      "1965",
-      "1977"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "491. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth Liberty",
-      "Somali Youth League",
-      "Somali League Union",
-      "Somali Year League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "492. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1988",
-      "2000",
-      "1995",
-      "1991"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "493. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1991",
-      "1990",
-      "1995",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "494. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1998",
-      "2000",
-      "1995",
-      "2004"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "495. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Kenya",
-      "Itoobiya",
-      "Yemen",
-      "Jabuuti"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "496. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2000",
-      "2004",
-      "1998",
-      "2006"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "497. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2012",
-      "2000",
-      "2004",
-      "2008"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "498. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2012",
-      "2005",
-      "2007",
-      "2010"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "499. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2012",
-      "2008",
-      "2016",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "500. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2012",
-      "2022",
-      "2010",
-      "2017"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "501. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1943",
-      "1960",
-      "1950",
-      "1945"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "502. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Cali Mahdi"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "503. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1965",
-      "1960",
-      "1970",
-      "1958"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "504. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Daraawiishta",
-      "SYL",
-      "Xisbigii SDP",
-      "Maxkamadaha"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "505. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "30 sano",
-      "20 sano",
-      "15 sano",
-      "10 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "506. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1972",
-      "1975",
-      "1980",
-      "1969"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "507. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "508. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1960",
-      "1977",
-      "1969"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "509. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Heshiis",
-      "Doorasho",
-      "Afgambi",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "510. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1977",
-      "1965",
-      "1982",
-      "1991"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "511. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth Liberty",
-      "Somali League Union",
-      "Somali Youth League",
-      "Somali Year League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "512. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1991",
-      "1988",
-      "2000",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "513. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1991",
-      "1990",
-      "1988",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "514. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1998",
-      "2004",
-      "1995",
-      "2000"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "515. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Yemen",
-      "Kenya",
-      "Jabuuti",
-      "Itoobiya"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "516. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "1998",
-      "2000",
-      "2004",
-      "2006"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "517. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2008",
-      "2012",
-      "2004",
-      "2000"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "518. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2012",
-      "2010",
-      "2007",
-      "2005"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "519. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2004",
-      "2012",
-      "2008",
-      "2016"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "520. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2012",
-      "2022",
-      "2010",
-      "2017"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "521. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1950",
-      "1945",
-      "1960",
-      "1943"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "522. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Siyaad Barre",
-      "Aadan Cadde",
-      "Cali Mahdi",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "523. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1970",
-      "1960",
-      "1958",
-      "1965"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "524. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Daraawiishta",
-      "Xisbigii SDP",
-      "SYL",
-      "Maxkamadaha"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "525. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "10 sano",
-      "15 sano",
-      "30 sano",
-      "20 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "526. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1969",
-      "1980",
-      "1975",
-      "1972"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "527. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "528. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1969",
-      "1977",
-      "1991",
-      "1960"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "529. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Doorasho",
-      "Heshiis",
-      "Afgambi",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "530. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1965",
-      "1977",
-      "1991",
-      "1982"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "531. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth League",
-      "Somali Youth Liberty",
-      "Somali Year League",
-      "Somali League Union"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "532. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1991",
-      "2000",
-      "1988",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "533. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1988",
-      "1991",
-      "1990",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "534. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "2004",
-      "1995",
-      "1998",
-      "2000"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "535. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Itoobiya",
-      "Kenya",
-      "Yemen",
-      "Jabuuti"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "536. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2006",
-      "2004",
-      "1998",
-      "2000"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "537. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2012",
-      "2004",
-      "2000",
-      "2008"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "538. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2005",
-      "2007",
-      "2010",
-      "2012"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "539. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2012",
-      "2004",
-      "2008",
-      "2016"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "540. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2022",
-      "2010",
-      "2017",
-      "2012"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "541. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1960",
-      "1943",
-      "1950",
-      "1945"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "542. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Siyaad Barre",
-      "Cali Mahdi",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "543. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1960",
-      "1970",
-      "1965",
-      "1958"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "544. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Xisbigii SDP",
-      "Maxkamadaha",
-      "Daraawiishta",
-      "SYL"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "545. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "10 sano",
-      "30 sano",
-      "20 sano",
-      "15 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "546. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1969",
-      "1975",
-      "1980",
-      "1972"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "547. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Cumar Carte"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "548. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1977",
-      "1991",
-      "1969",
-      "1960"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "549. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Afgambi",
-      "Doorasho",
-      "Dagaal",
-      "Heshiis"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "550. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1977",
-      "1982",
-      "1965"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "551. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth Liberty",
-      "Somali League Union",
-      "Somali Youth League",
-      "Somali Year League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "552. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "2000",
-      "1988",
-      "1991",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "553. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1991",
-      "1995",
-      "1990",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "554. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "2004",
-      "2000",
-      "1995",
-      "1998"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "555. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Yemen",
-      "Jabuuti",
-      "Itoobiya",
-      "Kenya"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "556. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2000",
-      "2006",
-      "1998",
-      "2004"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "557. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2000",
-      "2012",
-      "2008",
-      "2004"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "558. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2012",
-      "2005",
-      "2007",
-      "2010"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "559. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2008",
-      "2016",
-      "2012",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "560. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2012",
-      "2010",
-      "2022",
-      "2017"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "561. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1960",
-      "1950",
-      "1945",
-      "1943"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "562. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Cali Mahdi",
-      "Cabdirashiid Sharmaarke",
-      "Aadan Cadde",
-      "Siyaad Barre"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "563. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1965",
-      "1958",
-      "1970",
-      "1960"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "564. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Daraawiishta",
-      "Xisbigii SDP",
-      "SYL",
-      "Maxkamadaha"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "565. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "15 sano",
-      "30 sano",
-      "10 sano",
-      "20 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "566. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1975",
-      "1969",
-      "1980",
-      "1972"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "567. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Cumar Carte",
-      "Aadan Cadde"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "568. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1960",
-      "1969",
-      "1977",
-      "1991"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "569. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Afgambi",
-      "Heshiis",
-      "Dagaal",
-      "Doorasho"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "570. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1965",
-      "1977",
-      "1982",
-      "1991"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "571. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth Liberty",
-      "Somali Youth League",
-      "Somali League Union",
-      "Somali Year League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "572. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1988",
-      "1991",
-      "1995",
-      "2000"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "573. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1990",
-      "1988",
-      "1991",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "574. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1998",
-      "2004",
-      "2000",
-      "1995"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "575. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Kenya",
-      "Itoobiya",
-      "Yemen"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "576. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2004",
-      "1998",
-      "2006",
-      "2000"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "577. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2000",
-      "2012",
-      "2004",
-      "2008"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "578. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2007",
-      "2005",
-      "2012",
-      "2010"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "579. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2012",
-      "2008",
-      "2004",
-      "2016"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "580. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2010",
-      "2012",
-      "2022",
-      "2017"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "581. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1943",
-      "1945",
-      "1960",
-      "1950"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "582. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Cali Mahdi",
-      "Cabdirashiid Sharmaarke",
-      "Siyaad Barre",
-      "Aadan Cadde"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "583. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1960",
-      "1970",
-      "1965",
-      "1958"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "584. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Maxkamadaha",
-      "SYL",
-      "Xisbigii SDP",
-      "Daraawiishta"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "585. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "15 sano",
-      "30 sano",
-      "20 sano",
-      "10 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "586. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1975",
-      "1969",
-      "1980",
-      "1972"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "587. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Siyaad Barre",
-      "Aadan Cadde",
-      "Cumar Carte",
-      "Cabdirashiid Sharmaarke"
-    ],
-    "correct": "Cabdirashiid Sharmaarke"
-  },
-  {
-    "question": "588. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1960",
-      "1977",
-      "1991",
-      "1969"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "589. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Dagaal",
-      "Heshiis",
-      "Doorasho",
-      "Afgambi"
-    ],
-    "correct": "Afgambi"
-  },
-  {
-    "question": "590. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1977",
-      "1982",
-      "1991",
-      "1965"
-    ],
-    "correct": "1977"
-  },
-  {
-    "question": "591. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Youth League",
-      "Somali Youth Liberty",
-      "Somali League Union",
-      "Somali Year League"
-    ],
-    "correct": "Somali Youth League"
-  },
-  {
-    "question": "592. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1991",
-      "1988",
-      "2000",
-      "1995"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "593. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1991",
-      "1990",
-      "1995",
-      "1988"
-    ],
-    "correct": "1991"
-  },
-  {
-    "question": "594. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "1995",
-      "2000",
-      "1998",
-      "2004"
-    ],
-    "correct": "1998"
-  },
-  {
-    "question": "595. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Itoobiya",
-      "Yemen",
-      "Kenya"
-    ],
-    "correct": "Jabuuti"
-  },
-  {
-    "question": "596. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "1998",
-      "2000",
-      "2004",
-      "2006"
-    ],
-    "correct": "2000"
-  },
-  {
-    "question": "597. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2004",
-      "2008",
-      "2012",
-      "2000"
-    ],
-    "correct": "2004"
-  },
-  {
-    "question": "598. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2005",
-      "2012",
-      "2007",
-      "2010"
-    ],
-    "correct": "2007"
-  },
-  {
-    "question": "599. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2012",
-      "2008",
-      "2016",
-      "2004"
-    ],
-    "correct": "2012"
-  },
-  {
-    "question": "600. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2010",
-      "2017",
-      "2022",
-      "2012"
-    ],
-    "correct": "2012"
+    "correct": "9"
   }
 ]
