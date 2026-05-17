@@ -7,7 +7,7 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData, saveData, activeGames } = require('../store');
-const { checkUser, getLevel } = require('../utils/helpers');
+const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
 const { markSeenForGame } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
 const {
@@ -172,7 +172,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     const embed = new EmbedBuilder()
         .setTitle(`📊 Su'aal ${qNumber}/${total}`)
         .setDescription(
-            `## ${q.question}\n\n` +
+            `## ${stripQuestionNumber(q.question)}\n\n` +
             `${scoreHint}\n` +
             (streakLine ? `${streakLine}\n` : '') +
             `🏆 Dhibco hadda: **${game.totalPoints || 0}** pts`

@@ -9,7 +9,7 @@ const {
 } = require('discord.js');
 const { userData, saveData } = require('../store');
 const { econData, saveEcon, checkEconUser } = require('../economy/econStore');
-const { checkUser } = require('../utils/helpers');
+const { checkUser, stripQuestionNumber } = require('../utils/helpers');
 const {
     pickQuestionsForGame,
     markSeenForUsersInGame,
@@ -403,7 +403,7 @@ async function sendTeamDuelQuestion(channel, channelId) {
         .setTitle(`⚔️ Team Duel — Su'aal ${qIndex + 1}/${state.totalQ}`)
         .setColor('#9b59b6')
         .setDescription(
-            `## ${q.question}\n\n` +
+            `## ${stripQuestionNumber(q.question)}\n\n` +
             `⏱️ ${GLOBAL_WAIT_MS / 1000} ilbiriqsi\n\n` +
             `🔵 Team 1: **${t1Score}** | 🔴 Team 2: **${t2Score}**`,
         );
@@ -466,7 +466,7 @@ async function sendTeamDuelQuestion(channel, channelId) {
             .setTitle(`⚔️ Team Duel — Su'aal ${qIndex + 1}/${cur.totalQ}`)
             .setColor('#2ecc71')
             .setDescription(
-                `## ${q.question}\n\n` +
+                `## ${stripQuestionNumber(q.question)}\n\n` +
                 `✅ **${correctLabel}**\n\n` +
                 `🔵 Team 1: **${newT1}** | 🔴 Team 2: **${newT2}**`,
             );

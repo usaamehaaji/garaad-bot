@@ -27,7 +27,7 @@ const {
     userData,
     saveData,
 } = require('../store');
-const { checkUser }          = require('../utils/helpers');
+const { checkUser, stripQuestionNumber } = require('../utils/helpers');
 const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 const { markUserPlayed }     = require('../utils/reminders');
 const {
@@ -621,7 +621,7 @@ async function cmdAdminNext(message) {
     if (!state) return message.channel.send(`⚠️ Tartan ma jiro.`);
 
     if (state.prevRoundQuestions?.length > 0) {
-        const recap  = state.prevRoundQuestions.map((q, i) => `**${i + 1}.** ${q.question}\n↳ ✅ **${q.correct}**`).join('\n\n');
+        const recap  = state.prevRoundQuestions.map((q, i) => `**${i + 1}.** ${stripQuestionNumber(q.question)}\n↳ ✅ **${q.correct}**`).join('\n\n');
         const chunks = [];
         let cur      = '';
         for (const line of recap.split('\n\n')) {
@@ -822,7 +822,7 @@ async function sendQuestion(state) {
     const embed = new EmbedBuilder()
         .setTitle(`🏁 ${meta.name} — Su'aal ${state.currentQ + 1}/${totalQ}`)
         .setDescription(
-            `## ${q.question}\n\n` +
+            `## ${stripQuestionNumber(q.question)}\n\n` +
             `${typeTag} · ⏱️ ${GLOBAL_WAIT_MS / 1000}s\n` +
             `⚡ < 5s = **40pts** · 18s = **5pts** — tartamayaasha: **${state.survivors.size}**`
         )
@@ -902,7 +902,7 @@ async function sendQuestion(state) {
             .join('\n');
 
         const sumEmbed = EmbedBuilder.from(embed)
-            .setDescription(`## ${q.question}\n\n${resultLine}\n\n📊 **Dhibcaha Wareegga:**\n${board || '—'}`);
+            .setDescription(`## ${stripQuestionNumber(q.question)}\n\n${resultLine}\n\n📊 **Dhibcaha Wareegga:**\n${board || '—'}`);
 
         await msg.edit({ embeds: [sumEmbed], components: [] }).catch(() => {});
         state.currentQ += 1;

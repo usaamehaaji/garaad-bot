@@ -5,7 +5,7 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 const { userData, saveData, activeDuels } = require('../store');
-const { checkUser, getLevel } = require('../utils/helpers');
+const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
 const { pickQuestionsForGame, markSeenForUsersInGame, noQuestionsLeftEmbed } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
 const {
@@ -149,7 +149,7 @@ async function sendDuelQuestion(channel, currentMsg = null) {
     const embed = new EmbedBuilder()
         .setTitle(`⚔️ Duel — Su'aal ${qIndex + 1}/${state.totalQ}`)
         .setDescription(
-            `## ${q.question}\n\n` +
+            `## ${stripQuestionNumber(q.question)}\n\n` +
             `⏱️ ${GLOBAL_WAIT_MS / 1000} ilbiriqsi — qofka ugu horreeya ee sax ayaa dhibic helaya!\n\n` +
             `📊 <@${state.p1}>: **${state.scores[state.p1]}** | <@${state.p2}>: **${state.scores[state.p2]}**`
         )
@@ -221,7 +221,7 @@ async function sendDuelQuestion(channel, currentMsg = null) {
         const summaryEmbed = new EmbedBuilder()
             .setTitle(`⚔️ Duel — Su'aal ${qIndex + 1}/${cur.totalQ}`)
             .setDescription(
-                `## ${q.question}\n\n${resultLine}\n\n` +
+                `## ${stripQuestionNumber(q.question)}\n\n${resultLine}\n\n` +
                 `📊 <@${cur.p1}>: **${cur.scores[cur.p1]}** | <@${cur.p2}>: **${cur.scores[cur.p2]}**`
             )
             .setColor(reason === 'correct' ? '#2ecc71' : '#e74c3c');

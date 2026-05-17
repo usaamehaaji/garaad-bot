@@ -14,7 +14,7 @@ const {
     MessageFlags,
 } = require('discord.js');
 const { userData, saveData, activeQuiz, activeTournament, isUserBusy } = require('../store');
-const { checkUser }                                                      = require('../utils/helpers');
+const { checkUser, stripQuestionNumber }                                 = require('../utils/helpers');
 const { canHostQuiz, bumpHostQuiz }                                      = require('../utils/hostQuota');
 const {
     pickQuestionsForGame,
@@ -275,7 +275,7 @@ async function sendQuizQuestion(state) {
     const embed = new EmbedBuilder()
         .setTitle(`👥 Quiz Koox — Su'aal ${state.currentQ + 1}/${totalQ}`)
         .setDescription(
-            `## ${q.question}\n\n` +
+            `## ${stripQuestionNumber(q.question)}\n\n` +
             `⏱️ **${GLOBAL_WAIT_MS / 1000}s** — Dhammaan waxay jawaabi karaan!\n` +
             `⚡ Kii ugu dhakhsaha sax ah badan helaa dhibco.\n` +
             `Ciyaartoy: **${state.players.size}**`
@@ -378,7 +378,7 @@ async function sendQuizQuestion(state) {
         const sumEmbed = new EmbedBuilder()
             .setTitle(`👥 Quiz Koox — Su'aal ${state.currentQ + 1}/${totalQ}`)
             .setDescription(
-                `## ${q.question}\n\n` +
+                `## ${stripQuestionNumber(q.question)}\n\n` +
                 `📌 Jawaabta saxda ah: **${correctLabel}**\n\n` +
                 `**Su'aashaas natiijadeeda:**\n${resultLines}${timeoutLine}\n\n` +
                 `📊 **Dhibcaha guud (top 5):**\n${leaderboard}`

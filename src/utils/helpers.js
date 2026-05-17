@@ -130,4 +130,9 @@ function fmt(n) {
     return String(n);
 }
 
-module.exports = { todayKey, checkUser, getLevel, addXp, shuffleArray, getDisplayTitle, saveData, fmt };
+// Lambarka horeba ka tir (tusaale: "85. Su'aal" → "Su'aal")
+function stripQuestionNumber(text) {
+    return String(text).replace(/^\d+\.\s*/, '');
+}
+
+module.exports = { todayKey, checkUser, getLevel, addXp, shuffleArray, getDisplayTitle, saveData, fmt, stripQuestionNumber };
