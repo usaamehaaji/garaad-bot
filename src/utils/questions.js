@@ -66,15 +66,18 @@ function pickQuestionsForGame(userId, game, count) {
     cleanExpiredSeenForGame(userId, game);
     cleanExpiredSeenTexts(userId);
 
-    const pool      = questionsByGame[game] || [];
-    const seenIdx   = getSeenForGame(userId, game);
-    const seenTxt   = getSeenTexts(userId);
-    const unseenIdx = [];
+    const pool        = questionsByGame[game] || [];
+    const seenIdx     = getSeenForGame(userId, game);
+    const seenTxt     = getSeenTexts(userId);
+    const unseenIdx   = [];
+    const pickedTxts  = new Set(); // prevent same text appearing twice in one pick
 
     for (let i = 0; i < pool.length; i++) {
         const q = pool[i];
-        if (i in seenIdx)           continue;
-        if (q.question in seenTxt)  continue;
+        if (i in seenIdx)                continue;
+        if (q.question in seenTxt)       continue;
+        if (pickedTxts.has(q.question))  continue;
+        pickedTxts.add(q.question);
         unseenIdx.push(i);
     }
 

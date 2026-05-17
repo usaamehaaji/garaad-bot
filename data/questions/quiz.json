@@ -390,16 +390,6 @@
     "correct": "Cali Bin Abi Taalib"
   },
   {
-    "question": "Caasimadda dalka Ruushka waa?",
-    "options": [
-      "Kyiv",
-      "Moscow",
-      "Warsaw",
-      "Prague"
-    ],
-    "correct": "Moscow"
-  },
-  {
     "question": "Waa maxay xubinta ugu weyn jirka bini'aadamka?",
     "options": [
       "Beerka",
@@ -5255,16 +5245,6 @@
     "correct": "120"
   },
   {
-    "question": "2⁸ = ?",
-    "options": [
-      "128",
-      "256",
-      "512",
-      "64"
-    ],
-    "correct": "256"
-  },
-  {
     "question": "Haddii x + 5 = 12, x = ?",
     "options": [
       "5",
@@ -8625,16 +8605,6 @@
     "correct": "Du'a iyo baryashada Alle"
   },
   {
-    "question": "Hamza (RA) goorma shahiid noqday?",
-    "options": [
-      "Dagaalkii Uhud — 625 CE",
-      "Dagaalkii Badar",
-      "Dagaalkii Khandaq",
-      "Dagaalkii Tabuk"
-    ],
-    "correct": "Dagaalkii Uhud — 625 CE"
-  },
-  {
     "question": "Dagaalkii Hunayn — goorma dhacay?",
     "options": [
       "630 CE — ka dib Fataxu Makkah",
@@ -9994,4 +9964,4 @@
     ],
     "correct": "Dulqaadashada — waa xoog ruuxiga ah — Alle jeceshahay dadka sabra"
   }
-] sualah af somali nadiif igu qor qof fahmi karo totalkooda isheeg file aha isii quiz.json u baxi
+]
