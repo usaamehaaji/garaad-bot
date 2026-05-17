@@ -14,15 +14,14 @@ const { TWO_WEEKS_MS, PREFIX }    = require('../config');
 // ───── Soo akhri su'aalaha game kasta ─────
 const GAMES = ['solo', 'duel', 'quiz', 'tournament'];
 const questionsByGame = {};
-const fallback        = require('../../data/questions.json');
 
 for (const game of GAMES) {
     try {
         const file = path.join(__dirname, '..', '..', 'data', 'questions', `${game}.json`);
         questionsByGame[game] = JSON.parse(fs.readFileSync(file, 'utf8'));
     } catch (e) {
-        console.warn(`[Questions] Faylka ${game}.json lama helin — fallback la isticmaalay`);
-        questionsByGame[game] = fallback;
+        console.warn(`[Questions] Faylka ${game}.json lama helin — poolka madhan yahay`);
+        questionsByGame[game] = [];
     }
 }
 
