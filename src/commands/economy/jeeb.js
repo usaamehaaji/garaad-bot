@@ -25,14 +25,6 @@ function buildJeebEmbed(userId, username) {
         return `\n💳 **Deen:** ${fmt(d.loan.owed)} BTC ${daysLeft > 0 ? `(${daysLeft} malin)` : '🔴 overdue'}`;
     })();
 
-    // Asset ugu yar
-    const assets = [
-        { label: '₿ BTC',      val: btc  },
-        { label: '🥇 Gold',    val: gold },
-        { label: '🏦 Bank',    val: bank },
-    ];
-    const lowest = assets.reduce((a, b) => b.val < a.val ? b : a);
-
     return new EmbedBuilder()
         .setTitle(`👜 Jeebka — ${username}${xirfadLabel}`)
         .setColor('#f39c12')
@@ -40,8 +32,7 @@ function buildJeebEmbed(userId, username) {
         .setDescription(
             `₿ **BTC:** ${fmt(btc)}\n` +
             `🥇 **Gold:** ${fmt(gold)}\n\n` +
-            `🏦 **Garaad Bank:** ${fmt(bank)} BTC\n\n` +
-            `📉 **Ugu yar:** ${lowest.label} — **${fmt(lowest.val)}**` +
+            `🏦 **Garaad Bank:** ${fmt(bank)} BTC` +
             loanLine
         )
         .setFooter({ text: `Garaad Economy • ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, iconURL: BTC_ICON });
