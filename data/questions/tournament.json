@@ -1,68 +1,309 @@
+```json
 [
-  {"question":"Caasimadda Australia waa Sydney.","options":["Run","Been"],"correct":"Been"},
-  {"question":"Quraan Kariimku wuxuu leeyahay 114 Suuro.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Dalka ugu weyn adduunka dhulka ahaan waa China.","options":["Run","Been"],"correct":"Been"},
-  {"question":"Nabi Muxammad (SCW) wuxuu ku dhashay Makkah.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Bini'aadamku wuxuu leeyahay 206 lafo.","options":["Run","Been"],"correct":"Run"},
-  {"question":"dadka dhiiga O- ayaa loo yaqaan 'Universal Donor'.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Soomaalida madaxtinimada waxay heshay 1960-kii.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Suurat Al-Fatixa ayaa ugu horraysay in la soo dejiyay.","options":["Run","Been"],"correct":"Been"},
-  {"question":"Tiirarka Islaamka waa shanta.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Caasimadda Canada waa Toronto.","options":["Run","Been"],"correct":"Been"},
-  {"question":"Shakespeare waxaa lagu magacaabaa 'The Bard of Avon'.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Dalka ugu yar adduunka waa Monaco.","options":["Run","Been"],"correct":"Been"},
-  {"question":"Zakat waa 2.5% hantida.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Malaariya waxaa keenta xumbaarta (mosquito).","options":["Run","Been"],"correct":"Run"},
-  {"question":"Vitamin C la'aantiis waxay keentaa cudurka Scurvy.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Olympics sanadkasta ayaa la qabtaa.","options":["Run","Been"],"correct":"Been"},
-  {"question":"2 x 2 = 5.","options":["Run","Been"],"correct":"Been"},
-  {"question":"Dhiiga Cas iyo Dhiiga Caddaan waxay ka mid yihiin unugyada dhiiga.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Penicillin waxaa helay Alexander Fleming.","options":["Run","Been"],"correct":"Run"},
-  {"question":"Nabi Muxammad (SCW) wuxuu geeriyooday sanadkii 632 Milaadiga.","options":["Run","Been"],"correct":"Run"},
-
-  {"question":"Caasimadda Japan waa?","options":["Osaka","Kyoto","Tokyo","Hiroshima"],"correct":"Tokyo"},
-  {"question":"Luqadda ugu badan dadka adduunka ku hadla waa?","options":["English","Spanish","Mandarin Chinese","Arabic"],"correct":"Mandarin Chinese"},
-  {"question":"Dalka ugu dheer adduunka waa?","options":["USA","China","Russia","Canada"],"correct":"Russia"},
-  {"question":"Telefoonka (telephone) waxaa soo afjaray?","options":["Thomas Edison","Alexander Graham Bell","Nikola Tesla","Albert Einstein"],"correct":"Alexander Graham Bell"},
-  {"question":"Dayaxa ugu horeeyay bini'aadanka ka degay sanadkee?","options":["1965","1969","1972","1961"],"correct":"1969"},
-  {"question":"Kooxda kubadda cagta waxaa ka ciyaara imisa qof?","options":["9","10","11","12"],"correct":"11"},
-  {"question":"Waa maxay gaaska badan ee hawada?","options":["Oxygen","Carbon Dioxide","Nitrogen","Hydrogen"],"correct":"Nitrogen"},
-  {"question":"Internetka isticmaalka guud goorma la soo saaray?","options":["1983","1991","1995","1989"],"correct":"1991"},
-
-  {"question":"Dagaalkii 2aad ee Adduunka (WW2) goorma bilaabmay?","options":["1935","1939","1941","1943"],"correct":"1939"},
-  {"question":"Ninkii ugu horeeyay Madaxweyne ka noqday Maraykanka waa?","options":["Abraham Lincoln","Thomas Jefferson","Benjamin Franklin","George Washington"],"correct":"George Washington"},
-  {"question":"Soomaalida goorma xoroobday?","options":["1956","1960","1963","1968"],"correct":"1960"},
-  {"question":"Siidhiga Colomb goorma helay Ameerika?","options":["1488","1492","1498","1504"],"correct":"1492"},
-  {"question":"Dagaalkii 1aad ee Adduunka (WW1) goorma dhammaaday?","options":["1916","1917","1918","1919"],"correct":"1918"},
-  {"question":"Warqadda Magna Carta goorma la saxiixay?","options":["1066","1215","1348","1453"],"correct":"1215"},
-  {"question":"Martin Luther King Jr. wuxuu la dooday xuquuqda?","options":["Haweenka","Carruurta","Madaniga (Civil Rights)","Shaqaalaha"],"correct":"Madaniga (Civil Rights)"},
-  {"question":"Nabi Muuse (AS) wuxuu ka soo jeeda?","options":["Ciraaq","Masar (Egypt)","Suuriya","Falastiin"],"correct":"Masar (Egypt)"},
-
-  {"question":"Zakatul-Fitr waxaa laga bixiyaa marka?","options":["Bilaabista Ramadan","Celiyada Ramadan","Dhammaadka Ramadan","Ciida Al-Adxaa"],"correct":"Dhammaadka Ramadan"},
-  {"question":"Muslimigu maalintii imisa jeer ayuu tukadaa?","options":["3","4","5","6"],"correct":"5"},
-  {"question":"Ramadan waa bisha imisaad ee sanadka Hijriga?","options":["7aad","8aad","9aad","10aad"],"correct":"9aad"},
-  {"question":"Tiirarka Islaamka ee 5ta meesha koowaad waxaa ku jira?","options":["Soomaali","Salaat","Shahada","Saum"],"correct":"Shahada"},
-  {"question":"Nisaab ee dahabka Zakat waa imisa gram?","options":["65g","75g","85g","95g"],"correct":"85g"},
-  {"question":"Hajka waa waajib markee?","options":["Mar sanadkiiba","Mar nolosha oo dhan haddii awood leh","Sanadkii kowaad ee Islaamka","Mar labaad ee nolosha"],"correct":"Mar nolosha oo dhan haddii awood leh"},
-  {"question":"Ciid Al-Adxaa goorma la qabtaa?","options":["10-ka Muharram","10-ka Dhul-Hijja","1-da Shawwaal","15-ka Sha'ban"],"correct":"10-ka Dhul-Hijja"},
-  {"question":"Waa maxay macnaha 'Zakat'?","options":["Soo tuuris","Nadiifin iyo korris","Sadaqo","Soo celis"],"correct":"Nadiifin iyo korris"},
-
-  {"question":"Wadnaha bini'aadanka saacaddii imisa jeer ayuu garaacaa (celcelis)?","options":["40-50","60-100","110-130","130-160"],"correct":"60-100"},
-  {"question":"Cudurka diabetes waxaa loola jeedaa?","options":["Dhiiga sare","Sonkorta dhiiga","Culeyska jirka","Xanuunka wadnaha"],"correct":"Sonkorta dhiiga"},
-  {"question":"Daawooyinka antibiotics waxay ka shaqeeyaan?","options":["Fayraska","Bakteeriyada","Faangaska","Dhibaatada maskaxda"],"correct":"Bakteeriyada"},
-  {"question":"Jimicsiga maalinta imisa daqiiqo ayaa caafimaad u fiicaan?","options":["10 daqiiqo","20 daqiiqo","30 daqiiqo","60 daqiiqo"],"correct":"30 daqiiqo"},
-  {"question":"Neefta caadiga ah bini'aadanka waa imisa jeer daqiiqaddii?","options":["8-10","12-20","25-30","35-40"],"correct":"12-20"},
-  {"question":"Dareeraha ugu badan jidhka bini'aadanka waa?","options":["Dhiig","Biyo","Dufan","Qajiis"],"correct":"Biyo"},
-
-  {"question":"√169 = ?","options":["11","12","13","14"],"correct":"13"},
-  {"question":"20% of 500 = ?","options":["80","100","120","150"],"correct":"100"},
-  {"question":"2⁴ = ?","options":["8","12","16","20"],"correct":"16"},
-  {"question":"1,000 ÷ 40 = ?","options":["20","25","30","40"],"correct":"25"},
-  {"question":"Haddii aad iibsato 3 shay oo mid kasta $15 ah, guud ahaan meesha bixisaa?","options":["$30","$40","$45","$50"],"correct":"$45"},
-  {"question":"Saddex-xagal goobaabka (perimeter) haddii dhammaan dhinacyadiisu yihiin 8, guud waa?","options":["16","20","24","32"],"correct":"24"},
-
-  {"question":"'She ___ to school every day.' — Buuxi meesha bannaan:","options":["go","goes","going","gone"],"correct":"goes"},
-  {"question":"Pluralka (jamac) 'child' waa?","options":["childs","childrens","children","child's"],"correct":"children"},
-  {"question":"'I have been working here ___ 2019.' — Buuxi:","options":["for","since","during","from"],"correct":"since"},
-  {"question":"'He is taller ___ his brother.' — Buuxi:","options":["then","than","that","to"],"correct":"than"}
+  {
+    "question":"Caasimadda Soomaaliya waa?",
+    "options":["Hargeysa","Muqdisho","Baydhabo","Kismaayo"],
+    "correct":"Muqdisho"
+  },
+  {
+    "question":"Soomaaliya waxay xorriyadda qaadatay sanadkee?",
+    "options":["1950","1960","1970","1980"],
+    "correct":"1960"
+  },
+  {
+    "question":"Midabka dhexe ee calanka Soomaaliya waa?",
+    "options":["Casaan","Cagaar","Buluug","Madow"],
+    "correct":"Buluug"
+  },
+  {
+    "question":"Xiddigta calanka Soomaaliya waxay leedahay imisa gees?",
+    "options":["4","5","6","7"],
+    "correct":"5"
+  },
+  {
+    "question":"Geela labka ah waxaa la yiraahdaa?",
+    "options":["Qaalin","Rati","Nirig","Weyl"],
+    "correct":"Rati"
+  },
+  {
+    "question":"Sayid Maxamed Cabdulle Xasan waxaa loo yaqaanay?",
+    "options":["Boqorka Soomaaliya","Hoggaamiyihii Daraawiishta","Suldaan","Abwaan"],
+    "correct":"Hoggaamiyihii Daraawiishta"
+  },
+  {
+    "question":"Dhaqdhaqaaqii Daraawiishta wuxuu la dagaallamay?",
+    "options":["Itoobiya","Ingiriiska","Talyaaniga","Jabuuti"],
+    "correct":"Ingiriiska"
+  },
+  {
+    "question":"Gabayga 'Koofilow waa kaa qaaday' waxaa tiriyay?",
+    "options":["Hadraawi","Sayid Maxamed Cabdulle Xasan","Timacadde","Raage Ugaas"],
+    "correct":"Sayid Maxamed Cabdulle Xasan"
+  },
+  {
+    "question":"Gobolka Banaadir caasimaddiisu waa?",
+    "options":["Jowhar","Muqdisho","Marka","Kismaayo"],
+    "correct":"Muqdisho"
+  },
+  {
+    "question":"Gobolka Hiiraan caasimaddiisu waa?",
+    "options":["Balcad","Beledweyne","Dhuusamareeb","Gaalkacyo"],
+    "correct":"Beledweyne"
+  },
+  {
+    "question":"Gobolka Bay caasimaddiisu waa?",
+    "options":["Baraawe","Baydhabo","Boosaaso","Buulobarde"],
+    "correct":"Baydhabo"
+  },
+  {
+    "question":"Gobolka Mudug caasimaddiisu waa?",
+    "options":["Cadaado","Gaalkacyo","Qardho","Ceerigaabo"],
+    "correct":"Gaalkacyo"
+  },
+  {
+    "question":"Xoolaha ugu badan ee Soomaalidu dhaqato waa?",
+    "options":["Digaag","Fardo","Geel","Bakeyle"],
+    "correct":"Geel"
+  },
+  {
+    "question":"Soomaalidu badanaa maxay ku nool yihiin?",
+    "options":["Beeraha","Kalluumaysi","Xoolo dhaqasho","Macdan"],
+    "correct":"Xoolo dhaqasho"
+  },
+  {
+    "question":"Magaalada dekedda weyn leh ee Soomaaliya waa?",
+    "options":["Baydhabo","Muqdisho","Dhuusamareeb","Buuhoodle"],
+    "correct":"Muqdisho"
+  },
+  {
+    "question":"Webiga ugu dheer Soomaaliya waa?",
+    "options":["Jubba","Shabeelle","Nile","Awash"],
+    "correct":"Jubba"
+  },
+  {
+    "question":"Soomaaliya waxay ku taallaa qaaradda?",
+    "options":["Asia","Europe","Africa","America"],
+    "correct":"Africa"
+  },
+  {
+    "question":"Dalka Itoobiya caasimaddiisu waa?",
+    "options":["Nairobi","Asmara","Addis Ababa","Qaahira"],
+    "correct":"Addis Ababa"
+  },
+  {
+    "question":"Dalka Kenya caasimaddiisu waa?",
+    "options":["Mombasa","Nairobi","Kampala","Kigali"],
+    "correct":"Nairobi"
+  },
+  {
+    "question":"Dalka Jabuuti caasimaddiisu waa?",
+    "options":["Tajoura","Ali Sabieh","Jabuuti","Diridhaba"],
+    "correct":"Jabuuti"
+  },
+  {
+    "question":"Qaaradda Afrika dalka ugu weyn waa?",
+    "options":["Kenya","Algeria","Sudan","Somalia"],
+    "correct":"Algeria"
+  },
+  {
+    "question":"Madaxweynaha ugu horreeyay Soomaaliya wuxuu ahaa?",
+    "options":["Aadan Cadde","Siyaad Barre","Cabdullaahi Yuusuf","Shariif Sheekh"],
+    "correct":"Aadan Cadde"
+  },
+  {
+    "question":"Ra’iisul wasaare waa?",
+    "options":["Taliyaha ciidanka","Madaxa dowladda","Guddoomiyaha gobolka","Duqa magaalada"],
+    "correct":"Madaxa dowladda"
+  },
+  {
+    "question":"Diinta dadka Soomaaliyeed intooda badan waa?",
+    "options":["Kirishtaan","Yahuud","Islaam","Budhis"],
+    "correct":"Islaam"
+  },
+  {
+    "question":"Quraanka Kariimka wuxuu ka kooban yahay imisa suuradood?",
+    "options":["100","114","120","99"],
+    "correct":"114"
+  },
+  {
+    "question":"Muslimku maalintii imisa jeer ayuu tukadaa?",
+    "options":["3","4","5","6"],
+    "correct":"5"
+  },
+  {
+    "question":"Bisha Soonka waxaa la yiraahdaa?",
+    "options":["Shacbaan","Ramadaan","Muxarram","Safar"],
+    "correct":"Ramadaan"
+  },
+  {
+    "question":"Nabiga ugu dambeeyay waa?",
+    "options":["Nabi Muuse","Nabi Ciise","Nabi Maxamed SCW","Nabi Ibraahim"],
+    "correct":"Nabi Maxamed SCW"
+  },
+  {
+    "question":"Magaalada uu Nabi Maxamed SCW ku dhashay waa?",
+    "options":["Madiina","Makka","Qudus","Damacas"],
+    "correct":"Makka"
+  },
+  {
+    "question":"Kacbadu waxay ku taallaa?",
+    "options":["Madiina","Makka","Qaahira","Doha"],
+    "correct":"Makka"
+  },
+  {
+    "question":"Ciidda Soonfur waxaa kale oo loo yaqaan?",
+    "options":["Ciidul Adxaa","Ciidul Fidriga","Mowliid","Ashuuro"],
+    "correct":"Ciidul Fidriga"
+  },
+  {
+    "question":"Aabaha nebiyada waxaa loo yaqaan?",
+    "options":["Nabi Muuse","Nabi Ibraahim","Nabi Nuux","Nabi Yuusuf"],
+    "correct":"Nabi Ibraahim"
+  },
+  {
+    "question":"Libaaxu wuxuu ka tirsan yahay?",
+    "options":["Xamaarato","Shimbir","Dugaag","Kalluun"],
+    "correct":"Dugaag"
+  },
+  {
+    "question":"Xayawaanka loo yaqaan boqorka duurka waa?",
+    "options":["Maroodi","Shabeel","Libaax","Waraabe"],
+    "correct":"Libaax"
+  },
+  {
+    "question":"Shimbirka qaranka Soomaaliya waa?",
+    "options":["Gorgor","Baalley","Gorayo","Qoolley"],
+    "correct":"Baalley"
+  },
+  {
+    "question":"Midkee ka mid ah waa webi Soomaaliya mara?",
+    "options":["Nile","Jubba","Amazon","Yangtze"],
+    "correct":"Jubba"
+  },
+  {
+    "question":"Afka hooyo ee Soomaaliya waa?",
+    "options":["Carabi","English","Soomaali","Talyaani"],
+    "correct":"Soomaali"
+  },
+  {
+    "question":"Lacagta Soomaaliya waa?",
+    "options":["Birr","Dollar","Shilin Soomaali","Dirham"],
+    "correct":"Shilin Soomaali"
+  },
+  {
+    "question":"Soomaaliya xeebteedu waxay ku taallaa?",
+    "options":["Badweynta Atlantic","Badweynta Hindiya","Badda Cas","Mediterranean"],
+    "correct":"Badweynta Hindiya"
+  },
+  {
+    "question":"Magaalada Kismaayo waxay ku taallaa gobolka?",
+    "options":["Bari","Jubbada Hoose","Nugaal","Bay"],
+    "correct":"Jubbada Hoose"
+  },
+  {
+    "question":"Magaalada Hargeysa waxay ku taallaa?",
+    "options":["Somaliland","Puntland","Galmudug","Hirshabeelle"],
+    "correct":"Somaliland"
+  },
+  {
+    "question":"Magaalada Boosaaso waxay ku taallaa gobolka?",
+    "options":["Bari","Mudug","Sool","Awdal"],
+    "correct":"Bari"
+  },
+  {
+    "question":"Gobolka Galgaduud caasimaddiisu waa?",
+    "options":["Cadaado","Dhuusamareeb","Gaalkacyo","Guriceel"],
+    "correct":"Dhuusamareeb"
+  },
+  {
+    "question":"Dhaqanka Soomaalida gabaygu wuxuu ka tirsan yahay?",
+    "options":["Ciyaar","Suugaan","Ganacsi","Beeraha"],
+    "correct":"Suugaan"
+  },
+  {
+    "question":"Abwaanka Hadraawi wuxuu caan ku ahaa?",
+    "options":["Kubadda","Suugaanta","Ganacsiga","Daawada"],
+    "correct":"Suugaanta"
+  },
+  {
+    "question":"Geelu wuxuu caan ku yahay?",
+    "options":["Degaanka biyaha","Samirka","Duulista","Dabaasha"],
+    "correct":"Samirka"
+  },
+  {
+    "question":"Xoolaha Soomaalida ugu qiimaha badan waa?",
+    "options":["Digaag","Geel","Bakeyle","Bisad"],
+    "correct":"Geel"
+  },
+  {
+    "question":"Magaalada Marka waxay ku taallaa gobolka?",
+    "options":["Shabeellaha Hoose","Bay","Mudug","Bari"],
+    "correct":"Shabeellaha Hoose"
+  },
+  {
+    "question":"Magaalada Beledweyne waxay ku taallaa gobolka?",
+    "options":["Hiiraan","Bay","Bakool","Nugaal"],
+    "correct":"Hiiraan"
+  },
+  {
+    "question":"Dalka Uganda caasimaddiisu waa?",
+    "options":["Kampala","Nairobi","Kigali","Juba"],
+    "correct":"Kampala"
+  },
+  {
+    "question":"Dalka Masar caasimaddiisu waa?",
+    "options":["Alexandria","Qaahira","Aswan","Luxor"],
+    "correct":"Qaahira"
+  },
+  {
+    "question":"Midkee ka mid ah waa waddan Afrika ku yaal?",
+    "options":["Brazil","Somalia","Japan","Canada"],
+    "correct":"Somalia"
+  },
+  {
+    "question":"Midabka calanka Itoobiya waxaa ku jira?",
+    "options":["Buluug","Cagaar","Madow","Cadaan"],
+    "correct":"Cagaar"
+  },
+  {
+    "question":"Xiddigta Soomaaliya waxay astaan u tahay?",
+    "options":["5-ta Soomaaliyeed","5 qaaradood","5 badood","5 magaalo"],
+    "correct":"5-ta Soomaaliyeed"
+  },
+  {
+    "question":"Soomaalidu waxay caan ku tahay?",
+    "options":["Barafka","Martisoorka","Kaymaha","Tareennada"],
+    "correct":"Martisoorka"
+  },
+  {
+    "question":"Magaalada Baydhabo waxaa loo yaqaan?",
+    "options":["Magaalada nabadda","Baydhabo Janaay","Magaalada xeebta","Magaalada geela"],
+    "correct":"Baydhabo Janaay"
+  },
+  {
+    "question":"Dhulka Soomaaliya intiisa badan waa?",
+    "options":["Buuro","Lama degaan","Bannaan","Baraf"],
+    "correct":"Bannaan"
+  },
+  {
+    "question":"Dadka Soomaaliyeed waxay badanaa ku hadlaan?",
+    "options":["Faransiis","Soomaali","Hindi","Turki"],
+    "correct":"Soomaali"
+  },
+  {
+    "question":"Ciidanka Daraawiishta waxaa hoggaamin jiray?",
+    "options":["Aadan Cadde","Sayid Maxamed","Siyaad Barre","Sharmaarke"],
+    "correct":"Sayid Maxamed"
+  },
+  {
+    "question":"Midkee ka mid ah waa xoolo nool?",
+    "options":["Geel","Gaari","Doon","Diyaarad"],
+    "correct":"Geel"
+  },
+  {
+    "question":"Soomaaliya waxay leedahay xeeb dheer oo ku taal?",
+    "options":["Badda Cas","Badweynta Hindiya","Atlantic","Pacific"],
+    "correct":"Badweynta Hindiya"
+  }
 ]
+```
