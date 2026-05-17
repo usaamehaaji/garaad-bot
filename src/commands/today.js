@@ -1,9 +1,12 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData, saveData }                       = require('../store');
-const { checkUser }                                = require('../utils/helpers');
-const { econData, checkEconUser, saveEcon, trackEarning } = require('../economy/econStore');
+const { userData, saveData }              = require('../store');
+const { checkUser }                       = require('../utils/helpers');
+const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;
+const BTC_ICON  = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
+const GOLD_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/xau.png';
+const DAILY_REWARD = 250;
 
 module.exports = async function todayCommand(message) {
     const userId = message.author.id;
@@ -36,41 +39,32 @@ module.exports = async function todayCommand(message) {
     const d = econData[userId];
     u.lastDaily = Date.now();
 
-    // IQ: 5–12 had iyo jeer
+    // IQ: 5–12
     const iqGain = Math.floor(Math.random() * 8) + 5;
     u.iq = (u.iq || 0) + iqGain;
 
-    // USD: $50–$300 (xad $1,000/maalin)
-    const usdRaw = Math.floor(Math.random() * 251) + 50;
-    const today = new Date().toISOString().slice(0, 10);
-    d.todayEarned ??= { date: '', usd: 0 };
-    if (d.todayEarned.date !== today) d.todayEarned = { date: today, usd: 0 };
-    const usdLeft   = Math.max(0, 1000 - d.todayEarned.usd);
-    const usdActual = Math.min(usdRaw, usdLeft);
-    if (usdActual > 0) {
-        d.usd += usdActual;
-        trackEarning(userId, usdActual);
-        d.todayEarned.usd += usdActual;
-    }
+    // 250 BTC ama 250 Gold — random
+    const asset = Math.random() < 0.5 ? 'btc' : 'gold';
+    d[asset] = (d[asset] || 0) + DAILY_REWARD;
 
     saveData();
     saveEcon();
 
-    const usdLine = usdActual > 0
-        ? `💵 **+$${usdActual} USD**`
-        : `💵 USD — **$1,000 xad maanta gaadhay**`;
+    const ICON       = asset === 'gold' ? GOLD_ICON : BTC_ICON;
+    const assetLabel = asset === 'gold' ? `🥇 **+${DAILY_REWARD} Gold**` : `₿ **+${DAILY_REWARD} BTC**`;
 
     return message.reply({
         embeds: [new EmbedBuilder()
             .setTitle('🎁 Dhibco Maalinlaha — Waxaad Heshay!')
+            .setThumbnail(ICON)
             .setDescription(
                 `✅ Maanta abaalmarinta:\n\n` +
                 `🧠 **+${iqGain} IQ**\n` +
-                `${usdLine}\n\n` +
+                `${assetLabel}\n\n` +
                 `Berri hore u soo noqo!`
             )
             .setColor('#2ecc71')
-            .setFooter({ text: '24 saacadood kadib waa dib loo cusboonaysiinayaa.' })],
+            .setFooter({ text: '24 saacadood kadib waa dib loo cusboonaysiinayaa.', iconURL: ICON })],
         components: [row],
     });
 };
