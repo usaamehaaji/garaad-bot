@@ -14,7 +14,6 @@ const activeDuels      = new Map(); // channelId -> duel state
 const activeRush       = new Map(); // userId    -> rush state
 const activeQuiz       = new Map(); // channelId -> quiz state
 
-const activeRows       = new Map(); // channelId -> row/Connect4 state
 const activeTournament = new Map(); // channelId -> tartan state
 /** @type {Map<string, { code: string, at: number }>} */
 const tournamentRegistry = new Map(); // userId -> diiwaangeli
@@ -65,7 +64,6 @@ module.exports = {
     activeDuels,
     activeRush,
     activeQuiz,
-    activeRows,
     activeTournament,
     tournamentRegistry,
     isUserBusy,

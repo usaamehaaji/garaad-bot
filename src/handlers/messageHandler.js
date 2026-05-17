@@ -22,8 +22,6 @@ const ciladaCmd       = require('../commands/cilada');
 const adminCmd        = require('../commands/admin/admin');
 const broadcast       = require('../commands/admin/adminBroadcast');
 const tournament      = require('../games/tournament');
-const connect4        = require('../games/connect4');
-const werewolf        = require('../games/werewolf');
 const teamDuel        = require('../games/teamDuel');
 
 // ── Economy ──
@@ -139,13 +137,6 @@ module.exports = function setupMessageHandler(client) {
 
             case 'etitle':
                 return econTitleCmd(message, args);
-
-            case '4inrow':
-                return connect4.cmdChallenge(message);
-
-            case 'werewolf':
-            case 'ww':
-                return werewolf.cmdWerewolf(message);
 
             case 'ebank':
                 return ebankCmd(message, args);
