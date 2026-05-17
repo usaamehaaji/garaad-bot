@@ -37,6 +37,9 @@ module.exports = async function todayCommand(message) {
     const d = econData[userId];
     userData[userId].lastDaily = Date.now();
 
+    const iqGain = Math.floor(Math.random() * 9) + 5;
+    userData[userId].iq = (userData[userId].iq || 0) + iqGain;
+
     d.btc = (d.btc || 0) + DAILY_BTC;
 
     saveData();
@@ -48,6 +51,7 @@ module.exports = async function todayCommand(message) {
             .setThumbnail(BTC_ICON)
             .setDescription(
                 `✅ Maanta abaalmarinta:\n\n` +
+                `🧠 **+${iqGain} IQ**\n` +
                 `₿ **+${DAILY_BTC} BTC**\n\n` +
                 `Berri hore u soo noqo!`
             )
