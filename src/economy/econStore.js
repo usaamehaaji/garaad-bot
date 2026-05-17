@@ -25,6 +25,7 @@ function defaultUser() {
         customEconTitle:     null,
         todayEarned:         { date: '', usd: 0 },
         dailyGiven:          { date: '', usd: 0 },
+        weeklyEarned:        { week: '', usd: 0 },
     };
 }
 
@@ -57,8 +58,9 @@ function checkEconUser(userId) {
         if (d.econTitles === undefined)       d.econTitles       = [];
         if (d.activeEconTitle === undefined)  d.activeEconTitle  = null;
         if (d.customEconTitle === undefined)  d.customEconTitle  = null;
-        d.todayEarned ??= { date: '', usd: 0 };
-        d.dailyGiven  ??= { date: '', usd: 0 };
+        d.todayEarned  ??= { date: '', usd: 0 };
+        d.dailyGiven   ??= { date: '', usd: 0 };
+        d.weeklyEarned ??= { week: '', usd: 0 };
     }
     return econData[userId];
 }
@@ -110,6 +112,13 @@ function deductFromTreasury(amount) {
     return true;
 }
 
+function getWeekKey() {
+    const d = new Date();
+    const jan1 = new Date(d.getFullYear(), 0, 1);
+    const week = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+    return `${d.getFullYear()}-W${week}`;
+}
+
 function trackEarning(userId, usdAmount) {
     if (!usdAmount || usdAmount <= 0) return;
     const d = econData[userId];
@@ -119,6 +128,22 @@ function trackEarning(userId, usdAmount) {
         d.todayEarned = { date: today, usd: 0 };
     }
     d.todayEarned.usd += usdAmount;
+
+    const week = getWeekKey();
+    if (!d.weeklyEarned || d.weeklyEarned.week !== week) {
+        d.weeklyEarned = { week, usd: 0 };
+    }
+    d.weeklyEarned.usd += usdAmount;
 }
 
-module.exports = { econData, checkEconUser, saveEcon, getTreasury, addToTreasury, topUpTreasury, deductFromTreasury, trackEarning };
+function resetWeeklyEarnings() {
+    const week = getWeekKey();
+    for (const uid of Object.keys(econData)) {
+        if (econData[uid].weeklyEarned) {
+            econData[uid].weeklyEarned = { week, usd: 0 };
+        }
+    }
+    saveEcon();
+}
+
+module.exports = { econData, checkEconUser, saveEcon, getTreasury, addToTreasury, topUpTreasury, deductFromTreasury, trackEarning, resetWeeklyEarnings };
