@@ -2212,82 +2212,146 @@
   {
     "question": "Nabi Muxamed (CSW) ayaa Quranka qoray: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Fardiga Hajka waxaa lagu qabataa Makkada Mukarrama: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Salaadda shantaad waxay leedahay 17 rakaad: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Soontu waxay bilaabanaysaa bisha Rajab: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Jibriil waa malaigaha waxyiga: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Masjidil Haraam wuxuu ku yaallaa Madiina: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Muharram waa bisha 1aad ee sanadka Islaamka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Quranka waxaa ku jira 6,236 aayad: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dhammaan muslimiinta waxay ku tukadaan dhinaca Makka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Malaigaha Israafil wuxuu garaacaa taruurada (Soor): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-carabi waa luqadda Quranka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Nabi Muxamed (CSW) wuxuu geeriyooday Makka: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Ciyid al-Adha waxaa lagu xusaa bisha 10aad ee Dhul Xijja: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Nabi Ciise (CS) wuxuu ku dhashay Bayt Lahm (Bethlehem): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Al-Baqara waa suurtii labaad ee Quranka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Makka waxay ku taal Jaziiradda Carabiyeed: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "TFG (Transitional Federal Government) goorma la aasaasay?",
@@ -2462,117 +2526,209 @@
   {
     "question": "Somaliland waxay xubnaha ka tahay UN: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Webiga Shabeelle wuxuu ku dhacaa badda: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "SYL waxaa aasaasay 13 dhallinyaro Soomaali ah: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Geeska Afrika Soomaaliya ayaa ugu dhow badda Hindiya: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Kismayo waxay ku taallaa Jubba Dhexe: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Diiwaangelintii qoraalka Soomaaliga 1972 ayaa lagu bilaabay: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Xukuumada Federaalka Soomaaliya waxaa ku jira 5 dowlad-gobol: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Muqdisho waxay lahayd magac duqoobay oo ah 'Xamar': Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dervishkii Sayidka waxay dagaallameen 20 sano: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Soomaaliya waa waddanka ugu xeebta badan Afrika: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Garoonka Muqdisho waxaa lagu magacaabaa Aden Adde: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Puntland waxay dhawaaqday madaxbanaan buuxda: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Koonfur Soomaaliya waxaa maamuli jiray Itaaly: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Soomaaliya waxay ka mid tahay League of Arab States (AL): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Hargeysa waa magaalada labaad ee Soomaaliya tirada dadka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Sayid Maxamed Cabdulle Xasan wuxuu dhintay 1920: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Bosaso waa dekedda ugu weyn Puntland: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Soomaaliya 18 gobol ayaa ku jira: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Berbera waxay ku taal Woqooyi Galbeed: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Guri Ceel waxay ku taallaa Galgaduud: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Webiga Jubba wuxuu bilaabmaa Itoobiya: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Boosaaso waxay ku taallaa Gobolka Bari: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Soomaalidu waxay leedahay hal koox qowmiyadeed: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Selka jidhka aadanaha waxaa ku jira imisa lafood?",
@@ -2717,107 +2873,191 @@
   {
     "question": "Oksijiin — waa gaas u muhiim neefsashada: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Mars waxaa loogu yaqaan 'Red Planet': Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Antarctiga waa meesha ugu qabow dhulka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Moon (dayaxa) wuxuu leeyahay hawada uu la noolaado: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dhulku wuxuu ku wareegaa nafsigiisa 24 saacadood: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Biyuhu waxay ka kooban yihiin hydrogen iyo oxygen: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Einstein wuxuu ogaaday telefonka: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Bisaddu maqasheeda ayay baashaalka ku cabbirtaa: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Erayga 'photosynthesis' macnaheedu yahay geedo cuntada u soo saara nuurka qorraxda: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Xiddigtu shucaaceeda waxay ka timaaataa hydrogen oo karaya: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Koronto-waxaa-soo-saara (battery) ugu badan ee casriga ah waxay isticmaashaa Lithium: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dhexdhexaadinta dhiigga jirka waxaa qabta wadnaha: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Calooshii ugu weyn ee jidhka aadanaha waa beerka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Daaweynta antibiotics waxay shaqeeysa fayruuska: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dhulka 71% waa badda: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Naasi (octopus) wuxuu leeyahay saddex wadne: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Shimbirku (bird) dhiiggiisu waa diiran yahay (warm-blooded): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Shimbirka penguin wuxuu duuli karaa: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Adduunka ugu weyn ee xayawaanka dhulka waa maroodi (elephant): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Jir-dhiska aadanaha wuxuu leeyahay 12 muruqood oo weyn: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Geedka ugu gaaban dunidu waa Bonsai: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Waddanka ugu yar adduunka dhulka ahaan waa:",
@@ -3002,157 +3242,281 @@
   {
     "question": "Amazon waa hoyga ugub (jungle) ugu weyn adduunka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Suez Canal waxay xidhiisaa Badda Cas iyo Mediteranean: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Australiya waa qaarad iyo waddan: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Sahara waa ugub (desert) ugu weyn adduunka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Paris waa caasimadda Faransiiska: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "London waa caasimadda UK: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Saudi Arabia waa waddanka ugu weyn Bariga Dhexe: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Kanada waa waddanka ugu weyn dhulka Waqooyi Ameerika: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Bariga Dhexe waddanka Saudi Arabia ayaa ugu weyn: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Masar waxay ku taal Afrika iyo Aasiya: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Bahrain waa waddan jasiirad ah: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Buurta Everest waxay ku taal Nepal iyo Tibet: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Antarctiga waa meesha laga helo koonfurta dhulka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Adduunka waxaa ku jira 195 waddan madaxbannaan: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Webiga Nile wuxuu mara 11 waddan: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Waddanka ugu yar tirada dadka waa Vatican: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Waddanka Maraykanka 50 gobol ayuu leeyahay: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Qaaradda Asia waa qaraadda ugu weyn: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Badda Hindiya waxay u dhaxaysaa Afrika, Aasiya iyo Australiya: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Waddanka Ruushka waxuu ku yaallaa laba qaaradood (Europe + Asia): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Tokyo waa magaalada ugu dadka badan adduunka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Shiinaha waxay leeddahay xuduud wadammo 14 ah: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Waddanka Nigeria waa waddanka ugu dadka badan Afrika: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Webiga Volga wuxuu ku yaallaa Ruushka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Caasimadda Kanada waa Toronto: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Peru waxay ku taallaa Koonfur Ameerika: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Hindiya geedka ugu caan badan waa Mango: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Qaaradda Antarkiig cidla ma deggenayn: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Waddanka Albaniya waxay ku taallaa Yurub: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Masar waa caasimadda al-Qahira (Cairo): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Badda Cas waxay ku dhaxaysaa Sacuudiga iyo Masar iyo xeebaha kale: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Magaca (noun) af-Soomaaligga wuxuu leeyahay imisa jinsi?",
@@ -3287,137 +3651,245 @@
   {
     "question": "Af-Soomaaliga waa luuqadda ugu badan ee Geeska Afrika: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaliga wuxuu leeyahay harfaha 'p' iyo 'v': Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaliga waa mid ka mid ah luuqadaha Cushitic: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Jumladda Soomaaliga falku marka ugu horeysa ayuu yimaadaa: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Xarafka 'X' af-Soomaaligga wuxuu dhawaaqa sida 'kh' Carabiga: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaliga waxaa lagu qori karaa farta Laatiinka: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Damiirka 'Ayaan' waa mid dheddig ah: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Luuqadda Soomaaliga waxaa ku hadla qiyaastii 20 milyan: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Erayga 'guri' waa magac: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Abwaan (poet) af-Soomaaligga waxaa laga baranayaa suugaanta: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Qoraalka Soomaaliga 1972 waxaa soo saaray Maxamed Siyaad Barre: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaliga wuxuu leeyahay dhawaqyo aan ku jirin luuqado kale: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "'Dhagax' waa magac lab ah: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "'Naag' waa magac dheddig ah: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Falka 'cunayaa' waa wakhtiga hadda: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaliga waxaa ku jira 5 harfood oo vowel ah: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Erayga 'buug' waa magac: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Tonal system (heesashada erayo) waa muhiim af-Soomaaliga: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaliga ma lahan qoraal hore (indigenous script) inta aan 1972 la gaadhin: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Suugaanta Soomaaliga asal ahaan waxay ku jiirtay afka (oral tradition): Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dhammaan magacyada Soomaaliya waxay dambeeyaan '-o' hadday dheddig yihiin: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaliga waxaa lagu wada isticmaalaa Soomaaliya, Itoobiya, Jabuuti iyo Waqooyiga Kenya: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Erayga 'macallin' waxaa loogu yaqaan 'teacher' Ingiriisiga: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "'Carruurta' waa jamiaca 'Caruur': Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Falka 'akhriyey' wuxuu macnaheedu yahay 'he read (past)': Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Af-Soomaaligga heer (tone) waa qayb ka mid ah micnaha ereyga: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Luuqadda Soomaaliga waxaa lagu baranayaa dugsiyada Soomaaliya: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "144 ÷ 12 = ?",
@@ -3562,97 +4034,173 @@
   {
     "question": "Prime number kii ugu yar ee la yaqaan waa 2: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "0 waa tiro prime ah: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "100² = 10,000: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Tirada π (pi) waa qiyaastii 3.14159: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "√4 = 2: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Xagasha wareegga guud waa 360°: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "1 × 0 = 1: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "10,000 - 9,999 = 1: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Xisaabta algebra waxaa aasaasay Al-Khawarizmi: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "50 × 2 = 100: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Tiro walba waxaad ku qaybiso nafteeda waxaad heshaa 1: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "3 + 3 + 3 = 3 × 3: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Tirada Fibonacci ee 10aad waa 55: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dhammaan tiro liidada (negative) ma aha prime: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Dhammaan tiraha lays-qeybinaya 6 sidoo kale waxay yihiin mid lays-qeybinaya 3: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "15 waa tiro prime ah: Run — Been",
     "type": "tf",
-    "correct": false
+    "correct": "Been",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Xagasha saddex-xagalka (triangle) sum-kiisu waa 180°: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "25 × 4 = 100: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Labada tiro ee ugu horeeya ee tiro-xiga (sequence) Fibonacci waa 1 iyo 1: Run — Been",
     "type": "tf",
-    "correct": true
+    "correct": "Run",
+    "options": [
+      "Run",
+      "Been"
+    ]
   },
   {
     "question": "Muqdisho waa caasimadda Soomaaliya?",
