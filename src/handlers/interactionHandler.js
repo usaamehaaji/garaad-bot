@@ -1134,18 +1134,17 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
 
-            const { claimVote, hasPendingVote } = require('../economy/voteStore');
+            const { recordClaim, hasClaimedRecently } = require('../economy/voteStore');
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
             const { userData: uData, saveData }  = require('../store');
-            const { checkUser }                  = require('../utils/helpers');
-            const { fmt }                        = require('../utils/helpers');
+            const { checkUser, fmt }             = require('../utils/helpers');
 
-            if (!hasPendingVote(userId))
-                return interaction.reply({ content: '⚠️ Vote reward ma jirto — marka hore codeey.', flags: MessageFlags.Ephemeral });
+            if (hasClaimedRecently(userId))
+                return interaction.reply({ content: '⚠️ Horay ayaad u claiméysay — 24 saacadood sug.', flags: MessageFlags.Ephemeral });
 
             checkUser(userId);
             checkEconUser(userId);
-            claimVote(userId);
+            recordClaim(userId);
 
             const IQ_GAIN  = 12;
             const AMT      = 250;

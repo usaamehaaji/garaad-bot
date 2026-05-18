@@ -1,7 +1,11 @@
 const path = require('path');
 const fs   = require('fs');
+const https = require('https');
 
-const VOTE_PATH = path.join(__dirname, '../../data/votes.json');
+const VOTE_PATH  = path.join(__dirname, '../../data/votes.json');
+const BOT_ID     = '1495341089266073705';
+const COOLDOWN   = 24 * 60 * 60 * 1000; // 24 saacadood
+
 let voteData = {};
 
 function loadVotes() {
@@ -19,25 +23,47 @@ function saveVotes() {
 
 loadVotes();
 
-function hasPendingVote(userId) {
-    return voteData[userId]?.pending === true;
+// Ma claiméynin 24 saacadood gudahood?
+function hasClaimedRecently(userId) {
+    const last = voteData[userId]?.lastClaimed || 0;
+    return (Date.now() - last) < COOLDOWN;
 }
 
-function setPendingVote(userId) {
-    voteData[userId] = { pending: true, votedAt: Date.now() };
+function getRemainingCooldown(userId) {
+    const last = voteData[userId]?.lastClaimed || 0;
+    return Math.max(0, COOLDOWN - (Date.now() - last));
+}
+
+function recordClaim(userId) {
+    voteData[userId] = { lastClaimed: Date.now() };
     saveVotes();
 }
 
-function claimVote(userId) {
-    if (!voteData[userId]?.pending) return false;
-    voteData[userId].pending    = false;
-    voteData[userId].lastClaimed = Date.now();
-    saveVotes();
-    return true;
+// top.gg API: miyuu codeeyay? returns Promise<boolean>
+function checkVoted(userId) {
+    const token = process.env.TOPGG_TOKEN;
+    if (!token) return Promise.resolve(false);
+
+    return new Promise((resolve) => {
+        const options = {
+            hostname: 'top.gg',
+            path:     `/api/bots/${BOT_ID}/check?userId=${userId}`,
+            method:   'GET',
+            headers:  { Authorization: token },
+        };
+        const req = https.request(options, (res) => {
+            let body = '';
+            res.on('data', chunk => { body += chunk; });
+            res.on('end', () => {
+                try {
+                    const data = JSON.parse(body);
+                    resolve(data.voted === 1);
+                } catch { resolve(false); }
+            });
+        });
+        req.on('error', () => resolve(false));
+        req.end();
+    });
 }
 
-function getLastVote(userId) {
-    return voteData[userId]?.votedAt || 0;
-}
-
-module.exports = { hasPendingVote, setPendingVote, claimVote, getLastVote };
+module.exports = { hasClaimedRecently, getRemainingCooldown, recordClaim, checkVoted };
