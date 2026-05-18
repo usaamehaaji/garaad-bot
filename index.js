@@ -27,10 +27,36 @@ function startPortHealthServerIfNeeded() {
     if (raw === undefined || raw === '') return;
     const port = Number(raw);
     if (!Number.isFinite(port)) return;
-    const server = http.createServer((_, res) => {
+
+    const server = http.createServer((req, res) => {
+        // ── top.gg vote webhook ──
+        if (req.method === 'POST' && req.url === '/topgg-vote') {
+            const auth = req.headers.authorization || '';
+            if (process.env.TOPGG_AUTH && auth !== process.env.TOPGG_AUTH) {
+                res.writeHead(401);
+                return res.end('Unauthorized');
+            }
+            let body = '';
+            req.on('data', chunk => { body += chunk; });
+            req.on('end', () => {
+                try {
+                    const data = JSON.parse(body);
+                    if (data.user && data.type === 'upvote') {
+                        const { setPendingVote } = require('./src/economy/voteStore');
+                        setPendingVote(data.user);
+                        console.log(`[Vote] ${data.user} wuu codeeyay top.gg`);
+                    }
+                } catch {}
+                res.writeHead(200);
+                res.end('ok');
+            });
+            return;
+        }
+        // ── Health check ──
         res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
         res.end('ok');
     });
+
     server.listen(port, '0.0.0.0', () => {
         console.log(`[Health] Dhagaysan ${port} (Railway / PaaS)`);
     });

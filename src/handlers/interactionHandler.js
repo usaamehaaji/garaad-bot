@@ -1126,6 +1126,50 @@ module.exports = function setupInteractionHandler(client) {
             return; // handled by collector
         }
 
+        // ── Vote: Claim BTC or Gold ──
+        if (id.startsWith('vote_claim_')) {
+            const parts  = id.split('_');
+            const asset  = parts[2]; // btc or gold
+            const userId = parts[3];
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+
+            const { claimVote, hasPendingVote } = require('../economy/voteStore');
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            const { userData: uData, saveData }  = require('../store');
+            const { checkUser }                  = require('../utils/helpers');
+            const { fmt }                        = require('../utils/helpers');
+
+            if (!hasPendingVote(userId))
+                return interaction.reply({ content: '⚠️ Vote reward ma jirto — marka hore codeey.', flags: MessageFlags.Ephemeral });
+
+            checkUser(userId);
+            checkEconUser(userId);
+            claimVote(userId);
+
+            const IQ_GAIN  = 12;
+            const AMT      = 250;
+            uData[userId].iq = (uData[userId].iq || 0) + IQ_GAIN;
+            eData[userId][asset] = (eData[userId][asset] || 0) + AMT;
+            saveData();
+            saveEcon();
+
+            const icon  = asset === 'gold' ? '🥇' : '₿';
+            const label = asset === 'gold' ? 'Gold' : 'BTC';
+            return interaction.update({
+                embeds: [new EmbedBuilder()
+                    .setTitle('✅ Vote Abaalmarinta — Waxaad Heshay!')
+                    .setColor('#2ecc71')
+                    .setDescription(
+                        `🧠 **+${IQ_GAIN} IQ**\n` +
+                        `${icon} **+${fmt(AMT)} ${label}**\n\n` +
+                        `24 saacadood ka dib mar kale codeey!`
+                    )
+                    .setFooter({ text: 'Garaad Bot — Mahadsanid vote-gaaga!' })],
+                components: [],
+            });
+        }
+
         // ── Xir (Close) ──
         if (id.startsWith('close_')) {
             const parts   = id.split('_');
