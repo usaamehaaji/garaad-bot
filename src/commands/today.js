@@ -1,77 +1,55 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { hasClaimedRecently, getRemainingCooldown, checkVoted } = require('../economy/voteStore');
-const { checkUser } = require('../utils/helpers');
-const { userData }  = require('../store');
+const { userData, saveData }                = require('../store');
+const { checkUser }                         = require('../utils/helpers');
+const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 
-const TOPGG_URL       = 'https://top.gg/bot/1495341089266073705';
-const VOTE_REWARD_IQ  = 12;
-const VOTE_REWARD_AMT = 250;
+const COOLDOWN_MS = 24 * 60 * 60 * 1000;
+const DAILY_BTC   = 250;
+const TOPGG_URL   = 'https://top.gg/bot/1495341089266073705';
 
 module.exports = async function todayCommand(message) {
     const userId = message.author.id;
     checkUser(userId);
+    checkEconUser(userId);
 
-    // 1. Cooldown check — hore u claiméeyay?
-    if (hasClaimedRecently(userId)) {
-        const rem   = getRemainingCooldown(userId);
-        const hours = Math.floor(rem / 3600000);
-        const mins  = Math.floor((rem % 3600000) / 60000);
-        const row   = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId(`close_today_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
-        );
-        return message.reply({
-            embeds: [new EmbedBuilder()
-                .setTitle('⏳ Vote Cooldown')
-                .setColor('#e74c3c')
-                .setDescription(`Horay ayaad u claiméysay!\n\n**${hours}s ${mins}d** ka dib dib u tijaabi.`)
-                .setFooter({ text: '24 saacadood • Garaad Bot' })],
-            components: [row],
-        });
-    }
+    const lastDaily  = userData[userId].lastDaily || 0;
+    const remaining  = COOLDOWN_MS - (Date.now() - lastDaily);
 
-    // 2. top.gg API: miyuu codeeyay?
-    const voted = await checkVoted(userId);
-
-    if (voted) {
-        const row = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId(`vote_claim_btc_${userId}`) .setLabel('₿ +250 BTC') .setStyle(ButtonStyle.Success),
-            new ButtonBuilder().setCustomId(`vote_claim_gold_${userId}`).setLabel('🥇 +250 Gold').setStyle(ButtonStyle.Primary),
-        );
-        return message.reply({
-            embeds: [new EmbedBuilder()
-                .setTitle('🎁 Vote Abaalmarinta — Dooro!')
-                .setColor('#f1c40f')
-                .setDescription(
-                    `✅ Vote-gaaga waa la xaqiijiyay!\n\n` +
-                    `🧠 **+${VOTE_REWARD_IQ} IQ** — hadda dooro:\n\n` +
-                    `₿ **+${VOTE_REWARD_AMT} BTC**  ama  🥇 **+${VOTE_REWARD_AMT} Gold**`
-                )
-                .setFooter({ text: 'Garaad Bot — Vote Abaalmarino' })],
-            components: [row],
-        });
-    }
-
-    // 3. Weli ma codeynin — vote panel
     const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setURL(TOPGG_URL).setLabel('🗳️ Vote Hadda ↗').setStyle(ButtonStyle.Link),
+        new ButtonBuilder().setURL(TOPGG_URL).setLabel('🗳️ Vote Garaad Bot').setStyle(ButtonStyle.Link),
         new ButtonBuilder().setCustomId(`close_today_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
+
+    if (remaining > 0) {
+        const hours = Math.floor(remaining / 3600000);
+        const mins  = Math.floor((remaining % 3600000) / 60000);
+        return message.reply({
+            embeds: [new EmbedBuilder()
+                .setTitle('⏳ Cooldown — Dhibco Maalinlaha')
+                .setDescription(`Waxaad sug kartaa **${hours}s ${mins}d** oo dhiman ka dib isku day.`)
+                .setColor('#e67e22')],
+            components: [row],
+        });
+    }
+
+    const iqGain = Math.floor(Math.random() * 9) + 5;
+    userData[userId].iq       = (userData[userId].iq || 0) + iqGain;
+    userData[userId].lastDaily = Date.now();
+    econData[userId].btc       = (econData[userId].btc || 0) + DAILY_BTC;
+    saveData();
+    saveEcon();
+
     return message.reply({
         embeds: [new EmbedBuilder()
-            .setTitle('🗳️ Vote — Garaad Bot')
-            .setColor('#3498db')
+            .setTitle('🎁 Dhibco Maalinlaha — Waxaad Heshay!')
             .setDescription(
-                `Bot-ka u codeey si aad abaalmarino u hesho!\n\n` +
-                `🎁 **Abaalmarino (vote kasta):**\n` +
-                `🧠 +${VOTE_REWARD_IQ} IQ\n` +
-                `₿ +${VOTE_REWARD_AMT} BTC  **ama**  🥇 +${VOTE_REWARD_AMT} Gold\n\n` +
-                `📋 **Sida:**\n` +
-                `1️⃣ **Vote Hadda ↗** riix\n` +
-                `2️⃣ top.gg ku codeey\n` +
-                `3️⃣ \`?today\` qor — abaalmarintaada dooro\n\n` +
-                `⏰ 24 saacadood kasta ayaad codeeyn kartaa`
+                `✅ Maanta abaalmarinta:\n\n` +
+                `🧠 **+${iqGain} IQ**\n` +
+                `₿ **+${DAILY_BTC} BTC**\n\n` +
+                `Berri hore u soo noqo!`
             )
-            .setFooter({ text: 'Garaad Bot — top.gg' })],
+            .setColor('#2ecc71')
+            .setFooter({ text: '24 saacadood kadib waa dib loo cusboonaysiinayaa.' })],
         components: [row],
     });
 };
