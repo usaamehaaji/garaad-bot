@@ -15,7 +15,6 @@ const {
 } = require('discord.js');
 const { userData, saveData, activeQuiz, activeTournament, isUserBusy } = require('../store');
 
-const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 const { checkUser, stripQuestionNumber }                                 = require('../utils/helpers');
 const { canHostQuiz, bumpHostQuiz }                                      = require('../utils/hostQuota');
 const {
@@ -276,7 +275,6 @@ async function sendQuizQuestion(state) {
 
     const embed = new EmbedBuilder()
         .setTitle(`👥 Quiz Koox — Su'aal ${state.currentQ + 1}/${totalQ}`)
-        .setThumbnail(BTC_ICON)
         .setDescription(
             `## ${stripQuestionNumber(q.question)}\n\n` +
             `⏱️ **${GLOBAL_WAIT_MS / 1000}s** — Dhammaan waxay jawaabi karaan!\n` +
@@ -438,7 +436,6 @@ async function finishQuiz(state) {
 
     const embed = new EmbedBuilder()
         .setTitle('🏁 Quiz Koox — Dhamaaday!')
-        .setThumbnail(BTC_ICON)
         .setColor('#f1c40f')
         .setDescription(
             `${winnerLine}\n\n` +
