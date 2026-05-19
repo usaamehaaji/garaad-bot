@@ -5,7 +5,7 @@ const { fmt } = require('../../utils/helpers');
 const WIN_RATE    = 0.50;
 const WIN_MULTI   = 0.90;
 const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
-const COOLDOWN_MS = 15_000; // 15s total (5s resolve + 10s after result)
+const COOLDOWN_MS = 4_000; // 4s anti-spam cooldown
 
 const flipCooldowns = new Map();
 
@@ -72,8 +72,6 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
         flipCooldowns.delete(userId); // release cooldown if rejected
         return replyFn({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
     }
-
-    await new Promise(r => setTimeout(r, 5000));
 
     const win    = Math.random() < WIN_RATE;
     const profit = Math.floor(amount * WIN_MULTI);
@@ -152,21 +150,12 @@ module.exports = async function cashflipCmd(message, args) {
         return message.reply(`⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**`);
     }
 
-    // Direct resolve if direction typed
+    // Direct resolve if direction typed — instant result
     if (direction === 'up' || direction === 'down') {
-        const sent = await message.reply({ embeds: [
-            new EmbedBuilder()
-                .setTitle('🎰 Economy Flip — Flipping...')
-                .setColor('#f39c12')
-                .setDescription(
-                    `You chose **${direction === 'up' ? '⬆️ UP' : '⬇️ DOWN'}**\n\n` +
-                    `⏳ _Resolving in 5 seconds..._`
-                ),
-        ]});
         return resolveFlip(
             data => message.reply(data),
             userId, amount, direction,
-            () => sent.delete()
+            null
         );
     }
 
@@ -178,8 +167,7 @@ module.exports = async function cashflipCmd(message, args) {
             .setThumbnail(BTC_ICON)
             .setDescription(
                 `₿ Stake: **${fmt(amount)} BTC**\n\n` +
-                `⬆️ **UP** or ⬇️ **DOWN** — pick one!\n\n` +
-                `⏳ Result in **5 seconds** after you pick`
+                `⬆️ **UP** or ⬇️ **DOWN** — pick one!`
             )
             .setFooter({ text: '50/50 chance • Garaad Economy' }),
     ], components: [directionRow(userId, amount)] });
