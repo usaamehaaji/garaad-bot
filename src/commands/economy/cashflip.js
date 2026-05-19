@@ -86,19 +86,7 @@ module.exports = async function cashflipCmd(message, args) {
         return flipMsg.edit({ embeds: [resultEmbed], components: [closeRow(userId)] });
     }
 
-    // No args — show info panel
-    return message.reply({ embeds: [
-        new EmbedBuilder()
-            .setTitle('🎰 Economy Flip — 50/50')
-            .setColor('#9b59b6')
-            .setThumbnail(BTC_ICON)
-            .setDescription(
-                `**Usage:** \`?ef 500\`\n\n` +
-                `₿ Wallet: **${fmt(d.btc || 0)} BTC**\n\n` +
-                `🏆 **Win:** +90% of stake\n💀 **Lose:** −100% of stake\n⚖️ **Chance:** 50/50`
-            )
-            .setFooter({ text: 'Garaad Economy' }),
-    ], components: [closeRow(userId)] });
+    return message.reply(`⚠️ Usage: \`?ef 500\` or \`?ef btc 500\`\n₿ Wallet: **${fmt(d.btc || 0)} BTC**`);
 };
 
 module.exports.WIN_MULTI = WIN_MULTI;
