@@ -198,20 +198,16 @@ function mainRow(userId) {
     );
 }
 
-// Row 2: buy + sell + close
+// Row 2: close only (buy/sell removed — BTC is currency, no USD)
 function tradeCloseRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)   .setLabel('🛒 Buy')     .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`trade_sell_${userId}`)   .setLabel('💰 Sell')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_trade_${userId}`)  .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`close_trade_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
 
 function controlRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`pred_refresh_${userId}`).setLabel('🔄 Refresh') .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`trade_shop_${userId}`)  .setLabel('🛒 Buy')     .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`trade_sell_${userId}`)  .setLabel('💰 Sell')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_trade_${userId}`) .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
     );
 }
