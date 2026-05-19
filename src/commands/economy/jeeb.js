@@ -10,7 +10,7 @@ function fmtW(n) {
         const s = (n / 1_000_000).toFixed(3).replace(/\.?0+$/, '');
         return s + 'M';
     }
-    if (n >= 1_000) {
+    if (n >= 200_000) {
         const s = (n / 1_000).toFixed(1);
         return (s.endsWith('.0') ? s.slice(0, -2) : s) + 'K';
     }
