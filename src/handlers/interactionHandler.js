@@ -447,14 +447,29 @@ module.exports = function setupInteractionHandler(client) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-                const targetId = interaction.fields.getTextInputValue('target_id').trim();
+                const { fmt } = require('../utils/helpers');
+                const targetId   = interaction.fields.getTextInputValue('target_id').trim();
+                const resetWhat  = (interaction.fields.getTextInputValue('reset_what') || 'both').trim().toLowerCase();
                 checkEconUser(targetId);
                 const d = eData[targetId];
-                d.banks = { mandeeq: 0, garaad: 0 };
-                d.inventory = { safety: 0, robticket: 0 };
-                d.loan = null; d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
+                let msg = '';
+                if (resetWhat === 'wallet') {
+                    d.btc = 1000;
+                    msg = `💼 Wallet reset to **1,000 BTC**`;
+                } else if (resetWhat === 'bank') {
+                    d.banks = { garaad: 0 };
+                    d.loan = null;
+                    msg = `🏦 Bank reset to **0 BTC** (loan cleared)`;
+                } else {
+                    d.btc = 1000;
+                    d.banks = { garaad: 0 };
+                    d.inventory = { safety: 0, robticket: 0 };
+                    d.loan = null; d.lastLoanTaken = 0;
+                    d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
+                    msg = `♻️ Full economy reset — wallet **1,000 BTC**, bank **0**, loan cleared`;
+                }
                 saveEcon();
-                return interaction.reply({ content: `🗑️ <@${targetId}> economy data dib loo dejiyay.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ <@${targetId}> — ${msg}`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Admin Econ modal: Treasury ──
@@ -966,6 +981,7 @@ module.exports = function setupInteractionHandler(client) {
             const modal = new ModalBuilder().setCustomId(`admin_eco_m_reset_${ownerId}`).setTitle('🗑️ Reset Economy');
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('reset_what').setLabel('Reset: wallet / bank / both').setStyle(TextInputStyle.Short).setPlaceholder('wallet  |  bank  |  both').setRequired(true)),
             );
             return interaction.showModal(modal);
         }
