@@ -6,13 +6,13 @@ const TICK_MS     = 60 * 1000;       // 1 daqiiqo
 const HISTORY_MAX = 10;              // Taariikhda qiimaha (10 daqiiqo)
 
 const BASE_PRICES = {
-    btc:     30000,
-    gold:    1800,
+    btc:  100,  // price index (for prediction display only)
+    gold: 3,    // 3 BTC per 1 Gold
 };
 
 const VOLATILITY = {
-    btc:     0.04,
-    gold:    0.025,
+    btc:  0.03,
+    gold: 0.05,
 };
 
 const trends = { btc: 0, gold: 0 };
@@ -58,9 +58,12 @@ function doOneTick() {
         const bias   = trend * vol * 0.35;
         const change = (Math.random() * 2 - 1) * vol + bias;
         trends[asset] = change > 0 ? 1 : change < 0 ? -1 : 0;
-        const next   = Math.max(
-            Math.round(BASE_PRICES[asset] * 0.3),
-            Math.round(prev * (1 + change))
+        const next   = Math.min(
+            Math.round(BASE_PRICES[asset] * 3),
+            Math.max(
+                Math.round(BASE_PRICES[asset] * 0.4),
+                Math.round(prev * (1 + change))
+            )
         );
         marketData.previous[asset] = prev;
         marketData.prices[asset]   = next;

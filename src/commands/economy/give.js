@@ -1,34 +1,17 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser } = require('../../economy/econStore');
+const { EmbedBuilder } = require('discord.js');
+const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 const { fmt } = require('../../utils/helpers');
 
 const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold' };
 
-function assetRow(targetId, userId) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_gv_btc_${targetId}_${userId}`) .setLabel('₿ BTC')      .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_gv_gold_${targetId}_${userId}`).setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_give_${userId}`)             .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
-    );
-}
-
-function closeRow(userId) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`close_give_${userId}`)
-            .setLabel('❌ Iska xir')
-            .setStyle(ButtonStyle.Danger),
-    );
-}
-
-module.exports = async function giveCmd(message) {
+module.exports = async function giveCmd(message, args) {
     const userId = message.author.id;
     const target = message.mentions.users.first();
 
     if (!target) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription('**Lacag u dir:** `?give @user`\nMarka ku qoro @user, asset baad dooranaysaa.')
+                .setDescription('**Isticmaal:** `?give @user btc 200` ama `?give @user gold 300`')
                 .setColor('#e74c3c'),
         ]});
     }
@@ -39,21 +22,50 @@ module.exports = async function giveCmd(message) {
         ]});
     }
 
+    if (target.bot) {
+        return message.reply({ embeds: [
+            new EmbedBuilder().setDescription('⚠️ Bot-ka lacag uma dirin kartid.').setColor('#e74c3c'),
+        ]});
+    }
+
+    const asset  = (args[1] || '').toLowerCase();
+    const amount = parseInt(args[2], 10);
+
+    if (!['btc', 'gold'].includes(asset) || isNaN(amount) || amount <= 0) {
+        return message.reply({ embeds: [
+            new EmbedBuilder()
+                .setDescription('**Isticmaal:** `?give @user btc 200` ama `?give @user gold 300`')
+                .setColor('#e74c3c'),
+        ]});
+    }
+
     checkEconUser(userId);
-    const d = econData[userId];
+    checkEconUser(target.id);
+    const d  = econData[userId];
+    const dt = econData[target.id];
+
+    if ((d[asset] || 0) < amount) {
+        return message.reply({ embeds: [
+            new EmbedBuilder()
+                .setDescription(`⚠️ Ma haysid **${fmt(amount)} ${ASSET_LABELS[asset]}** si aad u dirtid.`)
+                .setColor('#e74c3c'),
+        ]});
+    }
+
+    d[asset]  = (d[asset]  || 0) - amount;
+    dt[asset] = (dt[asset] || 0) + amount;
+    saveEcon();
 
     return message.reply({ embeds: [
         new EmbedBuilder()
-            .setTitle(`💸 Lacag u dir — ${target.username}`)
-            .setColor('#3498db')
+            .setTitle('💸 Lacag La Diray!')
+            .setColor('#2ecc71')
             .setDescription(
-                `**Asset dooro** aad u diri:\n\n` +
-                `₿ BTC: **${fmt(d.btc || 0)}**\n` +
-                `🥇 Gold: **${fmt(d.gold || 0)}**`
+                `✅ **${fmt(amount)} ${ASSET_LABELS[asset]}** waxaad u diray\n\n` +
+                `Hadhaagaaga: **${fmt(d[asset])} ${ASSET_LABELS[asset]}**`
             )
             .setFooter({ text: 'Garaad Economy' }),
-    ], components: [assetRow(target.id, userId)] });
+    ]});
 };
 
 module.exports.ASSET_LABELS = ASSET_LABELS;
-module.exports.closeRow     = closeRow;

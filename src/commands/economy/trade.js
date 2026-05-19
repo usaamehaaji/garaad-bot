@@ -9,7 +9,7 @@ const { getMarketSnapshot, getPrice } = require('../../economy/market');
 const { getActivePrediction, WIN_MULTI, LOSE_MULTI, ASSET_LABEL } = require('../../economy/prediction');
 const pfmt = n => Math.round(n).toLocaleString();
 
-const ASSETS = ['btc', 'gold'];
+const ASSETS = ['gold'];
 
 // ── Embed: Market overview ─────────────────────────────────────────
 
@@ -218,7 +218,6 @@ function controlRow(userId) {
 
 function shopRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`trade_buy_btc_${userId}`)  .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_buy_gold_${userId}`) .setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_back_${userId}`)      .setLabel('🔙 Dib')     .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_trade_${userId}`)    .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
@@ -229,7 +228,6 @@ function shopBackRow(userId) { return shopRow(userId); }
 
 function sellRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`trade_sellasset_btc_${userId}`)  .setLabel('BTC')        .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`trade_sellasset_gold_${userId}`) .setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`pred_back_${userId}`)            .setLabel('🔙 Dib')     .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_trade_${userId}`)          .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
