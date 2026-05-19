@@ -1,9 +1,3 @@
-// =====================================================================
-// GARAAD PREDICT — Binary Prediction Trading (UP / DOWN)
-// WIN  = stake × 1.8 (faa'iido 80%)
-// LOSE = stake × 0.4 (dib u celinta 40%)
-// =====================================================================
-
 const fs   = require('fs');
 const path = require('path');
 const { getPrice }  = require('./market');
@@ -11,8 +5,13 @@ const { econData, checkEconUser, saveEcon, trackEarning, addToTreasury } = requi
 
 const PRED_PATH = path.join(__dirname, '../../data/predictions.json');
 
-const pendingSetup      = new Map();  // userId -> partial setup state
-const activePredictions = new Map();  // userId -> locked prediction
+const pendingSetup      = new Map();
+const activePredictions = new Map();
+
+const WIN_MULTI  = 1.8;
+const LOSE_MULTI = 0.4;
+
+const ASSET_LABEL = { btc: '₿ BTC' };
 
 function savePredictions() {
     try {
@@ -22,7 +21,7 @@ function savePredictions() {
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(PRED_PATH, JSON.stringify(obj, null, 2));
     } catch (e) {
-        console.error('[Predictions] Save khalad:', e.message);
+        console.error('[Predictions] Save error:', e.message);
     }
 }
 
@@ -41,69 +40,57 @@ function restorePredictions(client) {
             }
             count++;
         }
-        if (count > 0) console.log(`[Predictions] ${count} saadaalin dib loo bilaabishay`);
+        if (count > 0) console.log(`[Predictions] ${count} prediction(s) restored`);
     } catch (e) {
-        console.error('[Predictions] Restore khalad:', e.message);
+        console.error('[Predictions] Restore error:', e.message);
     }
 }
-
-const WIN_MULTI  = 1.8;
-const LOSE_MULTI = 0.4;
-
-const ASSET_LABEL = {
-    btc:  'BTC',
-    gold: '🥇 Gold',
-};
-
-// ── Pending state helpers ──────────────────────────────────────────
 
 function setPending(userId, patch) {
     const cur = pendingSetup.get(userId) || {};
     pendingSetup.set(userId, { ...cur, ...patch });
 }
 
-function getPending(userId)  { return pendingSetup.get(userId)  || null; }
-function clearPending(userId){ pendingSetup.delete(userId); }
+function getPending(userId)   { return pendingSetup.get(userId) || null; }
+function clearPending(userId) { pendingSetup.delete(userId); }
 
-// ── Active prediction helpers ──────────────────────────────────────
-
-function hasPrediction(userId)        { return activePredictions.has(userId); }
-function getActivePrediction(userId)  { return activePredictions.get(userId) || null; }
-
-// ── Lock prediction ────────────────────────────────────────────────
+function hasPrediction(userId)       { return activePredictions.has(userId); }
+function getActivePrediction(userId) { return activePredictions.get(userId) || null; }
 
 async function lockPrediction(userId, client) {
     const pend = getPending(userId);
-    if (!pend)                  return { ok: false, msg: '⚠️ Setup xog ma jirto — bilow marlabaad.' };
-    if (hasPrediction(userId))  return { ok: false, msg: '⚠️ Saadaalin firfircoon ayaad haysataa. Sug.' };
+    if (!pend)                 return { ok: false, msg: '⚠️ No setup found — start over.' };
+    if (hasPrediction(userId)) return { ok: false, msg: '⚠️ You already have an active prediction. Wait for it to resolve.' };
 
-    const { asset, stakeType, stakeAmount, stakeUsd, minutes, direction, channelId, messageId } = pend;
-    if (!asset || !stakeType || !stakeAmount || !minutes || !direction) {
-        return { ok: false, msg: '⚠️ Macluumaad dhameystiran kuma jiro. Bilow marlabaad.' };
+    const { stakeAmount, minutes, direction, channelId, messageId } = pend;
+    if (!stakeAmount || !minutes || !direction) {
+        return { ok: false, msg: '⚠️ Incomplete setup — start over.' };
     }
 
     checkEconUser(userId);
     const d = econData[userId];
 
-    if (stakeType === 'btc') {
-        if ((d.btc || 0) < stakeAmount)
-            return { ok: false, msg: `⚠️ BTC kugu filna ma lihid. Haysataa: **${(d.btc || 0).toLocaleString()} BTC**` };
-        d.btc = (d.btc || 0) - stakeAmount;
-    } else {
-        if ((d[asset] || 0) < stakeAmount)
-            return { ok: false, msg: `⚠️ ${asset.toUpperCase()} kugu filna ma lihid. Haysataa: **${d[asset] || 0}**` };
-        d[asset] -= stakeAmount;
-    }
+    if ((d.btc || 0) < stakeAmount)
+        return { ok: false, msg: `⚠️ Not enough BTC. Wallet: **${(d.btc || 0).toLocaleString()} BTC**` };
+
+    d.btc = (d.btc || 0) - stakeAmount;
     saveEcon();
 
-    const entryPrice = getPrice(asset);
+    const entryPrice = getPrice('btc');
     const endTime    = Date.now() + minutes * 60 * 1000;
 
     const pred = {
-        userId, asset, stakeType, stakeAmount,
-        stakeUsd: stakeUsd || stakeAmount,
-        minutes, direction, endTime, entryPrice,
-        channelId, messageId,
+        userId,
+        asset:       'btc',
+        stakeType:   'btc',
+        stakeAmount,
+        stakeUsd:    stakeAmount,
+        minutes,
+        direction,
+        endTime,
+        entryPrice,
+        channelId,
+        messageId,
     };
     activePredictions.set(userId, pred);
     clearPending(userId);
@@ -113,18 +100,15 @@ async function lockPrediction(userId, client) {
     return { ok: true };
 }
 
-// ── Resolve prediction ─────────────────────────────────────────────
-
 async function resolvePrediction(userId, client) {
     const pred = activePredictions.get(userId);
     if (!pred) return;
 
-    const exitPrice   = getPrice(pred.asset);
+    const exitPrice   = getPrice('btc');
     const priceWentUp = exitPrice > pred.entryPrice;
     const priceEqual  = exitPrice === pred.entryPrice;
 
-    let win    = false;
-    let isDraw = false;
+    let win = false, isDraw = false;
     if (priceEqual) {
         isDraw = true;
     } else {
@@ -149,66 +133,43 @@ async function resolvePrediction(userId, client) {
     activePredictions.delete(userId);
     savePredictions();
 
-    const pctChange   = ((exitPrice - pred.entryPrice) / pred.entryPrice * 100).toFixed(2);
-    const dirLabel    = pred.direction === 'up' ? '⬆️ KOR U KAC' : '⬇️ HOOS U DHAC';
-    const assetLabel  = ASSET_LABEL[pred.asset] || pred.asset.toUpperCase();
-    const profit      = payout - pred.stakeUsd;
+    const pctChange  = ((exitPrice - pred.entryPrice) / pred.entryPrice * 100).toFixed(2);
+    const dirLabel   = pred.direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const profit     = payout - pred.stakeUsd;
+    const fmt        = n => Math.round(n).toLocaleString();
 
-    const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+    const { EmbedBuilder } = require('discord.js');
 
     const resultEmbed = new EmbedBuilder()
         .setTitle(
-            isDraw ? '🤝 Saadaalin — Xeerka! (Draw)'
-            : win  ? '🏆 Saadaalin — GUUL! WIN!'
-                   : '😢 Saadaalin — KHASAARO! LOSE'
+            isDraw ? '🤝 Prediction — DRAW'
+            : win  ? '🏆 Prediction — WIN!'
+                   : '❌ Prediction — LOSS'
         )
         .setColor(isDraw ? '#f1c40f' : win ? '#2ecc71' : '#e74c3c')
         .setDescription(
-            `📌 **Asset:**       ${assetLabel}\n` +
-            `🎯 **Saadaal:**     ${dirLabel}\n` +
-            `📊 **Galitaanka:**  **${pred.entryPrice.toLocaleString()} BTC**\n` +
-            `📊 **Bixitaanka:**  **${exitPrice.toLocaleString()} BTC** (${pctChange > 0 ? '+' : ''}${pctChange}%)\n\n` +
-            `💰 **Dhigay:**      ${pred.stakeUsd.toLocaleString()} BTC\n` +
+            `🎯 **Direction:** ${dirLabel}\n` +
+            `📊 **Entry price:** ${fmt(pred.entryPrice)} BTC\n` +
+            `📊 **Exit price:**  ${fmt(exitPrice)} BTC (${parseFloat(pctChange) > 0 ? '+' : ''}${pctChange}%)\n\n` +
+            `💰 **Invested:** ${fmt(pred.stakeUsd)} BTC\n` +
             (isDraw
-                ? `✅ **Dib u celinta:** ${payout.toLocaleString()} BTC (qiime iskumid — dib oo dhan)`
+                ? `✅ **Returned:** ${fmt(payout)} BTC (price unchanged — full refund)`
                 : win
-                    ? `✅ **Dib u celinta:** ${payout.toLocaleString()} BTC (+${profit.toLocaleString()} BTC faa'iido)`
-                    : `❌ **Dib u celinta:** ${payout.toLocaleString()} BTC (-${Math.round(Math.abs(profit)).toLocaleString()} BTC khasaaro)`) +
-            `\n\n₿ **BTC-kaaga hadda:** ${(d.btc || 0).toLocaleString()} BTC`
+                    ? `✅ **Returned:** ${fmt(payout)} BTC (+${fmt(profit)} BTC profit)`
+                    : `❌ **Returned:** ${fmt(payout)} BTC (−${fmt(Math.abs(profit))} BTC loss)`) +
+            `\n\n₿ **Wallet:** ${fmt(d.btc || 0)} BTC`
         )
-        .setFooter({ text: 'Garaad Predict • ?trade si aad dib u bilaabasho' });
+        .setFooter({ text: 'Garaad Predict • ?trade to play again' });
 
-    const closeRow = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`close_trade_${userId}`)
-            .setLabel('❌ Iska xir')
-            .setStyle(ButtonStyle.Danger),
-    );
-
-    // Edit original message (silent update in channel)
-    if (client && pred.channelId && pred.messageId) {
+    // Send result to channel as a reply/mention — no DM
+    if (client && pred.channelId) {
         try {
             const ch = await client.channels.fetch(pred.channelId).catch(() => null);
             if (ch) {
-                const msg = await ch.messages.fetch(pred.messageId).catch(() => null);
-                if (msg) await msg.edit({ embeds: [resultEmbed], components: [closeRow] }).catch(() => {});
+                await ch.send({ content: `<@${userId}>`, embeds: [resultEmbed] }).catch(() => {});
             }
         } catch {}
     }
-
-    // DM user privately — only they see the result
-    if (client) {
-        try {
-            const user = await client.users.fetch(userId).catch(() => null);
-            if (user) {
-                await user.send({
-                    embeds:     [resultEmbed],
-                    components: [closeRow],
-                }).catch(() => {});
-            }
-        } catch {}
-    }
-
 }
 
 module.exports = {

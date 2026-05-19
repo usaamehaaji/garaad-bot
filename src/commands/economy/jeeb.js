@@ -53,13 +53,11 @@ function jeebRow(authorId, targetId) {
 }
 
 module.exports = async function jeebCmd(message) {
-    const target   = message.mentions.users.first() || message.author;
-    const authorId = message.author.id;
-    const targetId = target.id;
+    const userId = message.author.id;
 
     return message.reply({
-        embeds:     [buildJeebEmbed(targetId, target.username)],
-        components: [jeebRow(authorId, targetId)],
+        embeds:     [buildJeebEmbed(userId, message.author.username)],
+        components: [jeebRow(userId, userId)],
     });
 };
 
