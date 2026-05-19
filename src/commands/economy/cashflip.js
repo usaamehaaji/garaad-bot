@@ -23,6 +23,23 @@ function directionRow(userId, amount) {
     );
 }
 
+function replayRow(userId, amount) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`eco_ef_up_${amount}_${userId}`)
+            .setLabel('⬆️ UP again')
+            .setStyle(ButtonStyle.Success),
+        new ButtonBuilder()
+            .setCustomId(`eco_ef_down_${amount}_${userId}`)
+            .setLabel('⬇️ DOWN again')
+            .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder()
+            .setCustomId(`close_cf_${userId}`)
+            .setLabel('✖ Stop')
+            .setStyle(ButtonStyle.Secondary),
+    );
+}
+
 function closeRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -32,9 +49,7 @@ function closeRow(userId) {
     );
 }
 
-// Resolve the flip — called from command or button handler
-// replyFn: function(data) that sends the result (reply or channel.send with mention)
-// deleteMsg: optional function to delete the choice panel before sending result
+// replyFn: sends the result  |  deleteMsg: deletes the panel before result
 async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
     const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
     ceu(userId);
@@ -44,7 +59,7 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
         return replyFn({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
     }
 
-    await new Promise(r => setTimeout(r, 1200));
+    await new Promise(r => setTimeout(r, 5000));
 
     const win    = Math.random() < WIN_RATE;
     const profit = Math.floor(amount * WIN_MULTI);
@@ -76,7 +91,7 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
                 { name: '₿ Profit',      value: `**+${fmt(profit)} BTC**`, inline: true },
                 { name: '₿ New Balance', value: `**${newBal} BTC**`,       inline: true },
             )
-            .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON })
+            .setFooter({ text: 'Garaad Economy • Play again?', iconURL: BTC_ICON })
         : new EmbedBuilder()
             .setTitle('❌ Economy Flip — LOSS!')
             .setColor('#e74c3c')
@@ -86,9 +101,9 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
                 { name: '₿ Lost',        value: `**-${fmt(amount)} BTC**`, inline: true },
                 { name: '₿ New Balance', value: `**${newBal} BTC**`,       inline: true },
             )
-            .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
+            .setFooter({ text: 'Garaad Economy • Try again?', iconURL: BTC_ICON });
 
-    return replyFn({ embeds: [resultEmbed] });
+    return replyFn({ embeds: [resultEmbed], components: [replayRow(userId, amount)] });
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -96,7 +111,7 @@ module.exports = async function cashflipCmd(message, args) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Parse: ?ef 500 | ?ef 500 up | ?ef 500 down
+    // Accept: ?ef 500 | ?ef btc 500 | ?ef 500 up | ?ef btc 500 up | ?ef btc 500 down
     let amount, direction;
 
     if (args && args.length >= 1) {
@@ -107,7 +122,7 @@ module.exports = async function cashflipCmd(message, args) {
 
     if (!amount || isNaN(amount) || amount <= 0) {
         return message.reply(
-            `⚠️ Usage: \`?ef 500\`  •  \`?ef 500 up\`  •  \`?ef 500 down\`\n` +
+            `⚠️ Usage: \`?ef btc 500\`  •  \`?ef btc 500 up\`  •  \`?ef btc 500 down\`\n` +
             `₿ Wallet: **${fmt(d.btc || 0)} BTC**`
         );
     }
@@ -116,13 +131,16 @@ module.exports = async function cashflipCmd(message, args) {
         return message.reply(`⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**`);
     }
 
-    // Direct resolve if direction typed in command
+    // Direct resolve if direction typed
     if (direction === 'up' || direction === 'down') {
         const sent = await message.reply({ embeds: [
             new EmbedBuilder()
                 .setTitle('🎰 Economy Flip — Flipping...')
                 .setColor('#f39c12')
-                .setDescription(`You chose **${direction === 'up' ? '⬆️ UP' : '⬇️ DOWN'}**\n\n⏳ _Resolving..._`),
+                .setDescription(
+                    `You chose **${direction === 'up' ? '⬆️ UP' : '⬇️ DOWN'}**\n\n` +
+                    `⏳ _Resolving in 5 seconds..._`
+                ),
         ]});
         return resolveFlip(
             data => message.reply(data),
@@ -140,8 +158,7 @@ module.exports = async function cashflipCmd(message, args) {
             .setDescription(
                 `₿ Stake: **${fmt(amount)} BTC**\n\n` +
                 `⬆️ **UP** or ⬇️ **DOWN** — pick one!\n\n` +
-                `🏆 Win: **+${fmt(Math.floor(amount * WIN_MULTI))} BTC**\n` +
-                `💀 Lose: **−${fmt(amount)} BTC**`
+                `⏳ Result in **5 seconds** after you pick`
             )
             .setFooter({ text: '50/50 chance • Garaad Economy' }),
     ], components: [directionRow(userId, amount)] });
