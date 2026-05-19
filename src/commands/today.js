@@ -32,8 +32,17 @@ module.exports = async function todayCommand(message) {
         });
     }
 
+    // Update streak: consecutive if last claim was within 48h
+    const prevDaily = userData[userId].lastDaily || 0;
+    const hoursSinceLast = (Date.now() - prevDaily) / 3600000;
+    if (prevDaily > 0 && hoursSinceLast < 48) {
+        econData[userId].streak = (econData[userId].streak || 0) + 1;
+    } else {
+        econData[userId].streak = 1;
+    }
+
     const iqGain = Math.floor(Math.random() * 9) + 5;
-    userData[userId].iq       = (userData[userId].iq || 0) + iqGain;
+    userData[userId].iq        = (userData[userId].iq || 0) + iqGain;
     userData[userId].lastDaily = Date.now();
     econData[userId].btc       = (econData[userId].btc || 0) + DAILY_BTC;
     trackEarning(userId, DAILY_BTC);

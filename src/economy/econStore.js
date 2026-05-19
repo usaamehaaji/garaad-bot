@@ -11,6 +11,7 @@ function defaultUser() {
         banks:           { garaad: 0 },
         lastDaily:       0,
         lastInterest:    0,
+        streak:          0,
         robsToday:       { date: '', count: 0 },
         inventory:       { safety: 0, robticket: 0 },
         lastWork:        0,
@@ -38,6 +39,7 @@ function checkEconUser(userId) {
         d.inventory        ??= { safety: 0, robticket: 0 };
         d.inventory.safety    ??= 0;
         d.inventory.robticket ??= 0;
+        d.streak           ??= 0;
         d.lastWork         ??= 0;
         d.interestEarned   ??= { garaad: 0 };
         d.interestEarned.garaad ??= 0;
