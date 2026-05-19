@@ -33,23 +33,14 @@ function closeRow(userId) {
 }
 
 // Resolve the flip — called from command or button handler
-async function resolveFlip(send, edit, userId, amount, direction) {
+// deleteMsg: optional function to delete the choice panel before sending result
+async function resolveFlip(channel, userId, amount, direction, deleteMsg) {
     const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
     ceu(userId);
     const d = eData[userId];
 
     if ((d.btc || 0) < amount) {
-        return send({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
-    }
-
-    // Show flipping animation
-    if (edit) {
-        await edit({ embeds: [
-            new EmbedBuilder()
-                .setTitle('🎰 Economy Flip — Flipping...')
-                .setColor('#f39c12')
-                .setDescription(`You chose **${direction === 'up' ? '⬆️ UP' : '⬇️ DOWN'}**\n\n⏳ _Resolving..._`),
-        ], components: [] });
+        return channel.send({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
     }
 
     await new Promise(r => setTimeout(r, 1200));
@@ -67,7 +58,12 @@ async function resolveFlip(send, edit, userId, amount, direction) {
     }
     se();
 
-    const newBal = fmt(d.btc || 0);
+    // Delete the choice panel before sending result
+    if (deleteMsg) {
+        try { await deleteMsg(); } catch {}
+    }
+
+    const newBal   = fmt(d.btc || 0);
     const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
 
     const resultEmbed = win
@@ -92,15 +88,7 @@ async function resolveFlip(send, edit, userId, amount, direction) {
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
 
-    const { ActionRowBuilder: AR, ButtonBuilder: BB, ButtonStyle: BS } = require('discord.js');
-    const closeBtn = new AR().addComponents(
-        new BB().setCustomId(`close_cf_${userId}`).setLabel('✖ Close').setStyle(BS.Danger),
-    );
-
-    if (edit) {
-        return edit({ embeds: [resultEmbed], components: [closeBtn] });
-    }
-    return send({ embeds: [resultEmbed], components: [closeBtn] });
+    return channel.send({ embeds: [resultEmbed] });
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -108,30 +96,38 @@ module.exports = async function cashflipCmd(message, args) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Parse: ?ef 500 | ?ef 500 up | ?ef 500 down | ?ef btc 500
+    // Parse: ?ef 500 | ?ef 500 up | ?ef 500 down
     let amount, direction;
 
     if (args && args.length >= 1) {
-        // skip 'btc' prefix if given
         const numIdx = isNaN(parseFloat(args[0])) ? 1 : 0;
         amount    = parseFloat(args[numIdx]);
         direction = (args[numIdx + 1] || '').toLowerCase();
     }
 
     if (!amount || isNaN(amount) || amount <= 0) {
-        return message.reply(`⚠️ Usage: \`?ef 500\` or \`?ef 500 up\`\n₿ Wallet: **${fmt(d.btc || 0)} BTC**`);
+        return message.reply(
+            `⚠️ Usage: \`?ef 500\`  •  \`?ef 500 up\`  •  \`?ef 500 down\`\n` +
+            `₿ Wallet: **${fmt(d.btc || 0)} BTC**`
+        );
     }
 
     if ((d.btc || 0) < amount) {
         return message.reply(`⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**`);
     }
 
-    // Direct resolve if direction given in command
+    // Direct resolve if direction typed in command — delete command reply, send result
     if (direction === 'up' || direction === 'down') {
+        const sent = await message.reply({ embeds: [
+            new EmbedBuilder()
+                .setTitle('🎰 Economy Flip — Flipping...')
+                .setColor('#f39c12')
+                .setDescription(`You chose **${direction === 'up' ? '⬆️ UP' : '⬇️ DOWN'}**\n\n⏳ _Resolving..._`),
+        ]});
         return resolveFlip(
-            p => message.reply(p),
-            null,
-            userId, amount, direction
+            message.channel,
+            userId, amount, direction,
+            () => sent.delete()
         );
     }
 

@@ -1613,12 +1613,12 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ This is not your flip.', flags: MessageFlags.Ephemeral });
             }
 
-            const { resolveFlip } = require('../commands/economy/cashflip');
             await interaction.deferUpdate();
+            const { resolveFlip } = require('../commands/economy/cashflip');
             return resolveFlip(
-                p => interaction.followUp(p),
-                p => interaction.editReply(p),
-                ownerId, amount, direction
+                interaction.channel,
+                ownerId, amount, direction,
+                () => interaction.message.delete()
             );
         }
 
