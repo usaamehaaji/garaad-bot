@@ -39,7 +39,7 @@ function buildEduEmbed(userId) {
             `\n**🎮 Ciyaaraha**\n` +
             `**\`${PREFIX}solo\`** — Su'aal kuu yimaada, jawaab si degdeg ah\n` +
             `**\`${PREFIX}duel @qof\`** — La ciyaar qof, IQ ayaa danbeeysa\n` +
-            `**\`${PREFIX}deul 2v2 usd 10000\`** — Team duel: 1v1/2v2/3v3\n` +
+            `**\`${PREFIX}deul 2v2\`** — Team duel: 1v1/2v2/3v3\n` +
             `**\`${PREFIX}quiz\`** — Koox la ciyaar, waa la tartamaa\n\n` +
 
             `**🏆 Tartan (Tournament)**\n` +
@@ -81,13 +81,13 @@ function buildEcoEmbed() {
             `**\`${PREFIX}list\`** — Dadka lacagaha bankiga ku haya\n\n` +
 
             `🎮 **Ciyaarta**\n` +
-            `**\`${PREFIX}trade\`** — Suuqa live: saadaal UP/DOWN, iibso, iib assets\n` +
+            `**\`${PREFIX}trade\`** — Suuqa live: saadaal UP/DOWN qiimaha\n` +
             `**\`${PREFIX}ef\`** — 50/50 gamar — guul +90%, khasaaro −100%\n` +
             `**\`${PREFIX}shop\`** — Dukaanka economy (xirfad titles)\n` +
             `**\`${PREFIX}etitle [key]\`** — Xirfadahaaga arag / dhig\n\n` +
 
             `🤝 **Bulshada**\n` +
-            `**\`${PREFIX}give @user\`** — Lacag u dir (max $5,000/maalin)\n` +
+            `**\`${PREFIX}give @user btc 200\`** — BTC/Gold lacag u dir\n` +
             `**\`${PREFIX}rob @user\`** — Lacag ka xad\n` +
             `**\`${PREFIX}rich\`** — TOP 10 ugu taajirta`
         )
