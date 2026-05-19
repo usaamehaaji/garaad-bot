@@ -30,8 +30,7 @@ function buildMarketEmbed(d) {
         .setDescription(
             `₿ **BTC**  **${pfmt(price)}**  ${ind}\n\`${spark}\`${sig}` +
             `\n\n₿ Wallet: **${pfmt(d.btc || 0)} BTC**\n\n` +
-            `**Click "📊 Predict BTC" to start a prediction:**\n` +
-            `🏆 Win: stake **×${WIN_MULTI}** | 💀 Lose: stake **×${LOSE_MULTI}**`
+            `**Click "📊 Predict BTC" to start a prediction:**`
         )
         .setFooter({ text: 'Garaad Predict • Choose UP or DOWN, wait for the result' });
 }
