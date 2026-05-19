@@ -1,29 +1,16 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../economy/econStore');
-const { getPrice } = require('../../economy/market');
 const { fmt } = require('../../utils/helpers');
 
-const WIN_RATE   = 0.50;
-const WIN_MULTI  = 0.90;
+const WIN_RATE  = 0.50;
+const WIN_MULTI = 0.90;
 const BTC_ICON  = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
-const GOLD_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/xau.png';
-
-const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold' };
-const VALID_ASSETS = Object.keys(ASSET_LABELS);
-
-function assetRow(userId) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_cf_btc_${userId}`) .setLabel('₿ BTC')      .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_cf_gold_${userId}`).setLabel('🥇 Gold')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_cf_${userId}`)   .setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
-    );
-}
 
 function closeRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(`close_cf_${userId}`)
-            .setLabel('❌ Iska xir')
+            .setLabel('✖ Close')
             .setStyle(ButtonStyle.Danger),
     );
 }
@@ -33,97 +20,86 @@ module.exports = async function cashflipCmd(message, args) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // ?ef 100 → default btc | ?ef gold 100 → gold
-    let asset, amount;
+    // ?ef 100  OR  ?ef btc 100
+    let amount;
     if (args && args.length >= 2 && isNaN(parseFloat(args[0]))) {
-        asset  = args[0].toLowerCase();
         amount = parseFloat(args[1]);
     } else if (args && args.length >= 1 && !isNaN(parseFloat(args[0]))) {
-        asset  = 'btc';
         amount = parseFloat(args[0]);
     }
 
-    if (asset !== undefined) {
-        if (!VALID_ASSETS.includes(asset))
-            return message.reply(`⚠️ Asset saxda ah geli: **${VALID_ASSETS.join(', ')}**\nTusaale: \`?ef 100\` ama \`?ef gold 100\``);
+    if (amount !== undefined) {
         if (!amount || isNaN(amount) || amount <= 0)
-            return message.reply('⚠️ Xaddad sax ah geli.\nTusaale: `?ef 100` ama `?ef gold 100`');
-        if ((d[asset] || 0) < amount)
-            return message.reply(`⚠️ ${asset.toUpperCase()} kugu filna ma lihid. Haysataa: **${fmt(d[asset] || 0)} ${asset.toUpperCase()}**`);
+            return message.reply('⚠️ Enter a valid amount. Example: `?ef 500`');
+        if ((d.btc || 0) < amount)
+            return message.reply(`⚠️ Not enough BTC. You have: **${fmt(d.btc || 0)} BTC**`);
 
         const flipMsg = await message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('🎰 ECONOMY FLIP')
+                .setTitle('🎰 Economy Flip')
                 .setColor('#f39c12')
-                .setDescription(`**La Raadinayaa...**\n\n⏳ **${fmt(amount)} ${asset.toUpperCase()}** la ciyaarayaa...\n_Sugso natiijahaaga..._`),
+                .setDescription(`**Flipping...**\n\n⏳ **${fmt(amount)} BTC** on the line...\n_Wait for the result..._`),
         ]});
 
         await new Promise(r => setTimeout(r, 1500));
 
-        const win    = Math.random() < WIN_RATE;
-        const usdVal = asset === 'usd' ? amount : Math.round(amount * (getPrice(asset) || 0));
+        const win = Math.random() < WIN_RATE;
 
         if (win) {
             const profit = Math.floor(amount * WIN_MULTI);
-            d[asset] = (d[asset] || 0) + profit;
-            const fee    = amount - profit;
-            const feeUsd = Math.round(fee * (getPrice(asset) || 0));
-            addToTreasury(feeUsd);
-            trackEarning(userId, Math.round(profit * (getPrice(asset) || 0)));
+            d.btc = (d.btc || 0) + profit;
+            addToTreasury(amount - profit);
+            trackEarning(userId, profit);
         } else {
-            d[asset] = (d[asset] || 0) - amount;
-            addToTreasury(usdVal);
+            d.btc = (d.btc || 0) - amount;
+            addToTreasury(amount);
         }
         saveEcon();
 
-        const newBal    = d[asset] || 0;
-        const assetUp   = asset.toUpperCase();
-        const profitAmt = `${fmt(Math.floor(amount * WIN_MULTI))} ${assetUp}`;
-        const lossAmt   = `${fmt(amount)} ${assetUp}`;
-        const balLabel  = `${fmt(newBal)} ${assetUp}`;
-        const ICON      = asset === 'gold' ? GOLD_ICON : BTC_ICON;
+        const newBal    = d.btc || 0;
+        const profitAmt = fmt(Math.floor(amount * WIN_MULTI));
+        const lossAmt   = fmt(amount);
+        const balLabel  = fmt(newBal);
 
         const resultEmbed = win
             ? new EmbedBuilder()
-                .setTitle('✅ ECONOMY FLIP ✅')
+                .setTitle('✅ Economy Flip — WIN!')
                 .setColor('#2ecc71')
-                .setThumbnail(ICON)
-                .setDescription(`─────── **GUUL!** ───────\n\n📈 **Suuqa ayaa kuu shaqeeyay.**`)
+                .setThumbnail(BTC_ICON)
+                .setDescription(`─── **YOU WON!** ───\n\n📈 The market worked in your favor.`)
                 .addFields(
-                    { name: '₿ Faa\'iido',     value: `**+${profitAmt}**`, inline: true },
-                    { name: '₿ Balance Cusub', value: `**${balLabel}**`,   inline: true },
+                    { name: '₿ Profit',      value: `**+${profitAmt} BTC**`, inline: true },
+                    { name: '₿ New Balance', value: `**${balLabel} BTC**`,   inline: true },
                 )
-                .setFooter({ text: `🔄 ?ef si aad u tijaabiso mar kale  •  ✨ Garaad Economy`, iconURL: ICON })
+                .setFooter({ text: '🔄 Try again with ?ef  •  Garaad Economy', iconURL: BTC_ICON })
             : new EmbedBuilder()
-                .setTitle('❌ ECONOMY FLIP ❌')
+                .setTitle('❌ Economy Flip — LOSS!')
                 .setColor('#e74c3c')
-                .setThumbnail(ICON)
-                .setDescription(`─────── **QASAARO!** ───────\n\n📉 **Suuqa ayaa kaa hooseeyay.**`)
+                .setThumbnail(BTC_ICON)
+                .setDescription(`─── **YOU LOST!** ───\n\n📉 The market went against you.`)
                 .addFields(
-                    { name: '₿ Khasaaro',      value: `**-${lossAmt}**`,  inline: true },
-                    { name: '₿ Balance Cusub', value: `**${balLabel}**`,   inline: true },
+                    { name: '₿ Lost',        value: `**-${lossAmt} BTC**`,  inline: true },
+                    { name: '₿ New Balance', value: `**${balLabel} BTC**`,   inline: true },
                 )
-                .setFooter({ text: `🔄 ?ef si aad u isku daydo mar kale  •  ✨ Garaad Economy`, iconURL: ICON });
+                .setFooter({ text: '🔄 Try again with ?ef  •  Garaad Economy', iconURL: BTC_ICON });
 
         return flipMsg.edit({ embeds: [resultEmbed], components: [closeRow(userId)] });
     }
 
-    // Button flow — menu
+    // No args — show info panel
     return message.reply({ embeds: [
         new EmbedBuilder()
-            .setTitle('🎰 ECONOMY FLIP — 50/50')
+            .setTitle('🎰 Economy Flip — 50/50')
             .setColor('#9b59b6')
             .setThumbnail(BTC_ICON)
             .setDescription(
-                `**Asset dooro** ama qor toos:\n\`?ef 100\` ama \`?ef gold 100\`\n\n` +
-                `₿ BTC: **${fmt(d.btc || 0)} BTC**\n` +
-                `🥇 Gold: **${fmt(d.gold || 0)} Gold**\n\n` +
-                `🏆 **Win:** Stake × 1.9 | 💀 **Lose:** Stake dhan`
+                `**Usage:** \`?ef 500\`\n\n` +
+                `₿ Wallet: **${fmt(d.btc || 0)} BTC**\n\n` +
+                `🏆 **Win:** +90% of stake\n💀 **Lose:** −100% of stake\n⚖️ **Chance:** 50/50`
             )
-            .setFooter({ text: '50/50 chance • Garaad Economy' }),
-    ], components: [assetRow(userId)] });
+            .setFooter({ text: 'Garaad Economy' }),
+    ], components: [closeRow(userId)] });
 };
 
-module.exports.ASSET_LABELS = ASSET_LABELS;
-module.exports.WIN_MULTI    = WIN_MULTI;
-module.exports.closeRow     = closeRow;
+module.exports.WIN_MULTI = WIN_MULTI;
+module.exports.closeRow  = closeRow;

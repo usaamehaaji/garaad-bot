@@ -12,13 +12,12 @@ module.exports = async function econTitleCmd(message, args) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // ?etitle <key> — set active title
     if (args[0]) {
         const key = args[0].toLowerCase();
         if (!d.econTitles.includes(key)) {
             return message.reply({ embeds: [
                 new EmbedBuilder()
-                    .setDescription(`⚠️ **${resolveLabel(d, key)}** ma haysatid.\nIibso marka hore: \`?shop\``)
+                    .setDescription(`⚠️ You don't own **${resolveLabel(d, key)}**.\nBuy it first at \`?shop\``)
                     .setColor('#e74c3c'),
             ]});
         }
@@ -26,34 +25,33 @@ module.exports = async function econTitleCmd(message, args) {
         saveEcon();
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('🏷️ Xirfadda Waa La Beddelay')
+                .setTitle('🏷️ Title Updated')
                 .setColor('#2ecc71')
-                .setDescription(`✅ Hadda waxaad tahay: **${resolveLabel(d, key)}**`)
+                .setDescription(`✅ Active title set to: **${resolveLabel(d, key)}**`)
                 .setFooter({ text: 'Garaad Economy' }),
         ]});
     }
 
-    // ?etitle — show owned titles
     if (d.econTitles.length === 0) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('🏷️ Xirfad Titles')
+                .setTitle('🏷️ Economy Titles')
                 .setColor('#9b59b6')
-                .setDescription('Weli xirfad kuma iibsan.\n\nEeg **`?shop`** si aad u aragto liiska.')
+                .setDescription("You don't own any titles yet.\n\nBrowse **`?shop`** to buy one.")
                 .setFooter({ text: 'Garaad Economy' }),
         ]});
     }
 
     const ownedLines = d.econTitles.map(key => {
-        const active = d.activeEconTitle === key ? ' ✅ *(firfircoon)*' : '';
+        const active = d.activeEconTitle === key ? ' ✅ *(active)*' : '';
         return `• ${resolveLabel(d, key)}${active}`;
     }).join('\n');
 
     return message.reply({ embeds: [
         new EmbedBuilder()
-            .setTitle('🏷️ Xirfadahaaga')
+            .setTitle('🏷️ Your Titles')
             .setColor('#9b59b6')
-            .setDescription(ownedLines + '\n\n`?etitle <key>` si aad u beddesho.')
+            .setDescription(ownedLines + '\n\n`?etitle <key>` to equip a title.')
             .setFooter({ text: 'Garaad Economy' }),
     ]});
 };

@@ -5,20 +5,18 @@ const { fmt } = require('../../utils/helpers');
 module.exports = async function bankListCmd(message) {
     const userId = message.author.id;
 
-    // Bank deposits
     const bankEntries = Object.entries(econData)
         .filter(([k, d]) => !k.startsWith('__') && d && typeof d === 'object' && (d.banks?.garaad || 0) > 0)
         .map(([uid, d]) => ({ uid, garaad: d.banks.garaad }))
         .sort((a, b) => b.garaad - a.garaad);
 
-    const grandGaraad = bankEntries.reduce((s, e) => s + e.garaad, 0);
+    const grandTotal = bankEntries.reduce((s, e) => s + e.garaad, 0);
 
     const bankLines = bankEntries.slice(0, 15).map((e, i) => {
         const rank = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`;
         return `${rank} <@${e.uid}> — **${fmt(e.garaad)} BTC**`;
     });
 
-    // Active loans
     const loanEntries = Object.entries(econData)
         .filter(([k, d]) => !k.startsWith('__') && d && d.loan && d.loan.owed > 0)
         .map(([uid, d]) => {
@@ -27,39 +25,39 @@ module.exports = async function bankListCmd(message) {
         })
         .sort((a, b) => b.owed - a.owed);
 
-    const loanLines = loanEntries.map((e, i) => {
+    const loanLines = loanEntries.map(e => {
         const urgency = e.daysLeft === 0 ? '🔴' : e.daysLeft === 1 ? '⚠️' : '💳';
-        const timeStr = e.daysLeft > 0 ? `${e.daysLeft}m hadhay` : 'la jarayo!';
-        return `${urgency} <@${e.uid}> — **${fmt(e.owed)} BTC** bixin | ${timeStr}`;
+        const timeStr = e.daysLeft > 0 ? `${e.daysLeft}d left` : '**OVERDUE**';
+        return `${urgency} <@${e.uid}> — **${fmt(e.owed)} BTC** | ${timeStr}`;
     });
 
     const embed = new EmbedBuilder()
-        .setTitle('🏦 Garaad Bank — Liiska')
+        .setTitle('🏦 Garaad Bank — Directory')
         .setColor('#3498db');
 
     let desc = '';
     if (bankLines.length > 0) {
-        desc += `**🏦 Garaad Bank Macaamiisha:**\n${bankLines.join('\n')}\n\n`;
-        desc += `💰 **Wadarta dhiggan:** ${fmt(grandGaraad)} BTC\n\n`;
+        desc += `**🏦 Bank Deposits:**\n${bankLines.join('\n')}\n\n`;
+        desc += `💰 **Total deposited:** ${fmt(grandTotal)} BTC\n\n`;
     } else {
-        desc += '_Cidna lacag Garaad Bank kuma dhigin._\n\n';
+        desc += '_No one has deposited into the bank yet._\n\n';
     }
 
     if (loanLines.length > 0) {
-        desc += `**💳 Deen Socda (${loanEntries.length} qof):**\n${loanLines.join('\n')}`;
+        desc += `**💳 Active Loans (${loanEntries.length}):**\n${loanLines.join('\n')}`;
     } else {
-        desc += '_Cidna deen haatan kama qaatin._';
+        desc += '_No active loans._';
     }
 
     embed.setDescription(desc);
-    embed.setFooter({ text: `${bankEntries.length} macaamiil • ${loanEntries.length} deen • Garaad Economy` });
+    embed.setFooter({ text: `${bankEntries.length} depositors • ${loanEntries.length} loans • Garaad Economy` });
 
-    const closeRow = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`close_banklist_${userId}`)
-            .setLabel('❌ Iska xir')
-            .setStyle(ButtonStyle.Danger),
-    );
-
-    return message.reply({ embeds: [embed], components: [closeRow] });
+    return message.reply({ embeds: [embed], components: [
+        new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setCustomId(`close_banklist_${userId}`)
+                .setLabel('✖ Close')
+                .setStyle(ButtonStyle.Danger),
+        ),
+    ]});
 };

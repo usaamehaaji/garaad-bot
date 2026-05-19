@@ -1,8 +1,3 @@
-// =====================================================================
-// GARAAD BOT — Weekly Leaderboard
-// Axad 19:00 EAT: top earners + top IQ, winner prize, reset earnings
-// =====================================================================
-
 const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, resetWeeklyEarnings } = require('../economy/econStore');
 const { userData }     = require('../store');
@@ -11,11 +6,16 @@ const { getLevel, getDisplayTitle, checkUser } = require('../utils/helpers');
 const CHANNEL_ID    = '1504517873673048185';
 const WEEK_MS       = 7 * 24 * 60 * 60 * 1000;
 const FIRST_TICK_MS = 30 * 1000;
-const PRIZE_USD     = 2000; // winner prize (BTC)
+const PRIZE_BTC     = 2_000;
 
 const MEDALS = ['🥇', '🥈', '🥉'];
 
-// ── Weekly earnings top 10 ────────────────────────────────────────
+function getCurrentWeekKey() {
+    const d    = new Date();
+    const jan1 = new Date(d.getFullYear(), 0, 1);
+    const week = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+    return `${d.getFullYear()}-W${week}`;
+}
 
 async function buildEcoLines(client) {
     const week = getCurrentWeekKey();
@@ -23,7 +23,7 @@ async function buildEcoLines(client) {
         .filter(([k]) => !k.startsWith('__'))
         .map(([uid, d]) => ({
             uid,
-            earned: (d.weeklyEarned?.week === week ? d.weeklyEarned.usd : 0),
+            earned: (d.weeklyEarned?.week === week ? (d.weeklyEarned.btc || d.weeklyEarned.usd || 0) : 0),
         }))
         .filter(e => e.earned > 0)
         .sort((a, b) => b.earned - a.earned)
@@ -33,13 +33,11 @@ async function buildEcoLines(client) {
         let name = `<@${uid}>`;
         try { const u = await client.users.fetch(uid); name = u.username; } catch {}
         const medal = MEDALS[i] || `**${i + 1}.**`;
-        return `${medal} **${name}** — $${earned.toLocaleString()} shaqaystay`;
+        return `${medal} **${name}** — ₿ ${earned.toLocaleString()} BTC earned`;
     }));
 
     return { lines, winner: entries[0] || null };
 }
-
-// ── IQ top 10 ─────────────────────────────────────────────────────
 
 async function buildIqLines(client) {
     const sorted = Object.entries(userData)
@@ -61,20 +59,11 @@ async function buildIqLines(client) {
     return lines;
 }
 
-function getCurrentWeekKey() {
-    const d = new Date();
-    const jan1 = new Date(d.getFullYear(), 0, 1);
-    const week = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
-    return `${d.getFullYear()}-W${week}`;
-}
-
-// ── Send leaderboard + prize + reset ─────────────────────────────
-
 async function sendLeaderboard(client) {
     try {
         const channel = await client.channels.fetch(CHANNEL_ID).catch(() => null);
         if (!channel) {
-            console.error('[WeeklyLB] Channel la heli waayo:', CHANNEL_ID);
+            console.error('[WeeklyLB] Channel not found:', CHANNEL_ID);
             return;
         }
 
@@ -83,49 +72,45 @@ async function sendLeaderboard(client) {
             buildIqLines(client),
         ]);
 
-        const dateStr = new Date().toLocaleDateString('so-SO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const dateStr = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-        // Give prize to weekly earnings winner
         let prizeLine = '';
         if (winner) {
             checkEconUser(winner.uid);
-            econData[winner.uid].btc = (econData[winner.uid].btc || 0) + PRIZE_USD;
+            econData[winner.uid].btc = (econData[winner.uid].btc || 0) + PRIZE_BTC;
             saveEcon();
-            prizeLine = `\n\n🏆 **Winner-ka Isbuucaan:** <@${winner.uid}>\n₿ **+${PRIZE_USD.toLocaleString()} BTC** abaalmarintii`;
+            prizeLine = `\n\n🏆 **This Week's Winner:** <@${winner.uid}>\n₿ **+${PRIZE_BTC.toLocaleString()} BTC** prize awarded!`;
         }
 
         const ecoEmbed = new EmbedBuilder()
-            .setTitle('💰 TOP 10 — Ugu Badan Shaqaystay Isbuucaan')
+            .setTitle('💰 TOP 10 — Weekly Earners')
             .setColor('#f39c12')
             .setDescription(
-                (ecoLines.join('\n') || '_Cidna weli ma shaqaynin._') +
+                (ecoLines.join('\n') || '_No earnings recorded this week._') +
                 prizeLine
             )
-            .setFooter({ text: `Garaad Economy • ${dateStr} • Dib ayaa la bilaabayaa` })
+            .setFooter({ text: `Garaad Economy • ${dateStr} • Earnings reset` })
             .setTimestamp();
 
         const iqEmbed = new EmbedBuilder()
-            .setTitle('🧠 TOP 10 — Ugu IQ Badan')
+            .setTitle('🧠 TOP 10 — Highest IQ')
             .setColor('#3498db')
-            .setDescription(iqLines.join('\n') || '_Wax xog ah ma jirto._')
+            .setDescription(iqLines.join('\n') || '_No data available._')
             .setFooter({ text: `Garaad IQ System • ${dateStr}` })
             .setTimestamp();
 
         await channel.send({
-            content: '@here\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 **Garaad — Tirakoobka Isbuuceedka**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+            content: '@here\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 **Garaad — Weekly Leaderboard**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
             embeds: [ecoEmbed, iqEmbed],
         });
 
-        // Reset weekly earnings after announcing
         resetWeeklyEarnings();
-        console.log('[WeeklyLB] ✅ Leaderboard la diray, earnings la reset gareeyay');
+        console.log('[WeeklyLB] ✅ Leaderboard posted, earnings reset');
 
     } catch (err) {
-        console.error('[WeeklyLB] Khalad:', err.message);
+        console.error('[WeeklyLB] Error:', err.message);
     }
 }
-
-// ── Setup ─────────────────────────────────────────────────────────
 
 function getNextSundayEAT() {
     const now = Date.now();
@@ -147,7 +132,7 @@ module.exports = function setupWeeklyLeaderboard(client) {
         const delayMs = Math.max(0, nextMs - Date.now());
         const days    = Math.floor(delayMs / 86400000);
         const hours   = Math.floor((delayMs % 86400000) / 3600000);
-        console.log(`[WeeklyLB] Xiga: Axad 19:00 EAT (~${days}d ${hours}h)`);
+        console.log(`[WeeklyLB] Next: Sunday 19:00 EAT (~${days}d ${hours}h)`);
 
         setTimeout(async () => {
             await sendLeaderboard(client);
@@ -158,5 +143,5 @@ module.exports = function setupWeeklyLeaderboard(client) {
     }
 
     setTimeout(() => scheduleNext(), FIRST_TICK_MS);
-    console.log('[WeeklyLB] ✅ Weekly leaderboard scheduler bilaabay');
+    console.log('[WeeklyLB] ✅ Weekly leaderboard scheduler started');
 };

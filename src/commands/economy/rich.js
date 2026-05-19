@@ -26,16 +26,16 @@ module.exports = async function richCmd(message) {
     const closeRow = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(`close_rich_${message.author.id}`)
-            .setLabel('❌ Iska xir')
+            .setLabel('✖ Close')
             .setStyle(ButtonStyle.Danger),
     );
 
     return message.reply({ embeds: [
         new EmbedBuilder()
-            .setTitle('₿ TOP 10 — Ugu Taajirta')
+            .setTitle('₿ TOP 10 — Richest Players')
             .setColor('#f39c12')
             .setThumbnail(BTC_ICON)
-            .setDescription(lines.join('\n') || '_Wali xog ma jirto._')
+            .setDescription(lines.join('\n') || '_No data yet._')
             .setFooter({ text: 'Garaad Economy • BTC Leaderboard', iconURL: BTC_ICON }),
     ], components: [closeRow] });
 };

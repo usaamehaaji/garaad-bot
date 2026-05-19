@@ -7,25 +7,20 @@ let econData = {};
 
 function defaultUser() {
     return {
-        usd: 1000,
-        btc: 0,
-        gold: 0,
-        banks: { mandeeq: 0, garaad: 0 },
-        lastDaily: 0,
-        lastInterest: 0,
-        robsToday:           { date: '', count: 0 },
-        inventory:           { safety: 0, robticket: 0 },
-        lastWork:            0,
-        serviceChargesPaid:  { mandeeq: 0, garaad: 0 },
-        interestEarned:      { mandeeq: 0, garaad: 0 },
-        loan:                null,
-        lastLoanTaken:       0,
-        econTitles:          [],
-        activeEconTitle:     null,
-        customEconTitle:     null,
-        todayEarned:         { date: '', usd: 0 },
-        dailyGiven:          { date: '', usd: 0 },
-        weeklyEarned:        { week: '', usd: 0 },
+        btc:             1000,
+        banks:           { garaad: 0 },
+        lastDaily:       0,
+        lastInterest:    0,
+        robsToday:       { date: '', count: 0 },
+        inventory:       { safety: 0, robticket: 0 },
+        lastWork:        0,
+        interestEarned:  { garaad: 0 },
+        loan:            null,
+        lastLoanTaken:   0,
+        econTitles:      [],
+        activeEconTitle: null,
+        customEconTitle: null,
+        weeklyEarned:    { week: '', btc: 0 },
     };
 }
 
@@ -34,33 +29,25 @@ function checkEconUser(userId) {
         econData[userId] = defaultUser();
     } else {
         const d = econData[userId];
-        d.usd             ??= 1000;
-        d.btc             ??= 0;
-        d.gold            ??= 0;
-        d.banks           ??= { mandeeq: 0, garaad: 0 };
-        d.banks.mandeeq   ??= 0;
-        d.banks.garaad    ??= 0;
-        d.lastDaily       ??= 0;
-        d.lastInterest    ??= 0;
-        d.robsToday       ??= { date: '', count: 0 };
-        d.inventory       ??= { safety: 0, robticket: 0 };
+        d.btc              ??= 1000;
+        d.banks            ??= { garaad: 0 };
+        d.banks.garaad     ??= 0;
+        d.lastDaily        ??= 0;
+        d.lastInterest     ??= 0;
+        d.robsToday        ??= { date: '', count: 0 };
+        d.inventory        ??= { safety: 0, robticket: 0 };
         d.inventory.safety    ??= 0;
         d.inventory.robticket ??= 0;
-        d.lastWork        ??= 0;
-        d.serviceChargesPaid         ??= { mandeeq: 0, garaad: 0 };
-        d.serviceChargesPaid.mandeeq ??= 0;
-        d.serviceChargesPaid.garaad  ??= 0;
-        d.interestEarned             ??= { mandeeq: 0, garaad: 0 };
-        d.interestEarned.mandeeq     ??= 0;
-        d.interestEarned.garaad      ??= 0;
-        if (d.loan === undefined)             d.loan             = null;
-        d.lastLoanTaken ??= 0;
-        if (d.econTitles === undefined)       d.econTitles       = [];
-        if (d.activeEconTitle === undefined)  d.activeEconTitle  = null;
-        if (d.customEconTitle === undefined)  d.customEconTitle  = null;
-        d.todayEarned  ??= { date: '', usd: 0 };
-        d.dailyGiven   ??= { date: '', usd: 0 };
-        d.weeklyEarned ??= { week: '', usd: 0 };
+        d.lastWork         ??= 0;
+        d.interestEarned   ??= { garaad: 0 };
+        d.interestEarned.garaad ??= 0;
+        if (d.loan === undefined)            d.loan            = null;
+        d.lastLoanTaken    ??= 0;
+        if (d.econTitles === undefined)      d.econTitles      = [];
+        if (d.activeEconTitle === undefined) d.activeEconTitle = null;
+        if (d.customEconTitle === undefined) d.customEconTitle = null;
+        d.weeklyEarned     ??= { week: '', btc: 0 };
+        if (!d.weeklyEarned.btc) d.weeklyEarned.btc ??= d.weeklyEarned.usd || 0;
     }
     return econData[userId];
 }
@@ -70,7 +57,7 @@ try {
         econData = JSON.parse(fs.readFileSync(ECON_PATH, 'utf8'));
     }
 } catch (e) {
-    console.error('[EconStore] Khalad:', e.message);
+    console.error('[EconStore] Load error:', e.message);
     econData = {};
 }
 
@@ -80,7 +67,7 @@ function saveEcon() {
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(ECON_PATH, JSON.stringify(econData, null, 2));
     } catch (e) {
-        console.error('[EconStore] Khalad keydintiinta:', e.message);
+        console.error('[EconStore] Save error:', e.message);
     }
 }
 
@@ -93,7 +80,7 @@ function getTreasury() {
 
 function addToTreasury(amount) {
     if (!amount || amount <= 0) return;
-    const t  = getTreasury();
+    const t = getTreasury();
     t.balance += amount;
     t.totalIn += amount;
 }
@@ -102,7 +89,6 @@ function topUpTreasury(amount) {
     if (!amount || amount <= 0) return;
     const t = getTreasury();
     t.balance += amount;
-    // does NOT add to totalIn — admin inject, not player income
 }
 
 function deductFromTreasury(amount) {
@@ -113,37 +99,41 @@ function deductFromTreasury(amount) {
 }
 
 function getWeekKey() {
-    const d = new Date();
+    const d    = new Date();
     const jan1 = new Date(d.getFullYear(), 0, 1);
     const week = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
     return `${d.getFullYear()}-W${week}`;
 }
 
-function trackEarning(userId, usdAmount) {
-    if (!usdAmount || usdAmount <= 0) return;
+function trackEarning(userId, btcAmount) {
+    if (!btcAmount || btcAmount <= 0) return;
     const d = econData[userId];
     if (!d) return;
-    const today = new Date().toISOString().slice(0, 10);
-    if (!d.todayEarned || d.todayEarned.date !== today) {
-        d.todayEarned = { date: today, usd: 0 };
-    }
-    d.todayEarned.usd += usdAmount;
-
     const week = getWeekKey();
     if (!d.weeklyEarned || d.weeklyEarned.week !== week) {
-        d.weeklyEarned = { week, usd: 0 };
+        d.weeklyEarned = { week, btc: 0 };
     }
-    d.weeklyEarned.usd += usdAmount;
+    d.weeklyEarned.btc = (d.weeklyEarned.btc || 0) + btcAmount;
 }
 
 function resetWeeklyEarnings() {
     const week = getWeekKey();
     for (const uid of Object.keys(econData)) {
-        if (econData[uid].weeklyEarned) {
-            econData[uid].weeklyEarned = { week, usd: 0 };
+        if (econData[uid] && econData[uid].weeklyEarned) {
+            econData[uid].weeklyEarned = { week, btc: 0 };
         }
     }
     saveEcon();
 }
 
-module.exports = { econData, checkEconUser, saveEcon, getTreasury, addToTreasury, topUpTreasury, deductFromTreasury, trackEarning, resetWeeklyEarnings };
+module.exports = {
+    econData,
+    checkEconUser,
+    saveEcon,
+    getTreasury,
+    addToTreasury,
+    topUpTreasury,
+    deductFromTreasury,
+    trackEarning,
+    resetWeeklyEarnings,
+};

@@ -68,30 +68,31 @@ function buildEduEmbed(userId) {
 
 function buildEcoEmbed() {
     return new EmbedBuilder()
-        .setTitle('💰 Economy — Dhaqaalaha')
+        .setTitle('💰 Economy — Bitcoin System')
         .setColor('#f39c12')
         .setDescription(
             `👤 **Personal**\n` +
-            `**\`${PREFIX}jeeb\`** — Wallet, Banks, iyo Assets-kaaga\n` +
-            `**\`${PREFIX}shaqo\`** — Shaqeyso 250 Gold hel (9 saacadood)\n` +
-            `**\`${PREFIX}today\`** — Maalin kasta 250 BTC + IQ hel\n\n` +
+            `**\`${PREFIX}jeeb\`** — Your wallet, bank balance & loan status\n` +
+            `**\`${PREFIX}work\`** — Work every 8h → earn 500 BTC\n` +
+            `**\`${PREFIX}today\`** — Daily reward: 250 BTC + IQ (24h)\n` +
+            `**\`${PREFIX}manta\`** — Daily reward: 500 BTC (24h)\n\n` +
 
-            `🏦 **Bangiga & Deen**\n` +
-            `**\`${PREFIX}ebank\`** — Garaad Bank (deposit 1%/maalin) + Deen (Khamiis–Jimce)\n` +
-            `**\`${PREFIX}list\`** — Dadka lacagaha bankiga ku haya\n\n` +
+            `🏦 **Banking & Loans**\n` +
+            `**\`${PREFIX}ebank\`** — Garaad Bank (1%/day interest) + Loan (Thu–Fri)\n` +
+            `**\`${PREFIX}list\`** — Bank leaderboard & active loans\n\n` +
 
-            `🎮 **Ciyaarta**\n` +
-            `**\`${PREFIX}trade\`** — Suuqa live: saadaal UP/DOWN qiimaha\n` +
-            `**\`${PREFIX}ef\`** — 50/50 gamar — guul +90%, khasaaro −100%\n` +
-            `**\`${PREFIX}shop\`** — Dukaanka economy (xirfad titles)\n` +
-            `**\`${PREFIX}etitle [key]\`** — Xirfadahaaga arag / dhig\n\n` +
+            `🎮 **Games**\n` +
+            `**\`${PREFIX}trade\`** — Live market: predict BTC UP/DOWN\n` +
+            `**\`${PREFIX}ef [amount]\`** — 50/50 flip: win +90%, lose −100%\n` +
+            `**\`${PREFIX}shop\`** — Economy shop (titles & items)\n` +
+            `**\`${PREFIX}etitle [key]\`** — View / equip your titles\n\n` +
 
-            `🤝 **Bulshada**\n` +
-            `**\`${PREFIX}give @user btc 200\`** — BTC/Gold lacag u dir\n` +
-            `**\`${PREFIX}rob @user\`** — Lacag ka xad\n` +
-            `**\`${PREFIX}rich\`** — TOP 10 ugu taajirta`
+            `🤝 **Social**\n` +
+            `**\`${PREFIX}give @user btc 200\`** — Send BTC to a player\n` +
+            `**\`${PREFIX}rob @user\`** — Steal BTC (needs Rob Ticket)\n` +
+            `**\`${PREFIX}rich\`** — Top 10 richest players`
         )
-        .setFooter({ text: `Garaad Economy` });
+        .setFooter({ text: `Garaad Economy • Bitcoin only` });
 }
 
 

@@ -111,6 +111,7 @@ module.exports = function setupMessageHandler(client) {
 
             // ── Economy ──
             case 'shaqo':
+            case 'work':
                 return shaqoCmd(message);
 
             case 'jeeb':

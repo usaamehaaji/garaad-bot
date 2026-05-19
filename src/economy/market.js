@@ -2,42 +2,41 @@ const fs   = require('fs');
 const path = require('path');
 
 const MARKET_PATH = path.join(__dirname, '../../data/market.json');
-const TICK_MS     = 60 * 1000;       // 1 daqiiqo
-const HISTORY_MAX = 10;              // Taariikhda qiimaha (10 daqiiqo)
+const TICK_MS     = 60 * 1000;
+const HISTORY_MAX = 10;
 
+// BTC price index — used for prediction display only
 const BASE_PRICES = {
-    btc:  100,  // price index (for prediction display only)
-    gold: 3,    // 3 BTC per 1 Gold
+    btc: 100,
 };
 
 const VOLATILITY = {
-    btc:  0.03,
-    gold: 0.05,
+    btc: 0.03,
 };
 
-const trends = { btc: 0, gold: 0 };
+const trends = { btc: 0 };
 
 let marketData = {
     prices:     { ...BASE_PRICES },
     previous:   { ...BASE_PRICES },
-    history:    { btc: [], gold: [] },
+    history:    { btc: [] },
     lastUpdate: 0,
 };
 
 try {
     if (fs.existsSync(MARKET_PATH)) {
         const loaded = JSON.parse(fs.readFileSync(MARKET_PATH, 'utf8'));
-        if (loaded && loaded.prices) {
+        if (loaded && loaded.prices && loaded.prices.btc) {
             marketData = {
-                prices:     loaded.prices,
-                previous:   loaded.previous   || { ...BASE_PRICES },
-                history:    loaded.history     || { btc: [], gold: [] },
-                lastUpdate: loaded.lastUpdate  || 0,
+                prices:     { btc: loaded.prices.btc },
+                previous:   { btc: loaded.previous?.btc   || BASE_PRICES.btc },
+                history:    { btc: loaded.history?.btc     || [] },
+                lastUpdate: loaded.lastUpdate || 0,
             };
         }
     }
 } catch (e) {
-    console.error('[Market] Khalad:', e.message);
+    console.error('[Market] Load error:', e.message);
 }
 
 function saveMarket() {
@@ -46,41 +45,38 @@ function saveMarket() {
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(MARKET_PATH, JSON.stringify(marketData, null, 2));
     } catch (e) {
-        console.error('[Market] Khalad keydintiinta:', e.message);
+        console.error('[Market] Save error:', e.message);
     }
 }
 
 function doOneTick() {
-    for (const asset of Object.keys(BASE_PRICES)) {
-        const prev   = marketData.prices[asset];
-        const vol    = VOLATILITY[asset];
-        const trend  = trends[asset] || 0;
-        const bias   = trend * vol * 0.35;
-        const change = (Math.random() * 2 - 1) * vol + bias;
-        trends[asset] = change > 0 ? 1 : change < 0 ? -1 : 0;
-        const next   = Math.min(
-            Math.round(BASE_PRICES[asset] * 3),
-            Math.max(
-                Math.round(BASE_PRICES[asset] * 0.4),
-                Math.round(prev * (1 + change))
-            )
-        );
-        marketData.previous[asset] = prev;
-        marketData.prices[asset]   = next;
-        marketData.history[asset] ??= [];
-        marketData.history[asset].push(next);
-        if (marketData.history[asset].length > HISTORY_MAX) {
-            marketData.history[asset].shift();
-        }
+    const prev   = marketData.prices.btc;
+    const vol    = VOLATILITY.btc;
+    const trend  = trends.btc || 0;
+    const bias   = trend * vol * 0.35;
+    const change = (Math.random() * 2 - 1) * vol + bias;
+    trends.btc   = change > 0 ? 1 : change < 0 ? -1 : 0;
+    const next   = Math.min(
+        Math.round(BASE_PRICES.btc * 3),
+        Math.max(
+            Math.round(BASE_PRICES.btc * 0.4),
+            Math.round(prev * (1 + change))
+        )
+    );
+    marketData.previous.btc = prev;
+    marketData.prices.btc   = next;
+    marketData.history.btc  ??= [];
+    marketData.history.btc.push(next);
+    if (marketData.history.btc.length > HISTORY_MAX) {
+        marketData.history.btc.shift();
     }
 }
 
 function tickMarket() {
-    const now      = Date.now();
-    const elapsed  = now - marketData.lastUpdate;
+    const now     = Date.now();
+    const elapsed = now - marketData.lastUpdate;
     if (elapsed < TICK_MS) return false;
 
-    // Catch-up: advance one tick per missed minute (max 60)
     const ticks = Math.min(60, Math.floor(elapsed / TICK_MS));
     for (let i = 0; i < ticks; i++) doOneTick();
 
@@ -89,13 +85,11 @@ function tickMarket() {
     return true;
 }
 
-// Wakhtiga ugu dhaw ee isbeddelka
 function nextTickSeconds() {
     const elapsed = Date.now() - marketData.lastUpdate;
     return Math.max(0, Math.ceil((TICK_MS - elapsed) / 1000));
 }
 
-// Farriinta is-bedelka %
 function getPriceChange(asset) {
     const cur  = marketData.prices[asset];
     const prev = marketData.previous[asset] || cur;
@@ -103,7 +97,6 @@ function getPriceChange(asset) {
     return ((cur - prev) / prev) * 100;
 }
 
-// Xarfaha shaxanka yar (sparkline)
 function sparkline(asset) {
     const hist = marketData.history[asset];
     if (!hist || hist.length < 2) return '▄▄▄▄▄';
@@ -116,7 +109,7 @@ function sparkline(asset) {
 
 function getPrice(asset) {
     tickMarket();
-    return marketData.prices[asset.toLowerCase()] ?? null;
+    return marketData.prices[asset?.toLowerCase()] ?? null;
 }
 
 function getPrices() {
@@ -126,12 +119,11 @@ function getPrices() {
 
 function getMarketSnapshot() {
     tickMarket();
-    const assets = Object.keys(BASE_PRICES);
-    return assets.map(asset => ({
+    return Object.keys(BASE_PRICES).map(asset => ({
         asset,
-        price:    marketData.prices[asset],
-        change:   getPriceChange(asset),
-        spark:    sparkline(asset),
+        price:  marketData.prices[asset],
+        change: getPriceChange(asset),
+        spark:  sparkline(asset),
     }));
 }
 

@@ -1,7 +1,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData, saveData }                = require('../store');
 const { checkUser }                         = require('../utils/helpers');
-const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
+const { econData, checkEconUser, saveEcon, trackEarning } = require('../economy/econStore');
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;
 const DAILY_BTC   = 250;
@@ -17,7 +17,7 @@ module.exports = async function todayCommand(message) {
 
     const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder().setURL(TOPGG_URL).setLabel('🗳️ Vote Garaad Bot').setStyle(ButtonStyle.Link),
-        new ButtonBuilder().setCustomId(`close_today_${userId}`).setLabel('❌ Iska xir').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`close_today_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
     );
 
     if (remaining > 0) {
@@ -25,8 +25,8 @@ module.exports = async function todayCommand(message) {
         const mins  = Math.floor((remaining % 3600000) / 60000);
         return message.reply({
             embeds: [new EmbedBuilder()
-                .setTitle('⏳ Cooldown — Dhibco Maalinlaha')
-                .setDescription(`Waxaad sug kartaa **${hours}s ${mins}d** oo dhiman ka dib isku day.`)
+                .setTitle('⏳ Daily Reward — On Cooldown')
+                .setDescription(`You already claimed today's reward.\n\nCome back in **${hours}h ${mins}m**.`)
                 .setColor('#e67e22')],
             components: [row],
         });
@@ -36,20 +36,21 @@ module.exports = async function todayCommand(message) {
     userData[userId].iq       = (userData[userId].iq || 0) + iqGain;
     userData[userId].lastDaily = Date.now();
     econData[userId].btc       = (econData[userId].btc || 0) + DAILY_BTC;
+    trackEarning(userId, DAILY_BTC);
     saveData();
     saveEcon();
 
     return message.reply({
         embeds: [new EmbedBuilder()
-            .setTitle('🎁 Dhibco Maalinlaha — Waxaad Heshay!')
+            .setTitle('🎁 Daily Reward — Claimed!')
             .setDescription(
-                `✅ Maanta abaalmarinta:\n\n` +
+                `✅ Today's rewards:\n\n` +
                 `🧠 **+${iqGain} IQ**\n` +
                 `₿ **+${DAILY_BTC} BTC**\n\n` +
-                `Berri hore u soo noqo!`
+                `Come back tomorrow!`
             )
             .setColor('#2ecc71')
-            .setFooter({ text: '24 saacadood kadib waa dib loo cusboonaysiinayaa.' })],
+            .setFooter({ text: 'Resets every 24 hours.' })],
         components: [row],
     });
 };

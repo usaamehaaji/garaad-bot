@@ -1,36 +1,18 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
 
-const WORK_COOLDOWN = 9 * 60 * 60 * 1000;
-const WORK_GOLD     = 250;
-
-const GOLD_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/xau.png';
+const WORK_COOLDOWN = 8 * 60 * 60 * 1000; // 8 hours
+const WORK_BTC      = 500;
 
 const JOBS = [
-    {
-        title: '💻 Software Developer',
-        desc: 'Maanta waxaad dhistay app cusub oo dhalinyarada Soomaaliyeed u fududeynaysa waxbarashada online-ka. Code aad qortay wuxuu furtaa albaabbo cusub — mid kasta oo aad qorto waa tallaabo dhanka mustaqbalka ah.',
-    },
-    {
-        title: '📊 Data Analyst',
-        desc: 'Xogta suuqa Soomaalida aad falanqeysay maanta waxay ka caawineysaa ganacsatada yaryar inay go\'aan caqli-gal ah gaartaan. Tignoolajiyadu waxay tahay qalab — adigu waxaad tahay geesiga isticmaalaya.',
-    },
-    {
-        title: '🌐 Web Designer',
-        desc: 'Website cusub oo ganacsi Soomaali ah aad maanta naqshadaysay. Dhalinyarada Soomaaliyeed ayaa tignoolajiyada ku horumaraysa — adigu waxaad ka mid tahay kuwa hormuudka ah.',
-    },
-    {
-        title: '📱 App Tester',
-        desc: 'App waxbarasho oo carruurta Soomaalida loogu talagalay aad maanta tijaabisay, khaladaadkiina soo sheegay. Shaqadaadu si toos ah ayey u gacan-siisaa mustaqbalka waxbarashada Soomaalida.',
-    },
-    {
-        title: '🛠️ IT Support',
-        desc: 'Xafiisyada deegaankaaga aad caawisay — computers la hagaajiyay, internet la xaliyay. Dhalinyaro Soomaali ah oo xirfad tignoolajiyadeed leh ayaa loo baahan yahay, adigu waxaad tahay midood.',
-    },
-    {
-        title: '🎨 UI/UX Designer',
-        desc: 'Naqshadaha barnaamijka cusub aad maanta samaystay wuxuu ka dhigan yahay in isticmaaluhu si fudud ula xiriiri karo. Farshaxanka iyo tignoolajiyadu way isku darsamaan gacantaada.',
-    },
+    { title: '💻 Software Developer',  desc: 'You built a new app and deployed it to production. Clean code, zero bugs.' },
+    { title: '📊 Data Analyst',        desc: 'You analyzed market data and delivered insights that moved the numbers.' },
+    { title: '🌐 Web Designer',        desc: 'You designed and launched a clean, responsive website for a client.' },
+    { title: '📱 App Tester',          desc: 'You ran a full QA cycle, found 12 bugs, and filed detailed reports.' },
+    { title: '🛠️ IT Support',         desc: 'You fixed network issues across the office. Everything is running smooth.' },
+    { title: '🎨 UI/UX Designer',      desc: 'You delivered polished mockups that the client approved on first pass.' },
+    { title: '🔐 Security Analyst',    desc: 'You ran a penetration test and patched three critical vulnerabilities.' },
+    { title: '☁️ Cloud Engineer',      desc: 'You migrated the infrastructure to the cloud — 40% cost reduction.' },
 ];
 
 module.exports = async function shaqoCmd(message) {
@@ -47,36 +29,36 @@ module.exports = async function shaqoCmd(message) {
         const mins  = Math.floor((rem % 3600000) / 60000);
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('⏳ Shaqo — Naso yar')
+                .setTitle('⏳ Work — On Cooldown')
                 .setColor('#e74c3c')
-                .setDescription(`Weli shaqo ma samayn kartid.\n\n🕐 **${hours}s ${mins}d** ka dib dib u tijaabi.`)
-                .setFooter({ text: 'Garaad Economy • 9 saacadood kasta' }),
+                .setDescription(`You need to rest before working again.\n\n🕐 Come back in **${hours}h ${mins}m**.`)
+                .setFooter({ text: 'Garaad Economy • Every 8 hours' }),
         ]});
     }
 
-    d.gold     = (d.gold || 0) + WORK_GOLD;
+    d.btc      = (d.btc || 0) + WORK_BTC;
     d.lastWork = Date.now();
+    trackEarning(userId, WORK_BTC);
     saveEcon();
 
     const job = JOBS[Math.floor(Math.random() * JOBS.length)];
 
-    const closeRow = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`close_shaqo_${userId}`)
-            .setLabel('❌ Iska xir')
-            .setStyle(ButtonStyle.Danger),
-    );
-
     return message.reply({ embeds: [
         new EmbedBuilder()
             .setTitle(`✅ ${job.title}`)
-            .setThumbnail(GOLD_ICON)
             .setColor('#2ecc71')
             .setDescription(
                 `${job.desc}\n\n` +
-                `🥇 **+${WORK_GOLD} Gold** shaqadaada ah\n` +
-                `🥇 Gold-kaaga: **${(d.gold).toLocaleString()} Gold**`
+                `₿ **+${WORK_BTC.toLocaleString()} BTC** earned\n` +
+                `₿ Wallet: **${(d.btc).toLocaleString()} BTC**`
             )
-            .setFooter({ text: 'Garaad Economy • 9 saacadood gudahood dib u shaqeyso', iconURL: GOLD_ICON }),
-    ], components: [closeRow] });
+            .setFooter({ text: 'Garaad Economy • Work again in 8 hours' }),
+    ], components: [
+        new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setCustomId(`close_shaqo_${userId}`)
+                .setLabel('✖ Close')
+                .setStyle(ButtonStyle.Danger),
+        ),
+    ]});
 };
