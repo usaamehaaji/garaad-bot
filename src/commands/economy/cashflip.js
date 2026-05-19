@@ -33,14 +33,15 @@ function closeRow(userId) {
 }
 
 // Resolve the flip — called from command or button handler
+// replyFn: function(data) that sends the result (reply or channel.send with mention)
 // deleteMsg: optional function to delete the choice panel before sending result
-async function resolveFlip(channel, userId, amount, direction, deleteMsg) {
+async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
     const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
     ceu(userId);
     const d = eData[userId];
 
     if ((d.btc || 0) < amount) {
-        return channel.send({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
+        return replyFn({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
     }
 
     await new Promise(r => setTimeout(r, 1200));
@@ -58,7 +59,6 @@ async function resolveFlip(channel, userId, amount, direction, deleteMsg) {
     }
     se();
 
-    // Delete the choice panel before sending result
     if (deleteMsg) {
         try { await deleteMsg(); } catch {}
     }
@@ -88,7 +88,7 @@ async function resolveFlip(channel, userId, amount, direction, deleteMsg) {
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
 
-    return channel.send({ embeds: [resultEmbed] });
+    return replyFn({ embeds: [resultEmbed] });
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -116,7 +116,7 @@ module.exports = async function cashflipCmd(message, args) {
         return message.reply(`⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**`);
     }
 
-    // Direct resolve if direction typed in command — delete command reply, send result
+    // Direct resolve if direction typed in command
     if (direction === 'up' || direction === 'down') {
         const sent = await message.reply({ embeds: [
             new EmbedBuilder()
@@ -125,7 +125,7 @@ module.exports = async function cashflipCmd(message, args) {
                 .setDescription(`You chose **${direction === 'up' ? '⬆️ UP' : '⬇️ DOWN'}**\n\n⏳ _Resolving..._`),
         ]});
         return resolveFlip(
-            message.channel,
+            data => message.reply(data),
             userId, amount, direction,
             () => sent.delete()
         );

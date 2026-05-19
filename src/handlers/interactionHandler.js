@@ -1616,7 +1616,7 @@ module.exports = function setupInteractionHandler(client) {
             await interaction.deferUpdate();
             const { resolveFlip } = require('../commands/economy/cashflip');
             return resolveFlip(
-                interaction.channel,
+                data => interaction.channel.send({ content: `<@${ownerId}>`, ...data }),
                 ownerId, amount, direction,
                 () => interaction.message.delete()
             );
