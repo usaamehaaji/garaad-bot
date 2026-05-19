@@ -134,18 +134,13 @@ module.exports = async function adminEconCmd(message, args) {
         const asset  = (rest[1] || 'btc').toLowerCase();
         const amount = parseFloat(rest[2]);
         if (isNaN(amount) || amount <= 0) return message.reply('⚠️ Enter a valid amount.');
-        if (!['btc', 'garaad'].includes(asset)) return message.reply('⚠️ Asset must be `btc` or `garaad`');
+        if (asset !== 'btc') return message.reply('⚠️ Asset must be `btc`');
         checkEconUser(target.id);
         const d = econData[target.id];
-        if (asset === 'garaad') {
-            d.banks.garaad = (d.banks.garaad || 0) + amount;
-        } else {
-            d.btc = (d.btc || 0) + amount;
-        }
+        d.btc = (d.btc || 0) + amount;
         saveEcon();
-        const val = asset === 'garaad' ? d.banks.garaad : d.btc;
         return message.reply({ embeds: [new EmbedBuilder().setColor('#2ecc71')
-            .setDescription(`✅ **${fmt(amount)} ${asset.toUpperCase()}** given to <@${target.id}>.\nNew balance: **${fmt(val)} BTC**`)] });
+            .setDescription(`✅ **${fmt(amount)} BTC** given to <@${target.id}>.\nNew balance: **${fmt(d.btc)} BTC**`)] });
     }
 
     // ?admin econ title @user <key>
@@ -230,9 +225,8 @@ module.exports = async function adminEconCmd(message, args) {
     // ?admin econ wallet @user
     if (sub === 'wallet' || sub === 'jeeb') {
         if (!target) return message.reply('⚠️ `?admin econ wallet @user`');
-        const jeebCmd = require('../economy/jeeb');
-        const fakeMsg = { author: { id: target.id }, mentions: { users: { first: () => target } }, reply: p => message.reply(p) };
-        return jeebCmd(fakeMsg);
+        const { buildJeebEmbed, jeebRow } = require('../economy/jeeb');
+        return message.reply({ embeds: [buildJeebEmbed(target.id, target.username)], components: [jeebRow(message.author.id, target.id)] });
     }
 
     // ?admin econ all [page]

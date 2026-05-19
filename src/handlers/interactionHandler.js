@@ -399,13 +399,12 @@ module.exports = function setupInteractionHandler(client) {
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 const asset    = interaction.fields.getTextInputValue('asset').trim().toLowerCase();
                 const amount   = parseFloat(interaction.fields.getTextInputValue('amount'));
-                if (!['btc', 'gold'].includes(asset)) return interaction.reply({ content: '⚠️ Asset: `btc` ama `gold`', flags: MessageFlags.Ephemeral });
+                if (asset !== 'btc') return interaction.reply({ content: '⚠️ Asset: `btc` kaliya', flags: MessageFlags.Ephemeral });
                 if (isNaN(amount) || amount <= 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
                 checkEconUser(targetId);
-                eData[targetId][asset] = (eData[targetId][asset] || 0) + amount;
+                eData[targetId].btc = (eData[targetId].btc || 0) + amount;
                 saveEcon();
-                const label = asset === 'btc' ? 'BTC' : '🥇 Gold';
-                return interaction.reply({ content: `✅ **${amount} ${label}** waxaad u diray <@${targetId}>. Hadda: **${eData[targetId][asset]}**`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** waxaad u diray <@${targetId}>. Hadda: **${eData[targetId].btc.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Admin Econ modal: Give Bank ──
@@ -416,7 +415,7 @@ module.exports = function setupInteractionHandler(client) {
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 const bank     = interaction.fields.getTextInputValue('bank').trim().toLowerCase();
                 const amount   = parseFloat(interaction.fields.getTextInputValue('amount'));
-                if (!['mandeeq', 'garaad'].includes(bank)) return interaction.reply({ content: '⚠️ Bank: `mandeeq` ama `garaad`', flags: MessageFlags.Ephemeral });
+                if (bank !== 'garaad') return interaction.reply({ content: '⚠️ Bank: `garaad` kaliya', flags: MessageFlags.Ephemeral });
                 if (isNaN(amount) || amount <= 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
                 checkEconUser(targetId);
                 eData[targetId].banks[bank] = (eData[targetId].banks[bank] || 0) + amount;
@@ -926,7 +925,7 @@ module.exports = function setupInteractionHandler(client) {
             const modal = new ModalBuilder().setCustomId(`admin_eco_m_giveasset_${ownerId}`).setTitle('🪙 Give Asset');
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
-                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('asset').setLabel('Asset (btc ama gold)').setStyle(TextInputStyle.Short).setPlaceholder('btc').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('asset').setLabel('Asset (btc)').setStyle(TextInputStyle.Short).setPlaceholder('btc').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 1').setRequired(true)),
             );
             return interaction.showModal(modal);
@@ -940,7 +939,7 @@ module.exports = function setupInteractionHandler(client) {
             const modal = new ModalBuilder().setCustomId(`admin_eco_m_givebank_${ownerId}`).setTitle('🏦 Give Bank');
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
-                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('bank').setLabel('Bank (mandeeq ama garaad)').setStyle(TextInputStyle.Short).setPlaceholder('mandeeq').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('bank').setLabel('Bank (garaad)').setStyle(TextInputStyle.Short).setPlaceholder('garaad').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka BTC').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 10000').setRequired(true)),
             );
             return interaction.showModal(modal);
@@ -1148,23 +1147,21 @@ module.exports = function setupInteractionHandler(client) {
 
             const IQ_GAIN  = 12;
             const AMT      = 250;
-            uData[userId].iq = (uData[userId].iq || 0) + IQ_GAIN;
-            eData[userId][asset] = (eData[userId][asset] || 0) + AMT;
+            uData[userId].iq  = (uData[userId].iq  || 0) + IQ_GAIN;
+            eData[userId].btc = (eData[userId].btc || 0) + AMT;
             saveData();
             saveEcon();
 
-            const icon  = asset === 'gold' ? '🥇' : '₿';
-            const label = asset === 'gold' ? 'Gold' : 'BTC';
             return interaction.update({
                 embeds: [new EmbedBuilder()
-                    .setTitle('✅ Vote Abaalmarinta — Waxaad Heshay!')
+                    .setTitle('✅ Vote Reward — Claimed!')
                     .setColor('#2ecc71')
                     .setDescription(
                         `🧠 **+${IQ_GAIN} IQ**\n` +
-                        `${icon} **+${fmt(AMT)} ${label}**\n\n` +
-                        `24 saacadood ka dib mar kale codeey!`
+                        `₿ **+${fmt(AMT)} BTC**\n\n` +
+                        `Vote again in 24 hours!`
                     )
-                    .setFooter({ text: 'Garaad Bot — Mahadsanid vote-gaaga!' })],
+                    .setFooter({ text: 'Garaad Bot — Thank you for voting!' })],
                 components: [],
             });
         }
