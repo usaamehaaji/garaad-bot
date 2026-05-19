@@ -2,9 +2,12 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../economy/econStore');
 const { fmt } = require('../../utils/helpers');
 
-const WIN_RATE  = 0.50;
-const WIN_MULTI = 0.90;
-const BTC_ICON  = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
+const WIN_RATE    = 0.50;
+const WIN_MULTI   = 0.90;
+const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
+const COOLDOWN_MS = 15_000; // 15s total (5s resolve + 10s after result)
+
+const flipCooldowns = new Map();
 
 function directionRow(userId, amount) {
     return new ActionRowBuilder().addComponents(
@@ -51,11 +54,22 @@ function closeRow(userId) {
 
 // replyFn: sends the result  |  deleteMsg: deletes the panel before result
 async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
+    // Cooldown check
+    const cdUntil = flipCooldowns.get(userId) || 0;
+    const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
+    if (cdLeft > 0) {
+        return replyFn({ content: `⏳ Wait **${cdLeft}s** before flipping again.` });
+    }
+
+    // Set cooldown immediately so rapid button presses are blocked
+    flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
+
     const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
     ceu(userId);
     const d = eData[userId];
 
     if ((d.btc || 0) < amount) {
+        flipCooldowns.delete(userId); // release cooldown if rejected
         return replyFn({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
     }
 
@@ -125,6 +139,13 @@ module.exports = async function cashflipCmd(message, args) {
             `⚠️ Usage: \`?ef btc 500\`  •  \`?ef btc 500 up\`  •  \`?ef btc 500 down\`\n` +
             `₿ Wallet: **${fmt(d.btc || 0)} BTC**`
         );
+    }
+
+    // Cooldown check at command entry (for UP/DOWN panel display)
+    const cdUntil = flipCooldowns.get(userId) || 0;
+    const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
+    if (cdLeft > 0) {
+        return message.reply(`⏳ Wait **${cdLeft}s** before flipping again.`);
     }
 
     if ((d.btc || 0) < amount) {
