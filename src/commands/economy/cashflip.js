@@ -5,45 +5,13 @@ const { fmt } = require('../../utils/helpers');
 const WIN_RATE    = 0.50;
 const WIN_MULTI   = 0.90;
 const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
-const COOLDOWN_MS = 4_000;
+const COOLDOWN_MS = 10_000; // 10s cooldown between flips
 
-const flipCooldowns = new Map();
+const flipCooldowns = new Map(); // userId → cooldownUntil ms
+const flipQueued    = new Set(); // userId → has a queued flip pending
 
-async function resolveFlip(replyFn, userId, amount, direction) {
-    const cdUntil = flipCooldowns.get(userId) || 0;
-    const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
-    if (cdLeft > 0) {
-        return replyFn({ content: `⏳ Wait **${cdLeft}s** before flipping again.` });
-    }
-
-    flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
-
-    const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
-    ceu(userId);
-    const d = eData[userId];
-
-    if ((d.btc || 0) < amount) {
-        flipCooldowns.delete(userId);
-        return replyFn({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
-    }
-
-    const win    = Math.random() < WIN_RATE;
-    const profit = Math.floor(amount * WIN_MULTI);
-
-    if (win) {
-        d.btc = (d.btc || 0) + profit;
-        att(amount - profit);
-        te(userId, profit);
-    } else {
-        d.btc = (d.btc || 0) - amount;
-        att(amount);
-    }
-    se();
-
-    const newBal   = fmt(d.btc || 0);
-    const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
-
-    const resultEmbed = win
+function buildResult(win, dirLabel, profit, amount, newBal) {
+    return win
         ? new EmbedBuilder()
             .setTitle('✅ Economy Flip — WIN!')
             .setColor('#2ecc71')
@@ -64,8 +32,30 @@ async function resolveFlip(replyFn, userId, amount, direction) {
                 { name: '₿ New Balance', value: `**${newBal} BTC**`,       inline: true },
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
+}
 
-    return replyFn({ embeds: [resultEmbed] });
+function doFlip(userId, amount, direction) {
+    const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
+    ceu(userId);
+    const d = eData[userId];
+
+    if ((d.btc || 0) < amount) return { err: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` };
+
+    const win    = Math.random() < WIN_RATE;
+    const profit = Math.floor(amount * WIN_MULTI);
+
+    if (win) {
+        d.btc = (d.btc || 0) + profit;
+        att(amount - profit);
+        te(userId, profit);
+    } else {
+        d.btc = (d.btc || 0) - amount;
+        att(amount);
+    }
+    se();
+
+    const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    return { embed: buildResult(win, dirLabel, profit, amount, fmt(d.btc || 0)) };
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -73,9 +63,7 @@ module.exports = async function cashflipCmd(message, args) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Accept: ?ef 500 up | ?ef btc 500 up | ?ef 500 down | ?ef btc 500 down
     let amount, direction;
-
     if (args && args.length >= 1) {
         const numIdx = isNaN(parseFloat(args[0])) ? 1 : 0;
         amount    = parseFloat(args[numIdx]);
@@ -93,8 +81,29 @@ module.exports = async function cashflipCmd(message, args) {
         return message.reply(`⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**`);
     }
 
-    return resolveFlip(data => message.reply(data), userId, amount, direction);
+    const cdUntil = flipCooldowns.get(userId) || 0;
+    const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
+
+    // ── On cooldown: queue the flip, resolve after delay ──
+    if (cdLeft > 0) {
+        if (flipQueued.has(userId)) {
+            return message.reply(`⏳ Already queued — wait for your result.`);
+        }
+        flipQueued.add(userId);
+        const sent = await message.reply({ content: `⏳ **Flipping...** result in **${cdLeft}s**` });
+        await new Promise(r => setTimeout(r, cdLeft * 1000));
+        flipQueued.delete(userId);
+        flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
+        const { err, embed } = doFlip(userId, amount, direction);
+        if (err) return sent.edit({ content: err, embeds: [] });
+        return sent.edit({ content: '', embeds: [embed] });
+    }
+
+    // ── No cooldown: instant result ──
+    flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
+    const { err, embed } = doFlip(userId, amount, direction);
+    if (err) return message.reply(err);
+    return message.reply({ embeds: [embed] });
 };
 
-module.exports.WIN_MULTI   = WIN_MULTI;
-module.exports.resolveFlip = resolveFlip;
+module.exports.WIN_MULTI = WIN_MULTI;
