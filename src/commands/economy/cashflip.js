@@ -1,67 +1,21 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../economy/econStore');
 const { fmt } = require('../../utils/helpers');
 
 const WIN_RATE    = 0.50;
 const WIN_MULTI   = 0.90;
 const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
-const COOLDOWN_MS = 4_000; // 4s anti-spam cooldown
+const COOLDOWN_MS = 4_000;
 
 const flipCooldowns = new Map();
 
-function directionRow(userId, amount) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`eco_ef_up_${amount}_${userId}`)
-            .setLabel('⬆️ UP')
-            .setStyle(ButtonStyle.Success),
-        new ButtonBuilder()
-            .setCustomId(`eco_ef_down_${amount}_${userId}`)
-            .setLabel('⬇️ DOWN')
-            .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder()
-            .setCustomId(`close_cf_${userId}`)
-            .setLabel('✖ Cancel')
-            .setStyle(ButtonStyle.Secondary),
-    );
-}
-
-function replayRow(userId, amount) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`eco_ef_up_${amount}_${userId}`)
-            .setLabel('⬆️ UP again')
-            .setStyle(ButtonStyle.Success),
-        new ButtonBuilder()
-            .setCustomId(`eco_ef_down_${amount}_${userId}`)
-            .setLabel('⬇️ DOWN again')
-            .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder()
-            .setCustomId(`close_cf_${userId}`)
-            .setLabel('✖ Stop')
-            .setStyle(ButtonStyle.Secondary),
-    );
-}
-
-function closeRow(userId) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`close_cf_${userId}`)
-            .setLabel('✖ Close')
-            .setStyle(ButtonStyle.Danger),
-    );
-}
-
-// replyFn: sends the result  |  deleteMsg: deletes the panel before result
-async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
-    // Cooldown check
+async function resolveFlip(replyFn, userId, amount, direction) {
     const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
     if (cdLeft > 0) {
         return replyFn({ content: `⏳ Wait **${cdLeft}s** before flipping again.` });
     }
 
-    // Set cooldown immediately so rapid button presses are blocked
     flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
 
     const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
@@ -69,7 +23,7 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
     const d = eData[userId];
 
     if ((d.btc || 0) < amount) {
-        flipCooldowns.delete(userId); // release cooldown if rejected
+        flipCooldowns.delete(userId);
         return replyFn({ content: `⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**` });
     }
 
@@ -86,10 +40,6 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
     }
     se();
 
-    if (deleteMsg) {
-        try { await deleteMsg(); } catch {}
-    }
-
     const newBal   = fmt(d.btc || 0);
     const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
 
@@ -103,7 +53,7 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
                 { name: '₿ Profit',      value: `**+${fmt(profit)} BTC**`, inline: true },
                 { name: '₿ New Balance', value: `**${newBal} BTC**`,       inline: true },
             )
-            .setFooter({ text: 'Garaad Economy • Play again?', iconURL: BTC_ICON })
+            .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON })
         : new EmbedBuilder()
             .setTitle('❌ Economy Flip — LOSS!')
             .setColor('#e74c3c')
@@ -113,9 +63,9 @@ async function resolveFlip(replyFn, userId, amount, direction, deleteMsg) {
                 { name: '₿ Lost',        value: `**-${fmt(amount)} BTC**`, inline: true },
                 { name: '₿ New Balance', value: `**${newBal} BTC**`,       inline: true },
             )
-            .setFooter({ text: 'Garaad Economy • Try again?', iconURL: BTC_ICON });
+            .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
 
-    return replyFn({ embeds: [resultEmbed], components: [replayRow(userId, amount)] });
+    return replyFn({ embeds: [resultEmbed] });
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -123,7 +73,7 @@ module.exports = async function cashflipCmd(message, args) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Accept: ?ef 500 | ?ef btc 500 | ?ef 500 up | ?ef btc 500 up | ?ef btc 500 down
+    // Accept: ?ef 500 up | ?ef btc 500 up | ?ef 500 down | ?ef btc 500 down
     let amount, direction;
 
     if (args && args.length >= 1) {
@@ -132,47 +82,19 @@ module.exports = async function cashflipCmd(message, args) {
         direction = (args[numIdx + 1] || '').toLowerCase();
     }
 
-    if (!amount || isNaN(amount) || amount <= 0) {
+    if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'up' && direction !== 'down')) {
         return message.reply(
-            `⚠️ Usage: \`?ef btc 500\`  •  \`?ef btc 500 up\`  •  \`?ef btc 500 down\`\n` +
+            `⚠️ Usage: \`?ef 500 up\`  or  \`?ef 500 down\`\n` +
             `₿ Wallet: **${fmt(d.btc || 0)} BTC**`
         );
-    }
-
-    // Cooldown check at command entry (for UP/DOWN panel display)
-    const cdUntil = flipCooldowns.get(userId) || 0;
-    const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
-    if (cdLeft > 0) {
-        return message.reply(`⏳ Wait **${cdLeft}s** before flipping again.`);
     }
 
     if ((d.btc || 0) < amount) {
         return message.reply(`⚠️ Not enough BTC. Wallet: **${fmt(d.btc || 0)} BTC**`);
     }
 
-    // Direct resolve if direction typed — instant result
-    if (direction === 'up' || direction === 'down') {
-        return resolveFlip(
-            data => message.reply(data),
-            userId, amount, direction,
-            null
-        );
-    }
-
-    // Show UP / DOWN choice panel
-    return message.reply({ embeds: [
-        new EmbedBuilder()
-            .setTitle('🎰 Economy Flip — Choose Direction')
-            .setColor('#9b59b6')
-            .setThumbnail(BTC_ICON)
-            .setDescription(
-                `₿ Stake: **${fmt(amount)} BTC**\n\n` +
-                `⬆️ **UP** or ⬇️ **DOWN** — pick one!`
-            )
-            .setFooter({ text: '50/50 chance • Garaad Economy' }),
-    ], components: [directionRow(userId, amount)] });
+    return resolveFlip(data => message.reply(data), userId, amount, direction);
 };
 
-module.exports.WIN_MULTI    = WIN_MULTI;
-module.exports.resolveFlip  = resolveFlip;
-module.exports.closeRow     = closeRow;
+module.exports.WIN_MULTI   = WIN_MULTI;
+module.exports.resolveFlip = resolveFlip;

@@ -1614,26 +1614,6 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
-        // ── Economy Flip: UP / DOWN button ──
-        if (id.startsWith('eco_ef_up_') || id.startsWith('eco_ef_down_')) {
-            const direction = id.startsWith('eco_ef_up_') ? 'up' : 'down';
-            const rest      = id.replace(`eco_ef_${direction}_`, '');
-            const lastUnd   = rest.lastIndexOf('_');
-            const amount    = parseFloat(rest.substring(0, lastUnd));
-            const ownerId   = rest.substring(lastUnd + 1);
-
-            if (interaction.user.id !== ownerId) {
-                return interaction.reply({ content: '⚠️ This is not your flip.', flags: MessageFlags.Ephemeral });
-            }
-
-            await interaction.deferUpdate();
-            const { resolveFlip } = require('../commands/economy/cashflip');
-            return resolveFlip(
-                data => interaction.channel.send({ content: `<@${ownerId}>`, ...data }),
-                ownerId, amount, direction,
-                () => interaction.message.delete()
-            );
-        }
 
         // ── Cashflip: Asset button → amount modal (legacy) ──
         if (id.startsWith('eco_cf_')) {
