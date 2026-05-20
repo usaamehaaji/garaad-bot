@@ -8,7 +8,6 @@ const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-ico
 const COOLDOWN_MS = 10_000; // 10s cooldown between flips
 
 const flipCooldowns = new Map(); // userId → cooldownUntil ms
-const flipQueued    = new Set(); // userId → has a queued flip pending
 
 function buildResult(win, dirLabel, profit, amount, newBal) {
     return win
@@ -84,22 +83,12 @@ module.exports = async function cashflipCmd(message, args) {
     const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
 
-    // ── On cooldown: queue the flip, resolve after delay ──
+    // ── On cooldown ──
     if (cdLeft > 0) {
-        if (flipQueued.has(userId)) {
-            return message.reply(`⏳ Already queued — wait for your result.`);
-        }
-        flipQueued.add(userId);
-        const sent = await message.reply({ content: `⏳ **Flipping...** result in **${cdLeft}s**` });
-        await new Promise(r => setTimeout(r, cdLeft * 1000));
-        flipQueued.delete(userId);
-        flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
-        const { err, embed } = doFlip(userId, amount, direction);
-        if (err) return sent.edit({ content: err, embeds: [] });
-        return sent.edit({ content: '', embeds: [embed] });
+        return message.reply(`⏳ Wait **${cdLeft}s** then send the command again.`);
     }
 
-    // ── No cooldown: instant result ──
+    // ── Instant result ──
     flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
     const { err, embed } = doFlip(userId, amount, direction);
     if (err) return message.reply(err);
