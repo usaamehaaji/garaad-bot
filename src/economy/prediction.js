@@ -126,8 +126,12 @@ async function resolvePrediction(userId, client) {
     d.btc = (d.btc || 0) + payout;
 
     if (!isDraw) {
-        if (win) trackEarning(userId, payout - pred.stakeUsd);
-        else     addToTreasury(pred.stakeUsd - payout);
+        if (win) {
+            trackEarning(userId, payout - pred.stakeUsd);
+            addToTreasury(pred.stakeUsd * 2 - payout); // house edge → treasury
+        } else {
+            addToTreasury(pred.stakeUsd - payout);
+        }
     }
     saveEcon();
     activePredictions.delete(userId);
