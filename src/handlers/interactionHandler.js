@@ -705,6 +705,53 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n₿ Qof walba: **${(5000).toLocaleString()} BTC** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
             }
 
+            // ── Admin Econ modal: Reset Any (single user or all) ──
+            if (interaction.customId.startsWith('admin_eco_m_resetany_')) {
+                if (interaction.user.id !== OWNER_ID)
+                    return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
+                const password  = interaction.fields.getTextInputValue('password').trim();
+                if (password !== OWNER_PASS)
+                    return interaction.reply({ content: '⛔ Password qalad ah. Awood ma lihid.', flags: MessageFlags.Ephemeral });
+                const rawTarget = interaction.fields.getTextInputValue('target_id').trim().toLowerCase();
+                const resetAll  = !rawTarget || rawTarget === 'all';
+                const targetId  = resetAll ? null : rawTarget;
+                const resetRaw  = (interaction.fields.getTextInputValue('reset_what') || 'both').trim().toLowerCase();
+                const resetWhat = (resetRaw === 'all') ? 'both' : resetRaw;
+                if (!['wallet', 'bank', 'both'].includes(resetWhat))
+                    return interaction.reply({ content: '⚠️ Reset: `wallet`, `bank`, ama `both` qor.', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+
+                function applyReset(d, what) {
+                    if (what === 'wallet') {
+                        d.btc = 1000;
+                    } else if (what === 'bank') {
+                        d.banks = { garaad: 0 };
+                        d.loan = null; d.lastLoanTaken = 0;
+                    } else {
+                        d.btc = 1000;
+                        d.banks = { garaad: 0 };
+                        d.inventory = { safety: 0, robticket: 0 };
+                        d.loan = null; d.lastLoanTaken = 0;
+                        d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
+                    }
+                }
+
+                if (resetAll) {
+                    const users = Object.keys(eData).filter(k => !k.startsWith('__'));
+                    for (const uid of users) { checkEconUser(uid); applyReset(eData[uid], resetWhat); }
+                    saveEcon();
+                    await notifyAdmins(interaction.client, interaction.user, `Reset ALL Economy (${resetWhat}) — ${users.length} players`);
+                    return interaction.reply({ content: `✅ **${users.length} qof** dhammaan economy dib loo dejiyay (**${resetWhat}**).`, flags: MessageFlags.Ephemeral });
+                } else {
+                    checkEconUser(targetId);
+                    applyReset(eData[targetId], resetWhat);
+                    saveEcon();
+                    await notifyAdmins(interaction.client, interaction.user, `Reset Economy (${resetWhat}): <@${targetId}>`);
+                    return interaction.reply({ content: `✅ <@${targetId}> economy dib loo dejiyay (**${resetWhat}**).`, flags: MessageFlags.Ephemeral });
+                }
+            }
+
             // (eco_dnmod_ and eco_dnpay_ removed — deen is now button-only, no modals)
 
             // ── Shop: Custom name title modal ──
@@ -1132,6 +1179,31 @@ module.exports = function setupInteractionHandler(client) {
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder().setCustomId('amount').setLabel('Tax per player (BTC)').setStyle(TextInputStyle.Short)
                         .setPlaceholder('Tusaale: 5').setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Owner password').setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin Econ: Reset (user or all) button → modal ──
+        if (id.startsWith('admin_eco_resetany_')) {
+            const ownerId = id.replace('admin_eco_resetany_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (interaction.user.id !== OWNER_ID)
+                return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_eco_m_resetany_${ownerId}`).setTitle('♻️ Reset Economy');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('target_id').setLabel('User ID  (ama "all" = dhammaan)').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('all   /   123456789012345678').setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('reset_what').setLabel('Reset: wallet / bank / both').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('wallet  |  bank  |  both').setRequired(true)
                 ),
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short)
