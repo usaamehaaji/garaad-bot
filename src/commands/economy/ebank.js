@@ -113,7 +113,7 @@ function buildTreasuryEmbed() {
             `**📊 Stats:**\n` +
             `📥 Total in: **${fmt(total)} BTC**\n` +
             `📤 Total out: **${fmt(spent)} BTC**\n\n` +
-            `**📌 Sources:** Shop sales, flip losses, loan fees`
+            `**📌 Sources:** Shop sales, flip losses, loan fees, tax`
         )
         .setFooter({ text: 'Garaad Bank Treasury' });
 }
