@@ -317,6 +317,35 @@ module.exports = function setupInteractionHandler(client) {
                 });
             }
 
+            // ── Admin: Broadcast modal submit ──
+            if (interaction.customId.startsWith('admin_m_broadcast_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const text = interaction.fields.getTextInputValue('msg').trim();
+                if (!text) return interaction.reply({ content: '⚠️ Fariin maxaad qortay?', flags: MessageFlags.Ephemeral });
+                const { userData: uData } = require('../store');
+                const userIds = Object.keys(uData);
+                await interaction.reply({ content: `📢 Fariin loo dirayaa **${userIds.length}** user...`, flags: MessageFlags.Ephemeral });
+                const broadEmbed = new EmbedBuilder()
+                    .setTitle('📢 Garaad Bot — Fariin Rasmi ah')
+                    .setDescription(text)
+                    .setColor('#3498db')
+                    .setFooter({ text: 'Garaad Bot' })
+                    .setTimestamp();
+                let success = 0, failed = 0;
+                for (const uid of userIds) {
+                    try {
+                        const u = await interaction.client.users.fetch(uid).catch(() => null);
+                        if (!u) { failed++; continue; }
+                        await u.send({ embeds: [broadEmbed] });
+                        success++;
+                    } catch { failed++; }
+                    await new Promise(r => setTimeout(r, 200));
+                }
+                await notifyAdmins(interaction.client, interaction.user, `Broadcast to ${userIds.length} users: "${text.slice(0, 60)}${text.length > 60 ? '…' : ''}"`);
+                return interaction.editReply({ content: `✅ La gaadhsiiyay: **${success}** | ❌ Kuma gaadhsiin: **${failed}**` });
+            }
+
             // ── Admin: Give IQ or BTC (combined modal) ──
             if (interaction.customId.startsWith('admin_m_give_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -890,6 +919,45 @@ module.exports = function setupInteractionHandler(client) {
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('give_input').setLabel('iq 200  or  btc 500').setStyle(TextInputStyle.Short).setPlaceholder('iq 200   /   btc 500').setRequired(true)),
             );
             return interaction.showModal(modal);
+        }
+
+        // ── Admin: Broadcast button → modal ──
+        if (id.startsWith('admin_broadcast_')) {
+            const ownerId = id.replace('admin_broadcast_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_broadcast_${ownerId}`).setTitle('📢 Broadcast — DM All Players');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('msg').setLabel('Fariinta (DM dhammaan players)').setStyle(TextInputStyle.Paragraph)
+                        .setPlaceholder('Tusaale: Quiz cusub berri 8 PM!').setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin: Bugs button → ephemeral reply ──
+        if (id.startsWith('admin_bugs_')) {
+            const ownerId = id.replace('admin_bugs_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const { getBugs } = require('../utils/admin');
+            const bugs = getBugs(15);
+            if (!bugs.length)
+                return interaction.reply({ content: '🎉 Cilad lama soo sheegin!', flags: MessageFlags.Ephemeral });
+            const bugsEmbed = new EmbedBuilder()
+                .setTitle('🐛 Cilada La Soo Sheegay')
+                .setColor('#e74c3c')
+                .setFooter({ text: `${bugs.length} cilad` });
+            bugs.forEach((b, i) => {
+                const desc = b.description.length > 200 ? b.description.slice(0, 200) + '...' : b.description;
+                bugsEmbed.addFields({ name: `${i + 1}. ${b.username || '?'} • ${new Date(b.timestamp).toLocaleString()}`, value: `> ${desc}\n🆔 \`${b.userId}\`` });
+            });
+            return interaction.reply({ embeds: [bugsEmbed], flags: MessageFlags.Ephemeral });
         }
 
         // ── Admin Aqoon: Give IQ button → modal (legacy) ──

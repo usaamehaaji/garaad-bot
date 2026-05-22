@@ -29,12 +29,14 @@ function buildAdminEmbed(uid) {
         .setFooter({ text: 'Garaad Admin' });
 }
 
-// Row 1: Give | Champion | DM User  (all admins)
+// Row 1: Give | Champion | DM User | Broadcast | Bugs  (all admins)
 function adminRow1(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_give_${uid}`)       .setLabel('🎁 Give')    .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`).setLabel('🏆 Champion').setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)      .setLabel('💬 DM User') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_give_${uid}`)        .setLabel('🎁 Give')     .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`) .setLabel('🏆 Champion') .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)       .setLabel('💬 DM User')  .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_broadcast_${uid}`)   .setLabel('📢 Broadcast').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_bugs_${uid}`)        .setLabel('🐛 Bugs')     .setStyle(ButtonStyle.Secondary),
     );
 }
 
