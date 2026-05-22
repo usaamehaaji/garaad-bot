@@ -93,6 +93,7 @@ function adminEcoMidRow(uid) {
         new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Players') .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`)     .setLabel('🏛️ Top-up') .setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`)     .setLabel('💳 Loans')   .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_eco_tax_${uid}`)       .setLabel('💸 Tax')      .setStyle(ButtonStyle.Danger),
     );
 }
 

@@ -531,6 +531,32 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** khaznadda lagu daray.\n🏛️ Hadda: **${t.balance.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
+            // ── Admin Econ modal: Tax ──
+            if (interaction.customId.startsWith('admin_eco_m_tax_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const amount = parseFloat(interaction.fields.getTextInputValue('amount'));
+                if (isNaN(amount) || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
+                const { fmt } = require('../utils/helpers');
+                const users = Object.entries(eData).filter(([k]) => !k.startsWith('__'));
+                let collected = 0;
+                for (const [uid] of users) {
+                    checkEconUser(uid);
+                    const d = eData[uid];
+                    const deduct = Math.min(amount, d.btc || 0);
+                    d.btc = (d.btc || 0) - deduct;
+                    collected += deduct;
+                }
+                if (collected > 0) addToTreasury(collected);
+                saveEcon();
+                return interaction.reply({
+                    content: `💸 **Tax Collected**\n**${fmt(amount)} BTC** ka baxday qof walba (${users.length} players)\n🏛️ Treasury helay: **${fmt(collected)} BTC**`,
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+
             // ── Admin Econ modal: Reset All ──
             if (interaction.customId.startsWith('admin_eco_m_resetall_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -772,7 +798,7 @@ module.exports = function setupInteractionHandler(client) {
         }
 
         // ── Admin tab: Economy (tab button only — exact prefix admin_eco_ + uid) ──
-        if (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_') && !id.startsWith('admin_eco_resetall_')) {
+        if (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_') && !id.startsWith('admin_eco_resetall_') && !id.startsWith('admin_eco_tax_')) {
             const ownerId = id.replace('admin_eco_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
@@ -899,6 +925,23 @@ module.exports = function setupInteractionHandler(client) {
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder().setCustomId('amount').setLabel('Xaddad ku dar khaznadda').setStyle(TextInputStyle.Short)
                         .setPlaceholder(`Hadda: ${fmt((t.balance || 0))} BTC`).setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin Econ: Tax button → modal ──
+        if (id.startsWith('admin_eco_tax_')) {
+            const ownerId = id.replace('admin_eco_tax_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_eco_m_tax_${ownerId}`).setTitle('💸 Tax Players');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('amount').setLabel('Tax per player (BTC)').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Tusaale: 5').setRequired(true)
                 ),
             );
             return interaction.showModal(modal);
