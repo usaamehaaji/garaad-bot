@@ -26,7 +26,7 @@ const OWNER_PASS = '2001';
 
 async function notifyAdmins(client, adminUser, action) {
     try {
-        const { listAdmins } = require('./utils/admin');
+        const { listAdmins } = require('../utils/admin');
         const recipients = new Set([OWNER_ID, ...listAdmins()]);
         recipients.delete(adminUser.id);
         const msg =
