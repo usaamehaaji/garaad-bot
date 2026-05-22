@@ -21,6 +21,23 @@ function genCode() {
     return s;
 }
 
+const OWNER_ID   = '1191096205955055690';
+const OWNER_PASS = '2001';
+
+async function notifyOwner(client, adminUser, action) {
+    try {
+        const owner = await client.users.fetch(OWNER_ID).catch(() => null);
+        if (owner) {
+            await owner.send(
+                `🔐 **Admin Action Log**\n` +
+                `👤 Admin: **${adminUser.username}** (\`${adminUser.id}\`)\n` +
+                `⚙️ Action: ${action}\n` +
+                `🕐 ${new Date().toUTCString()}`
+            ).catch(() => {});
+        }
+    } catch {}
+}
+
 module.exports = function setupInteractionHandler(client) {
     client.on('interactionCreate', async (interaction) => {
 
@@ -381,6 +398,9 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.customId.startsWith('admin_eco_m_giveusd_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const password = interaction.fields.getTextInputValue('password').trim();
+                if (password !== OWNER_PASS)
+                    return interaction.reply({ content: '⛔ Password qalad ah. Awood ma lihid.', flags: MessageFlags.Ephemeral });
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 const amount   = parseFloat(interaction.fields.getTextInputValue('amount'));
@@ -388,6 +408,7 @@ module.exports = function setupInteractionHandler(client) {
                 checkEconUser(targetId);
                 eData[targetId].btc = (eData[targetId].btc || 0) + amount;
                 saveEcon();
+                await notifyOwner(interaction.client, interaction.user, `Give BTC: **+${amount.toLocaleString()} BTC** → <@${targetId}>`);
                 return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** waxaad u diray <@${targetId}>. Hadda: **${eData[targetId].btc.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -476,6 +497,9 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.customId.startsWith('admin_eco_m_treasury_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const password = interaction.fields.getTextInputValue('password').trim();
+                if (password !== OWNER_PASS)
+                    return interaction.reply({ content: '⛔ Password qalad ah. Awood ma lihid.', flags: MessageFlags.Ephemeral });
                 const action = interaction.fields.getTextInputValue('action').trim().toLowerCase();
                 const { econData: eData, checkEconUser, saveEcon, getTreasury, deductFromTreasury } = require('../economy/econStore');
                 const t = getTreasury();
@@ -493,6 +517,7 @@ module.exports = function setupInteractionHandler(client) {
                         return interaction.reply({ content: `⚠️ Khaznadda ma filna. Hadda: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                     for (const uid of users) { checkEconUser(uid); eData[uid].btc = (eData[uid].btc || 0) + perUser; }
                     saveEcon();
+                    await notifyOwner(interaction.client, interaction.user, `Distribute Treasury: **${perUser.toLocaleString()} BTC** × ${users.length} players`);
                     return interaction.reply({ content: `✅ **${perUser.toLocaleString()} BTC** × **${users.length}** players.\n🏛️ Treasury remaining: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                 }
 
@@ -506,6 +531,7 @@ module.exports = function setupInteractionHandler(client) {
                     checkEconUser(targetId);
                     eData[targetId].btc = (eData[targetId].btc || 0) + amount;
                     saveEcon();
+                    await notifyOwner(interaction.client, interaction.user, `Treasury Give: **${amount.toLocaleString()} BTC** → <@${targetId}>`);
                     return interaction.reply({ content: `✅ Khaznadda **${amount.toLocaleString()} BTC** waxaa laga siiyay <@${targetId}>.\n🏛️ Khaznad hadhay: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                 }
 
@@ -520,6 +546,9 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.customId.startsWith('admin_eco_m_topup_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const password = interaction.fields.getTextInputValue('password').trim();
+                if (password !== OWNER_PASS)
+                    return interaction.reply({ content: '⛔ Password qalad ah. Awood ma lihid.', flags: MessageFlags.Ephemeral });
                 const amount = parseFloat(interaction.fields.getTextInputValue('amount'));
                 if (isNaN(amount) || amount <= 0)
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
@@ -528,6 +557,7 @@ module.exports = function setupInteractionHandler(client) {
                 topUpTreasury(amount);
                 saveEcon();
                 const t = getTreasury();
+                await notifyOwner(interaction.client, interaction.user, `Top-up Treasury: **+${amount.toLocaleString()} BTC** — balance now **${t.balance.toLocaleString()} BTC**`);
                 return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** khaznadda lagu daray.\n🏛️ Hadda: **${t.balance.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -535,6 +565,9 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.customId.startsWith('admin_eco_m_tax_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const password = interaction.fields.getTextInputValue('password').trim();
+                if (password !== OWNER_PASS)
+                    return interaction.reply({ content: '⛔ Password qalad ah. Awood ma lihid.', flags: MessageFlags.Ephemeral });
                 const amount = parseFloat(interaction.fields.getTextInputValue('amount'));
                 if (isNaN(amount) || amount <= 0)
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
@@ -551,6 +584,7 @@ module.exports = function setupInteractionHandler(client) {
                 }
                 if (collected > 0) addToTreasury(collected);
                 saveEcon();
+                await notifyOwner(interaction.client, interaction.user, `Tax: **${fmt(amount)} BTC** × ${users.length} players → Treasury **+${fmt(collected)} BTC**`);
                 return interaction.reply({
                     content: `💸 **Tax Collected**\n**${fmt(amount)} BTC** ka baxday qof walba (${users.length} players)\n🏛️ Treasury helay: **${fmt(collected)} BTC**`,
                     flags: MessageFlags.Ephemeral,
@@ -561,6 +595,9 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.customId.startsWith('admin_eco_m_resetall_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const password = interaction.fields.getTextInputValue('password').trim();
+                if (password !== OWNER_PASS)
+                    return interaction.reply({ content: '⛔ Password qalad ah. Awood ma lihid.', flags: MessageFlags.Ephemeral });
                 const confirm = interaction.fields.getTextInputValue('confirm').trim().toUpperCase();
                 if (confirm !== 'RESET')
                     return interaction.reply({ content: '⚠️ "RESET" ayaad qori lahayd. La joojiyay.', flags: MessageFlags.Ephemeral });
@@ -579,6 +616,7 @@ module.exports = function setupInteractionHandler(client) {
                     d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
                 }
                 saveEcon();
+                await notifyOwner(interaction.client, interaction.user, `Reset All Economy — ${users.length} players`);
                 return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n₿ Qof walba: **${(5000).toLocaleString()} BTC** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
             }
 
@@ -919,12 +957,17 @@ module.exports = function setupInteractionHandler(client) {
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
             const { getTreasury } = require('../economy/econStore');
+            const { fmt } = require('../utils/helpers');
             const t = getTreasury();
             const modal = new ModalBuilder().setCustomId(`admin_eco_m_topup_${ownerId}`).setTitle('🏛️ Treasury Top-up');
             modal.addComponents(
                 new ActionRowBuilder().addComponents(
-                    new TextInputBuilder().setCustomId('amount').setLabel('Xaddad ku dar khaznadda').setStyle(TextInputStyle.Short)
+                    new TextInputBuilder().setCustomId('amount').setLabel('Xaddad ku dar khaznadda (BTC)').setStyle(TextInputStyle.Short)
                         .setPlaceholder(`Hadda: ${fmt((t.balance || 0))} BTC`).setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Owner password').setRequired(true)
                 ),
             );
             return interaction.showModal(modal);
@@ -943,6 +986,10 @@ module.exports = function setupInteractionHandler(client) {
                     new TextInputBuilder().setCustomId('amount').setLabel('Tax per player (BTC)').setStyle(TextInputStyle.Short)
                         .setPlaceholder('Tusaale: 5').setRequired(true)
                 ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Owner password').setRequired(true)
+                ),
             );
             return interaction.showModal(modal);
         }
@@ -957,7 +1004,10 @@ module.exports = function setupInteractionHandler(client) {
             const modal = new ModalBuilder().setCustomId(`admin_eco_m_resetall_${ownerId}`).setTitle('♻️ Reset All Economy');
             modal.addComponents(
                 new ActionRowBuilder().addComponents(
-                    new TextInputBuilder().setCustomId('confirm').setLabel('Xaqiiji: qor "RESET" si aad u xaqiijiso').setStyle(TextInputStyle.Short).setPlaceholder('RESET').setRequired(true)
+                    new TextInputBuilder().setCustomId('confirm').setLabel('Xaqiiji: qor "RESET"').setStyle(TextInputStyle.Short).setPlaceholder('RESET').setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short).setPlaceholder('Owner password').setRequired(true)
                 ),
             );
             return interaction.showModal(modal);
@@ -972,6 +1022,7 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka BTC').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 5000').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short).setPlaceholder('Owner password').setRequired(true)),
             );
             return interaction.showModal(modal);
         }
@@ -1044,6 +1095,9 @@ module.exports = function setupInteractionHandler(client) {
                 ),
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder().setCustomId('amount').setLabel('Xaddad (distribute) ama "UserID xad" (give)').setStyle(TextInputStyle.Short).setPlaceholder(`Khaznad hadda: ${fmt((t.balance || 0))} BTC`).setRequired(false)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short).setPlaceholder('Owner password').setRequired(true)
                 ),
             );
             return interaction.showModal(modal);
