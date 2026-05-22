@@ -13,7 +13,6 @@ function buildAdminEmbed(uid) {
         if (d.loan?.owed > 0) activeLoans++;
     }
     const isOwner = uid === OWNER_ID;
-
     return new EmbedBuilder()
         .setTitle('⚙️ Admin Panel')
         .setColor('#8e44ad')
@@ -21,75 +20,71 @@ function buildAdminEmbed(uid) {
             `**🏛️ Treasury:** ${fmt(t.balance)} BTC\n` +
             `**👥 Players:** ${users.length} | **₿ Circulation:** ${fmt(totalBtc)} BTC\n` +
             `**💳 Active Loans:** ${activeLoans}\n\n` +
-            `**Actions available:**\n` +
-            `🧠 Give IQ  •  ₿ Give BTC  •  🏆 Champion  •  💬 DM\n` +
+            `**Actions:**\n` +
+            `🎁 Give  •  🏆 Champion  •  💬 DM  •  📢 Broadcast  •  🐛 Bugs\n` +
             `👥 Players  •  💳 Loans` +
-            (isOwner ? `  •  🏛️ Top-up  •  💸 Tax\n🗑️ Reset User  •  ♻️ Reset All IQ  •  ♻️ Reset All Eco` : '')
+            (isOwner ? `\n🏛️ Top-up  •  💸 Tax  •  ➕ Add Admin\n🗑️ Reset User  •  ♻️ Reset IQ  •  ♻️ Reset All Eco` : '')
         )
         .setFooter({ text: 'Garaad Admin' });
 }
 
-// Row 1: Give | Champion | DM User | Broadcast | Bugs  (all admins)
+// Row 1 — all admins
 function adminRow1(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_give_${uid}`)        .setLabel('🎁 Give')     .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`) .setLabel('🏆 Champion') .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)       .setLabel('💬 DM User')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_broadcast_${uid}`)   .setLabel('📢 Broadcast').setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`admin_bugs_${uid}`)        .setLabel('🐛 Bugs')     .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_give_${uid}`)       .setLabel('🎁 Give')    .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`).setLabel('🏆 Champion').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)      .setLabel('💬 DM User') .setStyle(ButtonStyle.Secondary),
     );
 }
 
-// Row 2: Players | [Top-up owner] | Loans | [Tax owner] | Add Admin (owner)
+// Row 2 — all admins
 function adminRow2(uid) {
-    const isOwner = uid === OWNER_ID;
-    const btns = [
-        new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Players').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`)     .setLabel('💳 Loans')  .setStyle(ButtonStyle.Secondary),
-    ];
-    if (isOwner) {
-        btns.splice(1, 0, new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`).setLabel('🏛️ Top-up').setStyle(ButtonStyle.Primary));
-        btns.push(new ButtonBuilder().setCustomId(`admin_eco_tax_${uid}`) .setLabel('💸 Tax')      .setStyle(ButtonStyle.Danger));
-        btns.push(new ButtonBuilder().setCustomId(`admin_addadmin_${uid}`).setLabel('➕ Add Admin').setStyle(ButtonStyle.Primary));
-    }
-    return new ActionRowBuilder().addComponents(...btns);
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Players') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_broadcast_${uid}`)     .setLabel('📢 Broadcast').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_bugs_${uid}`)          .setLabel('🐛 Bugs')     .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`)     .setLabel('💳 Loans')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`)    .setLabel('✖ Close')     .setStyle(ButtonStyle.Danger),
+    );
 }
 
-// Row 3: [Reset User owner] | [Reset All IQ owner] | [Reset All Eco owner] | Close
+// Row 3 — owner only
 function adminRow3(uid) {
-    const isOwner = uid === OWNER_ID;
-    const btns = [
-        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
-    ];
-    if (isOwner) {
-        btns.unshift(
-            new ButtonBuilder().setCustomId(`admin_eco_reset_${uid}`)    .setLabel('🗑️ Reset User')  .setStyle(ButtonStyle.Danger),
-            new ButtonBuilder().setCustomId(`admin_aq_reset_${uid}`)     .setLabel('♻️ Reset All IQ') .setStyle(ButtonStyle.Danger),
-            new ButtonBuilder().setCustomId(`admin_eco_resetall_${uid}`) .setLabel('♻️ Reset All Eco').setStyle(ButtonStyle.Danger),
-        );
-    }
-    return new ActionRowBuilder().addComponents(...btns);
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`).setLabel('🏛️ Top-up')   .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_eco_tax_${uid}`)  .setLabel('💸 Tax')       .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_addadmin_${uid}`) .setLabel('➕ Add Admin') .setStyle(ButtonStyle.Primary),
+    );
+}
+
+// Row 4 — owner only
+function adminRow4(uid) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`admin_eco_reset_${uid}`)    .setLabel('🗑️ Reset User')  .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_aq_reset_${uid}`)     .setLabel('♻️ Reset IQ')     .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_eco_resetall_${uid}`) .setLabel('♻️ Reset All Eco').setStyle(ButtonStyle.Danger),
+    );
 }
 
 function getRows(uid) {
-    return [adminRow1(uid), adminRow2(uid), adminRow3(uid)];
+    return uid === OWNER_ID
+        ? [adminRow1(uid), adminRow2(uid), adminRow3(uid), adminRow4(uid)]
+        : [adminRow1(uid), adminRow2(uid)];
 }
 
 module.exports = async function adminHelpPanel(message) {
     const uid = message.author.id;
-    return message.reply({
-        embeds:     [buildAdminEmbed(uid)],
-        components: getRows(uid),
-    });
+    return message.reply({ embeds: [buildAdminEmbed(uid)], components: getRows(uid) });
 };
 
-module.exports.buildAdminEmbed        = buildAdminEmbed;
-module.exports.getRows                = getRows;
-module.exports.adminRow1              = adminRow1;
-module.exports.adminRow2              = adminRow2;
-module.exports.adminRow3              = adminRow3;
-// Legacy exports used by interaction handler
-module.exports.buildAdminAqoonEmbed   = buildAdminEmbed;
-module.exports.adminAqoonMainRow      = adminRow1;
-module.exports.adminAqoonMidRow       = adminRow2;
-module.exports.adminAqoonFooterRow    = adminRow3;
+module.exports.buildAdminEmbed      = buildAdminEmbed;
+module.exports.getRows              = getRows;
+module.exports.adminRow1            = adminRow1;
+module.exports.adminRow2            = adminRow2;
+module.exports.adminRow3            = adminRow3;
+module.exports.adminRow4            = adminRow4;
+// Legacy exports
+module.exports.buildAdminAqoonEmbed = buildAdminEmbed;
+module.exports.adminAqoonMainRow    = adminRow1;
+module.exports.adminAqoonMidRow     = adminRow2;
+module.exports.adminAqoonFooterRow  = adminRow3;
