@@ -40,7 +40,7 @@ function adminRow1(uid) {
     );
 }
 
-// Row 2: Players | [Top-up owner] | Loans | [Tax owner]
+// Row 2: Players | [Top-up owner] | Loans | [Tax owner] | Add Admin (owner)
 function adminRow2(uid) {
     const isOwner = uid === OWNER_ID;
     const btns = [
@@ -49,7 +49,8 @@ function adminRow2(uid) {
     ];
     if (isOwner) {
         btns.splice(1, 0, new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`).setLabel('🏛️ Top-up').setStyle(ButtonStyle.Primary));
-        btns.push(new ButtonBuilder().setCustomId(`admin_eco_tax_${uid}`).setLabel('💸 Tax').setStyle(ButtonStyle.Danger));
+        btns.push(new ButtonBuilder().setCustomId(`admin_eco_tax_${uid}`) .setLabel('💸 Tax')      .setStyle(ButtonStyle.Danger));
+        btns.push(new ButtonBuilder().setCustomId(`admin_addadmin_${uid}`).setLabel('➕ Add Admin').setStyle(ButtonStyle.Primary));
     }
     return new ActionRowBuilder().addComponents(...btns);
 }

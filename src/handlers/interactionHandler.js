@@ -317,6 +317,22 @@ module.exports = function setupInteractionHandler(client) {
                 });
             }
 
+            // ── Admin: Add Admin modal submit (owner only) ──
+            if (interaction.customId.startsWith('admin_m_addadmin_')) {
+                if (interaction.user.id !== OWNER_ID)
+                    return interaction.reply({ content: '⛔ Owner kaliya ayaa admin kudarsan kara.', flags: MessageFlags.Ephemeral });
+                const targetId = interaction.fields.getTextInputValue('target_id').trim();
+                const { addAdmin, listAdmins } = require('../utils/admin');
+                const added = addAdmin(targetId);
+                await notifyAdmins(interaction.client, interaction.user, `Add Admin: <@${targetId}>`);
+                return interaction.reply({
+                    content: added
+                        ? `✅ <@${targetId}> waxaa loo daray admin-yada. Admins: **${listAdmins().length}**`
+                        : `⚠️ <@${targetId}> horay u ahaa admin.`,
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+
             // ── Admin: Broadcast modal submit ──
             if (interaction.customId.startsWith('admin_m_broadcast_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -917,6 +933,23 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('give_input').setLabel('iq 200  or  btc 500').setStyle(TextInputStyle.Short).setPlaceholder('iq 200   /   btc 500').setRequired(true)),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin: Add Admin button → modal (owner only) ──
+        if (id.startsWith('admin_addadmin_')) {
+            const ownerId = id.replace('admin_addadmin_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (interaction.user.id !== OWNER_ID)
+                return interaction.reply({ content: '⛔ Owner kaliya ayaa admin kudarsan kara.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_addadmin_${ownerId}`).setTitle('➕ Add Admin');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('123456789012345678').setRequired(true)
+                ),
             );
             return interaction.showModal(modal);
         }
