@@ -183,16 +183,18 @@ module.exports = async function adminEconCmd(message, args) {
         }
 
         if (action === 'distribute') {
-            const amount = parseFloat(args[2]);
-            if (isNaN(amount) || amount <= 0) return message.reply('⚠️ `?admin econ treasury distribute [amount]`');
-            const users   = Object.keys(econData).filter(k => !k.startsWith('__'));
+            const users  = Object.keys(econData).filter(k => !k.startsWith('__'));
+            const rawArg = (args[2] || '').toLowerCase();
+            const amount = rawArg === 'all' ? t.balance : parseFloat(args[2]);
+            if (!amount || isNaN(amount) || amount <= 0)
+                return message.reply('⚠️ `?admin econ treasury distribute all`  or  `?admin econ treasury distribute [amount]`');
             const perUser = Math.floor(amount / users.length);
             if (perUser < 1) return message.reply('⚠️ Amount too small to distribute.');
             if (!deductFromTreasury(amount)) return message.reply(`⚠️ Treasury insufficient. Balance: **${fmt(t.balance)} BTC**`);
             for (const uid of users) { checkEconUser(uid); econData[uid].btc = (econData[uid].btc || 0) + perUser; }
             saveEcon();
             return message.reply({ embeds: [new EmbedBuilder().setColor('#2ecc71')
-                .setDescription(`✅ **${fmt(perUser)} BTC** × **${users.length}** players.\n🏛️ Remaining: **${fmt(t.balance)} BTC**`)] });
+                .setDescription(`✅ **${fmt(perUser)} BTC** × **${users.length}** players.\n🏛️ Treasury remaining: **${fmt(t.balance)} BTC**`)] });
         }
 
         if (action === 'give') {

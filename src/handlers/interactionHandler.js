@@ -480,11 +480,12 @@ module.exports = function setupInteractionHandler(client) {
                 const { econData: eData, checkEconUser, saveEcon, getTreasury, deductFromTreasury } = require('../economy/econStore');
                 const t = getTreasury();
 
-                if (action === 'distribute' || action === 'qaybso') {
-                    const amount = parseFloat(interaction.fields.getTextInputValue('amount'));
-                    if (isNaN(amount) || amount <= 0)
-                        return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
-                    const users = Object.keys(eData).filter(k => !k.startsWith('__'));
+                if (action === 'distribute' || action === 'qaybso' || action === 'all') {
+                    const users   = Object.keys(eData).filter(k => !k.startsWith('__'));
+                    const rawAmt  = interaction.fields.getTextInputValue('amount').trim().toLowerCase();
+                    const amount  = rawAmt === 'all' ? t.balance : parseFloat(rawAmt);
+                    if (!amount || isNaN(amount) || amount <= 0)
+                        return interaction.reply({ content: '⚠️ Xaddad geli ama "all" qor.', flags: MessageFlags.Ephemeral });
                     const perUser = Math.floor(amount / users.length);
                     if (perUser < 1)
                         return interaction.reply({ content: '⚠️ Xaddadka aad yar — dadku aad baa u badan.', flags: MessageFlags.Ephemeral });
@@ -492,7 +493,7 @@ module.exports = function setupInteractionHandler(client) {
                         return interaction.reply({ content: `⚠️ Khaznadda ma filna. Hadda: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                     for (const uid of users) { checkEconUser(uid); eData[uid].btc = (eData[uid].btc || 0) + perUser; }
                     saveEcon();
-                    return interaction.reply({ content: `✅ **${perUser.toLocaleString()} BTC** waxaa la siiyay **${users.length}** qof.\n🏛️ Khaznad hadhay: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `✅ **${perUser.toLocaleString()} BTC** × **${users.length}** players.\n🏛️ Treasury remaining: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                 }
 
                 if (action === 'give' || action === 'sii') {
