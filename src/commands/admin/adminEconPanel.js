@@ -72,59 +72,18 @@ function buildAllPlayersEmbed(page = 0) {
         .setFooter({ text: `Page ${page + 1}/${totalPages} • ${players.length} total` });
 }
 
-// ── Rows ──────────────────────────────────────────────────────────
+// ── Rows — delegate to unified panel ──────────────────────────────
 
-function adminTabRow(uid, active) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_aqoon_${uid}`)      .setLabel('🧠 Education').setStyle(active === 'aqoon' ? ButtonStyle.Primary : ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_eco_${uid}`)        .setLabel('💰 Economy')  .setStyle(active === 'eco'   ? ButtonStyle.Primary : ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`).setLabel('✖ Close')      .setStyle(ButtonStyle.Danger),
-    );
-}
+const { adminRow1, adminRow2, adminRow3, getRows } = require('./adminHelpPanel');
 
-function adminEcoMainRow(uid) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_aqoon_${uid}`)       .setLabel('🧠 Education').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_eco_${uid}`)         .setLabel('💰 Economy')  .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`) .setLabel('₿ Give BTC')  .setStyle(ButtonStyle.Success),
-    );
-}
-
-function adminEcoMidRow(uid) {
-    const isOwner = uid === OWNER_ID;
-    const btns = [
-        new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Players').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`)     .setLabel('💳 Loans')  .setStyle(ButtonStyle.Secondary),
-    ];
-    if (isOwner) {
-        btns.splice(1, 0, new ButtonBuilder().setCustomId(`admin_eco_topup_${uid}`).setLabel('🏛️ Top-up').setStyle(ButtonStyle.Primary));
-        btns.push(new ButtonBuilder().setCustomId(`admin_eco_tax_${uid}`).setLabel('💸 Tax').setStyle(ButtonStyle.Danger));
-    }
-    return new ActionRowBuilder().addComponents(...btns);
-}
-
-function adminEcoFooterRow(uid) {
-    const isOwner = uid === OWNER_ID;
-    const btns = [
-        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
-    ];
-    if (isOwner) {
-        btns.unshift(
-            new ButtonBuilder().setCustomId(`admin_eco_reset_${uid}`)    .setLabel('🗑️ Reset User').setStyle(ButtonStyle.Danger),
-            new ButtonBuilder().setCustomId(`admin_eco_resetall_${uid}`) .setLabel('♻️ Reset All') .setStyle(ButtonStyle.Danger),
-        );
-    }
-    return new ActionRowBuilder().addComponents(...btns);
-}
-
-function adminEcoActionsRow(uid)  { return adminEcoMidRow(uid); }
-function adminEconActionsRow(uid) { return adminEcoMidRow(uid); }
-function adminEconActionsRow2(uid){ return adminEcoFooterRow(uid); }
-function adminEcoCloseRow(uid) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
-    );
-}
+function adminTabRow(uid)          { return adminRow1(uid); }
+function adminEcoMainRow(uid)      { return adminRow1(uid); }
+function adminEcoMidRow(uid)       { return adminRow2(uid); }
+function adminEcoFooterRow(uid)    { return adminRow3(uid); }
+function adminEcoActionsRow(uid)   { return adminRow2(uid); }
+function adminEconActionsRow(uid)  { return adminRow2(uid); }
+function adminEconActionsRow2(uid) { return adminRow3(uid); }
+function adminEcoCloseRow(uid)     { return adminRow3(uid); }
 
 // ── Command ────────────────────────────────────────────────────────
 
@@ -134,9 +93,10 @@ module.exports = async function adminEconCmd(message, args) {
     const target = message.mentions.users.first();
 
     if (!sub || sub === 'help') {
+        const { buildAdminEmbed } = require('./adminHelpPanel');
         return message.reply({
-            embeds:     [buildAdminEconEmbed()],
-            components: [adminEcoMainRow(userId), adminEcoMidRow(userId), adminEcoFooterRow(userId)],
+            embeds:     [buildAdminEmbed(userId)],
+            components: getRows(userId),
         });
     }
 
