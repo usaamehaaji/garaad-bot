@@ -29,11 +29,10 @@ function buildAdminEmbed(uid) {
         .setFooter({ text: 'Garaad Admin' });
 }
 
-// Row 1: Give IQ | Give BTC | Champion | DM User  (all admins)
+// Row 1: Give | Champion | DM User  (all admins)
 function adminRow1(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_aq_giveiq_${uid}`)  .setLabel('🧠 Give IQ') .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`admin_eco_giveusd_${uid}`).setLabel('₿ Give BTC') .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_give_${uid}`)       .setLabel('🎁 Give')    .setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`).setLabel('🏆 Champion').setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)      .setLabel('💬 DM User') .setStyle(ButtonStyle.Secondary),
     );

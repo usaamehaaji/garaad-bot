@@ -317,6 +317,36 @@ module.exports = function setupInteractionHandler(client) {
                 });
             }
 
+            // ── Admin: Give IQ or BTC (combined modal) ──
+            if (interaction.customId.startsWith('admin_m_give_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const targetId  = interaction.fields.getTextInputValue('target_id').trim();
+                const raw       = interaction.fields.getTextInputValue('give_input').trim().toLowerCase();
+                const parts     = raw.split(/\s+/);
+                const type      = parts[0];
+                const amount    = parseFloat(parts[1]);
+                if ((type !== 'iq' && type !== 'btc') || isNaN(amount) || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Qaabka: `iq 200`  ama  `btc 500`', flags: MessageFlags.Ephemeral });
+
+                if (type === 'iq') {
+                    const { userData: uData, saveData } = require('../store');
+                    const { checkUser } = require('../utils/helpers');
+                    checkUser(targetId);
+                    uData[targetId].iq = Math.max(0, (uData[targetId].iq || 0) + amount);
+                    saveData();
+                    await notifyAdmins(interaction.client, interaction.user, `Give IQ: **+${amount} IQ** → <@${targetId}>`);
+                    return interaction.reply({ content: `✅ <@${targetId}> **+${amount} IQ**. Hadda: **${uData[targetId].iq} IQ**`, flags: MessageFlags.Ephemeral });
+                } else {
+                    const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                    checkEconUser(targetId);
+                    eData[targetId].btc = (eData[targetId].btc || 0) + amount;
+                    saveEcon();
+                    await notifyAdmins(interaction.client, interaction.user, `Give BTC: **+${amount.toLocaleString()} BTC** → <@${targetId}>`);
+                    return interaction.reply({ content: `✅ <@${targetId}> **+${amount.toLocaleString()} BTC**. Hadda: **${eData[targetId].btc.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
+                }
+            }
+
             // ── Admin Aqoon modal: Give IQ ──
             if (interaction.customId.startsWith('admin_aq_m_giveiq_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -847,7 +877,22 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.update({ embeds: [buildAdminEmbed(ownerId)], components: getRows(ownerId) });
         }
 
-        // ── Admin Aqoon: Give IQ button → modal ──
+        // ── Admin: Give (IQ or BTC) button → modal ──
+        if (id.startsWith('admin_give_')) {
+            const ownerId = id.replace('admin_give_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_give_${ownerId}`).setTitle('🎁 Give IQ or BTC');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('give_input').setLabel('iq 200  or  btc 500').setStyle(TextInputStyle.Short).setPlaceholder('iq 200   /   btc 500').setRequired(true)),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin Aqoon: Give IQ button → modal (legacy) ──
         if (id.startsWith('admin_aq_giveiq_')) {
             const ownerId = id.replace('admin_aq_giveiq_', '');
             if (interaction.user.id !== ownerId)
