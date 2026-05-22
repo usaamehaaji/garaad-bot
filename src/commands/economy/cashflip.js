@@ -4,7 +4,8 @@ const { fmt } = require('../../utils/helpers');
 const full = n => Math.round(n || 0).toLocaleString(); // always full number, no abbreviation
 
 const WIN_RATE    = 0.50;
-const WIN_MULTI   = 0.90;
+const WIN_MULTI   = 2.0;
+const WIN_TAX     = 5;
 const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 const COOLDOWN_MS = 10_000; // 10s cooldown between flips
 
@@ -45,17 +46,19 @@ function doFlip(userId, amount, direction) {
     const profit = Math.floor(amount * WIN_MULTI);
 
     if (win) {
-        d.btc = (d.btc || 0) + profit;
-        att(amount - profit);
-        te(userId, profit);
+        const netProfit = profit - WIN_TAX;
+        d.btc = (d.btc || 0) + netProfit;
+        att(WIN_TAX);
+        te(userId, netProfit);
     } else {
         d.btc = (d.btc || 0) - amount;
         att(amount);
     }
     se();
 
+    const netProfit = win ? profit - WIN_TAX : profit;
     const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
-    return { embed: buildResult(win, dirLabel, profit, amount, d.btc || 0) };
+    return { embed: buildResult(win, dirLabel, netProfit, amount, d.btc || 0) };
 }
 
 module.exports = async function cashflipCmd(message, args) {
