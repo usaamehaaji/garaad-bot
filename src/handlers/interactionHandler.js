@@ -317,20 +317,34 @@ module.exports = function setupInteractionHandler(client) {
                 });
             }
 
-            // ── Admin: Add Admin modal submit (owner only) ──
+            // ── Admin: Add/Remove Admin modal submit (owner only) ──
             if (interaction.customId.startsWith('admin_m_addadmin_')) {
                 if (interaction.user.id !== OWNER_ID)
-                    return interaction.reply({ content: '⛔ Owner kaliya ayaa admin kudarsan kara.', flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
-                const { addAdmin, listAdmins } = require('../utils/admin');
-                const added = addAdmin(targetId);
-                await notifyAdmins(interaction.client, interaction.user, `Add Admin: <@${targetId}>`);
-                return interaction.reply({
-                    content: added
-                        ? `✅ <@${targetId}> waxaa loo daray admin-yada. Admins: **${listAdmins().length}**`
-                        : `⚠️ <@${targetId}> horay u ahaa admin.`,
-                    flags: MessageFlags.Ephemeral,
-                });
+                const action   = (interaction.fields.getTextInputValue('action') || '').trim().toLowerCase();
+                const { addAdmin, removeAdmin, listAdmins } = require('../utils/admin');
+                if (action === 'add') {
+                    const added = addAdmin(targetId);
+                    await notifyAdmins(interaction.client, interaction.user, `Add Admin: <@${targetId}>`);
+                    return interaction.reply({
+                        content: added
+                            ? `✅ <@${targetId}> admin-yada lagu daray. Admins: **${listAdmins().length}**`
+                            : `⚠️ <@${targetId}> horay u ahaa admin.`,
+                        flags: MessageFlags.Ephemeral,
+                    });
+                } else if (action === 'remove') {
+                    const removed = removeAdmin(targetId);
+                    await notifyAdmins(interaction.client, interaction.user, `Remove Admin: <@${targetId}>`);
+                    return interaction.reply({
+                        content: removed
+                            ? `✅ <@${targetId}> admin-yada laga saaray. Admins: **${listAdmins().length}**`
+                            : `⚠️ <@${targetId}> admin ma aha.`,
+                        flags: MessageFlags.Ephemeral,
+                    });
+                } else {
+                    return interaction.reply({ content: '⚠️ Ficilka: `add` ama `remove`', flags: MessageFlags.Ephemeral });
+                }
             }
 
             // ── Admin: Broadcast modal submit ──
@@ -1042,18 +1056,22 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
-        // ── Admin: Add Admin button → modal (owner only) ──
+        // ── Admin: Add/Remove Admin button → modal (owner only) ──
         if (id.startsWith('admin_addadmin_')) {
             const ownerId = id.replace('admin_addadmin_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             if (interaction.user.id !== OWNER_ID)
-                return interaction.reply({ content: '⛔ Owner kaliya ayaa admin kudarsan kara.', flags: MessageFlags.Ephemeral });
-            const modal = new ModalBuilder().setCustomId(`admin_m_addadmin_${ownerId}`).setTitle('➕ Add Admin');
+                return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_addadmin_${ownerId}`).setTitle('👥 Admin — Add / Remove');
             modal.addComponents(
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short)
                         .setPlaceholder('123456789012345678').setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('action').setLabel('Ficil: add  ama  remove').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('add   /   remove').setRequired(true)
                 ),
             );
             return interaction.showModal(modal);
