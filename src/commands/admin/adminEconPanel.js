@@ -254,6 +254,30 @@ module.exports = async function adminEconCmd(message, args) {
             .setFooter({ text: 'Garaad Admin' })] });
     }
 
+    // ?admin econ tax [amount]
+    if (sub === 'tax') {
+        const amount = parseFloat(args[1]);
+        if (isNaN(amount) || amount <= 0)
+            return message.reply('⚠️ `?admin econ tax [amount]`  — e.g. `?admin econ tax 5`');
+        const users = Object.entries(econData).filter(([k]) => !k.startsWith('__'));
+        let collected = 0;
+        for (const [uid] of users) {
+            checkEconUser(uid);
+            const d = econData[uid];
+            const deduct = Math.min(amount, d.btc || 0);
+            d.btc = (d.btc || 0) - deduct;
+            collected += deduct;
+        }
+        if (collected > 0) addToTreasury(collected);
+        saveEcon();
+        return message.reply({ embeds: [new EmbedBuilder().setColor('#e67e22')
+            .setTitle('💸 Tax Collected')
+            .setDescription(
+                `**${fmt(amount)} BTC** deducted from each of **${users.length}** players.\n` +
+                `🏛️ Treasury received: **${fmt(collected)} BTC**`
+            )] });
+    }
+
     return message.reply(`⚠️ Usage: \`${PREFIX}admin econ help\``);
 };
 
