@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../economy/econStore');
 const { fmt } = require('../../utils/helpers');
+const full = n => Math.round(n || 0).toLocaleString(); // always full number, no abbreviation
 
 const WIN_RATE    = 0.50;
 const WIN_MULTI   = 0.90;
@@ -17,8 +18,8 @@ function buildResult(win, dirLabel, profit, amount, newBal) {
             .setThumbnail(BTC_ICON)
             .setDescription(`You picked **${dirLabel}** — correct!\n\n📈 The market moved your way.`)
             .addFields(
-                { name: '₿ Profit',      value: `**+${fmt(profit)} BTC**`, inline: true },
-                { name: '₿ New Balance', value: `**${newBal} BTC**`,       inline: true },
+                { name: '₿ Profit',      value: `**+${full(profit)} BTC**`, inline: true },
+                { name: '₿ New Balance', value: `**${full(newBal)} BTC**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON })
         : new EmbedBuilder()
@@ -27,8 +28,8 @@ function buildResult(win, dirLabel, profit, amount, newBal) {
             .setThumbnail(BTC_ICON)
             .setDescription(`You picked **${dirLabel}** — wrong!\n\n📉 The market went the other way.`)
             .addFields(
-                { name: '₿ Lost',        value: `**-${fmt(amount)} BTC**`, inline: true },
-                { name: '₿ New Balance', value: `**${newBal} BTC**`,       inline: true },
+                { name: '₿ Lost',        value: `**-${full(amount)} BTC**`, inline: true },
+                { name: '₿ New Balance', value: `**${full(newBal)} BTC**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
 }
@@ -54,7 +55,7 @@ function doFlip(userId, amount, direction) {
     se();
 
     const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
-    return { embed: buildResult(win, dirLabel, profit, amount, fmt(d.btc || 0)) };
+    return { embed: buildResult(win, dirLabel, profit, amount, d.btc || 0) };
 }
 
 module.exports = async function cashflipCmd(message, args) {
