@@ -44,7 +44,6 @@ function adminRow2(uid) {
         new ButtonBuilder().setCustomId(`admin_broadcast_${uid}`)     .setLabel('📢 Broadcast').setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`admin_bugs_${uid}`)          .setLabel('🐛 Bugs')     .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`)     .setLabel('💳 Loans')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`)    .setLabel('✖ Close')     .setStyle(ButtonStyle.Danger),
     );
 }
 
@@ -60,7 +59,8 @@ function adminRow3(uid) {
 // Row 4 — owner only
 function adminRow4(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_reset_${uid}`).setLabel('♻️ Reset').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_reset_${uid}`)         .setLabel('♻️ Reset') .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`close_admin_help_${uid}`)    .setLabel('✖ Close')  .setStyle(ButtonStyle.Danger),
     );
 }
 
