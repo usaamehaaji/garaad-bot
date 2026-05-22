@@ -326,6 +326,7 @@ module.exports = function setupInteractionHandler(client) {
                 checkUser(targetId);
                 uData[targetId].iq = Math.max(0, (uData[targetId].iq || 0) + amount);
                 saveData();
+                await notifyOwner(interaction.client, interaction.user, `Give IQ: **${amount > 0 ? '+' : ''}${amount} IQ** → <@${targetId}>`);
                 return interaction.reply({ content: `✅ <@${targetId}> wuxuu helay **${amount > 0 ? '+' : ''}${amount} IQ**. Hadda: **${uData[targetId].iq} IQ**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -398,9 +399,6 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.customId.startsWith('admin_eco_m_giveusd_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-                const password = interaction.fields.getTextInputValue('password').trim();
-                if (password !== OWNER_PASS)
-                    return interaction.reply({ content: '⛔ Password qalad ah. Awood ma lihid.', flags: MessageFlags.Ephemeral });
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 const amount   = parseFloat(interaction.fields.getTextInputValue('amount'));
@@ -1022,7 +1020,6 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka BTC').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 5000').setRequired(true)),
-                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short).setPlaceholder('Owner password').setRequired(true)),
             );
             return interaction.showModal(modal);
         }
