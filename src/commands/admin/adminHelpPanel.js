@@ -23,7 +23,7 @@ function buildAdminEmbed(uid) {
             `**Actions:**\n` +
             `🎁 Give  •  🏆 Champion  •  💬 DM  •  📢 Broadcast  •  🐛 Bugs\n` +
             `👥 Players  •  💳 Loans` +
-            (isOwner ? `\n🏛️ Top-up  •  💸 Tax  •  ➕ Add Admin\n🗑️ Reset User  •  ♻️ Reset IQ  •  ♻️ Reset All Eco` : '')
+            (isOwner ? `\n🏛️ Top-up  •  💸 Tax  •  ➕ Add Admin\n♻️ Reset (IQ / Eco / Both)` : '')
         )
         .setFooter({ text: 'Garaad Admin' });
 }
@@ -60,9 +60,7 @@ function adminRow3(uid) {
 // Row 4 — owner only
 function adminRow4(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_eco_reset_${uid}`)    .setLabel('🗑️ Reset User')  .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId(`admin_aq_reset_${uid}`)     .setLabel('♻️ Reset IQ')     .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId(`admin_eco_resetall_${uid}`) .setLabel('♻️ Reset All Eco').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`admin_reset_${uid}`).setLabel('♻️ Reset').setStyle(ButtonStyle.Danger),
     );
 }
 

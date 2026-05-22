@@ -454,7 +454,65 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Ficilka: `give` ama `remove`', flags: MessageFlags.Ephemeral });
             }
 
-            // ── Admin Aqoon modal: Reset ──
+            // ── Admin modal: Reset (combined IQ + Eco, owner only) ──
+            if (interaction.customId.startsWith('admin_m_reset_')) {
+                if (interaction.user.id !== OWNER_ID)
+                    return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
+                const password  = interaction.fields.getTextInputValue('password').trim();
+                if (password !== OWNER_PASS)
+                    return interaction.reply({ content: '⛔ Password qalad ah.', flags: MessageFlags.Ephemeral });
+                const rawTarget  = interaction.fields.getTextInputValue('target_id').trim().toLowerCase();
+                const resetAll   = rawTarget === 'all';
+                const targetId   = resetAll ? null : rawTarget;
+                const resetType  = (interaction.fields.getTextInputValue('reset_type') || 'both').trim().toLowerCase();
+                if (!['iq', 'eco', 'both'].includes(resetType))
+                    return interaction.reply({ content: '⚠️ Reset type: `iq`, `eco`, ama `both` qor.', flags: MessageFlags.Ephemeral });
+
+                const doResetIq = resetType === 'iq'  || resetType === 'both';
+                const doResetEco = resetType === 'eco' || resetType === 'both';
+
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { userData: uData, saveData: sd } = require('../store');
+                const { checkUser: cu } = require('../utils/helpers');
+
+                const ecoUsers = doResetEco ? Object.keys(eData).filter(k => !k.startsWith('__')) : [];
+                const iqUsers  = doResetIq  ? Object.keys(uData) : [];
+                const targets  = resetAll ? null : [targetId];
+
+                if (doResetEco) {
+                    const list = targets || ecoUsers;
+                    for (const uid of list) {
+                        checkEconUser(uid);
+                        const d = eData[uid];
+                        d.btc = 1000;
+                        d.banks = { garaad: 0 };
+                        d.inventory = { safety: 0, robticket: 0 };
+                        d.loan = null; d.lastLoanTaken = 0;
+                        d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
+                    }
+                    saveEcon();
+                }
+
+                if (doResetIq) {
+                    const list = targets || iqUsers;
+                    for (const uid of list) {
+                        cu(uid);
+                        uData[uid].iq = 0; uData[uid].xp = 0; uData[uid].stars = 0;
+                        uData[uid].pendingQuizPoints = 0;
+                        uData[uid].ownedTitles = ['beginner'];
+                        uData[uid].activeTitle = 'beginner';
+                        uData[uid].customTitle = null;
+                        uData[uid].stats = { soloPlayed:0, soloCorrect:0, soloWrong:0, duelWins:0, duelLosses:0, duelDraws:0, rushBest:0, quizWins:0, quizPlayed:0, bugsReported:0 };
+                    }
+                    sd();
+                }
+
+                const scope = resetAll ? 'dhammaan players' : `<@${targetId}>`;
+                await notifyAdmins(interaction.client, interaction.user, `Reset **${resetType}** — ${scope}`);
+                return interaction.reply({ content: `✅ **${resetType}** dib loo dejiyay — ${scope}.`, flags: MessageFlags.Ephemeral });
+            }
+
+            // ── Admin Aqoon modal: Reset (legacy) ──
             if (interaction.customId.startsWith('admin_aq_m_reset_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
@@ -1082,14 +1140,27 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
-        // ── Admin Aqoon: Reset button → modal ──
-        if (id.startsWith('admin_aq_reset_')) {
-            const ownerId = id.replace('admin_aq_reset_', '');
+        // ── Admin: Reset (combined IQ + Eco) button → modal (owner only) ──
+        if (id.startsWith('admin_reset_')) {
+            const ownerId = id.replace('admin_reset_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const modal = new ModalBuilder().setCustomId(`admin_aq_m_reset_${ownerId}`).setTitle('🗑️ Reset Aqoon');
+            if (interaction.user.id !== OWNER_ID)
+                return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_reset_${ownerId}`).setTitle('♻️ Reset User');
             modal.addComponents(
-                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('target_id').setLabel('User ID  (ama "all" = dhammaan)').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('all   /   123456789012345678').setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('reset_type').setLabel('Reset: iq / eco / both').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('iq  |  eco  |  both').setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('password').setLabel('🔐 Owner Password').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Owner password').setRequired(true)
+                ),
             );
             return interaction.showModal(modal);
         }
