@@ -24,16 +24,19 @@ function genCode() {
 const OWNER_ID   = '1191096205955055690';
 const OWNER_PASS = '2001';
 
-async function notifyOwner(client, adminUser, action) {
+async function notifyAdmins(client, adminUser, action) {
     try {
-        const owner = await client.users.fetch(OWNER_ID).catch(() => null);
-        if (owner) {
-            await owner.send(
-                `🔐 **Admin Action Log**\n` +
-                `👤 Admin: **${adminUser.username}** (\`${adminUser.id}\`)\n` +
-                `⚙️ Action: ${action}\n` +
-                `🕐 ${new Date().toUTCString()}`
-            ).catch(() => {});
+        const { listAdmins } = require('./utils/admin');
+        const recipients = new Set([OWNER_ID, ...listAdmins()]);
+        recipients.delete(adminUser.id);
+        const msg =
+            `🔐 **Admin Action Log**\n` +
+            `👤 Admin: **${adminUser.username}** (\`${adminUser.id}\`)\n` +
+            `⚙️ Action: ${action}\n` +
+            `🕐 ${new Date().toUTCString()}`;
+        for (const uid of recipients) {
+            const u = await client.users.fetch(uid).catch(() => null);
+            if (u) await u.send(msg).catch(() => {});
         }
     } catch {}
 }
@@ -326,7 +329,7 @@ module.exports = function setupInteractionHandler(client) {
                 checkUser(targetId);
                 uData[targetId].iq = Math.max(0, (uData[targetId].iq || 0) + amount);
                 saveData();
-                await notifyOwner(interaction.client, interaction.user, `Give IQ: **${amount > 0 ? '+' : ''}${amount} IQ** → <@${targetId}>`);
+                await notifyAdmins(interaction.client, interaction.user, `Give IQ: **${amount > 0 ? '+' : ''}${amount} IQ** → <@${targetId}>`);
                 return interaction.reply({ content: `✅ <@${targetId}> wuxuu helay **${amount > 0 ? '+' : ''}${amount} IQ**. Hadda: **${uData[targetId].iq} IQ**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -352,6 +355,7 @@ module.exports = function setupInteractionHandler(client) {
                     uData[uid].stats = { soloPlayed:0, soloCorrect:0, soloWrong:0, duelWins:0, duelLosses:0, duelDraws:0, rushBest:0, quizWins:0, quizPlayed:0, bugsReported:0 };
                 }
                 sd();
+                await notifyAdmins(interaction.client, interaction.user, `Reset All Aqoon — IQ, darajo, stats eber (${users.length} users)`);
                 return interaction.reply({ content: `✅ **${users.length} qof** aqoon dib loo dejiyay — IQ, darajo, stats eber.`, flags: MessageFlags.Ephemeral });
             }
 
@@ -362,10 +366,12 @@ module.exports = function setupInteractionHandler(client) {
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 const action   = interaction.fields.getTextInputValue('action').trim().toLowerCase();
                 if (action === 'give') {
+                    await notifyAdmins(interaction.client, interaction.user, `Champion Give → <@${targetId}>`);
                     const giveChampion = require('../commands/admin/adminGiveChampion');
                     const fakeMsg = { author: interaction.user, mentions: { users: { first: () => ({ id: targetId }) } }, reply: (p) => interaction.reply({ ...p, flags: MessageFlags.Ephemeral }) };
                     return giveChampion(fakeMsg, []);
                 } else if (action === 'remove') {
+                    await notifyAdmins(interaction.client, interaction.user, `Champion Remove → <@${targetId}>`);
                     const removeChampion = require('../commands/admin/adminRemoveChampion');
                     const fakeMsg = { author: interaction.user, mentions: { users: { first: () => ({ id: targetId }) } }, reply: (p) => interaction.reply({ ...p, flags: MessageFlags.Ephemeral }) };
                     return removeChampion(fakeMsg, []);
@@ -378,6 +384,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
+                await notifyAdmins(interaction.client, interaction.user, `Reset Aqoon (IQ/stats) → <@${targetId}>`);
                 const reset    = require('../commands/admin/adminReset');
                 const fakeMsg  = { author: interaction.user, mentions: { users: { first: () => ({ id: targetId }) } }, reply: (p) => interaction.reply({ ...p, flags: MessageFlags.Ephemeral }) };
                 return reset(fakeMsg, []);
@@ -392,6 +399,7 @@ module.exports = function setupInteractionHandler(client) {
                 const user     = await interaction.client.users.fetch(targetId).catch(() => null);
                 if (!user) return interaction.reply({ content: '⚠️ User la heli waayo.', flags: MessageFlags.Ephemeral });
                 await user.send(msg).catch(() => {});
+                await notifyAdmins(interaction.client, interaction.user, `DM sent → <@${targetId}>: "${msg.slice(0, 80)}${msg.length > 80 ? '…' : ''}"`);
                 return interaction.reply({ content: `✅ DM la diray <@${targetId}>.`, flags: MessageFlags.Ephemeral });
             }
 
@@ -406,7 +414,7 @@ module.exports = function setupInteractionHandler(client) {
                 checkEconUser(targetId);
                 eData[targetId].btc = (eData[targetId].btc || 0) + amount;
                 saveEcon();
-                await notifyOwner(interaction.client, interaction.user, `Give BTC: **+${amount.toLocaleString()} BTC** → <@${targetId}>`);
+                await notifyAdmins(interaction.client, interaction.user, `Give BTC: **+${amount.toLocaleString()} BTC** → <@${targetId}>`);
                 return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** waxaad u diray <@${targetId}>. Hadda: **${eData[targetId].btc.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -423,6 +431,7 @@ module.exports = function setupInteractionHandler(client) {
                 checkEconUser(targetId);
                 eData[targetId].btc = (eData[targetId].btc || 0) + amount;
                 saveEcon();
+                await notifyAdmins(interaction.client, interaction.user, `Give Asset (BTC): **+${amount.toLocaleString()} BTC** → <@${targetId}>`);
                 return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** waxaad u diray <@${targetId}>. Hadda: **${eData[targetId].btc.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -440,6 +449,7 @@ module.exports = function setupInteractionHandler(client) {
                 eData[targetId].banks[bank] = (eData[targetId].banks[bank] || 0) + amount;
                 saveEcon();
                 const bankLabel = bank.charAt(0).toUpperCase() + bank.slice(1);
+                await notifyAdmins(interaction.client, interaction.user, `Give Bank: **+${amount.toLocaleString()} BTC** → <@${targetId}> (${bankLabel} Bank)`);
                 return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** waxaad u dejisay <@${targetId}> — 🏦 ${bankLabel} Bank. Hadda: **${eData[targetId].banks[bank].toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -458,6 +468,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (!d.econTitles.includes(key)) d.econTitles.push(key);
                 d.activeEconTitle = key;
                 saveEcon();
+                await notifyAdmins(interaction.client, interaction.user, `Give Title: **${info.label}** → <@${targetId}>`);
                 return interaction.reply({ content: `✅ <@${targetId}> waxaa la siiyay: **${info.label}** _(hadda firfircoon)_`, flags: MessageFlags.Ephemeral });
             }
 
@@ -488,6 +499,7 @@ module.exports = function setupInteractionHandler(client) {
                     msg = `♻️ Full economy reset — wallet **1,000 BTC**, bank **0**, loan cleared`;
                 }
                 saveEcon();
+                await notifyAdmins(interaction.client, interaction.user, `Reset User Economy: <@${targetId}> — ${msg}`);
                 return interaction.reply({ content: `✅ <@${targetId}> — ${msg}`, flags: MessageFlags.Ephemeral });
             }
 
@@ -515,7 +527,7 @@ module.exports = function setupInteractionHandler(client) {
                         return interaction.reply({ content: `⚠️ Khaznadda ma filna. Hadda: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                     for (const uid of users) { checkEconUser(uid); eData[uid].btc = (eData[uid].btc || 0) + perUser; }
                     saveEcon();
-                    await notifyOwner(interaction.client, interaction.user, `Distribute Treasury: **${perUser.toLocaleString()} BTC** × ${users.length} players`);
+                    await notifyAdmins(interaction.client, interaction.user, `Distribute Treasury: **${perUser.toLocaleString()} BTC** × ${users.length} players`);
                     return interaction.reply({ content: `✅ **${perUser.toLocaleString()} BTC** × **${users.length}** players.\n🏛️ Treasury remaining: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                 }
 
@@ -529,7 +541,7 @@ module.exports = function setupInteractionHandler(client) {
                     checkEconUser(targetId);
                     eData[targetId].btc = (eData[targetId].btc || 0) + amount;
                     saveEcon();
-                    await notifyOwner(interaction.client, interaction.user, `Treasury Give: **${amount.toLocaleString()} BTC** → <@${targetId}>`);
+                    await notifyAdmins(interaction.client, interaction.user, `Treasury Give: **${amount.toLocaleString()} BTC** → <@${targetId}>`);
                     return interaction.reply({ content: `✅ Khaznadda **${amount.toLocaleString()} BTC** waxaa laga siiyay <@${targetId}>.\n🏛️ Khaznad hadhay: **${fmt((t.balance || 0))} BTC**`, flags: MessageFlags.Ephemeral });
                 }
 
@@ -555,7 +567,7 @@ module.exports = function setupInteractionHandler(client) {
                 topUpTreasury(amount);
                 saveEcon();
                 const t = getTreasury();
-                await notifyOwner(interaction.client, interaction.user, `Top-up Treasury: **+${amount.toLocaleString()} BTC** — balance now **${t.balance.toLocaleString()} BTC**`);
+                await notifyAdmins(interaction.client, interaction.user, `Top-up Treasury: **+${amount.toLocaleString()} BTC** — balance now **${t.balance.toLocaleString()} BTC**`);
                 return interaction.reply({ content: `✅ **${amount.toLocaleString()} BTC** khaznadda lagu daray.\n🏛️ Hadda: **${t.balance.toLocaleString()} BTC**`, flags: MessageFlags.Ephemeral });
             }
 
@@ -582,7 +594,7 @@ module.exports = function setupInteractionHandler(client) {
                 }
                 if (collected > 0) addToTreasury(collected);
                 saveEcon();
-                await notifyOwner(interaction.client, interaction.user, `Tax: **${fmt(amount)} BTC** × ${users.length} players → Treasury **+${fmt(collected)} BTC**`);
+                await notifyAdmins(interaction.client, interaction.user, `Tax: **${fmt(amount)} BTC** × ${users.length} players → Treasury **+${fmt(collected)} BTC**`);
                 return interaction.reply({
                     content: `💸 **Tax Collected**\n**${fmt(amount)} BTC** ka baxday qof walba (${users.length} players)\n🏛️ Treasury helay: **${fmt(collected)} BTC**`,
                     flags: MessageFlags.Ephemeral,
@@ -614,7 +626,7 @@ module.exports = function setupInteractionHandler(client) {
                     d.econTitles = []; d.activeEconTitle = null; d.customEconTitle = null;
                 }
                 saveEcon();
-                await notifyOwner(interaction.client, interaction.user, `Reset All Economy — ${users.length} players`);
+                await notifyAdmins(interaction.client, interaction.user, `Reset All Economy — ${users.length} players`);
                 return interaction.reply({ content: `✅ **${users.length} qof** economy dib loo dejiyay.\n₿ Qof walba: **${(5000).toLocaleString()} BTC** | Deyn, bank, assets — eber.`, flags: MessageFlags.Ephemeral });
             }
 
