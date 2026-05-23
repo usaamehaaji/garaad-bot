@@ -94,13 +94,10 @@ module.exports = async function giveCmd(message, args) {
     return message.reply({ embeds: [new EmbedBuilder()
         .setTitle('💸 Lacag La Diray!')
         .setColor('#2ecc71')
+        .setDescription(`**${fmt(amount)} ${ASSET_LABELS[asset]}** si guul ah ayaa loo diray!`)
         .addFields(
-            { name: '📤 Diray',    value: `<@${userId}>`,   inline: true },
-            { name: '📥 Helay',    value: `<@${target.id}>`, inline: true },
-            { name: '​',      value: '​',           inline: true },
-            { name: '💰 Xaddadka', value: `**${fmt(amount)} ${ASSET_LABELS[asset]}**`, inline: true },
-            { name: '📊 Hadhkiisa', value: `**${fmt(d[asset])} ${ASSET_LABELS[asset]}**`, inline: true },
-            { name: '📈 Cusub',    value: `**${fmt(dt[asset])} ${ASSET_LABELS[asset]}**`, inline: true },
+            { name: '📤 Diray',         value: `<@${userId}>\nHadhay: **${fmt(d[asset])} ${ASSET_LABELS[asset]}**`,    inline: true },
+            { name: '📥 Helay',         value: `<@${target.id}>\nCusub: **${fmt(dt[asset])} ${ASSET_LABELS[asset]}**`, inline: true },
         )
         .setFooter({ text: 'Garaad Economy' })] });
 };
