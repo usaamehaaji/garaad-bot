@@ -2,7 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
 
 const ROB_SUCCESS_RATE   = 0.45;
-const ROB_MIN_BTC        = 5_000;
+const ROB_MIN_BTC        = 2_000;
 const MAX_STEAL_FRACTION = 0.25;
 const MAX_ROBS_PER_DAY   = 3;
 
