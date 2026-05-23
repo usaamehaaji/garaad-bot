@@ -174,6 +174,9 @@ module.exports = function setupInteractionHandler(client) {
                 const d         = eData[ownerId];
                 const bankLabel = bank.charAt(0).toUpperCase() + bank.slice(1);
 
+                const txRef  = () => '#GBK-' + Math.random().toString(36).slice(2,8).toUpperCase();
+                const txDate = () => new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+
                 if (action === 'deposit') {
                     if ((d.btc || 0) < amount) {
                         return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid. Haysataa: **₿: ${(d.btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
@@ -183,14 +186,20 @@ module.exports = function setupInteractionHandler(client) {
                     saveEcon();
                     return interaction.update({ embeds: [
                         new EmbedBuilder()
-                            .setTitle(`🏦 ${bankLabel} Bank — Lacag la Dhigay`)
-                            .setColor('#2ecc71')
-                            .setDescription(
-                                `✅ **₿: ${amount.toLocaleString()}** dhigatay\n\n` +
-                                `🏦 ${bankLabel}: **₿: ${d.banks[bank].toLocaleString()}**\n` +
-                                `₿ BTC: **₿: ${(d.btc || 0).toLocaleString()}**`
+                            .setTitle('🏦 GARAAD BANK — Transaction Receipt')
+                            .setColor('#27ae60')
+                            .addFields(
+                                { name: '📋 Type',            value: '⬇️ DEPOSIT',                                  inline: true },
+                                { name: '🔖 Reference',       value: `\`${txRef()}\``,                               inline: true },
+                                { name: '📅 Date',            value: txDate(),                                        inline: true },
+                                { name: '👤 Account Holder',  value: `<@${ownerId}>`,                                 inline: true },
+                                { name: '💳 From',            value: 'Wallet',                                        inline: true },
+                                { name: '🏦 To',              value: `${bankLabel} Savings`,                          inline: true },
+                                { name: '💰 Amount',          value: `**+₿ ${amount.toLocaleString()}**`,             inline: true },
+                                { name: '🏦 Savings Balance', value: `**₿ ${d.banks[bank].toLocaleString()}**`,       inline: true },
+                                { name: '💳 Wallet Balance',  value: `**₿ ${(d.btc||0).toLocaleString()}**`,         inline: true },
                             )
-                            .setFooter({ text: 'Garaad Economy' }),
+                            .setFooter({ text: 'Garaad Bank • Deposits earn 1% daily interest' }),
                     ], components: [closeRow(ownerId)] });
                 } else {
                     if (d.banks[bank] < amount) {
@@ -201,14 +210,20 @@ module.exports = function setupInteractionHandler(client) {
                     saveEcon();
                     return interaction.update({ embeds: [
                         new EmbedBuilder()
-                            .setTitle(`🏦 ${bankLabel} Bank — Lacag la Bixiyay`)
-                            .setColor('#2ecc71')
-                            .setDescription(
-                                `✅ **₿: ${amount.toLocaleString()}** la bixiyay\n\n` +
-                                `🏦 ${bankLabel}: **₿: ${d.banks[bank].toLocaleString()}**\n` +
-                                `₿ BTC: **₿: ${(d.btc || 0).toLocaleString()}**`
+                            .setTitle('🏦 GARAAD BANK — Transaction Receipt')
+                            .setColor('#2980b9')
+                            .addFields(
+                                { name: '📋 Type',            value: '⬆️ WITHDRAWAL',                                inline: true },
+                                { name: '🔖 Reference',       value: `\`${txRef()}\``,                               inline: true },
+                                { name: '📅 Date',            value: txDate(),                                        inline: true },
+                                { name: '👤 Account Holder',  value: `<@${ownerId}>`,                                 inline: true },
+                                { name: '🏦 From',            value: `${bankLabel} Savings`,                          inline: true },
+                                { name: '💳 To',              value: 'Wallet',                                        inline: true },
+                                { name: '💰 Amount',          value: `**-₿ ${amount.toLocaleString()}**`,             inline: true },
+                                { name: '🏦 Savings Balance', value: `**₿ ${d.banks[bank].toLocaleString()}**`,       inline: true },
+                                { name: '💳 Wallet Balance',  value: `**₿ ${(d.btc||0).toLocaleString()}**`,         inline: true },
                             )
-                            .setFooter({ text: 'Garaad Economy' }),
+                            .setFooter({ text: 'Garaad Bank • Funds available instantly' }),
                     ], components: [closeRow(ownerId)] });
                 }
             }
@@ -255,25 +270,32 @@ module.exports = function setupInteractionHandler(client) {
                 addToTreasury(tax);
                 saveEcon();
 
-                let targetTag = targetId;
-                try { const u = await interaction.client.users.fetch(targetId); targetTag = `<@${u.id}>`; } catch {}
+                let senderName   = interaction.user.username;
+                let receiverName = targetId;
+                try { const u = await interaction.client.users.fetch(targetId); receiverName = u.username; } catch {}
+
+                const txRef  = '#GBK-' + Math.random().toString(36).slice(2,8).toUpperCase();
+                const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
 
                 return interaction.update({ embeds: [
                     new EmbedBuilder()
-                        .setTitle('💸 Bank Transfer — Guul!')
-                        .setColor('#2ecc71')
+                        .setTitle('🏦 GARAAD BANK — Wire Transfer Receipt')
+                        .setColor('#27ae60')
                         .addFields(
-                            { name: '📤 Diray',         value: `<@${ownerId}>`,                                        inline: true },
-                            { name: '📥 Helay',         value: targetTag,                                              inline: true },
-                            { name: '​',           value: '​',                                               inline: true },
-                            { name: '💰 La diray',      value: `**₿: ${amount.toLocaleString()}**`,                    inline: true },
-                            { name: '🏛️ Tax (5%)',      value: `**-₿: ${tax.toLocaleString()}**`,                      inline: true },
-                            { name: '✅ La helay',       value: `**₿: ${received.toLocaleString()}**`,                  inline: true },
-                            { name: '🏦 Bank-kaaga',    value: `**₿: ${sender.banks.garaad.toLocaleString()}**`,       inline: true },
-                            { name: '🏦 Bank-kiisa',    value: `**₿: ${receiver.banks.garaad.toLocaleString()}**`,     inline: true },
-                            { name: '​',           value: '​',                                               inline: true },
+                            { name: '📋 Type',              value: '💸 WIRE TRANSFER',                                  inline: true },
+                            { name: '🔖 Reference',         value: `\`${txRef}\``,                                      inline: true },
+                            { name: '📅 Date',              value: txDate,                                               inline: true },
+                            { name: '📤 Sender',            value: `**${senderName}**\n<@${ownerId}>`,                   inline: true },
+                            { name: '📥 Receiver',          value: `**${receiverName}**\n<@${targetId}>`,                inline: true },
+                            { name: '​',               value: '​',                                               inline: true },
+                            { name: '💰 Amount Sent',       value: `**₿ ${amount.toLocaleString()}**`,                   inline: true },
+                            { name: '🏛️ Transfer Fee (5%)', value: `**-₿ ${tax.toLocaleString()}**`,                     inline: true },
+                            { name: '✅ Amount Received',   value: `**₿ ${received.toLocaleString()}**`,                  inline: true },
+                            { name: `🏦 ${senderName} Balance`,   value: `**₿ ${sender.banks.garaad.toLocaleString()}**`,   inline: true },
+                            { name: `🏦 ${receiverName} Balance`, value: `**₿ ${receiver.banks.garaad.toLocaleString()}**`, inline: true },
+                            { name: '​',               value: '​',                                               inline: true },
                         )
-                        .setFooter({ text: 'Garaad Bank • 5% transfer tax' }),
+                        .setFooter({ text: 'Garaad Bank • International Wire Transfer' }),
                 ], components: [closeRow(ownerId)] });
             }
 
