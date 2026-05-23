@@ -9,11 +9,11 @@ const MAX_BET       = 50_000;
 
 // Win rate drops as bet increases
 function getWinRate(amount) {
-    if (amount <= 1_000)  return 0.52; // small bets: slight edge
-    if (amount <= 5_000)  return 0.48;
-    if (amount <= 10_000) return 0.44;
-    if (amount <= 25_000) return 0.38;
-    return 0.30;                       // 10k+: house heavily favored
+    if (amount <= 1_000)  return 0.48;
+    if (amount <= 5_000)  return 0.44;
+    if (amount <= 10_000) return 0.39;
+    if (amount <= 25_000) return 0.32;
+    return 0.24;
 }
 const MIN_TREASURY  = 5_000; // market closes if treasury below this
 
