@@ -35,7 +35,7 @@ module.exports = {
 
     DUEL_MIN_QUESTIONS:     3,
     DUEL_MAX_QUESTIONS:     15,
-    DUEL_DEFAULT_QUESTIONS: 5,
+    DUEL_DEFAULT_QUESTIONS: 15,
 
     /** Duel: mid kasta wuxuu dhigaa IQ intaan ka hor inta aan la bilaabin */
     DUEL_STAKE_IQ: 5,

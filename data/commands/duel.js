@@ -49,21 +49,20 @@ module.exports = async function duelCommand(message, args) {
     }
 
     // ⭐ Hubi haddii tirada toos loo qoray (?duel @user 10)
-    let count = 0;
+    let count = DUEL_DEFAULT_QUESTIONS;
     const numArg = args.find(a => /^\d+$/.test(a));
     if (numArg) {
-        count = parseInt(numArg);
-        if (count < DUEL_MIN_QUESTIONS || count > DUEL_MAX_QUESTIONS) {
+        const parsed = parseInt(numArg);
+        if (parsed < DUEL_MIN_QUESTIONS || parsed > DUEL_MAX_QUESTIONS) {
             return message.reply(
                 `⚠️ Tirada waa inay u dhexeyso **${DUEL_MIN_QUESTIONS}** iyo **${DUEL_MAX_QUESTIONS}**.\n` +
                 `Tusaale: \`${PREFIX}duel @${target.username} 10\``
             );
         }
+        count = parsed;
     }
 
-    const countLine = count > 0
-        ? `**Tirada su'aalaha:** ${count}\n`
-        : `**Tirada su'aalaha:** Bot wuxuu weydiinayaa labadiina marka aad aqbasho.\n`;
+    const countLine = `**Tirada su'aalaha:** ${count}\n`;
 
     const embed = new EmbedBuilder()
         .setTitle('⚔️ Duel Codsi')
