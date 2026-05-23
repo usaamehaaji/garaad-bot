@@ -7,6 +7,7 @@ const WIN_MULTI   = 2.0;
 const WIN_TAX     = 5;
 const COOLDOWN_MS = 10_000;
 const MAX_BET     = 10_000;
+const MIN_BET     = 50;
 
 const flipCooldowns = new Map();
 
@@ -78,6 +79,10 @@ module.exports = async function cashflipCmd(message, args) {
 
     if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'u' && direction !== 'd')) {
         return message.reply(`⚠️ Isticmaal: \`?ef 500 u\`  ama  \`?ef 500 d\`\nWallet: **₿ ${fmt(d.btc || 0)}**`);
+    }
+
+    if (amount < MIN_BET) {
+        return message.reply(`⚠️ Min bet waa **₿ ${MIN_BET.toLocaleString()}**. Kor u qaad.`);
     }
 
     if (amount > MAX_BET) {
