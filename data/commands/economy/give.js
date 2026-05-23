@@ -57,12 +57,11 @@ module.exports = async function giveCmd(message, args) {
             .setColor('#2ecc71')
             .setDescription(`**${message.author.username}** → **${target.username}**`)
             .addFields(
-                { name: '🧠 Amount',       value: `**${actual} IQ**`,                                  inline: true },
-                { name: '📊 Your IQ',      value: `**${d.iq} IQ**`,                                    inline: true },
-                { name: '📊 Their IQ',     value: `**${dt.iq} IQ**`,                                   inline: true },
-                { name: '⏳ Daily Limit',  value: `**${IQ_DAILY_LIMIT - d.iqGivenToday.count}/${IQ_DAILY_LIMIT}** remaining`, inline: true },
+                { name: '🧠 Amount',   value: `**${actual} IQ**`,  inline: true },
+                { name: '📊 Your IQ', value: `**${d.iq} IQ**`,    inline: true },
+                { name: '📊 Their IQ',value: `**${dt.iq} IQ**`,   inline: true },
             )
-            .setFooter({ text: 'Garaad Economy' })] });
+            .setFooter({ text: `Garaad Economy • ${IQ_DAILY_LIMIT - d.iqGivenToday.count}/${IQ_DAILY_LIMIT} IQ remaining today` })] });
     }
 
     // ── BTC / Gold ──
