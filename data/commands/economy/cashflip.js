@@ -19,8 +19,8 @@ function buildResult(win, dirLabel, profit, amount, newBal) {
             .setThumbnail(BTC_ICON)
             .setDescription(`You picked **${dirLabel}** — correct!\n\n📈 The market moved your way.`)
             .addFields(
-                { name: '₿ Profit',      value: `**+₿${full(profit)}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿${full(newBal)}**`,  inline: true },
+                { name: '₿ Profit',      value: `**+₿: ${full(profit)}**`, inline: true },
+                { name: '₿ New Balance', value: `**₿: ${full(newBal)}**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON })
         : new EmbedBuilder()
@@ -29,8 +29,8 @@ function buildResult(win, dirLabel, profit, amount, newBal) {
             .setThumbnail(BTC_ICON)
             .setDescription(`You picked **${dirLabel}** — wrong!\n\n📉 The market went the other way.`)
             .addFields(
-                { name: '₿ Lost',        value: `**-₿${full(amount)}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿${full(newBal)}**`,  inline: true },
+                { name: '₿ Lost',        value: `**-₿: ${full(amount)}**`, inline: true },
+                { name: '₿ New Balance', value: `**₿: ${full(newBal)}**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
 }
@@ -40,7 +40,7 @@ function doFlip(userId, amount, direction) {
     ceu(userId);
     const d = eData[userId];
 
-    if ((d.btc || 0) < amount) return { err: `⚠️ Not enough BTC. Wallet: **₿${fmt(d.btc || 0)}**` };
+    if ((d.btc || 0) < amount) return { err: `⚠️ Not enough BTC. Wallet: **₿: ${fmt(d.btc || 0)}**` };
 
     const win    = Math.random() < WIN_RATE;
     const profit = Math.floor(amount * WIN_MULTI);
@@ -76,12 +76,12 @@ module.exports = async function cashflipCmd(message, args) {
     if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'up' && direction !== 'down')) {
         return message.reply(
             `⚠️ Usage: \`?ef 500 up\`  or  \`?ef 500 down\`\n` +
-            `Wallet: **₿${fmt(d.btc || 0)}**`
+            `Wallet: **₿: ${fmt(d.btc || 0)}**`
         );
     }
 
     if ((d.btc || 0) < amount) {
-        return message.reply(`⚠️ Not enough BTC. Wallet: **₿${fmt(d.btc || 0)}**`);
+        return message.reply(`⚠️ Not enough BTC. Wallet: **₿: ${fmt(d.btc || 0)}**`);
     }
 
     const cdUntil = flipCooldowns.get(userId) || 0;

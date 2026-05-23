@@ -118,16 +118,7 @@ function getDisplayTitle(userId) {
 }
 
 function fmt(n) {
-    n = Math.round(n);
-    if (n >= 1_000_000) {
-        const s = (n / 1_000_000).toFixed(1);
-        return (s.endsWith('.0') ? s.slice(0, -2) : s) + 'm';
-    }
-    if (n >= 1_000) {
-        const s = (n / 1_000).toFixed(1);
-        return (s.endsWith('.0') ? s.slice(0, -2) : s) + 'k';
-    }
-    return String(n);
+    return Math.round(n || 0).toLocaleString();
 }
 
 // Lambarka horeba ka tir (tusaale: "85. Su'aal" → "Su'aal")

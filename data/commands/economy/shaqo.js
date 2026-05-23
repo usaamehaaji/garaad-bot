@@ -49,8 +49,8 @@ module.exports = async function shaqoCmd(message) {
             .setColor('#2ecc71')
             .setDescription(
                 `${job.desc}\n\n` +
-                `**+₿${WORK_BTC.toLocaleString()}** earned\n` +
-                `Wallet: **₿${(d.btc).toLocaleString()}**`
+                `**+₿: ${WORK_BTC.toLocaleString()}** earned\n` +
+                `Wallet: **₿: ${(d.btc).toLocaleString()}**`
             )
             .setFooter({ text: 'Garaad Economy • Work again in 8 hours' }),
     ], components: [

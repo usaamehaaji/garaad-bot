@@ -20,7 +20,7 @@ const SHOP_ITEMS = {
 function priceTag(p) {
     if (p >= 1_000_000) return `${(p / 1_000_000).toFixed(1)}M BTC`;
     if (p >= 1_000)     return `${(p / 1_000).toFixed(1)}k BTC`.replace('.0k BTC', 'k BTC');
-    return `₿${p}`;
+    return `₿: ${p}`;
 }
 
 module.exports = async function econShopCmd(message) {

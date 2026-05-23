@@ -69,10 +69,10 @@ function buildMainEmbed(d) {
         .setColor('#3498db')
         .setDescription(
             `**💼 Your Account:**\n` +
-            `Wallet: **₿${fmt(d.btc || 0)}**\n` +
-            `🏦 Bank: **₿${fmt(d.banks.garaad)}**\n\n` +
-            `📈 Interest earned: **+₿${fmt(d.interestEarned?.garaad || 0)}**\n\n` +
-            `🏛️ Treasury: **₿${fmt(t.balance || 0)}**`
+            `Wallet: **₿: ${fmt(d.btc || 0)}**\n` +
+            `🏦 Bank: **₿: ${fmt(d.banks.garaad)}**\n\n` +
+            `📈 Interest earned: **+₿: ${fmt(d.interestEarned?.garaad || 0)}**\n\n` +
+            `🏛️ Treasury: **₿: ${fmt(t.balance || 0)}**`
         )
         .setFooter({ text: 'Garaad Bank • 1% daily interest on deposits' });
 }
@@ -83,17 +83,17 @@ function buildBankEmbed(d) {
     let loanLine  = '';
     if (hasLoan) {
         const daysLeft = Math.max(0, 3 - Math.floor((Date.now() - loan.takenAt) / 86400000));
-        loanLine = `\n\n⚠️ **Active Loan:** ₿${fmt(loan.owed)} due | ${daysLeft > 0 ? `${daysLeft} days left` : '🔴 Being deducted!'}`;
+        loanLine = `\n\n⚠️ **Active Loan:** ₿: ${fmt(loan.owed)} due | ${daysLeft > 0 ? `${daysLeft} days left` : '🔴 Being deducted!'}`;
     }
     return new EmbedBuilder()
         .setTitle('🏦 Garaad Bank')
         .setColor('#2980b9')
         .setDescription(
-            `🏦 **Deposited:** **₿${fmt(d.banks.garaad)}**\n` +
-            `**Wallet:** **₿${fmt(d.btc || 0)}**\n` +
-            `📈 **Interest earned:** +₿${fmt(d.interestEarned?.garaad || 0)}\n\n` +
+            `🏦 **Deposited:** **₿: ${fmt(d.banks.garaad)}**\n` +
+            `**Wallet:** **₿: ${fmt(d.btc || 0)}**\n` +
+            `📈 **Interest earned:** +₿: ${fmt(d.interestEarned?.garaad || 0)}\n\n` +
             `📊 **Rate:** 1% per day\n` +
-            `🏦 **Total in bank:** ₿${fmt(bankTotalDeposits())}` +
+            `🏦 **Total in bank:** ₿: ${fmt(bankTotalDeposits())}` +
             loanLine
         )
         .setFooter({ text: 'Garaad Bank • Deposit to grow your BTC' });
@@ -109,10 +109,10 @@ function buildTreasuryEmbed() {
         .setColor('#8e44ad')
         .setDescription(
             `**💰 Current:**\n` +
-            `🏛️ Balance: **₿${fmt(bal)}**\n\n` +
+            `🏛️ Balance: **₿: ${fmt(bal)}**\n\n` +
             `**📊 Stats:**\n` +
-            `📥 Total in: **₿${fmt(total)}**\n` +
-            `📤 Total out: **₿${fmt(spent)}**\n\n` +
+            `📥 Total in: **₿: ${fmt(total)}**\n` +
+            `📤 Total out: **₿: ${fmt(spent)}**\n\n` +
             `**📌 Sources:** Shop sales, flip losses, loan fees, tax`
         )
         .setFooter({ text: 'Garaad Bank Treasury' });
@@ -132,8 +132,8 @@ function buildLoanEmbed(d) {
             .setColor('#e74c3c')
             .setDescription(
                 `⚠️ **Active Loan — Pay it back!**\n\n` +
-                `₿ Borrowed: **₿${fmt(LOAN_MAX)}**\n` +
-                `💸 Due: **₿${fmt(loan.owed)}**\n` +
+                `₿ Borrowed: **₿: ${fmt(LOAN_MAX)}**\n` +
+                `💸 Due: **₿: ${fmt(loan.owed)}**\n` +
                 (daysLeft > 0
                     ? `⏱️ Auto-deduct in: **${daysLeft} day(s)**`
                     : `🔴 **Being deducted now from your bank/wallet.**`)
@@ -149,8 +149,8 @@ function buildLoanEmbed(d) {
                 `🔴 **Loan window is CLOSED**\n` +
                 `_Opens: Thursday 1:00 AM — Friday end (EAT)_\n\n` +
                 `**📋 Loan Terms:**\n` +
-                `₿ You receive: **₿${fmt(LOAN_MAX)}**\n` +
-                `💸 You repay: **₿${fmt(LOAN_OWED)}** (₿${LOAN_FEE} fee)\n` +
+                `₿ You receive: **₿: ${fmt(LOAN_MAX)}**\n` +
+                `💸 You repay: **₿: ${fmt(LOAN_OWED)}** (₿: ${LOAN_FEE} fee)\n` +
                 `🔒 Once per week • Auto-deducted after 3 days`
             )
             .setFooter({ text: 'Garaad Bank' });
@@ -163,7 +163,7 @@ function buildLoanEmbed(d) {
             .setDescription(
                 `🟡 **Loan window is OPEN** _(Thursday)_\n\n` +
                 `⚠️ **You already took a loan this week.** Come back next Thursday.\n\n` +
-                `Wallet: **₿${fmt(d.btc || 0)}**`
+                `Wallet: **₿: ${fmt(d.btc || 0)}**`
             )
             .setFooter({ text: 'Garaad Bank' });
     }
@@ -175,11 +175,11 @@ function buildLoanEmbed(d) {
         .setDescription(
             `🟢 **Loan window is OPEN** _(Thursday)_\n\n` +
             `**📋 Loan Terms:**\n\n` +
-            `₿ You receive: **₿${fmt(LOAN_MAX)}**\n` +
-            `💸 You repay: **₿${fmt(LOAN_OWED)}** (₿${LOAN_FEE} fee only)\n\n` +
+            `₿ You receive: **₿: ${fmt(LOAN_MAX)}**\n` +
+            `💸 You repay: **₿: ${fmt(LOAN_OWED)}** (₿: ${LOAN_FEE} fee only)\n\n` +
             `🔒 **Auto-deducted after 3 days** from bank/wallet\n` +
             `📅 **Once per week** — Thursday 1am to Friday end\n\n` +
-            `🏛️ Treasury: **₿${fmt(t.balance || 0)}** | Wallet: **₿${fmt(d.btc || 0)}**`
+            `🏛️ Treasury: **₿: ${fmt(t.balance || 0)}** | Wallet: **₿: ${fmt(d.btc || 0)}**`
         )
         .setFooter({ text: 'Garaad Bank' });
 }
@@ -217,12 +217,12 @@ function deenRow(userId, hasLoan, d) {
         ...(hasLoan ? [
             new ButtonBuilder()
                 .setCustomId(`eco_dn_pay_${userId}`)
-                .setLabel(`₿ Repay Loan (₿${fmt(LOAN_OWED)})`)
+                .setLabel(`₿ Repay Loan (₿: ${fmt(LOAN_OWED)})`)
                 .setStyle(ButtonStyle.Success),
         ] : [
             new ButtonBuilder()
                 .setCustomId(`eco_dn_take_${userId}`)
-                .setLabel(`💳 Take Loan (₿${fmt(LOAN_MAX)})`)
+                .setLabel(`💳 Take Loan (₿: ${fmt(LOAN_MAX)})`)
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(!canTake),
         ]),

@@ -29,7 +29,7 @@ function buildMarketEmbed(d) {
         .setColor('#1a1a2e')
         .setDescription(
             `₿ **BTC**  **${pfmt(price)}**  ${ind}\n\`${spark}\`${sig}` +
-            `\n\nWallet: **₿${pfmt(d.btc || 0)}**\n\n` +
+            `\n\nWallet: **₿: ${pfmt(d.btc || 0)}**\n\n` +
             `**Click "📊 Predict BTC" to start a prediction:**`
         )
         .setFooter({ text: 'Garaad Predict • Choose UP or DOWN, wait for the result' });
@@ -42,7 +42,7 @@ function buildTimeEmbed(asset, stakeType, stakeAmount, stakeUsd) {
         .setTitle('⏱️ Choose Duration — BTC Prediction')
         .setColor('#8e44ad')
         .setDescription(
-            `**Stake:** ₿${pfmt(stakeUsd)}\n\n` +
+            `**Stake:** ₿: ${pfmt(stakeUsd)}\n\n` +
             `How many minutes do you want to wait?\n\n` +
             `> 🟡 **5 minutes** — Quick\n` +
             `> 🎯 **10 minutes** — Recommended\n` +
@@ -61,7 +61,7 @@ function buildDirectionEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes) {
         .setColor('#e67e22')
         .setDescription(
             `**Asset:** ₿ BTC\n` +
-            `**Stake:** ₿${pfmt(stakeUsd)}\n` +
+            `**Stake:** ₿: ${pfmt(stakeUsd)}\n` +
             `**Duration:** ${minutes} minutes\n` +
             `**Current price:** ${pfmt(price)}\n\n` +
             `⬆️ **UP** — You predict the price will go up\n` +
@@ -83,11 +83,11 @@ function buildConfirmEmbed(asset, stakeType, stakeAmount, stakeUsd, minutes, dir
         .setDescription(
             `₿ **Asset:** BTC\n` +
             `📊 **Current price:** ${pfmt(price)}\n` +
-            `💰 **Stake:** ₿${pfmt(stakeUsd)}\n` +
+            `💰 **Stake:** ₿: ${pfmt(stakeUsd)}\n` +
             `⏱️ **Duration:** ${minutes} minutes\n` +
             `🎯 **Direction:** ${dirLabel}\n\n` +
-            `🏆 **If you win:** +₿${pfmt(winPay - stakeUsd)} profit → total: **₿${pfmt(winPay)}**\n` +
-            `💀 **If you lose:** −₿${pfmt(stakeUsd - losePay)} loss → returned: **₿${pfmt(losePay)}**\n\n` +
+            `🏆 **If you win:** +₿: ${pfmt(winPay - stakeUsd)} profit → total: **₿: ${pfmt(winPay)}**\n` +
+            `💀 **If you lose:** −₿: ${pfmt(stakeUsd - losePay)} loss → returned: **₿: ${pfmt(losePay)}**\n\n` +
             `⚡ **Prediction will be LOCKED — cannot be changed**`
         )
         .setFooter({ text: 'Garaad Predict • Lock to confirm' });
@@ -107,7 +107,7 @@ function buildActiveEmbed(pred) {
             `📌 **Asset:**        ₿ BTC\n` +
             `📊 **Entry price:**  ${pfmt(pred.entryPrice)}\n` +
             `🎯 **Direction:**    ${dirLabel}\n` +
-            `💰 **Stake:**        ₿${pfmt(pred.stakeUsd)}\n` +
+            `💰 **Stake:**        ₿: ${pfmt(pred.stakeUsd)}\n` +
             `⏱️ **Time left:**    **${mins}m ${secs}s**\n\n` +
             `🔔 When time expires, the result will be posted in this channel!`
         )

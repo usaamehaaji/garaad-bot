@@ -20,7 +20,7 @@ module.exports = async function richCmd(message) {
             name = `<@${uid}>`;
         }
         const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `**${i + 1}.**`;
-        return `${medal} ${name} — ₿ **₿${fmt(btc)}**`;
+        return `${medal} ${name} — ₿ **₿: ${fmt(btc)}**`;
     }));
 
     const closeRow = new ActionRowBuilder().addComponents(

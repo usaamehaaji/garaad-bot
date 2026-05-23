@@ -73,7 +73,7 @@ module.exports = async function robCmd(message) {
     if ((victim.btc || 0) < ROB_MIN_BTC) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription(`⚠️ Target doesn't have enough BTC to rob (min **₿${ROB_MIN_BTC.toLocaleString()}**).`)
+                .setDescription(`⚠️ Target doesn't have enough BTC to rob (min **₿: ${ROB_MIN_BTC.toLocaleString()}**).`)
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
@@ -105,8 +105,8 @@ module.exports = async function robCmd(message) {
                 .setTitle('🔫 Rob — Success!')
                 .setColor('#2ecc71')
                 .setDescription(
-                    `✅ You stole **₿${stolen.toLocaleString()}** from the target!\n` +
-                    `Wallet: **₿${(robber.btc).toLocaleString()}**`
+                    `✅ You stole **₿: ${stolen.toLocaleString()}** from the target!\n` +
+                    `Wallet: **₿: ${(robber.btc).toLocaleString()}**`
                 )
                 .setFooter({ text: 'Garaad Economy' }),
         ], components: [closeRow(userId)] });
@@ -119,8 +119,8 @@ module.exports = async function robCmd(message) {
                 .setTitle('🚔 Rob — Failed!')
                 .setColor('#e74c3c')
                 .setDescription(
-                    `❌ You were caught! Fined **₿${fine.toLocaleString()}**.\n` +
-                    `Wallet: **₿${(robber.btc).toLocaleString()}**`
+                    `❌ You were caught! Fined **₿: ${fine.toLocaleString()}**.\n` +
+                    `Wallet: **₿: ${(robber.btc).toLocaleString()}**`
                 )
                 .setFooter({ text: 'Garaad Economy' }),
         ], components: [closeRow(userId)] });

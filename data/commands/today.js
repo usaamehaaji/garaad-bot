@@ -55,7 +55,7 @@ module.exports = async function todayCommand(message) {
             .setDescription(
                 `✅ Today's rewards:\n\n` +
                 `🧠 **+${iqGain} IQ**\n` +
-                `₿ **+₿${DAILY_BTC}**\n\n` +
+                `₿ **+₿: ${DAILY_BTC}**\n\n` +
                 `Come back tomorrow!`
             )
             .setColor('#2ecc71')

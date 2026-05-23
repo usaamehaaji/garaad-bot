@@ -5,16 +5,7 @@ const { ECON_TITLES }             = require('./econShop');
 const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 
 function fmtW(n) {
-    n = Math.round(n || 0);
-    if (n >= 1_000_000) {
-        const s = (n / 1_000_000).toFixed(3).replace(/\.?0+$/, '');
-        return s + 'M';
-    }
-    if (n >= 200_000) {
-        const s = (n / 1_000).toFixed(1);
-        return (s.endsWith('.0') ? s.slice(0, -2) : s) + 'K';
-    }
-    return n.toLocaleString();
+    return Math.round(n || 0).toLocaleString();
 }
 
 function getPlayerRank(userId) {
@@ -42,7 +33,7 @@ function buildJeebEmbed(userId, username) {
     })();
 
     const loanLine = d.loan?.owed
-        ? `\n💳 **Loan:** ₿${fmtW(d.loan.owed)}`
+        ? `\n💳 **Loan:** ₿: ${fmtW(d.loan.owed)}`
         : '';
 
     return new EmbedBuilder()
@@ -51,9 +42,9 @@ function buildJeebEmbed(userId, username) {
         .setThumbnail(BTC_ICON)
         .setDescription(
             `👤 **${username}**${titleLabel}\n\n` +
-            `💰 **Wallet:** ₿${fmtW(btc)}\n` +
-            `🏦 **Bank:** ₿${fmtW(bank)}\n` +
-            `📊 **Wadarta:** ₿${fmtW(total)}\n` +
+            `💰 **Wallet:** ₿: ${fmtW(btc)}\n` +
+            `🏦 **Bank:** ₿: ${fmtW(bank)}\n` +
+            `📊 **Wadarta:** ₿: ${fmtW(total)}\n` +
             `🏷️ **Rank:** #${rank ?? '—'}\n` +
             `🔥 **Streak:** ${streak} day${streak !== 1 ? 's' : ''}` +
             loanLine

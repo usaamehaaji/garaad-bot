@@ -11,7 +11,7 @@ async function notifyAdminAction(client, adminUser, targetId, type, amount) {
     try {
         const recipients = new Set([OWNER_ID, ...listAdmins()]);
         recipients.delete(adminUser.id);
-        const typeLabel = type === 'iq' ? `${amount} IQ` : `₿${fmt(amount)}`;
+        const typeLabel = type === 'iq' ? `${amount} IQ` : `₿: ${fmt(amount)}`;
         const msg =
             `🔐 **Admin Action Log**\n` +
             `👤 Admin: **${adminUser.username}** (\`${adminUser.id}\`)\n` +
@@ -67,7 +67,7 @@ module.exports = async function giveCmd(message, args) {
 
         await notifyAdminAction(message.client, message.author, target.id, asset, amount);
 
-        const label = asset === 'iq' ? `${amount} IQ` : `₿${fmt(amount)}`;
+        const label = asset === 'iq' ? `${amount} IQ` : `₿: ${fmt(amount)}`;
         return message.reply({ embeds: [new EmbedBuilder()
             .setTitle('🎁 Admin Give')
             .setColor('#2ecc71')
