@@ -2,11 +2,19 @@ const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, deductFromTreasury, getTreasury, trackEarning } = require('../../../src/economy/econStore');
 const { fmt } = require('../../../src/utils/helpers');
 
-const WIN_RATE      = 0.50;
-const WIN_MULTI     = 1.9;   // win 1.9x stake (house keeps 0.1)
+const WIN_MULTI     = 1.9;
 const COOLDOWN_MS   = 10_000;
 const MIN_BET       = 50;
 const MAX_BET       = 50_000;
+
+// Win rate drops as bet increases
+function getWinRate(amount) {
+    if (amount <= 1_000)  return 0.52; // small bets: slight edge
+    if (amount <= 5_000)  return 0.48;
+    if (amount <= 10_000) return 0.44;
+    if (amount <= 25_000) return 0.38;
+    return 0.30;                       // 10k+: house heavily favored
+}
 const MIN_TREASURY  = 5_000; // market closes if treasury below this
 
 const flipCooldowns = new Map();
@@ -60,7 +68,7 @@ function doFlip(userId, amount, direction) {
     if ((d.btc || 0) < amount) return { err: `⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(d.btc || 0)}**` };
 
     const treasury = getTreasury();
-    const win      = Math.random() < WIN_RATE;
+    const win      = Math.random() < getWinRate(amount);
     const payout   = Math.floor(amount * WIN_MULTI);
 
     if (win) {
