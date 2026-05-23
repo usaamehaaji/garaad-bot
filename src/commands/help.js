@@ -73,8 +73,7 @@ function buildEcoEmbed() {
             `👤 **Personal**\n` +
             `**\`${PREFIX}jeeb\`** — Your wallet, bank balance & loan status\n` +
             `**\`${PREFIX}work\`** — Work every 8h → earn 500 BTC\n` +
-            `**\`${PREFIX}today\`** — Daily reward: 250 BTC + IQ (24h)\n` +
-            `**\`${PREFIX}manta\`** — Daily reward: 500 BTC (24h)\n\n` +
+            `**\`${PREFIX}today\`** — Daily reward: 250 BTC + IQ (24h)\n\n` +
 
             `🏦 **Banking & Loans**\n` +
             `**\`${PREFIX}ebank\`** — Garaad Bank (1%/day interest) + Loan (Thu–Fri)\n` +
