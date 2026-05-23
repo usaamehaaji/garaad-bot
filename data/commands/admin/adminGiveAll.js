@@ -1,5 +1,5 @@
-const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
+const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+const { fmt } = require('../../../src/utils/helpers');
 
 // ?admin giveall btc 5000
 module.exports = async function adminGiveAll(message, args) {

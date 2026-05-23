@@ -2,7 +2,7 @@
 // SUB-AMARKA: ?admin remove @user
 // =====================================================================
 
-const { removeAdmin, listAdmins } = require('../../utils/admin');
+const { removeAdmin, listAdmins } = require('../../../src/utils/admin');
 
 module.exports = async function adminRemoveAdmin(message, args) {
     let target = message.mentions.users.first();

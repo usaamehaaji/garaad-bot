@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon, trackEarning } = require('../../../src/economy/econStore');
 
 const WORK_COOLDOWN = 8 * 60 * 60 * 1000; // 8 hours
 const WORK_BTC      = 150;

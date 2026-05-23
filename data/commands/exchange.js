@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { exchangeQuizPoints } = require('../utils/quizPoints');
-const { PREFIX } = require('../config');
+const { exchangeQuizPoints } = require('../../src/utils/quizPoints');
+const { PREFIX } = require('../../src/config');
 
 module.exports = async function exchangeCommand(message) {
     const userId = message.author.id;

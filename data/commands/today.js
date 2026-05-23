@@ -1,7 +1,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData, saveData }                = require('../store');
-const { checkUser }                         = require('../utils/helpers');
-const { econData, checkEconUser, saveEcon, trackEarning } = require('../economy/econStore');
+const { userData, saveData }                = require('../../src/store');
+const { checkUser }                         = require('../../src/utils/helpers');
+const { econData, checkEconUser, saveEcon, trackEarning } = require('../../src/economy/econStore');
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;
 const DAILY_BTC   = 250;

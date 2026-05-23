@@ -2,8 +2,8 @@
 // AMARKA: ?admin god @user (hidden command)
 // =====================================================================
 
-const { userData, saveData } = require('../../store');
-const { checkUser, addXp } = require('../../utils/helpers');
+const { userData, saveData } = require('../../../src/store');
+const { checkUser, addXp } = require('../../../src/utils/helpers');
 
 module.exports = async function adminGodMode(message, args) {
     const target = message.mentions.users.first();

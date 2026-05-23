@@ -3,10 +3,10 @@
 // =====================================================================
 
 const { EmbedBuilder }       = require('discord.js');
-const { userData, saveData } = require('../store');
-const { checkUser }          = require('../utils/helpers');
-const { logBug, listAdmins } = require('../utils/admin');
-const { PREFIX }             = require('../config');
+const { userData, saveData } = require('../../src/store');
+const { checkUser }          = require('../../src/utils/helpers');
+const { logBug, listAdmins } = require('../../src/utils/admin');
+const { PREFIX }             = require('../../src/config');
 
 module.exports = async function ciladaCommand(message, args) {
     const userId      = message.author.id;

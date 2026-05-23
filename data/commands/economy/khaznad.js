@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { getTreasury } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
+const { getTreasury } = require('../../../src/economy/econStore');
+const { fmt } = require('../../../src/utils/helpers');
 
 module.exports = async function khaznadCmd(message) {
     const t       = getTreasury();

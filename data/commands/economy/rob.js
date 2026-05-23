@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 
 const ROB_SUCCESS_RATE   = 0.45;
 const ROB_MIN_BTC        = 2_000;

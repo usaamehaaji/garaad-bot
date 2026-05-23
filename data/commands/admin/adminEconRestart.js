@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
+const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+const { fmt } = require('../../../src/utils/helpers');
 
 const START_CASH = 5_000;
 

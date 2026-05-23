@@ -2,7 +2,7 @@
 // AMARKA: ?admin (router)
 // =====================================================================
 
-const { isAdmin }  = require('../../utils/admin');
+const { isAdmin }  = require('../../../src/utils/admin');
 
 const broadcast      = require('./adminBroadcast');
 const addAdmin       = require('./adminAddAdmin');

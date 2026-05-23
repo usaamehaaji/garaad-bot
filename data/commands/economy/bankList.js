@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
+const { econData } = require('../../../src/economy/econStore');
+const { fmt } = require('../../../src/utils/helpers');
 
 module.exports = async function bankListCmd(message) {
     const userId = message.author.id;

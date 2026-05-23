@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
+const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../../src/economy/econStore');
+const { fmt } = require('../../../src/utils/helpers');
 const full = n => Math.round(n || 0).toLocaleString(); // always full number, no abbreviation
 
 const WIN_RATE    = 0.50;
@@ -36,7 +36,7 @@ function buildResult(win, dirLabel, profit, amount, newBal) {
 }
 
 function doFlip(userId, amount, direction) {
-    const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../economy/econStore');
+    const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../../src/economy/econStore');
     ceu(userId);
     const d = eData[userId];
 

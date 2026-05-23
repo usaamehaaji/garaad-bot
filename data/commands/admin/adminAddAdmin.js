@@ -2,7 +2,7 @@
 // SUB-AMARKA: ?admin add @user (ama userId)
 // =====================================================================
 
-const { addAdmin } = require('../../utils/admin');
+const { addAdmin } = require('../../../src/utils/admin');
 
 module.exports = async function adminAddAdmin(message, args) {
     let target = message.mentions.users.first();

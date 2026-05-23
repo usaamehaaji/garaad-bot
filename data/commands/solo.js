@@ -6,11 +6,11 @@
 // =====================================================================
 
 const { EmbedBuilder } = require('discord.js');
-const { isUserBusy, activeGames, userData, saveData } = require('../store');
-const { pickQuestionsForGame, noQuestionsLeftEmbed } = require('../utils/questions');
-const { sendQuestion } = require('../games/solo');
-const { checkUser } = require('../utils/helpers');
-const { PREFIX, SOLO_MIN_QUESTIONS, SOLO_MAX_QUESTIONS, SOLO_DEFAULT_QUESTIONS } = require('../config');
+const { isUserBusy, activeGames, userData, saveData } = require('../../src/store');
+const { pickQuestionsForGame, noQuestionsLeftEmbed } = require('../../src/utils/questions');
+const { sendQuestion } = require('../../src/games/solo');
+const { checkUser } = require('../../src/utils/helpers');
+const { PREFIX, SOLO_MIN_QUESTIONS, SOLO_MAX_QUESTIONS, SOLO_DEFAULT_QUESTIONS } = require('../../src/config');
 
 function soloIntroEmbed() {
     return new EmbedBuilder()

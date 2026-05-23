@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 const { ECON_TITLES } = require('./econShop');
 
 function resolveLabel(d, key) {

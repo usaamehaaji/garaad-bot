@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon, getTreasury } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
+const { econData, checkEconUser, saveEcon, getTreasury } = require('../../../src/economy/econStore');
+const { fmt } = require('../../../src/utils/helpers');
 
 const INTEREST_RATE     = 0.01;
 const INTEREST_INTERVAL = 24 * 60 * 60 * 1000;

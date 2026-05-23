@@ -3,7 +3,7 @@
 // =====================================================================
 
 const { EmbedBuilder } = require('discord.js');
-const { userData }     = require('../../store');
+const { userData }     = require('../../../src/store');
 
 module.exports = async function adminBroadcast(message, args) {
     const text = args.join(' ').trim();

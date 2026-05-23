@@ -6,8 +6,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { activeDuels, isUserBusy, userData } = require('../store');
-const { checkUser } = require('../utils/helpers');
+const { activeDuels, isUserBusy, userData } = require('../../src/store');
+const { checkUser } = require('../../src/utils/helpers');
 const {
     PREFIX,
     GLOBAL_WAIT_MS,
@@ -15,7 +15,7 @@ const {
     DUEL_MAX_QUESTIONS,
     DUEL_STAKE_IQ,
     DUEL_WIN_IQ,
-} = require('../config');
+} = require('../../src/config');
 
 module.exports = async function duelCommand(message, args) {
     const userId = message.author.id;

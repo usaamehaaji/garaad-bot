@@ -2,8 +2,8 @@
 // SUB-AMARKA: ?admin reset @user
 // =====================================================================
 
-const { userData, saveData } = require('../../store');
-const { checkUser, todayKey } = require('../../utils/helpers');
+const { userData, saveData } = require('../../../src/store');
+const { checkUser, todayKey } = require('../../../src/utils/helpers');
 
 module.exports = async function adminReset(message, args) {
     let target = message.mentions.users.first();

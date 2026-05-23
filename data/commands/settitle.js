@@ -2,9 +2,9 @@
 // AMARKA: ?settitle [title_key | custom name]
 // =====================================================================
 
-const { userData, saveData } = require('../store');
-const { checkUser } = require('../utils/helpers');
-const { TITLES } = require('../config');
+const { userData, saveData } = require('../../src/store');
+const { checkUser } = require('../../src/utils/helpers');
+const { TITLES } = require('../../src/config');
 
 // Bad words filter (simple list)
 const BAD_WORDS = ['badword1', 'badword2', 'offensive']; // Add more as needed

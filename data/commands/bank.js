@@ -3,8 +3,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData, saveData } = require('../store');
-const { checkUser }          = require('../utils/helpers');
+const { userData, saveData } = require('../../src/store');
+const { checkUser }          = require('../../src/utils/helpers');
 
 function iqRow(userId) {
     return new ActionRowBuilder().addComponents(

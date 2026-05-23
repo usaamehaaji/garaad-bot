@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
-const { getPrice }                          = require('../../economy/market');
+const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+const { getPrice }                          = require('../../../src/economy/market');
 
 const VALID_ASSETS = ['usd', 'btc', 'gold'];
 

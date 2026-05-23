@@ -4,8 +4,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData }  = require('../store');
-const { checkUser } = require('../utils/helpers');
+const { userData }  = require('../../src/store');
+const { checkUser } = require('../../src/utils/helpers');
 
 function formatDate(ts) {
     const d = new Date(ts);

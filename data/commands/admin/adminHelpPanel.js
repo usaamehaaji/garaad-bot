@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, getTreasury } = require('../../economy/econStore');
-const { fmt } = require('../../utils/helpers');
+const { econData, getTreasury } = require('../../../src/economy/econStore');
+const { fmt } = require('../../../src/utils/helpers');
 
 const OWNER_ID = '1191096205955055690';
 

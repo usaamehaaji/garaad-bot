@@ -1,8 +1,8 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon, getTreasury, topUpTreasury, deductFromTreasury } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon, getTreasury, topUpTreasury, deductFromTreasury } = require('../../../src/economy/econStore');
 const { ECON_TITLES } = require('../economy/econShop');
-const { fmt } = require('../../utils/helpers');
-const { PREFIX } = require('../../config');
+const { fmt } = require('../../../src/utils/helpers');
+const { PREFIX } = require('../../../src/config');
 
 const OWNER_ID = '1191096205955055690';
 

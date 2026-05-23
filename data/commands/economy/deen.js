@@ -1,5 +1,5 @@
-const { econData } = require('../../economy/econStore');
-const { addToTreasury } = require('../../economy/econStore');
+const { econData } = require('../../../src/economy/econStore');
+const { addToTreasury } = require('../../../src/economy/econStore');
 
 const LOAN_MAX        = 2_500;
 const LOAN_FEE        = 100;

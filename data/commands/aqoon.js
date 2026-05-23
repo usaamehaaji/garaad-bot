@@ -3,8 +3,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData, activeTournament, tournamentRegistry } = require('../store');
-const { PREFIX, TOURNAMENT_R1_QUESTIONS, TOURNAMENT_R2_QUESTIONS, TOURNAMENT_FINAL_QUESTIONS } = require('../config');
+const { userData, activeTournament, tournamentRegistry } = require('../../src/store');
+const { PREFIX, TOURNAMENT_R1_QUESTIONS, TOURNAMENT_R2_QUESTIONS, TOURNAMENT_FINAL_QUESTIONS } = require('../../src/config');
 
 module.exports = async function aqoonCommand(message) {
     const userId = message.author.id;

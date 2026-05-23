@@ -2,8 +2,8 @@
 // AMARKA: ?admin givechampion @user
 // =====================================================================
 
-const { userData, saveData } = require('../../store');
-const { checkUser } = require('../../utils/helpers');
+const { userData, saveData } = require('../../../src/store');
+const { checkUser } = require('../../../src/utils/helpers');
 
 module.exports = async function adminGiveChampion(message, args) {
     const target = message.mentions.users.first();

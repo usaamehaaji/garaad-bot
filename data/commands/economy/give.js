@@ -1,8 +1,8 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon } = require('../../economy/econStore');
-const { userData, saveData } = require('../../store');
-const { checkUser, fmt } = require('../../utils/helpers');
-const { isAdmin, listAdmins } = require('../../utils/admin');
+const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+const { userData, saveData } = require('../../../src/store');
+const { checkUser, fmt } = require('../../../src/utils/helpers');
+const { isAdmin, listAdmins } = require('../../../src/utils/admin');
 
 const OWNER_ID    = '1191096205955055690';
 const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold' };

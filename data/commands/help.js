@@ -3,8 +3,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { PREFIX } = require('../config');
-const { isUserBusy } = require('../store');
+const { PREFIX } = require('../../src/config');
+const { isUserBusy } = require('../../src/store');
 
 function helpRow(userId, active) {
     return new ActionRowBuilder().addComponents(

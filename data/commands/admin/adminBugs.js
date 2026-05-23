@@ -3,7 +3,7 @@
 // =====================================================================
 
 const { EmbedBuilder } = require('discord.js');
-const { getBugs }      = require('../../utils/admin');
+const { getBugs }      = require('../../../src/utils/admin');
 
 module.exports = async function adminBugs(message) {
     const bugs = getBugs(15);

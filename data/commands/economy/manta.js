@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon, trackEarning } = require('../../../src/economy/econStore');
 
 const DAILY_AMOUNT = 500;
 const ONE_DAY_MS   = 24 * 60 * 60 * 1000;

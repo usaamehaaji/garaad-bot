@@ -3,7 +3,7 @@
 // =====================================================================
 
 const { EmbedBuilder } = require('discord.js');
-const { listAdmins }   = require('../../utils/admin');
+const { listAdmins }   = require('../../../src/utils/admin');
 
 module.exports = async function adminList(message) {
     const admins = listAdmins();

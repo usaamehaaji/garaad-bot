@@ -3,9 +3,9 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData } = require('../store');
-const { checkUser } = require('../utils/helpers');
-const { TITLES, SHOP_TITLE_KEYS, PREFIX } = require('../config');
+const { userData } = require('../../src/store');
+const { checkUser } = require('../../src/utils/helpers');
+const { TITLES, SHOP_TITLE_KEYS, PREFIX } = require('../../src/config');
 
 function findTitleEntry(key) {
     for (const [cat, titles] of Object.entries(TITLES)) {

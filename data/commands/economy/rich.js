@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData } = require('../../economy/econStore');
-const { fmt }      = require('../../utils/helpers');
+const { econData } = require('../../../src/economy/econStore');
+const { fmt }      = require('../../../src/utils/helpers');
 
 const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
 

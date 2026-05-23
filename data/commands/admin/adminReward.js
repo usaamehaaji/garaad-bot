@@ -3,8 +3,8 @@
 //         ?admin reward @user xp [amount]
 // =====================================================================
 
-const { userData, saveData } = require('../../store');
-const { checkUser, addXp } = require('../../utils/helpers');
+const { userData, saveData } = require('../../../src/store');
+const { checkUser, addXp } = require('../../../src/utils/helpers');
 
 module.exports = async function adminReward(message, args) {
     const target = message.mentions.users.first();

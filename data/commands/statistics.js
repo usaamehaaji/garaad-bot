@@ -3,8 +3,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData } = require('../store');
-const { checkUser } = require('../utils/helpers');
+const { userData } = require('../../src/store');
+const { checkUser } = require('../../src/utils/helpers');
 
 module.exports = async function statisticsCommand(message) {
     const viewerId = message.author.id;

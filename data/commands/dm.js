@@ -1,6 +1,6 @@
 // ?dm <fariin> — Player-ku fakirkiisa/talada admin oo dhan u dira
 const { EmbedBuilder } = require('discord.js');
-const { listAdmins }   = require('../utils/admin');
+const { listAdmins }   = require('../../src/utils/admin');
 
 module.exports = async function dmCmd(message, args) {
     const text = args.join(' ').trim();

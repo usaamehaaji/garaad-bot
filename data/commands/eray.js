@@ -8,11 +8,11 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { isAdmin } = require('../utils/admin');
+const { isAdmin } = require('../../src/utils/admin');
 const {
     saxEray, hubiBadal, raadEray, raadNooc,
     kuDarBadal, kuDarEray, tirEray, tirada,
-} = require('../utils/afSomaali');
+} = require('../../src/utils/afSomaali');
 
 const NOOCYADA = ['tiro','sifo','magac','hadalka','waqti','bil','maalin','dhaqaale','waxbarasho','jidaafi','diini','ciyaar'];
 

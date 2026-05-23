@@ -3,8 +3,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData } = require('../store');
-const { checkUser, getLevel, getDisplayTitle } = require('../utils/helpers');
+const { userData } = require('../../src/store');
+const { checkUser, getLevel, getDisplayTitle } = require('../../src/utils/helpers');
 
 const SOLO_HINT =
     '📘 **Talo:** `?today` maalin kasta 250 BTC + IQ ku hel bilaash ah. ' +

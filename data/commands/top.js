@@ -3,8 +3,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData } = require('../store');
-const { getLevel, getDisplayTitle, checkUser } = require('../utils/helpers');
+const { userData } = require('../../src/store');
+const { getLevel, getDisplayTitle, checkUser } = require('../../src/utils/helpers');
 
 const TOP_N   = 15;
 const MEDALS  = ['🥇', '🥈', '🥉'];

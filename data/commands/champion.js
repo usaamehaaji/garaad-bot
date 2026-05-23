@@ -3,7 +3,7 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData } = require('../store');
+const { userData } = require('../../src/store');
 
 module.exports = async function championCommand(message) {
     const userId = message.author.id;

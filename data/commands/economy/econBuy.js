@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { econData, checkEconUser, saveEcon, addToTreasury } = require('../../economy/econStore');
+const { econData, checkEconUser, saveEcon, addToTreasury } = require('../../../src/economy/econStore');
 const { SHOP_ITEMS } = require('./econShop');
 
 // Returns null if item not in economy shop (caller falls through to quiz buy)

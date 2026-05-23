@@ -4,9 +4,9 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser }     = require('../../economy/econStore');
-const { getMarketSnapshot, getPrice } = require('../../economy/market');
-const { getActivePrediction, WIN_MULTI, LOSE_MULTI, ASSET_LABEL } = require('../../economy/prediction');
+const { econData, checkEconUser }     = require('../../../src/economy/econStore');
+const { getMarketSnapshot, getPrice } = require('../../../src/economy/market');
+const { getActivePrediction, WIN_MULTI, LOSE_MULTI, ASSET_LABEL } = require('../../../src/economy/prediction');
 const pfmt = n => Math.round(n).toLocaleString();
 
 // ── Embed: Market overview ─────────────────────────────────────────
