@@ -299,6 +299,107 @@ module.exports = function setupInteractionHandler(client) {
                 ], components: [closeRow(ownerId)] });
             }
 
+            // ── Donation: donate modal submit ──
+            if (interaction.customId.startsWith('eco_don_m_donate_')) {
+                const userId = interaction.customId.replace('eco_don_m_donate_', '');
+                if (interaction.user.id !== userId)
+                    return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+
+                const amount = parseInt(interaction.fields.getTextInputValue('eco_don_amount'));
+                if (!amount || isNaN(amount) || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, checkEconUser, saveEcon, addToTreasury, getTreasury } = require('../economy/econStore');
+                const { buildDonationEmbed, donationRow } = require('../../data/commands/economy/donation');
+                checkEconUser(userId);
+                const d = eData[userId];
+
+                if ((d.btc || 0) < amount)
+                    return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${(d.btc||0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+
+                d.btc = (d.btc || 0) - amount;
+                addToTreasury(amount);
+                saveEcon();
+
+                const txRef  = '#DON-' + Math.random().toString(36).slice(2,8).toUpperCase();
+                const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+                return interaction.update({ embeds: [
+                    new EmbedBuilder()
+                        .setTitle('🏛️ GARAAD BANK — Donation Receipt')
+                        .setColor('#8e44ad')
+                        .addFields(
+                            { name: '📋 Type',           value: '💝 DONATION',                                     inline: true },
+                            { name: '🔖 Reference',      value: `\`${txRef}\``,                                    inline: true },
+                            { name: '📅 Date',           value: txDate,                                             inline: true },
+                            { name: '👤 Donor',          value: `**${interaction.user.username}**\n<@${userId}>`,  inline: true },
+                            { name: '🏛️ To',             value: 'Garaad Treasury',                                 inline: true },
+                            { name: '💰 Amount',         value: `**₿ ${amount.toLocaleString()}**`,                inline: true },
+                            { name: '💳 Your Wallet',    value: `**₿ ${(d.btc||0).toLocaleString()}**`,           inline: true },
+                            { name: '🏛️ Treasury',       value: `**₿ ${(getTreasury().balance||0).toLocaleString()}**`, inline: true },
+                            { name: '​',            value: '​',                                            inline: true },
+                        )
+                        .setFooter({ text: 'Garaad Bank • Thank you for your donation!' }),
+                ], components: [donationRow(userId)] });
+            }
+
+            // ── Donation: share to all modal submit ──
+            if (interaction.customId.startsWith('eco_don_m_share_')) {
+                const userId = interaction.customId.replace('eco_don_m_share_', '');
+                if (interaction.user.id !== userId)
+                    return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+
+                const { isAdmin } = require('../utils/admin');
+                if (!isAdmin(userId))
+                    return interaction.reply({ content: '⚠️ Admin kaliya.', flags: MessageFlags.Ephemeral });
+
+                const total = parseInt(interaction.fields.getTextInputValue('eco_don_amount'));
+                if (!total || isNaN(total) || total <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, saveEcon, getTreasury, deductFromTreasury } = require('../economy/econStore');
+                const { buildDonationEmbed, donationRow } = require('../../data/commands/economy/donation');
+                const t = getTreasury();
+
+                if ((t.balance || 0) < total)
+                    return interaction.reply({ content: `⚠️ Treasury lacag ku filan ma lahan. Haysataa: **₿ ${(t.balance||0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+
+                const players = Object.entries(eData).filter(([k, v]) => !k.startsWith('__') && v && typeof v === 'object');
+                const count   = players.length;
+                if (count === 0)
+                    return interaction.reply({ content: '⚠️ Players la ma helin.', flags: MessageFlags.Ephemeral });
+
+                const perPlayer = Math.floor(total / count);
+                if (perPlayer < 1)
+                    return interaction.reply({ content: `⚠️ Lacagtu aad bay u yar tahay — **${count}** player. Wax badan geli.`, flags: MessageFlags.Ephemeral });
+
+                const actualTotal = perPlayer * count;
+                deductFromTreasury(actualTotal);
+                for (const [, d] of players) {
+                    d.btc = (d.btc || 0) + perPlayer;
+                }
+                saveEcon();
+
+                const txRef  = '#SHR-' + Math.random().toString(36).slice(2,8).toUpperCase();
+                const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+                return interaction.update({ embeds: [
+                    new EmbedBuilder()
+                        .setTitle('🏛️ GARAAD BANK — Treasury Distribution')
+                        .setColor('#27ae60')
+                        .addFields(
+                            { name: '📋 Type',          value: '🎁 SHARE TO ALL',                                    inline: true },
+                            { name: '🔖 Reference',     value: `\`${txRef}\``,                                       inline: true },
+                            { name: '📅 Date',          value: txDate,                                                inline: true },
+                            { name: '👤 Authorized by', value: `**${interaction.user.username}**\n<@${userId}>`,     inline: true },
+                            { name: '👥 Recipients',    value: `**${count} players**`,                               inline: true },
+                            { name: '💰 Per Player',    value: `**+₿ ${perPlayer.toLocaleString()}**`,               inline: true },
+                            { name: '💸 Total Paid',    value: `**₿ ${actualTotal.toLocaleString()}**`,              inline: true },
+                            { name: '🏛️ Treasury Left', value: `**₿ ${(getTreasury().balance||0).toLocaleString()}**`, inline: true },
+                            { name: '​',           value: '​',                                                inline: true },
+                        )
+                        .setFooter({ text: 'Garaad Bank • Treasury Distribution Complete' }),
+                ], components: [donationRow(userId)] });
+            }
+
             // ── Cashflip: amount modal submit ──
             if (interaction.customId.startsWith('eco_cfmod_')) {
                 const rest    = interaction.customId.replace('eco_cfmod_', '');
@@ -1672,6 +1773,52 @@ module.exports = function setupInteractionHandler(client) {
                     .setFooter({ text: 'Garaad Bot — Thank you for voting!' })],
                 components: [],
             });
+        }
+
+        // ── Donation: Donate button → modal ──
+        if (id.startsWith('eco_don_donate_')) {
+            const userId = id.replace('eco_don_donate_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser } = require('../economy/econStore');
+            checkEconUser(userId);
+            const wallet = (eData[userId].btc || 0).toLocaleString();
+            const modal = new ModalBuilder()
+                .setCustomId(`eco_don_m_donate_${userId}`)
+                .setTitle('💝 Donate to Treasury');
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('eco_don_amount')
+                    .setLabel(`Xaddadka (Wallet: ₿ ${wallet})`)
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('500')
+                    .setRequired(true)
+            ));
+            return interaction.showModal(modal);
+        }
+
+        // ── Donation: Share to All button → modal (admin only) ──
+        if (id.startsWith('eco_don_share_')) {
+            const userId = id.replace('eco_don_share_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { isAdmin } = require('../utils/admin');
+            if (!isAdmin(userId))
+                return interaction.reply({ content: '⚠️ **Admin kaliya** ayaa Share to All isticmaali kara.', flags: MessageFlags.Ephemeral });
+            const { getTreasury } = require('../economy/econStore');
+            const bal = (getTreasury().balance || 0).toLocaleString();
+            const modal = new ModalBuilder()
+                .setCustomId(`eco_don_m_share_${userId}`)
+                .setTitle('🎁 Share to All Players');
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('eco_don_amount')
+                    .setLabel(`Wadarta la qeybin (Treasury: ₿ ${bal})`)
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder('1000')
+                    .setRequired(true)
+            ));
+            return interaction.showModal(modal);
         }
 
         // ── Xir (Close) ──
