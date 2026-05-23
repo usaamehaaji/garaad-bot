@@ -17,19 +17,19 @@ function buildResult(win, dirLabel, profit, amount, newBal) {
         ? new EmbedBuilder()
             .setTitle('✅ Economy Flip — WIN!')
             .setColor('#2ecc71')
-            .setDescription(`Waxaad dooratay **${dirLabel}** — sax!\n\n📈 Suuqku dhinacaagaa u dhaqaaqay.`)
+            .setDescription(`You picked **${dirLabel}** — correct!\n\n📈 The market moved your way.`)
             .addFields(
-                { name: '₿ Profit',      value: `**+₿ ${profit.toLocaleString()}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿ ${newBal.toLocaleString()}**`,   inline: true },
+                { name: '💰 Profit',      value: `**+₿ ${profit.toLocaleString()}**`, inline: true },
+                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy' })
         : new EmbedBuilder()
             .setTitle('❌ Economy Flip — LOSS!')
             .setColor('#e74c3c')
-            .setDescription(`Waxaad dooratay **${dirLabel}** — khalad!\n\n📉 Suuqku dhinaca kale u dhaqaaqay.`)
+            .setDescription(`You picked **${dirLabel}** — wrong!\n\n📉 The market went the other way.`)
             .addFields(
-                { name: '₿ Lost',        value: `**-₿ ${amount.toLocaleString()}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿ ${newBal.toLocaleString()}**`,   inline: true },
+                { name: '💸 Lost',        value: `**-₿ ${amount.toLocaleString()}**`, inline: true },
+                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy' });
 }
