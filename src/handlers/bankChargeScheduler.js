@@ -1,6 +1,6 @@
 const { econData, saveEcon }  = require('../economy/econStore');
-const { applyInterest }       = require('../commands/economy/ebank');
-const { applyLoanDeduction }  = require('../commands/economy/deen');
+const { applyInterest }       = require('../../data/commands/economy/ebank');
+const { applyLoanDeduction }  = require('../../data/commands/economy/deen');
 
 const FIRST_TICK_MS     = 10 * 60 * 1000;
 const CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000;

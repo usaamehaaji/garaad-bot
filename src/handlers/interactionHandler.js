@@ -12,7 +12,7 @@ const { checkUser }         = require('../utils/helpers');
 const { isAdmin }           = require('../utils/admin');
 const { QUIZ_MIN_PLAYERS, QUIZ_MAX_PLAYERS, DUEL_STAKE_IQ, TOURNAMENT_MIN_PLAYERS, TOURNAMENT_R1_QUESTIONS, TOURNAMENT_R2_QUESTIONS, TOURNAMENT_FINAL_QUESTIONS } = require('../config');
 const { exchangeQuizPoints } = require('../utils/quizPoints');
-const { buildEduEmbed, buildEcoEmbed, helpRow } = require('../commands/help');
+const { buildEduEmbed, buildEcoEmbed, helpRow } = require('../../data/commands/help');
 
 function genCode() {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -46,7 +46,7 @@ module.exports = function setupInteractionHandler(client) {
 
         // ── Modal Submit: IQ dhigo / IQ la bax ──
         if (interaction.isModalSubmit()) {
-            const { iqRow, balanceEmbed } = require('../commands/bank');
+            const { iqRow, balanceEmbed } = require('../../data/commands/bank');
             const { saveData } = require('../utils/helpers');
 
             if (interaction.customId.startsWith('iq_dhigo_modal_')) {
@@ -112,7 +112,7 @@ module.exports = function setupInteractionHandler(client) {
                 }
 
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-                const { ASSET_LABELS, closeRow } = require('../commands/economy/give');
+                const { ASSET_LABELS, closeRow } = require('../../data/commands/economy/give');
                 const { getPrice: gpGive } = require('../economy/market');
                 checkEconUser(ownerId);
                 checkEconUser(targetId);
@@ -169,7 +169,7 @@ module.exports = function setupInteractionHandler(client) {
                 }
 
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-                const { closeRow } = require('../commands/economy/ebank');
+                const { closeRow } = require('../../data/commands/economy/ebank');
                 checkEconUser(ownerId);
                 const d         = eData[ownerId];
                 const bankLabel = bank.charAt(0).toUpperCase() + bank.slice(1);
@@ -232,7 +232,7 @@ module.exports = function setupInteractionHandler(client) {
                 }
 
                 const { econData: eData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../economy/econStore');
-                const { ASSET_LABELS, closeRow } = require('../commands/economy/cashflip');
+                const { ASSET_LABELS, closeRow } = require('../../data/commands/economy/cashflip');
                 const { getPrice } = require('../economy/market');
                 checkEconUser(ownerId);
                 const d = eData[ownerId];
@@ -253,7 +253,7 @@ module.exports = function setupInteractionHandler(client) {
                 // Wait 1.2 seconds then reveal result
                 await new Promise(r => setTimeout(r, 1200));
 
-                const { WIN_MULTI } = require('../commands/economy/cashflip');
+                const { WIN_MULTI } = require('../../data/commands/economy/cashflip');
                 const { fmt: cfFmt } = require('../utils/helpers');
                 const win = Math.random() < 0.50;
                 if (win) {
@@ -306,7 +306,7 @@ module.exports = function setupInteractionHandler(client) {
 
                 const { econData: eData, checkEconUser } = require('../economy/econStore');
                 const { getPrice }                        = require('../economy/market');
-                const { buildConfirmEmbed, confirmRow }   = require('../commands/economy/trade');
+                const { buildConfirmEmbed, confirmRow }   = require('../../data/commands/economy/trade');
                 checkEconUser(ownerId);
                 const d     = eData[ownerId];
                 const price = getPrice(asset);
@@ -456,12 +456,12 @@ module.exports = function setupInteractionHandler(client) {
                 const action   = interaction.fields.getTextInputValue('action').trim().toLowerCase();
                 if (action === 'give') {
                     await notifyAdmins(interaction.client, interaction.user, `Champion Give → <@${targetId}>`);
-                    const giveChampion = require('../commands/admin/adminGiveChampion');
+                    const giveChampion = require('../../data/commands/admin/adminGiveChampion');
                     const fakeMsg = { author: interaction.user, mentions: { users: { first: () => ({ id: targetId }) } }, reply: (p) => interaction.reply({ ...p, flags: MessageFlags.Ephemeral }) };
                     return giveChampion(fakeMsg, []);
                 } else if (action === 'remove') {
                     await notifyAdmins(interaction.client, interaction.user, `Champion Remove → <@${targetId}>`);
-                    const removeChampion = require('../commands/admin/adminRemoveChampion');
+                    const removeChampion = require('../../data/commands/admin/adminRemoveChampion');
                     const fakeMsg = { author: interaction.user, mentions: { users: { first: () => ({ id: targetId }) } }, reply: (p) => interaction.reply({ ...p, flags: MessageFlags.Ephemeral }) };
                     return removeChampion(fakeMsg, []);
                 }
@@ -532,7 +532,7 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 await notifyAdmins(interaction.client, interaction.user, `Reset Aqoon (IQ/stats) → <@${targetId}>`);
-                const reset    = require('../commands/admin/adminReset');
+                const reset    = require('../../data/commands/admin/adminReset');
                 const fakeMsg  = { author: interaction.user, mentions: { users: { first: () => ({ id: targetId }) } }, reply: (p) => interaction.reply({ ...p, flags: MessageFlags.Ephemeral }) };
                 return reset(fakeMsg, []);
             }
@@ -605,7 +605,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
                     return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-                const { ECON_TITLES } = require('../commands/economy/econShop');
+                const { ECON_TITLES } = require('../../data/commands/economy/econShop');
                 const targetId = interaction.fields.getTextInputValue('target_id').trim();
                 const key      = interaction.fields.getTextInputValue('title_key').trim().toLowerCase();
                 const info     = ECON_TITLES[key];
@@ -833,7 +833,7 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
 
                 const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
-                const { SHOP_ITEMS } = require('../commands/economy/econShop');
+                const { SHOP_ITEMS } = require('../../data/commands/economy/econShop');
                 checkEconUser(ownerId);
                 const d    = eData[ownerId];
                 const item = SHOP_ITEMS['custom'];
@@ -863,7 +863,7 @@ module.exports = function setupInteractionHandler(client) {
                 const { setPending, getPending }  = require('../economy/prediction');
                 const {
                     buildTimeEmbed, timeRow, backRow,
-                } = require('../commands/economy/trade');
+                } = require('../../data/commands/economy/trade');
 
                 const raw    = interaction.fields.getTextInputValue('pred_amount');
                 const amount = parseFloat(raw);
@@ -892,7 +892,7 @@ module.exports = function setupInteractionHandler(client) {
                 const { setPending, getPending } = require('../economy/prediction');
                 const {
                     buildTimeEmbed, timeRow, backRow,
-                } = require('../commands/economy/trade');
+                } = require('../../data/commands/economy/trade');
                 const { getPrice }                     = require('../economy/market');
                 const { econData: eData, checkEconUser } = require('../economy/econStore');
 
@@ -975,7 +975,7 @@ module.exports = function setupInteractionHandler(client) {
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
                 const { getPrice }                                  = require('../economy/market');
                 const { ASSET_LABEL }                               = require('../economy/prediction');
-                const { buildShopEmbed, shopRow, shopBackRow }      = require('../commands/economy/trade');
+                const { buildShopEmbed, shopRow, shopBackRow }      = require('../../data/commands/economy/trade');
                 checkEconUser(ownerId);
                 const d = eData[ownerId];
 
@@ -1037,7 +1037,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-            const { buildAdminEmbed, getRows } = require('../commands/admin/adminHelpPanel');
+            const { buildAdminEmbed, getRows } = require('../../data/commands/admin/adminHelpPanel');
             return interaction.update({ embeds: [buildAdminEmbed(ownerId)], components: getRows(ownerId) });
         }
 
@@ -1203,8 +1203,8 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-            const { buildAllPlayersEmbed } = require('../commands/admin/adminEconPanel');
-            const { getRows } = require('../commands/admin/adminHelpPanel');
+            const { buildAllPlayersEmbed } = require('../../data/commands/admin/adminEconPanel');
+            const { getRows } = require('../../data/commands/admin/adminHelpPanel');
             return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: getRows(ownerId) });
         }
 
@@ -1223,7 +1223,7 @@ module.exports = function setupInteractionHandler(client) {
                     const left = Math.max(0, 3 - days);
                     return `${left === 0 ? '🔴' : '💳'} <@${uid}> — **₿: ${d.loan.owed.toLocaleString()}** | ${left === 0 ? '**OVERDUE**' : `${left}d`}`;
                 });
-            const { getRows } = require('../commands/admin/adminHelpPanel');
+            const { getRows } = require('../../data/commands/admin/adminHelpPanel');
             const loansEmbed = new EmbedBuilder()
                 .setTitle(`💳 Deynta (${loans.length})`)
                 .setColor('#e74c3c')
@@ -1500,7 +1500,7 @@ module.exports = function setupInteractionHandler(client) {
             const authorId = parts.slice(0, -1).join('_');
             if (interaction.user.id !== authorId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { buildJeebEmbed, jeebRow } = require('../commands/economy/jeeb');
+            const { buildJeebEmbed, jeebRow } = require('../../data/commands/economy/jeeb');
             const targetUser = await interaction.client.users.fetch(targetId).catch(() => null);
             const username   = targetUser ? targetUser.username : targetId;
             return interaction.update({ embeds: [buildJeebEmbed(targetId, username)], components: [jeebRow(authorId, targetId)] });
@@ -1603,7 +1603,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
@@ -1618,7 +1618,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { getActivePrediction }            = require('../economy/prediction');
-            const { buildMarketEmbed, buildActiveEmbed, mainRow, tradeCloseRow, controlRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, buildActiveEmbed, mainRow, tradeCloseRow, controlRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             const active = getActivePrediction(ownerId);
             if (active) {
@@ -1637,7 +1637,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { clearPending }                   = require('../economy/prediction');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             clearPending(ownerId);
             return interaction.update({
@@ -1653,7 +1653,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { clearPending }                   = require('../economy/prediction');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             clearPending(ownerId);
             return interaction.update({
@@ -1790,7 +1790,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { setPending, getPending }         = require('../economy/prediction');
-            const { buildDirectionEmbed, directionRow } = require('../commands/economy/trade');
+            const { buildDirectionEmbed, directionRow } = require('../../data/commands/economy/trade');
             setPending(ownerId, { minutes });
             const pend = getPending(ownerId);
             return interaction.update({
@@ -1807,7 +1807,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const dir = isUp ? 'up' : 'down';
             const { setPending, getPending }       = require('../economy/prediction');
-            const { buildConfirmEmbed, confirmRow } = require('../commands/economy/trade');
+            const { buildConfirmEmbed, confirmRow } = require('../../data/commands/economy/trade');
             setPending(ownerId, {
                 direction:  dir,
                 channelId:  interaction.channelId,
@@ -1826,7 +1826,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { lockPrediction, getActivePrediction } = require('../economy/prediction');
-            const { buildActiveEmbed, controlRow }        = require('../commands/economy/trade');
+            const { buildActiveEmbed, controlRow }        = require('../../data/commands/economy/trade');
             const result = await lockPrediction(ownerId, interaction.client);
             if (!result.ok)
                 return interaction.reply({ content: result.msg, flags: MessageFlags.Ephemeral });
@@ -1843,7 +1843,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildSellEmbed, sellRow } = require('../commands/economy/trade');
+            const { buildSellEmbed, sellRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildSellEmbed(eData[ownerId])],
@@ -1885,7 +1885,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildShopEmbed, shopRow } = require('../commands/economy/trade');
+            const { buildShopEmbed, shopRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildShopEmbed(eData[ownerId])],
@@ -1933,7 +1933,7 @@ module.exports = function setupInteractionHandler(client) {
             }
 
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { ASSET_LABELS } = require('../commands/economy/give');
+            const { ASSET_LABELS } = require('../../data/commands/economy/give');
             checkEconUser(userId);
             const balance = eData[userId][asset];
 
@@ -1965,7 +1965,7 @@ module.exports = function setupInteractionHandler(client) {
                 applyInterest,
                 buildMainEmbed, buildBankEmbed, buildKhaznadEmbed, buildDeenEmbed,
                 bankFullRow, ebCloseRow, deenRow, backRow,
-            } = require('../commands/economy/ebank');
+            } = require('../../data/commands/economy/ebank');
             checkEconUser(userId);
             const d = eData[userId];
             applyInterest(d);
@@ -2031,7 +2031,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             }
 
-            const { ASSET_LABELS } = require('../commands/economy/cashflip');
+            const { ASSET_LABELS } = require('../../data/commands/economy/cashflip');
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             checkEconUser(ownerId);
             const balance = eData[ownerId][asset];
@@ -2056,7 +2056,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { buildDeenEmbed, deenRow, isBankOpen, usedWeeklyLoan, LOAN_MAX, LOAN_OWED } = require('../commands/economy/ebank');
+            const { buildDeenEmbed, deenRow, isBankOpen, usedWeeklyLoan, LOAN_MAX, LOAN_OWED } = require('../../data/commands/economy/ebank');
             checkEconUser(ownerId);
             const d = eData[ownerId];
             if (!isBankOpen())
@@ -2081,7 +2081,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
-            const { buildDeenEmbed, deenRow, LOAN_OWED } = require('../commands/economy/ebank');
+            const { buildDeenEmbed, deenRow, LOAN_OWED } = require('../../data/commands/economy/ebank');
             checkEconUser(ownerId);
             const d = eData[ownerId];
             if (!d.loan || d.loan.owed <= 0)
@@ -2102,7 +2102,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             }
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
@@ -2117,7 +2117,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             }
             const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../commands/economy/trade');
+            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
@@ -2136,7 +2136,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             }
 
-            const { ASSET_LABEL } = require('../commands/economy/trade');
+            const { ASSET_LABEL } = require('../../data/commands/economy/trade');
             const { getPrice }    = require('../economy/market');
             const price           = getPrice(asset);
 
@@ -2170,7 +2170,7 @@ module.exports = function setupInteractionHandler(client) {
 
             const { econData, checkEconUser, saveEcon, addToTreasury: atT } = require('../economy/econStore');
             const { getPrice: gp, getMarketSnapshot }  = require('../economy/market');
-            const { ASSET_LABEL }   = require('../commands/economy/trade');
+            const { ASSET_LABEL }   = require('../../data/commands/economy/trade');
             checkEconUser(userId);
             const d         = econData[userId];
             const totalCost = Math.round(price * amount);
@@ -2272,7 +2272,7 @@ module.exports = function setupInteractionHandler(client) {
         if (id.startsWith('eco_shop_')) {
             const key = id.replace('eco_shop_', '');
             const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
-            const { SHOP_ITEMS } = require('../commands/economy/econShop');
+            const { SHOP_ITEMS } = require('../../data/commands/economy/econShop');
             const userId = interaction.user.id;
             checkEconUser(userId);
             const d    = eData[userId];
