@@ -213,6 +213,61 @@ module.exports = function setupInteractionHandler(client) {
                 }
             }
 
+            // ── Ebank: bank transfer modal submit ──
+            if (interaction.customId.startsWith('eco_ebmod_transfer_')) {
+                const rest    = interaction.customId.replace('eco_ebmod_transfer_garaad_', '');
+                const ownerId = rest;
+
+                if (interaction.user.id !== ownerId) {
+                    return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+                }
+
+                const targetId = interaction.fields.getTextInputValue('eco_eb_target').trim().replace(/[<@!>]/g, '');
+                const amount   = parseInt(interaction.fields.getTextInputValue('eco_eb_amount'));
+
+                if (!amount || isNaN(amount) || amount <= 0) {
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 500).', flags: MessageFlags.Ephemeral });
+                }
+                if (targetId === ownerId) {
+                    return interaction.reply({ content: '⚠️ Adiga nafta bank-kaaga uma dirin kartid.', flags: MessageFlags.Ephemeral });
+                }
+
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { closeRow, buildBankEmbed, bankFullRow, ebCloseRow, applyInterest } = require('../../data/commands/economy/ebank');
+
+                checkEconUser(ownerId);
+                checkEconUser(targetId);
+                const sender   = eData[ownerId];
+                const receiver = eData[targetId];
+
+                if ((sender.banks?.garaad || 0) < amount) {
+                    return interaction.reply({ content: `⚠️ Bank-kaagu lacag ku filan ma lahan. Haysataa: **₿: ${(sender.banks?.garaad || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                }
+
+                sender.banks.garaad   -= amount;
+                receiver.banks        ??= { garaad: 0 };
+                receiver.banks.garaad += amount;
+                saveEcon();
+
+                let targetTag = targetId;
+                try { const u = await interaction.client.users.fetch(targetId); targetTag = `<@${u.id}>`; } catch {}
+
+                return interaction.update({ embeds: [
+                    new EmbedBuilder()
+                        .setTitle('💸 Bank Transfer — Guul!')
+                        .setColor('#2ecc71')
+                        .addFields(
+                            { name: '📤 Diray',         value: `<@${ownerId}>`,                                        inline: true },
+                            { name: '📥 Helay',         value: targetTag,                                              inline: true },
+                            { name: '​',           value: '​',                                               inline: true },
+                            { name: '💰 Xaddadka',      value: `**₿: ${amount.toLocaleString()}**`,                    inline: true },
+                            { name: '🏦 Bank-kaaga',    value: `**₿: ${sender.banks.garaad.toLocaleString()}**`,       inline: true },
+                            { name: '🏦 Bank-kiisa',    value: `**₿: ${receiver.banks.garaad.toLocaleString()}**`,     inline: true },
+                        )
+                        .setFooter({ text: 'Garaad Bank' }),
+                ], components: [closeRow(ownerId)] });
+            }
+
             // ── Cashflip: amount modal submit ──
             if (interaction.customId.startsWith('eco_cfmod_')) {
                 const rest    = interaction.customId.replace('eco_cfmod_', '');
@@ -1983,6 +2038,30 @@ module.exports = function setupInteractionHandler(client) {
             }
             if (section === 'garaad') {
                 return interaction.update({ embeds: [buildBankEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId)] });
+            }
+            if (section === 'transfer') {
+                const modal = new ModalBuilder()
+                    .setCustomId(`eco_ebmod_transfer_garaad_${userId}`)
+                    .setTitle('💸 Bank Transfer');
+                modal.addComponents(
+                    new ActionRowBuilder().addComponents(
+                        new TextInputBuilder()
+                            .setCustomId('eco_eb_target')
+                            .setLabel('Qofka User ID-giisa (right-click → Copy ID)')
+                            .setStyle(TextInputStyle.Short)
+                            .setPlaceholder('123456789012345678')
+                            .setRequired(true)
+                    ),
+                    new ActionRowBuilder().addComponents(
+                        new TextInputBuilder()
+                            .setCustomId('eco_eb_amount')
+                            .setLabel(`Xaddadka (Bank-kaaga: ₿: ${(d.banks?.garaad || 0).toLocaleString()})`)
+                            .setStyle(TextInputStyle.Short)
+                            .setPlaceholder('500')
+                            .setRequired(true)
+                    ),
+                );
+                return interaction.showModal(modal);
             }
         }
 
