@@ -13,15 +13,40 @@ const {
     GLOBAL_WAIT_MS,
     DUEL_MIN_QUESTIONS,
     DUEL_MAX_QUESTIONS,
+    DUEL_DEFAULT_QUESTIONS,
     DUEL_STAKE_IQ,
     DUEL_WIN_IQ,
 } = require('../../src/config');
+const teamDuel = require('../../src/games/teamDuel');
 
 module.exports = async function duelCommand(message, args) {
     const userId = message.author.id;
+
+    // ── Team Duel: ?duel 2v2 / ?duel 3v3 ──
+    const teamArg = (args[0] || '').toLowerCase();
+    const teamMap = { '2v2': '2v2', '2vs2': '2v2', '3v3': '3v3', '3vs3': '3v3' };
+    if (teamMap[teamArg]) {
+        const format = teamMap[teamArg];
+        const prompt = await message.reply(
+            `⚔️ **Team Duel ${format}** — dhigga qor:\n` +
+            `\`iq [xaddad]\` ama \`btc [xaddad]\`\n` +
+            `_Tusaale: \`iq 10\` ama \`btc 500\`_ _(30 ilbiriqsi)_`
+        );
+        const collected = await message.channel.awaitMessages({
+            filter: m => m.author.id === userId && /^(iq|btc)\s+\d+$/i.test(m.content.trim()),
+            max: 1, time: 30_000,
+        }).catch(() => null);
+        await prompt.delete().catch(() => {});
+        if (!collected || collected.size === 0)
+            return message.reply('⏰ Waqti dhammaaday — team duel waa la joojiyay.');
+        const parts = collected.first().content.trim().toLowerCase().split(/\s+/);
+        await collected.first().delete().catch(() => {});
+        return teamDuel.cmdTeamDuel(message, [format, parts[0], parts[1]]);
+    }
+
     const target = message.mentions.users.first();
 
-    if (!target)              return message.reply(`Isticmaal sidan: \`${PREFIX}duel @user\` ama \`${PREFIX}duel @user 10\``);
+    if (!target)              return message.reply(`Isticmaal sidan: \`${PREFIX}duel @user\` ama \`${PREFIX}duel 2v2\``);
     if (target.bot)           return message.reply('Bot lama dagaallami karo.');
     if (target.id === userId) return message.reply('Naftaada lama dagaallami kartid.');
 
