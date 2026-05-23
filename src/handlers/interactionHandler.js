@@ -174,56 +174,39 @@ module.exports = function setupInteractionHandler(client) {
                 const d         = eData[ownerId];
                 const bankLabel = bank.charAt(0).toUpperCase() + bank.slice(1);
 
-                const txRef  = () => '#GBK-' + Math.random().toString(36).slice(2,8).toUpperCase();
-                const txDate = () => new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-
                 if (action === 'deposit') {
                     if ((d.btc || 0) < amount) {
-                        return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid. Haysataa: **₿: ${(d.btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                        return interaction.reply({ content: `⚠️ Not enough BTC. Wallet: **₿ ${(d.btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                     }
                     d.btc         = (d.btc || 0) - amount;
                     d.banks[bank] += amount;
                     saveEcon();
-                    return interaction.update({ embeds: [
-                        new EmbedBuilder()
-                            .setTitle('🏦 GARAAD BANK — Transaction Receipt')
-                            .setColor('#27ae60')
-                            .addFields(
-                                { name: '📋 Type',            value: '⬇️ DEPOSIT',                                  inline: true },
-                                { name: '🔖 Reference',       value: `\`${txRef()}\``,                               inline: true },
-                                { name: '📅 Date',            value: txDate(),                                        inline: true },
-                                { name: '👤 Account Holder',  value: `<@${ownerId}>`,                                 inline: true },
-                                { name: '💳 From',            value: 'Wallet',                                        inline: true },
-                                { name: '🏦 To',              value: `${bankLabel} Savings`,                          inline: true },
-                                { name: '💰 Amount',          value: `**+₿ ${amount.toLocaleString()}**`,             inline: true },
-                                { name: '🏦 Savings Balance', value: `**₿ ${d.banks[bank].toLocaleString()}**`,       inline: true },
-                                { name: '💳 Wallet Balance',  value: `**₿ ${(d.btc||0).toLocaleString()}**`,         inline: true },
-                            )
-                            .setFooter({ text: 'Garaad Bank • Deposits earn 1% daily interest' }),
+                    return interaction.update({ embeds: [new EmbedBuilder()
+                        .setTitle('🏦 Deposit — Success!')
+                        .setColor('#27ae60')
+                        .addFields(
+                            { name: '💰 Deposited',     value: `**+₿ ${amount.toLocaleString()}**`,          inline: true },
+                            { name: '🏦 Bank Balance',  value: `**₿ ${d.banks[bank].toLocaleString()}**`,    inline: true },
+                            { name: '💳 Wallet',        value: `**₿ ${(d.btc||0).toLocaleString()}**`,      inline: true },
+                        )
+                        .setFooter({ text: 'Garaad Bank • 1% daily interest on deposits' }),
                     ], components: [closeRow(ownerId)] });
                 } else {
                     if (d.banks[bank] < amount) {
-                        return interaction.reply({ content: `⚠️ ${bankLabel} lacag ku filan ma lahan. Haysataa: **₿: ${d.banks[bank].toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                        return interaction.reply({ content: `⚠️ Not enough in bank. Balance: **₿ ${d.banks[bank].toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                     }
                     d.banks[bank] -= amount;
                     d.btc          = (d.btc || 0) + amount;
                     saveEcon();
-                    return interaction.update({ embeds: [
-                        new EmbedBuilder()
-                            .setTitle('🏦 GARAAD BANK — Transaction Receipt')
-                            .setColor('#2980b9')
-                            .addFields(
-                                { name: '📋 Type',            value: '⬆️ WITHDRAWAL',                                inline: true },
-                                { name: '🔖 Reference',       value: `\`${txRef()}\``,                               inline: true },
-                                { name: '📅 Date',            value: txDate(),                                        inline: true },
-                                { name: '👤 Account Holder',  value: `<@${ownerId}>`,                                 inline: true },
-                                { name: '🏦 From',            value: `${bankLabel} Savings`,                          inline: true },
-                                { name: '💳 To',              value: 'Wallet',                                        inline: true },
-                                { name: '💰 Amount',          value: `**-₿ ${amount.toLocaleString()}**`,             inline: true },
-                                { name: '🏦 Savings Balance', value: `**₿ ${d.banks[bank].toLocaleString()}**`,       inline: true },
-                                { name: '💳 Wallet Balance',  value: `**₿ ${(d.btc||0).toLocaleString()}**`,         inline: true },
-                            )
-                            .setFooter({ text: 'Garaad Bank • Funds available instantly' }),
+                    return interaction.update({ embeds: [new EmbedBuilder()
+                        .setTitle('🏦 Withdrawal — Success!')
+                        .setColor('#2980b9')
+                        .addFields(
+                            { name: '💰 Withdrawn',     value: `**-₿ ${amount.toLocaleString()}**`,          inline: true },
+                            { name: '🏦 Bank Balance',  value: `**₿ ${d.banks[bank].toLocaleString()}**`,    inline: true },
+                            { name: '💳 Wallet',        value: `**₿ ${(d.btc||0).toLocaleString()}**`,      inline: true },
+                        )
+                        .setFooter({ text: 'Garaad Bank • Funds available instantly' }),
                     ], components: [closeRow(ownerId)] });
                 }
             }
@@ -270,32 +253,21 @@ module.exports = function setupInteractionHandler(client) {
                 addToTreasury(tax);
                 saveEcon();
 
-                let senderName   = interaction.user.username;
                 let receiverName = targetId;
                 try { const u = await interaction.client.users.fetch(targetId); receiverName = u.username; } catch {}
 
-                const txRef  = '#GBK-' + Math.random().toString(36).slice(2,8).toUpperCase();
-                const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-
-                return interaction.update({ embeds: [
-                    new EmbedBuilder()
-                        .setTitle('🏦 GARAAD BANK — Wire Transfer Receipt')
-                        .setColor('#27ae60')
-                        .addFields(
-                            { name: '📋 Type',              value: '💸 WIRE TRANSFER',                                  inline: true },
-                            { name: '🔖 Reference',         value: `\`${txRef}\``,                                      inline: true },
-                            { name: '📅 Date',              value: txDate,                                               inline: true },
-                            { name: '📤 Sender',            value: `**${senderName}**\n<@${ownerId}>`,                   inline: true },
-                            { name: '📥 Receiver',          value: `**${receiverName}**\n<@${targetId}>`,                inline: true },
-                            { name: '​',               value: '​',                                               inline: true },
-                            { name: '💰 Amount Sent',       value: `**₿ ${amount.toLocaleString()}**`,                   inline: true },
-                            { name: '🏛️ Transfer Fee (5%)', value: `**-₿ ${tax.toLocaleString()}**`,                     inline: true },
-                            { name: '✅ Amount Received',   value: `**₿ ${received.toLocaleString()}**`,                  inline: true },
-                            { name: `🏦 ${senderName} Balance`,   value: `**₿ ${sender.banks.garaad.toLocaleString()}**`,   inline: true },
-                            { name: `🏦 ${receiverName} Balance`, value: `**₿ ${receiver.banks.garaad.toLocaleString()}**`, inline: true },
-                            { name: '​',               value: '​',                                               inline: true },
-                        )
-                        .setFooter({ text: 'Garaad Bank • International Wire Transfer' }),
+                return interaction.update({ embeds: [new EmbedBuilder()
+                    .setTitle('💸 Bank Transfer — Success!')
+                    .setColor('#27ae60')
+                    .setDescription(`**${interaction.user.username}** → **${receiverName}**`)
+                    .addFields(
+                        { name: '💰 Sent',              value: `**₿ ${amount.toLocaleString()}**`,                  inline: true },
+                        { name: '🏛️ Fee (5%)',          value: `**-₿ ${tax.toLocaleString()}**`,                    inline: true },
+                        { name: '✅ Received',          value: `**₿ ${received.toLocaleString()}**`,                inline: true },
+                        { name: '🏦 Your Bank',         value: `**₿ ${sender.banks.garaad.toLocaleString()}**`,     inline: true },
+                        { name: '🏦 Their Bank',        value: `**₿ ${receiver.banks.garaad.toLocaleString()}**`,   inline: true },
+                    )
+                    .setFooter({ text: 'Garaad Bank • 5% transfer fee' }),
                 ], components: [closeRow(ownerId)] });
             }
 
@@ -321,24 +293,16 @@ module.exports = function setupInteractionHandler(client) {
                 addToTreasury(amount);
                 saveEcon();
 
-                const txRef  = '#DON-' + Math.random().toString(36).slice(2,8).toUpperCase();
-                const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-                return interaction.update({ embeds: [
-                    new EmbedBuilder()
-                        .setTitle('🏛️ GARAAD BANK — Donation Receipt')
-                        .setColor('#8e44ad')
-                        .addFields(
-                            { name: '📋 Type',           value: '💝 DONATION',                                     inline: true },
-                            { name: '🔖 Reference',      value: `\`${txRef}\``,                                    inline: true },
-                            { name: '📅 Date',           value: txDate,                                             inline: true },
-                            { name: '👤 Donor',          value: `**${interaction.user.username}**\n<@${userId}>`,  inline: true },
-                            { name: '🏛️ To',             value: 'Garaad Treasury',                                 inline: true },
-                            { name: '💰 Amount',         value: `**₿ ${amount.toLocaleString()}**`,                inline: true },
-                            { name: '💳 Your Wallet',    value: `**₿ ${(d.btc||0).toLocaleString()}**`,           inline: true },
-                            { name: '🏛️ Treasury',       value: `**₿ ${(getTreasury().balance||0).toLocaleString()}**`, inline: true },
-                            { name: '​',            value: '​',                                            inline: true },
-                        )
-                        .setFooter({ text: 'Garaad Bank • Thank you for your donation!' }),
+                return interaction.update({ embeds: [new EmbedBuilder()
+                    .setTitle('💝 Donation — Thank you!')
+                    .setColor('#8e44ad')
+                    .setDescription(`**${interaction.user.username}** donated to the Treasury!`)
+                    .addFields(
+                        { name: '💰 Donated',      value: `**₿ ${amount.toLocaleString()}**`,                       inline: true },
+                        { name: '💳 Your Wallet',  value: `**₿ ${(d.btc||0).toLocaleString()}**`,                  inline: true },
+                        { name: '🏛️ Treasury',     value: `**₿ ${(getTreasury().balance||0).toLocaleString()}**`,  inline: true },
+                    )
+                    .setFooter({ text: 'Garaad Economy' }),
                 ], components: [donationRow(userId)] });
             }
 
@@ -379,24 +343,16 @@ module.exports = function setupInteractionHandler(client) {
                 }
                 saveEcon();
 
-                const txRef  = '#SHR-' + Math.random().toString(36).slice(2,8).toUpperCase();
-                const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-                return interaction.update({ embeds: [
-                    new EmbedBuilder()
-                        .setTitle('🏛️ GARAAD BANK — Treasury Distribution')
-                        .setColor('#27ae60')
-                        .addFields(
-                            { name: '📋 Type',          value: '🎁 SHARE TO ALL',                                    inline: true },
-                            { name: '🔖 Reference',     value: `\`${txRef}\``,                                       inline: true },
-                            { name: '📅 Date',          value: txDate,                                                inline: true },
-                            { name: '👤 Authorized by', value: `**${interaction.user.username}**\n<@${userId}>`,     inline: true },
-                            { name: '👥 Recipients',    value: `**${count} players**`,                               inline: true },
-                            { name: '💰 Per Player',    value: `**+₿ ${perPlayer.toLocaleString()}**`,               inline: true },
-                            { name: '💸 Total Paid',    value: `**₿ ${actualTotal.toLocaleString()}**`,              inline: true },
-                            { name: '🏛️ Treasury Left', value: `**₿ ${(getTreasury().balance||0).toLocaleString()}**`, inline: true },
-                            { name: '​',           value: '​',                                                inline: true },
-                        )
-                        .setFooter({ text: 'Garaad Bank • Treasury Distribution Complete' }),
+                return interaction.update({ embeds: [new EmbedBuilder()
+                    .setTitle('🎁 Share to All — Done!')
+                    .setColor('#27ae60')
+                    .setDescription(`Treasury distributed to all **${count} players**!`)
+                    .addFields(
+                        { name: '💰 Per Player',    value: `**+₿ ${perPlayer.toLocaleString()}**`,                  inline: true },
+                        { name: '💸 Total Paid',    value: `**₿ ${actualTotal.toLocaleString()}**`,                 inline: true },
+                        { name: '🏛️ Treasury Left', value: `**₿ ${(getTreasury().balance||0).toLocaleString()}**`, inline: true },
+                    )
+                    .setFooter({ text: 'Garaad Economy' }),
                 ], components: [donationRow(userId)] });
             }
 

@@ -65,36 +65,34 @@ function bankTotalInterest() {
 function buildMainEmbed(d) {
     const t = getTreasury();
     return new EmbedBuilder()
-        .setTitle('🏦 GARAAD BANK — Account Overview')
+        .setTitle('🏦 Garaad Bank')
         .setColor('#2471a3')
         .addFields(
-            { name: '💳 Wallet',          value: `**₿ ${fmt(d.btc || 0)}**`,                   inline: true },
-            { name: '🏦 Savings',         value: `**₿ ${fmt(d.banks.garaad)}**`,                inline: true },
+            { name: '💳 Wallet',          value: `**₿ ${fmt(d.btc || 0)}**`,                    inline: true },
+            { name: '🏦 Bank Balance',    value: `**₿ ${fmt(d.banks.garaad)}**`,                 inline: true },
             { name: '📈 Interest Earned', value: `**+₿ ${fmt(d.interestEarned?.garaad || 0)}**`, inline: true },
-            { name: '🏛️ Treasury Reserve',value: `₿ ${fmt(t.balance || 0)}`,                    inline: true },
-            { name: '📊 Interest Rate',   value: '1% per day',                                   inline: true },
-            { name: '🔒 Account Type',    value: 'Personal Savings',                             inline: true },
+            { name: '🏛️ Treasury',        value: `**₿ ${fmt(t.balance || 0)}**`,                 inline: true },
+            { name: '📊 Interest Rate',   value: '**1% per day**',                               inline: true },
         )
-        .setFooter({ text: 'Garaad Bank • Deposits earn 1% daily interest' });
+        .setFooter({ text: 'Garaad Bank • 1% daily interest on deposits' });
 }
 
 function buildBankEmbed(d) {
     const loan    = d.loan;
     const hasLoan = !!(loan && loan.owed > 0);
     const fields  = [
-        { name: '🏦 Savings Balance',  value: `**₿ ${fmt(d.banks.garaad)}**`,                   inline: true },
-        { name: '💳 Wallet Balance',   value: `**₿ ${fmt(d.btc || 0)}**`,                        inline: true },
-        { name: '📈 Interest Earned',  value: `**+₿ ${fmt(d.interestEarned?.garaad || 0)}**`,    inline: true },
-        { name: '📊 Interest Rate',    value: '1% per day',                                       inline: true },
-        { name: '🏛️ Total Deposits',   value: `₿ ${fmt(bankTotalDeposits())}`,                   inline: true },
-        { name: '🔒 Account Status',   value: '✅ Active',                                        inline: true },
+        { name: '🏦 Bank Balance',    value: `**₿ ${fmt(d.banks.garaad)}**`,                  inline: true },
+        { name: '💳 Wallet',          value: `**₿ ${fmt(d.btc || 0)}**`,                       inline: true },
+        { name: '📈 Interest Earned', value: `**+₿ ${fmt(d.interestEarned?.garaad || 0)}**`,   inline: true },
+        { name: '📊 Rate',            value: '**1% per day**',                                  inline: true },
+        { name: '🏛️ Total Deposits',  value: `**₿ ${fmt(bankTotalDeposits())}**`,              inline: true },
     ];
     if (hasLoan) {
         const daysLeft = Math.max(0, 3 - Math.floor((Date.now() - loan.takenAt) / 86400000));
-        fields.push({ name: '⚠️ Active Loan', value: `₿ ${fmt(loan.owed)} due — ${daysLeft > 0 ? `${daysLeft} day(s) left` : '🔴 Being deducted!'}`, inline: false });
+        fields.push({ name: '⚠️ Active Loan', value: `**₿ ${fmt(loan.owed)}** due — ${daysLeft > 0 ? `${daysLeft} day(s) left` : '🔴 Being deducted!'}`, inline: false });
     }
     return new EmbedBuilder()
-        .setTitle('🏦 GARAAD BANK — Savings Account')
+        .setTitle('🏦 Garaad Bank — Savings')
         .setColor('#2471a3')
         .addFields(...fields)
         .setFooter({ text: 'Garaad Bank • Deposit to grow your BTC' });
