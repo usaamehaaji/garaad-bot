@@ -4,7 +4,7 @@ const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econ
 const ROB_SUCCESS_RATE   = 0.45;
 const ROB_MIN_BTC        = 2_000;
 const MAX_STEAL_FRACTION = 0.25;
-const MAX_ROBS_PER_DAY   = 3;
+const MAX_ROBS_PER_DAY   = 5;
 
 function todayStr() {
     const d = new Date();
