@@ -66,11 +66,14 @@ function jeebRow(authorId, targetId) {
 }
 
 module.exports = async function jeebCmd(message) {
-    const userId = message.author.id;
+    const authorId = message.author.id;
+    const target   = message.mentions.users.first();
+    const userId   = target ? target.id       : authorId;
+    const username = target ? target.username : message.author.username;
 
     return message.reply({
-        embeds:     [buildJeebEmbed(userId, message.author.username)],
-        components: [jeebRow(userId, userId)],
+        embeds:     [buildJeebEmbed(userId, username)],
+        components: [jeebRow(authorId, userId)],
     });
 };
 
