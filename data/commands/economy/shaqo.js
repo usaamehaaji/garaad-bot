@@ -1,18 +1,18 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon, trackEarning } = require('../../../src/economy/econStore');
 
-const WORK_COOLDOWN = 8 * 60 * 60 * 1000; // 8 hours
+const WORK_COOLDOWN = 8 * 60 * 60 * 1000;
 const WORK_BTC      = 150;
 
 const JOBS = [
-    { title: '💻 Software Developer',  desc: 'You built a new app and deployed it to production. Clean code, zero bugs.' },
-    { title: '📊 Data Analyst',        desc: 'You analyzed market data and delivered insights that moved the numbers.' },
-    { title: '🌐 Web Designer',        desc: 'You designed and launched a clean, responsive website for a client.' },
-    { title: '📱 App Tester',          desc: 'You ran a full QA cycle, found 12 bugs, and filed detailed reports.' },
-    { title: '🛠️ IT Support',         desc: 'You fixed network issues across the office. Everything is running smooth.' },
-    { title: '🎨 UI/UX Designer',      desc: 'You delivered polished mockups that the client approved on first pass.' },
-    { title: '🔐 Security Analyst',    desc: 'You ran a penetration test and patched three critical vulnerabilities.' },
-    { title: '☁️ Cloud Engineer',      desc: 'You migrated the infrastructure to the cloud — 40% cost reduction.' },
+    { title: 'Software Developer',  emoji: '💻', desc: 'Built a new app and deployed it to production.' },
+    { title: 'Data Analyst',        emoji: '📊', desc: 'Analyzed market data and delivered key insights.' },
+    { title: 'Web Designer',        emoji: '🌐', desc: 'Designed and launched a responsive website.' },
+    { title: 'App Tester',          emoji: '📱', desc: 'Ran a full QA cycle and filed detailed reports.' },
+    { title: 'IT Support',          emoji: '🛠️', desc: 'Fixed network issues across the office.' },
+    { title: 'UI/UX Designer',      emoji: '🎨', desc: 'Delivered polished mockups approved first pass.' },
+    { title: 'Security Analyst',    emoji: '🔐', desc: 'Patched three critical vulnerabilities.' },
+    { title: 'Cloud Engineer',      emoji: '☁️', desc: 'Migrated infrastructure — 40% cost reduction.' },
 ];
 
 module.exports = async function shaqoCmd(message) {
@@ -29,10 +29,14 @@ module.exports = async function shaqoCmd(message) {
         const mins  = Math.floor((rem % 3600000) / 60000);
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('⏳ Work — On Cooldown')
+                .setTitle('🏦 GARAAD BANK — Payroll')
                 .setColor('#e74c3c')
-                .setDescription(`You need to rest before working again.\n\n🕐 Come back in **${hours}h ${mins}m**.`)
-                .setFooter({ text: 'Garaad Economy • Every 8 hours' }),
+                .addFields(
+                    { name: '⏳ Status',     value: 'NOT ELIGIBLE YET',                      inline: true },
+                    { name: '🕐 Next Pay',   value: `**${hours}h ${mins}m**`,                 inline: true },
+                    { name: '📋 Schedule',   value: 'Every 8 hours',                          inline: true },
+                )
+                .setFooter({ text: 'Garaad Bank • Payroll Department' }),
         ]});
     }
 
@@ -41,18 +45,26 @@ module.exports = async function shaqoCmd(message) {
     trackEarning(userId, WORK_BTC);
     saveEcon();
 
-    const job = JOBS[Math.floor(Math.random() * JOBS.length)];
+    const job  = JOBS[Math.floor(Math.random() * JOBS.length)];
+    const ref  = '#SAL-' + Math.random().toString(36).slice(2,8).toUpperCase();
+    const date = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
 
     return message.reply({ embeds: [
         new EmbedBuilder()
-            .setTitle(`✅ ${job.title}`)
-            .setColor('#2ecc71')
-            .setDescription(
-                `${job.desc}\n\n` +
-                `**+₿: ${WORK_BTC.toLocaleString()}** earned\n` +
-                `Wallet: **₿: ${(d.btc).toLocaleString()}**`
+            .setTitle('🏦 GARAAD BANK — Salary Receipt')
+            .setColor('#27ae60')
+            .addFields(
+                { name: '📋 Type',        value: '💰 SALARY PAYMENT',                         inline: true },
+                { name: '🔖 Reference',   value: `\`${ref}\``,                                 inline: true },
+                { name: '📅 Date',        value: date,                                          inline: true },
+                { name: '👤 Employee',    value: `**${message.author.username}**\n<@${userId}>`, inline: true },
+                { name: `${job.emoji} Position`, value: `**${job.title}**`,                    inline: true },
+                { name: '📝 Activity',    value: job.desc,                                      inline: false },
+                { name: '💰 Gross Pay',   value: `**+₿ ${WORK_BTC.toLocaleString()}**`,        inline: true },
+                { name: '💳 Wallet',      value: `**₿ ${d.btc.toLocaleString()}**`,            inline: true },
+                { name: '⏳ Next Pay',    value: 'In 8 hours',                                  inline: true },
             )
-            .setFooter({ text: 'Garaad Economy • Work again in 8 hours' }),
+            .setFooter({ text: 'Garaad Bank • Payroll Department' }),
     ], components: [
         new ActionRowBuilder().addComponents(
             new ButtonBuilder()

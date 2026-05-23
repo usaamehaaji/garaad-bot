@@ -36,20 +36,23 @@ function buildJeebEmbed(userId, username) {
         ? `\n💳 **Loan:** ₿: ${fmtW(d.loan.owed)}`
         : '';
 
+    const fields = [
+        { name: '👤 Account Holder', value: `**${username}**${titleLabel}`, inline: true },
+        { name: '🏷️ Rank',           value: `**#${rank ?? '—'}**`,           inline: true },
+        { name: '🔥 Streak',         value: `${streak} day${streak !== 1 ? 's' : ''}`, inline: true },
+        { name: '💳 Wallet',         value: `**₿ ${fmtW(btc)}**`,           inline: true },
+        { name: '🏦 Savings',        value: `**₿ ${fmtW(bank)}**`,          inline: true },
+        { name: '📊 Net Worth',      value: `**₿ ${fmtW(total)}**`,         inline: true },
+    ];
+    if (d.loan?.owed) {
+        fields.push({ name: '💳 Active Loan', value: `**₿ ${fmtW(d.loan.owed)}** due`, inline: true });
+    }
     return new EmbedBuilder()
-        .setTitle(`💼 Garaad Wallet`)
-        .setColor('#f39c12')
+        .setTitle('🏦 GARAAD BANK — Account Statement')
+        .setColor('#2471a3')
         .setThumbnail(BTC_ICON)
-        .setDescription(
-            `👤 **${username}**${titleLabel}\n\n` +
-            `💰 **Wallet:** ₿: ${fmtW(btc)}\n` +
-            `🏦 **Bank:** ₿: ${fmtW(bank)}\n` +
-            `📊 **Wadarta:** ₿: ${fmtW(total)}\n` +
-            `🏷️ **Rank:** #${rank ?? '—'}\n` +
-            `🔥 **Streak:** ${streak} day${streak !== 1 ? 's' : ''}` +
-            loanLine
-        )
-        .setFooter({ text: `Garaad Economy • ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, iconURL: BTC_ICON });
+        .addFields(...fields)
+        .setFooter({ text: `Garaad Bank • ${new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })} ${new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' })}`, iconURL: BTC_ICON });
 }
 
 function jeebRow(authorId, targetId) {

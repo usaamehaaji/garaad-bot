@@ -1,38 +1,51 @@
 const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../../src/economy/econStore');
 const { fmt } = require('../../../src/utils/helpers');
-const full = n => Math.round(n || 0).toLocaleString(); // always full number, no abbreviation
 
 const WIN_RATE    = 0.50;
 const WIN_MULTI   = 2.0;
 const WIN_TAX     = 5;
-const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
-const COOLDOWN_MS = 10_000; // 10s cooldown between flips
+const COOLDOWN_MS = 10_000;
 
-const flipCooldowns = new Map(); // userId → cooldownUntil ms
+const flipCooldowns = new Map();
+
+const txRef  = () => '#MKT-' + Math.random().toString(36).slice(2,8).toUpperCase();
+const txDate = () => new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
 
 function buildResult(win, dirLabel, profit, amount, newBal) {
-    return win
-        ? new EmbedBuilder()
-            .setTitle('✅ Economy Flip — WIN!')
-            .setColor('#2ecc71')
-            .setThumbnail(BTC_ICON)
-            .setDescription(`You picked **${dirLabel}** — correct!\n\n📈 The market moved your way.`)
+    if (win) {
+        return new EmbedBuilder()
+            .setTitle('🏦 GARAAD BANK — Market Trade Receipt')
+            .setColor('#27ae60')
             .addFields(
-                { name: '₿ Profit',      value: `**+₿: ${full(profit)}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿: ${full(newBal)}**`,  inline: true },
+                { name: '📋 Type',        value: '📈 MARKET FLIP',           inline: true },
+                { name: '🔖 Reference',   value: `\`${txRef()}\``,            inline: true },
+                { name: '📅 Date',        value: txDate(),                     inline: true },
+                { name: '📊 Direction',   value: dirLabel,                     inline: true },
+                { name: '✅ Result',      value: '**WIN**',                    inline: true },
+                { name: '💰 Stake',       value: `₿ ${amount.toLocaleString()}`, inline: true },
+                { name: '📈 Profit',      value: `**+₿ ${profit.toLocaleString()}**`, inline: true },
+                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
+                { name: '​',         value: '​',                          inline: true },
             )
-            .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON })
-        : new EmbedBuilder()
-            .setTitle('❌ Economy Flip — LOSS!')
-            .setColor('#e74c3c')
-            .setThumbnail(BTC_ICON)
-            .setDescription(`You picked **${dirLabel}** — wrong!\n\n📉 The market went the other way.`)
+            .setFooter({ text: 'Garaad Bank • Market Trade • 50% win rate' });
+    } else {
+        return new EmbedBuilder()
+            .setTitle('🏦 GARAAD BANK — Market Trade Receipt')
+            .setColor('#c0392b')
             .addFields(
-                { name: '₿ Lost',        value: `**-₿: ${full(amount)}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿: ${full(newBal)}**`,  inline: true },
+                { name: '📋 Type',        value: '📉 MARKET FLIP',              inline: true },
+                { name: '🔖 Reference',   value: `\`${txRef()}\``,               inline: true },
+                { name: '📅 Date',        value: txDate(),                        inline: true },
+                { name: '📊 Direction',   value: dirLabel,                        inline: true },
+                { name: '❌ Result',      value: '**LOSS**',                     inline: true },
+                { name: '💰 Stake',       value: `₿ ${amount.toLocaleString()}`,  inline: true },
+                { name: '📉 Lost',        value: `**-₿ ${amount.toLocaleString()}**`, inline: true },
+                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
+                { name: '​',         value: '​',                             inline: true },
             )
-            .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
+            .setFooter({ text: 'Garaad Bank • Market Trade • 50% win rate' });
+    }
 }
 
 function doFlip(userId, amount, direction) {
@@ -40,7 +53,7 @@ function doFlip(userId, amount, direction) {
     ceu(userId);
     const d = eData[userId];
 
-    if ((d.btc || 0) < amount) return { err: `⚠️ Not enough BTC. Wallet: **₿: ${fmt(d.btc || 0)}**` };
+    if ((d.btc || 0) < amount) return { err: `⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(d.btc || 0)}**` };
 
     const win    = Math.random() < WIN_RATE;
     const profit = Math.floor(amount * WIN_MULTI);
@@ -57,7 +70,7 @@ function doFlip(userId, amount, direction) {
     se();
 
     const netProfit = win ? profit - WIN_TAX : profit;
-    const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
+    const dirLabel  = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
     return { embed: buildResult(win, dirLabel, netProfit, amount, d.btc || 0) };
 }
 
@@ -77,25 +90,19 @@ module.exports = async function cashflipCmd(message, args) {
     if (direction === 'down') direction = 'd';
 
     if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'u' && direction !== 'd')) {
-        return message.reply(
-            `⚠️ Isticmaal: \`?ef 500 u\`  ama  \`?ef 500 d\`\n` +
-            `Wallet: **₿: ${fmt(d.btc || 0)}**`
-        );
+        return message.reply(`⚠️ Isticmaal: \`?ef 500 u\`  ama  \`?ef 500 d\`\nWallet: **₿ ${fmt(d.btc || 0)}**`);
     }
 
     if ((d.btc || 0) < amount) {
-        return message.reply(`⚠️ Not enough BTC. Wallet: **₿: ${fmt(d.btc || 0)}**`);
+        return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(d.btc || 0)}**`);
     }
 
     const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
-
-    // ── On cooldown ──
     if (cdLeft > 0) {
-        return message.reply(`⏳ Wait **${cdLeft}s** then send the command again.`);
+        return message.reply(`⏳ Sug **${cdLeft}s** kadib isku day.`);
     }
 
-    // ── Instant result ──
     flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
     const { err, embed } = doFlip(userId, amount, direction);
     if (err) return message.reply(err);

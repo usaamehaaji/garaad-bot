@@ -6,6 +6,9 @@ const ROB_MIN_BTC        = 2_000;
 const MAX_STEAL_FRACTION = 0.25;
 const MAX_ROBS_PER_DAY   = 5;
 
+const txRef  = () => '#ROB-' + Math.random().toString(36).slice(2,8).toUpperCase();
+const txDate = () => new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+
 function todayStr() {
     const d = new Date();
     return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
@@ -27,20 +30,20 @@ module.exports = async function robCmd(message) {
     if (!target) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription('**Rob:** `?rob @user`\n⚠️ You need a Rob Ticket — buy one at `?shop`')
+                .setDescription('**Rob:** `?rob @user`\n⚠️ Rob Ticket ku baahan tahay — ka iibso `?shop`')
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
 
     if (target.id === userId) {
         return message.reply({ embeds: [
-            new EmbedBuilder().setDescription("⚠️ You can't rob yourself.").setColor('#e74c3c'),
+            new EmbedBuilder().setDescription('⚠️ Adiga nafta kuma xadin kartid.').setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
 
     if (target.bot) {
         return message.reply({ embeds: [
-            new EmbedBuilder().setDescription("⚠️ You can't rob a bot.").setColor('#e74c3c'),
+            new EmbedBuilder().setDescription('⚠️ Bot-ka xadin karo.').setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
 
@@ -53,7 +56,7 @@ module.exports = async function robCmd(message) {
     if (!(robber.inventory.robticketExpiry > Date.now())) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription('⚠️ You need a **Rob Ticket** to rob. Buy one at `?shop` for 500 BTC (active 2 days).')
+                .setDescription('⚠️ **Rob Ticket** ma lihid. Ka iibso `?shop` — 500 BTC (2 maalmood active).')
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
@@ -65,7 +68,7 @@ module.exports = async function robCmd(message) {
     if (robber.robsToday.count >= MAX_ROBS_PER_DAY) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription(`⚠️ You've used all **${MAX_ROBS_PER_DAY} robs** for today. Come back tomorrow.`)
+                .setDescription(`⚠️ Maanta **${MAX_ROBS_PER_DAY} rob** oo dhan baad isticmaashay. Berri isku day.`)
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
@@ -73,7 +76,7 @@ module.exports = async function robCmd(message) {
     if ((victim.btc || 0) < ROB_MIN_BTC) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription(`⚠️ Target doesn't have enough BTC to rob (min **₿: ${ROB_MIN_BTC.toLocaleString()}**).`)
+                .setDescription(`⚠️ Target-ku lacag ku filan ma lahan (min **₿ ${ROB_MIN_BTC.toLocaleString()}**).`)
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
@@ -83,15 +86,21 @@ module.exports = async function robCmd(message) {
         saveEcon();
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('🛡️ Rob Blocked!')
+                .setTitle('🏦 GARAAD SECURITY — Incident Report')
                 .setColor('#f39c12')
-                .setDescription(`❌ Target used a **Safety Shield** — rob failed!\n✅ Your ticket was refunded.`)
-                .setFooter({ text: 'Garaad Economy' }),
+                .addFields(
+                    { name: '📋 Type',      value: '🛡️ ROB BLOCKED',                        inline: true },
+                    { name: '🔖 Reference', value: `\`${txRef()}\``,                          inline: true },
+                    { name: '📅 Date',      value: txDate(),                                   inline: true },
+                    { name: '🎯 Target',    value: `**${target.username}**\n<@${target.id}>`, inline: true },
+                    { name: '🛡️ Status',    value: 'Safety Shield activated',                 inline: true },
+                    { name: '💳 Outcome',   value: 'Rob failed — shield consumed',            inline: true },
+                )
+                .setFooter({ text: 'Garaad Security • Safety Shield protected the target' }),
         ], components: [closeRow(userId)] });
     }
 
     robber.robsToday.count += 1;
-
     const success = Math.random() < ROB_SUCCESS_RATE;
 
     if (success) {
@@ -101,13 +110,20 @@ module.exports = async function robCmd(message) {
         saveEcon();
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('🔫 Rob — Success!')
-                .setColor('#2ecc71')
-                .setDescription(
-                    `✅ You stole **₿: ${stolen.toLocaleString()}** from the target!\n` +
-                    `Wallet: **₿: ${(robber.btc).toLocaleString()}**`
+                .setTitle('🏦 GARAAD SECURITY — Incident Report')
+                .setColor('#27ae60')
+                .addFields(
+                    { name: '📋 Type',        value: '🔫 ROBBERY',                                     inline: true },
+                    { name: '🔖 Reference',   value: `\`${txRef()}\``,                                  inline: true },
+                    { name: '📅 Date',        value: txDate(),                                           inline: true },
+                    { name: '🦹 Robber',      value: `**${message.author.username}**\n<@${userId}>`,     inline: true },
+                    { name: '🎯 Victim',      value: `**${target.username}**\n<@${target.id}>`,          inline: true },
+                    { name: '✅ Status',      value: '**SUCCESS**',                                      inline: true },
+                    { name: '💰 Stolen',      value: `**+₿ ${stolen.toLocaleString()}**`,               inline: true },
+                    { name: '💳 Your Wallet', value: `**₿ ${robber.btc.toLocaleString()}**`,            inline: true },
+                    { name: '📊 Robs Today',  value: `${robber.robsToday.count}/${MAX_ROBS_PER_DAY}`,   inline: true },
                 )
-                .setFooter({ text: 'Garaad Economy' }),
+                .setFooter({ text: 'Garaad Security • Robbery Report' }),
         ], components: [closeRow(userId)] });
     } else {
         const fine = Math.min(500, Math.floor((robber.btc || 0) * 0.10));
@@ -115,13 +131,20 @@ module.exports = async function robCmd(message) {
         saveEcon();
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setTitle('🚔 Rob — Failed!')
-                .setColor('#e74c3c')
-                .setDescription(
-                    `❌ You were caught! Fined **₿: ${fine.toLocaleString()}**.\n` +
-                    `Wallet: **₿: ${(robber.btc).toLocaleString()}**`
+                .setTitle('🏦 GARAAD SECURITY — Incident Report')
+                .setColor('#c0392b')
+                .addFields(
+                    { name: '📋 Type',        value: '🚔 ROBBERY ATTEMPT',                              inline: true },
+                    { name: '🔖 Reference',   value: `\`${txRef()}\``,                                  inline: true },
+                    { name: '📅 Date',        value: txDate(),                                           inline: true },
+                    { name: '🦹 Suspect',     value: `**${message.author.username}**\n<@${userId}>`,     inline: true },
+                    { name: '🎯 Target',      value: `**${target.username}**\n<@${target.id}>`,          inline: true },
+                    { name: '❌ Status',      value: '**ARRESTED**',                                     inline: true },
+                    { name: '💸 Fine',        value: `**-₿ ${fine.toLocaleString()}**`,                 inline: true },
+                    { name: '💳 Your Wallet', value: `**₿ ${robber.btc.toLocaleString()}**`,            inline: true },
+                    { name: '📊 Robs Today',  value: `${robber.robsToday.count}/${MAX_ROBS_PER_DAY}`,   inline: true },
                 )
-                .setFooter({ text: 'Garaad Economy' }),
+                .setFooter({ text: 'Garaad Security • You were caught and fined' }),
         ], components: [closeRow(userId)] });
     }
 };
