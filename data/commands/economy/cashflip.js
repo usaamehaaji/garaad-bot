@@ -13,39 +13,25 @@ const txRef  = () => '#MKT-' + Math.random().toString(36).slice(2,8).toUpperCase
 const txDate = () => new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
 
 function buildResult(win, dirLabel, profit, amount, newBal) {
-    if (win) {
-        return new EmbedBuilder()
-            .setTitle('🏦 GARAAD BANK — Market Trade Receipt')
-            .setColor('#27ae60')
+    return win
+        ? new EmbedBuilder()
+            .setTitle('✅ Economy Flip — WIN!')
+            .setColor('#2ecc71')
+            .setDescription(`Waxaad dooratay **${dirLabel}** — sax!\n\n📈 Suuqku dhinacaagaa u dhaqaaqay.`)
             .addFields(
-                { name: '📋 Type',        value: '📈 MARKET FLIP',           inline: true },
-                { name: '🔖 Reference',   value: `\`${txRef()}\``,            inline: true },
-                { name: '📅 Date',        value: txDate(),                     inline: true },
-                { name: '📊 Direction',   value: dirLabel,                     inline: true },
-                { name: '✅ Result',      value: '**WIN**',                    inline: true },
-                { name: '💰 Stake',       value: `₿ ${amount.toLocaleString()}`, inline: true },
-                { name: '📈 Profit',      value: `**+₿ ${profit.toLocaleString()}**`, inline: true },
-                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
-                { name: '​',         value: '​',                          inline: true },
+                { name: '₿ Profit',      value: `**+₿ ${profit.toLocaleString()}**`, inline: true },
+                { name: '₿ New Balance', value: `**₿ ${newBal.toLocaleString()}**`,   inline: true },
             )
-            .setFooter({ text: 'Garaad Bank • Market Trade • 50% win rate' });
-    } else {
-        return new EmbedBuilder()
-            .setTitle('🏦 GARAAD BANK — Market Trade Receipt')
-            .setColor('#c0392b')
+            .setFooter({ text: 'Garaad Economy' })
+        : new EmbedBuilder()
+            .setTitle('❌ Economy Flip — LOSS!')
+            .setColor('#e74c3c')
+            .setDescription(`Waxaad dooratay **${dirLabel}** — khalad!\n\n📉 Suuqku dhinaca kale u dhaqaaqay.`)
             .addFields(
-                { name: '📋 Type',        value: '📉 MARKET FLIP',              inline: true },
-                { name: '🔖 Reference',   value: `\`${txRef()}\``,               inline: true },
-                { name: '📅 Date',        value: txDate(),                        inline: true },
-                { name: '📊 Direction',   value: dirLabel,                        inline: true },
-                { name: '❌ Result',      value: '**LOSS**',                     inline: true },
-                { name: '💰 Stake',       value: `₿ ${amount.toLocaleString()}`,  inline: true },
-                { name: '📉 Lost',        value: `**-₿ ${amount.toLocaleString()}**`, inline: true },
-                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
-                { name: '​',         value: '​',                             inline: true },
+                { name: '₿ Lost',        value: `**-₿ ${amount.toLocaleString()}**`, inline: true },
+                { name: '₿ New Balance', value: `**₿ ${newBal.toLocaleString()}**`,   inline: true },
             )
-            .setFooter({ text: 'Garaad Bank • Market Trade • 50% win rate' });
-    }
+            .setFooter({ text: 'Garaad Economy' });
 }
 
 function doFlip(userId, amount, direction) {
