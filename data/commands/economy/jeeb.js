@@ -49,9 +49,9 @@ function buildJeebEmbed(userId, username, isOwner = true) {
 
     // ── Own wallet: full info ──
     const fields = [
-        { name: '💳 Wallet',    value: `**₿ ${fmtW(btc)}**`,   inline: true },
-        { name: '🏦 Savings',   value: `**₿ ${fmtW(bank)}**`,  inline: true },
-        { name: '📊 Net Worth', value: `**₿ ${fmtW(total)}**`, inline: true },
+        { name: '💳 Wallet',       value: `**₿ ${fmtW(btc)}**`,   inline: true },
+        { name: '🏦 Bank Balance', value: `**₿ ${fmtW(bank)}**`,  inline: true },
+        { name: '📊 Net Worth',    value: `**₿ ${fmtW(total)}**`, inline: true },
     ];
     if (d.loan?.owed) fields.push({ name: '⚠️ Loan Due', value: `**₿ ${fmtW(d.loan.owed)}**`, inline: true });
 
