@@ -37,8 +37,10 @@ function getMarketState() {
     };
 }
 
-function buildResult(win, dirLabel, profit, amount, newBal, market) {
-    const trendLine = `${market.trend} Market: **${market.price.toLocaleString()}** (${market.arrow} ${market.change})`;
+function buildResult(win, dirLabel, direction, profit, amount, newBal, market) {
+    const marketUp   = win ? (direction === 'u') : (direction !== 'u');
+    const trendEmoji = marketUp ? '📈' : '📉';
+    const trendLine  = `${trendEmoji} Market: **${market.price.toLocaleString()}**`;
     return win
         ? new EmbedBuilder()
             .setTitle('✅ Economy Flip — WIN!')
@@ -85,7 +87,7 @@ function doFlip(userId, amount, direction) {
     saveEcon();
 
     const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
-    return { win, payout, amount, newBal: d.btc, dirLabel };
+    return { win, payout, amount, newBal: d.btc, dirLabel, direction };
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -139,7 +141,7 @@ module.exports = async function cashflipCmd(message, args) {
     const result = doFlip(userId, amount, direction);
     if (result.err) return message.reply(result.err);
 
-    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.payout, result.amount, result.newBal, market)] });
+    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.direction, result.payout, result.amount, result.newBal, market)] });
 };
 
 module.exports.WIN_MULTI = WIN_MULTI;
