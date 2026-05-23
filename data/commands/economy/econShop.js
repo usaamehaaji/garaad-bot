@@ -13,7 +13,7 @@ const ECON_TITLES = {
 
 const SHOP_ITEMS = {
     safety:    { label: '🛡️ Safety Shield', price:   500, currency: 'btc', type: 'item', desc: 'Blocks one robbery attempt' },
-    robticket: { label: '🎫 Rob Ticket',    price: 8_000, currency: 'btc', type: 'item', desc: 'Required to use ?rob' },
+    robticket: { label: '🎫 Rob Ticket',    price: 1_000, currency: 'btc', type: 'item', desc: 'Required to use ?rob' },
     ...ECON_TITLES,
 };
 
@@ -29,7 +29,7 @@ module.exports = async function econShopCmd(message) {
     // Row 1: Shield | Rob Ticket | Master
     const row1 = new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId('eco_shop_safety')    .setLabel('🛡️ Shield  500 BTC') .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId('eco_shop_robticket') .setLabel('🎫 Rob Ticket 8k BTC').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('eco_shop_robticket') .setLabel('🎫 Rob Ticket 1k BTC').setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId('eco_shop_master')    .setLabel('Master  5k BTC')      .setStyle(ButtonStyle.Primary),
     );
 
@@ -66,7 +66,7 @@ module.exports = async function econShopCmd(message) {
                     name: '🧰 Items',
                     value:
                         `🛡️ **Safety Shield** — 500 BTC _(blocks one robbery)_\n` +
-                        `🎫 **Rob Ticket** — 8,000 BTC _(required for ?rob)_`,
+                        `🎫 **Rob Ticket** — 1,000 BTC _(required for ?rob)_`,
                     inline: false,
                 },
                 {
