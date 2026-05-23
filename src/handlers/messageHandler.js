@@ -6,40 +6,40 @@ const { PREFIX, SAVER_CHANNEL_ID } = require('../config');
 const { checkUser }   = require('../utils/helpers');
 const { isAdmin }     = require('../utils/admin');
 
-const helpCmd         = require('../commands/help');
+const helpCmd         = require('../../data/commands/help');
 
-const profileCmd      = require('../commands/profile');
-const statisticsCmd   = require('../commands/statistics');
-const topCmd          = require('../commands/top');
-const todayCmd        = require('../commands/today');
+const profileCmd      = require('../../data/commands/profile');
+const statisticsCmd   = require('../../data/commands/statistics');
+const topCmd          = require('../../data/commands/top');
+const todayCmd        = require('../../data/commands/today');
 
-const buyCmd          = require('../commands/buy');
-const soloCmd         = require('../commands/solo');
-const duelCmd         = require('../commands/duel');
-const quizCmd         = require('../commands/quiz');
-const exchangeCmd     = require('../commands/exchange');
-const ciladaCmd       = require('../commands/cilada');
-const adminCmd        = require('../commands/admin/admin');
-const broadcast       = require('../commands/admin/adminBroadcast');
+const buyCmd          = require('../../data/commands/buy');
+const soloCmd         = require('../../data/commands/solo');
+const duelCmd         = require('../../data/commands/duel');
+const quizCmd         = require('../../data/commands/quiz');
+const exchangeCmd     = require('../../data/commands/exchange');
+const ciladaCmd       = require('../../data/commands/cilada');
+const adminCmd        = require('../../data/commands/admin/admin');
+const broadcast       = require('../../data/commands/admin/adminBroadcast');
 const tournament      = require('../games/tournament');
 const teamDuel        = require('../games/teamDuel');
 
 // ── Economy ──
 
-const jeebCmd         = require('../commands/economy/jeeb');
-const tradeCmd        = require('../commands/economy/trade');
-const cashflipCmd     = require('../commands/economy/cashflip');
-const econExchangeCmd = require('../commands/economy/econExchange');
-const giveCmd         = require('../commands/economy/give');
-const robCmd          = require('../commands/economy/rob');
-const richCmd         = require('../commands/economy/rich');
-const ebankCmd        = require('../commands/economy/ebank');
-const econShopCmd     = require('../commands/economy/econShop');
+const jeebCmd         = require('../../data/commands/economy/jeeb');
+const tradeCmd        = require('../../data/commands/economy/trade');
+const cashflipCmd     = require('../../data/commands/economy/cashflip');
+const econExchangeCmd = require('../../data/commands/economy/econExchange');
+const giveCmd         = require('../../data/commands/economy/give');
+const robCmd          = require('../../data/commands/economy/rob');
+const richCmd         = require('../../data/commands/economy/rich');
+const ebankCmd        = require('../../data/commands/economy/ebank');
+const econShopCmd     = require('../../data/commands/economy/econShop');
 
-const shaqoCmd        = require('../commands/economy/shaqo');
-const bankListCmd     = require('../commands/economy/bankList');
-const econTitleCmd    = require('../commands/economy/econTitle');
-const dmCmd           = require('../commands/dm');
+const shaqoCmd        = require('../../data/commands/economy/shaqo');
+const bankListCmd     = require('../../data/commands/economy/bankList');
+const econTitleCmd    = require('../../data/commands/economy/econTitle');
+const dmCmd           = require('../../data/commands/dm');
 
 
 module.exports = function setupMessageHandler(client) {
