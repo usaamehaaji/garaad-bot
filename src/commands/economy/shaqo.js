@@ -2,7 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { econData, checkEconUser, saveEcon, trackEarning } = require('../../economy/econStore');
 
 const WORK_COOLDOWN = 8 * 60 * 60 * 1000; // 8 hours
-const WORK_BTC      = 500;
+const WORK_BTC      = 150;
 
 const JOBS = [
     { title: '💻 Software Developer',  desc: 'You built a new app and deployed it to production. Clean code, zero bugs.' },

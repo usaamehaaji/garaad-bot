@@ -67,7 +67,7 @@ function buildEcoEmbed() {
         .setDescription(
             `**👤 Lacagta**\n` +
             `**\`${PREFIX}jeeb\`** — Jeebkaaga, bank iyo deynta\n` +
-            `**\`${PREFIX}shaqo\`** — Shaqo 8h mar → +500 BTC\n` +
+            `**\`${PREFIX}shaqo\`** — Shaqo 8h mar → +150 BTC\n` +
             `**\`${PREFIX}today\`** — Maalin kasta: +250 BTC + 3 IQ (24h)\n\n` +
 
             `**🏦 Bank & Deyn**\n` +
