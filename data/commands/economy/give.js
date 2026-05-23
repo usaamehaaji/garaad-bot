@@ -65,14 +65,23 @@ module.exports = async function giveCmd(message, args) {
         saveData();
 
         const newRemaining = IQ_DAILY_LIMIT - d.iqGivenToday.count;
+        const txRef = '#GVE-' + Math.random().toString(36).slice(2,8).toUpperCase();
+        const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
         return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('🧠 IQ La Diray!')
-            .setColor('#2ecc71')
-            .setDescription(
-                `✅ **${actualAmount} IQ** waxaad u diray <@${target.id}>\n\n` +
-                `Maanta kuu hadhay: **${newRemaining}/${IQ_DAILY_LIMIT} IQ**`
+            .setTitle('🏦 GARAAD BANK — Transfer Receipt')
+            .setColor('#27ae60')
+            .addFields(
+                { name: '📋 Type',        value: '🧠 IQ TRANSFER',                                     inline: true },
+                { name: '🔖 Reference',   value: `\`${txRef}\``,                                        inline: true },
+                { name: '📅 Date',        value: txDate,                                                 inline: true },
+                { name: '📤 Sender',      value: `**${message.author.username}**\n<@${userId}>`,         inline: true },
+                { name: '📥 Receiver',    value: `**${target.username}**\n<@${target.id}>`,              inline: true },
+                { name: '✅ Amount',      value: `**${actualAmount} 🧠 IQ**`,                            inline: true },
+                { name: '📊 Sender IQ',   value: `**${d.iq} IQ**`,                                      inline: true },
+                { name: '📊 Receiver IQ', value: `**${dt.iq} IQ**`,                                     inline: true },
+                { name: '⏳ Daily Limit', value: `${newRemaining}/${IQ_DAILY_LIMIT} remaining today`,    inline: true },
             )
-            .setFooter({ text: 'Garaad Economy' })] });
+            .setFooter({ text: 'Garaad Economy • IQ transfers limited to 5 per day' })] });
     }
 
     // ── BTC / Gold give ──
@@ -91,15 +100,23 @@ module.exports = async function giveCmd(message, args) {
     dt[asset] = (dt[asset] || 0) + amount;
     saveEcon();
 
+    const txRef  = '#GVE-' + Math.random().toString(36).slice(2,8).toUpperCase();
+    const txDate = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
     return message.reply({ embeds: [new EmbedBuilder()
-        .setTitle('💸 Lacag La Diray!')
-        .setColor('#2ecc71')
-        .setDescription(`**${fmt(amount)} ${ASSET_LABELS[asset]}** si guul ah ayaa loo diray!`)
+        .setTitle('🏦 GARAAD BANK — Transfer Receipt')
+        .setColor('#27ae60')
         .addFields(
-            { name: '📤 Diray',         value: `<@${userId}>\nHadhay: **${fmt(d[asset])} ${ASSET_LABELS[asset]}**`,    inline: true },
-            { name: '📥 Helay',         value: `<@${target.id}>\nCusub: **${fmt(dt[asset])} ${ASSET_LABELS[asset]}**`, inline: true },
+            { name: '📋 Type',           value: `${asset === 'btc' ? '₿ BTC' : '🥇 GOLD'} TRANSFER`,   inline: true },
+            { name: '🔖 Reference',      value: `\`${txRef}\``,                                          inline: true },
+            { name: '📅 Date',           value: txDate,                                                   inline: true },
+            { name: '📤 Sender',         value: `**${message.author.username}**\n<@${userId}>`,           inline: true },
+            { name: '📥 Receiver',       value: `**${target.username}**\n<@${target.id}>`,                inline: true },
+            { name: '✅ Amount',         value: `**${fmt(amount)} ${ASSET_LABELS[asset]}**`,              inline: true },
+            { name: `📊 Sender Balance`, value: `**${fmt(d[asset])} ${ASSET_LABELS[asset]}**`,            inline: true },
+            { name: `📊 Receiver Balance`,value: `**${fmt(dt[asset])} ${ASSET_LABELS[asset]}**`,          inline: true },
+            { name: '​',            value: '​',                                                    inline: true },
         )
-        .setFooter({ text: 'Garaad Economy' })] });
+        .setFooter({ text: 'Garaad Economy • Peer-to-peer transfer' })] });
 };
 
 module.exports.ASSET_LABELS = ASSET_LABELS;
