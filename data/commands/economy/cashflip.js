@@ -1,64 +1,67 @@
 const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, trackEarning } = require('../../../src/economy/econStore');
 const { fmt } = require('../../../src/utils/helpers');
-const full = n => Math.round(n || 0).toLocaleString(); // always full number, no abbreviation
 
 const WIN_RATE    = 0.50;
 const WIN_MULTI   = 2.0;
 const WIN_TAX     = 5;
 const BTC_ICON    = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png';
-const COOLDOWN_MS = 10_000; // 10s cooldown between flips
+const COOLDOWN_MS = 10_000;
 
-const flipCooldowns = new Map(); // userId → cooldownUntil ms
+const flipCooldowns = new Map();
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function fakePrice(base, tick) {
+    const moves = [
+        Math.floor(base * 1.012),
+        Math.floor(base * 0.994),
+        Math.floor(base * 1.007),
+        Math.floor(base * 0.988),
+        Math.floor(base * 1.021),
+        Math.floor(base * 0.975),
+    ];
+    return moves[tick % moves.length];
+}
+
+function tickerEmbed(tick, price, prevPrice, dirLabel, amount) {
+    const arrow  = price >= prevPrice ? '📈' : '📉';
+    const bars   = ['🟥', '🟥', '🟥', '🟨', '🟨', '🟩'];
+    const filled = bars.slice(0, tick + 1).join('');
+    const empty  = '⬛'.repeat(3 - tick - 1);
+    return new EmbedBuilder()
+        .setTitle('📊 Garaad Market — Processing...')
+        .setColor('#f39c12')
+        .setDescription(
+            `**Bet:** ${dirLabel}  |  **₿: ${price.toLocaleString()}**  ${arrow}\n\n` +
+            `${filled}${empty}  Tick ${tick + 1}/3\n\n` +
+            `_Natiijiadu waxay kuu timid DM-ka..._`
+        )
+        .setThumbnail(BTC_ICON);
+}
 
 function buildResult(win, dirLabel, profit, amount, newBal) {
     return win
         ? new EmbedBuilder()
-            .setTitle('✅ Economy Flip — WIN!')
+            .setTitle('✅ Market Flip — WIN!')
             .setColor('#2ecc71')
             .setThumbnail(BTC_ICON)
-            .setDescription(`You picked **${dirLabel}** — correct!\n\n📈 The market moved your way.`)
+            .setDescription(`Waxaad dooratay **${dirLabel}** — sax!\n\n📈 Suuqku dhinacaagaa u dhaqaaqay.`)
             .addFields(
-                { name: '₿ Profit',      value: `**+₿: ${full(profit)}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿: ${full(newBal)}**`,  inline: true },
+                { name: '₿ Profit',      value: `**+₿: ${profit.toLocaleString()}**`, inline: true },
+                { name: '₿ New Balance', value: `**₿: ${newBal.toLocaleString()}**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON })
         : new EmbedBuilder()
-            .setTitle('❌ Economy Flip — LOSS!')
+            .setTitle('❌ Market Flip — LOSS!')
             .setColor('#e74c3c')
             .setThumbnail(BTC_ICON)
-            .setDescription(`You picked **${dirLabel}** — wrong!\n\n📉 The market went the other way.`)
+            .setDescription(`Waxaad dooratay **${dirLabel}** — khalad!\n\n📉 Suuqku dhinaca kale u dhaqaaqay.`)
             .addFields(
-                { name: '₿ Lost',        value: `**-₿: ${full(amount)}**`, inline: true },
-                { name: '₿ New Balance', value: `**₿: ${full(newBal)}**`,  inline: true },
+                { name: '₿ Lost',        value: `**-₿: ${amount.toLocaleString()}**`, inline: true },
+                { name: '₿ New Balance', value: `**₿: ${newBal.toLocaleString()}**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy', iconURL: BTC_ICON });
-}
-
-function doFlip(userId, amount, direction) {
-    const { econData: eData, checkEconUser: ceu, saveEcon: se, addToTreasury: att, trackEarning: te } = require('../../../src/economy/econStore');
-    ceu(userId);
-    const d = eData[userId];
-
-    if ((d.btc || 0) < amount) return { err: `⚠️ Not enough BTC. Wallet: **₿: ${fmt(d.btc || 0)}**` };
-
-    const win    = Math.random() < WIN_RATE;
-    const profit = Math.floor(amount * WIN_MULTI);
-
-    if (win) {
-        const netProfit = profit - WIN_TAX;
-        d.btc = (d.btc || 0) + netProfit;
-        att(WIN_TAX);
-        te(userId, netProfit);
-    } else {
-        d.btc = (d.btc || 0) - amount;
-        att(amount);
-    }
-    se();
-
-    const netProfit = win ? profit - WIN_TAX : profit;
-    const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
-    return { embed: buildResult(win, dirLabel, netProfit, amount, d.btc || 0) };
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -74,29 +77,66 @@ module.exports = async function cashflipCmd(message, args) {
     }
 
     if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'up' && direction !== 'down')) {
-        return message.reply(
-            `⚠️ Usage: \`?ef 500 up\`  or  \`?ef 500 down\`\n` +
-            `Wallet: **₿: ${fmt(d.btc || 0)}**`
-        );
+        return message.reply(`⚠️ Isticmaal: \`?ef 500 up\`  ama  \`?ef 500 down\`\nWallet: **₿: ${fmt(d.btc || 0)}**`);
     }
 
     if ((d.btc || 0) < amount) {
-        return message.reply(`⚠️ Not enough BTC. Wallet: **₿: ${fmt(d.btc || 0)}**`);
+        return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿: ${fmt(d.btc || 0)}**`);
     }
 
     const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
-
-    // ── On cooldown ──
     if (cdLeft > 0) {
-        return message.reply(`⏳ Wait **${cdLeft}s** then send the command again.`);
+        return message.reply(`⏳ Sug **${cdLeft}s** kadib isku day.`);
     }
 
-    // ── Instant result ──
     flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
-    const { err, embed } = doFlip(userId, amount, direction);
-    if (err) return message.reply(err);
-    return message.reply({ embeds: [embed] });
+
+    // Delete user's command so others can't see the bet
+    await message.delete().catch(() => {});
+
+    const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const basePrice = 1000 + Math.floor(Math.random() * 500);
+    let prevPrice = basePrice;
+
+    // Show 3-tick live ticker
+    const tickMsg = await message.channel.send({
+        embeds: [tickerEmbed(0, fakePrice(basePrice, 0), prevPrice, dirLabel, amount)],
+    }).catch(() => null);
+
+    for (let t = 1; t < 3; t++) {
+        await sleep(1000);
+        const price = fakePrice(basePrice, t);
+        if (tickMsg) await tickMsg.edit({ embeds: [tickerEmbed(t, price, prevPrice, dirLabel, amount)] }).catch(() => {});
+        prevPrice = price;
+    }
+
+    await sleep(1000);
+
+    // Calculate result
+    const win     = Math.random() < WIN_RATE;
+    const gross   = Math.floor(amount * WIN_MULTI);
+    const netProfit = win ? gross - WIN_TAX : gross;
+
+    if (win) {
+        d.btc = (d.btc || 0) + (gross - WIN_TAX);
+        addToTreasury(WIN_TAX);
+        trackEarning(userId, gross - WIN_TAX);
+    } else {
+        d.btc = (d.btc || 0) - amount;
+        addToTreasury(amount);
+    }
+    saveEcon();
+
+    // Delete ticker, send result to DM only
+    if (tickMsg) await tickMsg.delete().catch(() => {});
+
+    await message.author.send({ embeds: [buildResult(win, dirLabel, win ? gross - WIN_TAX : amount, amount, d.btc || 0)] })
+        .catch(() => {
+            // If DM fails, send briefly in channel then delete
+            message.channel.send({ embeds: [buildResult(win, dirLabel, win ? gross - WIN_TAX : amount, amount, d.btc || 0)] })
+                .then(m => setTimeout(() => m.delete().catch(() => {}), 8000));
+        });
 };
 
 module.exports.WIN_MULTI = WIN_MULTI;
