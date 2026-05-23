@@ -51,8 +51,7 @@ function buildEduEmbed(userId) {
             `**\`${PREFIX}gal CODE\`** — Game ku biir (code-ka DM-kaaga)\n\n` +
 
             `**📊 Dhibcaha & IQ**\n` +
-            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel\n` +
-            `**\`${PREFIX}exchange\`** — Dhibcaha IQ ku badal\n\n` +
+            `**\`${PREFIX}today\`** — Maalin kasta nasiib ku hel\n\n` +
 
             `**👤 Profile**\n` +
             `**\`${PREFIX}profile\`** — IQ, level iyo dhibcahaaga\n` +
