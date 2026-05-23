@@ -232,8 +232,10 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: '⚠️ Adiga nafta bank-kaaga uma dirin kartid.', flags: MessageFlags.Ephemeral });
                 }
 
-                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-                const { closeRow, buildBankEmbed, bankFullRow, ebCloseRow, applyInterest } = require('../../data/commands/economy/ebank');
+                const TRANSFER_TAX_RATE = 0.05; // 5%
+
+                const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
+                const { closeRow } = require('../../data/commands/economy/ebank');
 
                 checkEconUser(ownerId);
                 checkEconUser(targetId);
@@ -244,9 +246,13 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: `⚠️ Bank-kaagu lacag ku filan ma lahan. Haysataa: **₿: ${(sender.banks?.garaad || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
 
+                const tax      = Math.max(1, Math.floor(amount * TRANSFER_TAX_RATE));
+                const received = amount - tax;
+
                 sender.banks.garaad   -= amount;
                 receiver.banks        ??= { garaad: 0 };
-                receiver.banks.garaad += amount;
+                receiver.banks.garaad += received;
+                addToTreasury(tax);
                 saveEcon();
 
                 let targetTag = targetId;
@@ -260,11 +266,14 @@ module.exports = function setupInteractionHandler(client) {
                             { name: '📤 Diray',         value: `<@${ownerId}>`,                                        inline: true },
                             { name: '📥 Helay',         value: targetTag,                                              inline: true },
                             { name: '​',           value: '​',                                               inline: true },
-                            { name: '💰 Xaddadka',      value: `**₿: ${amount.toLocaleString()}**`,                    inline: true },
+                            { name: '💰 La diray',      value: `**₿: ${amount.toLocaleString()}**`,                    inline: true },
+                            { name: '🏛️ Tax (5%)',      value: `**-₿: ${tax.toLocaleString()}**`,                      inline: true },
+                            { name: '✅ La helay',       value: `**₿: ${received.toLocaleString()}**`,                  inline: true },
                             { name: '🏦 Bank-kaaga',    value: `**₿: ${sender.banks.garaad.toLocaleString()}**`,       inline: true },
                             { name: '🏦 Bank-kiisa',    value: `**₿: ${receiver.banks.garaad.toLocaleString()}**`,     inline: true },
+                            { name: '​',           value: '​',                                               inline: true },
                         )
-                        .setFooter({ text: 'Garaad Bank' }),
+                        .setFooter({ text: 'Garaad Bank • 5% transfer tax' }),
                 ], components: [closeRow(ownerId)] });
             }
 
