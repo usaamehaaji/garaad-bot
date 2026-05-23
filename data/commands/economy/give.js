@@ -94,9 +94,13 @@ module.exports = async function giveCmd(message, args) {
     return message.reply({ embeds: [new EmbedBuilder()
         .setTitle('💸 Lacag La Diray!')
         .setColor('#2ecc71')
-        .setDescription(
-            `✅ **${fmt(amount)} ${ASSET_LABELS[asset]}** waxaad u diray\n\n` +
-            `Hadhaagaaga: **${fmt(d[asset])} ${ASSET_LABELS[asset]}**`
+        .addFields(
+            { name: '📤 Diray',    value: `<@${userId}>`,   inline: true },
+            { name: '📥 Helay',    value: `<@${target.id}>`, inline: true },
+            { name: '​',      value: '​',           inline: true },
+            { name: '💰 Xaddadka', value: `**${fmt(amount)} ${ASSET_LABELS[asset]}**`, inline: true },
+            { name: '📊 Hadhkiisa', value: `**${fmt(d[asset])} ${ASSET_LABELS[asset]}**`, inline: true },
+            { name: '📈 Cusub',    value: `**${fmt(dt[asset])} ${ASSET_LABELS[asset]}**`, inline: true },
         )
         .setFooter({ text: 'Garaad Economy' })] });
 };
