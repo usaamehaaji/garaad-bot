@@ -143,8 +143,8 @@ async function cmdTeamDuel(message, args) {
             'Tusaale: `?tduel 2v2 usd 10000` ama `?tduel 1v1 iq 50`',
         );
     }
-    if (!['iq', 'usd'].includes(typeArg)) {
-        return message.reply('⚠️ Nooca dhigga waa `iq` ama `usd`.\nTusaale: `?tduel 2v2 usd 10000`');
+    if (!['iq', 'btc'].includes(typeArg)) {
+        return message.reply('⚠️ Nooca dhigga waa `iq` ama `btc`.\nTusaale: `?duel 2v2` kadib `btc 500` ama `iq 10`');
     }
     if (isNaN(amountArg) || amountArg <= 0) {
         return message.reply('⚠️ Dhigga qiimihiisu waa inuu ka sarreeyo 0.\nTusaale: `?deul 2v2 usd 10000`');
