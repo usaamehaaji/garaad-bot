@@ -34,10 +34,13 @@ function buildJeebEmbed(userId, username, isOwner = true) {
 
     const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
+    const hasShield = (d.inventory?.safetyExpiry || 0) > Date.now();
+    const shieldStr = hasShield ? '  🛡️' : '';
+
     // ── Other player: wallet only ──
     if (!isOwner) {
         return new EmbedBuilder()
-            .setTitle(`💼 ${username}${titleLabel}`)
+            .setTitle(`💼 ${username}${titleLabel}${shieldStr}`)
             .setColor('#95a5a6')
             .setThumbnail(BTC_ICON)
             .setDescription(`🏷️ **Rank #${rank ?? '—'}**`)
@@ -56,7 +59,7 @@ function buildJeebEmbed(userId, username, isOwner = true) {
     if (d.loan?.owed) fields.push({ name: '⚠️ Loan Due', value: `**₿ ${fmtW(d.loan.owed)}**`, inline: true });
 
     return new EmbedBuilder()
-        .setTitle(`💼 ${username}${titleLabel}`)
+        .setTitle(`💼 ${username}${titleLabel}${shieldStr}`)
         .setColor('#f39c12')
         .setThumbnail(BTC_ICON)
         .setDescription(`🏷️ **Rank #${rank ?? '—'}**  •  🔥 **${streak} day${streak !== 1 ? 's' : ''}**`)
