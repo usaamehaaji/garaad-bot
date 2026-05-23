@@ -1589,7 +1589,8 @@ module.exports = function setupInteractionHandler(client) {
             const { buildJeebEmbed, jeebRow } = require('../../data/commands/economy/jeeb');
             const targetUser = await interaction.client.users.fetch(targetId).catch(() => null);
             const username   = targetUser ? targetUser.username : targetId;
-            return interaction.update({ embeds: [buildJeebEmbed(targetId, username)], components: [jeebRow(authorId, targetId)] });
+            const isOwner    = targetId === authorId;
+            return interaction.update({ embeds: [buildJeebEmbed(targetId, username, isOwner)], components: [jeebRow(authorId, targetId)] });
         }
 
         // ── Team Duel: lobby buttons ──

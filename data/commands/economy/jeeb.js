@@ -16,13 +16,13 @@ function getPlayerRank(userId) {
     return idx >= 0 ? idx + 1 : null;
 }
 
-function buildJeebEmbed(userId, username) {
+function buildJeebEmbed(userId, username, isOwner = true) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    const btc    = d.btc             || 0;
-    const bank   = d.banks?.garaad   || 0;
-    const streak = d.streak          || 0;
+    const btc    = d.btc           || 0;
+    const bank   = d.banks?.garaad || 0;
+    const streak = d.streak        || 0;
     const total  = Math.max(0, btc + bank - (d.loan?.owed || 0));
     const rank   = getPlayerRank(userId);
 
@@ -32,11 +32,22 @@ function buildJeebEmbed(userId, username) {
         return ECON_TITLES[d.activeEconTitle] ? ` [${ECON_TITLES[d.activeEconTitle].label}]` : '';
     })();
 
-    const loanLine = d.loan?.owed
-        ? `\n💳 **Loan:** ₿: ${fmtW(d.loan.owed)}`
-        : '';
+    const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
-    const time   = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    // ── Other player: wallet only ──
+    if (!isOwner) {
+        return new EmbedBuilder()
+            .setTitle(`💼 ${username}${titleLabel}`)
+            .setColor('#95a5a6')
+            .setThumbnail(BTC_ICON)
+            .setDescription(`🏷️ **Rank #${rank ?? '—'}**`)
+            .addFields(
+                { name: '💳 Wallet', value: `**₿ ${fmtW(btc)}**`, inline: true },
+            )
+            .setFooter({ text: `Garaad Wallet • ${time}`, iconURL: BTC_ICON });
+    }
+
+    // ── Own wallet: full info ──
     const fields = [
         { name: '💳 Wallet',    value: `**₿ ${fmtW(btc)}**`,   inline: true },
         { name: '🏦 Savings',   value: `**₿ ${fmtW(bank)}**`,  inline: true },
@@ -71,9 +82,10 @@ module.exports = async function jeebCmd(message) {
     const target   = message.mentions.users.first();
     const userId   = target ? target.id       : authorId;
     const username = target ? target.username : message.author.username;
+    const isOwner  = !target || target.id === authorId;
 
     return message.reply({
-        embeds:     [buildJeebEmbed(userId, username)],
+        embeds:     [buildJeebEmbed(userId, username, isOwner)],
         components: [jeebRow(authorId, userId)],
     });
 };
