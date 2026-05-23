@@ -2294,15 +2294,21 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **${item.label}** si guul leh ayaad u iibsatay!\n\`?etitle ${key}\` si aad u dhigto.`, flags: MessageFlags.Ephemeral });
             }
 
-            if (item.type === 'item') {
+            if (item.type === 'timed_item') {
+                const expiryKey = key + 'Expiry';
+                d.inventory ??= {};
+                d.inventory[expiryKey] ??= 0;
+                if (d.inventory[expiryKey] > Date.now()) {
+                    const expiresIn = Math.ceil((d.inventory[expiryKey] - Date.now()) / 3600000);
+                    return interaction.reply({ content: `⚠️ **${item.label}** weli active yahay — **${expiresIn}h** baqa.`, flags: MessageFlags.Ephemeral });
+                }
                 if ((d.btc || 0) < item.price) {
                     return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid.\nQiimaha: **₿: ${item.price.toLocaleString()}** | Haysataa: **₿: ${(d.btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
                 d.btc = (d.btc || 0) - item.price;
-                d.inventory        ??= {};
-                d.inventory[key]    = (d.inventory[key] || 0) + 1;
+                d.inventory[expiryKey] = Date.now() + 2 * 24 * 60 * 60 * 1000;
                 saveEcon();
-                return interaction.reply({ content: `✅ **${item.label}** iibsatay! Jeebkaaga: **${d.inventory[key]}** goor.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **${item.label}** iibsatay! **2 maalmood** ayay shaqaynaysaa.`, flags: MessageFlags.Ephemeral });
             }
 
             // Custom name title — show modal

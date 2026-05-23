@@ -13,7 +13,7 @@ function defaultUser() {
         lastInterest:    0,
         streak:          0,
         robsToday:       { date: '', count: 0 },
-        inventory:       { safety: 0, robticket: 0 },
+        inventory:       { safety: 0, robticket: 0, safetyExpiry: 0, robticketExpiry: 0 },
         lastWork:        0,
         interestEarned:  { garaad: 0 },
         loan:            null,
@@ -37,8 +37,10 @@ function checkEconUser(userId) {
         d.lastInterest     ??= 0;
         d.robsToday        ??= { date: '', count: 0 };
         d.inventory        ??= { safety: 0, robticket: 0 };
-        d.inventory.safety    ??= 0;
-        d.inventory.robticket ??= 0;
+        d.inventory.safety           ??= 0;
+        d.inventory.robticket        ??= 0;
+        d.inventory.safetyExpiry     ??= 0;
+        d.inventory.robticketExpiry  ??= 0;
         d.streak           ??= 0;
         d.lastWork         ??= 0;
         d.interestEarned   ??= { garaad: 0 };

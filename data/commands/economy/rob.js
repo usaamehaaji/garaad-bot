@@ -50,10 +50,10 @@ module.exports = async function robCmd(message) {
     const robber = econData[userId];
     const victim = econData[target.id];
 
-    if (robber.inventory.robticket < 1) {
+    if (!(robber.inventory.robticketExpiry > Date.now())) {
         return message.reply({ embeds: [
             new EmbedBuilder()
-                .setDescription('⚠️ You need a **Rob Ticket** to rob. Buy one at `?shop` for 8,000 BTC.')
+                .setDescription('⚠️ You need a **Rob Ticket** to rob. Buy one at `?shop` for 500 BTC (active 2 days).')
                 .setColor('#e74c3c'),
         ], components: [closeRow(userId)] });
     }
@@ -78,8 +78,8 @@ module.exports = async function robCmd(message) {
         ], components: [closeRow(userId)] });
     }
 
-    if (victim.inventory.safety > 0) {
-        victim.inventory.safety -= 1;
+    if (victim.inventory.safetyExpiry > Date.now()) {
+        victim.inventory.safetyExpiry = 0;
         saveEcon();
         return message.reply({ embeds: [
             new EmbedBuilder()
@@ -90,8 +90,7 @@ module.exports = async function robCmd(message) {
         ], components: [closeRow(userId)] });
     }
 
-    robber.inventory.robticket -= 1;
-    robber.robsToday.count    += 1;
+    robber.robsToday.count += 1;
 
     const success = Math.random() < ROB_SUCCESS_RATE;
 
