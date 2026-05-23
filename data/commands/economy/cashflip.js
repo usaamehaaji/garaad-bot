@@ -57,7 +57,7 @@ function doFlip(userId, amount, direction) {
     se();
 
     const netProfit = win ? profit - WIN_TAX : profit;
-    const dirLabel = direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
     return { embed: buildResult(win, dirLabel, netProfit, amount, d.btc || 0) };
 }
 
@@ -73,9 +73,12 @@ module.exports = async function cashflipCmd(message, args) {
         direction = (args[numIdx + 1] || '').toLowerCase();
     }
 
-    if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'up' && direction !== 'down')) {
+    if (direction === 'up') direction = 'u';
+    if (direction === 'down') direction = 'd';
+
+    if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'u' && direction !== 'd')) {
         return message.reply(
-            `⚠️ Usage: \`?ef 500 up\`  or  \`?ef 500 down\`\n` +
+            `⚠️ Isticmaal: \`?ef 500 u\`  ama  \`?ef 500 d\`\n` +
             `Wallet: **₿: ${fmt(d.btc || 0)}**`
         );
     }
