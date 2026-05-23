@@ -2,8 +2,8 @@
 // AMARKA: ?buy [shay]  |  ?buy custom <magacaaga>
 // =====================================================================
 
-const { userData, saveData } = require('../store');
-const { PREFIX, SHOP_ITEMS, TITLES } = require('../config');
+const { userData, saveData } = require('../../src/store');
+const { PREFIX, SHOP_ITEMS, TITLES } = require('../../src/config');
 
 const CUSTOM_MAX_LEN = 24;
 
