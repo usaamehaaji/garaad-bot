@@ -6,7 +6,7 @@ const WIN_RATE      = 0.50;
 const WIN_MULTI     = 1.9;   // win 1.9x stake (house keeps 0.1)
 const COOLDOWN_MS   = 10_000;
 const MIN_BET       = 50;
-const MAX_BET       = 10_000;
+const MAX_BET       = 50_000;
 const MIN_TREASURY  = 5_000; // market closes if treasury below this
 
 const flipCooldowns = new Map();
