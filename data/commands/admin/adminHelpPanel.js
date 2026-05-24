@@ -21,8 +21,8 @@ function buildAdminEmbed(uid) {
             `**👥 Players:** ${users.length} | **₿ Circulation:** ${fmt(totalBtc)} BTC\n` +
             `**💳 Active Loans:** ${activeLoans}\n\n` +
             `**Actions:**\n` +
-            `🎁 Give  •  🧠 Give IQ  •  🏆 Champion  •  💬 DM  •  📢 Broadcast  •  🐛 Bugs\n` +
-            `👥 Players  •  💳 Loans` +
+            `🎁 Give  •  🧠 Give IQ  •  🏆 Champion  •  💬 DM\n` +
+            `💸 Transfer  •  👥 Players  •  📢 Broadcast  •  🐛 Bugs  •  💳 Loans` +
             (isOwner ? `\n🏛️ Top-up  •  💸 Tax  •  👥 Admin (add/remove)\n♻️ Reset (IQ / Eco / Both)` : '')
         )
         .setFooter({ text: 'Garaad Admin' });
@@ -41,7 +41,8 @@ function adminRow1(uid) {
 // Row 2 — all admins
 function adminRow2(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Players') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_transfer_${uid}`)      .setLabel('💸 Transfer') .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_eco_allplayers_${uid}`).setLabel('👥 Players')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_broadcast_${uid}`)     .setLabel('📢 Broadcast').setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`admin_bugs_${uid}`)          .setLabel('🐛 Bugs')     .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`)     .setLabel('💳 Loans')    .setStyle(ButtonStyle.Secondary),

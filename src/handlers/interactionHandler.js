@@ -464,6 +464,25 @@ module.exports = function setupInteractionHandler(client) {
                 }
             }
 
+            // ── Admin: Transfer → bank modal submit ──
+            if (interaction.customId.startsWith('admin_m_transfer_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const targetId = interaction.fields.getTextInputValue('target_id').trim();
+                const amount   = parseFloat(interaction.fields.getTextInputValue('amount').replace(/,/g, ''));
+                if (isNaN(amount) || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 5000).', flags: MessageFlags.Ephemeral });
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { fmt } = require('../utils/helpers');
+                checkEconUser(targetId);
+                eData[targetId].banks        ??= { garaad: 0 };
+                eData[targetId].banks.garaad ??= 0;
+                eData[targetId].banks.garaad  += amount;
+                saveEcon();
+                await notifyAdmins(interaction.client, interaction.user, `Transfer → Bank: **+₿ ${fmt(amount)}** → <@${targetId}>`);
+                return interaction.reply({ content: `✅ <@${targetId}> bangiga **+₿ ${fmt(amount)}** lagu daray.\n🏦 Hadda: **₿ ${fmt(eData[targetId].banks.garaad)}**`, flags: MessageFlags.Ephemeral });
+            }
+
             // ── Admin: Give All IQ modal submit ──
             if (interaction.customId.startsWith('admin_m_giveall_iq_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -1143,6 +1162,21 @@ module.exports = function setupInteractionHandler(client) {
                     new TextInputBuilder().setCustomId('amount').setLabel('IQ xaddadka (qof walba)').setStyle(TextInputStyle.Short)
                         .setPlaceholder('Tusaale: 100').setRequired(true)
                 ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin: Transfer → bank button → modal ──
+        if (id.startsWith('admin_transfer_')) {
+            const ownerId = id.replace('admin_transfer_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_transfer_${ownerId}`).setTitle('💸 Transfer → Bank');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
+                new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('amount').setLabel('BTC xaddadka').setStyle(TextInputStyle.Short).setPlaceholder('Tusaale: 5000').setRequired(true)),
             );
             return interaction.showModal(modal);
         }
