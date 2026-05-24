@@ -3,16 +3,16 @@ const { MongoClient } = require('mongodb');
 let db = null;
 
 async function connectDB() {
-    const uri = process.env.MONGODB_URI;
+    const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
     if (!uri) {
-        console.log('[DB] ⚠️  MONGODB_URI lama helin — JSON files la isticmaalayaa');
+        console.log('[DB] ⚠️  MONGO_URI lama helin — JSON files la isticmaalayaa');
         return null;
     }
     try {
         const client = new MongoClient(uri);
         await client.connect();
-        db = client.db('garaad');
-        console.log('[DB] ✅ MongoDB Atlas ku xidnay');
+        db = client.db('garaad_bot');
+        console.log('[DB] ✅ MongoDB ku xidnay');
         return db;
     } catch (err) {
         console.error('[DB] ❌ MongoDB connection failed:', err.message);
