@@ -7,7 +7,7 @@ const { PREFIX } = require('../../../src/config');
 const OWNER_ID = '1191096205955055690';
 
 function getEconStats() {
-    const users = Object.entries(econData).filter(([k]) => !k.startsWith('__'));
+    const users = Object.entries(econData).filter(([k]) => /^\d{17,19}$/.test(k));
     const t     = getTreasury();
 
     let totalBtc = 0, totalBank = 0, activeLoans = 0, totalOwed = 0, overdueLoans = 0;
@@ -46,7 +46,7 @@ function buildAllPlayersEmbed(page = 0) {
     const PER_PAGE = 10;
 
     const players = Object.entries(econData)
-        .filter(([k]) => !k.startsWith('__'))
+        .filter(([k]) => /^\d{17,19}$/.test(k))
         .map(([uid, d]) => ({
             uid,
             btc:  d.btc            || 0,
@@ -232,7 +232,7 @@ module.exports = async function adminEconCmd(message, args) {
         const amount = parseFloat(args[1]);
         if (isNaN(amount) || amount <= 0)
             return message.reply('⚠️ `?admin econ tax [amount]`  — e.g. `?admin econ tax 5`');
-        const users = Object.entries(econData).filter(([k]) => !k.startsWith('__'));
+        const users = Object.entries(econData).filter(([k]) => /^\d{17,19}$/.test(k));
         let collected = 0;
         for (const [uid] of users) {
             checkEconUser(uid);

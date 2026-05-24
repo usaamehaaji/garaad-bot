@@ -56,6 +56,12 @@ function checkEconUser(userId) {
     return econData[userId];
 }
 
+function purgeInvalidKeys(data) {
+    for (const k of Object.keys(data)) {
+        if (k !== '__treasury__' && !/^\d{17,19}$/.test(k)) delete data[k];
+    }
+}
+
 // ── Load: MongoDB first, fallback to JSON ──
 async function loadEcon() {
     const { getDB } = require('../db');
@@ -65,6 +71,7 @@ async function loadEcon() {
             const doc = await db.collection('store').findOne({ _id: 'economy' });
             if (doc && doc.data) {
                 Object.assign(econData, doc.data);
+                purgeInvalidKeys(econData);
                 console.log('[EconStore] ✅ economy.json ka soo degtay MongoDB');
                 return;
             }
@@ -76,6 +83,7 @@ async function loadEcon() {
     try {
         if (fs.existsSync(ECON_PATH)) {
             Object.assign(econData, JSON.parse(fs.readFileSync(ECON_PATH, 'utf8')));
+            purgeInvalidKeys(econData);
         }
     } catch (e) {
         console.error('[EconStore] Load error:', e.message);
