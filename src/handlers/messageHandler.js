@@ -142,10 +142,10 @@ module.exports = function setupMessageHandler(client) {
                 return econTitleCmd(message, args);
 
             case 'ebank':
+            case 'bank':
                 return ebankCmd(message, args);
 
             case 'banks':
-            case 'bank':
                 return banksCmd(message);
 
             case 'shop':
