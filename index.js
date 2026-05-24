@@ -69,6 +69,7 @@ const setupBankChargeScheduler  = require('./src/handlers/bankChargeScheduler');
 const setupWeeklyLeaderboard    = require('./src/handlers/weeklyLeaderboard');
 const setupBroadcastScheduler   = require('./src/handlers/broadcastScheduler');
 const setupBackupScheduler      = require('./src/handlers/backupScheduler');
+const setupAutoUpdate           = require('./src/handlers/autoUpdateScheduler');
 const { connectDB }             = require('./src/db');
 const { loadData }              = require('./src/store');
 const { loadEcon }              = require('./src/economy/econStore');
@@ -104,6 +105,7 @@ client.once('clientReady', () => {
     setupBankChargeScheduler(client);
     setupWeeklyLeaderboard(client);
     setupBroadcastScheduler(client);
+    setupAutoUpdate();
     setupBackupScheduler();
     restorePredictions(client);
 
