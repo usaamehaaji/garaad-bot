@@ -67,6 +67,7 @@ const setupInteractionHandler  = require('./src/handlers/interactionHandler');
 const setupReminderScheduler   = require('./src/handlers/reminderScheduler');
 const setupBankChargeScheduler  = require('./src/handlers/bankChargeScheduler');
 const setupWeeklyLeaderboard    = require('./src/handlers/weeklyLeaderboard');
+const setupBroadcastScheduler   = require('./src/handlers/broadcastScheduler');
 const { restorePredictions }    = require('./src/economy/prediction');
 const { tickMarket }            = require('./src/economy/market');
 
@@ -98,6 +99,7 @@ client.once('clientReady', () => {
     setupReminderScheduler(client);
     setupBankChargeScheduler(client);
     setupWeeklyLeaderboard(client);
+    setupBroadcastScheduler(client);
     restorePredictions(client);
 
     // Market auto-tick: update prices every 60s
