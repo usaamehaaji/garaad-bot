@@ -15,7 +15,6 @@ function getWinRate(amount) {
     if (amount <= 25_000) return 0.32;
     return 0.24;
 }
-const MIN_TREASURY  = 5_000; // market closes if treasury below this
 
 const flipCooldowns = new Map();
 
@@ -129,10 +128,6 @@ module.exports = async function cashflipCmd(message, args) {
 
     if (amount > MAX_BET)
         return message.reply(`⚠️ Max bet waa **₿ ${MAX_BET.toLocaleString()}**. Hoos u dhig.`);
-
-    const treasury = getTreasury();
-    if ((treasury.balance || 0) < MIN_TREASURY)
-        return message.reply(`⚠️ Treasury funds low — market temporarily closed. **₿ ${fmt(treasury.balance || 0)}** left.`);
 
     const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
