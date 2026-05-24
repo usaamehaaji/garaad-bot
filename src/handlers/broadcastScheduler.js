@@ -77,11 +77,10 @@ async function broadcast(client) {
 }
 
 module.exports = function setupBroadcastScheduler(client) {
-    // First broadcast after 4 hours (not immediately on start)
     setTimeout(() => {
         broadcast(client);
         setInterval(() => broadcast(client), INTERVAL_MS);
-    }, INTERVAL_MS);
+    }, 3 * 60 * 1000); // first broadcast after 3 minutes, then every 4 hours
 
-    console.log('[Broadcast] ✅ Scheduler started — first message in 4 hours');
+    console.log('[Broadcast] ✅ Scheduler started — first message in 3 minutes');
 };
