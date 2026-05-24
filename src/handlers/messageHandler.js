@@ -43,6 +43,18 @@ const dmCmd           = require('../../data/commands/dm');
 
 
 module.exports = function setupMessageHandler(client) {
+    // ── Rate limiter: max 6 economy commands per 10s per user ──
+    const _econRateMap = new Map();
+    const ECON_CMDS    = new Set(['shaqo','work','jeeb','trade','ecoflip','ef','give','rob','rich','ebank','bank','etitle','shop','exchange']);
+    function econRateLimited(userId) {
+        const now    = Date.now();
+        const bucket = _econRateMap.get(userId) || { count: 0, reset: now + 10_000 };
+        if (now > bucket.reset) { bucket.count = 0; bucket.reset = now + 10_000; }
+        bucket.count++;
+        _econRateMap.set(userId, bucket);
+        return bucket.count > 6;
+    }
+
     client.on('messageCreate', async (message) => {
         if (message.author.bot)                  return;
         if (!message.content.startsWith(PREFIX)) return;
@@ -65,6 +77,8 @@ module.exports = function setupMessageHandler(client) {
 
         checkUser(userId);
 
+        if (ECON_CMDS.has(command) && !isAdmin(userId) && econRateLimited(userId))
+            return message.reply('⏳ Aad u dhaqso. Daqiiqad yar sug.').catch(() => {});
 
         switch (command) {
             // ── Caawinaad ──

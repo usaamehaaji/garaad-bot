@@ -2,12 +2,12 @@ const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, deductFromTreasury, getTreasury, trackEarning } = require('../../../src/economy/econStore');
 const { fmt } = require('../../../src/utils/helpers');
 
-const PROFIT_RATE   = 0.95; // win = stake back + 95% of stake as profit
-const COOLDOWN_MS   = 10_000;
-const MIN_BET       = 50;
-const MAX_BET       = 50_000;
+const PROFIT_RATE      = 0.95;
+const COOLDOWN_MS      = 10_000;
+const MIN_BET          = 50;
+const MAX_BET          = 50_000;
+const DAILY_PROFIT_CAP = 500_000;
 
-// Win rate drops as bet increases
 function getWinRate(amount) {
     if (amount <= 1_000)  return 0.48;
     if (amount <= 5_000)  return 0.44;
@@ -18,7 +18,18 @@ function getWinRate(amount) {
 
 const flipCooldowns = new Map();
 
-// ── Live market price (cosmetic, changes every 10s) ──────────────────
+function todayKey() {
+    return new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+}
+
+function getFlipStats(d) {
+    d.flipStats ??= { flips: 0, wins: 0, totalProfit: 0, totalLost: 0, daily: { date: '', profit: 0 } };
+    d.flipStats.daily ??= { date: '', profit: 0 };
+    const today = todayKey();
+    if (d.flipStats.daily.date !== today) d.flipStats.daily = { date: today, profit: 0 };
+    return d.flipStats;
+}
+
 function getMarketState() {
     const tick     = Math.floor(Date.now() / 10_000);
     const prevTick = tick - 1;
@@ -28,26 +39,23 @@ function getMarketState() {
     const up       = cur >= prev;
     return {
         price:   cur,
-        prev:    prev,
         trend:   up ? '📈' : '📉',
-        arrow:   up ? '⬆️' : '⬇️',
-        change:  Math.abs(cur - prev),
         nextSec: 10 - Math.floor((Date.now() % 10_000) / 1000),
     };
 }
 
-function buildResult(win, dirLabel, direction, profit, amount, newBal, market) { // profit = 95% of stake on win
+function buildResult(win, dirLabel, direction, profit, amount, newBal, market, capLeft) {
     const marketUp   = win ? (direction === 'u') : (direction !== 'u');
-    const trendEmoji = marketUp ? '📈' : '📉';
-    const trendLine  = `${trendEmoji} Market: **${market.price.toLocaleString()}**`;
+    const trendLine  = `${marketUp ? '📈' : '📉'} Market: **${market.price.toLocaleString()}**`;
+    const capNote    = win && capLeft !== null ? `\n📊 Daily cap remaining: **₿ ${fmt(capLeft)}**` : '';
     return win
         ? new EmbedBuilder()
             .setTitle('✅ Economy Flip — WIN!')
             .setColor('#2ecc71')
-            .setDescription(`You picked **${dirLabel}** — correct!\n${trendLine}`)
+            .setDescription(`You picked **${dirLabel}** — correct!\n${trendLine}${capNote}`)
             .addFields(
-                { name: '💰 Profit',      value: `**+₿ ${profit.toLocaleString()}**`, inline: true },
-                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
+                { name: '💰 Profit',      value: `**+₿ ${fmt(profit)}**`,  inline: true },
+                { name: '💳 New Balance', value: `**₿ ${fmt(newBal)}**`,   inline: true },
             )
             .setFooter({ text: 'Garaad Economy • Treasury-backed market' })
         : new EmbedBuilder()
@@ -55,8 +63,8 @@ function buildResult(win, dirLabel, direction, profit, amount, newBal, market) {
             .setColor('#e74c3c')
             .setDescription(`You picked **${dirLabel}** — wrong!\n${trendLine}`)
             .addFields(
-                { name: '💸 Lost',        value: `**-₿ ${amount.toLocaleString()}**`, inline: true },
-                { name: '💳 New Balance', value: `**₿ ${newBal.toLocaleString()}**`,  inline: true },
+                { name: '💸 Lost',        value: `**-₿ ${fmt(amount)}**`,  inline: true },
+                { name: '💳 New Balance', value: `**₿ ${fmt(newBal)}**`,   inline: true },
             )
             .setFooter({ text: 'Garaad Economy • Treasury-backed market' });
 }
@@ -64,32 +72,47 @@ function buildResult(win, dirLabel, direction, profit, amount, newBal, market) {
 function doFlip(userId, amount, direction) {
     const { econData: eData, checkEconUser: ceu } = require('../../../src/economy/econStore');
     ceu(userId);
-    const d = eData[userId];
+    const d    = eData[userId];
+    const fs   = getFlipStats(d);
 
     if ((d.btc || 0) < amount) return { err: `⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(d.btc || 0)}**` };
+
+    // Daily profit cap check
+    if (fs.daily.profit >= DAILY_PROFIT_CAP)
+        return { err: `🚫 Maalinta max profit-kaaga waad gaartay (**₿ ${fmt(DAILY_PROFIT_CAP)}**). Berri isku day.` };
 
     const treasury = getTreasury();
     const win      = Math.random() < getWinRate(amount);
     const profit   = Math.floor(amount * PROFIT_RATE);
 
-    // Always deduct stake first
     d.btc = (d.btc || 0) - amount;
 
     if (win) {
         if ((treasury.balance || 0) < profit) {
-            d.btc += amount; // refund stake
+            d.btc += amount;
             return { err: `⚠️ Treasury funds low — market temporarily closed. Balance: **₿ ${fmt(treasury.balance || 0)}**` };
         }
-        d.btc += amount + profit; // return stake + 95% profit
-        deductFromTreasury(profit);
-        trackEarning(userId, profit);
+        // Cap actual payout to daily remaining
+        const capLeft   = DAILY_PROFIT_CAP - fs.daily.profit;
+        const paidProfit = Math.min(profit, capLeft);
+        d.btc += amount + paidProfit;
+        deductFromTreasury(paidProfit);
+        trackEarning(userId, paidProfit);
+        fs.wins++;
+        fs.totalProfit    += paidProfit;
+        fs.daily.profit   += paidProfit;
+        fs.flips++;
+        saveEcon();
+        const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
+        return { win, profit: paidProfit, amount, newBal: d.btc, dirLabel, direction, capLeft: DAILY_PROFIT_CAP - fs.daily.profit };
     } else {
         addToTreasury(amount);
+        fs.totalLost += amount;
+        fs.flips++;
+        saveEcon();
+        const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
+        return { win, profit, amount, newBal: d.btc, dirLabel, direction, capLeft: null };
     }
-    saveEcon();
-
-    const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
-    return { win, profit, amount, newBal: d.btc, dirLabel, direction };
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -98,18 +121,46 @@ module.exports = async function cashflipCmd(message, args) {
     const d      = econData[userId];
     const market = getMarketState();
 
-    // ── No args: show market state ──
+    // ── ?ef top: leaderboard ──
+    if (args && (args[0] === 'top' || args[0] === 'kwrn' || args[0] === 'kooron')) {
+        const top = Object.entries(econData)
+            .filter(([k, v]) => /^\d{17,19}$/.test(k) && v.flipStats?.flips > 0)
+            .sort(([, a], [, b]) => (b.flipStats?.totalProfit || 0) - (a.flipStats?.totalProfit || 0))
+            .slice(0, 10);
+
+        if (top.length === 0)
+            return message.reply('📊 Wali cid flip ma samayn.\nIsticmaal: `?ef 500 u` ama `?ef 500 d`');
+
+        const medals = ['🥇', '🥈', '🥉'];
+        const lines  = top.map(([uid, v], i) => {
+            const fs      = v.flipStats;
+            const winRate = fs.flips > 0 ? Math.round((fs.wins / fs.flips) * 100) : 0;
+            const medal   = medals[i] || `**${i + 1}.**`;
+            return `${medal} <@${uid}>\n┆ 💰 **₿ ${fmt(fs.totalProfit)}** profit · 🎯 ${winRate}% · 🎲 ${fs.flips} flips`;
+        });
+
+        return message.reply({ embeds: [new EmbedBuilder()
+            .setTitle('🏆 Top Flippers')
+            .setColor('#f39c12')
+            .setDescription(lines.join('\n\n'))
+            .setFooter({ text: `Garaad Economy • Daily cap: ₿${fmt(DAILY_PROFIT_CAP)}` })] });
+    }
+
+    // ── No args: market state ──
     if (!args || args.length === 0) {
-        const t = getTreasury();
+        const t  = getTreasury();
+        const fs = getFlipStats(d);
+        const capLeft = Math.max(0, DAILY_PROFIT_CAP - fs.daily.profit);
         return message.reply({ embeds: [new EmbedBuilder()
             .setTitle('📊 Garaad Market')
             .setColor('#f39c12')
             .addFields(
-                { name: `${market.trend} Price`,   value: `**${market.price.toLocaleString()}**`,        inline: true },
-                { name: '⏳ Next Tick',             value: `**${market.nextSec}s**`,                      inline: true },
-                { name: '🏛️ Treasury',              value: `**₿ ${fmt(t.balance || 0)}**`,               inline: true },
+                { name: `${market.trend} Price`,    value: `**${market.price.toLocaleString()}**`, inline: true },
+                { name: '⏳ Next Tick',              value: `**${market.nextSec}s**`,               inline: true },
+                { name: '🏛️ Treasury',               value: `**₿ ${fmt(t.balance || 0)}**`,        inline: true },
+                { name: '📊 Your Daily Cap Left',    value: `**₿ ${fmt(capLeft)}**`,                inline: true },
             )
-            .setDescription(`Bet: \`?ef 500 u\` or \`?ef 500 d\` · Min **₿${MIN_BET}** · Max **₿${MAX_BET.toLocaleString()}**`)
+            .setDescription(`Bet: \`?ef 500 u\` or \`?ef 500 d\` · Min **₿${MIN_BET}** · Max **₿${MAX_BET.toLocaleString()}**\n\`?ef top\` — leaderboard`)
             .setFooter({ text: 'Garaad Economy • Treasury-backed market' })] });
     }
 
@@ -139,7 +190,7 @@ module.exports = async function cashflipCmd(message, args) {
     const result = doFlip(userId, amount, direction);
     if (result.err) return message.reply(result.err);
 
-    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.direction, result.profit, result.amount, result.newBal, market)] });
+    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.direction, result.profit, result.amount, result.newBal, market, result.capLeft)] });
 };
 
 module.exports.PROFIT_RATE = PROFIT_RATE;
