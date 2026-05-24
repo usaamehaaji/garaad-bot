@@ -9,11 +9,12 @@ const MAX_BET          = 50_000;
 const DAILY_PROFIT_CAP = 500_000;
 
 function getWinRate(amount) {
-    if (amount <= 1_000)  return 0.48;
+    if (amount <= 500)    return 0.50;
+    if (amount <= 2_000)  return 0.47;
     if (amount <= 5_000)  return 0.44;
-    if (amount <= 10_000) return 0.39;
-    if (amount <= 25_000) return 0.32;
-    return 0.24;
+    if (amount <= 15_000) return 0.40;
+    if (amount <= 35_000) return 0.36;
+    return 0.32;
 }
 
 const flipCooldowns = new Map();
