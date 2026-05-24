@@ -31,6 +31,24 @@ function getFlipStats(d) {
     return d.flipStats;
 }
 
+function getStreak(d) {
+    d.flipStreak ??= { type: '', count: 0 };
+    return d.flipStreak;
+}
+
+// Returns forced win (true), forced loss (false), or null (random)
+function checkStreak(streak) {
+    if (streak.type === 'loss' && streak.count >= 2) return true;  // 2 loss → force win
+    if (streak.type === 'win'  && streak.count >= 3) return false; // 3 win  → force loss
+    return null;
+}
+
+function updateStreak(streak, win) {
+    const type = win ? 'win' : 'loss';
+    if (streak.type === type) streak.count++;
+    else { streak.type = type; streak.count = 1; }
+}
+
 function getMarketState() {
     const tick     = Math.floor(Date.now() / 10_000);
     const prevTick = tick - 1;
@@ -83,7 +101,9 @@ function doFlip(userId, amount, direction) {
         return { err: `🚫 Maalinta max profit-kaaga waad gaartay (**₿ ${fmt(DAILY_PROFIT_CAP)}**). Berri isku day.` };
 
     const treasury = getTreasury();
-    const win      = Math.random() < getWinRate(amount);
+    const streak   = getStreak(d);
+    const forced   = checkStreak(streak);
+    const win      = forced !== null ? forced : Math.random() < getWinRate(amount);
     const profit   = Math.floor(amount * PROFIT_RATE);
 
     d.btc = (d.btc || 0) - amount;
@@ -103,6 +123,7 @@ function doFlip(userId, amount, direction) {
         fs.totalProfit    += paidProfit;
         fs.daily.profit   += paidProfit;
         fs.flips++;
+        updateStreak(streak, true);
         saveEcon();
         const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
         return { win, profit: paidProfit, amount, newBal: d.btc, dirLabel, direction, capLeft: DAILY_PROFIT_CAP - fs.daily.profit };
@@ -110,6 +131,7 @@ function doFlip(userId, amount, direction) {
         addToTreasury(amount);
         fs.totalLost += amount;
         fs.flips++;
+        updateStreak(streak, false);
         saveEcon();
         const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
         return { win, profit, amount, newBal: d.btc, dirLabel, direction, capLeft: null };
