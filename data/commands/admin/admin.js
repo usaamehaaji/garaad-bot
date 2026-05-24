@@ -88,6 +88,19 @@ module.exports = async function adminCommand(message, args) {
         case 'bilow':
             return adminEconRestart(message);
 
+        case 'treasury':
+        case 'khaznad': {
+            const { topUpTreasury, getTreasury, saveEcon } = require('../../../src/economy/econStore');
+            const { fmt } = require('../../../src/utils/helpers');
+            const amount = Number((args[0] || '').replace(/,/g, ''));
+            if (!amount || isNaN(amount) || amount <= 0)
+                return message.reply('⚠️ Isticmaal: `?admin treasury 200000000`');
+            topUpTreasury(amount);
+            saveEcon();
+            const t = getTreasury();
+            return message.reply(`✅ **₿ ${fmt(amount)}** khaznadda lagu daray.\n🏛️ Hadda: **₿ ${fmt(t.balance)}**`);
+        }
+
         case 'help':
         default:
             return adminHelpPanel(message);
