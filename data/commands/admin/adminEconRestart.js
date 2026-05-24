@@ -5,7 +5,7 @@ const { fmt } = require('../../../src/utils/helpers');
 const START_CASH = 5_000;
 
 module.exports = async function adminEconRestart(message) {
-    const users = Object.keys(econData).filter(k => !k.startsWith('__'));
+    const users = Object.keys(econData).filter(k => /^\d{17,19}$/.test(k));
 
     if (!users.length) return message.reply('⚠️ Wax user ah ma jiraan.');
 

@@ -5,7 +5,7 @@ const { fmt } = require('../../../src/utils/helpers');
 const OWNER_ID = '1191096205955055690';
 
 function buildAdminEmbed(uid) {
-    const users = Object.entries(econData).filter(([k]) => !k.startsWith('__'));
+    const users = Object.entries(econData).filter(([k]) => /^\d{17,19}$/.test(k));
     const t     = getTreasury();
     let totalBtc = 0, activeLoans = 0;
     for (const [, d] of users) {

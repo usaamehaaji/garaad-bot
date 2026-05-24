@@ -6,7 +6,7 @@ module.exports = async function bankListCmd(message) {
     const userId = message.author.id;
 
     const bankEntries = Object.entries(econData)
-        .filter(([k, d]) => !k.startsWith('__') && d && typeof d === 'object' && (d.banks?.garaad || 0) > 0)
+        .filter(([k, d]) => /^\d{17,19}$/.test(k) && d && typeof d === 'object' && (d.banks?.garaad || 0) > 0)
         .map(([uid, d]) => ({ uid, garaad: d.banks.garaad }))
         .sort((a, b) => b.garaad - a.garaad);
 
@@ -18,7 +18,7 @@ module.exports = async function bankListCmd(message) {
     });
 
     const loanEntries = Object.entries(econData)
-        .filter(([k, d]) => !k.startsWith('__') && d && d.loan && d.loan.owed > 0)
+        .filter(([k, d]) => /^\d{17,19}$/.test(k) && d && d.loan && d.loan.owed > 0)
         .map(([uid, d]) => {
             const daysLeft = Math.max(0, 3 - Math.floor((Date.now() - d.loan.takenAt) / 86400000));
             return { uid, owed: d.loan.owed, daysLeft };

@@ -21,7 +21,7 @@ module.exports = async function adminGiveAll(message, args) {
         return message.reply(`✅ **${users.length}** players each received **+${amount} IQ**`);
     }
 
-    const users = Object.keys(econData).filter(k => !k.startsWith('__'));
+    const users = Object.keys(econData).filter(k => /^\d{17,19}$/.test(k));
     for (const uid of users) {
         checkEconUser(uid);
         econData[uid].btc = (econData[uid].btc || 0) + amount;

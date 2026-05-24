@@ -585,7 +585,7 @@ module.exports = function setupInteractionHandler(client) {
                 const { userData: uData, saveData: sd } = require('../store');
                 const { checkUser: cu } = require('../utils/helpers');
 
-                const ecoUsers = doResetEco ? Object.keys(eData).filter(k => !k.startsWith('__')) : [];
+                const ecoUsers = doResetEco ? Object.keys(eData).filter(k => /^[0-9]{17,19}$/.test(k)) : [];
                 const iqUsers  = doResetIq  ? Object.keys(uData) : [];
                 const targets  = resetAll ? null : [targetId];
 
@@ -758,7 +758,7 @@ module.exports = function setupInteractionHandler(client) {
                 const t = getTreasury();
 
                 if (action === 'distribute' || action === 'qaybso' || action === 'all') {
-                    const users   = Object.keys(eData).filter(k => !k.startsWith('__'));
+                    const users   = Object.keys(eData).filter(k => /^[0-9]{17,19}$/.test(k));
                     const rawAmt  = interaction.fields.getTextInputValue('amount').trim().toLowerCase();
                     const amount  = rawAmt === 'all' ? t.balance : parseFloat(rawAmt);
                     if (!amount || isNaN(amount) || amount <= 0)
@@ -826,7 +826,7 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
                 const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
                 const { fmt } = require('../utils/helpers');
-                const users = Object.entries(eData).filter(([k]) => !k.startsWith('__'));
+                const users = Object.entries(eData).filter(([k]) => /^[0-9]{17,19}$/.test(k));
                 let collected = 0;
                 for (const [uid] of users) {
                     checkEconUser(uid);
@@ -856,7 +856,7 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: '⚠️ "RESET" ayaad qori lahayd. La joojiyay.', flags: MessageFlags.Ephemeral });
                 const { econData: eData, saveEcon } = require('../economy/econStore');
                 const { fmt } = require('../utils/helpers');
-                const users = Object.keys(eData).filter(k => !k.startsWith('__'));
+                const users = Object.keys(eData).filter(k => /^[0-9]{17,19}$/.test(k));
                 for (const uid of users) {
                     const d = eData[uid];
                     d.banks = { mandeeq: 0, garaad: 0 };
@@ -906,7 +906,7 @@ module.exports = function setupInteractionHandler(client) {
                 }
 
                 if (resetAll) {
-                    const users = Object.keys(eData).filter(k => !k.startsWith('__'));
+                    const users = Object.keys(eData).filter(k => /^[0-9]{17,19}$/.test(k));
                     for (const uid of users) { checkEconUser(uid); applyReset(eData[uid], resetWhat); }
                     saveEcon();
                     await notifyAdmins(interaction.client, interaction.user, `Reset ALL Economy (${resetWhat}) — ${users.length} players`);
@@ -1342,7 +1342,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
             const { econData: eData } = require('../economy/econStore');
             const loans = Object.entries(eData)
-                .filter(([k, d]) => !k.startsWith('__') && d.loan?.owed > 0)
+                .filter(([k, d]) => /^[0-9]{17,19}$/.test(k) && d.loan?.owed > 0)
                 .map(([uid, d]) => {
                     const days = Math.floor((Date.now() - d.loan.takenAt) / 86400000);
                     const left = Math.max(0, 3 - days);

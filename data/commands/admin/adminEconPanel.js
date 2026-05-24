@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon, getTreasury, topUpTreasury, deductFromTreasury } = require('../../../src/economy/econStore');
+const { econData, checkEconUser, saveEcon, getTreasury, topUpTreasury, deductFromTreasury, addToTreasury } = require('../../../src/economy/econStore');
 const { ECON_TITLES } = require('../economy/econShop');
 const { fmt } = require('../../../src/utils/helpers');
 const { PREFIX } = require('../../../src/config');
@@ -156,7 +156,7 @@ module.exports = async function adminEconCmd(message, args) {
         }
 
         if (action === 'distribute') {
-            const users  = Object.keys(econData).filter(k => !k.startsWith('__'));
+            const users  = Object.keys(econData).filter(k => /^\d{17,19}$/.test(k));
             const rawArg = (args[2] || '').toLowerCase();
             const amount = rawArg === 'all' ? t.balance : parseFloat(args[2]);
             if (!amount || isNaN(amount) || amount <= 0)
@@ -213,7 +213,7 @@ module.exports = async function adminEconCmd(message, args) {
     // ?admin econ loans
     if (sub === 'loans') {
         const loans = Object.entries(econData)
-            .filter(([k, d]) => !k.startsWith('__') && d.loan?.owed > 0)
+            .filter(([k, d]) => /^\d{17,19}$/.test(k) && d.loan?.owed > 0)
             .map(([uid, d]) => {
                 const days    = Math.floor((Date.now() - d.loan.takenAt) / 86400000);
                 const left    = Math.max(0, 3 - days);

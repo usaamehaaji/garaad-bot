@@ -20,7 +20,7 @@ function getCurrentWeekKey() {
 async function buildEcoLines(client) {
     const week = getCurrentWeekKey();
     const entries = Object.entries(econData)
-        .filter(([k]) => !k.startsWith('__'))
+        .filter(([k]) => /^\d{17,19}$/.test(k))
         .map(([uid, d]) => ({
             uid,
             earned: (d.weeklyEarned?.week === week ? (d.weeklyEarned.btc || d.weeklyEarned.usd || 0) : 0),
