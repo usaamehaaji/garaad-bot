@@ -63,29 +63,37 @@ function getMarketState() {
     };
 }
 
-function buildResult(win, dirLabel, direction, profit, amount, newBal, market, capLeft) {
-    const marketUp   = win ? (direction === 'u') : (direction !== 'u');
-    const trendLine  = `${marketUp ? '📈' : '📉'} Market: **${market.price.toLocaleString()}**`;
-    const capNote    = win && capLeft !== null ? `\n📊 Daily cap remaining: **₿ ${fmt(capLeft)}**` : '';
-    return win
-        ? new EmbedBuilder()
+function buildResult(win, dirLabel, direction, profit, amount, newBal, market, capLeft, lossStreak) {
+    const marketUp  = win ? (direction === 'u') : (direction !== 'u');
+    const marketDir = marketUp ? 'UP' : 'DOWN';
+    const capNote   = win && capLeft !== null ? `\n📊 Daily cap remaining: **₿ ${fmt(capLeft)}**` : '';
+
+    if (win) {
+        const trendLine = `${marketUp ? '📈' : '📉'} Market: **${market.price.toLocaleString()}**`;
+        return new EmbedBuilder()
             .setTitle('✅ Economy Flip — WIN!')
             .setColor('#2ecc71')
             .setDescription(`You picked **${dirLabel}** — correct!\n${trendLine}${capNote}`)
             .addFields(
-                { name: '💰 Profit',      value: `**+₿ ${fmt(profit)}**`,  inline: true },
-                { name: '💳 New Balance', value: `**₿ ${fmt(newBal)}**`,   inline: true },
-            )
-            .setFooter({ text: 'Garaad Economy • Treasury-backed market' })
-        : new EmbedBuilder()
-            .setTitle('❌ Economy Flip — LOSS!')
-            .setColor('#e74c3c')
-            .setDescription(`You picked **${dirLabel}** — wrong!\n${trendLine}`)
-            .addFields(
-                { name: '💸 Lost',        value: `**-₿ ${fmt(amount)}**`,  inline: true },
-                { name: '💳 New Balance', value: `**₿ ${fmt(newBal)}**`,   inline: true },
+                { name: '💰 Profit',      value: `**+₿ ${fmt(profit)}**`, inline: true },
+                { name: '💳 New Balance', value: `**₿ ${fmt(newBal)}**`,  inline: true },
             )
             .setFooter({ text: 'Garaad Economy • Treasury-backed market' });
+    }
+
+    const streakHint = lossStreak >= 2
+        ? '\n🔥 **Next flip → guaranteed WIN!**'
+        : '\n🔥 **1 more loss → guaranteed WIN!**';
+
+    return new EmbedBuilder()
+        .setTitle(`💥 LOSS  •  -₿ ${fmt(amount)}`)
+        .setColor('#e74c3c')
+        .setDescription(`📉 Market went **${marketDir}** against you${streakHint}`)
+        .addFields(
+            { name: '💸 You lost', value: `**₿ ${fmt(amount)}**`, inline: true },
+            { name: '💳 Balance',  value: `**₿ ${fmt(newBal)}**`, inline: true },
+        )
+        .setFooter({ text: 'Garaad Economy • Treasury-backed market' });
 }
 
 function doFlip(userId, amount, direction) {
@@ -134,7 +142,7 @@ function doFlip(userId, amount, direction) {
         updateStreak(streak, false);
         saveEcon();
         const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
-        return { win, profit, amount, newBal: d.btc, dirLabel, direction, capLeft: null };
+        return { win, profit, amount, newBal: d.btc, dirLabel, direction, capLeft: null, lossStreak: streak.count };
     }
 }
 
@@ -213,7 +221,7 @@ module.exports = async function cashflipCmd(message, args) {
     const result = doFlip(userId, amount, direction);
     if (result.err) return message.reply(result.err);
 
-    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.direction, result.profit, result.amount, result.newBal, market, result.capLeft)] });
+    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.direction, result.profit, result.amount, result.newBal, market, result.capLeft, result.lossStreak)] });
 };
 
 module.exports.PROFIT_RATE = PROFIT_RATE;
