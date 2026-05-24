@@ -1003,26 +1003,23 @@ module.exports = function setupInteractionHandler(client) {
                 if (interaction.user.id !== ownerId)
                     return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
 
-                const { setPending, getPending }  = require('../economy/prediction');
-                const {
-                    buildTimeEmbed, timeRow, backRow,
-                } = require('../../data/commands/economy/trade');
+                const { setPending }                     = require('../economy/prediction');
+                const { buildPickEmbed, pickRow }         = require('../../data/commands/economy/trade');
+                const { econData: eData, checkEconUser } = require('../economy/econStore');
 
                 const raw    = interaction.fields.getTextInputValue('pred_amount');
                 const amount = parseFloat(raw);
                 if (!amount || isNaN(amount) || amount <= 0)
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 500).', flags: MessageFlags.Ephemeral });
 
-                const { econData: eData, checkEconUser } = require('../economy/econStore');
                 checkEconUser(ownerId);
                 if ((eData[ownerId].btc || 0) < amount)
-                    return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid. Haysataa: **₿: ${(eData[ownerId].btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid. Haysataa: **₿ ${(eData[ownerId].btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
 
-                setPending(ownerId, { stakeType: 'btc', stakeAmount: amount, stakeUsd: amount });
-                const newPend = getPending(ownerId);
+                setPending(ownerId, { asset: 'btc', stakeType: 'btc', stakeAmount: amount, stakeUsd: amount });
                 return interaction.update({
-                    embeds:     [buildTimeEmbed(newPend.asset, 'usd', amount, amount)],
-                    components: [timeRow(ownerId), backRow(ownerId)],
+                    embeds:     [buildPickEmbed(amount)],
+                    components: [pickRow(ownerId)],
                 });
             }
 
@@ -1788,19 +1785,6 @@ module.exports = function setupInteractionHandler(client) {
         }
 
         // ── Trade: Accept disclaimer → open market ──
-        if (id.startsWith('trade_accept_')) {
-            const ownerId = id.replace('trade_accept_', '');
-            if (interaction.user.id !== ownerId)
-                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
-            checkEconUser(ownerId);
-            return interaction.update({
-                embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
-            });
-        }
-
         // ── Prediction: Refresh market ──
         if (id.startsWith('pred_refresh_')) {
             const ownerId = id.replace('pred_refresh_', '');
@@ -1808,7 +1792,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { getActivePrediction }            = require('../economy/prediction');
-            const { buildMarketEmbed, buildActiveEmbed, mainRow, tradeCloseRow, controlRow } = require('../../data/commands/economy/trade');
+            const { buildMarketEmbed, buildActiveEmbed, mainRow, controlRow } = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             const active = getActivePrediction(ownerId);
             if (active) {
@@ -1816,39 +1800,25 @@ module.exports = function setupInteractionHandler(client) {
             }
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
+                components: [mainRow(ownerId)],
             });
         }
 
-        // ── Prediction: Back to market ──
-        if (id.startsWith('pred_back_')) {
-            const ownerId = id.replace('pred_back_', '');
+        // ── Prediction: Back / Cancel → market ──
+        if (id.startsWith('pred_back_') || id.startsWith('pred_cancel_')) {
+            const ownerId = id.startsWith('pred_back_')
+                ? id.replace('pred_back_', '')
+                : id.replace('pred_cancel_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser } = require('../economy/econStore');
             const { clearPending }                   = require('../economy/prediction');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
+            const { buildMarketEmbed, mainRow }       = require('../../data/commands/economy/trade');
             checkEconUser(ownerId);
             clearPending(ownerId);
             return interaction.update({
                 embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
-            });
-        }
-
-        // ── Prediction: Cancel prediction setup ──
-        if (id.startsWith('pred_cancel_')) {
-            const ownerId = id.replace('pred_cancel_', '');
-            if (interaction.user.id !== ownerId)
-                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { econData: eData, checkEconUser } = require('../economy/econStore');
-            const { clearPending }                   = require('../economy/prediction');
-            const { buildMarketEmbed, mainRow, tradeCloseRow } = require('../../data/commands/economy/trade');
-            checkEconUser(ownerId);
-            clearPending(ownerId);
-            return interaction.update({
-                embeds:     [buildMarketEmbed(eData[ownerId])],
-                components: [mainRow(ownerId), tradeCloseRow(ownerId)],
+                components: [mainRow(ownerId)],
             });
         }
 
@@ -1972,51 +1942,23 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
-        // ── Prediction: Time selected → direction buttons ──
-        if (/^pred_t_\d+_/.test(id)) {
-            const parts   = id.split('_');
-            const ownerId = parts[parts.length - 1];
-            const minutes = parseInt(parts[2]);
+        // ── Prediction: Direction + time combined → auto-lock ──
+        if (id.startsWith('pred_go_up_') || id.startsWith('pred_go_down_')) {
+            const isUp    = id.startsWith('pred_go_up_');
+            const rest    = id.replace(isUp ? 'pred_go_up_' : 'pred_go_down_', '');
+            const parts   = rest.split('_');
+            const minutes = parseInt(parts[0]);
+            const ownerId = parts.slice(1).join('_');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { setPending, getPending }         = require('../economy/prediction');
-            const { buildDirectionEmbed, directionRow } = require('../../data/commands/economy/trade');
-            setPending(ownerId, { minutes });
-            const pend = getPending(ownerId);
-            return interaction.update({
-                embeds:     [buildDirectionEmbed(pend.asset, pend.stakeType, pend.stakeAmount, pend.stakeUsd, minutes)],
-                components: [directionRow(ownerId)],
-            });
-        }
-
-        // ── Prediction: Direction selected → confirm ──
-        if (id.startsWith('pred_d_up_') || id.startsWith('pred_d_down_')) {
-            const isUp    = id.startsWith('pred_d_up_');
-            const ownerId = isUp ? id.replace('pred_d_up_', '') : id.replace('pred_d_down_', '');
-            if (interaction.user.id !== ownerId)
-                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const dir = isUp ? 'up' : 'down';
-            const { setPending, getPending }       = require('../economy/prediction');
-            const { buildConfirmEmbed, confirmRow } = require('../../data/commands/economy/trade');
+            const { setPending, lockPrediction, getActivePrediction } = require('../economy/prediction');
+            const { buildActiveEmbed, controlRow }                    = require('../../data/commands/economy/trade');
             setPending(ownerId, {
-                direction:  dir,
-                channelId:  interaction.channelId,
-                messageId:  interaction.message.id,
+                direction: isUp ? 'up' : 'down',
+                minutes,
+                channelId: interaction.channelId,
+                messageId: interaction.message.id,
             });
-            const pend = getPending(ownerId);
-            return interaction.update({
-                embeds:     [buildConfirmEmbed(pend.asset, pend.stakeType, pend.stakeAmount, pend.stakeUsd, pend.minutes, dir)],
-                components: [confirmRow(ownerId)],
-            });
-        }
-
-        // ── Prediction: Lock (final confirm) ──
-        if (id.startsWith('pred_lock_')) {
-            const ownerId = id.replace('pred_lock_', '');
-            if (interaction.user.id !== ownerId)
-                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { lockPrediction, getActivePrediction } = require('../economy/prediction');
-            const { buildActiveEmbed, controlRow }        = require('../../data/commands/economy/trade');
             const result = await lockPrediction(ownerId, interaction.client);
             if (!result.ok)
                 return interaction.reply({ content: result.msg, flags: MessageFlags.Ephemeral });

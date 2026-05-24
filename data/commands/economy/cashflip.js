@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, deductFromTreasury, getTreasury, trackEarning } = require('../../../src/economy/econStore');
 const { fmt } = require('../../../src/utils/helpers');
 
-const WIN_MULTI     = 1.9;
+const PROFIT_RATE   = 0.95; // win = stake back + 95% of stake as profit
 const COOLDOWN_MS   = 10_000;
 const MIN_BET       = 50;
 const MAX_BET       = 50_000;
@@ -37,7 +37,7 @@ function getMarketState() {
     };
 }
 
-function buildResult(win, dirLabel, direction, profit, amount, newBal, market) {
+function buildResult(win, dirLabel, direction, profit, amount, newBal, market) { // profit = 95% of stake on win
     const marketUp   = win ? (direction === 'u') : (direction !== 'u');
     const trendEmoji = marketUp ? '📈' : '📉';
     const trendLine  = `${trendEmoji} Market: **${market.price.toLocaleString()}**`;
@@ -71,23 +71,26 @@ function doFlip(userId, amount, direction) {
 
     const treasury = getTreasury();
     const win      = Math.random() < getWinRate(amount);
-    const payout   = Math.floor(amount * WIN_MULTI);
+    const profit   = Math.floor(amount * PROFIT_RATE);
+
+    // Always deduct stake first
+    d.btc = (d.btc || 0) - amount;
 
     if (win) {
-        if ((treasury.balance || 0) < payout) {
+        if ((treasury.balance || 0) < profit) {
+            d.btc += amount; // refund stake
             return { err: `⚠️ Treasury funds low — market temporarily closed. Balance: **₿ ${fmt(treasury.balance || 0)}**` };
         }
-        d.btc = (d.btc || 0) + payout;
-        deductFromTreasury(payout);
-        trackEarning(userId, payout);
+        d.btc += amount + profit; // return stake + 95% profit
+        deductFromTreasury(profit);
+        trackEarning(userId, profit);
     } else {
-        d.btc = (d.btc || 0) - amount;
         addToTreasury(amount);
     }
     saveEcon();
 
     const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
-    return { win, payout, amount, newBal: d.btc, dirLabel, direction };
+    return { win, profit, amount, newBal: d.btc, dirLabel, direction };
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -141,7 +144,7 @@ module.exports = async function cashflipCmd(message, args) {
     const result = doFlip(userId, amount, direction);
     if (result.err) return message.reply(result.err);
 
-    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.direction, result.payout, result.amount, result.newBal, market)] });
+    return message.reply({ embeds: [buildResult(result.win, result.dirLabel, result.direction, result.profit, result.amount, result.newBal, market)] });
 };
 
-module.exports.WIN_MULTI = WIN_MULTI;
+module.exports.PROFIT_RATE = PROFIT_RATE;

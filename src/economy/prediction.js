@@ -1,15 +1,15 @@
 const fs   = require('fs');
 const path = require('path');
 const { getPrice }  = require('./market');
-const { econData, checkEconUser, saveEcon, trackEarning, addToTreasury } = require('./econStore');
+const { econData, checkEconUser, saveEcon, trackEarning, addToTreasury, deductFromTreasury } = require('./econStore');
 
 const PRED_PATH = path.join(__dirname, '../../data/predictions.json');
 
 const pendingSetup      = new Map();
 const activePredictions = new Map();
 
-const WIN_MULTI  = 1.8;
-const LOSE_MULTI = 0.2;
+const WIN_MULTI  = 1.8; // win = stake back + 80% profit
+const LOSE_MULTI = 0;   // lose entire stake
 
 const ASSET_LABEL = { btc: '₿ BTC' };
 
@@ -125,43 +125,36 @@ async function resolvePrediction(userId, client) {
     const d = econData[userId];
     d.btc = (d.btc || 0) + payout;
 
-    if (!isDraw) {
-        if (win) {
-            trackEarning(userId, payout - pred.stakeUsd);
-            addToTreasury(pred.stakeUsd * 2 - payout); // house edge → treasury
-        } else {
-            addToTreasury(pred.stakeUsd - payout);
-        }
+    if (isDraw) {
+        // full refund, no treasury movement
+    } else if (win) {
+        const profit = payout - pred.stakeUsd;
+        deductFromTreasury(profit);
+        trackEarning(userId, profit);
+    } else {
+        addToTreasury(pred.stakeUsd); // entire stake goes to treasury
     }
     saveEcon();
     activePredictions.delete(userId);
     savePredictions();
 
-    const pctChange  = ((exitPrice - pred.entryPrice) / pred.entryPrice * 100).toFixed(2);
-    const dirLabel   = pred.direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
-    const profit     = payout - pred.stakeUsd;
-    const fmt        = n => Math.round(n).toLocaleString();
+    const pctChange = ((exitPrice - pred.entryPrice) / pred.entryPrice * 100).toFixed(2);
+    const dirLabel  = pred.direction === 'up' ? '⬆️ UP' : '⬇️ DOWN';
+    const profit    = payout - pred.stakeUsd;
+    const fmt       = n => Math.round(n).toLocaleString();
+    const pctStr    = (parseFloat(pctChange) > 0 ? '+' : '') + pctChange + '%';
 
     const { EmbedBuilder } = require('discord.js');
 
     const resultEmbed = new EmbedBuilder()
-        .setTitle(
-            isDraw ? '🤝 Prediction — DRAW'
-            : win  ? '🏆 Prediction — WIN!'
-                   : '❌ Prediction — LOSS'
-        )
+        .setTitle(isDraw ? '🤝 Predict — DRAW' : win ? '✅ Predict — WIN!' : '❌ Predict — LOSS')
         .setColor(isDraw ? '#f1c40f' : win ? '#2ecc71' : '#e74c3c')
-        .setDescription(
-            `🎯 **Direction:** ${dirLabel}\n` +
-            `📊 **Entry price:** ${fmt(pred.entryPrice)} BTC\n` +
-            `📊 **Exit price:**  ${fmt(exitPrice)} BTC (${parseFloat(pctChange) > 0 ? '+' : ''}${pctChange}%)\n\n` +
-            `💰 **Invested:** ${fmt(pred.stakeUsd)} BTC\n` +
-            (isDraw
-                ? `✅ **Returned:** ${fmt(payout)} BTC (price unchanged — full refund)`
-                : win
-                    ? `✅ **Returned:** ${fmt(payout)} BTC (+${fmt(profit)} BTC profit)`
-                    : `❌ **Returned:** ${fmt(payout)} BTC (−${fmt(Math.abs(profit))} BTC loss)`) +
-            `\n\n₿ **Wallet:** ${fmt(d.btc || 0)} BTC`
+        .addFields(
+            { name: '🎯 Direction',    value: `**${dirLabel}**`,                                                           inline: true },
+            { name: '📊 Price',        value: `**${fmt(pred.entryPrice)} → ${fmt(exitPrice)}** (${pctStr})`,               inline: true },
+            { name: isDraw ? '↩️ Refund' : win ? '💰 Profit' : '💸 Lost',
+              value: isDraw ? `**₿ ${fmt(payout)}**` : win ? `**+₿ ${fmt(profit)}**` : `**-₿ ${fmt(pred.stakeUsd)}**`,    inline: true },
+            { name: '💳 Wallet',       value: `**₿ ${fmt(d.btc || 0)}**`,                                                  inline: true },
         )
         .setFooter({ text: 'Garaad Predict • ?trade to play again' });
 
