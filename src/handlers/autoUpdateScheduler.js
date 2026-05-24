@@ -46,7 +46,7 @@ function checkForUpdates() {
             return;
         }
         const out = (stdout || '').trim();
-        if (!out || out.includes('already up to date')) return;
+        if (!out || out.toLowerCase().includes('already up to date')) return;
         applyUpdate(out);
     });
 }
