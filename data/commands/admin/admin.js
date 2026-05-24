@@ -88,6 +88,23 @@ module.exports = async function adminCommand(message, args) {
         case 'bilow':
             return adminEconRestart(message);
 
+        case 'transfer':
+        case 'bank':
+        case 'send': {
+            const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+            const { fmt } = require('../../../src/utils/helpers');
+            const target = message.mentions.users.first();
+            const amount = Number((args.find(a => !isNaN(parseFloat(a))) || '').replace(/,/g, ''));
+            if (!target) return message.reply('⚠️ Isticmaal: `?admin transfer @user 5000`');
+            if (!amount || isNaN(amount) || amount <= 0) return message.reply('⚠️ Lacag sax ah ku qor: `?admin transfer @user 5000`');
+            checkEconUser(target.id);
+            econData[target.id].banks        ??= { garaad: 0 };
+            econData[target.id].banks.garaad ??= 0;
+            econData[target.id].banks.garaad  += amount;
+            saveEcon();
+            return message.reply(`✅ **₿ ${fmt(amount)}** bankiga <@${target.id}> lagu daray.\n🏦 Bangiga hadda: **₿ ${fmt(econData[target.id].banks.garaad)}**`);
+        }
+
         case 'treasury':
         case 'khaznad': {
             const { topUpTreasury, getTreasury, saveEcon } = require('../../../src/economy/econStore');
