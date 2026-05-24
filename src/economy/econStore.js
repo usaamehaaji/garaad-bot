@@ -56,22 +56,49 @@ function checkEconUser(userId) {
     return econData[userId];
 }
 
-try {
-    if (fs.existsSync(ECON_PATH)) {
-        econData = JSON.parse(fs.readFileSync(ECON_PATH, 'utf8'));
+// ── Load: MongoDB first, fallback to JSON ──
+async function loadEcon() {
+    const { getDB } = require('../db');
+    const db = getDB();
+    if (db) {
+        try {
+            const doc = await db.collection('store').findOne({ _id: 'economy' });
+            if (doc && doc.data) {
+                Object.assign(econData, doc.data);
+                console.log('[EconStore] ✅ economy.json ka soo degtay MongoDB');
+                return;
+            }
+        } catch (e) {
+            console.error('[EconStore] MongoDB load failed, falling back to JSON:', e.message);
+        }
     }
-} catch (e) {
-    console.error('[EconStore] Load error:', e.message);
-    econData = {};
+    // Fallback: JSON file
+    try {
+        if (fs.existsSync(ECON_PATH)) {
+            Object.assign(econData, JSON.parse(fs.readFileSync(ECON_PATH, 'utf8')));
+        }
+    } catch (e) {
+        console.error('[EconStore] Load error:', e.message);
+    }
 }
 
+// ── Save: JSON always + MongoDB if connected ──
 function saveEcon() {
+    // Always write local JSON (backup)
     try {
         const dir = path.dirname(ECON_PATH);
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(ECON_PATH, JSON.stringify(econData, null, 2));
     } catch (e) {
         console.error('[EconStore] Save error:', e.message);
+    }
+    // Also save to MongoDB (fire-and-forget)
+    const { getDB } = require('../db');
+    const db = getDB();
+    if (db) {
+        db.collection('store')
+            .updateOne({ _id: 'economy' }, { $set: { data: econData } }, { upsert: true })
+            .catch(e => console.error('[EconStore] MongoDB save error:', e.message));
     }
 }
 
@@ -132,6 +159,7 @@ function resetWeeklyEarnings() {
 
 module.exports = {
     econData,
+    loadEcon,
     checkEconUser,
     saveEcon,
     getTreasury,

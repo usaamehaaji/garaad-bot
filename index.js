@@ -69,6 +69,9 @@ const setupBankChargeScheduler  = require('./src/handlers/bankChargeScheduler');
 const setupWeeklyLeaderboard    = require('./src/handlers/weeklyLeaderboard');
 const setupBroadcastScheduler   = require('./src/handlers/broadcastScheduler');
 const setupBackupScheduler      = require('./src/handlers/backupScheduler');
+const { connectDB }             = require('./src/db');
+const { loadData }              = require('./src/store');
+const { loadEcon }              = require('./src/economy/econStore');
 const { restorePredictions }    = require('./src/economy/prediction');
 const { tickMarket }            = require('./src/economy/market');
 
@@ -151,7 +154,13 @@ if (!token) {
     process.exit(1);
 }
 
-client.login(token).catch((err) => {
-    console.error('❌ Login Discord ma guulaysan:', err.message);
-    process.exit(1);
-});
+// Connect to MongoDB then load data before login
+(async () => {
+    await connectDB();
+    await loadData();
+    await loadEcon();
+        client.login(token).catch((err) => {
+            console.error('❌ Login Discord ma guulaysan:', err.message);
+            process.exit(1);
+        });
+})();

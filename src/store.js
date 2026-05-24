@@ -18,20 +18,49 @@ const activeTournament = new Map(); // channelId -> tartan state
 /** @type {Map<string, { code: string, at: number }>} */
 const tournamentRegistry = new Map(); // userId -> diiwaangeli
 
-try {
-    if (fs.existsSync(DATA_PATH)) {
-        userData = JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
+// ── Load: MongoDB first, fallback to JSON ──
+async function loadData() {
+    const { getDB } = require('./db');
+    const db = getDB();
+    if (db) {
+        try {
+            const doc = await db.collection('store').findOne({ _id: 'users' });
+            if (doc && doc.data) {
+                Object.assign(userData, doc.data);
+                console.log('[Store] ✅ users.json ka soo degtay MongoDB');
+                return;
+            }
+        } catch (e) {
+            console.error('[Store] MongoDB load failed, falling back to JSON:', e.message);
+        }
     }
-} catch (e) {
-    console.error('[Store] Khalad akhrinaynta users.json:', e.message);
-    userData = {};
+    // Fallback: JSON file
+    try {
+        if (fs.existsSync(DATA_PATH)) {
+            Object.assign(userData, JSON.parse(fs.readFileSync(DATA_PATH, 'utf8')));
+        }
+    } catch (e) {
+        console.error('[Store] Khalad akhrinaynta users.json:', e.message);
+    }
 }
 
+// ── Save: JSON always + MongoDB if connected ──
 function saveData() {
+    // Always write local JSON (backup)
     try {
+        const dir = path.dirname(DATA_PATH);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(DATA_PATH, JSON.stringify(userData, null, 2));
     } catch (e) {
         console.error('[Store] Khalad keydintiinta users.json:', e.message);
+    }
+    // Also save to MongoDB (fire-and-forget)
+    const { getDB } = require('./db');
+    const db = getDB();
+    if (db) {
+        db.collection('store')
+            .updateOne({ _id: 'users' }, { $set: { data: userData } }, { upsert: true })
+            .catch(e => console.error('[Store] MongoDB save error:', e.message));
     }
 }
 
@@ -59,6 +88,7 @@ function isUserBusy(userId) {
 
 module.exports = {
     userData,
+    loadData,
     saveData,
     activeGames,
     activeDuels,
