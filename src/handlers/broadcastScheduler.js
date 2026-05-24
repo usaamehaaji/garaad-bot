@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 const INTERVAL_MS = 4 * 60 * 60 * 1000; // 4 hours
 
@@ -55,12 +55,19 @@ async function broadcast(client) {
         .setDescription(MESSAGE)
         .setFooter({ text: 'Garaad Bot • garaadkaaga kobco' });
 
+    const voteRow = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setLabel('🗳️ Vote for Garaad')
+            .setStyle(ButtonStyle.Link)
+            .setURL('https://top.gg/bot/1495341089266073705'),
+    );
+
     let sent = 0;
     for (const guild of client.guilds.cache.values()) {
         try {
             const ch = getBestChannel(guild);
             if (!ch) continue;
-            await ch.send({ embeds: [embed] });
+            await ch.send({ embeds: [embed], components: [voteRow] });
             sent++;
         } catch {
             // skip guilds where send fails
