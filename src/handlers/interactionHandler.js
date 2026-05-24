@@ -464,6 +464,25 @@ module.exports = function setupInteractionHandler(client) {
                 }
             }
 
+            // ── Admin: Give All IQ modal submit ──
+            if (interaction.customId.startsWith('admin_m_giveall_iq_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const amount = parseInt(interaction.fields.getTextInputValue('amount'), 10);
+                if (isNaN(amount) || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 100).', flags: MessageFlags.Ephemeral });
+                const { userData: uData, saveData: sd } = require('../store');
+                const { checkUser: cu } = require('../utils/helpers');
+                const users = Object.keys(uData);
+                for (const uid of users) {
+                    cu(uid);
+                    uData[uid].iq = (uData[uid].iq || 0) + amount;
+                }
+                sd();
+                await notifyAdmins(interaction.client, interaction.user, `Give All IQ: **+${amount} IQ** × ${users.length} players`);
+                return interaction.reply({ content: `✅ **${users.length}** players qof walba wuxuu helay **+${amount} IQ**`, flags: MessageFlags.Ephemeral });
+            }
+
             // ── Admin Aqoon modal: Give IQ ──
             if (interaction.customId.startsWith('admin_aq_m_giveiq_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -1107,6 +1126,23 @@ module.exports = function setupInteractionHandler(client) {
             modal.addComponents(
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('target_id').setLabel('User ID').setStyle(TextInputStyle.Short).setPlaceholder('123456789012345678').setRequired(true)),
                 new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('give_input').setLabel('iq 200  or  btc 500').setStyle(TextInputStyle.Short).setPlaceholder('iq 200   /   btc 500').setRequired(true)),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Admin: Give All IQ button → modal ──
+        if (id.startsWith('admin_giveall_iq_')) {
+            const ownerId = id.replace('admin_giveall_iq_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_giveall_iq_${ownerId}`).setTitle('🧠 Give IQ — All Players');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('amount').setLabel('IQ xaddadka (qof walba)').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Tusaale: 100').setRequired(true)
+                ),
             );
             return interaction.showModal(modal);
         }

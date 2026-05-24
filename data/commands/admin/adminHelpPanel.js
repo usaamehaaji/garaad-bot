@@ -21,7 +21,7 @@ function buildAdminEmbed(uid) {
             `**👥 Players:** ${users.length} | **₿ Circulation:** ${fmt(totalBtc)} BTC\n` +
             `**💳 Active Loans:** ${activeLoans}\n\n` +
             `**Actions:**\n` +
-            `🎁 Give  •  🏆 Champion  •  💬 DM  •  📢 Broadcast  •  🐛 Bugs\n` +
+            `🎁 Give  •  🧠 Give IQ  •  🏆 Champion  •  💬 DM  •  📢 Broadcast  •  🐛 Bugs\n` +
             `👥 Players  •  💳 Loans` +
             (isOwner ? `\n🏛️ Top-up  •  💸 Tax  •  👥 Admin (add/remove)\n♻️ Reset (IQ / Eco / Both)` : '')
         )
@@ -31,9 +31,10 @@ function buildAdminEmbed(uid) {
 // Row 1 — all admins
 function adminRow1(uid) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`admin_give_${uid}`)       .setLabel('🎁 Give')    .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`).setLabel('🏆 Champion').setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)      .setLabel('💬 DM User') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`admin_give_${uid}`)        .setLabel('🎁 Give')      .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_giveall_iq_${uid}`)  .setLabel('🧠 Give IQ')   .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`admin_aq_champion_${uid}`) .setLabel('🏆 Champion')  .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`admin_aq_dm_${uid}`)       .setLabel('💬 DM User')   .setStyle(ButtonStyle.Secondary),
     );
 }
 
