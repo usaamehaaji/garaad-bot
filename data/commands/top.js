@@ -40,6 +40,7 @@ module.exports = async function topCommand(message) {
     checkUser(userId);
 
     const allIq = Object.entries(userData)
+        .filter(([id]) => /^\d{17,19}$/.test(id))
         .sort(([, a], [, b]) => (b.iq || 0) - (a.iq || 0));
 
     const top      = allIq.slice(0, TOP_N);

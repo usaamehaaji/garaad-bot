@@ -10,7 +10,7 @@ function fmtW(n) {
 
 function getPlayerRank(userId) {
     const sorted = Object.entries(econData)
-        .filter(([k]) => !k.startsWith('__'))
+        .filter(([k]) => /^\d{17,19}$/.test(k))
         .sort(([, a], [, b]) => (b.btc || 0) - (a.btc || 0));
     const idx = sorted.findIndex(([uid]) => uid === userId);
     return idx >= 0 ? idx + 1 : null;

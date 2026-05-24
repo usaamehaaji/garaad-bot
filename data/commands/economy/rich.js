@@ -6,7 +6,7 @@ const BTC_ICON = 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/
 
 module.exports = async function richCmd(message) {
     const entries = Object.entries(econData)
-        .filter(([, d]) => d && typeof d === 'object' && !d.__treasury__)
+        .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d && typeof d === 'object')
         .map(([uid, d]) => ({ uid, btc: d.btc || 0 }))
         .sort((a, b) => b.btc - a.btc)
         .slice(0, 10);
