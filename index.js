@@ -122,7 +122,6 @@ client.once('clientReady', () => {
                 .setDescription(
                     `Nabad! Bot-ku wuu soo noqday.\n\n` +
                     `Game dhaqaalaha waa bilaabmay — heshiis fiican!\n\n` +
-                    `• \`?manta\` — lacagta maanta qaad\n` +
                     `• \`?shaqo\` — shaqeyso lacag ku hel\n` +
                     `• \`?bank\` — lacagta bangiga ku dhig\n` +
                     `• \`?solo\` — su'aalo jawaab, IQ korso`
