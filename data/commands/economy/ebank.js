@@ -99,17 +99,14 @@ function buildBankEmbed(d) {
 }
 
 function buildTreasuryEmbed() {
-    const t     = getTreasury();
-    const bal   = t.balance || 0;
-    const total = t.totalIn || 0;
-    const spent = total - bal;
+    const t = getTreasury();
     return new EmbedBuilder()
         .setTitle('🏛️ Treasury')
         .setColor('#8e44ad')
         .addFields(
-            { name: '🏛️ Balance',   value: `**₿ ${fmt(bal)}**`,   inline: true },
-            { name: '📥 Total In',  value: `**₿ ${fmt(total)}**`,  inline: true },
-            { name: '📤 Total Out', value: `**₿ ${fmt(spent)}**`,  inline: true },
+            { name: '🏛️ Balance',   value: `**₿ ${fmt(t.balance  || 0)}**`, inline: true },
+            { name: '📥 Total In',  value: `**₿ ${fmt(t.totalIn  || 0)}**`, inline: true },
+            { name: '📤 Total Out', value: `**₿ ${fmt(t.totalOut || 0)}**`, inline: true },
         )
         .setFooter({ text: 'Garaad Bank • Sources: shop, flips, loans, tax' });
 }

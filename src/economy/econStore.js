@@ -103,9 +103,10 @@ function saveEcon() {
 }
 
 function getTreasury() {
-    econData.__treasury__ ??= { balance: 0, totalIn: 0 };
-    econData.__treasury__.balance ??= 0;
-    econData.__treasury__.totalIn ??= 0;
+    econData.__treasury__ ??= { balance: 0, totalIn: 0, totalOut: 0 };
+    econData.__treasury__.balance  ??= 0;
+    econData.__treasury__.totalIn  ??= 0;
+    econData.__treasury__.totalOut ??= 0;
     return econData.__treasury__;
 }
 
@@ -125,7 +126,8 @@ function topUpTreasury(amount) {
 function deductFromTreasury(amount) {
     const t = getTreasury();
     if (t.balance < amount) return false;
-    t.balance -= amount;
+    t.balance  -= amount;
+    t.totalOut += amount;
     return true;
 }
 
