@@ -34,6 +34,7 @@ const giveCmd         = require('../../data/commands/economy/give');
 const robCmd          = require('../../data/commands/economy/rob');
 const richCmd         = require('../../data/commands/economy/rich');
 const ebankCmd        = require('../../data/commands/economy/ebank');
+const banksCmd        = require('../../data/commands/economy/banks');
 const econShopCmd     = require('../../data/commands/economy/econShop');
 
 const shaqoCmd        = require('../../data/commands/economy/shaqo');
@@ -142,6 +143,10 @@ module.exports = function setupMessageHandler(client) {
 
             case 'ebank':
                 return ebankCmd(message, args);
+
+            case 'banks':
+            case 'bank':
+                return banksCmd(message);
 
             case 'shop':
                 return econShopCmd(message);
