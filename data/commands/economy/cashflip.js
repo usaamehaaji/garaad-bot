@@ -4,7 +4,7 @@ const { fmt } = require('../../../src/utils/helpers');
 
 const PROFIT_RATE      = 0.95;
 const COOLDOWN_MS      = 10_000;
-const MIN_BET          = 50;
+const MIN_BET          = 10;
 const MAX_BET          = 50_000;
 const DAILY_PROFIT_CAP = 500_000;
 
