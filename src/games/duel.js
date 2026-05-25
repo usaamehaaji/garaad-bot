@@ -126,11 +126,15 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0) {
     setTimeout(() => sendDuelQuestion(channel), 3000);
 }
 
-async function sendDuelQuestion(channel, currentMsg = null) {
+async function sendDuelQuestion(channel) {
     const state = activeDuels.get(channel.id);
     if (!state) return;
 
-    if (state.currentQ >= state.totalQ) return finishDuel(channel, currentMsg);
+    // Stop any previous monitors before starting a new question
+    if (state.chatMonitor)       { state.chatMonitor.stop();       state.chatMonitor = null; }
+    if (state.questionCollector) { state.questionCollector.stop('replaced'); state.questionCollector = null; }
+
+    if (state.currentQ >= state.totalQ) return finishDuel(channel);
 
     const qIndex = state.currentQ;
     const q      = state.questions[qIndex];
@@ -167,9 +171,7 @@ async function sendDuelQuestion(channel, currentMsg = null) {
 
     let msg;
     try {
-        msg = currentMsg
-            ? await currentMsg.edit({ embeds: [embed], components: [row] })
-            : await channel.send({ embeds: [embed], components: [row] });
+        msg = await channel.send({ embeds: [embed], components: [row] });
     } catch {
         activeDuels.delete(channel.id);
         refundDuelStakes(state.p1, state.p2);
@@ -177,37 +179,52 @@ async function sendDuelQuestion(channel, currentMsg = null) {
     }
     state.message = msg;
 
-    const filter    = i => i.customId.startsWith(`duel_q_${qIndex}_`) && (i.user.id === state.p1 || i.user.id === state.p2);
-    const collector = msg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS });
+    const questionEndTime = Date.now() + GLOBAL_WAIT_MS;
+    let questionDone = false;
 
-    collector.on('collect', async interaction => {
-        const cur = activeDuels.get(channel.id);
-        if (!cur || cur.currentQ !== qIndex) {
-            return interaction.reply({ content: 'Su\'aashan way dhamaatay.', flags: MessageFlags.Ephemeral }).catch(() => {});
-        }
-        if (cur.answeredBy.has(interaction.user.id)) {
-            return interaction.reply({ content: 'Mar hore ayaad isku dayday su\'aashan!', flags: MessageFlags.Ephemeral }).catch(() => {});
-        }
-        cur.answeredBy.add(interaction.user.id);
+    function startCollector(targetMsg, remainingMs) {
+        const filter = i => i.customId.startsWith(`duel_q_${qIndex}_`) && (i.user.id === state.p1 || i.user.id === state.p2);
+        const coll   = targetMsg.createMessageComponentCollector({ filter, time: Math.max(1000, remainingMs) });
+        state.questionCollector = coll;
 
-        const isCorrect = interaction.customId.endsWith('_t');
-        if (isCorrect) {
-            cur.scores[interaction.user.id]++;
-            cur.correctAnswerer = interaction.user.id;
-            await interaction.reply({ content: `✅ <@${interaction.user.id}> wuu helay dhibic!`, flags: MessageFlags.Ephemeral }).catch(() => {});
-            collector.stop('correct');
-        } else {
-            await interaction.reply({ content: '❌ Khalad! Sug qofka kale ama waqtigu wuu dhamaan.', flags: MessageFlags.Ephemeral }).catch(() => {});
-            if (cur.answeredBy.size >= 2) collector.stop('both_wrong');
-        }
-    });
+        coll.on('collect', async interaction => {
+            const cur = activeDuels.get(channel.id);
+            if (!cur || cur.currentQ !== qIndex) {
+                return interaction.reply({ content: 'Su\'aashan way dhamaatay.', flags: MessageFlags.Ephemeral }).catch(() => {});
+            }
+            if (cur.answeredBy.has(interaction.user.id)) {
+                return interaction.reply({ content: 'Mar hore ayaad isku dayday su\'aashan!', flags: MessageFlags.Ephemeral }).catch(() => {});
+            }
+            cur.answeredBy.add(interaction.user.id);
 
-    collector.on('end', async (_col, reason) => {
+            const isCorrect = interaction.customId.endsWith('_t');
+            if (isCorrect) {
+                cur.scores[interaction.user.id]++;
+                cur.correctAnswerer = interaction.user.id;
+                await interaction.reply({ content: `✅ <@${interaction.user.id}> wuu helay dhibic!`, flags: MessageFlags.Ephemeral }).catch(() => {});
+                coll.stop('correct');
+            } else {
+                await interaction.reply({ content: '❌ Khalad! Sug qofka kale ama waqtigu wuu dhamaan.', flags: MessageFlags.Ephemeral }).catch(() => {});
+                if (cur.answeredBy.size >= 2) coll.stop('both_wrong');
+            }
+        });
+
+        coll.on('end', (_col, reason) => {
+            if (reason === 'repost' || reason === 'replaced' || reason === 'done') return;
+            endQuestion(reason);
+        });
+    }
+
+    async function endQuestion(reason) {
+        if (questionDone) return;
+        questionDone = true;
+
+        if (state.chatMonitor) { state.chatMonitor.stop(); state.chatMonitor = null; }
+
         const cur = activeDuels.get(channel.id);
         if (!cur) return;
 
         let resultLine;
-
         if (reason === 'correct' && cur.correctAnswerer) {
             resultLine = `✅ <@${cur.correctAnswerer}> ayaa si sax ah u jawaabay!\nJawaabta saxda ah waxaa lagu muujiyaa kor.`;
         } else if (reason === 'both_wrong') {
@@ -230,11 +247,38 @@ async function sendDuelQuestion(channel, currentMsg = null) {
         if (cur.message) await cur.message.edit({ embeds: [summaryEmbed], components: [] }).catch(() => {});
 
         cur.currentQ++;
-        setTimeout(() => sendDuelQuestion(channel, cur.message), 2500);
+        setTimeout(() => sendDuelQuestion(channel), 2500);
+    }
+
+    startCollector(msg, GLOBAL_WAIT_MS);
+
+    // Chat monitor — repost question card at bottom when anyone chats
+    const chatMonitor = channel.createMessageCollector({
+        filter: m => !m.author.bot,
+        time: GLOBAL_WAIT_MS + 5000,
+    });
+    state.chatMonitor = chatMonitor;
+
+    chatMonitor.on('collect', async () => {
+        const cur = activeDuels.get(channel.id);
+        if (!cur || cur.currentQ !== qIndex || questionDone) return;
+
+        const remaining = questionEndTime - Date.now();
+        if (remaining <= 1000) return;
+
+        if (cur.questionCollector) { cur.questionCollector.stop('repost'); cur.questionCollector = null; }
+
+        const oldMsg = cur.message;
+        try {
+            const newMsg = await channel.send({ embeds: [embed], components: [row] });
+            cur.message = newMsg;
+            await oldMsg?.delete().catch(() => {});
+            startCollector(newMsg, remaining);
+        } catch {}
     });
 }
 
-async function finishDuel(channel, currentMsg = null) {
+async function finishDuel(channel) {
     const state = activeDuels.get(channel.id);
     if (!state) return;
 
@@ -291,11 +335,7 @@ async function finishDuel(channel, currentMsg = null) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    if (currentMsg) {
-        await currentMsg.edit({ embeds: [resultEmbed], components: [closeRow] }).catch(() => {});
-    } else {
-        await channel.send({ embeds: [resultEmbed], components: [closeRow] });
-    }
+    await channel.send({ embeds: [resultEmbed], components: [closeRow] });
 }
 
 module.exports = { startDuelGame, sendDuelQuestion, finishDuel, refundDuelStakes };
