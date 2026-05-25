@@ -2401,9 +2401,9 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid.\nQiimaha: **₿: ${item.price.toLocaleString()}** | Haysataa: **₿: ${(d.btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                 }
                 d.btc = (d.btc || 0) - item.price;
-                d.inventory[expiryKey] = Date.now() + 2 * 24 * 60 * 60 * 1000;
+                d.inventory[expiryKey] = Date.now() + 3 * 24 * 60 * 60 * 1000;
                 saveEcon();
-                return interaction.reply({ content: `✅ **${item.label}** iibsatay! **2 maalmood** ayay shaqaynaysaa.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **${item.label}** iibsatay!\n💸 Bixisay: **₿ ${item.price.toLocaleString()}** · 💳 Hadhay: **₿ ${(d.btc || 0).toLocaleString()}**\n⏳ Waxay shaqaynaysaa **3 maalmood**.`, flags: MessageFlags.Ephemeral });
             }
 
             // Custom name title — show modal
