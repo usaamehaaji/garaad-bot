@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, deductFromTreasury, getTreasury, trackEarning } = require('../../../src/economy/econStore');
 const { getMarketState, calculateOutcome, recordFlip } = require('../../../src/economy/marketEngine');
+
 const { fmt } = require('../../../src/utils/helpers');
 
 const PROFIT_RATE = 0.95;
@@ -15,31 +16,6 @@ function getFlipStats(d) {
     return d.flipStats;
 }
 
-function buildAnalyzingEmbed(state, dirLabel, amount) {
-    return new EmbedBuilder()
-        .setTitle('⏳ Analyzing Market Conditions...')
-        .setColor('#95a5a6')
-        .setDescription(
-            `Direction: **${dirLabel}** · Stake: **₿ ${fmt(amount)}**\n\n` +
-            `Market: **${state.icon} ${state.label}** — ${state.desc}\n` +
-            `State duration: \`${state.flipsIn + 1}/${state.flipsMax}\` flips\n\n` +
-            `_Scanning order books..._`
-        )
-        .setFooter({ text: 'Garaad Economy • Treasury-backed market' });
-}
-
-function buildIndicatorEmbed(state, dirLabel, amount, indicators) {
-    const lines = indicators.map(i => `> ${i}`).join('\n');
-    return new EmbedBuilder()
-        .setTitle(`${state.icon} ${state.label} — Executing Trade`)
-        .setColor('#f39c12')
-        .setDescription(
-            `Direction: **${dirLabel}** · Stake: **₿ ${fmt(amount)}**\n\n` +
-            `**Market Signals:**\n${lines}\n\n` +
-            `_Processing..._ ⏱️`
-        )
-        .setFooter({ text: 'Garaad Economy • Treasury-backed market' });
-}
 
 function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
     const returnedLine = win
@@ -135,9 +111,8 @@ module.exports = async function cashflipCmd(message, args) {
 
     const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
 
-    // Pre-calculate outcome (before suspense so treasury check can bail early)
-    const { win, indicators } = calculateOutcome(userId, amount);
-    const profit  = Math.floor(amount * PROFIT_RATE);
+    const { win } = calculateOutcome(userId, amount);
+    const profit   = Math.floor(amount * PROFIT_RATE);
     const treasury = getTreasury();
 
     if (win && (treasury.balance || 0) < profit) {
@@ -145,17 +120,9 @@ module.exports = async function cashflipCmd(message, args) {
         return message.reply(`⚠️ Treasury funds low — market temporarily closed. Balance: **₿ ${fmt(treasury.balance || 0)}**`);
     }
 
-    // ── Phase 1: analyzing (immediate) ──
-    const sent = await message.reply({ embeds: [buildAnalyzingEmbed(state, dirLabel, amount)] });
+    // 2 second suspense then result
+    await new Promise(r => setTimeout(r, 2000));
 
-    // ── Phase 2: indicators (1 second later) ──
-    await new Promise(r => setTimeout(r, 1000));
-    await sent.edit({ embeds: [buildIndicatorEmbed(state, dirLabel, amount, indicators)] }).catch(() => {});
-
-    // ── Phase 3: result (1.5–3 seconds later) ──
-    await new Promise(r => setTimeout(r, 1500 + Math.floor(Math.random() * 1500)));
-
-    // Apply to wallet
     const walletBefore = d.btc || 0;
     d.btc = walletBefore - amount;
     const fs = getFlipStats(d);
@@ -176,7 +143,7 @@ module.exports = async function cashflipCmd(message, args) {
     saveEcon();
 
     const freshState = getMarketState();
-    await sent.edit({ embeds: [buildResultEmbed(win, dirLabel, amount, profit, d.btc, freshState)] }).catch(() => {});
+    return message.reply({ embeds: [buildResultEmbed(win, dirLabel, amount, profit, d.btc, freshState)] });
 };
 
 module.exports.PROFIT_RATE = PROFIT_RATE;
