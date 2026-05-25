@@ -234,10 +234,14 @@ async function handleSoloAnswer(interaction) {
         return interaction.reply({ content: 'Ciyaartaada qoro!', flags: 64 });
     }
 
-    await interaction.deferUpdate();
-
     checkUser(ownerId);
-    const game     = activeGames.get(ownerId);
+    const game = activeGames.get(ownerId);
+
+    if (!game) {
+        return interaction.reply({ content: '⚠️ Ciyaartii waa dhacday — bot restart ayaa dhacay. Bilow mar kale: `?solo`', flags: 64 }).catch(() => {});
+    }
+
+    await interaction.deferUpdate();
     const timeTaken = Date.now() - (interaction.message.createdTimestamp || Date.now());
     let   msg       = '';
 

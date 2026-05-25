@@ -2772,5 +2772,13 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.reply({ content: text, flags: MessageFlags.Ephemeral });
         }
 
+        // ── Catch-all: game buttons orphaned after bot restart ──
+        if (id.startsWith('tna_')) {
+            return interaction.reply({
+                content: '⚠️ Su\'aashu waa dhacday — bot restart ayaa dhacay ciyaarta dhex maraysay. Sug wareeg cusub.',
+                flags: MessageFlags.Ephemeral,
+            }).catch(() => {});
+        }
+
     });
 };
