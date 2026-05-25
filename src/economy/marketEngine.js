@@ -4,7 +4,7 @@
 // =====================================================================
 
 const STATES = {
-    BULL:        { baseWin: 0.56, label: 'Bull Market',     icon: '🐂', desc: 'Upward trend',           duration: [12, 20] },
+    BULL:        { baseWin: 0.56, label: 'Bull Market',     icon: '🚀', desc: 'Upward trend',           duration: [12, 20] },
     BEAR:        { baseWin: 0.44, label: 'Bear Market',     icon: '🐻', desc: 'Downward pressure',       duration: [12, 20] },
     PANIC:       { baseWin: 0.36, label: 'Market Panic',    icon: '💥', desc: 'Extreme sell-off',        duration: [6, 12]  },
     RALLY:       { baseWin: 0.60, label: 'Rally Mode',      icon: '🚀', desc: 'FOMO buying frenzy',      duration: [8, 14]  },
