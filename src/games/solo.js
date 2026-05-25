@@ -137,8 +137,10 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 .setStyle(ButtonStyle.Danger),
         );
 
-        if (currentMsg) {
-            await currentMsg.edit({ embeds: [finishEmbed], components: [row] });
+        if (currentMsg) await currentMsg.delete().catch(() => {});
+        const fc = messageOrInteraction.channel;
+        if (fc) {
+            await fc.send({ embeds: [finishEmbed], components: [row] });
         } else {
             await messageOrInteraction.reply({ embeds: [finishEmbed], components: [row] });
         }
@@ -211,8 +213,11 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
 
             const timeoutEmbed = EmbedBuilder.from(embed)
                 .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
-            msg.edit({ embeds: [timeoutEmbed], components: [] }).catch(() => {});
-            setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, msg), 2000);
+            const tch = messageOrInteraction.channel;
+            msg.delete().catch(() => {});
+            tch.send({ embeds: [timeoutEmbed] })
+                .then(nm => setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, nm), 2000))
+                .catch(() => setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, null), 2000));
         }
     });
 }
@@ -267,9 +272,11 @@ async function handleSoloAnswer(interaction) {
     const updatedEmbed = EmbedBuilder.from(interaction.message.embeds[0])
         .setFields({ name: 'Natiijo', value: msg });
 
-    await interaction.editReply({ embeds: [updatedEmbed], components: [] });
+    const channel = interaction.channel;
+    await interaction.message.delete().catch(() => {});
+    const resultMsg = await channel.send({ embeds: [updatedEmbed] }).catch(() => null);
 
-    setTimeout(() => sendQuestion(interaction, qNum + 1, interaction.message), 1800);
+    setTimeout(() => sendQuestion(interaction, qNum + 1, resultMsg), 1800);
 }
 
 // ── Leaderboard button handler ────────────────────────────────────────

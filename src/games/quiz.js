@@ -250,10 +250,6 @@ async function sendQuizQuestion(state) {
     const totalQ = state.questionCount || QUIZ_QUESTION_COUNT;
     if (state.currentQ >= totalQ) return finishQuiz(state);
 
-    // Stop any leftover monitors from the previous question
-    if (state.chatMonitor)       { state.chatMonitor.stop();       state.chatMonitor = null; }
-    if (state.questionCollector) { state.questionCollector.stop('replaced'); state.questionCollector = null; }
-
     const channel = state.message?.channel;
     if (!channel) { activeQuiz.delete(state.channelId); return; }
 
@@ -271,9 +267,7 @@ async function sendQuizQuestion(state) {
 
     const correctLabel    = qEntries.find(e => e.isCorrect)?.label ?? String(q.correct);
     const questionStartMs = Date.now();
-    const questionEndTime = Date.now() + GLOBAL_WAIT_MS;
 
-    // Preserved across reposts
     const answeredBy = new Set();
     const correctMap = {};
 
@@ -297,57 +291,43 @@ async function sendQuizQuestion(state) {
     const row = new ActionRowBuilder().addComponents(buttons);
 
     const qIndex = state.currentQ;
-    let questionDone = false;
 
-    let activeMsg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
+    const activeMsg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
     if (!activeMsg) { activeQuiz.delete(state.channelId); return; }
 
-    function startCollector(targetMsg, remainingMs) {
-        const filter = i =>
-            i.customId.startsWith(`quiz_a_${state.channelId}_${qIndex}_`) &&
-            state.players.has(i.user.id);
+    const filter = i =>
+        i.customId.startsWith(`quiz_a_${state.channelId}_${qIndex}_`) &&
+        state.players.has(i.user.id);
 
-        const coll = targetMsg.createMessageComponentCollector({ filter, time: Math.max(1000, remainingMs) });
-        state.questionCollector = coll;
+    const collector = activeMsg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS });
 
-        coll.on('collect', async interaction => {
-            const uid = interaction.user.id;
-            if (answeredBy.has(uid)) {
-                return interaction.reply({ content: '⚠️ Mar hore ayaad jawaab bixisay!', flags: MessageFlags.Ephemeral }).catch(() => {});
-            }
-            answeredBy.add(uid);
+    collector.on('collect', async interaction => {
+        const uid = interaction.user.id;
+        if (answeredBy.has(uid)) {
+            return interaction.reply({ content: '⚠️ Mar hore ayaad jawaab bixisay!', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
+        answeredBy.add(uid);
 
-            const isCorrect   = interaction.customId.endsWith('_t');
-            const timeTakenMs = Date.now() - questionStartMs;
+        const isCorrect   = interaction.customId.endsWith('_t');
+        const timeTakenMs = Date.now() - questionStartMs;
 
-            if (isCorrect) {
-                const pts = calcTimedScore(timeTakenMs);
-                state.scores[uid] = (state.scores[uid] || 0) + pts;
-                correctMap[uid]   = { pts, timeTakenMs };
-                const secs = (timeTakenMs / 1000).toFixed(1);
-                await interaction.reply({ content: `✅ **Sax!** +**${pts}** dhibcood · ⏱️ ${secs}s`, flags: MessageFlags.Ephemeral }).catch(() => {});
-            } else {
-                checkUser(uid);
-                userData[uid].iq = Math.max(0, (userData[uid].iq || 0) - 1);
-                saveData();
-                await interaction.reply({ content: '❌ **Khalad.** Jawaabta sax ma ahayn · **−1 IQ** · 0 dhibcood', flags: MessageFlags.Ephemeral }).catch(() => {});
-            }
+        if (isCorrect) {
+            const pts = calcTimedScore(timeTakenMs);
+            state.scores[uid] = (state.scores[uid] || 0) + pts;
+            correctMap[uid]   = { pts, timeTakenMs };
+            const secs = (timeTakenMs / 1000).toFixed(1);
+            await interaction.reply({ content: `✅ **Sax!** +**${pts}** dhibcood · ⏱️ ${secs}s`, flags: MessageFlags.Ephemeral }).catch(() => {});
+        } else {
+            checkUser(uid);
+            userData[uid].iq = Math.max(0, (userData[uid].iq || 0) - 1);
+            saveData();
+            await interaction.reply({ content: '❌ **Khalad.** Jawaabta sax ma ahayn · **−1 IQ** · 0 dhibcood', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
 
-            if (answeredBy.size >= state.players.size) coll.stop('all_answered');
-        });
+        if (answeredBy.size >= state.players.size) collector.stop('all_answered');
+    });
 
-        coll.on('end', (_col, reason) => {
-            if (reason === 'repost' || reason === 'replaced' || reason === 'done') return;
-            endQuestion();
-        });
-    }
-
-    async function endQuestion() {
-        if (questionDone) return;
-        questionDone = true;
-
-        if (state.chatMonitor) { state.chatMonitor.stop(); state.chatMonitor = null; }
-
+    collector.on('end', async () => {
         const timedOut = [...state.players].filter(id => !answeredBy.has(id));
         for (const id of timedOut) {
             checkUser(id);
@@ -389,36 +369,11 @@ async function sendQuizQuestion(state) {
             )
             .setColor(correctEntries.length > 0 ? '#2ecc71' : '#e74c3c');
 
-        await activeMsg.edit({ embeds: [sumEmbed], components: [] }).catch(() => {});
+        await activeMsg.delete().catch(() => {});
+        await channel.send({ embeds: [sumEmbed] }).catch(() => {});
 
         state.currentQ++;
         setTimeout(() => sendQuizQuestion(state), 2500);
-    }
-
-    startCollector(activeMsg, GLOBAL_WAIT_MS);
-
-    // Chat monitor — repost question card at bottom when anyone chats
-    const chatMonitor = channel.createMessageCollector({
-        filter: m => !m.author.bot,
-        time: GLOBAL_WAIT_MS + 5000,
-    });
-    state.chatMonitor = chatMonitor;
-
-    chatMonitor.on('collect', async () => {
-        if (!activeQuiz.has(state.channelId) || state.currentQ !== qIndex || questionDone) return;
-
-        const remaining = questionEndTime - Date.now();
-        if (remaining <= 1000) return;
-
-        if (state.questionCollector) { state.questionCollector.stop('repost'); state.questionCollector = null; }
-
-        const oldMsg = activeMsg;
-        try {
-            const newMsg = await channel.send({ embeds: [embed], components: [row] });
-            activeMsg = newMsg;
-            await oldMsg?.delete().catch(() => {});
-            startCollector(newMsg, remaining);
-        } catch {}
     });
 }
 
