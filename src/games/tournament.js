@@ -117,32 +117,23 @@ function buildAnnounceEmbed(deadline, regCount, closed, state) {
         : `⏰ **Diiwaangelinta xirnaanaysaa:** ${hours > 0 ? `${hours}s ` : ''}${mins}d\n👥 **Diiwaangeliyay:** **${regCount}** qof\n\n_Riix 📝 Diiwaan Geli si aad code u heshid_ ⬇️`;
 
     return new EmbedBuilder()
-        .setTitle('🏆 TARTAN — Garaad Quiz Tournament')
+        .setTitle('🏆 Tartan — Garaad Quiz Tournament')
         .setColor(closed ? '#95a5a6' : '#e67e22')
         .setDescription(
-            `@everyone — **Tartan ayaa bilaabmayaa!** 🎉\n\n` +
+            `Nabad galyo dhammaan! 🏆\n\n` +
+            `Tartanka Garaad Quiz wuu bilaabmayaa — haddaad ka qaybgashan rabto riix badhanka **📝 Diiwaan Geli** hoose, code gaarka ah ayaa toos DM-kaaga ku yimaadaa.\n\n` +
+            `Marka admin game furo, code-kaaga fur oo ku qor <#${gameChId}> adigoo qoraya \`${PREFIX}gal CODE\`\n\n` +
+            `Tartanku wuxuu leeyahay saddex wareeg — kii ugu badan su'aalaha saxda ah ka jawaaba ayaa guulaysta.\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `📋 **WAREEGYADA:**\n` +
-            `🔸 Wareeg 1 — **${TOURNAMENT_R1_QUESTIONS} su'aalood**\n` +
-            `🔸 Wareeg 2 (Semi-Final) — **${TOURNAMENT_R2_QUESTIONS} su'aalood**\n` +
-            `🔸 Final 🏆 — **${TOURNAMENT_FINAL_QUESTIONS} su'aalood**\n\n` +
-            `⚡ Dhibco: < 5s = **40pts** · 18s = **5pts** (ku xidhan xawliga)\n` +
-            `🧠 MCQ (ABCD) + Run/Been · Af-Soomaali\n\n` +
-            `━━━━━━━━━━━━━━━━━━━━\n` +
-            `📌 **TILAABOOYINKA:**\n` +
-            `**1.** Riix **📝 Diiwaan Geli** — code DM-kaaga ku yimaadaa isla markiiba\n` +
-            `**2.** Marka admin game furo: tag 💬 <#${gameChId}>\n` +
-            `**3.** Qor: \`${PREFIX}gal CODE\` (code-kaagu DM-ka ayuu ku jiraa)\n\n` +
-            `🎙️ **Voice Channel:** <#${vcChId}>\n\n` +
-            `━━━━━━━━━━━━━━━━━━━━\n` +
-            `💰 **ABAALMARINTA:**\n` +
-            `🥇 1aad — **$15** + 🏆 Champion title\n` +
-            `🥈 2aad — **$10**\n` +
-            `🥉 3aad — **$5**\n\n` +
+            `💰 **Abaalmarinta:**\n` +
+            `🥇 Heerka 1aad — **$15** + 🏆 Champion title\n` +
+            `🥈 Heerka 2aad — **$10**\n` +
+            `🥉 Heerka 3aad — **$5**\n\n` +
+            `🎙️ Voice Channel: <#${vcChId}>\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
             regStatus
         )
-        .setFooter({ text: 'Garaad Quiz Tournament • ?tartan_status — xaaladda' });
+        .setFooter({ text: 'Garaad Quiz Tournament' });
 }
 
 function buildAnnounceButtons(disabled = false) {
