@@ -95,9 +95,8 @@ module.exports = async function cashflipCmd(message, args) {
     if (amount < MIN_BET)
         return message.reply(`⚠️ Min bet waa **₿ ${MIN_BET.toLocaleString()}**. Kor u qaad.`);
 
-    const maxBet = Math.min(MAX_BET, Math.floor((d.btc || 0) * 0.40));
-    if (amount > maxBet)
-        return message.reply(`⚠️ Max bet waa **₿ ${fmt(maxBet)}** (40% wallet ama 50k). Hoos u dhig.`);
+    if (amount > MAX_BET)
+        return message.reply(`⚠️ Max bet waa **₿ ${fmt(MAX_BET)}**. Hoos u dhig.`);
 
     if ((d.btc || 0) < amount)
         return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(d.btc || 0)}**`);
