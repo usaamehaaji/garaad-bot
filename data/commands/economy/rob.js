@@ -55,7 +55,7 @@ module.exports = async function robCmd(message) {
 
     if (victim.inventory.safetyExpiry > Date.now()) {
         const hoursLeft = Math.ceil((victim.inventory.safetyExpiry - Date.now()) / 3600000);
-        return message.reply(`🛡️ **${target.username}** waxaa ilaaliya Safety Shield — dhac ka dib!\nGaashaanku weli shaqaynayaa: **${hoursLeft}h** baqa.`);
+        return message.reply(`🛡️ **${target.username}** waxaa ilaaliya Safety Shield — dhac ka dib!\nGaashaanku weli shaqaynayaa: **${hoursLeft}h** active.`);
     }
 
     robber.robsToday.count += 1;
