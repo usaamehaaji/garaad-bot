@@ -104,8 +104,8 @@ function doFlip(userId, amount, direction) {
 
     if ((d.btc || 0) < amount) return { err: `⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(d.btc || 0)}**` };
 
-    // Daily profit cap check
-    if (fs.daily.profit >= DAILY_PROFIT_CAP)
+    // Daily profit cap check (skip for VIP users)
+    if (!d.vip && fs.daily.profit >= DAILY_PROFIT_CAP)
         return { err: `🚫 Maalinta max profit-kaaga waad gaartay (**₿ ${fmt(DAILY_PROFIT_CAP)}**). Berri isku day.` };
 
     const treasury = getTreasury();
@@ -121,9 +121,9 @@ function doFlip(userId, amount, direction) {
             d.btc += amount;
             return { err: `⚠️ Treasury funds low — market temporarily closed. Balance: **₿ ${fmt(treasury.balance || 0)}**` };
         }
-        // Cap actual payout to daily remaining
-        const capLeft   = DAILY_PROFIT_CAP - fs.daily.profit;
-        const paidProfit = Math.min(profit, capLeft);
+        // Cap actual payout to daily remaining (VIP = no cap)
+        const capLeft    = d.vip ? null : DAILY_PROFIT_CAP - fs.daily.profit;
+        const paidProfit = d.vip ? profit : Math.min(profit, capLeft);
         d.btc += amount + paidProfit;
         deductFromTreasury(paidProfit);
         trackEarning(userId, paidProfit);

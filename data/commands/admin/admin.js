@@ -118,6 +118,20 @@ module.exports = async function adminCommand(message, args) {
             return message.reply(`✅ **₿ ${fmt(amount)}** khaznadda lagu daray.\n🏛️ Hadda: **₿ ${fmt(t.balance)}**`);
         }
 
+        case 'vip': {
+            const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+            const target = message.mentions.users.first();
+            if (!target) return message.reply('⚠️ Isticmaal: `?admin vip @user`');
+            checkEconUser(target.id);
+            const d = econData[target.id];
+            d.vip = !d.vip;
+            saveEcon();
+            return message.reply(d.vip
+                ? `✅ <@${target.id}> **VIP** noqday — daily cap ma jiro.`
+                : `❌ <@${target.id}> VIP la qaatay — cap caadi ah ayuu leeyahay.`
+            );
+        }
+
         case 'help':
         default:
             return adminHelpPanel(message);
