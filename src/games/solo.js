@@ -1,14 +1,6 @@
-// =====================================================================
-// CIYAARTA SOLO — Garaad Quiz
-// Dhibco: ku xidhan xawliga (5s = max 40, 18s = min 5)
-// Streak: jawaabo sax oo isku xigta → bonus dhibcood
-// Dhammaadka: IQ leaderboard + goobta aad ku jirtid
-// =====================================================================
-
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData, saveData, activeGames } = require('../store');
 const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
-
 const { markSeenForGame } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
 const {
@@ -23,17 +15,12 @@ const {
 } = require('../config');
 const { getAnswerOptions } = require('../utils/questionOptions');
 
-// ── Xisaabi dhibcaha ku xidhan xawliga ──────────────────────────────
-// < 5s   → max 40 dhibcood
-// 18s    → min 5 dhibcood
-// dhexda → linear
 function calcTimedScore(timeTakenMs) {
     if (timeTakenMs <= SOLO_FAST_MS) return SOLO_MAX_SCORE;
     const ratio = (timeTakenMs - SOLO_FAST_MS) / (GLOBAL_WAIT_MS - SOLO_FAST_MS);
     return Math.max(SOLO_MIN_SCORE, Math.round(SOLO_MAX_SCORE - (SOLO_MAX_SCORE - SOLO_MIN_SCORE) * ratio));
 }
 
-// ── Streak bonus ─────────────────────────────────────────────────────
 function getStreakBonus(streak) {
     if (streak >= 10) return STREAK_BONUS_10;
     if (streak >= 5)  return STREAK_BONUS_5;
@@ -41,48 +28,39 @@ function getStreakBonus(streak) {
     return 0;
 }
 
-// ── IQ Leaderboard (ka dib game) ─────────────────────────────────────
-function buildLeaderboardEmbed(userId, totalPoints, questionsCount) {
+function pointsDisplay(pts, bonus, streak) {
+    let line = `🕐 **+${pts}** dhibcood`;
+    if (bonus > 0) line += ` + **+${bonus}** streak bonus (${streak}🔥)`;
+    return line;
+}
+
+function buildLeaderboardEmbed(userId) {
     const allUsers = Object.entries(userData)
         .filter(([, d]) => typeof d.iq === 'number')
         .map(([id, d]) => ({ id, iq: d.iq || 0 }))
         .sort((a, b) => b.iq - a.iq);
 
-    const myIq  = userData[userId]?.iq || 0;
-    const rank  = allUsers.findIndex(u => u.id === userId) + 1;
+    const myIq = userData[userId]?.iq || 0;
+    const rank = allUsers.findIndex(u => u.id === userId) + 1;
     const total = allUsers.length;
 
     const top10 = allUsers.slice(0, 10).map((u, i) => {
-        const medal  = ['🥇', '🥈', '🥉'][i] || `${i + 1}.`;
-        const isMe   = u.id === userId ? ' ← **Adiga**' : '';
+        const medal = ['🥇', '🥈', '🥉'][i] || `${i + 1}.`;
+        const isMe  = u.id === userId ? ' ← **Adiga**' : '';
         return `${medal} <@${u.id}> — **${u.iq} IQ**${isMe}`;
     }).join('\n');
 
-    // Haddii user-ku top 10 ku jiro, ka muuji goobtiisa
     let rankLine = '';
-    if (rank > 10) {
-        rankLine = `\n\n📍 **Goobtagaadu waa:** #${rank} / ${total} — **${myIq} IQ**`;
-    }
+    if (rank > 10) rankLine = `\n\n📍 **Goobtagaadu waa:** #${rank} / ${total} — **${myIq} IQ**`;
 
     return new EmbedBuilder()
         .setTitle('🏆 IQ Leaderboard — Tartanka Guud')
-        .setDescription(
-            `**10-ka ugu IQ-da sarreeya:**\n\n${top10 || '_Ma jiraan ciyaaryahanno_'}${rankLine}`
-        )
+        .setDescription(`**10-ka ugu IQ-da sarreeya:**\n\n${top10 || '_Ma jiraan ciyaaryahanno_'}${rankLine}`)
         .setColor('#f39c12')
-        .setFooter({ text: `?top — liis buuxa · ?profile — xaaladda kuu gaar ah` });
+        .setFooter({ text: '?top — liis buuxa · ?profile — xaaladda kuu gaar ah' });
 }
 
-// ── Dhibcaha yabooh muuji ─────────────────────────────────────────────
-function pointsDisplay(pts, bonus, streak) {
-    let line = `🕐 **+${pts}** dhibcood`;
-    if (bonus > 0) {
-        line += ` + **+${bonus}** streak bonus (${streak}🔥)`;
-    }
-    return line;
-}
-
-// ── Jawaab processing (shared between button + text) ─────────────────
+// ── Shared answer processor ───────────────────────────────────────────
 async function processAnswer(isCorrect, userId, game, timeTakenMs, embed, msg, messageOrInteraction, qNum) {
     checkUser(userId);
     let resultMsg = '';
@@ -97,7 +75,7 @@ async function processAnswer(isCorrect, userId, game, timeTakenMs, embed, msg, m
         game.totalPoints   = (game.totalPoints || 0) + total;
         game.correctCount  = (game.correctCount || 0) + 1;
         userData[userId].stats.soloCorrect++;
-        resultMsg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTakenMs/1000).toFixed(1)}s`;
+        resultMsg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTakenMs / 1000).toFixed(1)}s`;
     } else {
         game.currentStreak = 0;
         userData[userId].stats.soloWrong++;
@@ -109,40 +87,41 @@ async function processAnswer(isCorrect, userId, game, timeTakenMs, embed, msg, m
     saveData();
 
     const updatedEmbed = EmbedBuilder.from(embed).setFields({ name: 'Natiijo', value: resultMsg });
-    await msg.edit({ embeds: [updatedEmbed], components: [] });
-    setTimeout(() => sendQuestion(messageOrInteraction, qNum + 1, msg), 1800);
+    await msg.edit({ embeds: [updatedEmbed], components: [] }).catch(() => {});
+    setTimeout(() => sendQuestion(messageOrInteraction, qNum + 1), 1800);
 }
 
-// ── Su'aal dir ────────────────────────────────────────────────────────
-async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
+// ── Su'aal dir — always sends new message, reposts when player types ──
+async function sendQuestion(messageOrInteraction, qNumber) {
     const isInteraction = !!(messageOrInteraction.isButton && messageOrInteraction.isButton());
     const userId        = isInteraction ? messageOrInteraction.user.id : messageOrInteraction.author.id;
     const game          = activeGames.get(userId);
-    const total         = game ? game.total : SOLO_DEFAULT_QUESTIONS;
+    const channel       = messageOrInteraction.channel;
 
-    // Helper — sends to thread if available, else falls back
-    const sendFinal = (opts) => {
-        if (currentMsg) return currentMsg.edit(opts);
-        if (game?.thread) return game.thread.send(opts);
-        return messageOrInteraction.reply(opts);
-    };
+    // Clear any previous monitors/timers from last question
+    if (game?.chatMonitor)   { game.chatMonitor.stop();          game.chatMonitor   = null; }
+    if (game?.activeTimeout) { clearTimeout(game.activeTimeout); game.activeTimeout = null; }
 
+    const total = game ? game.total : SOLO_DEFAULT_QUESTIONS;
+
+    // ── Finish screen ────────────────────────────────────────────────
     if (!game || qNumber > total) {
         activeGames.delete(userId);
         checkUser(userId);
         markUserPlayed(userId);
 
-        const d          = userData[userId];
-        const totalPts   = game ? (game.totalPoints || 0) : 0;
-        const streak     = game ? (game.bestStreak  || 0) : 0;
-        const correct    = game ? (game.correctCount || 0) : 0;
-        const wrong      = total - correct;
+        const d         = userData[userId];
+        const totalPts  = game ? (game.totalPoints  || 0) : 0;
+        const streak    = game ? (game.bestStreak   || 0) : 0;
+        const correct   = game ? (game.correctCount || 0) : 0;
+        const wrong     = total - correct;
+
         const dayKey = new Date().toISOString().slice(0, 10);
         const dd = userData[userId];
         if (dd.soloIqDayKey !== dayKey) { dd.soloIqDayKey = dayKey; dd.soloIqToday = 0; }
-        const soloLeft   = Math.max(0, 30 - (dd.soloIqToday || 0));
-        const rawIqGain  = Math.floor(correct / 3);
-        const iqGain     = Math.min(rawIqGain, soloLeft);
+        const soloLeft  = Math.max(0, 30 - (dd.soloIqToday || 0));
+        const rawIqGain = Math.floor(correct / 3);
+        const iqGain    = Math.min(rawIqGain, soloLeft);
         if (iqGain > 0) {
             userData[userId].iq = (userData[userId].iq || 0) + iqGain;
             dd.soloIqToday = (dd.soloIqToday || 0) + iqGain;
@@ -157,51 +136,37 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}**\n` +
                 `🎯 Dhibco guud: **${totalPts}** pts\n` +
                 `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
-                `🧠 IQ aad heshay game kan waa: **+${iqGain} IQ** _(${correct} sax ÷ 3)_\n` +
+                `🧠 IQ aad heshay: **+${iqGain} IQ** _(${correct} sax ÷ 3)_\n` +
                 `📅 Maanta solo IQ: **${dayUsed}/30**\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | ⭐ XP: **${d.xp || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
             .setColor('#2ecc71');
 
         const row = new ActionRowBuilder().addComponents(
-            new ButtonBuilder()
-                .setCustomId(`solo_leaderboard_${userId}`)
-                .setLabel('🏆 IQ Leaderboard')
-                .setStyle(ButtonStyle.Primary),
-            new ButtonBuilder()
-                .setCustomId(`close_solo_${userId}`)
-                .setLabel('Iska xir')
-                .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId(`solo_leaderboard_${userId}`).setLabel('🏆 IQ Leaderboard').setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId(`close_solo_${userId}`).setLabel('Iska xir').setStyle(ButtonStyle.Danger),
         );
 
-        await sendFinal({ embeds: [finishEmbed], components: [row] });
+        await channel.send({ embeds: [finishEmbed], components: [row] });
         return;
     }
 
     const q = game.questions[qNumber - 1];
     game.currentQ = qNumber;
-
     markSeenForGame(userId, 'solo', q._idx);
     saveData();
 
     const entries = getAnswerOptions(q);
     if (entries.length === 0) {
         activeGames.delete(userId);
-        if (game?.thread) game.thread.send('⚠️ Su\'aal aan la fahmin.');
-        else messageOrInteraction.reply?.({ content: '⚠️ Su\'aal aan la fahmin.' });
+        await channel.send('⚠️ Su\'aal aan la fahmin.');
         return;
     }
 
     const streak     = game.currentStreak || 0;
     const streakLine = streak >= 2 ? `🔥 Streak: **${streak}** — bonus **+${getStreakBonus(streak)}**` : '';
-
-    const isTF = (q.type || '').toLowerCase() === 'tf' ||
-                 (q.type || '').toLowerCase() === 'truefalse' ||
-                 (q.type || '').toLowerCase() === 'bool';
-
-    const scoreHint = isTF
-        ? `⏱️ 18s — **5 → 40 dhibcood** (Run / Been)`
-        : `⏱️ 18s — **< 5s = 40pts · 18s = 5pts**`;
+    const isTF       = ['tf', 'truefalse', 'bool'].includes((q.type || '').toLowerCase());
+    const scoreHint  = isTF ? `⏱️ 18s — **5 → 40 dhibcood** (Run / Been)` : `⏱️ 18s — **< 5s = 40pts · 18s = 5pts**`;
 
     const embed = new EmbedBuilder()
         .setTitle(`📊 Su'aal ${qNumber}/${total}`)
@@ -213,79 +178,90 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         )
         .setColor(streak >= 5 ? '#e67e22' : streak >= 2 ? '#f39c12' : '#0099ff');
 
-    const buttons = entries.map((e, index) =>
+    const buttons = entries.map((e, i) =>
         new ButtonBuilder()
-            .setCustomId(`q_${qNumber}_${index}_${userId}_${e.isCorrect}`)
+            .setCustomId(`q_${qNumber}_${i}_${userId}_${e.isCorrect}`)
             .setLabel(e.label.slice(0, 80))
             .setStyle(ButtonStyle.Primary),
     );
-
     const row = new ActionRowBuilder().addComponents(buttons);
 
-    let msg;
-    if (currentMsg) {
-        msg = await currentMsg.edit({ embeds: [embed], components: [row] });
-    } else if (game.thread) {
-        msg = await game.thread.send({ embeds: [embed], components: [row] });
-    } else {
-        msg = await messageOrInteraction.reply({ embeds: [embed], components: [row], fetchReply: true });
-    }
+    // Send as NEW message (not edit) — keeps it at bottom
+    let msg = await channel.send({ embeds: [embed], components: [row] });
+    game.activeMsg    = msg;
+    game.questionDone = false;
+    const startTime   = Date.now();
 
-    const startTime  = Date.now();
-    const btnFilter  = i => i.user.id === userId;
-    const collector  = msg.createMessageComponentCollector({ filter: btnFilter, time: GLOBAL_WAIT_MS, max: 1 });
+    // ── Timeout via setTimeout (replaces button collector for timeout detection) ──
+    game.activeTimeout = setTimeout(async () => {
+        if (game.questionDone) return;
+        game.questionDone = true;
+        if (game.chatMonitor) { game.chatMonitor.stop(); game.chatMonitor = null; }
+        checkUser(userId);
+        game.currentStreak = 0;
+        userData[userId].stats.soloWrong++;
+        userData[userId].iq = Math.max(0, (userData[userId].iq || 0) - 1);
+        saveData();
+        const timeoutEmbed = EmbedBuilder.from(embed)
+            .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
+        if (game.activeMsg) await game.activeMsg.edit({ embeds: [timeoutEmbed], components: [] }).catch(() => {});
+        setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1), 2000);
+    }, GLOBAL_WAIT_MS);
 
-    // Text answer collector — user types full answer label in chat/thread
-    const answerChan   = game.thread || (isInteraction ? messageOrInteraction.channel : messageOrInteraction.channel);
-    const txtFilter    = m => m.author.id === userId &&
-        entries.some(e => e.label.trim().toLowerCase() === m.content.trim().toLowerCase());
-    const txtCollector = answerChan.createMessageCollector({ filter: txtFilter, time: GLOBAL_WAIT_MS, max: 1 });
-    game.msgCollector  = txtCollector;
-
-    txtCollector.on('collect', async m => {
-        collector.stop('text');
-        m.delete().catch(() => {});
-        const match     = entries.find(e => e.label.trim().toLowerCase() === m.content.trim().toLowerCase());
-        const timeTaken = Date.now() - startTime;
-        await processAnswer(match.isCorrect, userId, game, timeTaken, embed, msg, messageOrInteraction, qNumber);
+    // ── Chat monitor: text answers + repost on non-answer ──────────────
+    const chatMonitor = channel.createMessageCollector({
+        filter: m => m.author.id === userId && !m.author.bot,
+        time:   GLOBAL_WAIT_MS + 2000,
     });
+    game.chatMonitor = chatMonitor;
 
-    collector.on('end', (collected, reason) => {
-        txtCollector.stop();
-        if (reason === 'text') return;
-        if (collected.size === 0) {
-            checkUser(userId);
-            game.currentStreak = 0;
-            userData[userId].stats.soloWrong++;
-            userData[userId].iq = Math.max(0, (userData[userId].iq || 0) - 1);
-            saveData();
+    chatMonitor.on('collect', async m => {
+        if (game.questionDone) { chatMonitor.stop(); return; }
 
-            const timeoutEmbed = EmbedBuilder.from(embed)
-                .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
-            msg.edit({ embeds: [timeoutEmbed], components: [] }).catch(() => {});
-            setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, msg), 2000);
+        const typed = m.content.trim().toLowerCase();
+        const match = entries.find(e => e.label.trim().toLowerCase() === typed);
+
+        if (match) {
+            // Typed answer matches an option → process it
+            chatMonitor.stop();
+            game.chatMonitor = null;
+            clearTimeout(game.activeTimeout);
+            game.activeTimeout = null;
+            game.questionDone  = true;
+            m.delete().catch(() => {});
+            const timeTaken = Date.now() - startTime;
+            await processAnswer(match.isCorrect, userId, game, timeTaken, embed, game.activeMsg, messageOrInteraction, qNumber);
+        } else {
+            // Non-answer chat message → delete old question card and repost at bottom
+            const oldMsg = game.activeMsg;
+            const newMsg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
+            if (newMsg) {
+                game.activeMsg = newMsg;
+                await oldMsg.delete().catch(() => {});
+            }
         }
     });
 }
 
-// ── Jawaabta handle ─────────────────────────────────────────────────
+// ── Button answer handler ─────────────────────────────────────────────
 async function handleSoloAnswer(interaction) {
     const parts   = interaction.customId.split('_');
     const qNum    = parseInt(parts[1]);
     const ownerId = parts[3];
     const result  = parts[4];
 
-    if (interaction.user.id !== ownerId) {
+    if (interaction.user.id !== ownerId)
         return interaction.reply({ content: 'Ciyaartaada qoro!', flags: 64 });
-    }
 
     await interaction.deferUpdate();
 
     checkUser(ownerId);
     const game = activeGames.get(ownerId);
+    if (!game || game.questionDone) return; // already answered by text
 
-    // Stop text collector so it doesn't fire on next question's chat
-    if (game?.msgCollector) { game.msgCollector.stop('button'); game.msgCollector = null; }
+    if (game.chatMonitor)   { game.chatMonitor.stop();          game.chatMonitor   = null; }
+    if (game.activeTimeout) { clearTimeout(game.activeTimeout); game.activeTimeout = null; }
+    game.questionDone = true;
 
     const timeTaken = Date.now() - (interaction.message.createdTimestamp || Date.now());
     const isCorrect = result === 'true';
@@ -294,15 +270,12 @@ async function handleSoloAnswer(interaction) {
     await processAnswer(isCorrect, ownerId, game, timeTaken, embed, interaction.message, interaction, qNum);
 }
 
-
 // ── Leaderboard button handler ────────────────────────────────────────
 async function handleSoloLeaderboard(interaction) {
     const ownerId = interaction.customId.replace('solo_leaderboard_', '');
-    if (interaction.user.id !== ownerId) {
+    if (interaction.user.id !== ownerId)
         return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: 64 });
-    }
-    const lbEmbed = buildLeaderboardEmbed(ownerId, 0, 0);
-    return interaction.reply({ embeds: [lbEmbed], flags: 64 });
+    return interaction.reply({ embeds: [buildLeaderboardEmbed(ownerId)], flags: 64 });
 }
 
 module.exports = { sendQuestion, handleSoloAnswer, handleSoloLeaderboard };
