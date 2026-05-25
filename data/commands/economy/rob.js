@@ -42,7 +42,7 @@ module.exports = async function robCmd(message) {
 
     if (!(robber.inventory.robticketExpiry > Date.now()))
         return message.reply({ embeds: [new EmbedBuilder()
-            .setDescription('⚠️ You need a **Rob Ticket** to rob. Buy one at `?shop` for ₿ 500 (active 2 days).')
+            .setDescription('⚠️ You need a **Rob Ticket** to rob. Buy one at `?shop` for ₿ 500 (active 3 days).')
             .setColor('#e74c3c')], components: [closeRow(userId)] });
 
     const today = todayStr();

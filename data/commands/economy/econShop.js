@@ -13,7 +13,7 @@ const ECON_TITLES = {
 
 const SHOP_ITEMS = {
     safety:    { label: '🛡️ Safety Shield', price: 500, currency: 'btc', type: 'timed_item', desc: 'Blocks all robbery attempts for 3 days' },
-    robticket: { label: '🎫 Rob Ticket',    price: 500, currency: 'btc', type: 'timed_item', desc: 'Required to use ?rob (2 days active)' },
+    robticket: { label: '🎫 Rob Ticket',    price: 500, currency: 'btc', type: 'timed_item', desc: 'Required to use ?rob (3 days active)' },
     ...ECON_TITLES,
 };
 
