@@ -186,8 +186,8 @@ async function sendQuestion(messageOrInteraction, qNumber) {
     );
     const row = new ActionRowBuilder().addComponents(buttons);
 
-    // Send as NEW message (not edit) — keeps it at bottom
-    let msg = await channel.send({ embeds: [embed], components: [row] });
+    // Send as NEW message — mention player so it's clear whose game it is
+    let msg = await channel.send({ content: `🎯 <@${userId}>`, embeds: [embed], components: [row] });
     game.activeMsg    = msg;
     game.questionDone = false;
     const startTime   = Date.now();
@@ -209,8 +209,6 @@ async function sendQuestion(messageOrInteraction, qNumber) {
     }, GLOBAL_WAIT_MS);
 
     // ── Chat monitor: any non-bot message → repost question at bottom ──
-    // Player typing the exact answer label counts as a text answer.
-    // Anyone else typing (or player typing non-answer) just reposts the card.
     const chatMonitor = channel.createMessageCollector({
         filter: m => !m.author.bot,
         time:   GLOBAL_WAIT_MS + 2000,
@@ -219,27 +217,9 @@ async function sendQuestion(messageOrInteraction, qNumber) {
 
     chatMonitor.on('collect', async m => {
         if (game.questionDone) { chatMonitor.stop(); return; }
-
-        // Check if the player typed a matching answer
-        if (m.author.id === userId) {
-            const typed = m.content.trim().toLowerCase();
-            const match = entries.find(e => e.label.trim().toLowerCase() === typed);
-            if (match) {
-                chatMonitor.stop();
-                game.chatMonitor = null;
-                clearTimeout(game.activeTimeout);
-                game.activeTimeout = null;
-                game.questionDone  = true;
-                m.delete().catch(() => {});
-                const timeTaken = Date.now() - startTime;
-                await processAnswer(match.isCorrect, userId, game, timeTaken, embed, game.activeMsg, messageOrInteraction, qNumber);
-                return;
-            }
-        }
-
-        // Any other message (anyone) → delete old card and repost at bottom
+        // Any message (anyone) → delete old card and repost at bottom
         const oldMsg = game.activeMsg;
-        const newMsg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
+        const newMsg = await channel.send({ content: `🎯 <@${userId}>`, embeds: [embed], components: [row] }).catch(() => null);
         if (newMsg) {
             game.activeMsg = newMsg;
             await oldMsg.delete().catch(() => {});
