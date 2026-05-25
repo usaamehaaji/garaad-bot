@@ -135,7 +135,11 @@ function buildAnnounceEmbed(deadline, regCount, closed, state) {
             `**3.** Qor: \`${PREFIX}gal CODE\` (code-kaagu DM-ka ayuu ku jiraa)\n\n` +
             `🎙️ **Voice Channel:** <#${vcChId}>\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `🏆 **Guuleystaha:** **Champion 🏆** title + abaalmarin\n\n` +
+            `💰 **ABAALMARINTA:**\n` +
+            `🥇 1aad — **$15** + 🏆 Champion title\n` +
+            `🥈 2aad — **$10**\n` +
+            `🥉 3aad — **$5**\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n` +
             regStatus
         )
         .setFooter({ text: 'Garaad Quiz Tournament • ?tartan_status — xaaladda' });
@@ -1044,14 +1048,15 @@ async function finishTournament(state) {
     if (!userData[winId].ownedTitles.includes('champion')) userData[winId].ownedTitles.push('champion');
     userData[winId].activeTitle = 'champion';
     checkEconUser(winId);
-    econData[winId].btc = (econData[winId].btc || 0) + 500;
     saveEcon();
     saveData();
 
+    const prizes = ['$15', '$10', '$5'];
     const allScores = sorted.map(([id, sc], i) => {
         const medal = ['🥇', '🥈', '🥉'][i] || `${i + 1}.`;
-        const extra = i === 0 ? ' 👑 GUULEYSTAHA' : i === 1 ? ' 🥈' : i === 2 ? ' 🥉' : '';
-        return `${medal} <@${id}> — **${sc}pts**${extra}`;
+        const prize = prizes[i] ? ` · **${prizes[i]}**` : '';
+        const extra = i === 0 ? ' 👑' : '';
+        return `${medal} <@${id}> — **${sc}pts**${prize}${extra}`;
     }).join('\n');
 
     if (channel) {
@@ -1065,7 +1070,7 @@ async function finishTournament(state) {
                     `## <@${winId}>\n` +
                     `🏆 **Champion** title ayaa kuu galay!\n` +
                     `📊 Dhibcahaaga guud: **${winScore}pts**\n` +
-                    `💰 Bonus: **+500 BTC**\n\n` +
+                    `💵 Abaalmarintaada: **$15**\n\n` +
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
                     `**🏅 Natiijada Guud:**\n\n${allScores}\n\n` +
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
