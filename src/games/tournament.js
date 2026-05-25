@@ -872,11 +872,14 @@ async function sendQuestion(state) {
     if (!msg) { activeTournament.delete(guildId); return; }
 
     const prefix    = `tna_${gameChId}_${state.roundIdx}_${state.currentQ}_`;
-    const filter    = (i) => i.customId.startsWith(prefix) && state.survivors.has(i.user.id);
+    const filter    = (i) => i.customId.startsWith(prefix);
     const collector = msg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS });
 
     collector.on('collect', async (interaction) => {
         const uid = interaction.user.id;
+        if (!state.survivors.has(uid)) {
+            return interaction.reply({ content: '⚠️ Tartankan kuma jirtid — jawaabi kari mayside.', flags: MessageFlags.Ephemeral }).catch(() => {});
+        }
         if (answeredBy.has(uid)) {
             return interaction.reply({ content: '⚠️ Mar hore ayaad jawaab bixisay!', flags: MessageFlags.Ephemeral }).catch(() => {});
         }
