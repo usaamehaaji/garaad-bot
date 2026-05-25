@@ -2700,7 +2700,7 @@ module.exports = function setupInteractionHandler(client) {
             const tBusy = isUserBusy(targetId);
             if (tBusy) return interaction.reply({ content: `Adigu mar hore waxaad ku jirtaa ciyaar **${tBusy}**.`, flags: MessageFlags.Ephemeral });
             await interaction.update({ content: `⚔️ <@${targetId}> wuu aqbalay! Dagaalku wuu bilaabmayaa...`, embeds: [], components: [] });
-            return startDuelGame(interaction.channel, authorId, targetId, count);
+            return startDuelGame(interaction.channel, authorId, targetId, count, interaction.message);
         }
 
         if (id.startsWith('decline_duel_')) {

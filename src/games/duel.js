@@ -26,7 +26,7 @@ function refundDuelStakes(p1Id, p2Id) {
     saveData();
 }
 
-async function startDuelGame(channel, p1Id, p2Id, count = 0) {
+async function startDuelGame(channel, p1Id, p2Id, count = 0, originMsg = null) {
     checkUser(p1Id);
     checkUser(p2Id);
 
@@ -97,6 +97,7 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0) {
         correctAnswerer: null,
         message: null,
         stakesTaken: true,
+        originMsg,
     };
     activeDuels.set(channel.id, duelState);
 
@@ -165,9 +166,10 @@ async function sendDuelQuestion(channel) {
 
     const row = new ActionRowBuilder().addComponents(buttons);
 
+    const rOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
     let msg;
     try {
-        msg = await channel.send({ embeds: [embed], components: [row] });
+        msg = await channel.send({ embeds: [embed], components: [row], ...rOpt });
     } catch {
         activeDuels.delete(channel.id);
         refundDuelStakes(state.p1, state.p2);
@@ -230,7 +232,8 @@ async function sendDuelQuestion(channel) {
             .setColor(reason === 'correct' ? '#2ecc71' : '#e74c3c');
 
         if (cur.message) await cur.message.delete().catch(() => {});
-        await channel.send({ embeds: [summaryEmbed] }).catch(() => {});
+        const sOpt = cur.originMsg ? { reply: { messageReference: cur.originMsg.id, failIfNotExists: false } } : {};
+        await channel.send({ embeds: [summaryEmbed], ...sOpt }).catch(() => {});
 
         cur.currentQ++;
         setTimeout(() => sendDuelQuestion(channel), 2500);
@@ -294,7 +297,8 @@ async function finishDuel(channel) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    await channel.send({ embeds: [resultEmbed], components: [closeRow] });
+    const fOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
+    await channel.send({ embeds: [resultEmbed], components: [closeRow], ...fOpt });
 }
 
 module.exports = { startDuelGame, sendDuelQuestion, finishDuel, refundDuelStakes };
