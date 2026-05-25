@@ -33,6 +33,7 @@ const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 const { markUserPlayed }     = require('../utils/reminders');
 const {
     pickQuestionsForGame,
+    pickQuestionsForUsers,
     markSeenForUsersInGame,
     noQuestionsLeftEmbed,
     getAllQuestionsForGame,
@@ -765,14 +766,21 @@ async function beginRound(state, channel) {
         return channel.send({ embeds: [noQuestionsLeftEmbed('Admin')] });
     }
 
-    // Pick n questions starting from where the last round left off (no repeats across rounds)
-    if (!state.questionOffset) state.questionOffset = 0;
+    // Pick unseen questions for all survivors combined
+    const survivorIds = [...state.survivors];
     const useN = n;
-    const picked = Array.from({ length: useN }, (_, i) => {
-        const idx = (state.questionOffset + i) % pool.length;
-        return { ...pool[idx], _idx: idx };
-    });
-    state.questionOffset = (state.questionOffset + useN) % pool.length;
+    let picked = pickQuestionsForUsers(survivorIds, 'tournament', useN);
+
+    // If not enough unseen questions, fall back to offset cycling (no crash)
+    if (!picked || picked.length < useN) {
+        if (!state.questionOffset) state.questionOffset = 0;
+        const fallback = Array.from({ length: useN }, (_, i) => {
+            const idx = (state.questionOffset + i) % pool.length;
+            return { ...pool[idx], _idx: idx };
+        });
+        state.questionOffset = (state.questionOffset + useN) % pool.length;
+        picked = fallback;
+    }
 
     state.questions          = picked;
     state.prevRoundQuestions = [];
