@@ -53,6 +53,6 @@ function checkForUpdates() {
 
 module.exports = function setupAutoUpdate() {
     console.log('[AutoUpdate] ✅ Daqiiqad 5 walba GitHub la hubinayaa');
-    checkForUpdates(); // run once immediately on startup
+    // Don't check immediately on startup — wait first interval to avoid restart loop
     setInterval(checkForUpdates, CHECK_INTERVAL);
 };
