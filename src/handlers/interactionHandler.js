@@ -2529,7 +2529,7 @@ module.exports = function setupInteractionHandler(client) {
                     flags: MessageFlags.Ephemeral,
                 }).catch(() => {});
             }
-            return sendRegistrationCode(interaction.user, { reply: (o) => interaction.reply(o) }, state.gameChannelId);
+            return sendRegistrationCode(interaction.user, { reply: (o) => interaction.reply(o) }, state.gameChannelId, state.vcChannelId);
         }
 
         // ── Tartan Bilow: Status button ──
