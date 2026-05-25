@@ -203,7 +203,6 @@ async function beginQuizGame(state) {
     saveData();
 
     let totalQ  = state.questionCount || QUIZ_QUESTION_COUNT;
-    // Dooro su'aalo aan la arkin player kasta (ma aha host kaliya)
     const picked = pickQuestionsForUsers([...state.players], 'quiz', totalQ);
     if (!picked || picked.length === 0) {
         activeQuiz.delete(state.channelId);
@@ -221,9 +220,26 @@ async function beginQuizGame(state) {
 
     for (const pid of state.players) markUserPlayed(pid);
 
-    const channel = state.message?.channel;
-    if (!channel) { activeQuiz.delete(state.channelId); return; }
+    const mainChannel = state.message?.channel;
+    if (!mainChannel) { activeQuiz.delete(state.channelId); return; }
 
+    // Create an isolated thread so main chat doesn't interfere
+    try {
+        const thread = await mainChannel.threads.create({
+            name: `📊 Quiz — ${[...state.players].length} players`,
+            autoArchiveDuration: 60,
+        });
+        for (const pid of state.players) await thread.members.add(pid).catch(() => {});
+        activeQuiz.delete(state.channelId);
+        state.channelId   = thread.id;
+        state.gameChannel = thread;
+        activeQuiz.set(thread.id, state);
+        await mainChannel.send(`📊 **Quiz bilaabmay!** Su'aalaha halkan ku jawaab: ${thread}`);
+    } catch {
+        state.gameChannel = mainChannel;
+    }
+
+    const channel = state.gameChannel;
     await channel.send({
         embeds: [new EmbedBuilder()
             .setTitle('🚀 Quiz Koox — Wuu Bilaabmay!')
@@ -251,7 +267,7 @@ async function sendQuizQuestion(state) {
     const totalQ = state.questionCount || QUIZ_QUESTION_COUNT;
     if (state.currentQ >= totalQ) return finishQuiz(state);
 
-    const channel = state.message?.channel;
+    const channel = state.gameChannel || state.message?.channel;
     if (!channel) { activeQuiz.delete(state.channelId); return; }
 
     const q         = state.questions[state.currentQ];

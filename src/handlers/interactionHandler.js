@@ -2700,7 +2700,18 @@ module.exports = function setupInteractionHandler(client) {
             const tBusy = isUserBusy(targetId);
             if (tBusy) return interaction.reply({ content: `Adigu mar hore waxaad ku jirtaa ciyaar **${tBusy}**.`, flags: MessageFlags.Ephemeral });
             await interaction.update({ content: `⚔️ <@${targetId}> wuu aqbalay! Dagaalku wuu bilaabmayaa...`, embeds: [], components: [] });
-            return startDuelGame(interaction.channel, authorId, targetId, count);
+            let duelChannel = interaction.channel;
+            try {
+                const thread = await interaction.channel.threads.create({
+                    name: `⚔️ Duel — <@${authorId}> vs <@${targetId}>`,
+                    autoArchiveDuration: 60,
+                });
+                await thread.members.add(authorId).catch(() => {});
+                await thread.members.add(targetId).catch(() => {});
+                await interaction.channel.send(`⚔️ Dagaalku halkan socday: ${thread}`);
+                duelChannel = thread;
+            } catch {}
+            return startDuelGame(duelChannel, authorId, targetId, count);
         }
 
         if (id.startsWith('decline_duel_')) {
