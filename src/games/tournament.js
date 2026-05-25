@@ -925,6 +925,8 @@ async function sendQuestion(state) {
 
     onChat = m => {
         if (m.author.bot || m.channel.id !== channel.id) return;
+        if (m.reference) return;
+        if (Date.now() >= questionEndTime) return;
         if (!activeTournament.has(guildId) && !activeTournament.has(GAME_CHANNEL_ID)) return;
         if (state.stage !== 'play' || state.currentQ !== qIdx) return;
         if (reposting) return;
