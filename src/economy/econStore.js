@@ -52,6 +52,11 @@ function checkEconUser(userId) {
         if (d.customEconTitle === undefined) d.customEconTitle = null;
         d.weeklyEarned     ??= { week: '', btc: 0 };
         if (!d.weeklyEarned.btc) d.weeklyEarned.btc ??= d.weeklyEarned.usd || 0;
+        d.efStreak      ??= 0;
+        d.efLoseStreak  ??= 0;
+        d.efFlipCount   ??= 0;
+        d.efProfile     ??= 'balanced';
+        d.efRecentBets  ??= [];
     }
     return econData[userId];
 }

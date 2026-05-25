@@ -1,6 +1,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser }     = require('../../../src/economy/econStore');
 const { getMarketSnapshot, getPrice } = require('../../../src/economy/market');
+const { getMarketState }              = require('../../../src/economy/marketEngine');
 const {
     getActivePrediction, hasPrediction,
     setPending, lockPrediction,
@@ -17,15 +18,17 @@ function buildMarketEmbed(d) {
     const ind      = btcEntry
         ? (btcEntry.change > 0 ? `🟢 +${btcEntry.change.toFixed(1)}%` : btcEntry.change < 0 ? `🔴 ${btcEntry.change.toFixed(1)}%` : '⬜ 0.0%')
         : '';
-    const spark = btcEntry?.spark ?? '';
-    const price = btcEntry?.price ?? getPrice('btc');
+    const spark  = btcEntry?.spark ?? '';
+    const price  = btcEntry?.price ?? getPrice('btc');
+    const mstate = getMarketState();
 
     return new EmbedBuilder()
         .setTitle('📊 Garaad Predict')
         .setColor('#1a1a2e')
         .addFields(
-            { name: '₿ BTC Price',  value: `**${pfmt(price)}** ${ind}`, inline: true },
-            { name: '💳 Wallet',    value: `**₿ ${pfmt(d.btc || 0)}**`, inline: true },
+            { name: '₿ BTC Price',  value: `**${pfmt(price)}** ${ind}`,              inline: true },
+            { name: '💳 Wallet',    value: `**₿ ${pfmt(d.btc || 0)}**`,              inline: true },
+            { name: `${mstate.icon} Market`, value: `**${mstate.label}**`,            inline: true },
         )
         .setDescription(`\`${spark}\`\n\nClick **Predict** or use \`?trade 500 u 10\``)
         .setFooter({ text: 'Garaad Predict • Win = +80% profit • Lose = −100% stake' });
@@ -36,14 +39,16 @@ function buildMarketEmbed(d) {
 function buildPickEmbed(stakeAmount) {
     const price  = getPrice('btc');
     const profit = Math.floor(stakeAmount * (WIN_MULTI - 1));
+    const mstate = getMarketState();
     return new EmbedBuilder()
         .setTitle('🎯 Choose Direction & Duration')
         .setColor('#8e44ad')
         .addFields(
-            { name: '₿ Current Price', value: `**${pfmt(price)}**`,      inline: true },
-            { name: '💰 Stake',        value: `**₿ ${pfmt(stakeAmount)}**`, inline: true },
-            { name: '✅ If WIN',       value: `**+₿ ${pfmt(profit)}**`,  inline: true },
-            { name: '❌ If LOSE',      value: `**-₿ ${pfmt(stakeAmount)}**`, inline: true },
+            { name: '₿ Current Price',     value: `**${pfmt(price)}**`,          inline: true },
+            { name: '💰 Stake',            value: `**₿ ${pfmt(stakeAmount)}**`,  inline: true },
+            { name: `${mstate.icon} Market`, value: `**${mstate.label}**`,        inline: true },
+            { name: '✅ If WIN',           value: `**+₿ ${pfmt(profit)}**`,      inline: true },
+            { name: '❌ If LOSE',          value: `**-₿ ${pfmt(stakeAmount)}**`, inline: true },
         )
         .setFooter({ text: 'Garaad Predict • Pick UP or DOWN and your duration' });
 }

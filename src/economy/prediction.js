@@ -146,15 +146,22 @@ async function resolvePrediction(userId, client) {
 
     const { EmbedBuilder } = require('discord.js');
 
+    const returnedLine = isDraw
+        ? `↩️ Returned: **${fmt(payout)} BTC** _(draw — full refund)_`
+        : win
+        ? `✅ Returned: **${fmt(payout)} BTC** _(+${fmt(profit)} BTC profit)_`
+        : `❌ Returned: **0 BTC** _(−${fmt(pred.stakeUsd)} BTC loss)_`;
+
     const resultEmbed = new EmbedBuilder()
-        .setTitle(isDraw ? '🤝 Predict — DRAW' : win ? '✅ Predict — WIN!' : '❌ Predict — LOSS')
+        .setTitle(isDraw ? '🤝 Prediction — DRAW' : win ? '✅ Prediction — WIN' : '❌ Prediction — LOSS')
         .setColor(isDraw ? '#f1c40f' : win ? '#2ecc71' : '#e74c3c')
-        .addFields(
-            { name: '🎯 Direction',    value: `**${dirLabel}**`,                                                           inline: true },
-            { name: '📊 Price',        value: `**${fmt(pred.entryPrice)} → ${fmt(exitPrice)}** (${pctStr})`,               inline: true },
-            { name: isDraw ? '↩️ Refund' : win ? '💰 Profit' : '💸 Lost',
-              value: isDraw ? `**₿ ${fmt(payout)}**` : win ? `**+₿ ${fmt(profit)}**` : `**-₿ ${fmt(pred.stakeUsd)}**`,    inline: true },
-            { name: '💳 Wallet',       value: `**₿ ${fmt(d.btc || 0)}**`,                                                  inline: true },
+        .setDescription(
+            `🎯 Direction: **${dirLabel}**\n` +
+            `📊 Entry price: **${fmt(pred.entryPrice)} BTC**\n` +
+            `📊 Exit price: **${fmt(exitPrice)} BTC** (${pctStr})\n\n` +
+            `💰 Invested: **${fmt(pred.stakeUsd)} BTC**\n` +
+            `${returnedLine}\n\n` +
+            `₿ Wallet: **${fmt(d.btc || 0)} BTC**`
         )
         .setFooter({ text: 'Garaad Predict • ?trade to play again' });
 
