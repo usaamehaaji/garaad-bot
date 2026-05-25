@@ -491,6 +491,7 @@ async function cmdAnnounce(message) {
         _nextSurvivors:       null,
         questions:            [],
         currentQ:             0,
+        questionOffset:       0,
         channel:              null,
         registrationDeadline: null,
         announceMsgId:        null,
@@ -764,9 +765,14 @@ async function beginRound(state, channel) {
         return channel.send({ embeds: [noQuestionsLeftEmbed('Admin')] });
     }
 
-    // Build exactly n questions by cycling through pool in order (loop 1→60→1→…)
+    // Pick n questions starting from where the last round left off (no repeats across rounds)
+    if (!state.questionOffset) state.questionOffset = 0;
     const useN = n;
-    const picked = Array.from({ length: useN }, (_, i) => ({ ...pool[i % pool.length], _idx: i % pool.length }));
+    const picked = Array.from({ length: useN }, (_, i) => {
+        const idx = (state.questionOffset + i) % pool.length;
+        return { ...pool[idx], _idx: idx };
+    });
+    state.questionOffset = (state.questionOffset + useN) % pool.length;
 
     state.questions          = picked;
     state.prevRoundQuestions = [];
