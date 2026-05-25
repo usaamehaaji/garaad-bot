@@ -122,29 +122,32 @@ client.once('clientReady', () => {
     client.on('guildCreate', updateStatus);
     client.on('guildDelete', updateStatus);
 
-    const announceId = process.env.ANNOUNCE_CHANNEL_ID;
-    if (announceId) {
-        const ch = client.channels.cache.get(announceId);
-        if (ch) {
-            const embed = new EmbedBuilder()
-                .setTitle('🎮 Garaad Bot — Waa La Soo Celiyay!')
-                .setDescription(
-                    `Nabad! Bot-ku wuu soo noqday.\n\n` +
-                    `Game dhaqaalaha waa bilaabmay — heshiis fiican!\n\n` +
-                    `• \`?shaqo\` — shaqeyso lacag ku hel\n` +
-                    `• \`?bank\` — lacagta bangiga ku dhig\n` +
-                    `• \`?solo\` — su'aalo jawaab, IQ korso`
-                )
-                .setFooter({ text: 'Garaad Bot — Mahadsanid! • Garaad Economy + Quiz' })
-                .setColor('#2ecc71');
-            ch.send({ embeds: [embed] }).catch(() => {});
-        }
-    }
+    // No restart announcement — bot silently comes back online
 });
 
-// ───── Khaladaad aan la filanayn ─────
-client.on('error', err  => console.error('[Bot Error]', err));
-process.on('unhandledRejection', err => console.error('[Unhandled Rejection]', err));
+// ───── Khaladaad aan la filanayn — bot ha joojin ─────
+client.on('error', err => console.error('[Bot Error]', err));
+
+// Unhandled promise rejection — log oo sii socon (ha joojin)
+process.on('unhandledRejection', err => {
+    console.error('[Unhandled Rejection]', err?.message || err);
+});
+
+// Uncaught exception — log oo sii socon (ha joojin)
+process.on('uncaughtException', err => {
+    console.error('[Uncaught Exception]', err?.message || err);
+});
+
+// Discord disconnect — dib u xidh
+client.on('shardDisconnect', (event, id) => {
+    console.warn(`[Disconnect] Shard ${id} wuu goostay — dib u xidhmaya...`);
+});
+client.on('shardReconnecting', id => {
+    console.log(`[Reconnect] Shard ${id} wuu isku dayaa...`);
+});
+client.on('shardResume', (id, replayed) => {
+    console.log(`[Resume] Shard ${id} wuu soo noqday (${replayed} events)`);
+});
 
 // ───── Login ─────
 startPortHealthServerIfNeeded();
