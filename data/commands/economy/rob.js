@@ -55,11 +55,7 @@ module.exports = async function robCmd(message) {
 
     if (victim.inventory.safetyExpiry > Date.now()) {
         const hoursLeft = Math.ceil((victim.inventory.safetyExpiry - Date.now()) / 3600000);
-        return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('🛡️ Rob Blocked!')
-            .setColor('#f39c12')
-            .setDescription(`**${target.username}** waxaa ilaaliya **Safety Shield** — dhac ka dib!\nGaashaanku weli shaqaynayaa: **${hoursLeft}h** baqa.`)
-            .setFooter({ text: 'Garaad Economy' })], components: [closeRow(userId)] });
+        return message.reply(`🛡️ **${target.username}** waxaa ilaaliya Safety Shield — dhac ka dib!\nGaashaanku weli shaqaynayaa: **${hoursLeft}h** baqa.`);
     }
 
     robber.robsToday.count += 1;
