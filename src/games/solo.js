@@ -190,34 +190,39 @@ async function sendQuestion(messageOrInteraction, qNumber) {
     let msg = await channel.send({ content: `🎯 <@${userId}>`, embeds: [embed], components: [row] });
     game.activeMsg    = msg;
     game.questionDone = false;
-    const startTime   = Date.now();
 
-    // ── Timeout via setTimeout (replaces button collector for timeout detection) ──
-    game.activeTimeout = setTimeout(async () => {
-        if (game.questionDone) return;
-        game.questionDone = true;
-        if (game.chatMonitor) { game.chatMonitor.stop(); game.chatMonitor = null; }
-        checkUser(userId);
-        game.currentStreak = 0;
-        userData[userId].stats.soloWrong++;
-        userData[userId].iq = Math.max(0, (userData[userId].iq || 0) - 1);
-        saveData();
-        const timeoutEmbed = EmbedBuilder.from(embed)
-            .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
-        if (game.activeMsg) await game.activeMsg.edit({ embeds: [timeoutEmbed], components: [] }).catch(() => {});
-        setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1), 2000);
-    }, GLOBAL_WAIT_MS);
+    // ── Timeout — reset every time the question reposts ─────────────────
+    function scheduleTimeout() {
+        if (game.activeTimeout) clearTimeout(game.activeTimeout);
+        game.activeTimeout = setTimeout(async () => {
+            if (game.questionDone) return;
+            game.questionDone = true;
+            if (game.chatMonitor) { game.chatMonitor.stop(); game.chatMonitor = null; }
+            checkUser(userId);
+            game.currentStreak = 0;
+            userData[userId].stats.soloWrong++;
+            userData[userId].iq = Math.max(0, (userData[userId].iq || 0) - 1);
+            saveData();
+            const timeoutEmbed = EmbedBuilder.from(embed)
+                .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
+            if (game.activeMsg) await game.activeMsg.edit({ embeds: [timeoutEmbed], components: [] }).catch(() => {});
+            setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1), 2000);
+        }, GLOBAL_WAIT_MS);
+    }
+    scheduleTimeout();
 
-    // ── Chat monitor: any non-bot message → repost question at bottom ──
+    // ── Chat monitor: any non-bot message → repost + reset timer ────────
     const chatMonitor = channel.createMessageCollector({
         filter: m => !m.author.bot,
-        time:   GLOBAL_WAIT_MS + 2000,
+        time:   GLOBAL_WAIT_MS * 10, // long window, timeout managed manually
     });
     game.chatMonitor = chatMonitor;
 
     chatMonitor.on('collect', async m => {
         if (game.questionDone) { chatMonitor.stop(); return; }
-        // Any message (anyone) → delete old card and repost at bottom
+        // Reset timer — player is still active
+        scheduleTimeout();
+        // Delete old card and repost at bottom
         const oldMsg = game.activeMsg;
         const newMsg = await channel.send({ content: `🎯 <@${userId}>`, embeds: [embed], components: [row] }).catch(() => null);
         if (newMsg) {
