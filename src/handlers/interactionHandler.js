@@ -2403,7 +2403,7 @@ module.exports = function setupInteractionHandler(client) {
                 d.btc = (d.btc || 0) - item.price;
                 d.inventory[expiryKey] = Date.now() + 3 * 24 * 60 * 60 * 1000;
                 saveEcon();
-                return interaction.reply({ content: `✅ **${item.label}** iibsatay!\n💸 Bixisay: **₿ ${item.price.toLocaleString()}** · 💳 Hadhay: **₿ ${(d.btc || 0).toLocaleString()}**\n⏳ Waxay shaqaynaysaa **3 maalmood**.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `🛡️ **${item.label}** iibsatay!\n₿ **${item.price.toLocaleString()} / ${(d.btc || 0).toLocaleString()}**\n⏳ Waxay shaqaynaysaa **3 maalmood**.`, flags: MessageFlags.Ephemeral });
             }
 
             // Custom name title — show modal
