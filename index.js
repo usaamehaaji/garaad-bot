@@ -104,7 +104,7 @@ client.once('clientReady', () => {
     setupReminderScheduler(client);
     setupBankChargeScheduler(client);
     setupWeeklyLeaderboard(client);
-    setupBroadcastScheduler(client);
+    // setupBroadcastScheduler(client); // disabled
     setupAutoUpdate();
     setupBackupScheduler();
     restorePredictions(client);
