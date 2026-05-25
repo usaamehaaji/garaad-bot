@@ -120,12 +120,14 @@ async function startQuizLobby(message, args) {
         currentQ:      0,
         message:       null,
         lobbyTimer:    null,
+        originMsg:     message,
     };
     activeQuiz.set(channelId, state);
 
-    const lobbyMsg = await message.channel.send({
+    const lobbyMsg = await message.reply({
         embeds:     [buildLobbyEmbed(state)],
         components: [buildLobbyButtons(state)],
+        fetchReply: true,
     });
     state.message = lobbyMsg;
 
@@ -292,7 +294,8 @@ async function sendQuizQuestion(state) {
 
     const qIndex = state.currentQ;
 
-    const activeMsg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
+    const qOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
+    const activeMsg = await channel.send({ embeds: [embed], components: [row], ...qOpt }).catch(() => null);
     if (!activeMsg) { activeQuiz.delete(state.channelId); return; }
 
     const filter = i =>
@@ -370,7 +373,8 @@ async function sendQuizQuestion(state) {
             .setColor(correctEntries.length > 0 ? '#2ecc71' : '#e74c3c');
 
         await activeMsg.delete().catch(() => {});
-        await channel.send({ embeds: [sumEmbed] }).catch(() => {});
+        const rOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
+        await channel.send({ embeds: [sumEmbed], ...rOpt }).catch(() => {});
 
         state.currentQ++;
         setTimeout(() => sendQuizQuestion(state), 2500);
@@ -439,7 +443,8 @@ async function finishQuiz(state) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    await channel.send({ embeds: [embed], components: [exchRow] });
+    const fOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
+    await channel.send({ embeds: [embed], components: [exchRow], ...fOpt });
 }
 
 module.exports = { startQuizLobby, refreshLobby, beginQuizGame, buildLobbyButtons, buildLobbyEmbed };
