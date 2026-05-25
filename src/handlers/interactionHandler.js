@@ -2602,7 +2602,8 @@ module.exports = function setupInteractionHandler(client) {
             if (!isAdmin(interaction.user.id)) {
                 return interaction.reply({ content: '⛔ Kaliya **admin** ayaa bilaabi kara!', flags: MessageFlags.Ephemeral }).catch(() => {});
             }
-            const state = activeTournament?.get(GAME_CHANNEL_ID);
+            const guildId = interaction.guildId;
+            const state   = activeTournament?.get(guildId) || activeTournament?.get(GAME_CHANNEL_ID);
             if (!state || state.stage !== 'join') {
                 return interaction.reply({ content: '⚠️ Tartan lama heli karo ama mar hore wuu bilaabmay.', flags: MessageFlags.Ephemeral }).catch(() => {});
             }
@@ -2612,11 +2613,12 @@ module.exports = function setupInteractionHandler(client) {
                     flags: MessageFlags.Ephemeral,
                 }).catch(() => {});
             }
+            const gameChannel = state.channel || interaction.channel;
             await interaction.reply({ content: '▶️ Wareegga 1aad waa la bilaabayaa...', flags: MessageFlags.Ephemeral }).catch(() => {});
             state.survivors = new Set(state.players);
             state.roundIdx  = 1;
-            state.channel   = interaction.channel;
-            return beginRound(state, interaction.channel);
+            state.channel   = gameChannel;
+            return beginRound(state, gameChannel);
         }
 
         // ── Tournament Admin Next Button ──
@@ -2624,7 +2626,8 @@ module.exports = function setupInteractionHandler(client) {
             if (!isAdmin(interaction.user.id)) {
                 return interaction.reply({ content: '⛔ Kaliya **admin** ayaa badhankaan isticmaali kara.', flags: MessageFlags.Ephemeral }).catch(() => {});
             }
-            const state = activeTournament?.get(GAME_CHANNEL_ID);
+            const guildId = interaction.guildId;
+            const state   = activeTournament?.get(guildId) || activeTournament?.get(GAME_CHANNEL_ID);
 
             if (!state) {
                 return interaction.reply({
@@ -2640,6 +2643,8 @@ module.exports = function setupInteractionHandler(client) {
                 }).catch(() => {});
             }
 
+            const tnGameCh = state.channel || interaction.channel;
+
             if (state.stage === 'join') {
                 if (state.players.size < TOURNAMENT_MIN_PLAYERS) {
                     return interaction.reply({
@@ -2653,7 +2658,8 @@ module.exports = function setupInteractionHandler(client) {
                 }).catch(() => {});
                 state.survivors = new Set(state.players);
                 state.roundIdx  = 1;
-                return beginRound(state, interaction.channel);
+                state.channel   = tnGameCh;
+                return beginRound(state, tnGameCh);
             }
 
             if (state.stage === 'pause') {
@@ -2661,7 +2667,7 @@ module.exports = function setupInteractionHandler(client) {
                 state.survivors     = new Set(nextSurvivors);
                 state._nextSurvivors = null;
                 if (state.survivors.size === 0) {
-                    activeTournament.delete(cid);
+                    activeTournament.delete(guildId);
                     return interaction.reply({
                         content: '❌ Cidna kuma hartay — tartan waa la joojiyay.',
                         flags: MessageFlags.Ephemeral,
@@ -2673,7 +2679,8 @@ module.exports = function setupInteractionHandler(client) {
                     content: `▶️ **${roundName} waa la bilaabayaa...**`,
                     flags: MessageFlags.Ephemeral,
                 }).catch(() => {});
-                return beginRound(state, interaction.channel);
+                state.channel = tnGameCh;
+                return beginRound(state, tnGameCh);
             }
         }
 

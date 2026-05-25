@@ -117,19 +117,18 @@ function buildAnnounceEmbed(deadline, regCount, closed, state) {
         : `⏰ **Diiwaangelinta xirnaanaysaa:** ${hours > 0 ? `${hours}s ` : ''}${mins}d\n👥 **Diiwaangeliyay:** **${regCount}** qof\n\n_Riix 📝 Diiwaan Geli si aad code u heshid_ ⬇️`;
 
     return new EmbedBuilder()
-        .setTitle('🏆 Tartan — Garaad Quiz Tournament')
+        .setTitle('🏆 Garaad Quiz — Tartanka Rasmi ah')
         .setColor(closed ? '#95a5a6' : '#e67e22')
         .setDescription(
-            `Nabad galyo dhammaan! 🏆\n\n` +
-            `Tartanka Garaad Quiz wuu bilaabmayaa — haddaad ka qaybgashan rabto riix badhanka **📝 Diiwaan Geli** hoose, code gaarka ah ayaa toos DM-kaaga ku yimaadaa.\n\n` +
-            `Marka admin game furo, code-kaaga fur oo ku qor <#${gameChId}> adigoo qoraya \`${PREFIX}gal CODE\`\n\n` +
-            `Tartanku wuxuu leeyahay saddex wareeg — kii ugu badan su'aalaha saxda ah ka jawaaba ayaa guulaysta.\n\n` +
+            `Salaan dhammaan! Tartanka ugu weyn ee Garaad Quiz ayaa dib u soo noqday. 🔥\n\n` +
+            `Haddaad tartanka ku biiri rabto, riix badhanka **📝 Diiwaan Geli** oo code gaarka ah ayaa toos luuqadaada ku yimaadaa. Marka admin albaabka furo, code-kaas fur oo ku qor <#${gameChId}>.\n\n` +
+            `Tartanku wuxuu leeyahay **saddex wareeg**. Kii ugu xawliga badan oo sax badan jawaabaa — isaga ayaa guulaysta.\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
             `💰 **Abaalmarinta:**\n` +
-            `🥇 Heerka 1aad — **$15** + 🏆 Champion title\n` +
-            `🥈 Heerka 2aad — **$10**\n` +
-            `🥉 Heerka 3aad — **$5**\n\n` +
-            `🎙️ Voice Channel: <#${vcChId}>\n\n` +
+            `🥇 **1aad — $15** + 🏆 Champion title\n` +
+            `🥈 **2aad — $10**\n` +
+            `🥉 **3aad — $5**\n\n` +
+            `🎙️ Voice: <#${vcChId}>\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
             regStatus
         )
@@ -239,7 +238,7 @@ async function handlePanelButton(interaction, action) {
         state.stage = 'registration';
 
         const annMsg = await announceChannel.send({
-            content:    '@everyone',
+            content:    '@everyone @here',
             embeds:     [buildAnnounceEmbed(deadline, 0, false, state)],
             components: [buildAnnounceButtons(false)],
         });
@@ -374,19 +373,19 @@ async function openGamePhase(client, adminId, state) {
     const regCount = tournamentRegistry.size;
 
     await gameChannel.send({
+        content: '@here',
         embeds: [new EmbedBuilder()
-            .setTitle('🏁 Tartan — Albaabka Waa Furan Yahay!')
+            .setTitle('🟢 Tartanka Waa La Furay — Ku Soo Biir Hadda!')
             .setColor('#2ecc71')
             .setDescription(
-                `**Admin:** <@${adminId}>\n` +
-                `👥 **Diiwaangeliyay:** **${regCount}** qof\n\n` +
+                `**${regCount}** qof ayaa diiwaangeliyay — albaabku waa furan yahay.\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `📝 **Si aad u biirtid tartanka:**\n` +
-                `Qor: \`${PREFIX}gal CODE\`\n` +
-                `_(code-kaagu DM-kaaga tartan ayuu ku jiraa)_\n\n` +
+                `Haddaad code-kaaga hayso, hadda ayaad gasho:\n\n` +
+                `➡️ Qor: \`${PREFIX}gal CODE-KAAGA\`\n\n` +
+                `Code-kaagu DM-kaaga ayuu ku jiraa — fur oo eeg.\n\n` +
                 `🎙️ Voice Channel: <#${vcChId}>\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `_Marka dadku diyaar yihiin, admin ayaa wareegga bilaabi doona._`
+                `_Marka dadku diyaar yihiin, admin ayaa su'aalaha bilaabi doona._`
             )
         ],
         components: [new ActionRowBuilder().addComponents(
@@ -542,13 +541,13 @@ async function sendRegistrationCode(user, replyTarget, gameChId, vcChId) {
 
     function buildDesc(code) {
         return (
-            `Code-gaaga waa:\n\n# \`${code}\`\n\n` +
+            `Code-kaaga gaarka ah waa:\n\n# \`${code}\`\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `**📋 Tilaabooyinka:**\n` +
-            `**1.** Marka admin game furo tag: <#${gCh}>\n` +
+            `**Sidee u gasho:**\n` +
+            `**1.** Marka admin game furo, tag <#${gCh}>\n` +
             `**2.** Qor: \`${PREFIX}gal ${code}\`\n\n` +
-            `🎙️ **Voice Channel:** <#${vCh}>\n\n` +
-            `⚠️ **Code-kan ha u shegin qof kale — kuu gaarka ah!**`
+            `🎙️ Voice Channel: <#${vCh}>\n\n` +
+            `⚠️ Code-kan qof kale ha siinin — adiga oo keliya ayuu u shaqeeyaa!`
         );
     }
 
@@ -558,13 +557,13 @@ async function sendRegistrationCode(user, replyTarget, gameChId, vcChId) {
         try {
             await user.send({
                 embeds: [new EmbedBuilder()
-                    .setTitle('🏁 Tartan — Code-kaaga Horay u Qaday')
-                    .setDescription(`⚠️ **Horay ayaad u diiwaangelisay!**\n\n` + buildDesc(existing.code))
+                    .setTitle('🏁 Code-kaagii hore')
+                    .setDescription(`Horay ayaad u diiwaangelisay, code-kaagii hore ayaan kuu soo celiyay:\n\n` + buildDesc(existing.code))
                     .setColor('#f39c12')
                     .setFooter({ text: 'Garaad Quiz Tournament' })],
             });
         } catch {}
-        return replyTarget?.reply({ content: '⚠️ **Horay ayaad u diiwaangelisay!** Code-gaagii hore ayaa DM-kaaga laguugu soo celiyay.', flags: 64 });
+        return replyTarget?.reply({ content: '⚠️ Horay ayaad u diiwaangelisay — code-gaagii hore ayaa DM-kaaga laguugu soo celiyay.', flags: 64 });
     }
 
     const code = genCode();
@@ -572,12 +571,12 @@ async function sendRegistrationCode(user, replyTarget, gameChId, vcChId) {
     try {
         await user.send({
             embeds: [new EmbedBuilder()
-                .setTitle('🏁 Tartan — Code-kaaga Gaarka ah')
-                .setDescription(`✅ **Waxaad ku guulaysatay diiwaangelinta!**\n\n` + buildDesc(code))
+                .setTitle('🎉 Diiwaangelintii waa lagu guuleystay!')
+                .setDescription(`Ku soo dhowow tartanka! Kan hoose waa code-kaaga:\n\n` + buildDesc(code))
                 .setColor('#2ecc71')
                 .setFooter({ text: 'Garaad Quiz Tournament' })],
         });
-        return replyTarget?.reply({ content: '✅ **Code-gaaga waa laguugu diray DM!** Fur farrimahaaga gaarka ah.', flags: 64 });
+        return replyTarget?.reply({ content: '✅ Code-gaaga waa laguugu diray DM! Fur farrimahaaga gaarka ah.', flags: 64 });
     } catch {
         return replyTarget?.reply({ content: '❌ DM-kaaga ma furan. Settings → Privacy → Allow DMs ka fur, ka dibna isku day.', flags: 64 });
     }
@@ -657,13 +656,16 @@ async function cmdAdminNext(message) {
         state.prevRoundQuestions = [];
     }
 
+    const gameChannel = state.channel || await message.client.channels.fetch(state.gameChannelId || GAME_CHANNEL_ID).catch(() => null);
+    if (!gameChannel) return message.channel.send('⚠️ Game channel-ka la heyn waayay.');
+
     if (state.stage === 'join') {
         if (state.players.size < TOURNAMENT_MIN_PLAYERS) {
-            return message.channel.send(`⚠️ Ugu yaraan **${TOURNAMENT_MIN_PLAYERS}** qof. Hadda: **${state.players.size}**`);
+            return gameChannel.send(`⚠️ Ugu yaraan **${TOURNAMENT_MIN_PLAYERS}** qof. Hadda: **${state.players.size}**`);
         }
         state.survivors = new Set(state.players);
         state.roundIdx  = 1;
-        return beginRound(state, message.channel);
+        return beginRound(state, gameChannel);
     }
     if (state.stage === 'pause') {
         const next           = state._nextSurvivors || [];
@@ -671,10 +673,10 @@ async function cmdAdminNext(message) {
         state._nextSurvivors = null;
         if (state.survivors.size === 0) {
             activeTournament.delete(guildId);
-            return message.channel.send('❌ Cidna kuma hartay — tartan waa la joojiyay.');
+            return gameChannel.send('❌ Cidna kuma hartay — tartan waa la joojiyay.');
         }
         state.roundIdx += 1;
-        return beginRound(state, message.channel);
+        return beginRound(state, gameChannel);
     }
     return message.channel.send('⚠️ Hadda admin_next looma isticmaali karo — sug wareeggu dhammaado.');
 }
@@ -783,14 +785,13 @@ async function beginRound(state, channel) {
 
     await channel.send({
         embeds: [new EmbedBuilder()
-            .setTitle(`🏁 ${meta.name} — Bilaabmay!`)
+            .setTitle(`🔥 ${meta.name} — Bilaabmay!`)
             .setDescription(
-                `**Ka qaybgalayaasha:** ${state.survivors.size} qof\n` +
-                `**Su'aalo:** ${useN}\n` +
-                `**Dhibco/su'aal:** < 5s = **40pts** · 18s = **5pts**\n\n` +
+                `${state.survivors.size} qof ayaa tartamaya · ${useN} su'aalood\n` +
+                `⚡ Xawliga ayaa dhibcaha go'aamiya — hore u bixi!\n\n` +
                 `${elimInfo}\n\n` +
                 `**Tartamayaasha:**\n${playersList}\n\n` +
-                `_Su'aalaha waxay bilaabmayaan 3 ilbiriqsi gudahood..._`
+                `_Su'aalaha waxay bilaabmayaan 3 ilbiriqsi gudahood — diyaar noqo!_`
             )
             .setColor(meta.color)],
     });
@@ -965,19 +966,20 @@ async function endRoundPause(state) {
     // Results + discussion countdown
     await channel.send({
         embeds: [new EmbedBuilder()
-            .setTitle(`⏸️ ${ROUND_LABELS[state.roundIdx].name} — Dhamaaday!`)
+            .setTitle(`⏸️ ${ROUND_LABELS[state.roundIdx].name} — Waa Dhamaaday`)
             .setColor('#f39c12')
             .setDescription(
-                `**📊 Dhibcaha Guud:**\n${totalBoard}\n\n` +
+                `**Dhibcaha Guud:**\n${totalBoard}\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `**❌ Baxay (${eliminated.length}):**\n${eliminatedList}\n\n` +
-                `**✅ Hartay — ${nextRoundName} (${remaining.length}):**\n${remainingList}\n\n` +
+                (eliminated.length > 0
+                    ? `**Baxay (${eliminated.length}):**\n${eliminatedList}\n\n`
+                    : '') +
+                `**Wareega soo socda — ${nextRoundName}:**\n${remainingList}\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `🎙️ **Xilliga Wadahaddalka** — <#${vcChId}>\n` +
-                `💬 Kala hadla, is dhiiri gali, isku soo arki!\n\n` +
-                `⏰ **Wareegga xiga wuxuu bilaabmayaa 1 daqiiqad gudahood — diyaar noqda!**`
+                `🎙️ <#${vcChId}> — kala hadla, nafta soo qaado!\n\n` +
+                `⏰ Wareegga xiga wuxuu bilaabmayaa **1 daqiiqad gudahood** — ha moodin!`
             )
-            .setFooter({ text: 'Toos ayuu bilaabmayaa — admin ma baahna' })],
+            .setFooter({ text: 'Toos ayuu bilaabmayaa' })],
     });
 
     // Auto-advance after 60 seconds
@@ -1001,11 +1003,11 @@ async function endRoundPause(state) {
         const encourageList = [...state.survivors].map(id => `<@${id}>`).join(' ');
         await channel.send({
             embeds: [new EmbedBuilder()
-                .setTitle(`🚀 ${ROUND_LABELS[state.roundIdx]?.name || 'Wareeg Cusub'} — Bilaabmayaa!`)
+                .setTitle(`🚀 ${ROUND_LABELS[state.roundIdx]?.name || 'Wareeg Cusub'} — Diyaar noqda!`)
                 .setColor('#2ecc71')
                 .setDescription(
-                    `💪 **Dhiirigalinta tartamayaasha haray:**\n${encourageList}\n\n` +
-                    `🏆 Waxaad u dhow tahay guusha — sii wad!\n` +
+                    `${encourageList}\n\n` +
+                    `Waxaad gaartay halkan — guusha waxay kaa fog tahay su'aal! Sii wad xoogga.\n\n` +
                     `_Su'aalaha waxay bilaabmayaan 3 ilbiriqsi gudahood..._`
                 )],
         });
@@ -1054,21 +1056,20 @@ async function finishTournament(state) {
         await channel.send({
             content: '@everyone',
             embeds: [new EmbedBuilder()
-                .setTitle('🏆  T A R T A N  —  D H A M A A D A Y !')
+                .setTitle('🏆 Tartanka Waa Dhamaaday!')
                 .setDescription(
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-                    `👑  **GUULEYSTAHA**\n` +
+                    `👑 **Guuleystaha**\n` +
                     `## <@${winId}>\n` +
-                    `🏆 **Champion** title ayaa kuu galay!\n` +
-                    `📊 Dhibcahaaga guud: **${winScore}pts**\n` +
-                    `💵 Abaalmarintaada: **$15**\n\n` +
+                    `Hambalyo! 🏆 **Champion** title ayaa kuu galay.\n` +
+                    `Dhibcahaaga guud: **${winScore}pts** · Abaalmarintaada: **$15**\n\n` +
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-                    `**🏅 Natiijada Guud:**\n\n${allScores}\n\n` +
+                    `**Natiijada Guud:**\n\n${allScores}\n\n` +
                     `━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `_Mahadsanid ka qaybgalashada Tartan Garaad Quiz! 🎉_`
+                    `Mahadsanid dhammaan ka qaybgalay! Tartanka xiga idinla kulannaa. 🎉`
                 )
                 .setColor('#FFD700')
-                .setFooter({ text: 'Garaad Quiz — Tournament' })],
+                .setFooter({ text: 'Garaad Quiz Tournament' })],
         });
     }
 
@@ -1076,30 +1077,38 @@ async function finishTournament(state) {
         const winUser = await state.client.users.fetch(winId);
         await winUser.send({
             embeds: [new EmbedBuilder()
-                .setTitle('🏆 Hambalyo — Champion!')
+                .setTitle('🏆 Hambalyo!')
                 .setColor('#FFD700')
                 .setDescription(
-                    `👑 **Tartanka Garaad Quiz ayaad ku guulaysatay!**\n\n` +
-                    `🏆 **Champion** title ayaa kuu galay!\n` +
-                    `💰 **+500 BTC** abaalmarintaada\n` +
-                    `📊 Dhibcahaaga guud: **${winScore}pts**\n\n` +
-                    `_Mahadsanid ka qaybgalashadaada — Garaad Quiz_`
+                    `Adiga ayaa tartanka ku guulaysatay — taas waa wax weyn! 👑\n\n` +
+                    `🏆 **Champion** title ayaa kuu galay\n` +
+                    `📊 Dhibcahaaga guud: **${winScore}pts**\n` +
+                    `💵 Abaalmarintaada **$15** — admin ayaa kula xiriiri doona dhow.\n\n` +
+                    `Mahadsanid ka qaybgalashadaada. 🎉`
                 )
             ],
         });
     } catch {}
 
-    for (const [pid, sc] of sorted.slice(1)) {
+    const dmPrizes = ['$10', '$5'];
+    const dmColors = ['#95a5a6', '#cd7f32'];
+    const dmMedals = ['🥈', '🥉'];
+    for (const [idx, [pid, sc]] of sorted.slice(1).entries()) {
+        const place = idx + 2;
+        const prize = dmPrizes[idx] ? `💵 Abaalmarintaada **${dmPrizes[idx]}** — admin ayaa kula xiriiri doona.\n` : '';
+        const medal = dmMedals[idx] || `${place}aad`;
+        const color = dmColors[idx] || '#7f8c8d';
         try {
             const u = await state.client.users.fetch(pid);
             await u.send({
                 embeds: [new EmbedBuilder()
-                    .setTitle('🏁 Tartan — Mahadsanid!')
-                    .setColor('#3498db')
+                    .setTitle(`${medal} Tartanka — Aad baad u fiicnaatay!`)
+                    .setColor(color)
                     .setDescription(
-                        `**Mahadsanid ka qaybgalashadaada Tartan Garaad Quiz!** 🎉\n\n` +
-                        `📊 Dhibcahaaga guud: **${sc}pts**\n\n` +
-                        `_Tartanka xiga sug — aad baad u xoog badnaatay!_`
+                        `Mahadsanid ka qaybgalashadaada — si fiican ayaad u tartantay! 🎉\n\n` +
+                        `📊 Heerkaaga: **${place}aad** · Dhibcahaaga: **${sc}pts**\n` +
+                        `${prize}\n` +
+                        `Tartanka xiga sug — weli xoog baad leedahay!`
                     )
                 ],
             });
