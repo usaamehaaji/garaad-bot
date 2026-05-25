@@ -2521,14 +2521,15 @@ module.exports = function setupInteractionHandler(client) {
 
         // ── Tournament Register button ──
         if (id === 'tournament_register') {
-            const state = activeTournament?.get(GAME_CHANNEL_ID);
+            const guildId = interaction.guildId;
+            const state = activeTournament?.get(guildId) || activeTournament?.get(GAME_CHANNEL_ID);
             if (!state || state.stage !== 'registration') {
                 return interaction.reply({
                     content: '🔒 Diiwaangelinta waa la xiray.',
                     flags: MessageFlags.Ephemeral,
                 }).catch(() => {});
             }
-            return sendRegistrationCode(interaction.user, { reply: (o) => interaction.reply(o) });
+            return sendRegistrationCode(interaction.user, { reply: (o) => interaction.reply(o) }, state.gameChannelId);
         }
 
         // ── Tartan Bilow: Status button ──
