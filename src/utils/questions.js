@@ -163,6 +163,10 @@ const pickUnseenForGroup  = (hostId, count) => pickQuestionsForGame(hostId, 'qui
 const markSeen            = (userId, idx)   => markSeenForGame(userId, 'solo', idx);
 const markSeenForUsers    = (userIds, idx)  => markSeenForUsersInGame(userIds, 'quiz', idx);
 
+function getAllQuestionsForGame(game) {
+    return questionsByGame[game] || [];
+}
+
 module.exports = {
     pickQuestionsForGame,
     pickQuestionsForUsers,
@@ -173,4 +177,5 @@ module.exports = {
     markSeen,
     markSeenForUsers,
     noQuestionsLeftEmbed,
+    getAllQuestionsForGame,
 };

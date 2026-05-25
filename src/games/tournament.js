@@ -35,6 +35,7 @@ const {
     pickQuestionsForGame,
     markSeenForUsersInGame,
     noQuestionsLeftEmbed,
+    getAllQuestionsForGame,
 } = require('../utils/questions');
 const { getAnswerOptions } = require('../utils/questionOptions');
 const {
@@ -746,21 +747,19 @@ async function cmdStatus(message) {
 // ─────────────────────────────────────────────────────────────────────
 async function beginRound(state, channel) {
     state.channel = channel;
-    const n      = roundQuestionCount(state.roundIdx);
-    const meta   = ROUND_LABELS[state.roundIdx];
-    const picked = pickQuestionsForGame(state.adminId, 'tournament', n);
+    const n    = roundQuestionCount(state.roundIdx);
+    const meta = ROUND_LABELS[state.roundIdx];
 
-    if (!picked || picked.length === 0) {
+    const pool = getAllQuestionsForGame('tournament');
+    if (!pool.length) {
         const guildId = state.guildId || GAME_CHANNEL_ID;
         activeTournament.delete(guildId);
         return channel.send({ embeds: [noQuestionsLeftEmbed('Admin')] });
     }
 
-    let useN = n;
-    if (picked.length < n) {
-        useN = picked.length;
-        await channel.send(`📚 Su'aalo cusub: **${useN}** kaliya (halkii ${n}).`);
-    }
+    // Build exactly n questions by cycling through pool in order (loop 1→60→1→…)
+    const useN = n;
+    const picked = Array.from({ length: useN }, (_, i) => ({ ...pool[i % pool.length], _idx: i % pool.length }));
 
     state.questions          = picked;
     state.prevRoundQuestions = [];
