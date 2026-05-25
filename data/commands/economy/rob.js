@@ -4,7 +4,6 @@ const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econ
 const ROB_SUCCESS_RATE   = 0.45;
 const ROB_MIN_BTC        = 2_000;
 const MAX_STEAL_FRACTION = 0.25;
-const MAX_ROBS_PER_DAY   = 5;
 
 function todayStr() {
     const d = new Date();
@@ -49,11 +48,6 @@ module.exports = async function robCmd(message) {
     const today = todayStr();
     if (robber.robsToday.date !== today) robber.robsToday = { date: today, count: 0 };
 
-    if (robber.robsToday.count >= MAX_ROBS_PER_DAY)
-        return message.reply({ embeds: [new EmbedBuilder()
-            .setDescription(`⚠️ You've used all **${MAX_ROBS_PER_DAY} robs** for today. Come back tomorrow.`)
-            .setColor('#e74c3c')], components: [closeRow(userId)] });
-
     if ((victim.btc || 0) < ROB_MIN_BTC)
         return message.reply({ embeds: [new EmbedBuilder()
             .setDescription(`⚠️ Target doesn't have enough BTC (min **₿ ${ROB_MIN_BTC.toLocaleString()}**).`)
@@ -84,7 +78,6 @@ module.exports = async function robCmd(message) {
             .addFields(
                 { name: '💰 Stolen',      value: `**+₿ ${stolen.toLocaleString()}**`,                     inline: true },
                 { name: '💳 Your Wallet', value: `**₿ ${robber.btc.toLocaleString()}**`,                  inline: true },
-                { name: '📊 Robs Today',  value: `**${robber.robsToday.count}/${MAX_ROBS_PER_DAY}**`,     inline: true },
             )
             .setFooter({ text: 'Garaad Economy' })], components: [closeRow(userId)] });
     } else {
@@ -98,7 +91,6 @@ module.exports = async function robCmd(message) {
             .addFields(
                 { name: '💸 Fine',        value: `**-₿ ${fine.toLocaleString()}**`,                       inline: true },
                 { name: '💳 Your Wallet', value: `**₿ ${robber.btc.toLocaleString()}**`,                  inline: true },
-                { name: '📊 Robs Today',  value: `**${robber.robsToday.count}/${MAX_ROBS_PER_DAY}**`,     inline: true },
             )
             .setFooter({ text: 'Garaad Economy' })], components: [closeRow(userId)] });
     }

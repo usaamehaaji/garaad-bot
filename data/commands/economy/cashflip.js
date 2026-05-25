@@ -2,10 +2,9 @@ const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon, addToTreasury, deductFromTreasury, getTreasury, trackEarning } = require('../../../src/economy/econStore');
 const { fmt } = require('../../../src/utils/helpers');
 
-const PROFIT_RATE      = 0.95;
-const COOLDOWN_MS      = 10_000;
-const MIN_BET          = 10;
-const MAX_BET          = 50_000;
+const PROFIT_RATE = 0.95;
+const COOLDOWN_MS = 10_000;
+const MIN_BET     = 10;
 
 function getWinRate(amount) {
     if (amount <= 500)    return 0.50;
@@ -173,7 +172,7 @@ module.exports = async function cashflipCmd(message, args) {
                 { name: '⏳ Next Tick',           value: `**${market.nextSec}s**`,               inline: true },
                 { name: '🏛️ Treasury',            value: `**₿ ${fmt(t.balance || 0)}**`,        inline: true },
             )
-            .setDescription(`Bet: \`?ef 500 u\` or \`?ef 500 d\` · Min **₿${MIN_BET}** · Max **₿${MAX_BET.toLocaleString()}**\n\`?ef top\` — leaderboard`)
+            .setDescription(`Bet: \`?ef 500 u\` or \`?ef 500 d\` · Min **₿${MIN_BET}**\n\`?ef top\` — leaderboard`)
             .setFooter({ text: 'Garaad Economy • Treasury-backed market' })] });
     }
 
@@ -190,10 +189,7 @@ module.exports = async function cashflipCmd(message, args) {
     if (amount < MIN_BET)
         return message.reply(`⚠️ Min bet waa **₿ ${MIN_BET.toLocaleString()}**. Kor u qaad.`);
 
-    if (amount > MAX_BET)
-        return message.reply(`⚠️ Max bet waa **₿ ${MAX_BET.toLocaleString()}**. Hoos u dhig.`);
-
-    const cdUntil = flipCooldowns.get(userId) || 0;
+const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
     if (cdLeft > 0)
         return message.reply(`⏳ Sug **${cdLeft}s** kadib isku day.`);
