@@ -113,24 +113,34 @@ function buildAnnounceEmbed(deadline, regCount, closed, state) {
     const mins     = Math.floor((timeLeft % 3600000) / 60000);
 
     const regStatus = closed
-        ? `🔒 **Diiwaangelinta waa la xiray** · **${regCount}** qof ayaa diiwaangeliyay`
-        : `⏰ **Diiwaangelinta xirnaanaysaa:** ${hours > 0 ? `${hours}s ` : ''}${mins}d\n👥 **Diiwaangeliyay:** **${regCount}** qof\n\n_Riix 📝 Diiwaan Geli si aad code u heshid_ ⬇️`;
+        ? `🔒 **Diiwaangelintu waa la xiray** · **${regCount}** qof ayaa diiwaangeliyay`
+        : `⏰ **Diiwaangelintu waxay xirmaysaa:** ${hours > 0 ? `${hours} saac ` : ''}${mins} daqiiqo gudahood\n👥 **Diiwaangeliyay:** ${regCount} qof`;
 
     return new EmbedBuilder()
-        .setTitle('🏆 Garaad Quiz — Tartanka Rasmi ah')
+        .setTitle('🏆 Garaad Quiz — Tartanka Rasmiga ah')
         .setColor(closed ? '#95a5a6' : '#e67e22')
         .setDescription(
-            `Salaan dhammaan! Tartanka ugu weyn ee Garaad Quiz ayaa dib u soo noqday. 🔥\n\n` +
-            `Haddaad tartanka ku biiri rabto, riix badhanka **📝 Diiwaan Geli** oo code gaarka ah ayaa toos luuqadaada ku yimaadaa. Marka admin albaabka furo, code-kaas fur oo ku qor <#${gameChId}>.\n\n` +
-            `Tartanku wuxuu leeyahay **saddex wareeg**. Kii ugu xawliga badan oo sax badan jawaabaa — isaga ayaa guulaysta.\n\n` +
-            `━━━━━━━━━━━━━━━━━━━━\n` +
-            `💰 **Abaalmarinta:**\n` +
-            `🥇 **1aad — $15** + 🏆 Champion title\n` +
-            `🥈 **2aad — $10**\n` +
-            `🥉 **3aad — $5**\n\n` +
-            `🎙️ Voice: <#${vcChId}>\n\n` +
-            `━━━━━━━━━━━━━━━━━━━━\n` +
-            regStatus
+            `## 🔥 Ku soo dhowaada dhammaan ka qaybgalayaasha Garaad Quiz!\n\n` +
+            `Waxaa si rasmi ah loo qabanayaa **tartan weyn oo aqooneed**.\n` +
+            `Haddii aad doonayso inaad ka qayb gasho, riix badhanka **📝 Diiwaan Geli** si aad u hesho **code gaar ah** oo si toos ah kuugu imaanaya fariimahaaga.\n\n` +
+            `Marka maamulka furo albaabka tartanka, code-kaaga ku qor <#${gameChId}> si loo xaqiijiyo gelitaankaaga.\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `## ⚔️ Qaabka Tartanka\n\n` +
+            `🏁 Tartanku wuxuu ka koobnaan doonaa **3 wareeg**\n` +
+            `⚡ Qofka ugu dhaqso badan\n` +
+            `🧠 Jawaabaha ugu saxda badan bixiya\n` +
+            `👑 Isaga ayaa noqon doona guuleystaha rasmiga ah\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `# 💰 Abaalmarinnada\n\n` +
+            `🥇 **Kaalinta 1aad** — **$15** + 🏆 Champion Title\n` +
+            `🥈 **Kaalinta 2aad** — **$10**\n` +
+            `🥉 **Kaalinta 3aad** — **$5**\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `🎙️ **Voice Channel:** <#${vcChId}>\n\n` +
+            `${regStatus}\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `# 📝 Is Diiwaan Geli Hadda ⬇️\n\n` +
+            `## 🔥 Garaad Quiz Tournament 🔥`
         )
         .setFooter({ text: 'Garaad Quiz Tournament' });
 }
