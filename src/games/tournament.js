@@ -848,67 +848,98 @@ async function sendQuestion(state) {
     );
 
     const row = new ActionRowBuilder().addComponents(buttons);
-    const msg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
-    if (!msg) { activeTournament.delete(guildId); return; }
+    let activeMsg = await channel.send({ embeds: [embed], components: [row] }).catch(() => null);
+    if (!activeMsg) { activeTournament.delete(guildId); return; }
 
-    const prefix    = `tna_${gameChId}_${state.roundIdx}_${state.currentQ}_`;
-    const filter    = (i) => i.customId.startsWith(prefix) && state.survivors.has(i.user.id);
-    const collector = msg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS });
+    const qIdx = state.currentQ;
+    const questionEndTime = Date.now() + GLOBAL_WAIT_MS;
+    let reposting = false;
+    let col;
+    let onChat;
 
-    collector.on('collect', async (interaction) => {
-        const uid = interaction.user.id;
-        if (answeredBy.has(uid)) {
-            return interaction.reply({ content: '⚠️ Mar hore ayaad jawaab bixisay!', flags: MessageFlags.Ephemeral }).catch(() => {});
-        }
-        answeredBy.add(uid);
-        const isCorrect = interaction.customId.endsWith('_t');
-        const timeTaken = Date.now() - startTime;
+    function setupCol(targetMsg) {
+        const remaining = Math.max(1000, questionEndTime - Date.now());
+        const prefix = `tna_${gameChId}_${state.roundIdx}_${qIdx}_`;
+        const filter = (i) => i.customId.startsWith(prefix) && state.survivors.has(i.user.id);
+        const c = targetMsg.createMessageComponentCollector({ filter, time: remaining });
+        c.on('collect', async (interaction) => {
+            const uid = interaction.user.id;
+            if (answeredBy.has(uid)) {
+                return interaction.reply({ content: '⚠️ Mar hore ayaad jawaab bixisay!', flags: MessageFlags.Ephemeral }).catch(() => {});
+            }
+            answeredBy.add(uid);
+            const isCorrect = interaction.customId.endsWith('_t');
+            const timeTaken = Date.now() - startTime;
 
-        if (isCorrect) {
-            const pts  = calcScore(timeTaken);
-            const rank = correctAnswers.length + 1;
-            correctAnswers.push({ uid, timeMs: timeTaken, pts });
-            const medal = ['🥇', '🥈', '🥉'][rank - 1] || `${rank}aad`;
-            await interaction.reply({
-                content: `✅ **SAX!** ${medal} — **+${pts} pts** (${(timeTaken / 1000).toFixed(1)}s)`,
-                flags: MessageFlags.Ephemeral,
-            }).catch(() => {});
-        } else {
-            await interaction.reply({ content: '❌ Khalad. Isku day su\'aasha xiga!', flags: MessageFlags.Ephemeral }).catch(() => {});
-        }
-    });
+            if (isCorrect) {
+                const pts  = calcScore(timeTaken);
+                const rank = correctAnswers.length + 1;
+                correctAnswers.push({ uid, timeMs: timeTaken, pts });
+                const medal = ['🥇', '🥈', '🥉'][rank - 1] || `${rank}aad`;
+                await interaction.reply({
+                    content: `✅ **SAX!** ${medal} — **+${pts} pts** (${(timeTaken / 1000).toFixed(1)}s)`,
+                    flags: MessageFlags.Ephemeral,
+                }).catch(() => {});
+            } else {
+                await interaction.reply({ content: '❌ Khalad. Isku day su\'aasha xiga!', flags: MessageFlags.Ephemeral }).catch(() => {});
+            }
+        });
+        c.on('end', async (collected, reason) => {
+            if (reason === 'repost') return;
+            channel.client.off('messageCreate', onChat);
 
-    collector.on('end', async () => {
-        for (const { uid, pts } of correctAnswers) {
-            state.roundScores[uid] = (state.roundScores[uid] || 0) + pts;
-        }
+            for (const { uid, pts } of correctAnswers) {
+                state.roundScores[uid] = (state.roundScores[uid] || 0) + pts;
+            }
 
-        let resultLine;
-        if (correctAnswers.length === 0) {
-            resultLine = `⏰ Cidna si sax ah uma jawaabin.\n✅ Jawaabta saxda: **${correctLabel}**`;
-        } else {
-            const topList = correctAnswers.slice(0, 5)
-                .map(({ uid, timeMs, pts }, i) => {
-                    const medal = ['🥇', '🥈', '🥉'][i] || `${i + 1}.`;
-                    return `${medal} <@${uid}> — ${(timeMs / 1000).toFixed(1)}s → **+${pts}pts**`;
-                }).join('\n');
-            resultLine = `✅ Jawaabta saxda: **${correctLabel}**\n\n${topList}`;
-        }
+            let resultLine;
+            if (correctAnswers.length === 0) {
+                resultLine = `⏰ Cidna si sax ah uma jawaabin.\n✅ Jawaabta saxda: **${correctLabel}**`;
+            } else {
+                const topList = correctAnswers.slice(0, 5)
+                    .map(({ uid, timeMs, pts }, i) => {
+                        const medal = ['🥇', '🥈', '🥉'][i] || `${i + 1}.`;
+                        return `${medal} <@${uid}> — ${(timeMs / 1000).toFixed(1)}s → **+${pts}pts**`;
+                    }).join('\n');
+                resultLine = `✅ Jawaabta saxda: **${correctLabel}**\n\n${topList}`;
+            }
 
-        const board = [...state.survivors]
-            .map(id => [id, state.roundScores[id] || 0])
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 8)
-            .map(([id, sc], i) => `${i + 1}. <@${id}> — **${sc}pts**`)
-            .join('\n');
+            const board = [...state.survivors]
+                .map(id => [id, state.roundScores[id] || 0])
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 8)
+                .map(([id, sc], i) => `${i + 1}. <@${id}> — **${sc}pts**`)
+                .join('\n');
 
-        const sumEmbed = EmbedBuilder.from(embed)
-            .setDescription(`## ${stripQuestionNumber(q.question)}\n\n${resultLine}\n\n📊 **Dhibcaha Wareegga:**\n${board || '—'}`);
+            const sumEmbed = EmbedBuilder.from(embed)
+                .setDescription(`## ${stripQuestionNumber(q.question)}\n\n${resultLine}\n\n📊 **Dhibcaha Wareegga:**\n${board || '—'}`);
 
-        await msg.edit({ embeds: [sumEmbed], components: [] }).catch(() => {});
-        state.currentQ += 1;
-        setTimeout(() => sendQuestion(state), 2500);
-    });
+            await activeMsg.edit({ embeds: [sumEmbed], components: [] }).catch(() => {});
+            state.currentQ += 1;
+            setTimeout(() => sendQuestion(state), 2500);
+        });
+        return c;
+    }
+
+    col = setupCol(activeMsg);
+
+    onChat = m => {
+        if (m.author.bot || m.channel.id !== channel.id) return;
+        if (!activeTournament.has(guildId) && !activeTournament.has(GAME_CHANNEL_ID)) return;
+        if (state.stage !== 'play' || state.currentQ !== qIdx) return;
+        if (reposting) return;
+        reposting = true;
+        const oldMsg = activeMsg;
+        channel.send({ embeds: [embed], components: [row] }).then(newMsg => {
+            activeMsg = newMsg;
+            oldMsg.delete().catch(() => {});
+            col.stop('repost');
+            col = setupCol(newMsg);
+            reposting = false;
+        }).catch(() => { reposting = false; });
+    };
+
+    channel.client.on('messageCreate', onChat);
 }
 
 // ─────────────────────────────────────────────────────────────────────

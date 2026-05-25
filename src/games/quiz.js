@@ -295,90 +295,120 @@ async function sendQuizQuestion(state) {
     const qIndex = state.currentQ;
 
     const qOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
-    const activeMsg = await channel.send({ embeds: [embed], components: [row], ...qOpt }).catch(() => null);
+    let activeMsg = await channel.send({ embeds: [embed], components: [row], ...qOpt }).catch(() => null);
     if (!activeMsg) { activeQuiz.delete(state.channelId); return; }
 
-    const filter = i =>
-        i.customId.startsWith(`quiz_a_${state.channelId}_${qIndex}_`) &&
-        state.players.has(i.user.id);
+    const questionEndTime = Date.now() + GLOBAL_WAIT_MS;
+    let reposting = false;
+    let col;
+    let onChat;
 
-    const collector = activeMsg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS });
+    function setupCol(targetMsg) {
+        const remaining = Math.max(1000, questionEndTime - Date.now());
+        const filter = i =>
+            i.customId.startsWith(`quiz_a_${state.channelId}_${qIndex}_`) &&
+            state.players.has(i.user.id);
+        const c = targetMsg.createMessageComponentCollector({ filter, time: remaining });
+        c.on('collect', async interaction => {
+            const uid = interaction.user.id;
+            if (answeredBy.has(uid)) {
+                return interaction.reply({ content: '⚠️ Mar hore ayaad jawaab bixisay!', flags: MessageFlags.Ephemeral }).catch(() => {});
+            }
+            answeredBy.add(uid);
 
-    collector.on('collect', async interaction => {
-        const uid = interaction.user.id;
-        if (answeredBy.has(uid)) {
-            return interaction.reply({ content: '⚠️ Mar hore ayaad jawaab bixisay!', flags: MessageFlags.Ephemeral }).catch(() => {});
-        }
-        answeredBy.add(uid);
+            const isCorrect   = interaction.customId.endsWith('_t');
+            const timeTakenMs = Date.now() - questionStartMs;
 
-        const isCorrect   = interaction.customId.endsWith('_t');
-        const timeTakenMs = Date.now() - questionStartMs;
+            if (isCorrect) {
+                const pts = calcTimedScore(timeTakenMs);
+                state.scores[uid] = (state.scores[uid] || 0) + pts;
+                correctMap[uid]   = { pts, timeTakenMs };
+                const secs = (timeTakenMs / 1000).toFixed(1);
+                await interaction.reply({ content: `✅ **Sax!** +**${pts}** dhibcood · ⏱️ ${secs}s`, flags: MessageFlags.Ephemeral }).catch(() => {});
+            } else {
+                checkUser(uid);
+                userData[uid].iq = Math.max(0, (userData[uid].iq || 0) - 1);
+                saveData();
+                await interaction.reply({ content: '❌ **Khalad.** Jawaabta sax ma ahayn · **−1 IQ** · 0 dhibcood', flags: MessageFlags.Ephemeral }).catch(() => {});
+            }
 
-        if (isCorrect) {
-            const pts = calcTimedScore(timeTakenMs);
-            state.scores[uid] = (state.scores[uid] || 0) + pts;
-            correctMap[uid]   = { pts, timeTakenMs };
-            const secs = (timeTakenMs / 1000).toFixed(1);
-            await interaction.reply({ content: `✅ **Sax!** +**${pts}** dhibcood · ⏱️ ${secs}s`, flags: MessageFlags.Ephemeral }).catch(() => {});
-        } else {
-            checkUser(uid);
-            userData[uid].iq = Math.max(0, (userData[uid].iq || 0) - 1);
-            saveData();
-            await interaction.reply({ content: '❌ **Khalad.** Jawaabta sax ma ahayn · **−1 IQ** · 0 dhibcood', flags: MessageFlags.Ephemeral }).catch(() => {});
-        }
+            if (answeredBy.size >= state.players.size) c.stop('all_answered');
+        });
+        c.on('end', async (collected, reason) => {
+            if (reason === 'repost') return;
+            channel.client.off('messageCreate', onChat);
 
-        if (answeredBy.size >= state.players.size) collector.stop('all_answered');
-    });
+            const timedOut = [...state.players].filter(id => !answeredBy.has(id));
+            for (const id of timedOut) {
+                checkUser(id);
+                userData[id].iq = Math.max(0, (userData[id].iq || 0) - 1);
+            }
+            if (timedOut.length > 0) saveData();
 
-    collector.on('end', async () => {
-        const timedOut = [...state.players].filter(id => !answeredBy.has(id));
-        for (const id of timedOut) {
-            checkUser(id);
-            userData[id].iq = Math.max(0, (userData[id].iq || 0) - 1);
-        }
-        if (timedOut.length > 0) saveData();
+            const correctEntries = Object.entries(correctMap)
+                .sort(([, a], [, b]) => b.pts - a.pts || a.timeTakenMs - b.timeTakenMs);
 
-        const correctEntries = Object.entries(correctMap)
-            .sort(([, a], [, b]) => b.pts - a.pts || a.timeTakenMs - b.timeTakenMs);
+            let resultLines = '';
+            if (correctEntries.length === 0) {
+                resultLines = `⏰ Cidna si sax ah uma jawaabin.`;
+            } else {
+                resultLines = correctEntries.slice(0, 5).map(([id, { pts, timeTakenMs }], i) => {
+                    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '▫️';
+                    const secs  = (timeTakenMs / 1000).toFixed(1);
+                    return `${medal} <@${id}> — **+${pts}** pts · ${secs}s`;
+                }).join('\n');
+            }
 
-        let resultLines = '';
-        if (correctEntries.length === 0) {
-            resultLines = `⏰ Cidna si sax ah uma jawaabin.`;
-        } else {
-            resultLines = correctEntries.slice(0, 5).map(([id, { pts, timeTakenMs }], i) => {
-                const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '▫️';
-                const secs  = (timeTakenMs / 1000).toFixed(1);
-                return `${medal} <@${id}> — **+${pts}** pts · ${secs}s`;
-            }).join('\n');
-        }
+            const timeoutLine = timedOut.length > 0
+                ? `\n⏰ **Timeout −1 IQ:** ${timedOut.map(id => `<@${id}>`).join(', ')}`
+                : '';
 
-        const timeoutLine = timedOut.length > 0
-            ? `\n⏰ **Timeout −1 IQ:** ${timedOut.map(id => `<@${id}>`).join(', ')}`
-            : '';
+            const leaderboard = Object.entries(state.scores)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 5)
+                .map(([id, sc], i) => `${i + 1}. <@${id}> — **${sc}** pts`)
+                .join('\n') || '—';
 
-        const leaderboard = Object.entries(state.scores)
-            .sort(([, a], [, b]) => b - a)
-            .slice(0, 5)
-            .map(([id, sc], i) => `${i + 1}. <@${id}> — **${sc}** pts`)
-            .join('\n') || '—';
+            const sumEmbed = new EmbedBuilder()
+                .setTitle(`👥 Quiz Koox — Su'aal ${qIndex + 1}/${totalQ}`)
+                .setDescription(
+                    `## ${stripQuestionNumber(q.question)}\n\n` +
+                    `📌 Jawaabta saxda ah: **${correctLabel}**\n\n` +
+                    `**Su'aashaas natiijadeeda:**\n${resultLines}${timeoutLine}\n\n` +
+                    `📊 **Dhibcaha guud (top 5):**\n${leaderboard}`
+                )
+                .setColor(correctEntries.length > 0 ? '#2ecc71' : '#e74c3c');
 
-        const sumEmbed = new EmbedBuilder()
-            .setTitle(`👥 Quiz Koox — Su'aal ${qIndex + 1}/${totalQ}`)
-            .setDescription(
-                `## ${stripQuestionNumber(q.question)}\n\n` +
-                `📌 Jawaabta saxda ah: **${correctLabel}**\n\n` +
-                `**Su'aashaas natiijadeeda:**\n${resultLines}${timeoutLine}\n\n` +
-                `📊 **Dhibcaha guud (top 5):**\n${leaderboard}`
-            )
-            .setColor(correctEntries.length > 0 ? '#2ecc71' : '#e74c3c');
+            await activeMsg.delete().catch(() => {});
+            const rOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
+            await channel.send({ embeds: [sumEmbed], ...rOpt }).catch(() => {});
 
-        await activeMsg.delete().catch(() => {});
-        const rOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
-        await channel.send({ embeds: [sumEmbed], ...rOpt }).catch(() => {});
+            state.currentQ++;
+            setTimeout(() => sendQuizQuestion(state), 2500);
+        });
+        return c;
+    }
 
-        state.currentQ++;
-        setTimeout(() => sendQuizQuestion(state), 2500);
-    });
+    col = setupCol(activeMsg);
+
+    onChat = m => {
+        if (m.author.bot || m.channel.id !== channel.id) return;
+        if (!activeQuiz.has(state.channelId)) return;
+        const cur = activeQuiz.get(state.channelId);
+        if (!cur || cur.currentQ !== qIndex) return;
+        if (reposting) return;
+        reposting = true;
+        const oldMsg = activeMsg;
+        channel.send({ embeds: [embed], components: [row], ...qOpt }).then(newMsg => {
+            activeMsg = newMsg;
+            oldMsg.delete().catch(() => {});
+            col.stop('repost');
+            col = setupCol(newMsg);
+            reposting = false;
+        }).catch(() => { reposting = false; });
+    };
+
+    channel.client.on('messageCreate', onChat);
 }
 
 // ─────────────────────────────────────────────────────────────────────

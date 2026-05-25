@@ -193,36 +193,64 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
 
     const row = new ActionRowBuilder().addComponents(buttons);
 
-    let msg;
+    const channel  = messageOrInteraction.channel;
+    const replyOpt = game?.originMsg ? { reply: { messageReference: game.originMsg.id, failIfNotExists: false } } : {};
+
+    let activeMsg;
     if (currentMsg) {
-        msg = await currentMsg.edit({ embeds: [embed], components: [row] });
+        activeMsg = await currentMsg.edit({ embeds: [embed], components: [row] });
     } else {
-        msg = await messageOrInteraction.reply({ embeds: [embed], components: [row], fetchReply: true });
+        activeMsg = await messageOrInteraction.reply({ embeds: [embed], components: [row], fetchReply: true });
     }
 
-    const startTime = Date.now();
-    const filter    = i => i.user.id === userId;
-    const collector = msg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS, max: 1 });
+    const questionEndTime = Date.now() + GLOBAL_WAIT_MS;
+    let reposting = false;
+    let col;
+    let onChat;
 
-    collector.on('end', collected => {
-        if (collected.size === 0) {
-            // Wakhti dhammaaday — streak ka jaro, IQ −1
+    function setupCol(targetMsg) {
+        const remaining = Math.max(1000, questionEndTime - Date.now());
+        const filter    = i => i.user.id === userId;
+        const c = targetMsg.createMessageComponentCollector({ filter, time: remaining, max: 1 });
+        c.on('end', (collected, reason) => {
+            if (reason === 'repost') return;
+            channel.client.off('messageCreate', onChat);
+            if (collected.size !== 0) return;
             checkUser(userId);
+            if (!activeGames.has(userId)) return;
             game.currentStreak = 0;
             userData[userId].stats.soloWrong++;
             userData[userId].iq = Math.max(0, (userData[userId].iq || 0) - 1);
             saveData();
-
             const timeoutEmbed = EmbedBuilder.from(embed)
                 .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
-            const tch = messageOrInteraction.channel;
-            const tRef = game?.originMsg ? { reply: { messageReference: game.originMsg.id, failIfNotExists: false } } : {};
-            msg.delete().catch(() => {});
-            tch.send({ embeds: [timeoutEmbed], ...tRef })
+            activeMsg.delete().catch(() => {});
+            channel.send({ embeds: [timeoutEmbed], ...replyOpt })
                 .then(nm => setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, nm), 2000))
                 .catch(() => setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, null), 2000));
-        }
-    });
+        });
+        return c;
+    }
+
+    col = setupCol(activeMsg);
+
+    onChat = m => {
+        if (m.author.bot || m.channel.id !== channel.id) return;
+        const g = activeGames.get(userId);
+        if (!g || g.currentQ !== qNumber) return;
+        if (reposting) return;
+        reposting = true;
+        const oldMsg = activeMsg;
+        channel.send({ embeds: [embed], components: [row] }).then(newMsg => {
+            activeMsg = newMsg;
+            oldMsg.delete().catch(() => {});
+            col.stop('repost');
+            col = setupCol(newMsg);
+            reposting = false;
+        }).catch(() => { reposting = false; });
+    };
+
+    channel.client.on('messageCreate', onChat);
 }
 
 // ── Jawaabta handle ─────────────────────────────────────────────────
