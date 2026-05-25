@@ -82,12 +82,50 @@ function pointsDisplay(pts, bonus, streak) {
     return line;
 }
 
+// ── Jawaab processing (shared between button + text) ─────────────────
+async function processAnswer(isCorrect, userId, game, timeTakenMs, embed, msg, messageOrInteraction, qNum) {
+    checkUser(userId);
+    let resultMsg = '';
+
+    if (isCorrect) {
+        const pts    = calcTimedScore(Math.min(timeTakenMs, GLOBAL_WAIT_MS));
+        const streak = (game.currentStreak || 0) + 1;
+        const bonus  = getStreakBonus(streak);
+        const total  = pts + bonus;
+        game.currentStreak = streak;
+        game.bestStreak    = Math.max(game.bestStreak || 0, streak);
+        game.totalPoints   = (game.totalPoints || 0) + total;
+        game.correctCount  = (game.correctCount || 0) + 1;
+        userData[userId].stats.soloCorrect++;
+        resultMsg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTakenMs/1000).toFixed(1)}s`;
+    } else {
+        game.currentStreak = 0;
+        userData[userId].stats.soloWrong++;
+        userData[userId].iq = Math.max(0, (userData[userId].iq || 0) - 1);
+        resultMsg = '❌ **QALAD** — **−1 IQ** · Streak: 0🔥';
+    }
+
+    userData[userId].stats.soloPlayed++;
+    saveData();
+
+    const updatedEmbed = EmbedBuilder.from(embed).setFields({ name: 'Natiijo', value: resultMsg });
+    await msg.edit({ embeds: [updatedEmbed], components: [] });
+    setTimeout(() => sendQuestion(messageOrInteraction, qNum + 1, msg), 1800);
+}
+
 // ── Su'aal dir ────────────────────────────────────────────────────────
 async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     const isInteraction = !!(messageOrInteraction.isButton && messageOrInteraction.isButton());
     const userId        = isInteraction ? messageOrInteraction.user.id : messageOrInteraction.author.id;
     const game          = activeGames.get(userId);
     const total         = game ? game.total : SOLO_DEFAULT_QUESTIONS;
+
+    // Helper — sends to thread if available, else falls back
+    const sendFinal = (opts) => {
+        if (currentMsg) return currentMsg.edit(opts);
+        if (game?.thread) return game.thread.send(opts);
+        return messageOrInteraction.reply(opts);
+    };
 
     if (!game || qNumber > total) {
         activeGames.delete(userId);
@@ -99,7 +137,6 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         const streak     = game ? (game.bestStreak  || 0) : 0;
         const correct    = game ? (game.correctCount || 0) : 0;
         const wrong      = total - correct;
-        // 3 sax = 1 IQ, xad 30 IQ maalintiiba solo
         const dayKey = new Date().toISOString().slice(0, 10);
         const dd = userData[userId];
         if (dd.soloIqDayKey !== dayKey) { dd.soloIqDayKey = dayKey; dd.soloIqToday = 0; }
@@ -137,12 +174,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 .setStyle(ButtonStyle.Danger),
         );
 
-        if (currentMsg) {
-            await currentMsg.edit({ embeds: [finishEmbed], components: [row] });
-        } else {
-            await messageOrInteraction.reply({ embeds: [finishEmbed], components: [row] });
-        }
-
+        await sendFinal({ embeds: [finishEmbed], components: [row] });
         return;
     }
 
@@ -155,10 +187,11 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     const entries = getAnswerOptions(q);
     if (entries.length === 0) {
         activeGames.delete(userId);
-        return messageOrInteraction.reply?.({ content: '⚠️ Su\'aal aan la fahmin (faylka su\'aalahooda).' });
+        if (game?.thread) game.thread.send('⚠️ Su\'aal aan la fahmin.');
+        else messageOrInteraction.reply?.({ content: '⚠️ Su\'aal aan la fahmin.' });
+        return;
     }
 
-    // Streak iyo score muuji
     const streak     = game.currentStreak || 0;
     const streakLine = streak >= 2 ? `🔥 Streak: **${streak}** — bonus **+${getStreakBonus(streak)}**` : '';
 
@@ -192,17 +225,35 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     let msg;
     if (currentMsg) {
         msg = await currentMsg.edit({ embeds: [embed], components: [row] });
+    } else if (game.thread) {
+        msg = await game.thread.send({ embeds: [embed], components: [row] });
     } else {
         msg = await messageOrInteraction.reply({ embeds: [embed], components: [row], fetchReply: true });
     }
 
-    const startTime = Date.now();
-    const filter    = i => i.user.id === userId;
-    const collector = msg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS, max: 1 });
+    const startTime  = Date.now();
+    const btnFilter  = i => i.user.id === userId;
+    const collector  = msg.createMessageComponentCollector({ filter: btnFilter, time: GLOBAL_WAIT_MS, max: 1 });
 
-    collector.on('end', collected => {
+    // Text answer collector — user types full answer label in chat/thread
+    const answerChan   = game.thread || (isInteraction ? messageOrInteraction.channel : messageOrInteraction.channel);
+    const txtFilter    = m => m.author.id === userId &&
+        entries.some(e => e.label.trim().toLowerCase() === m.content.trim().toLowerCase());
+    const txtCollector = answerChan.createMessageCollector({ filter: txtFilter, time: GLOBAL_WAIT_MS, max: 1 });
+    game.msgCollector  = txtCollector;
+
+    txtCollector.on('collect', async m => {
+        collector.stop('text');
+        m.delete().catch(() => {});
+        const match     = entries.find(e => e.label.trim().toLowerCase() === m.content.trim().toLowerCase());
+        const timeTaken = Date.now() - startTime;
+        await processAnswer(match.isCorrect, userId, game, timeTaken, embed, msg, messageOrInteraction, qNumber);
+    });
+
+    collector.on('end', (collected, reason) => {
+        txtCollector.stop();
+        if (reason === 'text') return;
         if (collected.size === 0) {
-            // Wakhti dhammaaday — streak ka jaro, IQ −1
             checkUser(userId);
             game.currentStreak = 0;
             userData[userId].stats.soloWrong++;
@@ -231,46 +282,18 @@ async function handleSoloAnswer(interaction) {
     await interaction.deferUpdate();
 
     checkUser(ownerId);
-    const game     = activeGames.get(ownerId);
+    const game = activeGames.get(ownerId);
+
+    // Stop text collector so it doesn't fire on next question's chat
+    if (game?.msgCollector) { game.msgCollector.stop('button'); game.msgCollector = null; }
+
     const timeTaken = Date.now() - (interaction.message.createdTimestamp || Date.now());
-    let   msg       = '';
+    const isCorrect = result === 'true';
+    const embed     = interaction.message.embeds[0];
 
-    if (result === 'true') {
-        // ── Sax ──
-        const pts      = calcTimedScore(Math.min(timeTaken, GLOBAL_WAIT_MS));
-        const streak   = (game ? (game.currentStreak || 0) : 0) + 1;
-        const bonus    = getStreakBonus(streak);
-        const totalPts = pts + bonus;
-
-        if (game) {
-            game.currentStreak = streak;
-            game.bestStreak    = Math.max(game.bestStreak || 0, streak);
-            game.totalPoints   = (game.totalPoints || 0) + totalPts;
-            game.correctCount  = (game.correctCount || 0) + 1;
-        }
-
-        userData[ownerId].stats.soloCorrect++;
-        msg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTaken/1000).toFixed(1)}s`;
-    } else {
-        // ── Qalad ──
-        if (game) {
-            game.currentStreak = 0;
-        }
-        userData[ownerId].stats.soloWrong++;
-        userData[ownerId].iq = Math.max(0, (userData[ownerId].iq || 0) - 1);
-        msg = '❌ **QALAD** — **−1 IQ** · Streak: 0🔥';
-    }
-
-    userData[ownerId].stats.soloPlayed++;
-    saveData();
-
-    const updatedEmbed = EmbedBuilder.from(interaction.message.embeds[0])
-        .setFields({ name: 'Natiijo', value: msg });
-
-    await interaction.editReply({ embeds: [updatedEmbed], components: [] });
-
-    setTimeout(() => sendQuestion(interaction, qNum + 1, interaction.message), 1800);
+    await processAnswer(isCorrect, ownerId, game, timeTaken, embed, interaction.message, interaction, qNum);
 }
+
 
 // ── Leaderboard button handler ────────────────────────────────────────
 async function handleSoloLeaderboard(interaction) {

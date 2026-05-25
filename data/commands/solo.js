@@ -78,7 +78,20 @@ async function startSoloGame(message, count) {
     }
 
     activeGames.set(userId, { questions: picked, total: actualCount });
-    sendQuestion(message, 1);
+
+    // Start game in a thread so chat doesn't push questions up
+    try {
+        const thread = await message.channel.threads.create({
+            name: `🎯 Solo — ${message.author.username}`,
+            autoArchiveDuration: 60,
+        });
+        await thread.members.add(userId);
+        activeGames.get(userId).thread = thread;
+        await message.reply(`🎯 **${message.author.username}** — ciyaartaada ku bilow: ${thread}`);
+        sendQuestion({ author: { id: userId } }, 1);
+    } catch {
+        sendQuestion(message, 1);
+    }
 }
 
 module.exports = async function soloCommand(message, args) {
