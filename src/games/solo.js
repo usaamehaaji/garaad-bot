@@ -90,6 +90,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     const total         = game ? game.total : SOLO_DEFAULT_QUESTIONS;
 
     if (!game || qNumber > total) {
+        const originMsg = game?.originMsg ?? null;
         activeGames.delete(userId);
         checkUser(userId);
         markUserPlayed(userId);
@@ -139,8 +140,9 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
 
         if (currentMsg) await currentMsg.delete().catch(() => {});
         const fc = messageOrInteraction.channel;
+        const finishReply = originMsg ? { reply: { messageReference: originMsg.id, failIfNotExists: false } } : {};
         if (fc) {
-            await fc.send({ embeds: [finishEmbed], components: [row] });
+            await fc.send({ embeds: [finishEmbed], components: [row], ...finishReply });
         } else {
             await messageOrInteraction.reply({ embeds: [finishEmbed], components: [row] });
         }
@@ -214,8 +216,9 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
             const timeoutEmbed = EmbedBuilder.from(embed)
                 .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
             const tch = messageOrInteraction.channel;
+            const tRef = game?.originMsg ? { reply: { messageReference: game.originMsg.id, failIfNotExists: false } } : {};
             msg.delete().catch(() => {});
-            tch.send({ embeds: [timeoutEmbed] })
+            tch.send({ embeds: [timeoutEmbed], ...tRef })
                 .then(nm => setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, nm), 2000))
                 .catch(() => setTimeout(() => sendQuestion(messageOrInteraction, qNumber + 1, null), 2000));
         }
@@ -272,9 +275,11 @@ async function handleSoloAnswer(interaction) {
     const updatedEmbed = EmbedBuilder.from(interaction.message.embeds[0])
         .setFields({ name: 'Natiijo', value: msg });
 
-    const channel = interaction.channel;
+    const channel   = interaction.channel;
+    const originMsg = activeGames.get(ownerId)?.originMsg;
+    const replyOpt  = originMsg ? { reply: { messageReference: originMsg.id, failIfNotExists: false } } : {};
     await interaction.message.delete().catch(() => {});
-    const resultMsg = await channel.send({ embeds: [updatedEmbed] }).catch(() => null);
+    const resultMsg = await channel.send({ embeds: [updatedEmbed], ...replyOpt }).catch(() => null);
 
     setTimeout(() => sendQuestion(interaction, qNum + 1, resultMsg), 1800);
 }
