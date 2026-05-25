@@ -541,9 +541,33 @@ async function cmdRegister(message) {
 }
 
 async function sendRegistrationCode(user, replyTarget, gameChId) {
-    const uid     = user.id;
-    const code    = genCode();
-    const gCh     = gameChId || GAME_CHANNEL_ID;
+    const uid = user.id;
+    const gCh = gameChId || GAME_CHANNEL_ID;
+
+    // Already registered — resend existing code, don't generate a new one
+    if (tournamentRegistry.has(uid)) {
+        const existing = tournamentRegistry.get(uid);
+        try {
+            await user.send({
+                embeds: [new EmbedBuilder()
+                    .setTitle('🏁 Tartan — Code-kaaga Horay u Qaday')
+                    .setDescription(
+                        `⚠️ **Horay ayaad u diiwaangelisay!**\n\n` +
+                        `Code-gaagii hore weli shaqaynayaa:\n\n# \`${existing.code}\`\n\n` +
+                        `━━━━━━━━━━━━━━━━━━━━\n` +
+                        `**Marka admin game furo:**\n` +
+                        `1. Tag 💬 <#${gCh}>\n` +
+                        `2. Qor: \`${PREFIX}gal ${existing.code}\`\n\n` +
+                        `⚠️ **Code-kan ha u shegin qof kale — kuu gaarka ah!**`
+                    )
+                    .setColor('#f39c12')
+                    .setFooter({ text: 'Garaad Quiz Tournament' })],
+            });
+        } catch {}
+        return replyTarget?.reply({ content: '⚠️ **Horay ayaad u diiwaangelisay!** Code-gaagii hore ayaa DM-kaaga laguugu soo celiyay.', flags: 64 });
+    }
+
+    const code = genCode();
     tournamentRegistry.set(uid, { code, at: Date.now(), username: user.username });
     try {
         await user.send({
