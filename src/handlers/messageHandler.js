@@ -88,6 +88,7 @@ module.exports = function setupMessageHandler(client) {
 
             // ── Profile & Stats ──
             case 'profile':
+            case 'p':
                 return profileCmd(message);
 
             case 'statistics':
