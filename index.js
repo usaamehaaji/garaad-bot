@@ -70,6 +70,7 @@ const setupWeeklyLeaderboard    = require('./src/handlers/weeklyLeaderboard');
 const setupBroadcastScheduler   = require('./src/handlers/broadcastScheduler');
 const setupBackupScheduler      = require('./src/handlers/backupScheduler');
 const setupAutoUpdate           = require('./src/handlers/autoUpdateScheduler');
+const { restoreTournaments }    = require('./src/games/tournament');
 const { connectDB }             = require('./src/db');
 const { loadData }              = require('./src/store');
 const { loadEcon }              = require('./src/economy/econStore');
@@ -108,6 +109,7 @@ client.once('clientReady', () => {
     setupAutoUpdate();
     setupBackupScheduler();
     restorePredictions(client);
+    restoreTournaments(client).catch(e => console.error('[Tournament] Restore failed:', e.message));
 
     // Market auto-tick: update prices every 60s
     tickMarket();

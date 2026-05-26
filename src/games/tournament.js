@@ -40,6 +40,11 @@ const {
 } = require('../utils/questions');
 const { getAnswerOptions } = require('../utils/questionOptions');
 const {
+    saveTournamentState,
+    deleteTournamentState,
+    loadTournamentStates,
+} = require('../utils/tournamentPersist');
+const {
     PREFIX,
     GLOBAL_WAIT_MS,
     SOLO_FAST_MS,
@@ -100,6 +105,17 @@ function computeSurvivors(survivorIds, roundScoreMap, roundIdx) {
 // Helper: get state by guildId (falls back to old GAME_CHANNEL_ID key)
 function getState(guildId) {
     return activeTournament.get(guildId) || activeTournament.get(GAME_CHANNEL_ID);
+}
+
+// Persist state to MongoDB (fire-and-forget)
+function persist(state) {
+    if (!state?.guildId) return;
+    saveTournamentState(state, tournamentRegistry).catch(() => {});
+}
+
+function persistDelete(guildId) {
+    if (!guildId) return;
+    deleteTournamentState(guildId).catch(() => {});
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -255,6 +271,7 @@ async function handlePanelButton(interaction, action) {
         });
         state.announceMsgId = annMsg.id;
         state._regTimer = setTimeout(() => closeRegistration(state), REG_DURATION_MS);
+        persist(state);
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
@@ -274,6 +291,7 @@ async function handlePanelButton(interaction, action) {
             state.stage = 'initial';
             return interaction.reply({ content: '⚠️ Game channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
         }
+        persist(state);
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
@@ -302,6 +320,7 @@ async function handlePanelButton(interaction, action) {
         if (!ok) {
             return interaction.reply({ content: '⚠️ Game channel-ka la heyn waayay.', flags: MessageFlags.Ephemeral }).catch(() => {});
         }
+        persist(state);
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
@@ -328,6 +347,7 @@ async function handlePanelButton(interaction, action) {
         if (state?._regTimer) clearTimeout(state._regTimer);
         activeTournament.delete(guildId);
         activeTournament.delete(GAME_CHANNEL_ID);
+        persistDelete(guildId);
         return interaction.update({
             embeds: [new EmbedBuilder()
                 .setTitle('🛑 Tartan Waa La Joojiyay')
@@ -365,6 +385,7 @@ async function closeRegistration(state) {
         });
     } catch {}
 
+    persist(state);
     await openGamePhase(state.client, state.adminId, state).catch(() => {});
     await updateAdminPanel(state).catch(() => {});
 }
@@ -381,6 +402,7 @@ async function openGamePhase(client, adminId, state) {
     if (!gameChannel) return false;
 
     state.channel = gameChannel;
+    persist(state);
     const regCount = tournamentRegistry.size;
 
     await gameChannel.send({
@@ -501,6 +523,7 @@ async function cmdAnnounce(message) {
         _regTimer:            null,
     };
     activeTournament.set(guildId, state);
+    persist(state);
 
     const panelMsg = await message.channel.send({
         embeds:     [buildAdminPanelEmbed(state)],
@@ -508,6 +531,7 @@ async function cmdAnnounce(message) {
     });
     state.panelMsgId     = panelMsg.id;
     state.panelChannelId = message.channel.id;
+    persist(state);
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -629,6 +653,7 @@ async function cmdJoin(message, args) {
     state.players.add(message.author.id);
     state.totalScores[message.author.id] = 0;
     checkUser(message.author.id);
+    persist(state);
 
     const list = [...state.players].map((id, i) => `${i + 1}. <@${id}>`).join('\n');
     return message.reply(
@@ -677,6 +702,7 @@ async function cmdAdminNext(message) {
         }
         state.survivors = new Set(state.players);
         state.roundIdx  = 1;
+        state.channel   = gameChannel;
         return beginRound(state, gameChannel);
     }
     if (state.stage === 'pause') {
@@ -685,9 +711,11 @@ async function cmdAdminNext(message) {
         state._nextSurvivors = null;
         if (state.survivors.size === 0) {
             activeTournament.delete(guildId);
+            persistDelete(guildId);
             return gameChannel.send('❌ Cidna kuma hartay — tartan waa la joojiyay.');
         }
         state.roundIdx += 1;
+        state.channel   = gameChannel;
         return beginRound(state, gameChannel);
     }
     return message.channel.send('⚠️ Hadda admin_next looma isticmaali karo — sug wareeggu dhammaado.');
@@ -704,6 +732,7 @@ async function cmdStop(message) {
     if (state?._regTimer) clearTimeout(state._regTimer);
     activeTournament.delete(guildId);
     activeTournament.delete(GAME_CHANNEL_ID);
+    persistDelete(guildId);
     return message.reply('🛑 **Tartan-ka waa la joojiyay.**');
 }
 
@@ -788,6 +817,7 @@ async function beginRound(state, channel) {
     state.roundScores        = {};
     for (const id of state.survivors) state.roundScores[id] = 0;
     state.stage = 'play';
+    persist(state);
 
     for (const id of state.survivors) markUserPlayed(id);
 
@@ -949,6 +979,7 @@ async function sendQuestion(state) {
 
         await msg.edit({ embeds: [sumEmbed], components: [] }).catch(() => {});
         state.currentQ += 1;
+        persist(state);
         setTimeout(() => sendQuestion(state), 2500);
     });
 }
@@ -962,6 +993,7 @@ async function endRoundPause(state) {
     state._nextSurvivors = nextSurvivors;
     state.stage          = 'pause';
     state.roundScores    = {};
+    persist(state);
     if (!channel) return;
 
     const eliminated = [...state.survivors].filter(id => !nextSurvivors.includes(id));
@@ -1048,6 +1080,7 @@ async function finishTournament(state) {
     const guildId = state.guildId || GAME_CHANNEL_ID;
     activeTournament.delete(guildId);
     activeTournament.delete(GAME_CHANNEL_ID);
+    persistDelete(guildId);
 
     const sorted = [...state.survivors]
         .map(id => [id, state.totalScores[id] || 0])
@@ -1140,6 +1173,120 @@ async function finishTournament(state) {
     }
 }
 
+// ─────────────────────────────────────────────────────────────────────
+// Restore tournaments from MongoDB after bot restart
+// ─────────────────────────────────────────────────────────────────────
+async function restoreTournaments(client) {
+    let docs;
+    try {
+        docs = await loadTournamentStates();
+    } catch (e) {
+        console.error('[Tournament] Restore load error:', e.message);
+        return;
+    }
+    if (!docs || docs.length === 0) return;
+
+    let restored = 0;
+    for (const doc of docs) {
+        if (!doc.guildId || !doc.stage) continue;
+
+        // Rebuild registry for this guild
+        if (Array.isArray(doc.registry)) {
+            for (const [uid, entry] of doc.registry) {
+                if (!tournamentRegistry.has(uid)) {
+                    tournamentRegistry.set(uid, entry);
+                }
+            }
+        }
+
+        const state = {
+            guildId:              doc.guildId,
+            announceChannelId:    doc.announceChannelId    || ANNOUNCE_CHANNEL_ID,
+            gameChannelId:        doc.gameChannelId        || GAME_CHANNEL_ID,
+            vcChannelId:          doc.vcChannelId          || VC_CHANNEL_ID,
+            adminId:              doc.adminId              || null,
+            panelChannelId:       doc.panelChannelId       || null,
+            panelMsgId:           doc.panelMsgId           || null,
+            announceMsgId:        doc.announceMsgId        || null,
+            registrationDeadline: doc.registrationDeadline || null,
+            stage:                doc.stage,
+            roundIdx:             doc.roundIdx             || 0,
+            currentQ:             doc.currentQ             || 0,
+            questionOffset:       doc.questionOffset       || 0,
+            players:              new Set(doc.players      || []),
+            survivors:            new Set(doc.survivors    || []),
+            totalScores:          doc.totalScores          || {},
+            roundScores:          doc.roundScores          || {},
+            prevRoundQuestions:   doc.prevRoundQuestions   || [],
+            _nextSurvivors:       doc._nextSurvivors       || null,
+            questions:            doc.questions            || [],
+            channel:              null,
+            _regTimer:            null,
+            client,
+        };
+
+        // Fetch the game channel
+        if (state.gameChannelId) {
+            state.channel = await client.channels.fetch(state.gameChannelId).catch(() => null);
+        }
+
+        if (state.stage === 'registration') {
+            const remaining = state.registrationDeadline
+                ? state.registrationDeadline - Date.now()
+                : 0;
+            if (remaining > 0) {
+                // Restart registration timer for remaining time
+                state._regTimer = setTimeout(() => closeRegistration(state), remaining);
+                console.log(`[Tournament] ↩️  Registration timer restarted (${Math.round(remaining / 60000)}min left)`);
+            } else {
+                // Deadline passed during downtime — close registration
+                state.stage = 'join';
+            }
+        }
+
+        if (state.stage === 'play') {
+            // Can't resume mid-round (collectors dead) — pause and let admin restart
+            state.stage = 'pause';
+            // Don't eliminate anyone from an interrupted round; all current survivors advance
+            if (!state._nextSurvivors) {
+                state._nextSurvivors = [...state.survivors];
+            }
+            // Undo the roundIdx increment that will happen when admin clicks next
+            // so the same round number re-runs (e.g. Final stays Final)
+            if (state.roundIdx === 3) state.roundIdx = 2;
+
+            if (state.channel) {
+                await state.channel.send({
+                    embeds: [new EmbedBuilder()
+                        .setTitle('⚠️ Bot Wuu Dib Bilaabmay — Wareeggu Wuu Joojiyay')
+                        .setColor('#e74c3c')
+                        .setDescription(
+                            `Bot restart ayaa dhacay ciyaarta dhex maraysay.\n\n` +
+                            `**Wareegga:** ${ROUND_LABELS[state.roundIdx]?.name || `Wareeg ${state.roundIdx}`}\n` +
+                            `**Tartamayaasha:** ${state.survivors.size} qof\n\n` +
+                            `Admin ayaa wareegga dib u bilaabi doona — sug farriin cusub!`
+                        )
+                    ],
+                }).catch(() => {});
+            }
+        }
+
+        activeTournament.set(doc.guildId, state);
+        restored++;
+
+        // Refresh admin panel so it shows current state
+        await updateAdminPanel(state).catch(() => {});
+        // Re-persist with updated stage
+        persist(state);
+
+        console.log(`[Tournament] ✅ Restored guild ${doc.guildId} — stage: ${state.stage}, round: ${state.roundIdx}, survivors: ${state.survivors.size}`);
+    }
+
+    if (restored > 0) {
+        console.log(`[Tournament] ✅ ${restored} tournament(s) restored from database`);
+    }
+}
+
 module.exports = {
     cmdAnnounce,
     cmdRegister,
@@ -1152,6 +1299,7 @@ module.exports = {
     openGamePhase,
     sendRegistrationCode,
     handlePanelButton,
+    restoreTournaments,
     GAME_CHANNEL_ID,
     ANNOUNCE_CHANNEL_ID,
 };
