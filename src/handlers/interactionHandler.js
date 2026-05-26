@@ -49,6 +49,47 @@ module.exports = function setupInteractionHandler(client) {
             const { iqRow, balanceEmbed } = require('../../data/commands/bank');
             const { saveData } = require('../utils/helpers');
 
+            // ── Treasury modals (owner only) ──
+            if (interaction.customId.startsWith('trs_m_')) {
+                if (interaction.user.id !== OWNER_ID)
+                    return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
+                const { getTreasury, setTreasury, topUpTreasury, saveEcon } = require('../economy/econStore');
+                const { fmt } = require('../utils/helpers');
+                const { buildTreasuryEmbed, treasuryRow } = require('../../data/commands/economy/treasuryCmd');
+                const rawAmount = interaction.fields.getTextInputValue('amount').replace(/,/g, '').trim();
+                const amount    = parseFloat(rawAmount);
+                const t         = getTreasury();
+
+                if (interaction.customId.startsWith('trs_m_add_')) {
+                    if (isNaN(amount) || amount <= 0)
+                        return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                    topUpTreasury(amount);
+                    saveEcon();
+                    await interaction.update({ embeds: [buildTreasuryEmbed()], components: [treasuryRow(OWNER_ID)] });
+                    return;
+                }
+
+                if (interaction.customId.startsWith('trs_m_reduce_')) {
+                    if (isNaN(amount) || amount <= 0)
+                        return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                    if (amount > t.balance)
+                        return interaction.reply({ content: `⚠️ Xaddadkaas ka weyn khaznadda. Hadda: **₿ ${fmt(t.balance)}**`, flags: MessageFlags.Ephemeral });
+                    t.balance -= amount;
+                    saveEcon();
+                    await interaction.update({ embeds: [buildTreasuryEmbed()], components: [treasuryRow(OWNER_ID)] });
+                    return;
+                }
+
+                if (interaction.customId.startsWith('trs_m_set_')) {
+                    if (isNaN(amount) || amount < 0)
+                        return interaction.reply({ content: '⚠️ Xaddad sax ah geli (0 ama ka weyn).', flags: MessageFlags.Ephemeral });
+                    setTreasury(amount);
+                    saveEcon();
+                    await interaction.update({ embeds: [buildTreasuryEmbed()], components: [treasuryRow(OWNER_ID)] });
+                    return;
+                }
+            }
+
             if (interaction.customId.startsWith('iq_dhigo_modal_')) {
                 const ownerId = interaction.customId.replace('iq_dhigo_modal_', '');
                 checkUser(ownerId);
@@ -1111,6 +1152,30 @@ module.exports = function setupInteractionHandler(client) {
 
         const id = interaction.customId;
 
+        function buildPlayersPageRow(page, totalPages, ownerId) {
+            return new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`admin_eco_pg_${page - 1}_${ownerId}`)
+                    .setLabel('◀ Prev')
+                    .setStyle(ButtonStyle.Secondary)
+                    .setDisabled(page <= 0),
+                new ButtonBuilder()
+                    .setCustomId(`admin_eco_pg_noop_${ownerId}`)
+                    .setLabel(`${page + 1} / ${totalPages}`)
+                    .setStyle(ButtonStyle.Secondary)
+                    .setDisabled(true),
+                new ButtonBuilder()
+                    .setCustomId(`admin_eco_pg_${page + 1}_${ownerId}`)
+                    .setLabel('Next ▶')
+                    .setStyle(ButtonStyle.Secondary)
+                    .setDisabled(page >= totalPages - 1),
+                new ButtonBuilder()
+                    .setCustomId(`close_admin_help_${ownerId}`)
+                    .setLabel('✖ Close')
+                    .setStyle(ButtonStyle.Danger),
+            );
+        }
+
         // ── Help tabs: Education / Economy / Other ──
         if (id.startsWith('help_edu_')) {
             const ownerId = id.replace('help_edu_', '');
@@ -1329,8 +1394,24 @@ module.exports = function setupInteractionHandler(client) {
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
             const { buildAllPlayersEmbed } = require('../../data/commands/admin/adminEconPanel');
-            const { getRows } = require('../../data/commands/admin/adminHelpPanel');
-            return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: getRows(ownerId) });
+            const { econData: eData } = require('../economy/econStore');
+            const totalPages = Math.max(1, Math.ceil(Object.keys(eData).filter(k => /^\d{17,19}$/.test(k)).length / 10));
+            return interaction.update({ embeds: [buildAllPlayersEmbed(0)], components: [buildPlayersPageRow(0, totalPages, ownerId)] });
+        }
+
+        // ── Admin: Players page navigation ──
+        if (id.startsWith('admin_eco_pg_')) {
+            const parts   = id.replace('admin_eco_pg_', '').split('_');
+            const page    = parseInt(parts[0]);
+            const ownerId = parts.slice(1).join('_');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const { buildAllPlayersEmbed } = require('../../data/commands/admin/adminEconPanel');
+            const { econData: eData } = require('../economy/econStore');
+            const totalPages = Math.max(1, Math.ceil(Object.keys(eData).filter(k => /^\d{17,19}$/.test(k)).length / 10));
+            return interaction.update({ embeds: [buildAllPlayersEmbed(page)], components: [buildPlayersPageRow(page, totalPages, ownerId)] });
         }
 
         // ── Admin Econ: Loans button ──
@@ -1710,6 +1791,33 @@ module.exports = function setupInteractionHandler(client) {
                     .setFooter({ text: 'Garaad Bot — Thank you for voting!' })],
                 components: [],
             });
+        }
+
+        // ── Treasury buttons (owner only) ──
+        if (id.startsWith('trs_add_') || id.startsWith('trs_reduce_') || id.startsWith('trs_set_')) {
+            if (interaction.user.id !== OWNER_ID)
+                return interaction.reply({ content: '⛔ Owner kaliya.', flags: MessageFlags.Ephemeral });
+            const { getTreasury } = require('../economy/econStore');
+            const { fmt } = require('../utils/helpers');
+            const t = getTreasury();
+            let kind, label, placeholder;
+            if (id.startsWith('trs_add_'))    { kind = 'add';    label = '📥 Ku dar BTC';     placeholder = 'Tusaale: 1000000'; }
+            if (id.startsWith('trs_reduce_')) { kind = 'reduce'; label = '📤 Ka jar BTC';     placeholder = `Max: ${fmt(t.balance)}`; }
+            if (id.startsWith('trs_set_'))    { kind = 'set';    label = '🎯 Xaddad cusub set'; placeholder = `Hadda: ${fmt(t.balance)}`; }
+            const modal = new ModalBuilder()
+                .setCustomId(`trs_m_${kind}_${OWNER_ID}`)
+                .setTitle(`🏛️ Treasury — ${label}`);
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder()
+                        .setCustomId('amount')
+                        .setLabel(label)
+                        .setStyle(TextInputStyle.Short)
+                        .setPlaceholder(placeholder)
+                        .setRequired(true)
+                )
+            );
+            return interaction.showModal(modal);
         }
 
         // ── Xir (Close) ──

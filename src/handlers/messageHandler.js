@@ -32,6 +32,7 @@ const cashflipCmd     = require('../../data/commands/economy/cashflip');
 const giveCmd         = require('../../data/commands/economy/give');
 const richCmd         = require('../../data/commands/economy/rich');
 const ebankCmd        = require('../../data/commands/economy/ebank');
+const treasuryCmdFn   = require('../../data/commands/economy/treasuryCmd');
 
 const shaqoCmd        = require('../../data/commands/economy/shaqo');
 const bankListCmd     = require('../../data/commands/economy/bankList');
@@ -145,6 +146,10 @@ module.exports = function setupMessageHandler(client) {
             case 'ebank':
             case 'bank':
                 return ebankCmd(message, args);
+
+            case 'treasury':
+            case 'khaznad':
+                return treasuryCmdFn(message);
 
             // ── Kale ──
             case 'cilada':
