@@ -4,7 +4,7 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData } = require('../../src/store');
-const { checkUser, getLevel, getDisplayTitle } = require('../../src/utils/helpers');
+const { checkUser, getLevel } = require('../../src/utils/helpers');
 
 module.exports = async function profileCommand(message) {
     const target = message.mentions.users.first() || message.author;
@@ -13,14 +13,11 @@ module.exports = async function profileCommand(message) {
 
     const level     = getLevel(data.iq);
     const nextLvlIq = (level + 1) * 200;
-    const dispTitle = getDisplayTitle(target.id);
-    const titleTag  = dispTitle ? `[${dispTitle}] ` : '';
 
     const fields = [
         { name: '🧠 IQ',         value: `**${data.iq}**`,          inline: true },
         { name: '📈 Level',      value: `**${level}**`,             inline: true },
         { name: '🎯 Level xiga', value: `**${nextLvlIq} IQ**`,     inline: true },
-        { name: '🏷️ Cinwaan',   value: dispTitle ? `**${dispTitle}**` : '—', inline: false },
     ];
 
     const embed = new EmbedBuilder()

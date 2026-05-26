@@ -76,9 +76,7 @@ function buildEcoEmbed() {
 
             `**🎮 Ciyaaraha**\n` +
             `**\`${PREFIX}trade\`** — Suuqa: BTC UP/DOWN saadaal\n` +
-            `**\`${PREFIX}ef 300 up\`** ama **\`down\`** — 50/50: WIN 2× ama LOSS\n` +
-            `**\`${PREFIX}shop\`** — Shop (titles & alaabada)\n` +
-            `**\`${PREFIX}etitle\`** — Titleshaada arag ama xidh\n\n` +
+            `**\`${PREFIX}ef 300 up\`** ama **\`down\`** — 50/50: WIN 2× ama LOSS\n\n` +
 
             `**🤝 Bulshada**\n` +
             `**\`${PREFIX}give @user btc 200\`** — BTC u dir player\n` +
