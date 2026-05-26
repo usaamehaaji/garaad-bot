@@ -7,7 +7,8 @@ const { handleSoloAnswer, handleSoloLeaderboard } = require('../games/solo');
 const { startDuelGame }     = require('../games/duel');
 const { beginQuizGame, refreshLobby: refreshQuizLobby } = require('../games/quiz');
 const { beginRound, openGamePhase, sendRegistrationCode, handlePanelButton, GAME_CHANNEL_ID, ANNOUNCE_CHANNEL_ID } = require('../games/tournament');
-const { userData, activeQuiz, activeTournament, isUserBusy, tournamentRegistry } = require('../store');
+const { deleteTournamentState } = require('../utils/tournamentPersist');
+const { userData, activeQuiz, activeDuels, activeTournament, isUserBusy, tournamentRegistry } = require('../store');
 const { checkUser }         = require('../utils/helpers');
 const { isAdmin }           = require('../utils/admin');
 const { QUIZ_MIN_PLAYERS, QUIZ_MAX_PLAYERS, DUEL_STAKE_IQ, TOURNAMENT_MIN_PLAYERS, TOURNAMENT_R1_QUESTIONS, TOURNAMENT_R2_QUESTIONS, TOURNAMENT_FINAL_QUESTIONS } = require('../config');
@@ -2519,28 +2520,6 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
-        // ── Tournament Rules button ──
-        if (id === 'tournament_rules') {
-            return interaction.reply({
-                embeds: [new EmbedBuilder()
-                    .setTitle('📖 Xeerarka Tartanka')
-                    .setColor('#3498db')
-                    .setDescription(
-                        `**1.** Diiwaan geli badhanka hoose — code sir ah ayaad helaysaa DM-kaaga.\n` +
-                        `**2.** Marka game-ka la furo, code-kaaga ku qor channel-ka ciyaaraha.\n` +
-                        `**3.** Tartanku wuxuu ka koobnaan doonaa 3 wareeg — su'aalo badan iyo xawaare.\n` +
-                        `**4.** Mid walba waxaa la siinayaa isku xigta su'aalo — qofka ugu dhaqso badan\n` +
-                        `   oo jawaabahaas ugu badan saxna ayaa guuleysta.\n` +
-                        `**5.** Xil gaar ah: ha gashan — jawaab wakhtigeeda ah.\n\n` +
-                        `🥇 **Kaalinta 1aad** — $15 + 🏆 Champion Title\n` +
-                        `🥈 **Kaalinta 2aad** — $10\n` +
-                        `🥉 **Kaalinta 3aad** — $5`
-                    )
-                ],
-                flags: MessageFlags.Ephemeral,
-            }).catch(() => {});
-        }
-
         // ── Tournament Register button ──
         if (id === 'tournament_register') {
             const guildId = interaction.guildId;
@@ -2606,6 +2585,7 @@ module.exports = function setupInteractionHandler(client) {
             if (state?._regTimer) clearTimeout(state._regTimer);
             activeTournament?.delete(guildId);
             activeTournament?.delete(GAME_CHANNEL_ID);
+            deleteTournamentState(guildId).catch(() => {});
             return interaction.update({
                 embeds: [new EmbedBuilder()
                     .setTitle('🛑 Tartan Waa La Joojiyay')
@@ -2643,6 +2623,8 @@ module.exports = function setupInteractionHandler(client) {
             state.survivors = new Set(state.players);
             state.roundIdx  = 1;
             state.channel   = gameChannel;
+            // Disable this button to prevent double-clicks
+            interaction.message.edit({ components: [] }).catch(() => {});
             return beginRound(state, gameChannel);
         }
 
@@ -2693,6 +2675,7 @@ module.exports = function setupInteractionHandler(client) {
                 state._nextSurvivors = null;
                 if (state.survivors.size === 0) {
                     activeTournament.delete(guildId);
+                    deleteTournamentState(guildId).catch(() => {});
                     return interaction.reply({
                         content: '❌ Cidna kuma hartay — tartan waa la joojiyay.',
                         flags: MessageFlags.Ephemeral,
@@ -2795,6 +2778,25 @@ module.exports = function setupInteractionHandler(client) {
             const mode = id === 'quiz_pts_xp' ? 'xp' : 'iq';
             const { text } = exchangeQuizPoints(interaction.user.id, mode);
             return interaction.reply({ content: text, flags: MessageFlags.Ephemeral });
+        }
+
+        // ── Catch-all: quiz answer buttons orphaned after bot restart ──
+        if (id.startsWith('quiz_a_')) {
+            const channelId = id.split('_')[2];
+            if (activeQuiz.get(channelId)) return; // live quiz — collector handles it
+            return interaction.reply({
+                content: '⚠️ Quiz-kii wuu dhamaaday ama bot restart ayaa dhacay. Bilow cusub: `?quiz`',
+                flags: MessageFlags.Ephemeral,
+            }).catch(() => {});
+        }
+
+        // ── Catch-all: duel question buttons orphaned after bot restart ──
+        if (id.startsWith('duel_q_')) {
+            if (activeDuels.get(interaction.channelId)) return; // live duel — collector handles it
+            return interaction.reply({
+                content: '⚠️ Duel-kii wuu dhamaaday ama bot restart ayaa dhacay. Bilow cusub: `?duel`',
+                flags: MessageFlags.Ephemeral,
+            }).catch(() => {});
         }
 
         // ── Catch-all: tournament answer buttons orphaned after bot restart ──
