@@ -1189,7 +1189,7 @@ module.exports = function setupInteractionHandler(client) {
         }
 
         // ── Admin panel (unified — covers both aqoon + eco tab buttons) ──
-        if (id.startsWith('admin_aqoon_') || (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_') && !id.startsWith('admin_eco_resetall_') && !id.startsWith('admin_eco_tax_'))) {
+        if (id.startsWith('admin_aqoon_') || (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_') && !id.startsWith('admin_eco_resetall_') && !id.startsWith('admin_eco_tax_') && !id.startsWith('admin_eco_pg_'))) {
             const ownerId = id.startsWith('admin_aqoon_') ? id.replace('admin_aqoon_', '') : id.replace('admin_eco_', '');
             if (interaction.user.id !== ownerId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
