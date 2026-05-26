@@ -77,7 +77,7 @@ async function startSoloGame(message, count) {
         );
     }
 
-    activeGames.set(userId, { questions: picked, total: actualCount, originMsg: message });
+    activeGames.set(userId, { questions: picked, total: actualCount, originMsg: message, channelId: message.channel.id });
     sendQuestion(message, 1);
 }
 

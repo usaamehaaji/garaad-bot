@@ -2780,19 +2780,37 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.reply({ content: text, flags: MessageFlags.Ephemeral });
         }
 
-        // ── Catch-all: quiz answer buttons orphaned after bot restart ──
+        // ── Catch-all: quiz answer buttons ──
         if (id.startsWith('quiz_a_')) {
-            const channelId = id.split('_')[2];
-            if (activeQuiz.get(channelId)) return; // live quiz — collector handles it
+            const parts     = id.split('_');
+            const channelId = parts[2];
+            const clickedQ  = parseInt(parts[3]);
+            const qState    = activeQuiz.get(channelId);
+            if (qState) {
+                // Game is active — only let current question through to collector
+                if (clickedQ === qState.currentQ) return;
+                return interaction.reply({
+                    content: '⚠️ Su\'aashaas waa hore — raadi su\'aasha cusub.',
+                    flags: MessageFlags.Ephemeral,
+                }).catch(() => {});
+            }
             return interaction.reply({
                 content: '⚠️ Quiz-kii wuu dhamaaday ama bot restart ayaa dhacay. Bilow cusub: `?quiz`',
                 flags: MessageFlags.Ephemeral,
             }).catch(() => {});
         }
 
-        // ── Catch-all: duel question buttons orphaned after bot restart ──
+        // ── Catch-all: duel question buttons ──
         if (id.startsWith('duel_q_')) {
-            if (activeDuels.get(interaction.channelId)) return; // live duel — collector handles it
+            const clickedQ = parseInt(id.split('_')[2]);
+            const dState   = activeDuels.get(interaction.channelId);
+            if (dState) {
+                if (clickedQ === dState.currentQ) return; // let collector handle it
+                return interaction.reply({
+                    content: '⚠️ Su\'aashaas waa hore — raadi su\'aasha cusub.',
+                    flags: MessageFlags.Ephemeral,
+                }).catch(() => {});
+            }
             return interaction.reply({
                 content: '⚠️ Duel-kii wuu dhamaaday ama bot restart ayaa dhacay. Bilow cusub: `?duel`',
                 flags: MessageFlags.Ephemeral,

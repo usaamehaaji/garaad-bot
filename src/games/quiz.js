@@ -34,6 +34,11 @@ const {
     HOST_DAILY_LIMIT,
     QUIZ_POINTS_TO_XP, QUIZ_POINTS_PER_IQ,
 } = require('../config');
+const { saveQuizState, loadAllQuizStates, deleteQuizState } = require('../utils/gamePersist');
+
+function persistQuiz(state) {
+    saveQuizState(state.channelId, state).catch(() => {});
+}
 
 // ── Dhibco ku xidhan xawliga (sida solo + tartan) ────────────────────
 // < 5s   → 40 dhibcood (max)
@@ -251,6 +256,8 @@ async function sendQuizQuestion(state) {
     if (!activeQuiz.has(state.channelId)) return;
     const totalQ = state.questionCount || QUIZ_QUESTION_COUNT;
     if (state.currentQ >= totalQ) return finishQuiz(state);
+    // Persist before sending so bot restart can resume from this question
+    persistQuiz(state);
 
     const channel = state.message?.channel;
     if (!channel) { activeQuiz.delete(state.channelId); return; }
@@ -386,6 +393,7 @@ async function sendQuizQuestion(state) {
 // ─────────────────────────────────────────────────────────────────────
 async function finishQuiz(state) {
     activeQuiz.delete(state.channelId);
+    deleteQuizState(state.channelId).catch(() => {});
     const channel = state.message?.channel;
     if (!channel) return;
 
@@ -447,4 +455,53 @@ async function finishQuiz(state) {
     await channel.send({ embeds: [embed], components: [exchRow], ...fOpt });
 }
 
-module.exports = { startQuizLobby, refreshLobby, beginQuizGame, buildLobbyButtons, buildLobbyEmbed };
+// ── Startup restore: reload all saved quiz games and resend current question ──
+async function restoreQuizGames(client) {
+    const docs = await loadAllQuizStates().catch(() => []);
+    if (!docs.length) return;
+
+    let restored = 0;
+    for (const doc of docs) {
+        // Skip stale games (>6h — quiz games are short-lived)
+        if (Date.now() - doc.savedAt > 6 * 60 * 60 * 1000) {
+            deleteQuizState(doc.channelId).catch(() => {});
+            continue;
+        }
+        if (activeQuiz.has(doc.channelId)) continue;
+        if (!doc.channelId || !doc.questions?.length) {
+            deleteQuizState(doc.channelId).catch(() => {});
+            continue;
+        }
+
+        const channel = await client.channels.fetch(doc.channelId).catch(() => null);
+        if (!channel) {
+            deleteQuizState(doc.channelId).catch(() => {});
+            continue;
+        }
+
+        const state = {
+            hostId:        doc.hostId,
+            channelId:     doc.channelId,
+            questionCount: doc.questionCount,
+            players:       new Set(doc.players || []),
+            scores:        doc.scores          || {},
+            questions:     doc.questions        || [],
+            currentQ:      doc.currentQ         || 0,
+            started:       true,
+            message:       { channel },
+            lobbyTimer:    null,
+            originMsg:     null,
+        };
+        activeQuiz.set(doc.channelId, state);
+
+        await sendQuizQuestion(state).catch(e => {
+            console.error(`[Quiz Restore] Failed for channel ${doc.channelId}:`, e.message);
+            activeQuiz.delete(doc.channelId);
+        });
+        restored++;
+        console.log(`[Quiz] ✅ Restored quiz in channel ${doc.channelId} at Q${doc.currentQ}`);
+    }
+    if (restored > 0) console.log(`[Quiz] ✅ ${restored} quiz game(s) restored from database`);
+}
+
+module.exports = { startQuizLobby, refreshLobby, beginQuizGame, buildLobbyButtons, buildLobbyEmbed, restoreQuizGames };

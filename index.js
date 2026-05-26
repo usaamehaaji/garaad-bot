@@ -71,6 +71,9 @@ const setupBroadcastScheduler   = require('./src/handlers/broadcastScheduler');
 const setupBackupScheduler      = require('./src/handlers/backupScheduler');
 const setupAutoUpdate           = require('./src/handlers/autoUpdateScheduler');
 const { restoreTournaments }    = require('./src/games/tournament');
+const { restoreSoloGames }      = require('./src/games/solo');
+const { restoreQuizGames }      = require('./src/games/quiz');
+const { restoreDuelGames }      = require('./src/games/duel');
 const { connectDB }             = require('./src/db');
 const { loadData }              = require('./src/store');
 const { loadEcon }              = require('./src/economy/econStore');
@@ -110,6 +113,9 @@ client.once('clientReady', () => {
     setupBackupScheduler();
     restorePredictions(client);
     restoreTournaments(client).catch(e => console.error('[Tournament] Restore failed:', e.message));
+    restoreSoloGames(client).catch(e => console.error('[Solo] Restore failed:', e.message));
+    restoreQuizGames(client).catch(e => console.error('[Quiz] Restore failed:', e.message));
+    restoreDuelGames(client).catch(e => console.error('[Duel] Restore failed:', e.message));
 
     // Market auto-tick: update prices every 60s
     tickMarket();

@@ -22,6 +22,18 @@ const {
     STREAK_BONUS_10,
 } = require('../config');
 const { getAnswerOptions } = require('../utils/questionOptions');
+const {
+    saveSoloState,
+    loadSoloState,
+    loadAllSoloStates,
+    deleteSoloState,
+} = require('../utils/gamePersist');
+
+function persistSolo(userId) {
+    const game = activeGames.get(userId);
+    if (!game) return;
+    saveSoloState(userId, game).catch(() => {});
+}
 
 // ── Xisaabi dhibcaha ku xidhan xawliga ──────────────────────────────
 // < 5s   → max 40 dhibcood
@@ -58,7 +70,6 @@ function buildLeaderboardEmbed(userId, totalPoints, questionsCount) {
         return `${medal} <@${u.id}> — **${u.iq} IQ**${isMe}`;
     }).join('\n');
 
-    // Haddii user-ku top 10 ku jiro, ka muuji goobtiisa
     let rankLine = '';
     if (rank > 10) {
         rankLine = `\n\n📍 **Goobtagaadu waa:** #${rank} / ${total} — **${myIq} IQ**`;
@@ -92,6 +103,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     if (!game || qNumber > total) {
         const originMsg = game?.originMsg ?? null;
         activeGames.delete(userId);
+        deleteSoloState(userId).catch(() => {}); // clean up DB
         checkUser(userId);
         markUserPlayed(userId);
 
@@ -152,6 +164,8 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
 
     const q = game.questions[qNumber - 1];
     game.currentQ = qNumber;
+    // Persist: if bot restarts while this question is showing, resume here
+    persistSolo(userId);
 
     markSeenForGame(userId, 'solo', q._idx);
     saveData();
@@ -159,6 +173,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
     const entries = getAnswerOptions(q);
     if (entries.length === 0) {
         activeGames.delete(userId);
+        deleteSoloState(userId).catch(() => {});
         return messageOrInteraction.reply?.({ content: '⚠️ Su\'aal aan la fahmin (faylka su\'aalahooda).' });
     }
 
@@ -208,12 +223,20 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
 
     collector.on('end', (collected) => {
         if (collected.size !== 0) return;
+        // Guard: if the player already answered this question via an old button (on-demand restore path),
+        // game.currentQ will have advanced — skip this timeout to avoid double-processing
+        const g = activeGames.get(userId);
+        if (!g || g.currentQ !== qNumber) return;
+
         checkUser(userId);
-        if (!activeGames.has(userId)) return;
-        game.currentStreak = 0;
+        g.currentStreak = 0;
         userData[userId].stats.soloWrong++;
         userData[userId].iq = Math.max(0, (userData[userId].iq || 0) - 1);
         saveData();
+        // Advance before next question so guard works
+        g.currentQ = qNumber + 1;
+        persistSolo(userId);
+
         const timeoutEmbed = EmbedBuilder.from(embed)
             .setFields({ name: 'Natiijo', value: '⏰ Wakhti dhammaaday — **−1 IQ** · Streak: 0' });
         activeMsg.delete().catch(() => {});
@@ -235,10 +258,37 @@ async function handleSoloAnswer(interaction) {
     }
 
     checkUser(ownerId);
-    const game = activeGames.get(ownerId);
+    let game = activeGames.get(ownerId);
 
     if (!game) {
-        return interaction.reply({ content: '⚠️ Ciyaartii waa dhacday — bot restart ayaa dhacay. Bilow mar kale: `?solo`', flags: 64 }).catch(() => {});
+        // On-demand restore from DB (fallback when startup restore didn't run or failed)
+        const saved = await loadSoloState(ownerId);
+        if (!saved || Date.now() - saved.savedAt > 24 * 60 * 60 * 1000) {
+            return interaction.reply({
+                content: '⚠️ Ciyaartii waa dhacday — bot restart ayaa dhacay. Bilow mar kale: `?solo`',
+                flags: 64,
+            }).catch(() => {});
+        }
+        game = {
+            questions:     saved.questions     || [],
+            total:         saved.total         || 0,
+            currentQ:      saved.currentQ      || 1,
+            totalPoints:   saved.totalPoints   || 0,
+            correctCount:  saved.correctCount  || 0,
+            bestStreak:    saved.bestStreak    || 0,
+            currentStreak: saved.currentStreak || 0,
+            channelId:     saved.channelId,
+            originMsg:     null,
+        };
+        activeGames.set(ownerId, game);
+    }
+
+    // Guard: reject stale buttons (old question after restart or double-click)
+    if (qNum !== game.currentQ) {
+        return interaction.reply({
+            content: '⚠️ Su\'aal hore ayaad riixday — raadi su\'aasha cusub.',
+            flags: 64,
+        }).catch(() => {});
     }
 
     await interaction.deferUpdate();
@@ -248,24 +298,20 @@ async function handleSoloAnswer(interaction) {
     if (result === 'true') {
         // ── Sax ──
         const pts      = calcTimedScore(Math.min(timeTaken, GLOBAL_WAIT_MS));
-        const streak   = (game ? (game.currentStreak || 0) : 0) + 1;
+        const streak   = (game.currentStreak || 0) + 1;
         const bonus    = getStreakBonus(streak);
         const totalPts = pts + bonus;
 
-        if (game) {
-            game.currentStreak = streak;
-            game.bestStreak    = Math.max(game.bestStreak || 0, streak);
-            game.totalPoints   = (game.totalPoints || 0) + totalPts;
-            game.correctCount  = (game.correctCount || 0) + 1;
-        }
+        game.currentStreak = streak;
+        game.bestStreak    = Math.max(game.bestStreak || 0, streak);
+        game.totalPoints   = (game.totalPoints || 0) + totalPts;
+        game.correctCount  = (game.correctCount || 0) + 1;
 
         userData[ownerId].stats.soloCorrect++;
         msg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTaken/1000).toFixed(1)}s`;
     } else {
         // ── Qalad ──
-        if (game) {
-            game.currentStreak = 0;
-        }
+        game.currentStreak = 0;
         userData[ownerId].stats.soloWrong++;
         userData[ownerId].iq = Math.max(0, (userData[ownerId].iq || 0) - 1);
         msg = '❌ **QALAD** — **−1 IQ** · Streak: 0🔥';
@@ -274,11 +320,15 @@ async function handleSoloAnswer(interaction) {
     userData[ownerId].stats.soloPlayed++;
     saveData();
 
+    // Advance currentQ before next sendQuestion so the timeout guard works correctly
+    game.currentQ = qNum + 1;
+    persistSolo(ownerId);
+
     const updatedEmbed = EmbedBuilder.from(interaction.message.embeds[0])
         .setFields({ name: 'Natiijo', value: msg });
 
     const channel   = interaction.channel;
-    const originMsg = activeGames.get(ownerId)?.originMsg;
+    const originMsg = game?.originMsg;
     const replyOpt  = originMsg ? { reply: { messageReference: originMsg.id, failIfNotExists: false } } : {};
     await interaction.message.delete().catch(() => {});
     const resultMsg = await channel.send({ embeds: [updatedEmbed], ...replyOpt }).catch(() => null);
@@ -296,4 +346,59 @@ async function handleSoloLeaderboard(interaction) {
     return interaction.reply({ embeds: [lbEmbed], flags: 64 });
 }
 
-module.exports = { sendQuestion, handleSoloAnswer, handleSoloLeaderboard };
+// ── Startup restore: reload all saved solo games and resend current question ──
+async function restoreSoloGames(client) {
+    const docs = await loadAllSoloStates().catch(() => []);
+    if (!docs.length) return;
+
+    let restored = 0;
+    for (const doc of docs) {
+        // Skip stale games (>24h)
+        if (Date.now() - doc.savedAt > 24 * 60 * 60 * 1000) {
+            deleteSoloState(doc.userId).catch(() => {});
+            continue;
+        }
+        if (activeGames.has(doc.userId)) continue;
+        if (!doc.channelId || !doc.questions?.length) {
+            deleteSoloState(doc.userId).catch(() => {});
+            continue;
+        }
+
+        const game = {
+            questions:     doc.questions     || [],
+            total:         doc.total         || 0,
+            currentQ:      doc.currentQ      || 1,
+            totalPoints:   doc.totalPoints   || 0,
+            correctCount:  doc.correctCount  || 0,
+            bestStreak:    doc.bestStreak    || 0,
+            currentStreak: doc.currentStreak || 0,
+            channelId:     doc.channelId,
+            originMsg:     null,
+        };
+        activeGames.set(doc.userId, game);
+
+        const channel = await client.channels.fetch(doc.channelId).catch(() => null);
+        if (!channel) {
+            activeGames.delete(doc.userId);
+            continue;
+        }
+
+        // Fake message object so sendQuestion can use channel.send
+        const fakeMsg = {
+            channel,
+            author:   { id: doc.userId },
+            isButton: () => false,
+            reply:    async (opts) => channel.send(opts),
+        };
+
+        await sendQuestion(fakeMsg, game.currentQ).catch(e => {
+            console.error(`[Solo Restore] Failed for ${doc.userId}:`, e.message);
+            activeGames.delete(doc.userId);
+        });
+        restored++;
+        console.log(`[Solo] ✅ Restored game for user ${doc.userId} at Q${game.currentQ}/${game.total}`);
+    }
+    if (restored > 0) console.log(`[Solo] ✅ ${restored} solo game(s) restored from database`);
+}
+
+module.exports = { sendQuestion, handleSoloAnswer, handleSoloLeaderboard, restoreSoloGames };

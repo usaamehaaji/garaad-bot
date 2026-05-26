@@ -17,6 +17,11 @@ const {
     DUEL_WIN_IQ,
 } = require('../config');
 const { getAnswerOptions } = require('../utils/questionOptions');
+const { saveDuelState, loadAllDuelStates, deleteDuelState } = require('../utils/gamePersist');
+
+function persistDuel(channelId, state) {
+    saveDuelState(channelId, state).catch(() => {});
+}
 
 function refundDuelStakes(p1Id, p2Id) {
     checkUser(p1Id);
@@ -100,6 +105,8 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0, originMsg = null) {
         originMsg,
     };
     activeDuels.set(channel.id, duelState);
+    // Save immediately to protect stakes — if bot restarts before finish, we can restore
+    persistDuel(channel.id, duelState);
 
     markUserPlayed(p1Id);
     markUserPlayed(p2Id);
@@ -132,6 +139,8 @@ async function sendDuelQuestion(channel) {
     if (!state) return;
 
     if (state.currentQ >= state.totalQ) return finishDuel(channel);
+    // Persist current question index so restart can resume here
+    persistDuel(channel.id, state);
 
     const qIndex = state.currentQ;
     const q      = state.questions[qIndex];
@@ -243,6 +252,7 @@ async function sendDuelQuestion(channel) {
 async function finishDuel(channel) {
     const state = activeDuels.get(channel.id);
     if (!state) return;
+    deleteDuelState(channel.id).catch(() => {});
 
     const s1 = state.scores[state.p1];
     const s2 = state.scores[state.p2];
@@ -301,4 +311,61 @@ async function finishDuel(channel) {
     await channel.send({ embeds: [resultEmbed], components: [closeRow], ...fOpt });
 }
 
-module.exports = { startDuelGame, sendDuelQuestion, finishDuel, refundDuelStakes };
+// ── Startup restore: reload all saved duels and resend current question ──
+async function restoreDuelGames(client) {
+    const docs = await loadAllDuelStates().catch(() => []);
+    if (!docs.length) return;
+
+    let restored = 0;
+    for (const doc of docs) {
+        // Refund stakes for stale duels (>6h) and skip
+        if (Date.now() - doc.savedAt > 6 * 60 * 60 * 1000) {
+            if (doc.stakesTaken && doc.p1 && doc.p2) {
+                checkUser(doc.p1);
+                checkUser(doc.p2);
+                userData[doc.p1].iq = (userData[doc.p1].iq || 0) + DUEL_STAKE_IQ;
+                userData[doc.p2].iq = (userData[doc.p2].iq || 0) + DUEL_STAKE_IQ;
+                saveData();
+                console.log(`[Duel Restore] Auto-refunded stakes for stale duel in channel ${doc.channelId}`);
+            }
+            deleteDuelState(doc.channelId).catch(() => {});
+            continue;
+        }
+        if (activeDuels.has(doc.channelId)) continue;
+        if (!doc.channelId || !doc.questions?.length) {
+            deleteDuelState(doc.channelId).catch(() => {});
+            continue;
+        }
+
+        const channel = await client.channels.fetch(doc.channelId).catch(() => null);
+        if (!channel) {
+            deleteDuelState(doc.channelId).catch(() => {});
+            continue;
+        }
+
+        const state = {
+            p1:             doc.p1,
+            p2:             doc.p2,
+            questions:      doc.questions   || [],
+            totalQ:         doc.totalQ      || 0,
+            scores:         doc.scores      || {},
+            currentQ:       doc.currentQ    || 0,
+            answeredBy:     new Set(),
+            correctAnswerer: null,
+            message:        null,
+            stakesTaken:    doc.stakesTaken || false,
+            originMsg:      null,
+        };
+        activeDuels.set(doc.channelId, state);
+
+        await sendDuelQuestion(channel).catch(e => {
+            console.error(`[Duel Restore] Failed for channel ${doc.channelId}:`, e.message);
+            activeDuels.delete(doc.channelId);
+        });
+        restored++;
+        console.log(`[Duel] ✅ Restored duel in channel ${doc.channelId} at Q${doc.currentQ}`);
+    }
+    if (restored > 0) console.log(`[Duel] ✅ ${restored} duel(s) restored from database`);
+}
+
+module.exports = { startDuelGame, sendDuelQuestion, finishDuel, refundDuelStakes, restoreDuelGames };

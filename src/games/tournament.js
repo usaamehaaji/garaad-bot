@@ -1245,14 +1245,13 @@ async function restoreTournaments(client) {
         }
 
         if (state.stage === 'play') {
-            // Can't resume mid-round (collectors dead) — pause and let admin restart
+            // Can't resume mid-round (collectors dead) — convert to pause then auto-resume
             state.stage = 'pause';
-            // Don't eliminate anyone from an interrupted round; all current survivors advance
+            // All survivors advance from the interrupted round (no unfair elimination)
             if (!state._nextSurvivors) {
                 state._nextSurvivors = [...state.survivors];
             }
-            // Undo the roundIdx increment that will happen when admin clicks next
-            // so the same round number re-runs (e.g. Final stays Final)
+            // Roll back Final so it re-runs (roundIdx += 1 happens on advance)
             if (state.roundIdx === 3) state.roundIdx = 2;
 
             if (state.channel) {
@@ -1264,11 +1263,45 @@ async function restoreTournaments(client) {
                             `Bot restart ayaa dhacay ciyaarta dhex maraysay.\n\n` +
                             `**Wareegga:** ${ROUND_LABELS[state.roundIdx]?.name || `Wareeg ${state.roundIdx}`}\n` +
                             `**Tartamayaasha:** ${state.survivors.size} qof\n\n` +
-                            `Admin ayaa wareegga dib u bilaabi doona — sug farriin cusub!`
+                            `⏳ Wareegga xiga wuxuu si toos ah u bilaabmayaa **30 ilbiriqsi gudahood**!`
                         )
                     ],
                 }).catch(() => {});
             }
+
+            // Auto-resume: advance to next round after 30s without requiring admin
+            const autoState  = state;
+            const autoGuildId = doc.guildId;
+            setTimeout(async () => {
+                const cur = activeTournament.get(autoGuildId);
+                if (!cur || cur.stage !== 'pause') return;
+                const next = cur._nextSurvivors || [];
+                cur.survivors      = new Set(next);
+                cur._nextSurvivors = null;
+                if (cur.survivors.size === 0) {
+                    activeTournament.delete(autoGuildId);
+                    persistDelete(autoGuildId);
+                    if (cur.channel) cur.channel.send('❌ Cidna kuma hartay — tartan waa la joojiyay.').catch(() => {});
+                    return;
+                }
+                cur.roundIdx += 1;
+                if (cur.channel) {
+                    const encourageList = [...cur.survivors].map(id => `<@${id}>`).join(' ');
+                    await cur.channel.send({
+                        embeds: [new EmbedBuilder()
+                            .setTitle(`🚀 ${ROUND_LABELS[cur.roundIdx]?.name || 'Wareeg Cusub'} — Dib u bilaabmay!`)
+                            .setColor('#2ecc71')
+                            .setDescription(
+                                `${encourageList}\n\n` +
+                                `Bot wuu dib bilaabmay — wareegu si toos ah ayuu u sii wadaa!\n\n` +
+                                `_Su'aalaha waxay bilaabmayaan 3 ilbiriqsi gudahood..._`
+                            )],
+                    }).catch(() => {});
+                    await beginRound(cur, cur.channel).catch(e => {
+                        console.error('[Tournament Auto-Resume]', e.message);
+                    });
+                }
+            }, 30_000);
         }
 
         activeTournament.set(doc.guildId, state);
