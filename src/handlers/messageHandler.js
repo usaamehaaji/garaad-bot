@@ -31,7 +31,6 @@ const cashflipCmd     = require('../../data/commands/economy/cashflip');
 const giveCmd         = require('../../data/commands/economy/give');
 const richCmd         = require('../../data/commands/economy/rich');
 const ebankCmd        = require('../../data/commands/economy/ebank');
-const econShopCmd     = require('../../data/commands/economy/econShop');
 
 const shaqoCmd        = require('../../data/commands/economy/shaqo');
 const bankListCmd     = require('../../data/commands/economy/bankList');
@@ -42,7 +41,7 @@ const dmCmd           = require('../../data/commands/dm');
 module.exports = function setupMessageHandler(client) {
     // ── Rate limiter: max 6 economy commands per 10s per user ──
     const _econRateMap = new Map();
-    const ECON_CMDS    = new Set(['shaqo','work','jeeb','trade','ecoflip','ef','give','rich','ebank','bank','etitle','shop']);
+    const ECON_CMDS    = new Set(['shaqo','work','jeeb','trade','ecoflip','ef','give','rich','ebank','bank','etitle']);
     function econRateLimited(userId) {
         const now    = Date.now();
         const bucket = _econRateMap.get(userId) || { count: 0, reset: now + 10_000 };
@@ -144,9 +143,6 @@ module.exports = function setupMessageHandler(client) {
             case 'ebank':
             case 'bank':
                 return ebankCmd(message, args);
-
-            case 'shop':
-                return econShopCmd(message);
 
             // ── Kale ──
             case 'cilada':
