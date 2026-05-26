@@ -37,8 +37,7 @@ function buildJeebEmbed(userId, username) {
 
     const desc =
         `# 👤 ${username}${titleLabel}\n` +
-        `💳 **Wallet:** ₿ ${fmtW(btc)}  •  🏦 **Bank:** ₿ ${fmtW(bank)}\n` +
-        `📊 **Total:** ₿ ${fmtW(total)}  •  🏆 **Rank:** ${rankStr}\n` +
+        `💳 **Wallet:** ₿ ${fmtW(btc)}  •  🏆 **Rank:** ${rankStr}\n` +
         `🔥 **Streak:** ${streak} day${streak !== 1 ? 's' : ''}` +
         loanLine + `\n\n` +
         `**🏛️ Garaad Economy**\n` +
