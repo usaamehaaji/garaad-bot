@@ -28,27 +28,25 @@ function buildJeebEmbed(userId, username) {
 
     const titleLabel = (() => {
         if (!d.activeEconTitle) return '';
-        if (d.activeEconTitle === 'custom') return d.customEconTitle ? ` [${d.customEconTitle} ✍️]` : '';
-        return ECON_TITLES[d.activeEconTitle] ? ` [${ECON_TITLES[d.activeEconTitle].label}]` : '';
+        if (d.activeEconTitle === 'custom') return d.customEconTitle ? ` / ${d.customEconTitle}` : '';
+        return ECON_TITLES[d.activeEconTitle] ? ` / ${ECON_TITLES[d.activeEconTitle].label}` : '';
     })();
 
     const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const loanLine = d.loan?.owed ? `\n⚠️ **Loan:** ₿ ${fmtW(d.loan.owed)}` : '';
 
-    const fields = [
-        { name: '💳 Wallet',       value: `**₿ ${fmtW(btc)}**`,   inline: true },
-        { name: '🏦 Bank Balance', value: `**₿ ${fmtW(bank)}**`,  inline: true },
-        { name: '📊 Net Worth',    value: `**₿ ${fmtW(total)}**`, inline: true },
-        { name: '🏆 Rank',         value: rankStr,                 inline: true },
-    ];
-    if (d.loan?.owed) fields.push({ name: '⚠️ Loan Due', value: `**₿ ${fmtW(d.loan.owed)}**`, inline: true });
+    const desc =
+        `# 👤 ${username}${titleLabel}\n` +
+        `💳 **Wallet:** ₿ ${fmtW(btc)}  •  🏦 **Bank:** ₿ ${fmtW(bank)}\n` +
+        `📊 **Total:** ₿ ${fmtW(total)}  •  🏆 **Rank:** ${rankStr}\n` +
+        `🔥 **Streak:** ${streak} day${streak !== 1 ? 's' : ''}` +
+        loanLine + `\n\n` +
+        `**🏛️ Garaad Economy**\n` +
+        `🕐 *${time}*`;
 
     return new EmbedBuilder()
-        .setTitle(`💼 ${username}${titleLabel}`)
-        .setColor('#f39c12')
-        .setThumbnail(BTC_ICON)
-        .setDescription(`🔥 **${streak} day${streak !== 1 ? 's' : ''}**`)
-        .addFields(...fields)
-        .setFooter({ text: `Garaad Wallet • ${time}`, iconURL: BTC_ICON });
+        .setDescription(desc)
+        .setColor('#f39c12');
 }
 
 function jeebRow(authorId, targetId) {
