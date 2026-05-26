@@ -10,7 +10,7 @@ const { setEconUsername } = require('../economy/econStore');
 const helpCmd         = require('../../data/commands/help');
 
 const profileCmd      = require('../../data/commands/profile');
-const statisticsCmd   = require('../../data/commands/statistics');
+
 const topCmd          = require('../../data/commands/top');
 const todayCmd        = require('../../data/commands/today');
 
@@ -91,9 +91,7 @@ module.exports = function setupMessageHandler(client) {
             case 'p':
                 return profileCmd(message);
 
-            case 'statistics':
-            case 'stats':
-                return statisticsCmd(message);
+
 
             case 'top':
                 return topCmd(message, args);

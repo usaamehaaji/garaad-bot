@@ -51,7 +51,7 @@ function buildEduEmbed(userId) {
             `**👤 Profile**\n` +
             `**\`${PREFIX}profile\`** — IQ, level iyo statskaaga\n` +
             `**\`${PREFIX}top\`** — Top 15 IQ\n` +
-            `**\`${PREFIX}statistics\`** — Tirakoobkaaga guud\n\n` +
+            `\n` +
 
             `**💬 Kale**\n` +
             `**\`${PREFIX}dm <fariin>\`** — Admin u dir fikrad ama talo\n` +
