@@ -4,6 +4,8 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData } = require('../../src/store');
+const { econData, checkEconUser } = require('../../src/economy/econStore');
+const { ECON_TITLES } = require('./economy/econShop');
 const { checkUser, getLevel } = require('../../src/utils/helpers');
 
 function getIQRank(userId) {
@@ -16,28 +18,38 @@ function getIQRank(userId) {
 module.exports = async function profileCommand(message) {
     const target = message.mentions.users.first() || message.author;
     checkUser(target.id);
+    checkEconUser(target.id);
     const data = userData[target.id];
+    const econ = econData[target.id];
 
     const level     = getLevel(data.iq);
     const nextLvlIq = (level + 1) * 200;
     const { rank, total } = getIQRank(target.id);
-    const rankStr = rank ? `**#${rank}** / ${total}` : '—';
+
+    // Economy title
+    let econTitle = '';
+    if (econ.activeEconTitle === 'custom' && econ.customEconTitle) {
+        econTitle = econ.customEconTitle;
+    } else if (econ.activeEconTitle && ECON_TITLES[econ.activeEconTitle]) {
+        econTitle = ECON_TITLES[econ.activeEconTitle].label;
+    }
+    const titlePart = econTitle ? ` / ${econTitle}` : '';
 
     const s = data.stats || {};
-    const fields = [
-        { name: '🧠 IQ',         value: `**${data.iq}**`,      inline: true },
-        { name: '📈 Level',      value: `**${level}**`,         inline: true },
-        { name: '🎯 Level xiga', value: `**${nextLvlIq} IQ**`, inline: true },
-        { name: '🏆 Rank',       value: rankStr,                inline: true },
-        { name: '🎯 Solo',  value: `Ciyaaray: **${s.soloPlayed||0}** | Sax: **${s.soloCorrect||0}** | Qalad: **${s.soloWrong||0}**`,     inline: false },
-        { name: '⚔️ Duel',  value: `Guul: **${s.duelWins||0}** | Xumaan: **${s.duelLosses||0}** | Isdhafsashad: **${s.duelDraws||0}**`, inline: false },
-        { name: '📝 Quiz',  value: `Ciyaaray: **${s.quizPlayed||0}** | Guul: **${s.quizWins||0}**`,                                      inline: false },
-    ];
+    const totalGames = (s.soloPlayed || 0) + (s.duelWins || 0) + (s.duelLosses || 0) + (s.duelDraws || 0) + (s.quizPlayed || 0);
+
+    const desc =
+        `# 👤 ${target.username}${titlePart}\n` +
+        `🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
+        `🎯 **Next Level:** ${nextLvlIq} IQ\n` +
+        `🏆 **Rank:** #${rank ?? '—'} / ${total}\n` +
+        `🎮 **All Games:** ${totalGames}\n\n` +
+        `**🧠 Garaad Education**\n` +
+        `✨ *Kobci Garaadkaaga*`;
 
     const embed = new EmbedBuilder()
-        .setTitle(`👤 ${target.username}`)
+        .setDescription(desc)
         .setThumbnail(target.displayAvatarURL({ dynamic: true }))
-        .addFields(fields)
         .setColor('#9b59b6');
 
     const viewerId = message.author.id;
