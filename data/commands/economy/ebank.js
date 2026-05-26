@@ -1,8 +1,9 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { econData, checkEconUser, saveEcon, getTreasury } = require('../../../src/economy/econStore');
+const { econData, checkEconUser, saveEcon, getTreasury, addToTreasury } = require('../../../src/economy/econStore');
 const { fmt } = require('../../../src/utils/helpers');
 
 const INTEREST_RATE     = 0.01;
+const INTEREST_TAX_RATE = 0.10; // 10% of interest goes to treasury
 const INTEREST_INTERVAL = 24 * 60 * 60 * 1000;
 const LOAN_MAX          = 2_500;
 const LOAN_FEE          = 100;
@@ -41,9 +42,12 @@ function applyInterest(d) {
     if (days <= 0) return;
 
     if (d.banks.garaad > 0) {
-        const interest          = Math.floor(d.banks.garaad * INTEREST_RATE * days);
+        const gross             = Math.floor(d.banks.garaad * INTEREST_RATE * days);
+        const tax               = Math.floor(gross * INTEREST_TAX_RATE);
+        const interest          = gross - tax;
         d.banks.garaad         += interest;
         d.interestEarned.garaad += interest;
+        if (tax > 0) addToTreasury(tax);
     }
     d.lastInterest = now;
 }
@@ -72,9 +76,9 @@ function buildMainEmbed(d) {
             { name: '🏦 Bank Balance',    value: `**₿ ${fmt(d.banks.garaad)}**`,                 inline: true },
             { name: '📈 Interest Earned', value: `**+₿ ${fmt(d.interestEarned?.garaad || 0)}**`, inline: true },
             { name: '🏛️ Treasury',        value: `**₿ ${fmt(t.balance || 0)}**`,                 inline: true },
-            { name: '📊 Interest Rate',   value: '**1% per day**',                               inline: true },
+            { name: '📊 Interest Rate',   value: '**1% per day** _(10% tax)_',                   inline: true },
         )
-        .setFooter({ text: 'Garaad Bank • 1% daily interest on deposits' });
+        .setFooter({ text: 'Garaad Bank • 1% daily interest • 10% tax to treasury' });
 }
 
 function buildBankEmbed(d) {
