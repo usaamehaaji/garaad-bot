@@ -4,18 +4,18 @@
 // =====================================================================
 
 const STATES = {
-    BULL:        { baseWin: 0.56, label: 'Bull Market',     icon: '🚀', desc: 'Upward trend',           duration: [12, 20] },
-    BEAR:        { baseWin: 0.44, label: 'Bear Market',     icon: '🐻', desc: 'Downward pressure',       duration: [12, 20] },
-    PANIC:       { baseWin: 0.36, label: 'Market Panic',    icon: '💥', desc: 'Extreme sell-off',        duration: [6, 12]  },
-    RALLY:       { baseWin: 0.60, label: 'Rally Mode',      icon: '🚀', desc: 'FOMO buying frenzy',      duration: [8, 14]  },
-    VOLATILE:    { baseWin: 0.50, label: 'High Volatility', icon: '⚡', desc: 'Unpredictable swings',    duration: [8, 15]  },
-    WHALE:       { baseWin: 0.50, label: 'Whale Activity',  icon: '🐋', desc: 'Large orders moving',     duration: [6, 10]  },
-    BREAKOUT:    { baseWin: 0.63, label: 'Breakout',        icon: '📊', desc: 'Key level broken',        duration: [6, 10]  },
-    CONSOLIDATE: { baseWin: 0.50, label: 'Consolidation',   icon: '⬜', desc: 'Tight range trading',     duration: [15, 25] },
-    OVERBOUGHT:  { baseWin: 0.40, label: 'Overbought',      icon: '🔴', desc: 'Correction incoming',     duration: [8, 14]  },
-    OVERSOLD:    { baseWin: 0.58, label: 'Oversold',        icon: '🟢', desc: 'Bounce likely',           duration: [8, 14]  },
-    LIQ_SPIKE:   { baseWin: 0.50, label: 'Liquidity Spike', icon: '💫', desc: 'Liquidations cascading',  duration: [4, 8]   },
-    MOMENTUM:    { baseWin: 0.52, label: 'Momentum Shift',  icon: '🔄', desc: 'Trend reversing',         duration: [8, 15]  },
+    BULL:        { baseWin: 0.51, label: 'Bull Market',     icon: '🚀', desc: 'Upward trend',           duration: [12, 20] },
+    BEAR:        { baseWin: 0.39, label: 'Bear Market',     icon: '🐻', desc: 'Downward pressure',       duration: [12, 20] },
+    PANIC:       { baseWin: 0.31, label: 'Market Panic',    icon: '💥', desc: 'Extreme sell-off',        duration: [6, 12]  },
+    RALLY:       { baseWin: 0.55, label: 'Rally Mode',      icon: '🚀', desc: 'FOMO buying frenzy',      duration: [8, 14]  },
+    VOLATILE:    { baseWin: 0.45, label: 'High Volatility', icon: '⚡', desc: 'Unpredictable swings',    duration: [8, 15]  },
+    WHALE:       { baseWin: 0.45, label: 'Whale Activity',  icon: '🐋', desc: 'Large orders moving',     duration: [6, 10]  },
+    BREAKOUT:    { baseWin: 0.58, label: 'Breakout',        icon: '📊', desc: 'Key level broken',        duration: [6, 10]  },
+    CONSOLIDATE: { baseWin: 0.45, label: 'Consolidation',   icon: '⬜', desc: 'Tight range trading',     duration: [15, 25] },
+    OVERBOUGHT:  { baseWin: 0.35, label: 'Overbought',      icon: '🔴', desc: 'Correction incoming',     duration: [8, 14]  },
+    OVERSOLD:    { baseWin: 0.53, label: 'Oversold',        icon: '🟢', desc: 'Bounce likely',           duration: [8, 14]  },
+    LIQ_SPIKE:   { baseWin: 0.45, label: 'Liquidity Spike', icon: '💫', desc: 'Liquidations cascading',  duration: [4, 8]   },
+    MOMENTUM:    { baseWin: 0.47, label: 'Momentum Shift',  icon: '🔄', desc: 'Trend reversing',         duration: [8, 15]  },
 };
 
 // Weighted transitions: from current state → next state likelihoods
