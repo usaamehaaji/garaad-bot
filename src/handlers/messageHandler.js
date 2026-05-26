@@ -5,6 +5,7 @@
 const { PREFIX } = require('../config');
 const { checkUser }   = require('../utils/helpers');
 const { isAdmin }     = require('../utils/admin');
+const { setEconUsername } = require('../economy/econStore');
 
 const helpCmd         = require('../../data/commands/help');
 
@@ -72,6 +73,8 @@ module.exports = function setupMessageHandler(client) {
         }
 
         checkUser(userId);
+
+        if (ECON_CMDS.has(command)) setEconUsername(userId, message.author.username);
 
         if (ECON_CMDS.has(command) && !isAdmin(userId) && econRateLimited(userId))
             return message.reply('⏳ Aad u dhaqso. Daqiiqad yar sug.').catch(() => {});

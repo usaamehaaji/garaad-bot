@@ -49,6 +49,7 @@ function buildAllPlayersEmbed(page = 0) {
         .filter(([k]) => /^\d{17,19}$/.test(k))
         .map(([uid, d]) => ({
             uid,
+            username: d.username   || null,
             btc:  d.btc            || 0,
             bank: d.banks?.garaad  || 0,
             loan: d.loan?.owed     || 0,
@@ -62,7 +63,8 @@ function buildAllPlayersEmbed(page = 0) {
         const rank = page * PER_PAGE + i + 1;
         const bank = p.bank > 0 ? ` 🏦${fmt(p.bank)}` : '';
         const loan = p.loan > 0 ? ` 💳${fmt(p.loan)}` : '';
-        return `**${rank}.** <@${p.uid}> — ₿ **${fmt(p.btc)}**${bank}${loan}`;
+        const name = p.username ? `**${p.username}**` : `<@${p.uid}>`;
+        return `**${rank}.** ${name} — ₿ **${fmt(p.btc)}**${bank}${loan}`;
     });
 
     return new EmbedBuilder()

@@ -24,6 +24,10 @@ function defaultUser() {
     };
 }
 
+function setEconUsername(userId, username) {
+    if (username && econData[userId]) econData[userId].username = username;
+}
+
 function checkEconUser(userId) {
     if (!econData[userId]) {
         econData[userId] = defaultUser();
@@ -170,6 +174,7 @@ module.exports = {
     econData,
     loadEcon,
     checkEconUser,
+    setEconUsername,
     saveEcon,
     getTreasury,
     addToTreasury,
