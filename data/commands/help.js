@@ -82,7 +82,6 @@ function buildEcoEmbed() {
 
             `**🤝 Bulshada**\n` +
             `**\`${PREFIX}give @user btc 200\`** — BTC u dir player\n` +
-            `**\`${PREFIX}rob @user\`** — BTC xadso (Rob Ticket lazim)\n` +
             `**\`${PREFIX}rich\`** — Top 10 qof ugu hantida badan dhaqaalaha`
         )
         .setFooter({ text: `Garaad Economy • Bitcoin kaliya` });

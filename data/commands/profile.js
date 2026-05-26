@@ -6,10 +6,6 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { userData } = require('../../src/store');
 const { checkUser, getLevel, getDisplayTitle } = require('../../src/utils/helpers');
 
-const SOLO_HINT =
-    '📘 **Talo:** `?today` maalin kasta 250 BTC + IQ ku hel bilaash ah. ' +
-    '`?solo` ciyaar IQ hel (+3 sax / −1 qalad). `?duel @qof` tartam IQ dhig.';
-
 module.exports = async function profileCommand(message) {
     const target = message.mentions.users.first() || message.author;
     checkUser(target.id);
@@ -21,20 +17,14 @@ module.exports = async function profileCommand(message) {
     const titleTag  = dispTitle ? `[${dispTitle}] ` : '';
 
     const fields = [
-        { name: '🧠 IQ', value: `**${data.iq}**`, inline: true },
-        { name: '📈 Level', value: `**${level}**`, inline: true },
-        { name: '🎯 Level xiga', value: `**${nextLvlIq} IQ**`, inline: true },
-        { name: '💱 Dhibco tartan', value: `**${data.pendingQuizPoints || 0}** — \`?exchange\` (IQ ku badal)`, inline: false },
-        { name: '🏷️ Cinwaan', value: dispTitle ? `**${dispTitle}**` : '—', inline: false },
+        { name: '🧠 IQ',         value: `**${data.iq}**`,          inline: true },
+        { name: '📈 Level',      value: `**${level}**`,             inline: true },
+        { name: '🎯 Level xiga', value: `**${nextLvlIq} IQ**`,     inline: true },
+        { name: '🏷️ Cinwaan',   value: dispTitle ? `**${dispTitle}**` : '—', inline: false },
     ];
 
-    const viewerIsTarget = message.author.id === target.id;
-    if (viewerIsTarget && data.iq <= 0) {
-        fields.push({ name: '💡 Talo', value: SOLO_HINT, inline: false });
-    }
-
     const embed = new EmbedBuilder()
-        .setTitle(`👤 Profile: ${titleTag}${target.username}`)
+        .setTitle(`👤 ${titleTag}${target.username}`)
         .setThumbnail(target.displayAvatarURL({ dynamic: true }))
         .addFields(fields)
         .setColor('#9b59b6');
@@ -43,7 +33,7 @@ module.exports = async function profileCommand(message) {
     const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(`close_profile_${viewerId}`)
-            .setLabel('Iska xir')
+            .setLabel('✖ Xir')
             .setStyle(ButtonStyle.Danger),
     );
 

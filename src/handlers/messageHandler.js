@@ -17,7 +17,6 @@ const buyCmd          = require('../../data/commands/buy');
 const soloCmd         = require('../../data/commands/solo');
 const duelCmd         = require('../../data/commands/duel');
 const quizCmd         = require('../../data/commands/quiz');
-const exchangeCmd     = require('../../data/commands/exchange');
 const ciladaCmd       = require('../../data/commands/cilada');
 const adminCmd        = require('../../data/commands/admin/admin');
 const broadcast       = require('../../data/commands/admin/adminBroadcast');
@@ -29,9 +28,7 @@ const teamDuel        = require('../games/teamDuel');
 const jeebCmd         = require('../../data/commands/economy/jeeb');
 const tradeCmd        = require('../../data/commands/economy/trade');
 const cashflipCmd     = require('../../data/commands/economy/cashflip');
-const econExchangeCmd = require('../../data/commands/economy/econExchange');
 const giveCmd         = require('../../data/commands/economy/give');
-const robCmd          = require('../../data/commands/economy/rob');
 const richCmd         = require('../../data/commands/economy/rich');
 const ebankCmd        = require('../../data/commands/economy/ebank');
 const econShopCmd     = require('../../data/commands/economy/econShop');
@@ -45,7 +42,7 @@ const dmCmd           = require('../../data/commands/dm');
 module.exports = function setupMessageHandler(client) {
     // ── Rate limiter: max 6 economy commands per 10s per user ──
     const _econRateMap = new Map();
-    const ECON_CMDS    = new Set(['shaqo','work','jeeb','trade','ecoflip','ef','give','rob','rich','ebank','bank','etitle','shop','exchange']);
+    const ECON_CMDS    = new Set(['shaqo','work','jeeb','trade','ecoflip','ef','give','rich','ebank','bank','etitle','shop']);
     function econRateLimited(userId) {
         const now    = Date.now();
         const bucket = _econRateMap.get(userId) || { count: 0, reset: now + 10_000 };
@@ -104,13 +101,6 @@ module.exports = function setupMessageHandler(client) {
             case 'buy':
                 return buyCmd(message, args);
 
-            case 'exchange': {
-                const a0 = (args[0] || '').toLowerCase();
-                if (a0 === 'xp' || a0 === 'iq') return exchangeCmd(message, args);
-                return econExchangeCmd(message, args);
-            }
-
-
             // ── Ciyaaraha Aqoonta ──
             case 'solo':
                 return soloCmd(message, args);
@@ -141,9 +131,6 @@ module.exports = function setupMessageHandler(client) {
 
             case 'give':
                 return giveCmd(message, args);
-
-            case 'rob':
-                return robCmd(message, args);
 
             case 'rich':
                 return richCmd(message);
