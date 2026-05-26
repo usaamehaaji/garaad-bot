@@ -134,6 +134,12 @@ function topUpTreasury(amount) {
     t.balance += amount;
 }
 
+function setTreasury(amount) {
+    if (amount < 0) return;
+    const t = getTreasury();
+    t.balance = amount;
+}
+
 function deductFromTreasury(amount) {
     const t = getTreasury();
     if (t.balance < amount) return false;
@@ -179,6 +185,7 @@ module.exports = {
     getTreasury,
     addToTreasury,
     topUpTreasury,
+    setTreasury,
     deductFromTreasury,
     trackEarning,
     resetWeeklyEarnings,

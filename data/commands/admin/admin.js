@@ -107,15 +107,40 @@ module.exports = async function adminCommand(message, args) {
 
         case 'treasury':
         case 'khaznad': {
-            const { topUpTreasury, getTreasury, saveEcon } = require('../../../src/economy/econStore');
+            const { topUpTreasury, setTreasury, getTreasury, saveEcon } = require('../../../src/economy/econStore');
             const { fmt } = require('../../../src/utils/helpers');
-            const amount = Number((args[0] || '').replace(/,/g, ''));
-            if (!amount || isNaN(amount) || amount <= 0)
-                return message.reply('⚠️ Isticmaal: `?admin treasury 200000000`');
-            topUpTreasury(amount);
+            const sub2   = (args[0] || '').toLowerCase();
+            const amount = Number((args[1] || args[0] || '').replace(/,/g, ''));
+
+            // ?admin treasury set [amount] — set exact balance
+            if (sub2 === 'set') {
+                if (!args[1] || isNaN(amount) || amount < 0)
+                    return message.reply('⚠️ Isticmaal: `?admin treasury set 500000`');
+                setTreasury(amount);
+                saveEcon();
+                const t = getTreasury();
+                return message.reply(`✅ Khaznadda waxaa loo dejiyay **₿ ${fmt(t.balance)}**.`);
+            }
+
+            // ?admin treasury reduce [amount] — deduct without tracking
+            if (sub2 === 'reduce') {
+                if (!args[1] || isNaN(amount) || amount <= 0)
+                    return message.reply('⚠️ Isticmaal: `?admin treasury reduce 500000000`');
+                const t = getTreasury();
+                if (amount > t.balance) return message.reply(`⚠️ Hantidu ma filna. Hadda: **₿ ${fmt(t.balance)}**`);
+                t.balance -= amount;
+                saveEcon();
+                return message.reply(`✅ **₿ ${fmt(amount)}** khaznadda laga jaray.\n🏛️ Hadda: **₿ ${fmt(t.balance)}**`);
+            }
+
+            // ?admin treasury [amount] — topup (existing behaviour)
+            const topAmount = Number((args[0] || '').replace(/,/g, ''));
+            if (!topAmount || isNaN(topAmount) || topAmount <= 0)
+                return message.reply('⚠️ Isticmaal:\n`?admin treasury set 500000` — xaddid\n`?admin treasury reduce 500000000` — yar\n`?admin treasury 200000` — ku dar');
+            topUpTreasury(topAmount);
             saveEcon();
             const t = getTreasury();
-            return message.reply(`✅ **₿ ${fmt(amount)}** khaznadda lagu daray.\n🏛️ Hadda: **₿ ${fmt(t.balance)}**`);
+            return message.reply(`✅ **₿ ${fmt(topAmount)}** khaznadda lagu daray.\n🏛️ Hadda: **₿ ${fmt(t.balance)}**`);
         }
 
         case 'vip': {

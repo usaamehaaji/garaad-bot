@@ -1,96 +1,108 @@
 // =====================================================================
-// MARKET ENGINE — Adaptive simulation for ?ef
-// 12 rotating states · soft streak balancing · loss recovery
+// MARKET ENGINE — Dynamic time-based market states for ?ef
+// 6 states · auto-transitions · MongoDB persistence
 // =====================================================================
 
 const STATES = {
-    BULL:        { baseWin: 0.45, label: 'Bull Market',     icon: '🚀', desc: 'Upward trend',           duration: [12, 20] },
-    BEAR:        { baseWin: 0.45, label: 'Bear Market',     icon: '🐻', desc: 'Downward pressure',       duration: [12, 20] },
-    PANIC:       { baseWin: 0.45, label: 'Market Panic',    icon: '💥', desc: 'Extreme sell-off',        duration: [6, 12]  },
-    RALLY:       { baseWin: 0.45, label: 'Rally Mode',      icon: '🚀', desc: 'FOMO buying frenzy',      duration: [8, 14]  },
-    VOLATILE:    { baseWin: 0.45, label: 'High Volatility', icon: '⚡', desc: 'Unpredictable swings',    duration: [8, 15]  },
-    WHALE:       { baseWin: 0.45, label: 'Whale Activity',  icon: '🐋', desc: 'Large orders moving',     duration: [6, 10]  },
-    BREAKOUT:    { baseWin: 0.45, label: 'Breakout',        icon: '📊', desc: 'Key level broken',        duration: [6, 10]  },
-    CONSOLIDATE: { baseWin: 0.45, label: 'Consolidation',   icon: '⬜', desc: 'Tight range trading',     duration: [15, 25] },
-    OVERBOUGHT:  { baseWin: 0.45, label: 'Overbought',      icon: '🔴', desc: 'Correction incoming',     duration: [8, 14]  },
-    OVERSOLD:    { baseWin: 0.45, label: 'Oversold',        icon: '🟢', desc: 'Bounce likely',           duration: [8, 14]  },
-    LIQ_SPIKE:   { baseWin: 0.45, label: 'Liquidity Spike', icon: '💫', desc: 'Liquidations cascading',  duration: [4, 8]   },
-    MOMENTUM:    { baseWin: 0.45, label: 'Momentum Shift',  icon: '🔄', desc: 'Trend reversing',         duration: [8, 15]  },
+    UP:       { baseWin: 0.65, label: 'Rising',   icon: '📈', desc: 'Market rising',      minDur: 30,  maxDur: 90  },
+    DOWN:     { baseWin: 0.30, label: 'Falling',  icon: '📉', desc: 'Market falling',     minDur: 30,  maxDur: 90  },
+    SPIKE:    { baseWin: 0.80, label: 'Spike',    icon: '🚀', desc: 'Price spike!',       minDur: 10,  maxDur: 25  },
+    CRASH:    { baseWin: 0.10, label: 'Crash',    icon: '⚠️', desc: 'Market crash!',     minDur: 10,  maxDur: 25  },
+    STABLE:   { baseWin: 0.50, label: 'Stable',   icon: '⬜', desc: 'Tight range',        minDur: 60,  maxDur: 120 },
+    RECOVERY: { baseWin: 0.55, label: 'Recovery', icon: '🔄', desc: 'Recovering',         minDur: 45,  maxDur: 90  },
 };
 
-// Weighted transitions: from current state → next state likelihoods
+// Natural weighted transitions — SPIKE/CRASH are brief and non-repeating
 const TRANSITIONS = {
-    BULL:        { BULL:3, BEAR:1, PANIC:0.5, RALLY:2, VOLATILE:1, WHALE:1, BREAKOUT:1, CONSOLIDATE:2, OVERBOUGHT:2, OVERSOLD:0.5, LIQ_SPIKE:0.5, MOMENTUM:1 },
-    BEAR:        { BULL:1, BEAR:3, PANIC:2, RALLY:0.5, VOLATILE:1, WHALE:1, BREAKOUT:0.5, CONSOLIDATE:2, OVERBOUGHT:0.5, OVERSOLD:2, LIQ_SPIKE:1, MOMENTUM:1 },
-    PANIC:       { BULL:0.5, BEAR:2, PANIC:1, RALLY:1, VOLATILE:2, WHALE:2, BREAKOUT:0.5, CONSOLIDATE:1, OVERBOUGHT:0.5, OVERSOLD:3, LIQ_SPIKE:2, MOMENTUM:2 },
-    RALLY:       { BULL:2, BEAR:0.5, PANIC:0.5, RALLY:2, VOLATILE:1, WHALE:1, BREAKOUT:2, CONSOLIDATE:1, OVERBOUGHT:3, OVERSOLD:0.5, LIQ_SPIKE:1, MOMENTUM:1 },
-    VOLATILE:    { BULL:1, BEAR:1, PANIC:2, RALLY:1, VOLATILE:2, WHALE:2, BREAKOUT:1, CONSOLIDATE:1, OVERBOUGHT:1, OVERSOLD:1, LIQ_SPIKE:2, MOMENTUM:2 },
-    WHALE:       { BULL:1, BEAR:1, PANIC:1, RALLY:1, VOLATILE:2, WHALE:1, BREAKOUT:2, CONSOLIDATE:1, OVERBOUGHT:1, OVERSOLD:1, LIQ_SPIKE:2, MOMENTUM:2 },
-    BREAKOUT:    { BULL:2, BEAR:1, PANIC:1, RALLY:2, VOLATILE:2, WHALE:1, BREAKOUT:1, CONSOLIDATE:2, OVERBOUGHT:2, OVERSOLD:1, LIQ_SPIKE:1, MOMENTUM:2 },
-    CONSOLIDATE: { BULL:2, BEAR:2, PANIC:1, RALLY:1, VOLATILE:1, WHALE:1, BREAKOUT:2, CONSOLIDATE:2, OVERBOUGHT:1, OVERSOLD:1, LIQ_SPIKE:1, MOMENTUM:1 },
-    OVERBOUGHT:  { BULL:1, BEAR:2, PANIC:2, RALLY:0.5, VOLATILE:2, WHALE:1, BREAKOUT:0.5, CONSOLIDATE:2, OVERBOUGHT:1, OVERSOLD:1, LIQ_SPIKE:1, MOMENTUM:2 },
-    OVERSOLD:    { BULL:2, BEAR:1, PANIC:1, RALLY:2, VOLATILE:2, WHALE:1, BREAKOUT:1, CONSOLIDATE:2, OVERBOUGHT:1, OVERSOLD:1, LIQ_SPIKE:1, MOMENTUM:2 },
-    LIQ_SPIKE:   { BULL:1, BEAR:2, PANIC:3, RALLY:1, VOLATILE:3, WHALE:2, BREAKOUT:1, CONSOLIDATE:1, OVERBOUGHT:1, OVERSOLD:2, LIQ_SPIKE:1, MOMENTUM:2 },
-    MOMENTUM:    { BULL:2, BEAR:2, PANIC:1, RALLY:1, VOLATILE:2, WHALE:1, BREAKOUT:2, CONSOLIDATE:1, OVERBOUGHT:1, OVERSOLD:1, LIQ_SPIKE:1, MOMENTUM:1 },
+    UP:       { DOWN: 2, SPIKE: 2, STABLE: 2, RECOVERY: 1 },
+    DOWN:     { UP: 1, CRASH: 2, STABLE: 2, RECOVERY: 2 },
+    SPIKE:    { DOWN: 3, STABLE: 2, CRASH: 1 },
+    CRASH:    { RECOVERY: 4, STABLE: 2 },
+    STABLE:   { UP: 2, DOWN: 2, SPIKE: 0.5, CRASH: 0.5, RECOVERY: 1 },
+    RECOVERY: { UP: 3, STABLE: 2, DOWN: 1 },
 };
 
-// Partially misleading indicator pools per state: [confirming signals, fake/uncertainty signals]
-const INDICATORS = {
-    BULL:        [['📈 Strong buy pressure', '🟢 Bulls in control', '📊 Uptrend confirmed'],       ['⚠️ Overbought signals forming', '🐻 Bear trap possible']],
-    BEAR:        [['📉 Sell wall forming', '🔴 Bears dominating', '❄️ Market cooling'],             ['📈 Oversold bounce signals', '🧠 Smart money accumulating']],
-    PANIC:       [['💥 Panic selling detected', '📉 Support broken', '🔴 High sell volume'],        ['📈 Contrarian buy signal', '🐋 Whale buying the dip']],
-    RALLY:       [['🔥 FOMO rally in progress', '📈 Strong momentum', '🚀 Breakout confirmed'],     ['⚠️ Overextended rally', '❄️ Cool-down incoming']],
-    VOLATILE:    [['⚡ Extreme volatility', '💥 Both sides liquidating', '⚠️ High risk window'],    ['🧠 Smart money accumulating', '📊 Volatility compressing']],
-    WHALE:       [['🐋 Whale position opened', '💫 Large order detected', '⚠️ Market manipulation'],['🧠 Retail following whales', '📊 Volume spike']],
-    BREAKOUT:    [['📊 Key level broken', '🚀 Momentum building', '📈 Trend acceleration'],          ['⚠️ Fake breakout risk', '🐻 Bull trap possible']],
-    CONSOLIDATE: [['⬜ Tight range trading', '📊 Low volatility', '❄️ Market resting'],              ['⚡ Breakout imminent', '🐋 Quiet accumulation']],
-    OVERBOUGHT:  [['🔴 RSI overbought', '⚠️ Correction incoming', '📉 Sellers entering'],           ['🔥 Still some FOMO', '📈 One more push possible']],
-    OVERSOLD:    [['🟢 RSI oversold', '📈 Bounce expected', '🐋 Smart money buying'],               ['📉 More downside possible', '⚠️ Dead cat bounce risk']],
-    LIQ_SPIKE:   [['💥 Liquidations cascading', '⚡ Flash crash in progress', '🔴 Stop hunts active'],['🐋 Market maker reset', '📊 Volatility spike resolving']],
-    MOMENTUM:    [['🔄 Trend reversing', '🧠 Momentum shift detected', '📊 New direction forming'], ['⚠️ False reversal risk', '📈 Counter-trend spike']],
-};
+let currentState   = 'STABLE';
+let stateChangedAt = Date.now();
+let _timer         = null;
 
-// ── Global market state ──────────────────────────────────────────────
+// ── Transitions ──────────────────────────────────────────────────────
 
-let currentState   = 'BULL';
-let stateFlipCount = 0;
-let stateDuration  = 15;
-
-function rollDuration(state) {
-    const [min, max] = STATES[state].duration;
-    return min + Math.floor(Math.random() * (max - min + 1));
+function pickNextState() {
+    const weights = TRANSITIONS[currentState] || TRANSITIONS.STABLE;
+    const total   = Object.values(weights).reduce((a, b) => a + b, 0);
+    let rand = Math.random() * total;
+    for (const [state, w] of Object.entries(weights)) {
+        rand -= w;
+        if (rand <= 0) return state;
+    }
+    return 'STABLE';
 }
 
 function transitionState() {
-    const weights = TRANSITIONS[currentState];
-    const total   = Object.values(weights).reduce((a, b) => a + b, 0);
-    let rand      = Math.random() * total;
-    for (const [state, w] of Object.entries(weights)) {
-        rand -= w;
-        if (rand <= 0) { currentState = state; break; }
-    }
-    stateFlipCount = 0;
-    stateDuration  = rollDuration(currentState);
+    const next = pickNextState();
+    currentState   = next;
+    stateChangedAt = Date.now();
+    console.log(`[Market] → ${next} (${STATES[next].label})`);
+    saveMarketState();
 }
 
-function advanceMarket() {
-    stateFlipCount++;
-    if (stateFlipCount >= stateDuration) transitionState();
+function scheduleTransition() {
+    if (_timer) clearTimeout(_timer);
+    const s = STATES[currentState] || STATES.STABLE;
+    const delay = (s.minDur + Math.random() * (s.maxDur - s.minDur)) * 1000;
+    _timer = setTimeout(() => {
+        transitionState();
+        scheduleTransition();
+    }, delay);
 }
+
+function startMarketEngine() {
+    scheduleTransition();
+    console.log(`[Market] ✅ Engine started — state: ${currentState}`);
+}
+
+// ── Persistence ──────────────────────────────────────────────────────
+
+async function saveMarketState() {
+    try {
+        const { getDB } = require('../db');
+        const db = getDB();
+        if (!db) return;
+        await db.collection('market').updateOne(
+            { _id: 'state' },
+            { $set: { state: currentState, changedAt: stateChangedAt } },
+            { upsert: true }
+        );
+    } catch (e) { console.error('[Market] Save error:', e.message); }
+}
+
+async function loadMarketState() {
+    try {
+        const { getDB } = require('../db');
+        const db = getDB();
+        if (!db) return;
+        const doc = await db.collection('market').findOne({ _id: 'state' });
+        if (doc && doc.state && STATES[doc.state]) {
+            currentState   = doc.state;
+            stateChangedAt = doc.changedAt || Date.now();
+            console.log(`[Market] ✅ Restored state: ${currentState} (${STATES[currentState].label})`);
+        }
+    } catch (e) { console.error('[Market] Load error:', e.message); }
+}
+
+// ── State query ──────────────────────────────────────────────────────
 
 function getMarketState() {
-    return {
-        name:     currentState,
-        ...STATES[currentState],
-        flipsIn:  stateFlipCount,
-        flipsMax: stateDuration,
-    };
+    const s        = STATES[currentState] || STATES.STABLE;
+    const elapsed  = Math.floor((Date.now() - stateChangedAt) / 1000);
+    return { name: currentState, ...s, elapsed };
 }
 
 // ── Per-player modifiers ─────────────────────────────────────────────
 
 function streakModifier(d) {
-    const w = d.efStreak    || 0;
+    const w = d.efStreak     || 0;
     const l = d.efLoseStreak || 0;
     if (w >= 4) return -0.15;
     if (w >= 3) return -0.09;
@@ -104,9 +116,9 @@ function streakModifier(d) {
 function recoveryModifier(d) {
     const recent = d.efRecentBets || [];
     if (recent.length < 5) return 0;
-    const last10 = recent.slice(-10);
-    const lost    = last10.filter(b => !b.win).reduce((s, b) => s + b.amount, 0);
-    const wagered = last10.reduce((s, b) => s + b.amount, 0);
+    const last10   = recent.slice(-10);
+    const lost     = last10.filter(b => !b.win).reduce((s, b) => s + b.amount, 0);
+    const wagered  = last10.reduce((s, b) => s + b.amount, 0);
     return wagered > 0 && lost / wagered > 0.30 ? +0.08 : 0;
 }
 
@@ -116,49 +128,24 @@ function antiFarmModifier(d) {
     return (d.efFlipCount || 0) > 50 ? -0.12 : 0;
 }
 
-// ── Indicator picker ─────────────────────────────────────────────────
-
-function pickIndicators(stateName) {
-    const pool = INDICATORS[stateName] || INDICATORS.VOLATILE;
-    const [truePool, fakePool] = pool;
-    const shuffled = [...truePool].sort(() => Math.random() - 0.5);
-    const fake     = fakePool[Math.floor(Math.random() * fakePool.length)];
-    return [shuffled[0], shuffled[1], fake].filter(Boolean);
-}
-
-// ── Player behavioral profile ────────────────────────────────────────
-
-function updatePlayerProfile(d, betAmount, walletBefore) {
-    const ratio = walletBefore > 0 ? betAmount / walletBefore : 0;
-    const last  = (d.efRecentBets || []).slice(-1)[0]?.amount;
-    let profile = 'balanced';
-    if (ratio > 0.20 || betAmount > 20000)                              profile = 'high-risk';
-    else if (betAmount > 10000)                                         profile = 'aggressive';
-    else if (betAmount < 500)                                           profile = 'safe';
-    else if (ratio < 0.02)                                              profile = 'conservative';
-    else if (last && Math.abs(betAmount - last) / Math.max(last, 1) > 0.5) profile = 'emotional';
-    d.efProfile = profile;
-}
-
-// ── Main API ─────────────────────────────────────────────────────────
+// ── Main outcome calculation ─────────────────────────────────────────
 
 function calculateOutcome(userId, betAmount) {
     const { econData, checkEconUser } = require('./econStore');
     checkEconUser(userId);
     const d = econData[userId];
 
-    let prob = STATES[currentState].baseWin;
+    let prob = (STATES[currentState] || STATES.STABLE).baseWin;
     prob += streakModifier(d);
     prob += recoveryModifier(d);
     prob += antiFarmModifier(d);
-    prob = Math.max(0.28, Math.min(0.72, prob));
+    prob = Math.max(0.08, Math.min(0.85, prob));
 
     return {
-        win:        Math.random() < prob,
+        win:         Math.random() < prob,
         probability: prob,
-        indicators: pickIndicators(currentState),
-        stateName:  currentState,
-        stateInfo:  STATES[currentState],
+        stateName:   currentState,
+        stateInfo:   STATES[currentState] || STATES.STABLE,
     };
 }
 
@@ -177,9 +164,6 @@ function recordFlip(userId, betAmount, win, walletBefore) {
     d.efRecentBets = d.efRecentBets || [];
     d.efRecentBets.push({ amount: betAmount, win, ts: Date.now() });
     if (d.efRecentBets.length > 10) d.efRecentBets.shift();
-
-    updatePlayerProfile(d, betAmount, walletBefore);
-    advanceMarket();
 }
 
-module.exports = { getMarketState, calculateOutcome, recordFlip, STATES };
+module.exports = { getMarketState, calculateOutcome, recordFlip, startMarketEngine, loadMarketState, STATES };

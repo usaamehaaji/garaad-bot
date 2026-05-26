@@ -79,6 +79,7 @@ const { loadData }              = require('./src/store');
 const { loadEcon }              = require('./src/economy/econStore');
 const { restorePredictions }    = require('./src/economy/prediction');
 const { tickMarket }            = require('./src/economy/market');
+const { loadMarketState, startMarketEngine } = require('./src/economy/marketEngine');
 
 // ───── Client ─────
 const client = new Client({
@@ -116,6 +117,9 @@ client.once('clientReady', () => {
     restoreSoloGames(client).catch(e => console.error('[Solo] Restore failed:', e.message));
     restoreQuizGames(client).catch(e => console.error('[Quiz] Restore failed:', e.message));
     restoreDuelGames(client).catch(e => console.error('[Duel] Restore failed:', e.message));
+
+    // Dynamic market engine (6 states, time-based transitions)
+    startMarketEngine();
 
     // Market auto-tick: update prices every 60s
     tickMarket();
@@ -172,6 +176,7 @@ if (!token) {
     await connectDB();
     await loadData();
     await loadEcon();
+    await loadMarketState();
         client.login(token).catch((err) => {
             console.error('❌ Login Discord ma guulaysan:', err.message);
             process.exit(1);
