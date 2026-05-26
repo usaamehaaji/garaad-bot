@@ -175,13 +175,14 @@ async function sendDuelQuestion(channel) {
 
     const row = new ActionRowBuilder().addComponents(buttons);
 
-    const rOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
     let msg;
     try {
-        msg = await channel.send({ embeds: [embed], components: [row], ...rOpt });
-    } catch {
+        msg = await channel.send({ embeds: [embed], components: [row] });
+    } catch (e) {
+        console.error('[Duel] Failed to send question:', e.message);
         activeDuels.delete(channel.id);
         refundDuelStakes(state.p1, state.p2);
+        await channel.send(`⚠️ <@${state.p1}> <@${state.p2}> — Duel su'aal soo dirin kari waayay. IQ waa la soo celiyay.`).catch(() => {});
         return;
     }
     state.message = msg;
@@ -241,8 +242,7 @@ async function sendDuelQuestion(channel) {
             .setColor(reason === 'correct' ? '#2ecc71' : '#e74c3c');
 
         if (cur.message) await cur.message.delete().catch(() => {});
-        const sOpt = cur.originMsg ? { reply: { messageReference: cur.originMsg.id, failIfNotExists: false } } : {};
-        await channel.send({ embeds: [summaryEmbed], ...sOpt }).catch(() => {});
+        await channel.send({ embeds: [summaryEmbed] }).catch(() => {});
 
         cur.currentQ++;
         setTimeout(() => sendDuelQuestion(channel), 2500);
@@ -307,8 +307,7 @@ async function finishDuel(channel) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    const fOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
-    await channel.send({ embeds: [resultEmbed], components: [closeRow], ...fOpt });
+    await channel.send({ embeds: [resultEmbed], components: [closeRow] });
 }
 
 // ── Startup restore: reload all saved duels and resend current question ──
