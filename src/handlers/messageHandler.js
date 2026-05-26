@@ -2,7 +2,7 @@
 // GARAAD BOT - Maareynta Farriimaha (Message Handler)
 // =====================================================================
 
-const { PREFIX, SAVER_CHANNEL_ID } = require('../config');
+const { PREFIX } = require('../config');
 const { checkUser }   = require('../utils/helpers');
 const { isAdmin }     = require('../utils/admin');
 

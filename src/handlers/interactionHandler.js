@@ -12,7 +12,6 @@ const { userData, activeQuiz, activeDuels, activeTournament, isUserBusy, tournam
 const { checkUser }         = require('../utils/helpers');
 const { isAdmin }           = require('../utils/admin');
 const { QUIZ_MIN_PLAYERS, QUIZ_MAX_PLAYERS, DUEL_STAKE_IQ, TOURNAMENT_MIN_PLAYERS, TOURNAMENT_R1_QUESTIONS, TOURNAMENT_R2_QUESTIONS, TOURNAMENT_FINAL_QUESTIONS } = require('../config');
-const { exchangeQuizPoints } = require('../utils/quizPoints');
 const { buildEduEmbed, buildEcoEmbed, helpRow } = require('../../data/commands/help');
 
 function genCode() {
@@ -1629,8 +1628,7 @@ module.exports = function setupInteractionHandler(client) {
             const { buildJeebEmbed, jeebRow } = require('../../data/commands/economy/jeeb');
             const targetUser = await interaction.client.users.fetch(targetId).catch(() => null);
             const username   = targetUser ? targetUser.username : targetId;
-            const isOwner    = targetId === authorId;
-            return interaction.update({ embeds: [buildJeebEmbed(targetId, username, isOwner)], components: [jeebRow(authorId, targetId)] });
+            return interaction.update({ embeds: [buildJeebEmbed(targetId, username)], components: [jeebRow(authorId, targetId)] });
         }
 
         // ── Team Duel: lobby buttons ──
@@ -2390,23 +2388,6 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **${item.label}** si guul leh ayaad u iibsatay!\n\`?etitle ${key}\` si aad u dhigto.`, flags: MessageFlags.Ephemeral });
             }
 
-            if (item.type === 'timed_item') {
-                const expiryKey = key + 'Expiry';
-                d.inventory ??= {};
-                d.inventory[expiryKey] ??= 0;
-                if (d.inventory[expiryKey] > Date.now()) {
-                    const expiresIn = Math.ceil((d.inventory[expiryKey] - Date.now()) / 3600000);
-                    return interaction.reply({ content: `⚠️ **${item.label}** weli active yahay — **${expiresIn}h** baqa.`, flags: MessageFlags.Ephemeral });
-                }
-                if ((d.btc || 0) < item.price) {
-                    return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid.\nQiimaha: **₿: ${item.price.toLocaleString()}** | Haysataa: **₿: ${(d.btc || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
-                }
-                d.btc = (d.btc || 0) - item.price;
-                d.inventory[expiryKey] = Date.now() + 3 * 24 * 60 * 60 * 1000;
-                saveEcon();
-                return interaction.reply({ content: `🛡️ **${item.label}** iibsatay!\n₿ **${item.price} / ${d.btc || 0}**\n⏳ Waxay shaqaynaysaa **3 maalmood**.`, flags: MessageFlags.Ephemeral });
-            }
-
             // Custom name title — show modal
             if (item.type === 'custom') {
                 if ((d.btc || 0) < item.price) {
@@ -2772,12 +2753,6 @@ module.exports = function setupInteractionHandler(client) {
             await interaction.deferUpdate().catch(() => {});
             if (state.message) await state.message.edit({ embeds: [new EmbedBuilder().setTitle('✅ Lobby waa la xidhay').setDescription(`Quiz wuxuu ku bilaabmayaa **${state.players.size}** qof.`).setColor('#2ecc71')], components: [] }).catch(() => {});
             return beginQuizGame(state);
-        }
-
-        if (id === 'quiz_pts_xp' || id === 'quiz_pts_iq') {
-            const mode = id === 'quiz_pts_xp' ? 'xp' : 'iq';
-            const { text } = exchangeQuizPoints(interaction.user.id, mode);
-            return interaction.reply({ content: text, flags: MessageFlags.Ephemeral });
         }
 
         // ── Catch-all: quiz answer buttons ──

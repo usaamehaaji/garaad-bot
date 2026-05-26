@@ -9,14 +9,13 @@ function fmtW(n) {
 }
 
 function getPlayerRank(userId) {
-    const sorted = Object.entries(econData)
-        .filter(([k]) => /^\d{17,19}$/.test(k))
-        .sort(([, a], [, b]) => (b.btc || 0) - (a.btc || 0));
-    const idx = sorted.findIndex(([uid]) => uid === userId);
-    return idx >= 0 ? idx + 1 : null;
+    const entries = Object.entries(econData).filter(([k]) => /^\d{17,19}$/.test(k));
+    entries.sort(([, a], [, b]) => (b.btc || 0) - (a.btc || 0));
+    const idx = entries.findIndex(([uid]) => uid === userId);
+    return { rank: idx >= 0 ? idx + 1 : null, total: entries.length };
 }
 
-function buildJeebEmbed(userId, username, isOwner = true) {
+function buildJeebEmbed(userId, username) {
     checkEconUser(userId);
     const d = econData[userId];
 
@@ -24,7 +23,8 @@ function buildJeebEmbed(userId, username, isOwner = true) {
     const bank   = d.banks?.garaad || 0;
     const streak = d.streak        || 0;
     const total  = Math.max(0, btc + bank - (d.loan?.owed || 0));
-    const rank   = getPlayerRank(userId);
+    const { rank, total: playerCount } = getPlayerRank(userId);
+    const rankStr = rank ? `**#${rank}** / ${playerCount}` : '—';
 
     const titleLabel = (() => {
         if (!d.activeEconTitle) return '';
@@ -34,35 +34,19 @@ function buildJeebEmbed(userId, username, isOwner = true) {
 
     const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
-    const hasShield = (d.inventory?.safetyExpiry || 0) > Date.now();
-    const shieldStr = hasShield ? '  🛡️' : '';
-
-    // ── Other player: wallet only ──
-    if (!isOwner) {
-        return new EmbedBuilder()
-            .setTitle(`💼 ${username}${titleLabel}${shieldStr}`)
-            .setColor('#95a5a6')
-            .setThumbnail(BTC_ICON)
-            .setDescription(`🏷️ **Rank #${rank ?? '—'}**`)
-            .addFields(
-                { name: '💳 Wallet', value: `**₿ ${fmtW(btc)}**`, inline: true },
-            )
-            .setFooter({ text: `Garaad Wallet • ${time}`, iconURL: BTC_ICON });
-    }
-
-    // ── Own wallet: full info ──
     const fields = [
         { name: '💳 Wallet',       value: `**₿ ${fmtW(btc)}**`,   inline: true },
         { name: '🏦 Bank Balance', value: `**₿ ${fmtW(bank)}**`,  inline: true },
         { name: '📊 Net Worth',    value: `**₿ ${fmtW(total)}**`, inline: true },
+        { name: '🏆 Rank',         value: rankStr,                 inline: true },
     ];
     if (d.loan?.owed) fields.push({ name: '⚠️ Loan Due', value: `**₿ ${fmtW(d.loan.owed)}**`, inline: true });
 
     return new EmbedBuilder()
-        .setTitle(`💼 ${username}${titleLabel}${shieldStr}`)
+        .setTitle(`💼 ${username}${titleLabel}`)
         .setColor('#f39c12')
         .setThumbnail(BTC_ICON)
-        .setDescription(`🏷️ **Rank #${rank ?? '—'}**  •  🔥 **${streak} day${streak !== 1 ? 's' : ''}**`)
+        .setDescription(`🔥 **${streak} day${streak !== 1 ? 's' : ''}**`)
         .addFields(...fields)
         .setFooter({ text: `Garaad Wallet • ${time}`, iconURL: BTC_ICON });
 }
@@ -85,10 +69,9 @@ module.exports = async function jeebCmd(message) {
     const target   = message.mentions.users.first();
     const userId   = target ? target.id       : authorId;
     const username = target ? target.username : message.author.username;
-    const isOwner  = !target || target.id === authorId;
 
     return message.reply({
-        embeds:     [buildJeebEmbed(userId, username, isOwner)],
+        embeds:     [buildJeebEmbed(userId, username)],
         components: [jeebRow(authorId, userId)],
     });
 };

@@ -77,6 +77,7 @@ async function lockPrediction(userId, client) {
     saveEcon();
 
     const entryPrice = getPrice('btc');
+    if (!entryPrice) return { ok: false, msg: '⚠️ Market price la heli waayo — daqiiqad yar ka dib isku day.' };
     const endTime    = Date.now() + minutes * 60 * 1000;
 
     const pred = {

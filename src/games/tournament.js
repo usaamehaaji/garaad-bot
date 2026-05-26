@@ -208,27 +208,39 @@ function buildAdminPanelEmbed(state) {
 function buildAdminPanelButtons(stage, gameChId) {
     const gch = gameChId || GAME_CHANNEL_ID;
     if (stage === 'initial') {
-        return new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId('tartan_panel_announce').setLabel('📢 Bilow Registration').setStyle(ButtonStyle.Primary),
-            new ButtonBuilder().setCustomId('tartan_panel_quick')   .setLabel('🚀 Bilow Toos')        .setStyle(ButtonStyle.Success),
-            new ButtonBuilder().setCustomId('tartan_panel_cancel')  .setLabel('🛑 Jooji')             .setStyle(ButtonStyle.Danger),
-            new ButtonBuilder().setCustomId('tartan_panel_dismiss') .setLabel('❌ Iska xir')          .setStyle(ButtonStyle.Secondary),
-        );
+        return [
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('tartan_panel_announce').setLabel('📢 Bilow Registration').setStyle(ButtonStyle.Primary),
+                new ButtonBuilder().setCustomId('tartan_panel_quick')   .setLabel('🚀 Bilow Toos')        .setStyle(ButtonStyle.Success),
+                new ButtonBuilder().setCustomId('tartan_panel_cancel')  .setLabel('🛑 Jooji')             .setStyle(ButtonStyle.Danger),
+            ),
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('tartan_panel_dismiss') .setLabel('❌ Iska xir')          .setStyle(ButtonStyle.Secondary),
+            ),
+        ];
     }
     if (stage === 'registration') {
-        return new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId('tartan_panel_open')    .setLabel('▶️ Fur Game')          .setStyle(ButtonStyle.Success),
-            new ButtonBuilder().setCustomId('tartan_panel_count')   .setLabel('👥 Tirada')            .setStyle(ButtonStyle.Secondary),
-            new ButtonBuilder().setCustomId('tartan_panel_cancel')  .setLabel('🛑 Jooji')             .setStyle(ButtonStyle.Danger),
-            new ButtonBuilder().setCustomId('tartan_panel_dismiss') .setLabel('❌ Iska xir')          .setStyle(ButtonStyle.Secondary),
-        );
+        return [
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('tartan_panel_open')    .setLabel('▶️ Fur Game')          .setStyle(ButtonStyle.Success),
+                new ButtonBuilder().setCustomId('tartan_panel_count')   .setLabel('👥 Tirada')            .setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder().setCustomId('tartan_panel_cancel')  .setLabel('🛑 Jooji')             .setStyle(ButtonStyle.Danger),
+            ),
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('tartan_panel_dismiss') .setLabel('❌ Iska xir')          .setStyle(ButtonStyle.Secondary),
+            ),
+        ];
     }
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`tartan_bilow_next_${gch}`).setLabel('🚀 Bilow Wareeg 1aad').setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId('tartan_panel_count')  .setLabel('👥 Players') .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId('tartan_panel_cancel') .setLabel('🛑 Jooji')   .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId('tartan_panel_dismiss').setLabel('❌ Iska xir').setStyle(ButtonStyle.Secondary),
-    );
+    return [
+        new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId(`tartan_bilow_next_${gch}`).setLabel('🚀 Bilow Wareeg 1aad').setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId('tartan_panel_count')      .setLabel('👥 Players')          .setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder().setCustomId('tartan_panel_cancel')     .setLabel('🛑 Jooji')            .setStyle(ButtonStyle.Danger),
+        ),
+        new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId('tartan_panel_dismiss').setLabel('❌ Iska xir').setStyle(ButtonStyle.Secondary),
+        ),
+    ];
 }
 
 async function updateAdminPanel(state) {
@@ -238,7 +250,7 @@ async function updateAdminPanel(state) {
         const msg = await ch.messages.fetch(state.panelMsgId);
         await msg.edit({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons(state.stage, state.gameChannelId)],
+            components: buildAdminPanelButtons(state.stage, state.gameChannelId),
         });
     } catch {}
 }
@@ -275,7 +287,7 @@ async function handlePanelButton(interaction, action) {
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons('registration', state.gameChannelId)],
+            components: buildAdminPanelButtons('registration', state.gameChannelId),
         }).catch(() => {});
     }
 
@@ -295,7 +307,7 @@ async function handlePanelButton(interaction, action) {
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons('join', state.gameChannelId)],
+            components: buildAdminPanelButtons('join', state.gameChannelId),
         }).catch(() => {});
     }
 
@@ -324,7 +336,7 @@ async function handlePanelButton(interaction, action) {
 
         return interaction.update({
             embeds:     [buildAdminPanelEmbed(state)],
-            components: [buildAdminPanelButtons('join', state.gameChannelId)],
+            components: buildAdminPanelButtons('join', state.gameChannelId),
         }).catch(() => {});
     }
 
@@ -527,7 +539,7 @@ async function cmdAnnounce(message) {
 
     const panelMsg = await message.channel.send({
         embeds:     [buildAdminPanelEmbed(state)],
-        components: [buildAdminPanelButtons('initial', gameChId)],
+        components: buildAdminPanelButtons('initial', gameChId),
     });
     state.panelMsgId     = panelMsg.id;
     state.panelChannelId = message.channel.id;
