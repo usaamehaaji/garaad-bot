@@ -16,11 +16,12 @@ function getIQRank(userId) {
 }
 
 module.exports = async function profileCommand(message) {
+    try {
     const target = message.mentions.users.first() || message.author;
     checkUser(target.id);
     checkEconUser(target.id);
     const data = userData[target.id];
-    const econ = econData[target.id];
+    const econ = econData[target.id] || {};
 
     const level     = getLevel(data.iq);
     const nextLvlIq = (level + 1) * 200;
@@ -61,4 +62,8 @@ module.exports = async function profileCommand(message) {
     );
 
     return message.reply({ embeds: [embed], components: [row] });
+    } catch (e) {
+        console.error('[Profile] Error:', e.message);
+        return message.reply('⚠️ Profile soo bandhigi kari waayay. Dib isku day.').catch(() => {});
+    }
 };
