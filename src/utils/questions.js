@@ -12,7 +12,7 @@ const { checkUser, shuffleArray } = require('./helpers');
 const { TWO_WEEKS_MS, PREFIX }    = require('../config');
 
 // ───── Soo akhri su'aalaha game kasta ─────
-const GAMES = ['solo', 'duel', 'quiz', 'tournament'];
+const GAMES = ['solo', 'duel', 'quiz', 'tournament', 'team'];
 const questionsByGame = {};
 
 for (const game of GAMES) {

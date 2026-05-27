@@ -198,15 +198,16 @@ module.exports = function setupMessageHandler(client) {
 
             case '2v2':
             case '2vs2':
-                return duelCmd(message, ['2v2', ...args]);
+                return teamDuel.cmd2v2(message, args);
 
             case '3v3':
             case '3vs3':
-                return duelCmd(message, ['3v3', ...args]);
+                return teamDuel.cmd3v3(message, args);
 
+            case 'r':
             case 'remove':
             case 'tremove':
-                return teamDuel.cmdTeamRemove(message, args);
+                return teamDuel.cmdTeamRemove(message);
 
             case 'dm':
                 return dmCmd(message, args);

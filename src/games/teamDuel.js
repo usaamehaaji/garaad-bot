@@ -1,20 +1,16 @@
 // =====================================================================
-// GARAAD BOT — Team Duel (1v1 / 2v2 / 3v3)
-// Host: ?tduel 2v2 usd 10000  |  Kick: ?tremove @user
-// Stakes deducted on join, refunded on leave/kick/cancel
+// GARAAD BOT — Team Duel (?2v2 / ?3v3)
+// BTC-only · Auto-start when full · Max 25 questions · ?r @user
 // =====================================================================
 
 const {
     EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags,
 } = require('discord.js');
-const { userData, saveData } = require('../store');
-
 const { econData, saveEcon, checkEconUser } = require('../economy/econStore');
-const { checkUser, stripQuestionNumber } = require('../utils/helpers');
+const { fmt, stripQuestionNumber } = require('../utils/helpers');
 const {
     pickQuestionsForGame,
     markSeenForUsersInGame,
-    noQuestionsLeftEmbed,
 } = require('../utils/questions');
 const { getAnswerOptions } = require('../utils/questionOptions');
 const { GLOBAL_WAIT_MS, SOLO_FAST_MS, SOLO_MAX_SCORE, SOLO_MIN_SCORE } = require('../config');
@@ -22,155 +18,109 @@ const { GLOBAL_WAIT_MS, SOLO_FAST_MS, SOLO_MAX_SCORE, SOLO_MIN_SCORE } = require
 // channelId → state
 const activeTeamDuels = new Map();
 
-function calcTimedScore(timeTakenMs) {
-    if (timeTakenMs <= SOLO_FAST_MS) return SOLO_MAX_SCORE;
-    const ratio = (timeTakenMs - SOLO_FAST_MS) / (GLOBAL_WAIT_MS - SOLO_FAST_MS);
+const Q_DEFAULT = 10;
+const Q_MIN     = 3;
+const Q_MAX     = 25;
+const MIN_BET   = 10;
+const MAX_BET   = 100_000;
+
+function calcTimedScore(ms) {
+    if (ms <= SOLO_FAST_MS) return SOLO_MAX_SCORE;
+    const ratio = (ms - SOLO_FAST_MS) / (GLOBAL_WAIT_MS - SOLO_FAST_MS);
     return Math.max(SOLO_MIN_SCORE, Math.round(SOLO_MAX_SCORE - (SOLO_MAX_SCORE - SOLO_MIN_SCORE) * ratio));
 }
 
-const TDUEL_Q_DEFAULT = 10;
-const TDUEL_Q_MIN     = 3;
-const TDUEL_Q_MAX     = 25;
-
-// ── Helpers ───────────────────────────────────────────────────────────
-
-function allJoined(state) {
-    return [...state.teams[1], ...state.teams[2]];
-}
-
-function totalNeeded(state) {
-    return state.maxPerTeam * 2;
-}
-
-function teamOf(state, userId) {
-    if (state.teams[1].includes(userId)) return 1;
-    if (state.teams[2].includes(userId)) return 2;
+function allJoined(state)   { return [...state.teams[1], ...state.teams[2]]; }
+function totalNeeded(state) { return state.maxPerTeam * 2; }
+function teamOf(state, uid) {
+    if (state.teams[1].includes(uid)) return 1;
+    if (state.teams[2].includes(uid)) return 2;
     return null;
 }
 
-function hasEnough(state, userId) {
-    if (state.stakeType === 'iq') {
-        checkUser(userId);
-        return userData[userId].iq >= state.stakeAmount;
-    }
-    checkEconUser(userId);
-    return (econData[userId].btc || 0) >= state.stakeAmount;
-}
+function deductBTC(uid, amount) { checkEconUser(uid); econData[uid].btc = (econData[uid].btc || 0) - amount; }
+function refundBTC(uid, amount) { checkEconUser(uid); econData[uid].btc = (econData[uid].btc || 0) + amount; }
+function refundAll(state)  { for (const uid of allJoined(state)) refundBTC(uid, state.stakeAmount); }
 
-function deductStake(state, userId) {
-    if (state.stakeType === 'iq') { checkUser(userId); userData[userId].iq -= state.stakeAmount; }
-    else { checkEconUser(userId); econData[userId].btc = (econData[userId].btc || 0) - state.stakeAmount; }
-}
-
-function refundStake(state, userId) {
-    if (state.stakeType === 'iq') { checkUser(userId); userData[userId].iq += state.stakeAmount; }
-    else { checkEconUser(userId); econData[userId].btc = (econData[userId].btc || 0) + state.stakeAmount; }
-}
-
-function persistStakes(state) {
-    if (state.stakeType === 'iq') saveData(); else saveEcon();
-}
-
-// ── Embed / Row builders ──────────────────────────────────────────────
+// ── Embeds / Rows ─────────────────────────────────────────────────────
 
 function buildLobbyEmbed(state) {
-    const t1 = state.teams[1].map(id => `<@${id}>`).join(', ') || '—';
-    const t2 = state.teams[2].map(id => `<@${id}>`).join(', ') || '—';
-    const joined   = allJoined(state).length;
-    const needed   = totalNeeded(state);
-    const stakeStr = `${state.stakeAmount.toLocaleString()} ${state.stakeType.toUpperCase()}`;
-    const totalStr = `${fmt((state.stakeAmount * needed))} ${state.stakeType.toUpperCase()}`;
+    const t1     = state.teams[1].map(id => `<@${id}>`).join('\n') || '—';
+    const t2     = state.teams[2].map(id => `<@${id}>`).join('\n') || '—';
+    const joined = allJoined(state).length;
+    const needed = totalNeeded(state);
 
     return new EmbedBuilder()
-        .setTitle(`⚔️ Team Duel — ${state.mode.toUpperCase()}`)
+        .setTitle(`⚔️ ${state.mode.toUpperCase()} Team Duel — Lobby`)
         .setColor('#e67e22')
         .setDescription(
             `**Host:** <@${state.hostId}>\n` +
-            `**Dhig qof kasta:** ${stakeStr}\n` +
-            `**Wadarta:** ${totalStr}\n` +
+            `**₿ Dhig qof kasta:** ${fmt(state.stakeAmount)} BTC\n` +
             `**Su'aalood:** ${state.totalQ}\n\n` +
             `🔵 **Team 1** (${state.teams[1].length}/${state.maxPerTeam})\n${t1}\n\n` +
             `🔴 **Team 2** (${state.teams[2].length}/${state.maxPerTeam})\n${t2}\n\n` +
-            `👥 ${joined}/${needed} qof ayaa ku biiray\n\n` +
-            `_Dhigga waa la jaraa markad "✅ Ku biir" gujiso._`
-        );
+            `👥 **${joined}/${needed}** — buuxsho si ciyaartu bilaabato`
+        )
+        .setFooter({ text: 'Host: ?r @user si qof loo saaro lobby-ga' });
 }
 
 function lobbyRow(channelId, hostId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`tduel_join_${channelId}`)
-            .setLabel('✅ Ku biir')
-            .setStyle(ButtonStyle.Success),
-        new ButtonBuilder()
-            .setCustomId(`tduel_leave_${channelId}`)
-            .setLabel('🚪 Ka bax')
-            .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-            .setCustomId(`tduel_start_${hostId}_${channelId}`)
-            .setLabel('▶️ Bilow')
-            .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-            .setCustomId(`tduel_cancel_${hostId}_${channelId}`)
-            .setLabel('❌ Jooji')
-            .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`tduel_join_${channelId}`)             .setLabel('✅ Ku biir') .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`tduel_leave_${channelId}`)            .setLabel('🚪 Ka bax') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`tduel_start_${hostId}_${channelId}`) .setLabel('▶️ Bilow')  .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`tduel_cancel_${hostId}_${channelId}`).setLabel('❌ Jooji')  .setStyle(ButtonStyle.Danger),
     );
 }
 
 // ── Commands ──────────────────────────────────────────────────────────
 
-async function cmdTeamDuel(message, args) {
-    if (!message.guild) {
-        return message.reply('⛔ `?deul` server channel kaliya ayaa loogu shaqeeyaa — DM kuma shaqeyso.');
-    }
+async function cmdTeamGame(message, args, maxPerTeam) {
+    if (!message.guild)
+        return message.reply('⛔ Server channel kaliya ayaa loogu shaqeeyaa.');
 
     const channelId = message.channel.id;
     const hostId    = message.author.id;
+    const mode      = maxPerTeam === 2 ? '2v2' : '3v3';
 
-    if (activeTeamDuels.has(channelId)) {
-        return message.reply('⚠️ Channel-kan team duel ayaa socda. Sug ama host-ku ha joojiyaa.');
-    }
+    if (activeTeamDuels.has(channelId))
+        return message.reply(`⚠️ Channel-kan ${mode} duel ayaa socda. Sug ama host-ku ha joojiyaa.`);
 
-    const modeArg   = (args[0] || '2v2').toLowerCase();
-    const typeArg   = (args[1] || 'iq').toLowerCase();
-    const amountArg = parseInt(args[2] || '5');
-    const countArg  = args[3] ? parseInt(args[3]) : TDUEL_Q_DEFAULT;
-
-    const modeMap = { '1v1': 1, '2v2': 2, '3v3': 3 };
-    if (!modeMap[modeArg]) {
+    const amountArg = parseFloat(args[0]);
+    if (!args[0] || isNaN(amountArg) || amountArg <= 0)
         return message.reply(
-            '⚠️ Nidaamka waa: `1v1`, `2v2`, ama `3v3`\n' +
-            'Tusaale: `?tduel 2v2 usd 10000` ama `?tduel 1v1 iq 50`',
+            `⚠️ Isticmaal: \`?${mode} [lacag]\` ama \`?${mode} [lacag] [su'aalood]\`\n` +
+            `Tusaale: \`?${mode} 500\` ama \`?${mode} 500 15\``
         );
-    }
-    if (!['iq', 'btc'].includes(typeArg)) {
-        return message.reply('⚠️ Nooca dhigga waa `iq` ama `btc`.\nTusaale: `?duel 2v2` kadib `btc 500` ama `iq 10`');
-    }
-    if (isNaN(amountArg) || amountArg <= 0) {
-        return message.reply('⚠️ Dhigga qiimihiisu waa inuu ka sarreeyo 0.\nTusaale: `?deul 2v2 usd 10000`');
-    }
-    if (isNaN(countArg) || countArg < TDUEL_Q_MIN || countArg > TDUEL_Q_MAX) {
-        return message.reply(`⚠️ Tirada su'aalaha waa inay u dhexeyso **${TDUEL_Q_MIN}** iyo **${TDUEL_Q_MAX}**.\nTusaale: \`?deul 2v2 usd 10000 10\``);
-    }
+    if (amountArg < MIN_BET)
+        return message.reply(`⚠️ Min dhig waa **₿ ${MIN_BET.toLocaleString()}**.`);
+    if (amountArg > MAX_BET)
+        return message.reply(`⚠️ Max dhig waa **₿ ${fmt(MAX_BET)}**.`);
+
+    checkEconUser(hostId);
+    if ((econData[hostId].btc || 0) < amountArg)
+        return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(econData[hostId].btc || 0)}**`);
+
+    const countRaw = args[1] ? parseInt(args[1]) : Q_DEFAULT;
+    if (isNaN(countRaw) || countRaw < Q_MIN || countRaw > Q_MAX)
+        return message.reply(`⚠️ Su'aalaha tirada waa inay u dhexeyso **${Q_MIN}–${Q_MAX}**.`);
 
     const state = {
         hostId,
-        mode: modeArg,
-        maxPerTeam: modeMap[modeArg],
-        stakeType: typeArg,
+        mode,
+        maxPerTeam,
         stakeAmount: amountArg,
-        teams: { 1: [], 2: [] },
+        teams:  { 1: [], 2: [] },
         scores: {},
-        phase: 'lobby',
+        phase:     'lobby',
         questions: [],
-        currentQ: 0,
-        totalQ: countArg,
+        currentQ:  0,
+        totalQ:    countRaw,
         channelId,
-        lobbyMsg: null,
+        lobbyMsg:  null,
     };
 
     activeTeamDuels.set(channelId, state);
-
     const msg = await message.reply({
         embeds:     [buildLobbyEmbed(state)],
         components: [lobbyRow(channelId, hostId)],
@@ -178,78 +128,70 @@ async function cmdTeamDuel(message, args) {
     state.lobbyMsg = msg;
 }
 
-async function cmdTeamRemove(message, args) {
+async function cmdTeamRemove(message) {
     const channelId = message.channel.id;
     const state     = activeTeamDuels.get(channelId);
 
-    if (!state || state.phase !== 'lobby') {
+    if (!state || state.phase !== 'lobby')
         return message.reply('⚠️ Lobby ma jirto channel-kan.');
-    }
-    if (message.author.id !== state.hostId) {
+    if (message.author.id !== state.hostId)
         return message.reply('⛔ Host kaliya ayaa qof ka saari kara.');
-    }
 
     const target = message.mentions.users.first();
-    if (!target) return message.reply('⚠️ `?tremove @user` isticmaal.');
-    if (target.id === state.hostId) return message.reply('⚠️ Host isaga ma saari karo.');
+    if (!target)
+        return message.reply('⚠️ Isticmaal: `?r @user`');
+    if (target.id === state.hostId)
+        return message.reply('⚠️ Host isaga ma saari karo — `❌ Jooji` gujiso haddaad rabto.');
 
     const team = teamOf(state, target.id);
-    if (team === null) return message.reply(`⚠️ <@${target.id}> lobby kuma jirto.`);
+    if (team === null)
+        return message.reply(`⚠️ <@${target.id}> lobby kuma jirto.`);
 
     state.teams[team].splice(state.teams[team].indexOf(target.id), 1);
-    refundStake(state, target.id);
-    persistStakes(state);
+    refundBTC(target.id, state.stakeAmount);
+    saveEcon();
 
-    await state.lobbyMsg.edit({
+    await state.lobbyMsg?.edit({
         embeds:     [buildLobbyEmbed(state)],
         components: [lobbyRow(state.channelId, state.hostId)],
     }).catch(() => {});
 
-    return message.reply(`✅ <@${target.id}> lobby ayaa laga saaray — dhigga waa la soo celiyay.`);
+    return message.reply(`✅ <@${target.id}> lobby ayaa laga saaray — **₿ ${fmt(state.stakeAmount)}** waa la soo celiyay.`);
 }
 
 // ── Button handlers ───────────────────────────────────────────────────
 
 async function handleJoin(interaction, channelId) {
     const state = activeTeamDuels.get(channelId);
-    if (!state || state.phase !== 'lobby') {
+    if (!state || state.phase !== 'lobby')
         return interaction.reply({ content: '⚠️ Lobby ma jirto.', flags: MessageFlags.Ephemeral });
-    }
 
     const userId = interaction.user.id;
-    if (teamOf(state, userId) !== null) {
+    if (teamOf(state, userId) !== null)
         return interaction.reply({ content: '✅ Horey ayaad u ku biirtay!', flags: MessageFlags.Ephemeral });
-    }
 
-    // Slots full?
-    if (state.teams[1].length >= state.maxPerTeam && state.teams[2].length >= state.maxPerTeam) {
+    if (state.teams[1].length >= state.maxPerTeam && state.teams[2].length >= state.maxPerTeam)
         return interaction.reply({ content: '⚠️ Lobby waa buuxday!', flags: MessageFlags.Ephemeral });
-    }
 
-    // Check stake
-    if (!hasEnough(state, userId)) {
-        const have = state.stakeType === 'iq'
-            ? `${userData[userId].iq} IQ`
-            : `$${econData[userId].usd.toLocaleString()}`;
-        const need = state.stakeType === 'iq'
-            ? `${state.stakeAmount} IQ`
-            : `$${state.stakeAmount.toLocaleString()}`;
+    checkEconUser(userId);
+    if ((econData[userId].btc || 0) < state.stakeAmount)
         return interaction.reply({
-            content: `⚠️ ${state.stakeType.toUpperCase()} kugu filna ma lihid.\nHaysataa: **${have}** — Dhig: **${need}**`,
+            content: `⚠️ BTC kugu filna ma lihid.\nWallet: **₿ ${fmt(econData[userId].btc || 0)}** — Dhig: **₿ ${fmt(state.stakeAmount)}**`,
             flags: MessageFlags.Ephemeral,
         });
-    }
 
-    // Assign team
-    if (state.teams[1].length < state.maxPerTeam) {
-        state.teams[1].push(userId);
-    } else {
-        state.teams[2].push(userId);
-    }
+    if (state.teams[1].length < state.maxPerTeam) state.teams[1].push(userId);
+    else state.teams[2].push(userId);
 
-    // Deduct stake immediately on join
-    deductStake(state, userId);
-    persistStakes(state);
+    deductBTC(userId, state.stakeAmount);
+    saveEcon();
+
+    // Auto-start when all slots filled
+    if (allJoined(state).length >= totalNeeded(state)) {
+        await interaction.update({ embeds: [buildLobbyEmbed(state)], components: [lobbyRow(channelId, state.hostId)] });
+        setTimeout(() => autoStart(interaction.channel, channelId), 1500);
+        return;
+    }
 
     return interaction.update({
         embeds:     [buildLobbyEmbed(state)],
@@ -259,26 +201,20 @@ async function handleJoin(interaction, channelId) {
 
 async function handleLeave(interaction, channelId) {
     const state = activeTeamDuels.get(channelId);
-    if (!state || state.phase !== 'lobby') {
+    if (!state || state.phase !== 'lobby')
         return interaction.reply({ content: '⚠️ Lobby ma jirto.', flags: MessageFlags.Ephemeral });
-    }
 
     const userId = interaction.user.id;
-    if (userId === state.hostId) {
-        return interaction.reply({
-            content: '⚠️ Host "❌ Jooji" badhanka ku joog lobby-ga si loo xiro.',
-            flags: MessageFlags.Ephemeral,
-        });
-    }
+    if (userId === state.hostId)
+        return interaction.reply({ content: '⚠️ Host si loo baxo "❌ Jooji" gujiso.', flags: MessageFlags.Ephemeral });
 
     const team = teamOf(state, userId);
-    if (team === null) {
+    if (team === null)
         return interaction.reply({ content: '⚠️ Lobby kuma jirtid.', flags: MessageFlags.Ephemeral });
-    }
 
     state.teams[team].splice(state.teams[team].indexOf(userId), 1);
-    refundStake(state, userId);
-    persistStakes(state);
+    refundBTC(userId, state.stakeAmount);
+    saveEcon();
 
     return interaction.update({
         embeds:     [buildLobbyEmbed(state)],
@@ -288,158 +224,151 @@ async function handleLeave(interaction, channelId) {
 
 async function handleStart(interaction, hostId, channelId) {
     const state = activeTeamDuels.get(channelId);
-    if (!state || state.phase !== 'lobby') {
+    if (!state || state.phase !== 'lobby')
         return interaction.reply({ content: '⚠️ Lobby ma jirto.', flags: MessageFlags.Ephemeral });
-    }
-    if (interaction.user.id !== hostId) {
+    if (interaction.user.id !== hostId)
         return interaction.reply({ content: '⛔ Host kaliya ayaa bilaabi kara.', flags: MessageFlags.Ephemeral });
-    }
 
     const t1 = state.teams[1].length;
     const t2 = state.teams[2].length;
+    if (t1 === 0 || t2 === 0)
+        return interaction.reply({ content: '⚠️ Labada koob mid walba waa inuu leeyahay ugu yaraan 1 ciyaaryahan.', flags: MessageFlags.Ephemeral });
+    if (t1 !== t2)
+        return interaction.reply({ content: `⚠️ Koobabku waa inay isla tirsanyihiin. Team 1: ${t1} | Team 2: ${t2}`, flags: MessageFlags.Ephemeral });
 
-    if (t1 === 0 || t2 === 0) {
-        return interaction.reply({
-            content: '⚠️ Labada koob mid walba waa inuu leeyahay ugu yaraan 1 ciyaaryahan.',
-            flags: MessageFlags.Ephemeral,
-        });
-    }
-    if (t1 !== t2) {
-        return interaction.reply({
-            content: `⚠️ Koobabku waa inay isla tirsanyihiin. Team 1: ${t1} | Team 2: ${t2}`,
-            flags: MessageFlags.Ephemeral,
-        });
-    }
+    await interaction.update({ embeds: [buildStartEmbed(state)], components: [] });
+    await prepareAndStart(interaction.channel, channelId);
+}
 
-    // Pick questions (stakes already deducted on join)
-    const questions = pickQuestionsForGame(state.hostId, 'duel', state.totalQ);
+async function handleCancel(interaction, hostId, channelId) {
+    const state = activeTeamDuels.get(channelId);
+    if (!state)
+        return interaction.reply({ content: '⚠️ Lobby ma jirto.', flags: MessageFlags.Ephemeral });
+    if (interaction.user.id !== hostId)
+        return interaction.reply({ content: '⛔ Host kaliya ayaa joojin kara.', flags: MessageFlags.Ephemeral });
+
+    refundAll(state);
+    saveEcon();
+    activeTeamDuels.delete(channelId);
+
+    return interaction.update({
+        embeds: [new EmbedBuilder().setTitle('❌ Team Duel waa la joojiyay').setDescription('Dhigga waa la soo celiyay.').setColor('#e74c3c')],
+        components: [],
+    });
+}
+
+// ── Game start helpers ────────────────────────────────────────────────
+
+function buildStartEmbed(state) {
+    const players    = allJoined(state);
+    const totalPrize = state.stakeAmount * players.length;
+    return new EmbedBuilder()
+        .setTitle(`⚔️ ${state.mode.toUpperCase()} — Bilaabmay! 🏆`)
+        .setColor('#27ae60')
+        .setDescription(
+            `🔵 **Team 1:** ${state.teams[1].map(id => `<@${id}>`).join(', ')}\n` +
+            `🔴 **Team 2:** ${state.teams[2].map(id => `<@${id}>`).join(', ')}\n\n` +
+            `💰 **Wadarta:** ₿ ${fmt(totalPrize)}\n` +
+            `📋 **${state.totalQ}** su'aalood\n\n` +
+            `Su'aasha 1aad ayaa yimaadda...`
+        );
+}
+
+async function autoStart(channel, channelId) {
+    const state = activeTeamDuels.get(channelId);
+    if (!state || state.phase !== 'lobby') return;
+
+    const startEmbed = buildStartEmbed(state);
+    await state.lobbyMsg?.edit({ embeds: [startEmbed], components: [] }).catch(() => {});
+    await prepareAndStart(channel, channelId);
+}
+
+async function prepareAndStart(channel, channelId) {
+    const state = activeTeamDuels.get(channelId);
+    if (!state) return;
+
+    const questions = pickQuestionsForGame(state.hostId, 'team', state.totalQ);
     if (!questions || questions.length === 0) {
-        // Refund all and cancel
-        for (const uid of allJoined(state)) { refundStake(state, uid); }
-        persistStakes(state);
+        refundAll(state);
+        saveEcon();
         activeTeamDuels.delete(channelId);
-        return interaction.update({
-            embeds: [new EmbedBuilder()
-                .setTitle('⚠️ Team Duel — Su\'aalaha la heyn waayay')
-                .setDescription('Dhigga waa la soo celiyay.')
-                .setColor('#e74c3c')],
-            components: [],
-        });
+        await channel.send('⚠️ Su\'aalaha lama helin — dhigga waa la soo celiyay.').catch(() => {});
+        return;
     }
 
     state.questions = questions;
     state.totalQ    = questions.length;
     state.phase     = 'playing';
-
     for (const uid of allJoined(state)) state.scores[uid] = 0;
 
-    const players = allJoined(state);
-    const totalPrize = state.stakeAmount * players.length;
-
-    const startEmbed = new EmbedBuilder()
-        .setTitle(`⚔️ Team Duel — ${state.mode.toUpperCase()} — Bilaabmay!`)
-        .setColor('#e67e22')
-        .setDescription(
-            `🔵 **Team 1:** ${state.teams[1].map(id => `<@${id}>`).join(', ')}\n` +
-            `🔴 **Team 2:** ${state.teams[2].map(id => `<@${id}>`).join(', ')}\n\n` +
-            `**Wadarta:** ${totalPrize.toLocaleString()} ${state.stakeType.toUpperCase()}\n` +
-            `**${state.totalQ}** su'aalood — qof kasta si gooni ah ayuu jawaabaa!\n\n` +
-            `Bilaabaya 3 ilbiriqsi gudahood...`,
-        );
-
-    await interaction.update({ embeds: [startEmbed], components: [] });
-    setTimeout(() => sendTeamDuelQuestion(interaction.channel, channelId), 3000);
-}
-
-async function handleCancel(interaction, hostId, channelId) {
-    const state = activeTeamDuels.get(channelId);
-    if (!state) {
-        return interaction.reply({ content: '⚠️ Lobby ma jirto.', flags: MessageFlags.Ephemeral });
-    }
-    if (interaction.user.id !== hostId) {
-        return interaction.reply({ content: '⛔ Host kaliya ayaa joojin kara.', flags: MessageFlags.Ephemeral });
-    }
-
-    // Refund all who joined
-    for (const uid of allJoined(state)) { refundStake(state, uid); }
-    persistStakes(state);
-    activeTeamDuels.delete(channelId);
-
-    return interaction.update({
-        embeds: [new EmbedBuilder()
-            .setTitle('❌ Team Duel waa la joojiyay')
-            .setDescription('Dhigga waa la soo celiyay dadka ku biiray.')
-            .setColor('#e74c3c')],
-        components: [],
-    });
+    setTimeout(() => sendTeamQuestion(channel, channelId), 3000);
 }
 
 // ── Game loop ─────────────────────────────────────────────────────────
 
-async function sendTeamDuelQuestion(channel, channelId) {
+async function sendTeamQuestion(channel, channelId) {
     const state = activeTeamDuels.get(channelId);
     if (!state || state.phase !== 'playing') return;
-
     if (state.currentQ >= state.totalQ) return finishTeamDuel(channel, channelId);
 
     const qIndex  = state.currentQ;
     const q       = state.questions[qIndex];
     const players = allJoined(state);
 
-    markSeenForUsersInGame(players, 'duel', q._idx);
-    saveData();
+    markSeenForUsersInGame(players, 'team', q._idx);
 
     const entries = getAnswerOptions(q);
     if (entries.length === 0) {
-        for (const uid of players) { refundStake(state, uid); }
-        persistStakes(state);
+        refundAll(state);
+        saveEcon();
         activeTeamDuels.delete(channelId);
-        return channel.send('⚠️ Su\'aal khaldan — dhigga waa la soo celiyay.');
+        await channel.send('⚠️ Su\'aal khaldan — dhigga waa la soo celiyay.').catch(() => {});
+        return;
     }
 
     const t1Score = state.teams[1].reduce((s, id) => s + (state.scores[id] || 0), 0);
     const t2Score = state.teams[2].reduce((s, id) => s + (state.scores[id] || 0), 0);
 
     const qEmbed = new EmbedBuilder()
-        .setTitle(`⚔️ Team Duel — Su'aal ${qIndex + 1}/${state.totalQ}`)
+        .setTitle(`⚔️ ${state.mode.toUpperCase()} — Su'aal ${qIndex + 1}/${state.totalQ}`)
         .setColor('#9b59b6')
         .setDescription(
             `## ${stripQuestionNumber(q.question)}\n\n` +
-            `⏱️ ${GLOBAL_WAIT_MS / 1000} ilbiriqsi\n\n` +
-            `🔵 Team 1: **${t1Score}** | 🔴 Team 2: **${t2Score}**`,
+            `⏱️ ${GLOBAL_WAIT_MS / 1000}s\n\n` +
+            `🔵 Team 1: **${t1Score}** | 🔴 Team 2: **${t2Score}**`
         );
 
     const buttons = entries.map((e, i) =>
         new ButtonBuilder()
             .setCustomId(`tduel_ans_${channelId}_${qIndex}_${i}_${e.isCorrect ? 't' : 'f'}`)
             .setLabel(e.label.slice(0, 80))
-            .setStyle(ButtonStyle.Primary),
+            .setStyle(ButtonStyle.Primary)
     );
 
     let msg;
     try {
         msg = await channel.send({ embeds: [qEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
-    } catch {
-        for (const uid of players) { refundStake(state, uid); }
-        persistStakes(state);
+    } catch (e) {
+        console.error('[TeamDuel] Failed to send question:', e.message);
+        refundAll(state);
+        saveEcon();
         activeTeamDuels.delete(channelId);
+        await channel.send('⚠️ Su\'aal soo dirin kari waayay — dhigga waa la soo celiyay.').catch(() => {});
         return;
     }
     state.currentMsg = msg;
 
-    const answeredThisQ  = new Set();
+    const answeredThisQ   = new Set();
     const questionStartMs = Date.now();
 
-    const filter = i =>
-        i.customId.startsWith(`tduel_ans_${channelId}_${qIndex}_`) &&
-        players.includes(i.user.id);
-
-    const collector = msg.createMessageComponentCollector({ filter, time: GLOBAL_WAIT_MS });
+    const collector = msg.createMessageComponentCollector({
+        filter: i => i.customId.startsWith(`tduel_ans_${channelId}_${qIndex}_`) && players.includes(i.user.id),
+        time: GLOBAL_WAIT_MS,
+    });
 
     collector.on('collect', async interaction => {
-        if (answeredThisQ.has(interaction.user.id)) {
+        if (answeredThisQ.has(interaction.user.id))
             return interaction.reply({ content: '↩️ Su\'aashan mar hore ayaad jawaabday!', flags: MessageFlags.Ephemeral }).catch(() => {});
-        }
         answeredThisQ.add(interaction.user.id);
 
         const isCorrect = interaction.customId.endsWith('_t');
@@ -464,18 +393,17 @@ async function sendTeamDuelQuestion(channel, channelId) {
         const newT2 = cur.teams[2].reduce((s, id) => s + (cur.scores[id] || 0), 0);
 
         const summaryEmbed = new EmbedBuilder()
-            .setTitle(`⚔️ Team Duel — Su'aal ${qIndex + 1}/${cur.totalQ}`)
+            .setTitle(`⚔️ ${state.mode.toUpperCase()} — Su'aal ${qIndex + 1}/${cur.totalQ}`)
             .setColor('#2ecc71')
             .setDescription(
                 `## ${stripQuestionNumber(q.question)}\n\n` +
                 `✅ **${correctLabel}**\n\n` +
-                `🔵 Team 1: **${newT1}** | 🔴 Team 2: **${newT2}**`,
+                `🔵 Team 1: **${newT1}** | 🔴 Team 2: **${newT2}**`
             );
 
         await msg.edit({ embeds: [summaryEmbed], components: [] }).catch(() => {});
-
         cur.currentQ++;
-        setTimeout(() => sendTeamDuelQuestion(channel, channelId), 2500);
+        setTimeout(() => sendTeamQuestion(channel, channelId), 2500);
     });
 }
 
@@ -483,84 +411,67 @@ async function finishTeamDuel(channel, channelId) {
     const state = activeTeamDuels.get(channelId);
     if (!state) return;
 
-    const t1Score = state.teams[1].reduce((s, id) => s + (state.scores[id] || 0), 0);
-    const t2Score = state.teams[2].reduce((s, id) => s + (state.scores[id] || 0), 0);
+    const t1Score    = state.teams[1].reduce((s, id) => s + (state.scores[id] || 0), 0);
+    const t2Score    = state.teams[2].reduce((s, id) => s + (state.scores[id] || 0), 0);
     const players    = allJoined(state);
     const totalPrize = state.stakeAmount * players.length;
 
     let resultEmbed;
 
-    // IQ bonus from correct answers for all participants
-    const iqBonuses = {};
-    for (const uid of players) {
-        const iq = Math.floor((state.scores[uid] || 0) / 90);
-        if (iq > 0) { checkUser(uid); userData[uid].iq = (userData[uid].iq || 0) + iq; iqBonuses[uid] = iq; }
-    }
-    if (Object.keys(iqBonuses).length > 0) saveData();
-
-    const bonusLine = Object.keys(iqBonuses).length > 0
-        ? `\n\n🧠 **IQ Bonus (suaalaha):** ${players.map(id => iqBonuses[id] ? `<@${id}> +${iqBonuses[id]}` : null).filter(Boolean).join(' · ')}`
-        : '';
-
     if (t1Score === t2Score) {
-        for (const uid of players) { refundStake(state, uid); }
-
+        refundAll(state);
         resultEmbed = new EmbedBuilder()
             .setTitle('🤝 Team Duel — Iskumid!')
             .setColor('#f1c40f')
             .setDescription(
                 `🔵 Team 1: **${t1Score}** dhibic\n` +
                 `🔴 Team 2: **${t2Score}** dhibic\n\n` +
-                `Waa iskumid! Dhigga waa la soo celiyay.${bonusLine}`,
+                `Waa iskumid! Dhigga waa la soo celiyay.`
             );
     } else {
-        const winTeam    = t1Score > t2Score ? 1 : 2;
-        const loseTeam   = winTeam === 1 ? 2 : 1;
-        const winIds     = state.teams[winTeam];
-        const loseIds    = state.teams[loseTeam];
-        const perWinner  = Math.floor(totalPrize / winIds.length);
+        const winTeam   = t1Score > t2Score ? 1 : 2;
+        const loseTeam  = winTeam === 1 ? 2 : 1;
+        const winIds    = state.teams[winTeam];
+        const loseIds   = state.teams[loseTeam];
+        const perWinner = Math.floor(totalPrize / winIds.length);
 
         for (const uid of winIds) {
-            if (state.stakeType === 'iq') { checkUser(uid); userData[uid].iq += perWinner; }
-            else { checkEconUser(uid); econData[uid].btc = (econData[uid].btc || 0) + perWinner; }
+            checkEconUser(uid);
+            econData[uid].btc = (econData[uid].btc || 0) + perWinner;
         }
 
-        const winColor = winTeam === 1 ? '🔵' : '🔴';
+        const icon = winTeam === 1 ? '🔵' : '🔴';
         resultEmbed = new EmbedBuilder()
-            .setTitle('🏆 Team Duel — Dhamaatay!')
+            .setTitle(`🏆 ${state.mode.toUpperCase()} — Dhamaatay!`)
             .setColor('#2ecc71')
             .setDescription(
-                `${winColor} **Team ${winTeam}:** **${Math.max(t1Score, t2Score)}** dhibic 🏆\n` +
+                `${icon} **Team ${winTeam}:** **${Math.max(t1Score, t2Score)}** dhibic 🏆\n` +
                 `${winTeam === 1 ? '🔴' : '🔵'} **Team ${loseTeam}:** **${Math.min(t1Score, t2Score)}** dhibic\n\n` +
                 `🥇 **Guulayste:** ${winIds.map(id => `<@${id}>`).join(', ')}\n` +
-                `   Qof kasta: **+${perWinner.toLocaleString()} ${state.stakeType.toUpperCase()}**\n\n` +
+                `   Qof kasta: **+₿ ${fmt(perWinner)}**\n\n` +
                 `💀 **Lumiyay:** ${loseIds.map(id => `<@${id}>`).join(', ')}\n` +
-                `   Qof kasta: −${state.stakeAmount.toLocaleString()} ${state.stakeType.toUpperCase()}${bonusLine}`,
+                `   Qof kasta: **−₿ ${fmt(state.stakeAmount)}**`
             );
     }
 
-    persistStakes(state);
+    saveEcon();
     activeTeamDuels.delete(channelId);
-
     await channel.send({ embeds: [resultEmbed] });
 }
 
-// ── Non-participant answer guard ──────────────────────────────────────
-
 async function handleNonParticipantAnswer(interaction, channelId) {
     const state = activeTeamDuels.get(channelId);
-    if (!state || state.phase !== 'playing') {
+    if (!state || state.phase !== 'playing')
         return interaction.reply({ content: '⚠️ Ciyaar ma socdo.', flags: MessageFlags.Ephemeral });
-    }
-    const userId = interaction.user.id;
-    if (!allJoined(state).includes(userId)) {
+    if (!allJoined(state).includes(interaction.user.id))
         return interaction.reply({ content: '⛔ Game kuma jirtid — kama jawaabi kartid.', flags: MessageFlags.Ephemeral });
-    }
 }
 
 module.exports = {
     activeTeamDuels,
-    cmdTeamDuel,
+    cmd2v2:    (message, args) => cmdTeamGame(message, args, 2),
+    cmd3v3:    (message, args) => cmdTeamGame(message, args, 3),
+    cmdTeamDuel: (message, args) => cmdTeamGame(message, args, 2), // legacy compat
     cmdTeamRemove,
     handleJoin,
     handleLeave,
