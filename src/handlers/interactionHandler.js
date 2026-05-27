@@ -1793,7 +1793,7 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
-        // ── Admin: Eid greeting ──
+        // ── Admin: Eid greeting — DM all players ──
         if (id.startsWith('admin_eid_')) {
             const ownerId = id.replace('admin_eid_', '');
             if (interaction.user.id !== ownerId)
@@ -1801,17 +1801,35 @@ module.exports = function setupInteractionHandler(client) {
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
 
-            const eidEmbed = new EmbedBuilder()
-                .setTitle('🌙 Ciid Wanaagsan — Eid Mubarak! 🌙')
-                .setColor('#1a7a4a')
-                .setDescription(
-                    `🌙 Ciiddaan ha idiin noqoto mid ay ka buuxaan farxad, nabad, iyo waqtiyo qurux badan oo aad la qaadataan qoyska iyo asxaabta. Waxaan idiin rajeynaynaa guul iyo barako aan dhammaad lahayn. ✨\n\n` +
-                    `🎮 Dhamaan players-ka **Garaad Bot** Discord Game, mahadsanidiin taageeradiinna iyo ciyaartiinna joogtada ah. Ciid wanaagsan, ciyaarta sii wada, kuna raaxaysta madadaalada iyo tartanka saaxiibbadiin. 🏆`
-                )
-                .setFooter({ text: 'Garaad Bot Community • Ciid Mubaarak Dhamaan Players-ka' });
+            const { dmAllPlayersEid, buildChannelPayload } = require('../../data/commands/admin/ciidCmd');
 
-            await interaction.channel.send({ embeds: [eidEmbed] });
-            return interaction.reply({ content: '✅ Farriinta Ciidda waa la diray!', flags: MessageFlags.Ephemeral });
+            // Count guild members for the status message
+            let memberCount = '?';
+            try {
+                const members = await interaction.guild.members.fetch();
+                memberCount = members.filter(m => !m.user.bot).size;
+            } catch { /* ignore */ }
+
+            await interaction.reply({ content: `🌙 Ciid farriinta loo dirayaa **${memberCount}** members-ka... (waxay qaadanaysaa daqiiqad yar)`, flags: MessageFlags.Ephemeral });
+
+            // Send to the designated announcements channel with @everyone
+            const EID_CHANNEL_ID = '1490233695624364123';
+            const eidChannel = interaction.guild.channels.cache.get(EID_CHANNEL_ID)
+                || await interaction.guild.channels.fetch(EID_CHANNEL_ID).catch(() => null);
+            if (eidChannel) {
+                await eidChannel.send(buildChannelPayload()).catch(() => {});
+            } else {
+                await interaction.channel.send(buildChannelPayload()).catch(() => {});
+            }
+
+            // DM all guild members (includes admin/owner)
+            const { success, failed } = await dmAllPlayersEid(interaction.client, interaction.guild);
+            return interaction.editReply(
+                `✅ **Ciid Fariin la dhameystiray!**\n` +
+                `📢 Channel: <#${EID_CHANNEL_ID}>\n` +
+                `📨 DM la gaadhsiiyay: **${success}**\n` +
+                `❌ DM xiran (privacy): **${failed}**`
+            );
         }
 
         // ── Treasury buttons (owner only) ──

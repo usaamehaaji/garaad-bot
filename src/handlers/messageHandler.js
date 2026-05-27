@@ -38,6 +38,7 @@ const shaqoCmd        = require('../../data/commands/economy/shaqo');
 const bankListCmd     = require('../../data/commands/economy/bankList');
 const econTitleCmd    = require('../../data/commands/economy/econTitle');
 const dmCmd           = require('../../data/commands/dm');
+const ciidCmd         = require('../../data/commands/admin/ciidCmd');
 
 
 module.exports = function setupMessageHandler(client) {
@@ -150,6 +151,9 @@ module.exports = function setupMessageHandler(client) {
             case 'treasury':
             case 'khaznad':
                 return treasuryCmdFn(message);
+
+            case 'ciid':
+                return ciidCmd.sendEidToChannel(message);
 
             // ── Kale ──
             case 'cilada':
