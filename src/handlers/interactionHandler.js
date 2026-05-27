@@ -1801,6 +1801,9 @@ module.exports = function setupInteractionHandler(client) {
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
 
+            // Defer immediately to avoid 3-second timeout
+            await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+
             const { buildChannelPayload } = require('../../data/commands/admin/ciidCmd');
 
             const EID_CHANNEL_ID = '1490233695624364123';
@@ -1808,12 +1811,16 @@ module.exports = function setupInteractionHandler(client) {
                 || await interaction.guild.channels.fetch(EID_CHANNEL_ID).catch(() => null);
 
             const target = eidChannel || interaction.channel;
-            await target.send(buildChannelPayload()).catch(() => {});
-
-            return interaction.reply({
-                content: `✅ **Ciid Fariin la diray!**\n📢 <#${EID_CHANNEL_ID}> @everyone`,
-                flags: MessageFlags.Ephemeral
+            const sent = await target.send(buildChannelPayload()).catch(e => {
+                console.error('[Ciid] channel send failed:', e.message);
+                return null;
             });
+
+            return interaction.editReply(
+                sent
+                    ? `✅ **Ciid Fariin la diray!**\n📢 <#${EID_CHANNEL_ID}>`
+                    : `⚠️ Fariinta channelka laguma dirin karin. Channel ID hubi.`
+            );
         }
 
         // ── Treasury buttons (owner only) ──
