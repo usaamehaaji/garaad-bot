@@ -1793,6 +1793,27 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
+        // ── Admin: Eid greeting ──
+        if (id.startsWith('admin_eid_')) {
+            const ownerId = id.replace('admin_eid_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+
+            const eidEmbed = new EmbedBuilder()
+                .setTitle('🌙 Ciid Wanaagsan — Eid Mubarak! 🌙')
+                .setColor('#1a7a4a')
+                .setDescription(
+                    `🌙 Ciiddaan ha idiin noqoto mid ay ka buuxaan farxad, nabad, iyo waqtiyo qurux badan oo aad la qaadataan qoyska iyo asxaabta. Waxaan idiin rajeynaynaa guul iyo barako aan dhammaad lahayn. ✨\n\n` +
+                    `🎮 Dhamaan players-ka **Garaad Bot** Discord Game, mahadsanidiin taageeradiinna iyo ciyaartiinna joogtada ah. Ciid wanaagsan, ciyaarta sii wada, kuna raaxaysta madadaalada iyo tartanka saaxiibbadiin. 🏆`
+                )
+                .setFooter({ text: 'Garaad Bot Community • Ciid Mubaarak Dhamaan Players-ka' });
+
+            await interaction.channel.send({ embeds: [eidEmbed] });
+            return interaction.reply({ content: '✅ Farriinta Ciidda waa la diray!', flags: MessageFlags.Ephemeral });
+        }
+
         // ── Treasury buttons (owner only) ──
         if (id.startsWith('trs_add_') || id.startsWith('trs_reduce_') || id.startsWith('trs_set_')) {
             if (interaction.user.id !== OWNER_ID)
