@@ -1801,26 +1801,16 @@ module.exports = function setupInteractionHandler(client) {
             if (!require('../utils/admin').isAdmin(ownerId))
                 return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
 
-            // Defer immediately to avoid 3-second timeout
-            await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+            // Reply FIRST — instant, no hang
+            await interaction.reply({ content: '✅ Ciid fariin la diray!', flags: MessageFlags.Ephemeral });
 
+            // Send to channel in background — no await blocking interaction
+            const EID_CHANNEL_ID = '1499085787361316915';
             const { buildChannelPayload } = require('../../data/commands/admin/ciidCmd');
-
-            const EID_CHANNEL_ID = '1490233695624364123';
-            const eidChannel = interaction.guild.channels.cache.get(EID_CHANNEL_ID)
-                || await interaction.guild.channels.fetch(EID_CHANNEL_ID).catch(() => null);
-
-            const target = eidChannel || interaction.channel;
-            const sent = await target.send(buildChannelPayload()).catch(e => {
-                console.error('[Ciid] channel send failed:', e.message);
-                return null;
-            });
-
-            return interaction.editReply(
-                sent
-                    ? `✅ **Ciid Fariin la diray!**\n📢 <#${EID_CHANNEL_ID}>`
-                    : `⚠️ Fariinta channelka laguma dirin karin. Channel ID hubi.`
-            );
+            const eidCh = interaction.guild.channels.cache.get(EID_CHANNEL_ID);
+            const target = eidCh || interaction.channel;
+            target.send(buildChannelPayload()).catch(e => console.error('[Ciid]', e.message));
+            return;
         }
 
         // ── Treasury buttons (owner only) ──
