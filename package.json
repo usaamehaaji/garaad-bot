@@ -18,10 +18,11 @@
     "discord.js":        "^14.26.3",
     "dotenv":            "^17.4.2",
     "mongodb":           "^6.17.0",
-    "@discordjs/voice":  "^0.17.0",
-    "opusscript":        "^0.1.1",
-    "play-dl":           "^1.9.7",
-    "ffmpeg-static":     "^5.2.0",
-    "libsodium-wrappers":"^0.7.13"
+    "@discordjs/voice":    "^0.17.0",
+    "opusscript":          "^0.1.1",
+    "play-dl":             "^1.9.7",
+    "@distube/ytdl-core":  "^4.16.8",
+    "ffmpeg-static":       "^5.2.0",
+    "libsodium-wrappers":  "^0.7.13"
   }
 }

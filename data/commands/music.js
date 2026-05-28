@@ -1,6 +1,6 @@
 // =====================================================================
 // MUSIC SYSTEM — Admin only
-// ?join <song/url>  ?skip  ?stop  ?queue  ?np  ?leave
+// ?play <song/url>  ?skip  ?stop  ?queue  ?np  ?leave
 // =====================================================================
 
 const {
@@ -11,26 +11,51 @@ const {
     VoiceConnectionStatus,
     entersState,
     getVoiceConnection,
+    StreamType,
 } = require('@discordjs/voice');
-const play = require('play-dl');
+
+const ytdl = require('@distube/ytdl-core');
+const play  = require('play-dl');
 const { EmbedBuilder } = require('discord.js');
 const { isAdmin } = require('../../src/utils/admin');
 
-// guildId → { connection, player, queue: [], current: null, textChannel }
+// guildId → { connection, player, queue: [], current, textChannel }
 const queues = new Map();
 
-// ── Internal: play next song in queue ──────────────────────────────
+function fmtDuration(sec) {
+    if (!sec) return '?:??';
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+// ── Internal: stream a song ────────────────────────────────────────
+async function getStream(url) {
+    try {
+        const stream = ytdl(url, {
+            filter:         'audioonly',
+            quality:        'highestaudio',
+            highWaterMark:  1 << 25,
+            dlChunkSize:    0,
+        });
+        return createAudioResource(stream, { inputType: StreamType.Arbitrary, inlineVolume: true });
+    } catch (e) {
+        throw new Error(`Stream failed: ${e.message}`);
+    }
+}
+
+// ── Internal: play next ────────────────────────────────────────────
 async function playNext(guildId) {
     const q = queues.get(guildId);
     if (!q) return;
 
     if (q.queue.length === 0) {
-        q.textChannel.send('✅ Queue dhammaatay. Bot VC ka baxayaa...').catch(() => {});
+        q.textChannel.send('✅ Queue dhammaatay. Bot 10 ilbiriqsi kadib baxayaa.').catch(() => {});
         setTimeout(() => {
             const conn = getVoiceConnection(guildId);
             if (conn) conn.destroy();
             queues.delete(guildId);
-        }, 5000);
+        }, 10_000);
         return;
     }
 
@@ -38,103 +63,114 @@ async function playNext(guildId) {
     q.current  = song;
 
     try {
-        const stream   = await play.stream(song.url);
-        const resource = createAudioResource(stream.stream, { inputType: stream.type });
+        const resource = await getStream(song.url);
         q.player.play(resource);
 
         q.textChannel.send({
             embeds: [new EmbedBuilder()
                 .setColor('#1db954')
-                .setDescription(`🎵 **Hadda ciyaaraysa:**\n[${song.title}](${song.url})\n⏱ ${song.duration}`)
-                .setThumbnail(song.thumbnail)
-                .setFooter({ text: `Queue: ${q.queue.length} gabar haray` })
+                .setTitle('🎵 Hadda Ciyaaraysa')
+                .setDescription(`**[${song.title}](${song.url})**`)
+                .addFields(
+                    { name: '⏱ Muddada',  value: song.duration, inline: true },
+                    { name: '📋 Queue',    value: `${q.queue.length} gabar haray`, inline: true }
+                )
+                .setThumbnail(song.thumbnail || null)
+                .setFooter({ text: 'Garaad Bot Music' })
             ]
         }).catch(() => {});
     } catch (e) {
-        console.error('[Music] Stream error:', e.message);
+        console.error('[Music] Playback error:', e.message);
         q.textChannel.send(`⚠️ "${song.title}" ciyaari kari waayay. Next...`).catch(() => {});
         playNext(guildId);
     }
 }
 
-// ── ?join <song/url> ───────────────────────────────────────────────
+// ── ?play <query> ──────────────────────────────────────────────────
 async function joinCmd(message, args) {
     if (!isAdmin(message.author.id))
         return message.reply('⛔ Admin kaliya.');
 
     const query = args.join(' ').trim();
     if (!query)
-        return message.reply('⚠️ Isticmaal: `?join <magaca gabar ama YouTube URL>`');
+        return message.reply('⚠️ Isticmaal: `?play <magaca gabar ama YouTube URL>`');
 
     const voiceChannel = message.member?.voice?.channel;
     if (!voiceChannel)
-        return message.reply('⚠️ Marka hore VC (voice channel) ku biir, ka dibna `?join <gabar>` isticmaal.');
+        return message.reply('⚠️ Marka hore VC (voice channel) ku biir.');
 
-    // Search
     const searching = await message.reply('🔍 Raadinaya...');
 
     let songInfo;
     try {
-        if (play.yt_validate(query) === 'video') {
-            const info = await play.video_info(query);
-            songInfo = {
-                title:     info.video_details.title,
-                url:       info.video_details.url,
-                duration:  info.video_details.durationRaw,
-                thumbnail: info.video_details.thumbnails?.[0]?.url || '',
-            };
-        } else {
+        let videoUrl = query;
+
+        // If not a URL, search YouTube
+        if (!ytdl.validateURL(query)) {
             const results = await play.search(query, { limit: 1 });
             if (!results.length) {
                 await searching.edit('❌ Gabar lama helin. Magac kale isku day.');
                 return;
             }
-            songInfo = {
-                title:     results[0].title,
-                url:       results[0].url,
-                duration:  results[0].durationRaw,
-                thumbnail: results[0].thumbnails?.[0]?.url || '',
-            };
+            videoUrl = results[0].url;
         }
+
+        const info = await ytdl.getBasicInfo(videoUrl);
+        const det  = info.videoDetails;
+
+        songInfo = {
+            title:     det.title,
+            url:       det.video_url,
+            duration:  fmtDuration(parseInt(det.lengthSeconds)),
+            thumbnail: det.thumbnails?.slice(-1)[0]?.url || '',
+        };
     } catch (e) {
-        console.error('[Music] Search error:', e.message);
-        await searching.edit('❌ Raadin khalad ah. Dib isku day.').catch(() => {});
+        console.error('[Music] Search/info error:', e.message);
+        await searching.edit('❌ Khalad raadin. YouTube URL toos ah isku day.').catch(() => {});
         return;
     }
 
     const guildId = message.guild.id;
 
-    // Already have a queue → add to it
+    // Add to existing queue
     if (queues.has(guildId)) {
         queues.get(guildId).queue.push(songInfo);
         return searching.edit({
             content: '',
             embeds: [new EmbedBuilder()
                 .setColor('#9b59b6')
-                .setDescription(`➕ **Queue-ga lagu daray:**\n[${songInfo.title}](${songInfo.url})\n⏱ ${songInfo.duration}`)
-                .setThumbnail(songInfo.thumbnail)
+                .setTitle('➕ Queue-ga Lagu Daray')
+                .setDescription(`**[${songInfo.title}](${songInfo.url})**`)
+                .addFields({ name: '⏱ Muddada', value: songInfo.duration, inline: true })
+                .setThumbnail(songInfo.thumbnail || null)
             ]
         }).catch(() => {});
     }
 
-    // New connection
+    // Create new connection
     const connection = joinVoiceChannel({
         channelId:      voiceChannel.id,
-        guildId:        guildId,
+        guildId,
         adapterCreator: message.guild.voiceAdapterCreator,
     });
 
     const player = createAudioPlayer();
     connection.subscribe(player);
 
-    const q = { connection, player, queue: [songInfo], current: null, textChannel: message.channel };
-    queues.set(guildId, q);
+    queues.set(guildId, {
+        connection,
+        player,
+        queue:       [songInfo],
+        current:     null,
+        textChannel: message.channel,
+    });
 
     player.on(AudioPlayerStatus.Idle, () => playNext(guildId));
     player.on('error', e => {
         console.error('[Music] Player error:', e.message);
         playNext(guildId);
     });
+
     connection.on(VoiceConnectionStatus.Disconnected, async () => {
         try {
             await Promise.race([
@@ -191,8 +227,10 @@ function queueCmd(message) {
         return message.reply('📭 Queue maran tahay.');
 
     const lines = [];
-    if (q.current) lines.push(`🎵 **Hadda:** [${q.current.title}](${q.current.url})`);
-    q.queue.slice(0, 10).forEach((s, i) => lines.push(`**${i + 1}.** [${s.title}](${s.url})`));
+    if (q.current) lines.push(`🎵 **Hadda:** [${q.current.title}](${q.current.url}) — ${q.current.duration}`);
+    q.queue.slice(0, 10).forEach((s, i) =>
+        lines.push(`**${i + 1}.** [${s.title}](${s.url}) — ${s.duration}`)
+    );
     if (q.queue.length > 10) lines.push(`*...iyo ${q.queue.length - 10} gabar oo kale*`);
 
     return message.reply({
@@ -204,15 +242,16 @@ function queueCmd(message) {
     });
 }
 
-// ── ?np (now playing) ──────────────────────────────────────────────
+// ── ?np ────────────────────────────────────────────────────────────
 function npCmd(message) {
     const q = queues.get(message.guild.id);
     if (!q?.current) return message.reply('⚠️ Hadda wax ma ciyaarayo.');
     return message.reply({
         embeds: [new EmbedBuilder()
             .setColor('#1db954')
-            .setDescription(`🎵 **Hadda ciyaaraysa:**\n[${q.current.title}](${q.current.url})\n⏱ ${q.current.duration}`)
-            .setThumbnail(q.current.thumbnail)
+            .setTitle('🎵 Hadda Ciyaaraysa')
+            .setDescription(`**[${q.current.title}](${q.current.url})**\n⏱ ${q.current.duration}`)
+            .setThumbnail(q.current.thumbnail || null)
         ]
     });
 }
