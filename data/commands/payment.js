@@ -2,7 +2,6 @@
 // AMARKA: ?payment — Show payment methods from .env
 // =====================================================================
 
-require('dotenv').config();
 const { EmbedBuilder } = require('discord.js');
 
 const EVC_NUMBER  = process.env.EVC_NUMBER   || '610917813';
