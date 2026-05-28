@@ -44,6 +44,7 @@ const giveItemCmd     = require('../../data/commands/admin/giveItem');
 const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
+const { joinCmd, skipCmd, stopCmd, leaveCmd, queueCmd, npCmd } = require('../../data/commands/music');
 
 
 module.exports = function setupMessageHandler(client) {
@@ -187,6 +188,25 @@ module.exports = function setupMessageHandler(client) {
             case 'giveitem':
             case 'giveframe':
                 return giveItemCmd(message, args);
+
+            // ── Music (admin only) ──
+            case 'join':
+            case 'play':
+                return joinCmd(message, args);
+            case 'skip':
+            case 'fs':
+                return skipCmd(message);
+            case 'stop':
+                return stopCmd(message);
+            case 'leave':
+            case 'dc':
+                return leaveCmd(message);
+            case 'queue':
+            case 'q':
+                return queueCmd(message);
+            case 'np':
+            case 'nowplaying':
+                return npCmd(message);
 
             // ── Kale ──
             case 'cilada':
