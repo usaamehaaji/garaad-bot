@@ -19,7 +19,8 @@
     "dotenv":             "^17.4.2",
     "mongodb":            "^6.17.0",
     "@discordjs/voice":   "^0.17.0",
-    "play-dl":            "^1.9.7",
+    "distube":            "^4.2.7",
+    "@distube/yt-dlp":    "^2.0.4",
     "opusscript":         "^0.1.1",
     "tweetnacl":          "^1.0.3",
     "libsodium-wrappers": "^0.7.13"

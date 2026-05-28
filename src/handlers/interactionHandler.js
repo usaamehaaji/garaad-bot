@@ -1200,27 +1200,24 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⛔ Admin kaliya.', flags: MessageFlags.Ephemeral });
             let music; try { music = require('../../data/commands/music'); } catch { return interaction.reply({ content: '⚠️ Music install ma ahan.', flags: MessageFlags.Ephemeral }); }
 
-            const parts   = id.split('_');
-            const action  = parts[1];
-            const guildId = parts.slice(2).join('_');
-            const { controlRow } = music;
+            const parts  = id.split('_');
+            const action = parts[1];
+            const guildId = interaction.guild.id;
 
             if (action === 'pause') {
-                const result = music.pauseCmd(guildId);
-                const label  = result === 'paused' ? '▶️ Resume' : '⏸ Pause';
-                return interaction.reply({ content: result === 'paused' ? '⏸ La joojiyay.' : '▶️ Sii waday.', flags: MessageFlags.Ephemeral });
+                const result = music.pauseById(guildId);
+                return interaction.reply({ content: result === 'paused' ? '⏸ La joojiyay.' : result === 'resumed' ? '▶️ Sii waday.' : '⚠️ Wax ma ciyaarayo.', flags: MessageFlags.Ephemeral });
             }
-            if (action === 'skip')  { music.skipCmd(guildId);  return interaction.reply({ content: '⏭️ La gudbay.',   flags: MessageFlags.Ephemeral }); }
-            if (action === 'stop')  { music.stopCmd(guildId);  return interaction.reply({ content: '⏹️ La joojiyay.', flags: MessageFlags.Ephemeral }); }
-            if (action === 'leave') { music.leaveCmd(guildId); return interaction.reply({ content: '👋 VC ka baxay.', flags: MessageFlags.Ephemeral }); }
+            if (action === 'skip')  { await music.skipById(guildId).catch(() => {}); return interaction.reply({ content: '⏭️ La gudbay.',   flags: MessageFlags.Ephemeral }); }
+            if (action === 'stop')  { music.stopById(guildId);  return interaction.reply({ content: '⏹️ La joojiyay.', flags: MessageFlags.Ephemeral }); }
+            if (action === 'leave') { music.leaveById(guildId); return interaction.reply({ content: '👋 VC ka baxay.', flags: MessageFlags.Ephemeral }); }
             if (action === 'queue') {
-                const q = music.getQueue(guildId);
-                if (!q || (!q.current && !q.queue.length)) return interaction.reply({ content: '📭 Queue maran tahay.', flags: MessageFlags.Ephemeral });
-                const { EmbedBuilder } = require('discord.js');
-                const lines = [];
-                if (q.current) lines.push(`🎵 **Hadda:** ${q.current.title} — ${q.current.duration}`);
-                q.queue.slice(0, 8).forEach((s, i) => lines.push(`**${i+1}.** ${s.title} — ${s.duration}`));
-                return interaction.reply({ embeds: [new EmbedBuilder().setTitle('🎶 Queue').setColor('#1db954').setDescription(lines.join('\n') || 'Maran')], flags: MessageFlags.Ephemeral });
+                const q = music.getQueueObj(guildId);
+                if (!q?.songs?.length) return interaction.reply({ content: '📭 Queue maran tahay.', flags: MessageFlags.Ephemeral });
+                const lines = q.songs.slice(0, 10).map((s, i) =>
+                    i === 0 ? `🎵 **Hadda:** ${s.name} — ${s.formattedDuration}` : `**${i}.** ${s.name} — ${s.formattedDuration}`
+                );
+                return interaction.reply({ embeds: [new EmbedBuilder().setTitle('🎶 Queue').setColor('#1db954').setDescription(lines.join('\n'))], flags: MessageFlags.Ephemeral });
             }
         }
 

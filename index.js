@@ -93,6 +93,12 @@ const client = new Client({
     partials: [Partials.Channel, Partials.Message],
 });
 
+// ───── Music ─────
+try {
+    const { setupDisTube } = require('./src/music/disTubeSetup');
+    setupDisTube(client);
+} catch (e) { console.warn('[Music] DisTube load failed:', e.message); }
+
 // ───── Handlers ─────
 setupMessageHandler(client);
 setupInteractionHandler(client);
