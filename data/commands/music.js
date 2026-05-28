@@ -50,13 +50,9 @@ async function playNext(guildId) {
     if (!q) return;
 
     if (q.queue.length === 0) {
-        q.textChannel.send('✅ Queue dhammaatay. Bot 10 ilbiriqsi kadib baxayaa.').catch(() => {});
-        setTimeout(() => {
-            const conn = getVoiceConnection(guildId);
-            if (conn) conn.destroy();
-            queues.delete(guildId);
-        }, 10_000);
-        return;
+        q.current = null;
+        q.textChannel.send('✅ Queue dhammaatay. Bot VC ku jiraa — `?play <gabar>` ku dar.').catch(() => {});
+        return; // stay in VC — don't destroy
     }
 
     const song = q.queue.shift();
