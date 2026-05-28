@@ -18,9 +18,9 @@ try {
 // yt-dlp binary — uses the one bundled with @distube/yt-dlp
 const YTDLP = (() => {
     try {
-        const pkg = require.resolve('@distube/yt-dlp/package.json');
-        const exe = process.platform === 'win32' ? 'yt-dlp.exe' : 'yt-dlp';
-        return path.join(path.dirname(pkg), 'bin', exe);
+        const main = require.resolve('@distube/yt-dlp');
+        const exe  = process.platform === 'win32' ? 'yt-dlp.exe' : 'yt-dlp';
+        return path.join(path.dirname(main), '..', 'bin', exe);
     } catch { return 'yt-dlp'; }
 })();
 
