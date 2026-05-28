@@ -19,6 +19,11 @@ const play  = require('play-dl');
 const { EmbedBuilder } = require('discord.js');
 const { isAdmin } = require('../../src/utils/admin');
 
+// Make ffmpeg-static available to @discordjs/voice
+try {
+    process.env.FFMPEG_PATH = require('ffmpeg-static');
+} catch {};
+
 // guildId → { connection, player, queue: [], current, textChannel }
 const queues = new Map();
 
@@ -31,17 +36,26 @@ function fmtDuration(sec) {
 
 // ── Internal: stream a song ────────────────────────────────────────
 async function getStream(url) {
+    // Try WebmOpus first — direct opus, no ffmpeg needed
     try {
-        const stream = ytdl(url, {
-            filter:         'audioonly',
-            quality:        'highestaudio',
-            highWaterMark:  1 << 25,
-            dlChunkSize:    0,
+        const info   = await ytdl.getInfo(url);
+        const format = ytdl.chooseFormat(info.formats, {
+            filter:  f => f.codecs === 'opus' && f.container === 'webm' && f.audioSampleRate == '48000',
+            quality: 'highest',
         });
-        return createAudioResource(stream, { inputType: StreamType.Arbitrary, inlineVolume: true });
-    } catch (e) {
-        throw new Error(`Stream failed: ${e.message}`);
-    }
+        if (format) {
+            const stream = ytdl.downloadFromInfo(info, { format, highWaterMark: 1 << 25 });
+            return createAudioResource(stream, { inputType: StreamType.WebmOpus });
+        }
+    } catch {}
+
+    // Fallback — arbitrary stream via ffmpeg
+    const stream = ytdl(url, {
+        filter:        'audioonly',
+        quality:       'highestaudio',
+        highWaterMark: 1 << 25,
+    });
+    return createAudioResource(stream, { inputType: StreamType.Arbitrary });
 }
 
 // ── Internal: play next ────────────────────────────────────────────
