@@ -7,7 +7,7 @@ const {
 } = require('@discordjs/voice');
 const play = require('play-dl');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { isAdmin } = require('../../src/utils/admin');
+const { canPlayMusic, isAdmin } = require('../../src/utils/admin');
 
 // ffmpeg path for @discordjs/voice transcoding
 try {
@@ -94,7 +94,7 @@ function playNext(guildId) {
 }
 
 async function joinCmd(message, args) {
-    if (!isAdmin(message.author.id)) return message.reply('⛔ Admin kaliya.');
+    if (!canPlayMusic(message.author.id)) return message.reply('⛔ Ma haysatid fasax. Admin-ku wuxuu kuu siinayaa DJ fasaxa: `?dj @adigu`');
     const query = args.join(' ').trim();
     if (!query) return message.reply('⚠️ `?play <magaca gabar ama YouTube URL>`');
     const vc = message.member?.voice?.channel;
@@ -144,7 +144,7 @@ async function joinCmd(message, args) {
     }
 }
 
-function skipMsgCmd(m)  { if (!isAdmin(m.author.id)) return m.reply('⛔'); queues.get(m.guild.id)?.player.stop(); m.reply('⏭️'); }
+function skipMsgCmd(m)  { if (!canPlayMusic(m.author.id)) return m.reply('⛔'); queues.get(m.guild.id)?.player.stop(); m.reply('⏭️'); }
 function stopMsgCmd(m)  { if (!isAdmin(m.author.id)) return m.reply('⛔'); const q=queues.get(m.guild.id); if(q){q.queue=[];q.player.stop();q.connection.destroy();queues.delete(m.guild.id);} m.reply('⏹️'); }
 function leaveMsgCmd(m) { if (!isAdmin(m.author.id)) return m.reply('⛔'); getVoiceConnection(m.guild.id)?.destroy(); queues.delete(m.guild.id); m.reply('👋'); }
 function queueMsgCmd(m) {

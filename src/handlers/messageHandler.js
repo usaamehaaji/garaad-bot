@@ -22,6 +22,7 @@ const quizCmd         = require('../../data/commands/quiz');
 const ciladaCmd       = require('../../data/commands/cilada');
 const adminCmd        = require('../../data/commands/admin/admin');
 const broadcast       = require('../../data/commands/admin/adminBroadcast');
+const djCmd           = require('../../data/commands/admin/adminDj');
 const tournament      = require('../games/tournament');
 const teamDuel        = require('../games/teamDuel');
 
@@ -220,6 +221,9 @@ module.exports = function setupMessageHandler(client) {
             case 'cilad':
             case 'bug':
                 return ciladaCmd(message, args);
+
+            case 'dj':
+                return djCmd(message, args);
 
             case 'admin':
                 return adminCmd(message, args);
