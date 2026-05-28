@@ -8,10 +8,10 @@ const ytdl = require('@distube/ytdl-core');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { isAdmin } = require('../../src/utils/admin');
 
-// Set ffmpeg path so @discordjs/voice can transcode audio
 try { process.env.FFMPEG_PATH = require('ffmpeg-static'); } catch {}
 
 const queues = new Map();
+const ytdlAgent = ytdl.createAgent();
 
 function fmtDur(sec) {
     if (!sec) return '?:??';
@@ -38,16 +38,18 @@ async function playNext(guildId) {
     const song = q.queue.shift();
     q.current = song;
     try {
-        const info = await ytdl.getInfo(song.url);
+        const info = await ytdl.getInfo(song.url, { agent: ytdlAgent });
         const formats = ytdl.filterFormats(info.formats, 'audioonly');
         const opusFormat = formats.find(f => f.codecs === 'opus' && f.container === 'webm');
         let stream, streamType;
         if (opusFormat) {
             stream = ytdl.downloadFromInfo(info, { format: opusFormat, highWaterMark: 1 << 25 });
             streamType = StreamType.WebmOpus;
-        } else {
-            stream = ytdl.downloadFromInfo(info, { filter: 'audioonly', quality: 'highestaudio', highWaterMark: 1 << 25 });
+        } else if (formats.length) {
+            stream = ytdl.downloadFromInfo(info, { format: formats[0], highWaterMark: 1 << 25 });
             streamType = StreamType.Arbitrary;
+        } else {
+            throw new Error('Xog audio ah lama helin - fadlan hees kale isku day');
         }
         const res = createAudioResource(stream, { inputType: streamType });
         q.player.play(res);
@@ -82,7 +84,8 @@ async function joinCmd(message, args) {
         }
         const info = await play.video_info(url);
         const det  = info.video_details;
-        const song = { title: det.title, url: det.url, duration: fmtDur(det.durationInSec), thumbnail: det.thumbnails?.slice(-1)[0]?.url || null };
+        const songUrl = det.id ? `https://www.youtube.com/watch?v=${det.id}` : url;
+        const song = { title: det.title, url: songUrl, duration: fmtDur(det.durationInSec), thumbnail: det.thumbnails?.slice(-1)[0]?.url || null };
 
         const guildId = message.guild.id;
         if (queues.has(guildId)) {
