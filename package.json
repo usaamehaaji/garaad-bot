@@ -23,6 +23,7 @@
     "play-dl":             "^1.9.7",
     "@distube/ytdl-core":  "^4.16.8",
     "ffmpeg-static":       "^5.2.0",
-    "libsodium-wrappers":  "^0.7.13"
+    "libsodium-wrappers":  "^0.7.13",
+    "tweetnacl":           "^1.0.3"
   }
 }

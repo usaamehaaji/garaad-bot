@@ -36,21 +36,35 @@ function fmtDuration(sec) {
 
 // ── Internal: stream a song ────────────────────────────────────────
 async function getStream(url) {
-    // Try WebmOpus first — direct opus, no ffmpeg needed
+    const info = await ytdl.getInfo(url);
+
+    // Try WebmOpus — direct opus, no ffmpeg needed
     try {
-        const info   = await ytdl.getInfo(url);
         const format = ytdl.chooseFormat(info.formats, {
             filter:  f => f.codecs === 'opus' && f.container === 'webm' && f.audioSampleRate == '48000',
             quality: 'highest',
         });
         if (format) {
+            console.log('[Music] Using WebmOpus stream');
             const stream = ytdl.downloadFromInfo(info, { format, highWaterMark: 1 << 25 });
             return createAudioResource(stream, { inputType: StreamType.WebmOpus });
         }
-    } catch {}
+    } catch (e) {
+        console.log('[Music] WebmOpus not available:', e.message);
+    }
 
-    // Fallback — arbitrary stream via ffmpeg
-    const stream = ytdl(url, {
+    // Fallback — OggOpus via play-dl (no ffmpeg needed)
+    try {
+        console.log('[Music] Trying play-dl OggOpus stream');
+        const pd = await play.stream(url, { quality: 2 });
+        return createAudioResource(pd.stream, { inputType: pd.type });
+    } catch (e) {
+        console.log('[Music] play-dl failed:', e.message);
+    }
+
+    // Last resort — arbitrary via ffmpeg
+    console.log('[Music] Fallback to ffmpeg/arbitrary');
+    const stream = ytdl.downloadFromInfo(info, {
         filter:        'audioonly',
         quality:       'highestaudio',
         highWaterMark: 1 << 25,
