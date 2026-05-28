@@ -119,10 +119,9 @@ function buildShopEmbed() {
             `**\`${PREFIX}equip title <key>\`** — Cinwaan xidh\n` +
             `**\`${PREFIX}sell frame <key>\`** — Frame iib BTC\n\n` +
 
-            `**📋 Missions & Payment**\n` +
+            `**📋 Missions**\n` +
             `**\`${PREFIX}missions\`** — Howlaha maanta (3 daily tasks)\n` +
-            `**\`${PREFIX}missions claim 1\`** — Abaalmarinta qaado\n` +
-            `**\`${PREFIX}payment\`** — EVC Plus, Waafi, Salaam Bank`
+            `**\`${PREFIX}missions claim 1\`** — Abaalmarinta qaado`
         )
         .setFooter({ text: 'Garaad Bot • Shop System • ?profile si aad u aragto frame + badges' });
 }
