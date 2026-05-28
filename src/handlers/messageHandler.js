@@ -44,14 +44,9 @@ const giveItemCmd     = require('../../data/commands/admin/giveItem');
 const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
-
-// Music loaded lazily — only when first used (avoids crash if packages missing)
 let _music = null;
 function getMusic() {
-    if (!_music) {
-        try { _music = require('../../data/commands/music'); }
-        catch (e) { console.error('[Music] Package missing — run npm install:', e.message); }
-    }
+    if (!_music) try { _music = require('../../data/commands/music'); } catch (e) { console.error('[Music]', e.message); }
     return _music;
 }
 
@@ -198,47 +193,14 @@ module.exports = function setupMessageHandler(client) {
             case 'giveframe':
                 return giveItemCmd(message, args);
 
-            // ── Music (admin only) ──
-            case 'play':
-            case 'join': {
-                const m = getMusic();
-                if (!m) return message.reply('⚠️ Music packages weli install ma ahan. Server-ka `npm install` ku socodsii.');
-                return m.joinCmd(message, args);
-            }
-            case 'skip':
-            case 'fs': {
-                const m = getMusic();
-                return m ? m.skipCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
-            }
-            case 'stop': {
-                const m = getMusic();
-                return m ? m.stopCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
-            }
-            case 'leave':
-            case 'dc': {
-                const m = getMusic();
-                return m ? m.leaveCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
-            }
-            case 'queue':
-            case 'q': {
-                const m = getMusic();
-                return m ? m.queueCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
-            }
-            case 'np':
-            case 'nowplaying': {
-                const m = getMusic();
-                return m ? m.npCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
-            }
-            case 'pause':
-            case 'resume': {
-                const m = getMusic();
-                return m ? m.pauseCmd(message) : null;
-            }
-            case 'volume':
-            case 'vol': {
-                const m = getMusic();
-                return m ? m.volumeCmd(message, args) : null;
-            }
+            // ── Music ──
+            case 'play': { const m = getMusic(); return m ? m.joinCmd(message, args) : message.reply('⚠️ Music install ma ahan.'); }
+            case 'skip':  { const m = getMusic(); return m ? m.skipMsgCmd(message)  : null; }
+            case 'stop':  { const m = getMusic(); return m ? m.stopMsgCmd(message)  : null; }
+            case 'leave': { const m = getMusic(); return m ? m.leaveMsgCmd(message) : null; }
+            case 'queue': { const m = getMusic(); return m ? m.queueMsgCmd(message) : null; }
+            case 'np':    { const m = getMusic(); return m ? m.npMsgCmd(message)    : null; }
+
 
             // ── Kale ──
             case 'cilada':

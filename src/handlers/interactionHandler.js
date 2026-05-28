@@ -1194,6 +1194,36 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.update({ embeds: [buildShopEmbed()], components: [helpRow(ownerId, 'shop')] });
         }
 
+        // ── Music buttons ──
+        if (id.startsWith('music_')) {
+            if (!require('../utils/admin').isAdmin(interaction.user.id))
+                return interaction.reply({ content: '⛔ Admin kaliya.', flags: MessageFlags.Ephemeral });
+            let music; try { music = require('../../data/commands/music'); } catch { return interaction.reply({ content: '⚠️ Music install ma ahan.', flags: MessageFlags.Ephemeral }); }
+
+            const parts   = id.split('_');
+            const action  = parts[1];
+            const guildId = parts.slice(2).join('_');
+            const { controlRow } = music;
+
+            if (action === 'pause') {
+                const result = music.pauseCmd(guildId);
+                const label  = result === 'paused' ? '▶️ Resume' : '⏸ Pause';
+                return interaction.reply({ content: result === 'paused' ? '⏸ La joojiyay.' : '▶️ Sii waday.', flags: MessageFlags.Ephemeral });
+            }
+            if (action === 'skip')  { music.skipCmd(guildId);  return interaction.reply({ content: '⏭️ La gudbay.',   flags: MessageFlags.Ephemeral }); }
+            if (action === 'stop')  { music.stopCmd(guildId);  return interaction.reply({ content: '⏹️ La joojiyay.', flags: MessageFlags.Ephemeral }); }
+            if (action === 'leave') { music.leaveCmd(guildId); return interaction.reply({ content: '👋 VC ka baxay.', flags: MessageFlags.Ephemeral }); }
+            if (action === 'queue') {
+                const q = music.getQueue(guildId);
+                if (!q || (!q.current && !q.queue.length)) return interaction.reply({ content: '📭 Queue maran tahay.', flags: MessageFlags.Ephemeral });
+                const { EmbedBuilder } = require('discord.js');
+                const lines = [];
+                if (q.current) lines.push(`🎵 **Hadda:** ${q.current.title} — ${q.current.duration}`);
+                q.queue.slice(0, 8).forEach((s, i) => lines.push(`**${i+1}.** ${s.title} — ${s.duration}`));
+                return interaction.reply({ embeds: [new EmbedBuilder().setTitle('🎶 Queue').setColor('#1db954').setDescription(lines.join('\n') || 'Maran')], flags: MessageFlags.Ephemeral });
+            }
+        }
+
         // ── Admin panel (unified — covers both aqoon + eco tab buttons) ──
         if (id.startsWith('admin_aqoon_') || (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_') && !id.startsWith('admin_eco_resetall_') && !id.startsWith('admin_eco_tax_') && !id.startsWith('admin_eco_pg_'))) {
             const ownerId = id.startsWith('admin_aqoon_') ? id.replace('admin_aqoon_', '') : id.replace('admin_eco_', '');

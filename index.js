@@ -12,15 +12,6 @@
 
 require('dotenv').config();
 
-// Initialize libsodium (required for @discordjs/voice encryption)
-(async () => {
-    try {
-        const sodium = require('libsodium-wrappers');
-        await sodium.ready;
-        console.log('[Voice] libsodium ready');
-    } catch {}
-})();
-
 // Suppress known harmless deprecation warnings from discord.js internals on Node.js 25
 process.on('warning', w => { if (w.code === 'DEP0180') return; console.warn(w); });
 
@@ -101,14 +92,6 @@ const client = new Client({
     ],
     partials: [Partials.Channel, Partials.Message],
 });
-
-// ───── Music (DisTube) ─────
-try {
-    const { setupDisTube } = require('./src/music/disTubeSetup');
-    setupDisTube(client);
-} catch (e) {
-    console.warn('[Music] DisTube not loaded (run npm install):', e.message);
-}
 
 // ───── Handlers ─────
 setupMessageHandler(client);
