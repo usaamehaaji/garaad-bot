@@ -199,8 +199,8 @@ module.exports = function setupMessageHandler(client) {
                 return giveItemCmd(message, args);
 
             // ── Music (admin only) ──
-            case 'join':
-            case 'play': {
+            case 'play':
+            case 'join': {
                 const m = getMusic();
                 if (!m) return message.reply('⚠️ Music packages weli install ma ahan. Server-ka `npm install` ku socodsii.');
                 return m.joinCmd(message, args);
