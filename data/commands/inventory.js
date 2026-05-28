@@ -4,7 +4,7 @@
 // ?sell frame <key>
 // =====================================================================
 
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require('discord.js');
 const { userData, saveData } = require('../../src/store');
 const { econData, saveEcon }  = require('../../src/economy/econStore');
 const { checkUser } = require('../../src/utils/helpers');
@@ -73,7 +73,20 @@ async function inventoryCmd(message) {
     if (gameItems.length)
         embed.addFields({ name: '🎮 Game Items', value: gameItems.join('\n'), inline: false });
 
-    return message.reply({ embeds: [embed] });
+    const btnRow = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`inv_equip_frame_${userId}`)
+            .setLabel('⚙️ Equip Frame')
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(!framesOwned.length),
+        new ButtonBuilder()
+            .setCustomId(`inv_equip_title_${userId}`)
+            .setLabel('🏷️ Equip Title')
+            .setStyle(ButtonStyle.Secondary)
+            .setDisabled(!titleLines.length),
+    );
+
+    return message.reply({ embeds: [embed], components: [btnRow] });
 }
 
 // ── ?equip ───────────────────────────────────────────────────────────

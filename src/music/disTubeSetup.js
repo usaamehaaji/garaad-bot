@@ -1,6 +1,5 @@
 const { DisTube } = require('distube');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
-const { YouTubePlugin } = require('@distube/youtube');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 let distube = null;
@@ -17,7 +16,7 @@ function controlRow(guildId) {
 
 function setupDisTube(client) {
     distube = new DisTube(client, {
-        plugins: [new YouTubePlugin(), new YtDlpPlugin({ update: false })],
+        plugins: [new YtDlpPlugin({ update: false })],
         emitNewSongOnly: true,
         joinNewVoiceChannel: true,
         nsfw: true,

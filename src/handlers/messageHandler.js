@@ -199,7 +199,20 @@ module.exports = function setupMessageHandler(client) {
                 if (!vc) return message.reply('⚠️ Marka hore VC ku biir.');
                 const query = args.join(' ').trim();
                 if (!query) return message.reply('⚠️ `?play <magaca gabar ama URL>`');
-                dt.play(vc, query, { textChannel: message.channel, member: message.member }).catch(e => message.reply(`❌ ${e.message.slice(0,100)}`));
+                (async () => {
+                    try {
+                        const playDl = require('play-dl');
+                        let url = query;
+                        if (playDl.yt_validate(query) !== 'video') {
+                            const results = await playDl.search(query, { limit: 1 });
+                            if (!results.length) return message.reply('❌ Lama helin YouTube-ka.');
+                            url = `https://www.youtube.com/watch?v=${results[0].id}`;
+                        }
+                        await dt.play(vc, url, { textChannel: message.channel, member: message.member });
+                    } catch (e) {
+                        message.reply(`❌ ${e.message.slice(0, 100)}`).catch(() => {});
+                    }
+                })();
                 return;
             }
             case 'skip': {

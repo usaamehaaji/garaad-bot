@@ -2,7 +2,7 @@
 // GARAAD BOT - Maareynta Isdhexgalka (Interaction Handler)
 // =====================================================================
 
-const { MessageFlags, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+const { MessageFlags, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle, StringSelectMenuBuilder } = require('discord.js');
 const { handleSoloAnswer, handleSoloLeaderboard } = require('../games/solo');
 const { startDuelGame }     = require('../games/duel');
 const { beginQuizGame, refreshLobby: refreshQuizLobby } = require('../games/quiz');
@@ -1148,6 +1148,34 @@ module.exports = function setupInteractionHandler(client) {
             return;
         }
 
+        // ── Inventory Select Menu ──
+        if (interaction.isStringSelectMenu()) {
+            const id = interaction.customId;
+            if (id.startsWith('inv_sel_frame_') || id.startsWith('inv_sel_title_')) {
+                const ownerId = id.startsWith('inv_sel_frame_') ? id.replace('inv_sel_frame_', '') : id.replace('inv_sel_title_', '');
+                if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Inventory-gaagu maaha.', flags: MessageFlags.Ephemeral });
+                const { userData, saveData } = require('../../src/store');
+                const { econData, saveEcon }  = require('../../src/economy/econStore');
+                const { FRAMES }              = require('../utils/itemDefs');
+                const key = interaction.values[0];
+                const d   = userData[ownerId];
+                const ec  = econData[ownerId] || {};
+
+                if (id.startsWith('inv_sel_frame_')) {
+                    d.activeFrame = key;
+                    saveData();
+                    const f = FRAMES[key];
+                    return interaction.update({ content: `✅ **${f?.emoji || ''} ${f?.name || key}** la xidh!`, embeds: [], components: [] });
+                }
+                if (id.startsWith('inv_sel_title_')) {
+                    if ((ec.econTitles || []).includes(key)) { ec.activeEconTitle = key; saveEcon(); }
+                    else { d.activeTitle = key; saveData(); }
+                    return interaction.update({ content: `✅ Cinwaanka **${key}** waa la xidh!`, embeds: [], components: [] });
+                }
+            }
+            return;
+        }
+
         if (!interaction.isButton()) return;
 
         const id = interaction.customId;
@@ -1192,6 +1220,44 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { buildShopEmbed } = require('../../data/commands/help');
             return interaction.update({ embeds: [buildShopEmbed()], components: [helpRow(ownerId, 'shop')] });
+        }
+
+        // ── Inventory equip buttons ──
+        if (id.startsWith('inv_equip_frame_') || id.startsWith('inv_equip_title_')) {
+            const isFrame  = id.startsWith('inv_equip_frame_');
+            const ownerId  = isFrame ? id.replace('inv_equip_frame_', '') : id.replace('inv_equip_title_', '');
+            if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Inventory-gaagu maaha.', flags: MessageFlags.Ephemeral });
+
+            const { userData } = require('../../src/store');
+            const { econData }  = require('../../src/economy/econStore');
+            const { FRAMES }    = require('../utils/itemDefs');
+            const { ECON_TITLES } = require('../../data/commands/economy/econShop');
+            const d  = userData[ownerId];
+            const ec = econData[ownerId] || {};
+
+            if (isFrame) {
+                const options = (d.ownedFrames || []).map(k => {
+                    const f = FRAMES[k];
+                    return { label: `${f?.emoji || ''} ${f?.name || k}`, description: f?.rarity || '', value: k, default: d.activeFrame === k };
+                });
+                if (!options.length) return interaction.reply({ content: '⚠️ Ma lihid frames.', flags: MessageFlags.Ephemeral });
+                const menu = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder().setCustomId(`inv_sel_frame_${ownerId}`).setPlaceholder('Frame dooro...').addOptions(options)
+                );
+                return interaction.reply({ content: '🖼️ **Frame dooro:**', components: [menu], flags: MessageFlags.Ephemeral });
+            } else {
+                const allTitles = [...new Set([...(d.ownedTitles || []), ...(ec.econTitles || [])])];
+                const options = allTitles.map(k => {
+                    const et = ECON_TITLES[k];
+                    const label = et ? et.label.replace(/\s*◀.*/, '') : k;
+                    return { label: label.slice(0, 25), value: k, default: d.activeTitle === k || ec.activeEconTitle === k };
+                });
+                if (!options.length) return interaction.reply({ content: '⚠️ Ma lihid titles.', flags: MessageFlags.Ephemeral });
+                const menu = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder().setCustomId(`inv_sel_title_${ownerId}`).setPlaceholder('Title dooro...').addOptions(options)
+                );
+                return interaction.reply({ content: '🏷️ **Title dooro:**', components: [menu], flags: MessageFlags.Ephemeral });
+            }
         }
 
         // ── Music buttons ──
