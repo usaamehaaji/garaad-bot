@@ -1187,6 +1187,12 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             return interaction.update({ embeds: [buildEcoEmbed()], components: [helpRow(ownerId, 'eco')] });
         }
+        if (id.startsWith('help_shop_')) {
+            const ownerId = id.replace('help_shop_', '');
+            if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { buildShopEmbed } = require('../../data/commands/help');
+            return interaction.update({ embeds: [buildShopEmbed()], components: [helpRow(ownerId, 'shop')] });
+        }
 
         // ── Admin panel (unified — covers both aqoon + eco tab buttons) ──
         if (id.startsWith('admin_aqoon_') || (id.startsWith('admin_eco_') && !id.startsWith('admin_eco_give') && !id.startsWith('admin_eco_reset') && !id.startsWith('admin_eco_m_') && !id.startsWith('admin_eco_allplayers_') && !id.startsWith('admin_eco_loans_') && !id.startsWith('admin_eco_topup_') && !id.startsWith('admin_eco_treasury_') && !id.startsWith('admin_eco_resetall_') && !id.startsWith('admin_eco_tax_') && !id.startsWith('admin_eco_pg_'))) {

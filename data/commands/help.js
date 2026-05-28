@@ -17,8 +17,12 @@ function helpRow(userId, active) {
             .setLabel('💰 Economy')
             .setStyle(active === 'eco' ? ButtonStyle.Success : ButtonStyle.Secondary),
         new ButtonBuilder()
+            .setCustomId(`help_shop_${userId}`)
+            .setLabel('🛒 Shop & Items')
+            .setStyle(active === 'shop' ? ButtonStyle.Primary : ButtonStyle.Secondary),
+        new ButtonBuilder()
             .setCustomId(`close_help_${userId}`)
-            .setLabel('Iska xir')
+            .setLabel('✖ Xir')
             .setStyle(ButtonStyle.Danger),
     );
 }
@@ -86,11 +90,49 @@ function buildEcoEmbed() {
 }
 
 
+function buildShopEmbed() {
+    return new EmbedBuilder()
+        .setTitle('🛒 Shop & Items — Amarrada Cusub')
+        .setColor('#9b59b6')
+        .setDescription(
+            `**🏪 Shop**\n` +
+            `**\`${PREFIX}shop\`** — Dukaan (Frames, Boosters, Loot, Titles)\n` +
+            `**\`${PREFIX}shop frames\`** — Frames iibso (qurxinta profile)\n` +
+            `**\`${PREFIX}shop boosters\`** — Double IQ/XP/BTC + IQ Shield\n` +
+            `**\`${PREFIX}shop loot\`** — Loot Boxes iibso\n` +
+            `**\`${PREFIX}shop titles\`** — Cinwaanno iibso\n\n` +
+
+            `**📦 Loot Boxes**\n` +
+            `**\`${PREFIX}open common\`** — Common Box fur (📦)\n` +
+            `**\`${PREFIX}open rare\`** — Rare Box fur (🎁)\n` +
+            `**\`${PREFIX}open legendary\`** — Legendary Box fur (💎)\n\n` +
+
+            `**🛍️ Iibso (Direct)**\n` +
+            `**\`${PREFIX}buy frame <key>\`** — Frame iibso & isxidh\n` +
+            `**\`${PREFIX}buy booster <key>\`** — Booster iibso\n` +
+            `**\`${PREFIX}buy loot <type>\`** — Loot box iibso\n` +
+            `**\`${PREFIX}buy title <key>\`** — Cinwaan iibso\n\n` +
+
+            `**🎒 Inventory**\n` +
+            `**\`${PREFIX}inventory\`** — Dhamaan shayaadkaaga\n` +
+            `**\`${PREFIX}equip frame <key>\`** — Frame xidh\n` +
+            `**\`${PREFIX}equip title <key>\`** — Cinwaan xidh\n` +
+            `**\`${PREFIX}sell frame <key>\`** — Frame iib BTC\n\n` +
+
+            `**📋 Missions & Payment**\n` +
+            `**\`${PREFIX}missions\`** — Howlaha maanta (3 daily tasks)\n` +
+            `**\`${PREFIX}missions claim 1\`** — Abaalmarinta qaado\n` +
+            `**\`${PREFIX}payment\`** — EVC Plus, Waafi, Salaam Bank`
+        )
+        .setFooter({ text: 'Garaad Bot • Shop System • ?profile si aad u aragto frame + badges' });
+}
+
 module.exports = async function helpCommand(message) {
     const userId = message.author.id;
     return message.reply({ embeds: [buildEduEmbed(userId)], components: [helpRow(userId, 'edu')] });
 };
 
-module.exports.buildEduEmbed = buildEduEmbed;
-module.exports.buildEcoEmbed = buildEcoEmbed;
-module.exports.helpRow       = helpRow;
+module.exports.buildEduEmbed  = buildEduEmbed;
+module.exports.buildEcoEmbed  = buildEcoEmbed;
+module.exports.buildShopEmbed = buildShopEmbed;
+module.exports.helpRow        = helpRow;
