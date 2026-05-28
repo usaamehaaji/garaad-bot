@@ -4,6 +4,7 @@ const {
     StreamType,
 } = require('@discordjs/voice');
 const play = require('play-dl');
+const ytdl = require('@distube/ytdl-core');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { isAdmin } = require('../../src/utils/admin');
 
@@ -37,9 +38,18 @@ async function playNext(guildId) {
     const song = q.queue.shift();
     q.current = song;
     try {
-        const src = await play.stream(song.url, { quality: 2 });
-        // Use Arbitrary so ffmpeg handles decoding (works for all formats)
-        const res = createAudioResource(src.stream, { inputType: StreamType.Arbitrary });
+        const info = await ytdl.getInfo(song.url);
+        const formats = ytdl.filterFormats(info.formats, 'audioonly');
+        const opusFormat = formats.find(f => f.codecs === 'opus' && f.container === 'webm');
+        let stream, streamType;
+        if (opusFormat) {
+            stream = ytdl.downloadFromInfo(info, { format: opusFormat, highWaterMark: 1 << 25 });
+            streamType = StreamType.WebmOpus;
+        } else {
+            stream = ytdl.downloadFromInfo(info, { filter: 'audioonly', quality: 'highestaudio', highWaterMark: 1 << 25 });
+            streamType = StreamType.Arbitrary;
+        }
+        const res = createAudioResource(stream, { inputType: streamType });
         q.player.play(res);
         q.textChannel?.send({
             embeds: [new EmbedBuilder().setColor('#1db954').setTitle('🎵 Hadda Ciyaaraysa')
