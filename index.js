@@ -88,16 +88,9 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.GuildVoiceStates,
     ],
     partials: [Partials.Channel, Partials.Message],
 });
-
-// ───── Music ─────
-try {
-    const { setupDisTube } = require('./src/music/disTubeSetup');
-    setupDisTube(client);
-} catch (e) { console.warn('[Music] DisTube load failed:', e.message); }
 
 // ───── Handlers ─────
 setupMessageHandler(client);

@@ -44,11 +44,6 @@ const giveItemCmd     = require('../../data/commands/admin/giveItem');
 const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
-let _music = null;
-function getMusic() {
-    if (!_music) try { _music = require('../../data/commands/music'); } catch (e) { console.error('[Music]', e.message); }
-    return _music;
-}
 
 
 module.exports = function setupMessageHandler(client) {
@@ -193,13 +188,6 @@ module.exports = function setupMessageHandler(client) {
             case 'giveframe':
                 return giveItemCmd(message, args);
 
-            // ── Music ──
-            case 'play': { const m = getMusic(); return m ? m.joinCmd(message, args) : message.reply('⚠️ Music install ma ahan.'); }
-            case 'skip':  { const m = getMusic(); return m ? m.skipMsgCmd(message)  : null; }
-            case 'stop':  { const m = getMusic(); return m ? m.stopMsgCmd(message)  : null; }
-            case 'leave': { const m = getMusic(); return m ? m.leaveMsgCmd(message) : null; }
-            case 'queue': { const m = getMusic(); return m ? m.queueMsgCmd(message) : null; }
-            case 'np':    { const m = getMusic(); return m ? m.npMsgCmd(message)    : null; }
 
 
             // ── Kale ──
