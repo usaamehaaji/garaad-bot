@@ -1848,8 +1848,9 @@ module.exports = function setupInteractionHandler(client) {
                 if ((ec.btc || 0) < frame.price) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${frame.price.toLocaleString()}`, flags: MessageFlags.Ephemeral });
                 ec.btc -= frame.price;
                 d.ownedFrames.push(key);
+                d.activeFrame = key; // auto-equip
                 saveData(); saveEcon();
-                return interaction.reply({ content: `✅ **${frame.emoji} ${frame.name}** la iibsaday! (-₿${frame.price.toLocaleString()})`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **${frame.emoji} ${frame.name}** la iibsaday & la xidhay! (-₿${frame.price.toLocaleString()})\n\`?profile\` ku eeg.`, flags: MessageFlags.Ephemeral });
             }
 
             if (type === 'booster') {

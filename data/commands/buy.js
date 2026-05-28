@@ -28,8 +28,9 @@ module.exports = async function buyCommand(message, args) {
         if ((userData[userId].ownedFrames || []).includes(key)) return message.reply(`✅ Frame-kaas horay ayaad u lahayd.`);
         ec.btc -= frame.price;
         userData[userId].ownedFrames.push(key);
+        userData[userId].activeFrame = key; // auto-equip
         saveData(); saveEcon();
-        return message.reply(`✅ **${frame.emoji} ${frame.name}** la iibsaday! (-₿${frame.price.toLocaleString()})\n\`?equip frame ${key}\` si aad u xidho.`);
+        return message.reply(`✅ **${frame.emoji} ${frame.name}** la iibsaday & la xidhay! (-₿${frame.price.toLocaleString()})\n\`?profile\` ku eeg.`);
     }
 
     // ── ?buy booster <key> ──
