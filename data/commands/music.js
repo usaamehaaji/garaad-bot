@@ -1,10 +1,14 @@
 const {
     joinVoiceChannel, createAudioPlayer, createAudioResource,
     AudioPlayerStatus, VoiceConnectionStatus, entersState, getVoiceConnection,
+    StreamType,
 } = require('@discordjs/voice');
 const play = require('play-dl');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { isAdmin } = require('../../src/utils/admin');
+
+// Set ffmpeg path so @discordjs/voice can transcode audio
+try { process.env.FFMPEG_PATH = require('ffmpeg-static'); } catch {}
 
 const queues = new Map();
 
@@ -34,7 +38,8 @@ async function playNext(guildId) {
     q.current = song;
     try {
         const src = await play.stream(song.url, { quality: 2 });
-        const res = createAudioResource(src.stream, { inputType: src.type });
+        // Use Arbitrary so ffmpeg handles decoding (works for all formats)
+        const res = createAudioResource(src.stream, { inputType: StreamType.Arbitrary });
         q.player.play(res);
         q.textChannel?.send({
             embeds: [new EmbedBuilder().setColor('#1db954').setTitle('🎵 Hadda Ciyaaraysa')
