@@ -36,8 +36,15 @@ function checkUser(userId) {
                 duelWins: 0, duelLosses: 0, duelDraws: 0,
                 rushBest: 0,
                 quizWins: 0, quizPlayed: 0,
-                bugsReported: 0,
+                bugsReported: 0, lootOpened: 0,
             },
+            // ── New fields ──
+            ownedFrames:  [],
+            activeFrame:  null,
+            badges:       [],
+            boosters:     { doubleIq: 0, doubleXp: 0, doubleBtc: 0, iqShields: 0 },
+            lootBoxes:    { common: 0, rare: 0, legendary: 0 },
+            missions:     { date: '', tasks: [], baseline: {} },
         };
     } else {
         const d = userData[userId];
@@ -81,6 +88,21 @@ function checkUser(userId) {
         s.quizWins      ??= 0;
         s.quizPlayed    ??= 0;
         s.bugsReported  ??= 0;
+        s.lootOpened    ??= 0;
+        // ── New fields ──
+        d.ownedFrames  ??= [];
+        d.activeFrame  ??= null;
+        d.badges       ??= [];
+        d.boosters     ??= {};
+        d.boosters.doubleIq  ??= 0;
+        d.boosters.doubleXp  ??= 0;
+        d.boosters.doubleBtc ??= 0;
+        d.boosters.iqShields ??= 0;
+        d.lootBoxes    ??= {};
+        d.lootBoxes.common    ??= 0;
+        d.lootBoxes.rare      ??= 0;
+        d.lootBoxes.legendary ??= 0;
+        d.missions     ??= { date: '', tasks: [], baseline: {} };
     }
 }
 
@@ -90,8 +112,53 @@ function getLevel(iq) {
 
 function addXp(userId, amount) {
     checkUser(userId);
-    const mult = userData[userId].doubleXpUntil > Date.now() ? 2 : 1;
-    userData[userId].xp += amount * mult;
+    const d    = userData[userId];
+    const xpMult = (d.doubleXpUntil > Date.now() || (d.boosters && d.boosters.doubleXp > Date.now())) ? 2 : 1;
+    d.xp += amount * xpMult;
+}
+
+function applyIqChange(userId, delta) {
+    checkUser(userId);
+    const d = userData[userId];
+    if (delta < 0 && d.boosters && d.boosters.iqShields > 0) {
+        d.boosters.iqShields--;
+        return 0; // absorbed
+    }
+    const mult = (d.boosters && d.boosters.doubleIq > Date.now()) ? 2 : 1;
+    const actual = delta > 0 ? delta * mult : delta;
+    d.iq = Math.max(0, (d.iq || 0) + actual);
+    return actual;
+}
+
+function checkAndAwardBadges(userId) {
+    checkUser(userId);
+    const d = userData[userId];
+    const s = d.stats || {};
+    const { econData } = require('../economy/econStore');
+    const econ = econData[userId] || {};
+    const newBadges = [];
+
+    function award(key) {
+        if (!d.badges.includes(key)) { d.badges.push(key); newBadges.push(key); }
+    }
+
+    if (s.duelWins >= 1)                       award('first_win');
+    if ((d.stats?.rushBest || 0) >= 5)         award('streak_5');
+    if ((d.iq || 0) >= 100)                    award('iq_100');
+    if ((d.iq || 0) >= 500)                    award('iq_500');
+    if ((d.iq || 0) >= 1000)                   award('iq_1000');
+    if ((d.iq || 0) >= 3000)                   award('iq_3000');
+    if (s.duelWins >= 10)                      award('duel_10');
+    if (s.duelWins >= 50)                      award('duel_50');
+    if (s.duelWins >= 100)                     award('duel_100');
+    if (s.quizPlayed >= 10)                    award('quiz_10');
+    if (s.quizWins >= 20)                      award('quiz_champ');
+    if ((econ.btc || 0) >= 100_000)            award('rich_100k');
+    if ((econ.btc || 0) >= 1_000_000)          award('rich_1m');
+    if ((d.iq || 0) >= 7000)                   award('legend_rank');
+    if ((d.stats?.lootOpened || 0) >= 10)      award('loot_opener');
+
+    return newBadges;
 }
 
 function shuffleArray(array) {
@@ -126,4 +193,4 @@ function stripQuestionNumber(text) {
     return String(text).replace(/^\d+\.\s*/, '');
 }
 
-module.exports = { todayKey, checkUser, getLevel, addXp, shuffleArray, getDisplayTitle, saveData, fmt, stripQuestionNumber };
+module.exports = { todayKey, checkUser, getLevel, addXp, applyIqChange, checkAndAwardBadges, shuffleArray, getDisplayTitle, saveData, fmt, stripQuestionNumber };

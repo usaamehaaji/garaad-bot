@@ -6,7 +6,9 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { userData } = require('../../src/store');
 const { econData, checkEconUser } = require('../../src/economy/econStore');
 const { ECON_TITLES } = require('./economy/econShop');
-const { checkUser, getLevel } = require('../../src/utils/helpers');
+const { checkUser, getLevel, checkAndAwardBadges } = require('../../src/utils/helpers');
+const { getTier, getTierProgress } = require('../../src/utils/ranks');
+const { FRAMES, BADGES } = require('../../src/utils/itemDefs');
 
 function getIQRank(userId) {
     const entries = Object.entries(userData).filter(([k, v]) => /^\d{17,19}$/.test(k) && typeof v.iq === 'number');
@@ -15,17 +17,29 @@ function getIQRank(userId) {
     return { rank: idx >= 0 ? idx + 1 : null, total: entries.length };
 }
 
+function progressBar(pct, len = 10) {
+    const filled = Math.round((pct / 100) * len);
+    return '█'.repeat(filled) + '░'.repeat(len - filled);
+}
+
 module.exports = async function profileCommand(message) {
     try {
     const target = message.mentions.users.first() || message.author;
     checkUser(target.id);
     checkEconUser(target.id);
+    checkAndAwardBadges(target.id);
+
     const data = userData[target.id];
     const econ = econData[target.id] || {};
 
     const level     = getLevel(data.iq);
-    const nextLvlIq = (level + 1) * 200;
     const { rank, total } = getIQRank(target.id);
+    const { tier, pct, needed } = getTierProgress(data.iq);
+
+    // Active frame
+    const frameKey = data.activeFrame;
+    const frame    = frameKey && FRAMES[frameKey] ? FRAMES[frameKey] : null;
+    const frameTxt = frame ? `${frame.emoji} **${frame.name}** (${frame.rarity})` : '*None*';
 
     // Economy title
     let econTitle = '';
@@ -36,22 +50,48 @@ module.exports = async function profileCommand(message) {
     }
     const titlePart = econTitle ? ` / ${econTitle}` : '';
 
+    // Badges (show first 8)
+    const badgeList = (data.badges || []).slice(0, 8).map(k => {
+        const b = BADGES[k];
+        return b ? b.emoji : '🏅';
+    });
+    const badgeStr = badgeList.length ? badgeList.join(' ') : '*Wali ma gasho*';
+
+    // Stats
     const s = data.stats || {};
     const totalGames = (s.soloPlayed || 0) + (s.duelWins || 0) + (s.duelLosses || 0) + (s.duelDraws || 0) + (s.quizPlayed || 0);
 
+    // Active boosters
+    const now = Date.now();
+    const bo  = data.boosters || {};
+    const boostLines = [];
+    if (bo.doubleIq  > now) boostLines.push(`🧠 Double IQ (${Math.ceil((bo.doubleIq  - now) / 60000)}m)`);
+    if (bo.doubleXp  > now) boostLines.push(`⭐ Double XP (${Math.ceil((bo.doubleXp  - now) / 60000)}m)`);
+    if (bo.doubleBtc > now) boostLines.push(`₿ Double BTC (${Math.ceil((bo.doubleBtc - now) / 60000)}m)`);
+    if (bo.iqShields > 0)  boostLines.push(`🛡️ IQ Shield ×${bo.iqShields}`);
+
+    const tierColor = tier.color || '#9b59b6';
+
     const desc =
         `# 👤 ${target.username}${titlePart}\n` +
-        `🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
-        `🎯 **Next Level:** ${nextLvlIq} IQ\n` +
+        `\n` +
+        `${tier.emoji} **${tier.name}** Tier  •  🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
+        `\`${progressBar(pct)}\` ${pct}%` + (needed > 0 ? `  *(${needed} IQ → next tier)*` : ' *(MAX TIER)*') + `\n` +
+        `\n` +
         `🏆 **Rank:** #${rank ?? '—'} / ${total}\n` +
-        `🎮 **All Games:** ${totalGames}\n\n` +
-        `**🧠 Garaad Education**\n` +
-        `✨ *Kobci Garaadkaaga*`;
+        `💰 **BTC:** ₿${(econ.btc || 0).toLocaleString()}\n` +
+        `⭐ **XP:** ${(data.xp || 0).toLocaleString()}\n` +
+        `🎮 **Games:** ${totalGames}\n` +
+        `⚔️ **Duel Wins:** ${s.duelWins || 0}\n` +
+        `\n` +
+        `🖼️ **Frame:** ${frameTxt}\n` +
+        `🏅 **Badges:** ${badgeStr}` +
+        (boostLines.length ? `\n⚡ **Boosters:** ${boostLines.join(' • ')}` : '');
 
     const embed = new EmbedBuilder()
         .setDescription(desc)
         .setThumbnail(target.displayAvatarURL({ dynamic: true }))
-        .setColor('#9b59b6');
+        .setColor(tierColor);
 
     const viewerId = message.author.id;
     const row = new ActionRowBuilder().addComponents(

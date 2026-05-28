@@ -1813,6 +1813,84 @@ module.exports = function setupInteractionHandler(client) {
             return;
         }
 
+        // ── New Shop: section navigation ──
+        if (id.startsWith('shop_section_') || id === 'shop_back') {
+            const { shopEmbed, shopRows } = require('../../data/commands/shopCmd');
+            const { checkUser } = require('../utils/helpers');
+            const userId = interaction.user.id;
+            checkUser(userId);
+            const section = id === 'shop_back' ? '' : id.replace('shop_section_', '');
+            return interaction.update({ embeds: [shopEmbed(section, userId)], components: shopRows(section) });
+        }
+
+        // ── New Shop: buy via button ──
+        if (id.startsWith('shop_buy_')) {
+            const parts  = id.replace('shop_buy_', '').split('_');
+            const type   = parts[0];
+            const key    = parts.slice(1).join('_');
+            const userId = interaction.user.id;
+
+            const { checkUser } = require('../utils/helpers');
+            const { userData, saveData } = require('../store');
+            const { econData, saveEcon } = require('../economy/econStore');
+            const { FRAMES, BOOSTERS, LOOT_BOXES } = require('../../src/utils/itemDefs');
+            const { ECON_TITLES } = require('../../data/commands/economy/econShop');
+            checkUser(userId);
+
+            const d  = userData[userId];
+            const ec = econData[userId];
+            if (!ec) return interaction.reply({ content: '⚠️ Economy account ma jiro. `?jeeb`', flags: MessageFlags.Ephemeral });
+
+            if (type === 'frame') {
+                const frame = FRAMES[key];
+                if (!frame || frame.lootOnly) return interaction.reply({ content: '⚠️ Frame loot box kaliya.', flags: MessageFlags.Ephemeral });
+                if ((d.ownedFrames || []).includes(key)) return interaction.reply({ content: '✅ Horay ayaad u lahayd.', flags: MessageFlags.Ephemeral });
+                if ((ec.btc || 0) < frame.price) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${frame.price.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc -= frame.price;
+                d.ownedFrames.push(key);
+                saveData(); saveEcon();
+                return interaction.reply({ content: `✅ **${frame.emoji} ${frame.name}** la iibsaday! (-₿${frame.price.toLocaleString()})`, flags: MessageFlags.Ephemeral });
+            }
+
+            if (type === 'booster') {
+                const boost = BOOSTERS[key];
+                if (!boost) return interaction.reply({ content: '⚠️ Booster ma jiro.', flags: MessageFlags.Ephemeral });
+                if ((ec.btc || 0) < boost.price) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${boost.price.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc -= boost.price;
+                if (key === 'iq_shield')  d.boosters.iqShields = (d.boosters.iqShields || 0) + 1;
+                else if (key === 'double_iq')  d.boosters.doubleIq  = Date.now() + boost.duration;
+                else if (key === 'double_xp')  d.boosters.doubleXp  = Date.now() + boost.duration;
+                else if (key === 'double_btc') d.boosters.doubleBtc = Date.now() + boost.duration;
+                saveData(); saveEcon();
+                return interaction.reply({ content: `✅ **${boost.emoji} ${boost.name}** la iibsaday!`, flags: MessageFlags.Ephemeral });
+            }
+
+            if (type === 'loot') {
+                const box = LOOT_BOXES[key];
+                if (!box) return interaction.reply({ content: '⚠️ Loot box ma jiro.', flags: MessageFlags.Ephemeral });
+                if ((ec.btc || 0) < box.price) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${box.price.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc -= box.price;
+                d.lootBoxes       ??= {};
+                d.lootBoxes[key]   = (d.lootBoxes[key] || 0) + 1;
+                saveData(); saveEcon();
+                return interaction.reply({ content: `✅ **${box.emoji} ${box.name}** la iibsaday! Fur: \`?open ${key}\``, flags: MessageFlags.Ephemeral });
+            }
+
+            if (type === 'title') {
+                const title = ECON_TITLES[key];
+                if (!title) return interaction.reply({ content: '⚠️ Title ma jiro.', flags: MessageFlags.Ephemeral });
+                if ((ec.econTitles || []).includes(key)) return interaction.reply({ content: '✅ Horay ayaad u lahayd.', flags: MessageFlags.Ephemeral });
+                if ((ec.btc || 0) < title.price) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${title.price.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc -= title.price;
+                ec.econTitles = ec.econTitles || [];
+                ec.econTitles.push(key);
+                saveEcon();
+                return interaction.reply({ content: `✅ **${title.label}** la iibsaday! \`?equip title ${key}\` si aad u xidho.`, flags: MessageFlags.Ephemeral });
+            }
+
+            return interaction.reply({ content: '⚠️ Unknown purchase type.', flags: MessageFlags.Ephemeral });
+        }
+
         // ── Treasury buttons (owner only) ──
         if (id.startsWith('trs_add_') || id.startsWith('trs_reduce_') || id.startsWith('trs_set_')) {
             if (interaction.user.id !== OWNER_ID)

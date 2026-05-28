@@ -3,13 +3,89 @@
 // =====================================================================
 
 const { userData, saveData } = require('../../src/store');
+const { econData, saveEcon }  = require('../../src/economy/econStore');
 const { PREFIX, SHOP_ITEMS, TITLES } = require('../../src/config');
+const { checkUser } = require('../../src/utils/helpers');
+const { FRAMES, BOOSTERS, LOOT_BOXES } = require('../../src/utils/itemDefs');
+const { ECON_TITLES } = require('./economy/econShop');
 
 const CUSTOM_MAX_LEN = 24;
 
 module.exports = async function buyCommand(message, args) {
     const userId  = message.author.id;
+    checkUser(userId);
     const itemKey = (args[0] || '').toLowerCase();
+
+    // ── ?buy frame <key> ──
+    if (itemKey === 'frame') {
+        const key   = (args[1] || '').toLowerCase();
+        const frame = FRAMES[key];
+        if (!frame) return message.reply(`⚠️ Frame-kaas ma jiro. Eeg: \`?shop frames\``);
+        if (frame.lootOnly) return message.reply(`⚠️ **${frame.name}** waxaa laga heli karaa kaliya Loot Box. Iibso: \`?buy loot legendary\``);
+        const ec = econData[userId];
+        if (!ec) return message.reply('⚠️ Economy account-kaaga ma jiro. \`?jeeb\` ku bilow.');
+        if ((ec.btc || 0) < frame.price) return message.reply(`⚠️ BTC kaa ma filna. Waxaad u baahan tahay **₿${frame.price.toLocaleString()}**, haysataa **₿${(ec.btc||0).toLocaleString()}**.`);
+        if ((userData[userId].ownedFrames || []).includes(key)) return message.reply(`✅ Frame-kaas horay ayaad u lahayd.`);
+        ec.btc -= frame.price;
+        userData[userId].ownedFrames.push(key);
+        saveData(); saveEcon();
+        return message.reply(`✅ **${frame.emoji} ${frame.name}** la iibsaday! (-₿${frame.price.toLocaleString()})\n\`?equip frame ${key}\` si aad u xidho.`);
+    }
+
+    // ── ?buy booster <key> ──
+    if (itemKey === 'booster') {
+        const key   = (args[1] || '').toLowerCase();
+        const boost = BOOSTERS[key];
+        if (!boost) return message.reply(`⚠️ Booster-kaas ma jiro. Eeg: \`?shop boosters\``);
+        const ec = econData[userId];
+        if (!ec) return message.reply('⚠️ Economy account-kaaga ma jiro.');
+        if ((ec.btc || 0) < boost.price) return message.reply(`⚠️ BTC kaa ma filna. Waxaad u baahan tahay **₿${boost.price.toLocaleString()}**.`);
+        ec.btc -= boost.price;
+        const d = userData[userId];
+        if (key === 'iq_shield')  d.boosters.iqShields = (d.boosters.iqShields || 0) + 1;
+        else if (key === 'double_iq')  d.boosters.doubleIq  = Date.now() + boost.duration;
+        else if (key === 'double_xp')  d.boosters.doubleXp  = Date.now() + boost.duration;
+        else if (key === 'double_btc') d.boosters.doubleBtc = Date.now() + boost.duration;
+        saveData(); saveEcon();
+        return message.reply(`✅ **${boost.emoji} ${boost.name}** la iibsaday! (-₿${boost.price.toLocaleString()})\n${boost.desc}`);
+    }
+
+    // ── ?buy loot <type> ──
+    if (itemKey === 'loot') {
+        const type = (args[1] || 'common').toLowerCase();
+        const box  = LOOT_BOXES[type];
+        if (!box) return message.reply(`⚠️ Nooc: \`common\`, \`rare\`, \`legendary\``);
+        const ec = econData[userId];
+        if (!ec) return message.reply('⚠️ Economy account-kaaga ma jiro.');
+        if ((ec.btc || 0) < box.price) return message.reply(`⚠️ BTC kaa ma filna. Waxaad u baahan tahay **₿${box.price.toLocaleString()}**.`);
+        ec.btc -= box.price;
+        userData[userId].lootBoxes       ??= {};
+        userData[userId].lootBoxes[type]  = (userData[userId].lootBoxes[type] || 0) + 1;
+        saveData(); saveEcon();
+        return message.reply(`✅ **${box.emoji} ${box.name}** la iibsaday! (-₿${box.price.toLocaleString()})\nFur: \`?open ${type}\``);
+    }
+
+    // ── ?buy title <key> (BTC-based economy titles) ──
+    if (itemKey === 'title') {
+        const key   = (args[1] || '').toLowerCase();
+        const title = ECON_TITLES[key];
+        if (!title) return message.reply(`⚠️ Title-kaas ma jiro. Eeg: \`?shop titles\``);
+        const ec = econData[userId];
+        if (!ec) return message.reply('⚠️ Economy account-kaaga ma jiro.');
+        if ((ec.econTitles || []).includes(key)) return message.reply(`✅ Title-kaas horay ayaad u lahayd.`);
+        if ((ec.btc || 0) < title.price) return message.reply(`⚠️ BTC kaa ma filna. Waxaad u baahan tahay **₿${title.price.toLocaleString()}**.`);
+        ec.btc -= title.price;
+        ec.econTitles = ec.econTitles || [];
+        ec.econTitles.push(key);
+        if (key === 'custom') {
+            const name = args.slice(2).join(' ').trim();
+            if (!name) return message.reply('⚠️ Isticmaal: `?buy title custom <magacaaga>`');
+            ec.customEconTitle = name;
+            ec.activeEconTitle = 'custom';
+        }
+        saveEcon();
+        return message.reply(`✅ **${title.label}** la iibsaday! (-₿${title.price.toLocaleString()})\n\`?equip title ${key}\` si aad u xidho.`);
+    }
 
     // ── Custom title: ?buy custom <magac> ──
     if (itemKey === 'custom') {

@@ -39,6 +39,11 @@ const bankListCmd     = require('../../data/commands/economy/bankList');
 const econTitleCmd    = require('../../data/commands/economy/econTitle');
 const dmCmd           = require('../../data/commands/dm');
 const ciidCmd         = require('../../data/commands/admin/ciidCmd');
+const paymentCmd      = require('../../data/commands/payment');
+const missionsCmd     = require('../../data/commands/missions');
+const lootboxCmd      = require('../../data/commands/lootbox');
+const shopCmd         = require('../../data/commands/shopCmd');
+const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 
 
 module.exports = function setupMessageHandler(client) {
@@ -154,6 +159,34 @@ module.exports = function setupMessageHandler(client) {
 
             case 'ciid':
                 return ciidCmd.sendEidToChannel(message);
+
+            // ── Shop & Items ──
+            case 'shop':
+                return shopCmd(message, args);
+
+            case 'open':
+                return lootboxCmd(message, args);
+
+            case 'inventory':
+            case 'inv':
+                return inventoryCmd(message);
+
+            case 'equip':
+                return equipCmd(message, args);
+
+            case 'sell':
+                return sellCmd(message, args);
+
+            // ── Missions ──
+            case 'missions':
+            case 'mission':
+            case 'hawl':
+                return missionsCmd(message, args);
+
+            // ── Payment ──
+            case 'payment':
+            case 'lacag':
+                return paymentCmd(message);
 
             // ── Kale ──
             case 'cilada':
