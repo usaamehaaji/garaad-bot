@@ -44,7 +44,16 @@ const giveItemCmd     = require('../../data/commands/admin/giveItem');
 const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
-const { joinCmd, skipCmd, stopCmd, leaveCmd, queueCmd, npCmd } = require('../../data/commands/music');
+
+// Music loaded lazily — only when first used (avoids crash if packages missing)
+let _music = null;
+function getMusic() {
+    if (!_music) {
+        try { _music = require('../../data/commands/music'); }
+        catch (e) { console.error('[Music] Package missing — run npm install:', e.message); }
+    }
+    return _music;
+}
 
 
 module.exports = function setupMessageHandler(client) {
@@ -191,22 +200,35 @@ module.exports = function setupMessageHandler(client) {
 
             // ── Music (admin only) ──
             case 'join':
-            case 'play':
-                return joinCmd(message, args);
+            case 'play': {
+                const m = getMusic();
+                if (!m) return message.reply('⚠️ Music packages weli install ma ahan. Server-ka `npm install` ku socodsii.');
+                return m.joinCmd(message, args);
+            }
             case 'skip':
-            case 'fs':
-                return skipCmd(message);
-            case 'stop':
-                return stopCmd(message);
+            case 'fs': {
+                const m = getMusic();
+                return m ? m.skipCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
+            }
+            case 'stop': {
+                const m = getMusic();
+                return m ? m.stopCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
+            }
             case 'leave':
-            case 'dc':
-                return leaveCmd(message);
+            case 'dc': {
+                const m = getMusic();
+                return m ? m.leaveCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
+            }
             case 'queue':
-            case 'q':
-                return queueCmd(message);
+            case 'q': {
+                const m = getMusic();
+                return m ? m.queueCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
+            }
             case 'np':
-            case 'nowplaying':
-                return npCmd(message);
+            case 'nowplaying': {
+                const m = getMusic();
+                return m ? m.npCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
+            }
 
             // ── Kale ──
             case 'cilada':
