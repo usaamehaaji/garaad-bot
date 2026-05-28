@@ -1,17 +1,30 @@
+const path = require('path');
+const { spawn } = require('child_process');
 const {
     joinVoiceChannel, createAudioPlayer, createAudioResource,
     AudioPlayerStatus, VoiceConnectionStatus, entersState, getVoiceConnection,
     StreamType,
 } = require('@discordjs/voice');
 const play = require('play-dl');
-const ytdl = require('@distube/ytdl-core');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { isAdmin } = require('../../src/utils/admin');
 
-try { process.env.FFMPEG_PATH = require('ffmpeg-static'); } catch {}
+// ffmpeg path for @discordjs/voice transcoding
+try {
+    const bin = require('ffmpeg-static');
+    if (bin) process.env.FFMPEG_PATH = bin;
+} catch {}
+
+// yt-dlp binary — uses the one bundled with @distube/yt-dlp
+const YTDLP = (() => {
+    try {
+        const pkg = require.resolve('@distube/yt-dlp/package.json');
+        const exe = process.platform === 'win32' ? 'yt-dlp.exe' : 'yt-dlp';
+        return path.join(path.dirname(pkg), 'bin', exe);
+    } catch { return 'yt-dlp'; }
+})();
 
 const queues = new Map();
-const ytdlAgent = ytdl.createAgent();
 
 function fmtDur(sec) {
     if (!sec) return '?:??';
@@ -29,7 +42,7 @@ function controlRow(guildId) {
     );
 }
 
-async function playNext(guildId) {
+function playNext(guildId) {
     const q = queues.get(guildId);
     if (!q || !q.queue.length) {
         if (q) q.current = null;
@@ -37,32 +50,45 @@ async function playNext(guildId) {
     }
     const song = q.queue.shift();
     q.current = song;
+
+    const proc = spawn(YTDLP, [
+        '-f', 'bestaudio/best',
+        '-o', '-',
+        '--no-playlist',
+        '--quiet',
+        '--no-warnings',
+        song.url,
+    ]);
+
+    let failed = false;
+    proc.stderr.on('data', d => console.error('[yt-dlp]', d.toString().trim()));
+    proc.on('error', err => {
+        if (failed) return; failed = true;
+        console.error('[Music spawn]', err.message);
+        q.textChannel?.send(`⚠️ "${song.title}" - yt-dlp khalad: ${err.message.slice(0,60)}`).catch(() => {});
+        setTimeout(() => playNext(guildId), 1000);
+    });
+    proc.on('close', code => {
+        if (code !== 0 && !failed) console.error('[yt-dlp] exit', code);
+    });
+
     try {
-        const info = await ytdl.getInfo(song.url, { agent: ytdlAgent });
-        const formats = ytdl.filterFormats(info.formats, 'audioonly');
-        const opusFormat = formats.find(f => f.codecs === 'opus' && f.container === 'webm');
-        let stream, streamType;
-        if (opusFormat) {
-            stream = ytdl.downloadFromInfo(info, { format: opusFormat, highWaterMark: 1 << 25 });
-            streamType = StreamType.WebmOpus;
-        } else if (formats.length) {
-            stream = ytdl.downloadFromInfo(info, { format: formats[0], highWaterMark: 1 << 25 });
-            streamType = StreamType.Arbitrary;
-        } else {
-            throw new Error('Xog audio ah lama helin - fadlan hees kale isku day');
-        }
-        const res = createAudioResource(stream, { inputType: streamType });
+        const res = createAudioResource(proc.stdout, { inputType: StreamType.Arbitrary });
         q.player.play(res);
         q.textChannel?.send({
             embeds: [new EmbedBuilder().setColor('#1db954').setTitle('🎵 Hadda Ciyaaraysa')
                 .setDescription(`**[${song.title}](${song.url})**`)
-                .addFields({ name: '⏱', value: song.duration, inline: true }, { name: '📋', value: `${q.queue.length} haray`, inline: true })
+                .addFields(
+                    { name: '⏱', value: song.duration, inline: true },
+                    { name: '📋', value: `${q.queue.length} haray`, inline: true },
+                )
                 .setThumbnail(song.thumbnail)],
             components: [controlRow(guildId)],
         }).catch(() => {});
     } catch (e) {
         console.error('[Music]', e.message);
         q.textChannel?.send(`⚠️ "${song.title}" - khalad: ${e.message.slice(0,80)}`).catch(() => {});
+        proc.kill();
         setTimeout(() => playNext(guildId), 1000);
     }
 }
@@ -79,13 +105,18 @@ async function joinCmd(message, args) {
         let url = query;
         if (play.yt_validate(query) !== 'video') {
             const res = await play.search(query, { limit: 1 });
-            if (!res.length) return msg.edit('❌ Lama helin.');
-            url = res[0].url;
+            if (!res.length) return msg.edit('❌ Lama helin YouTube-ka.');
+            url = `https://www.youtube.com/watch?v=${res[0].id}`;
         }
         const info = await play.video_info(url);
         const det  = info.video_details;
         const songUrl = det.id ? `https://www.youtube.com/watch?v=${det.id}` : url;
-        const song = { title: det.title, url: songUrl, duration: fmtDur(det.durationInSec), thumbnail: det.thumbnails?.slice(-1)[0]?.url || null };
+        const song = {
+            title:     det.title,
+            url:       songUrl,
+            duration:  fmtDur(det.durationInSec),
+            thumbnail: det.thumbnails?.slice(-1)[0]?.url || null,
+        };
 
         const guildId = message.guild.id;
         if (queues.has(guildId)) {
@@ -99,7 +130,7 @@ async function joinCmd(message, args) {
         queues.set(guildId, { connection: conn, player, queue: [song], current: null, textChannel: message.channel });
 
         player.on(AudioPlayerStatus.Idle, () => playNext(guildId));
-        player.on('error', e => { console.error('[Music]', e.message); playNext(guildId); });
+        player.on('error', e => { console.error('[Music player]', e.message); playNext(guildId); });
         conn.on(VoiceConnectionStatus.Disconnected, async () => {
             try { await Promise.race([entersState(conn, VoiceConnectionStatus.Signalling, 5_000), entersState(conn, VoiceConnectionStatus.Connecting, 5_000)]); }
             catch { conn.destroy(); queues.delete(guildId); }

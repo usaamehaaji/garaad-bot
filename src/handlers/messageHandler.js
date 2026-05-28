@@ -191,70 +191,12 @@ module.exports = function setupMessageHandler(client) {
                 return giveItemCmd(message, args);
 
             // ── Music ──
-            case 'play': {
-                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
-                const dt = getDisTube();
-                if (!dt) return message.reply('⚠️ Music ma shaqaynayso.');
-                const vc = message.member?.voice?.channel;
-                if (!vc) return message.reply('⚠️ Marka hore VC ku biir.');
-                const query = args.join(' ').trim();
-                if (!query) return message.reply('⚠️ `?play <magaca gabar ama URL>`');
-                (async () => {
-                    try {
-                        const playDl = require('play-dl');
-                        let url = query;
-                        if (playDl.yt_validate(query) !== 'video') {
-                            const results = await playDl.search(query, { limit: 1 });
-                            if (!results.length) return message.reply('❌ Lama helin YouTube-ka.');
-                            url = `https://www.youtube.com/watch?v=${results[0].id}`;
-                        }
-                        await dt.play(vc, url, { textChannel: message.channel, member: message.member });
-                    } catch (e) {
-                        message.reply(`❌ ${e.message.slice(0, 100)}`).catch(() => {});
-                    }
-                })();
-                return;
-            }
-            case 'skip': {
-                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
-                const dt = getDisTube();
-                if (!dt) return;
-                dt.skip(message.guild).then(() => message.reply('⏭️')).catch(() => message.reply('⚠️ Queue dhammaatay.'));
-                return;
-            }
-            case 'stop': {
-                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
-                const dt = getDisTube();
-                if (!dt) return;
-                dt.stop(message.guild).catch(() => {});
-                message.reply('⏹️');
-                return;
-            }
-            case 'leave': {
-                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
-                const dt = getDisTube();
-                if (!dt) return;
-                dt.voices.get(message.guild)?.leave();
-                message.reply('👋');
-                return;
-            }
-            case 'queue': {
-                const dt = getDisTube();
-                if (!dt) return;
-                const q = dt.getQueue(message.guild);
-                if (!q?.songs?.length) return message.reply('📭 Queue maran.');
-                const lines = q.songs.slice(0, 10).map((s, i) =>
-                    i === 0 ? `🎵 **Hadda:** ${s.name} — ${s.formattedDuration}` : `**${i}.** ${s.name} — ${s.formattedDuration}`
-                );
-                return message.reply({ embeds: [new EmbedBuilder().setTitle('🎶 Queue').setColor('#1db954').setDescription(lines.join('\n'))] });
-            }
-            case 'np': {
-                const dt = getDisTube();
-                if (!dt) return;
-                const q = dt.getQueue(message.guild);
-                if (!q?.songs?.[0]) return message.reply('⚠️ Wax ma ciyaarayo.');
-                return message.reply({ embeds: [new EmbedBuilder().setColor('#1db954').setTitle('🎵 Hadda').setDescription(`**${q.songs[0].name}**\n⏱ ${q.songs[0].formattedDuration}`)] });
-            }
+            case 'play': { const m = getMusic(); return m ? m.joinCmd(message, args) : message.reply(`⚠️ Music khalad: \`${_musicErr || 'unknown'}\``); }
+            case 'skip':  { const m = getMusic(); if (m) m.skipMsgCmd(message);  return; }
+            case 'stop':  { const m = getMusic(); if (m) m.stopMsgCmd(message);  return; }
+            case 'leave': { const m = getMusic(); if (m) m.leaveMsgCmd(message); return; }
+            case 'queue': { const m = getMusic(); if (m) m.queueMsgCmd(message); return; }
+            case 'np':    { const m = getMusic(); if (m) m.npMsgCmd(message);    return; }
 
 
 
