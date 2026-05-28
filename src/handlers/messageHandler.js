@@ -2,6 +2,7 @@
 // GARAAD BOT - Maareynta Farriimaha (Message Handler)
 // =====================================================================
 
+const { EmbedBuilder } = require('discord.js');
 const { PREFIX } = require('../config');
 const { checkUser }   = require('../utils/helpers');
 const { isAdmin }     = require('../utils/admin');
@@ -44,20 +45,7 @@ const giveItemCmd     = require('../../data/commands/admin/giveItem');
 const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
-let _music = null;
-let _musicErr = '';
-function getMusic() {
-    if (!_music) {
-        try {
-            _music = require('../../data/commands/music');
-            _musicErr = '';
-        } catch (e) {
-            _musicErr = e.message;
-            console.error('[Music] Load error:', e.message);
-        }
-    }
-    return _music;
-}
+const { getDisTube } = require('../music/disTubeSetup');
 
 
 module.exports = function setupMessageHandler(client) {
@@ -203,12 +191,57 @@ module.exports = function setupMessageHandler(client) {
                 return giveItemCmd(message, args);
 
             // ── Music ──
-            case 'play': { const m = getMusic(); return m ? m.joinCmd(message, args) : message.reply(`⚠️ Music khalad: \`${_musicErr || 'unknown'}\``); }
-            case 'skip':  { const m = getMusic(); if (m) m.skipMsgCmd(message);  return; }
-            case 'stop':  { const m = getMusic(); if (m) m.stopMsgCmd(message);  return; }
-            case 'leave': { const m = getMusic(); if (m) m.leaveMsgCmd(message); return; }
-            case 'queue': { const m = getMusic(); if (m) m.queueMsgCmd(message); return; }
-            case 'np':    { const m = getMusic(); if (m) m.npMsgCmd(message);    return; }
+            case 'play': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
+                const dt = getDisTube();
+                if (!dt) return message.reply('⚠️ Music ma shaqaynayso.');
+                const vc = message.member?.voice?.channel;
+                if (!vc) return message.reply('⚠️ Marka hore VC ku biir.');
+                const query = args.join(' ').trim();
+                if (!query) return message.reply('⚠️ `?play <magaca gabar ama URL>`');
+                dt.play(vc, query, { textChannel: message.channel, member: message.member }).catch(e => message.reply(`❌ ${e.message.slice(0,100)}`));
+                return;
+            }
+            case 'skip': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
+                const dt = getDisTube();
+                if (!dt) return;
+                dt.skip(message.guild).then(() => message.reply('⏭️')).catch(() => message.reply('⚠️ Queue dhammaatay.'));
+                return;
+            }
+            case 'stop': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
+                const dt = getDisTube();
+                if (!dt) return;
+                dt.stop(message.guild).catch(() => {});
+                message.reply('⏹️');
+                return;
+            }
+            case 'leave': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin kaliya.');
+                const dt = getDisTube();
+                if (!dt) return;
+                dt.voices.get(message.guild)?.leave();
+                message.reply('👋');
+                return;
+            }
+            case 'queue': {
+                const dt = getDisTube();
+                if (!dt) return;
+                const q = dt.getQueue(message.guild);
+                if (!q?.songs?.length) return message.reply('📭 Queue maran.');
+                const lines = q.songs.slice(0, 10).map((s, i) =>
+                    i === 0 ? `🎵 **Hadda:** ${s.name} — ${s.formattedDuration}` : `**${i}.** ${s.name} — ${s.formattedDuration}`
+                );
+                return message.reply({ embeds: [new EmbedBuilder().setTitle('🎶 Queue').setColor('#1db954').setDescription(lines.join('\n'))] });
+            }
+            case 'np': {
+                const dt = getDisTube();
+                if (!dt) return;
+                const q = dt.getQueue(message.guild);
+                if (!q?.songs?.[0]) return message.reply('⚠️ Wax ma ciyaarayo.');
+                return message.reply({ embeds: [new EmbedBuilder().setColor('#1db954').setTitle('🎵 Hadda').setDescription(`**${q.songs[0].name}**\n⏱ ${q.songs[0].formattedDuration}`)] });
+            }
 
 
 

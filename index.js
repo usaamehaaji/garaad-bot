@@ -64,6 +64,7 @@ function startPortHealthServerIfNeeded() {
 
 const setupMessageHandler      = require('./src/handlers/messageHandler');
 const setupInteractionHandler  = require('./src/handlers/interactionHandler');
+const { setupDisTube }         = require('./src/music/disTubeSetup');
 const setupReminderScheduler   = require('./src/handlers/reminderScheduler');
 const setupBankChargeScheduler  = require('./src/handlers/bankChargeScheduler');
 const setupWeeklyLeaderboard    = require('./src/handlers/weeklyLeaderboard');
@@ -94,6 +95,7 @@ const client = new Client({
 });
 
 // ───── Handlers ─────
+setupDisTube(client);
 setupMessageHandler(client);
 setupInteractionHandler(client);
 
