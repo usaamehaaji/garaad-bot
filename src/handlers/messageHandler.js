@@ -45,8 +45,17 @@ const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 let _music = null;
+let _musicErr = '';
 function getMusic() {
-    if (!_music) try { _music = require('../../data/commands/music'); } catch (e) { console.error('[Music]', e.message); }
+    if (!_music) {
+        try {
+            _music = require('../../data/commands/music');
+            _musicErr = '';
+        } catch (e) {
+            _musicErr = e.message;
+            console.error('[Music] Load error:', e.message);
+        }
+    }
     return _music;
 }
 
@@ -194,7 +203,7 @@ module.exports = function setupMessageHandler(client) {
                 return giveItemCmd(message, args);
 
             // ── Music ──
-            case 'play': { const m = getMusic(); return m ? m.joinCmd(message, args) : message.reply('⚠️ Music install ma ahan.'); }
+            case 'play': { const m = getMusic(); return m ? m.joinCmd(message, args) : message.reply(`⚠️ Music khalad: \`${_musicErr || 'unknown'}\``); }
             case 'skip':  { const m = getMusic(); if (m) m.skipMsgCmd(message);  return; }
             case 'stop':  { const m = getMusic(); if (m) m.stopMsgCmd(message);  return; }
             case 'leave': { const m = getMusic(); if (m) m.leaveMsgCmd(message); return; }
