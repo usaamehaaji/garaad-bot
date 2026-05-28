@@ -48,6 +48,21 @@ const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/invento
 const { getDisTube } = require('../music/disTubeSetup');
 
 
+let _music = null;
+let _musicErr = '';
+function getMusic() {
+    if (!_music) {
+        try {
+            _music = require('../../data/commands/music');
+            _musicErr = '';
+        } catch (e) {
+            _musicErr = e.message;
+            console.error('[Music] Load error:', e.message);
+        }
+    }
+    return _music;
+}
+
 module.exports = function setupMessageHandler(client) {
     // ── Rate limiter: max 6 economy commands per 10s per user ──
     const _econRateMap = new Map();
