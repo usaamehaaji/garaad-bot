@@ -1,114 +1,12 @@
 // =====================================================================
-// MUSIC SYSTEM — Admin only
-// ?play <song/url>  ?skip  ?stop  ?queue  ?np  ?leave
+// MUSIC COMMANDS — Admin only — powered by DisTube
 // =====================================================================
 
-const {
-    joinVoiceChannel,
-    createAudioPlayer,
-    createAudioResource,
-    AudioPlayerStatus,
-    VoiceConnectionStatus,
-    entersState,
-    getVoiceConnection,
-    StreamType,
-} = require('@discordjs/voice');
-
-const ytdl = require('@distube/ytdl-core');
-const play  = require('play-dl');
-const { EmbedBuilder } = require('discord.js');
 const { isAdmin } = require('../../src/utils/admin');
+const { getDisTube } = require('../../src/music/disTubeSetup');
+const { EmbedBuilder } = require('discord.js');
 
-// Make ffmpeg-static available to @discordjs/voice
-try {
-    process.env.FFMPEG_PATH = require('ffmpeg-static');
-} catch {};
-
-// guildId → { connection, player, queue: [], current, textChannel }
-const queues = new Map();
-
-function fmtDuration(sec) {
-    if (!sec) return '?:??';
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    return `${m}:${String(s).padStart(2, '0')}`;
-}
-
-// ── Internal: stream a song ────────────────────────────────────────
-async function getStream(url) {
-    const info = await ytdl.getInfo(url);
-
-    // Try WebmOpus — direct opus, no ffmpeg needed
-    try {
-        const format = ytdl.chooseFormat(info.formats, {
-            filter:  f => f.codecs === 'opus' && f.container === 'webm' && f.audioSampleRate == '48000',
-            quality: 'highest',
-        });
-        if (format) {
-            console.log('[Music] Using WebmOpus stream');
-            const stream = ytdl.downloadFromInfo(info, { format, highWaterMark: 1 << 25 });
-            return createAudioResource(stream, { inputType: StreamType.WebmOpus });
-        }
-    } catch (e) {
-        console.log('[Music] WebmOpus not available:', e.message);
-    }
-
-    // Fallback — OggOpus via play-dl (no ffmpeg needed)
-    try {
-        console.log('[Music] Trying play-dl OggOpus stream');
-        const pd = await play.stream(url, { quality: 2 });
-        return createAudioResource(pd.stream, { inputType: pd.type });
-    } catch (e) {
-        console.log('[Music] play-dl failed:', e.message);
-    }
-
-    // Last resort — arbitrary via ffmpeg
-    console.log('[Music] Fallback to ffmpeg/arbitrary');
-    const stream = ytdl.downloadFromInfo(info, {
-        filter:        'audioonly',
-        quality:       'highestaudio',
-        highWaterMark: 1 << 25,
-    });
-    return createAudioResource(stream, { inputType: StreamType.Arbitrary });
-}
-
-// ── Internal: play next ────────────────────────────────────────────
-async function playNext(guildId) {
-    const q = queues.get(guildId);
-    if (!q) return;
-
-    if (q.queue.length === 0) {
-        q.current = null;
-        q.textChannel.send('✅ Queue dhammaatay. Bot VC ku jiraa — `?play <gabar>` ku dar.').catch(() => {});
-        return; // stay in VC — don't destroy
-    }
-
-    const song = q.queue.shift();
-    q.current  = song;
-
-    try {
-        const resource = await getStream(song.url);
-        q.player.play(resource);
-
-        q.textChannel.send({
-            embeds: [new EmbedBuilder()
-                .setColor('#1db954')
-                .setTitle('🎵 Hadda Ciyaaraysa')
-                .setDescription(`**[${song.title}](${song.url})**`)
-                .addFields(
-                    { name: '⏱ Muddada',  value: song.duration, inline: true },
-                    { name: '📋 Queue',    value: `${q.queue.length} gabar haray`, inline: true }
-                )
-                .setThumbnail(song.thumbnail || null)
-                .setFooter({ text: 'Garaad Bot Music' })
-            ]
-        }).catch(() => {});
-    } catch (e) {
-        console.error('[Music] Playback error:', e.message);
-        q.textChannel.send(`⚠️ "${song.title}" ciyaari kari waayay. Next...`).catch(() => {});
-        playNext(guildId);
-    }
-}
+function dt() { return getDisTube(); }
 
 // ── ?play <query> ──────────────────────────────────────────────────
 async function joinCmd(message, args) {
@@ -123,139 +21,73 @@ async function joinCmd(message, args) {
     if (!voiceChannel)
         return message.reply('⚠️ Marka hore VC (voice channel) ku biir.');
 
-    const searching = await message.reply('🔍 Raadinaya...');
-
-    let songInfo;
     try {
-        let videoUrl = query;
-
-        // If not a URL, search YouTube
-        if (!ytdl.validateURL(query)) {
-            const results = await play.search(query, { limit: 1 });
-            if (!results.length) {
-                await searching.edit('❌ Gabar lama helin. Magac kale isku day.');
-                return;
-            }
-            videoUrl = results[0].url;
-        }
-
-        const info = await ytdl.getBasicInfo(videoUrl);
-        const det  = info.videoDetails;
-
-        songInfo = {
-            title:     det.title,
-            url:       det.video_url,
-            duration:  fmtDuration(parseInt(det.lengthSeconds)),
-            thumbnail: det.thumbnails?.slice(-1)[0]?.url || '',
-        };
+        await dt().play(voiceChannel, query, {
+            member:      message.member,
+            textChannel: message.channel,
+            message,
+        });
     } catch (e) {
-        console.error('[Music] Search/info error:', e.message);
-        await searching.edit('❌ Khalad raadin. YouTube URL toos ah isku day.').catch(() => {});
-        return;
+        console.error('[Music] play error:', e.message);
+        return message.reply(`⚠️ Khalad: ${e.message}`);
     }
-
-    const guildId = message.guild.id;
-
-    // Add to existing queue
-    if (queues.has(guildId)) {
-        queues.get(guildId).queue.push(songInfo);
-        return searching.edit({
-            content: '',
-            embeds: [new EmbedBuilder()
-                .setColor('#9b59b6')
-                .setTitle('➕ Queue-ga Lagu Daray')
-                .setDescription(`**[${songInfo.title}](${songInfo.url})**`)
-                .addFields({ name: '⏱ Muddada', value: songInfo.duration, inline: true })
-                .setThumbnail(songInfo.thumbnail || null)
-            ]
-        }).catch(() => {});
-    }
-
-    // Create new connection
-    const connection = joinVoiceChannel({
-        channelId:      voiceChannel.id,
-        guildId,
-        adapterCreator: message.guild.voiceAdapterCreator,
-    });
-
-    const player = createAudioPlayer();
-    connection.subscribe(player);
-
-    queues.set(guildId, {
-        connection,
-        player,
-        queue:       [songInfo],
-        current:     null,
-        textChannel: message.channel,
-    });
-
-    player.on(AudioPlayerStatus.Idle, () => playNext(guildId));
-    player.on('error', e => {
-        console.error('[Music] Player error:', e.message);
-        playNext(guildId);
-    });
-
-    connection.on(VoiceConnectionStatus.Disconnected, async () => {
-        try {
-            await Promise.race([
-                entersState(connection, VoiceConnectionStatus.Signalling, 5_000),
-                entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
-            ]);
-        } catch {
-            connection.destroy();
-            queues.delete(guildId);
-        }
-    });
-
-    await searching.edit({ content: `✅ VC **${voiceChannel.name}** ku biray!`, embeds: [] }).catch(() => {});
-    playNext(guildId);
 }
 
 // ── ?skip ──────────────────────────────────────────────────────────
-function skipCmd(message) {
+async function skipCmd(message) {
     if (!isAdmin(message.author.id)) return message.reply('⛔ Admin kaliya.');
-    const q = queues.get(message.guild.id);
-    if (!q) return message.reply('⚠️ Hadda music ma ciyaarayo.');
-    q.player.stop();
-    return message.reply('⏭️ La gudbay.');
+    const queue = dt().getQueue(message.guild.id);
+    if (!queue) return message.reply('⚠️ Hadda music ma ciyaarayo.');
+    try {
+        await queue.skip();
+        return message.reply('⏭️ La gudbay.');
+    } catch {
+        return message.reply('⚠️ Queue kaliya hal gabar. Isticmaal `?stop`.');
+    }
 }
 
 // ── ?stop ──────────────────────────────────────────────────────────
-function stopCmd(message) {
+async function stopCmd(message) {
     if (!isAdmin(message.author.id)) return message.reply('⛔ Admin kaliya.');
-    const guildId = message.guild.id;
-    const q = queues.get(guildId);
-    if (!q) return message.reply('⚠️ Hadda music ma ciyaarayo.');
-    q.queue = [];
-    q.player.stop();
-    q.connection.destroy();
-    queues.delete(guildId);
-    return message.reply('⏹️ Music la joojiyay, queue la nadiifiyay.');
+    const queue = dt().getQueue(message.guild.id);
+    if (!queue) return message.reply('⚠️ Hadda music ma ciyaarayo.');
+    await queue.stop();
+    return message.reply('⏹️ Music la joojiyay.');
+}
+
+// ── ?pause / ?resume ───────────────────────────────────────────────
+async function pauseCmd(message) {
+    if (!isAdmin(message.author.id)) return message.reply('⛔ Admin kaliya.');
+    const queue = dt().getQueue(message.guild.id);
+    if (!queue) return message.reply('⚠️ Hadda music ma ciyaarayo.');
+    if (queue.paused) { queue.resume(); return message.reply('▶️ Sii waday.'); }
+    queue.pause();
+    return message.reply('⏸️ La joojiyay.');
 }
 
 // ── ?leave ─────────────────────────────────────────────────────────
-function leaveCmd(message) {
+async function leaveCmd(message) {
     if (!isAdmin(message.author.id)) return message.reply('⛔ Admin kaliya.');
-    const guildId = message.guild.id;
-    const conn = getVoiceConnection(guildId);
-    if (!conn) return message.reply('⚠️ Bot VC kuma jirto.');
-    conn.destroy();
-    queues.delete(guildId);
+    const queue = dt().getQueue(message.guild.id);
+    if (queue) await queue.stop();
+    else {
+        const voice = message.guild.members.me?.voice?.channel;
+        if (!voice) return message.reply('⚠️ Bot VC kuma jirto.');
+    }
     return message.reply('👋 VC ka baxay.');
 }
 
 // ── ?queue ─────────────────────────────────────────────────────────
 function queueCmd(message) {
-    const q = queues.get(message.guild.id);
-    if (!q || (!q.current && q.queue.length === 0))
-        return message.reply('📭 Queue maran tahay.');
+    const queue = dt().getQueue(message.guild.id);
+    if (!queue) return message.reply('📭 Queue maran tahay.');
 
-    const lines = [];
-    if (q.current) lines.push(`🎵 **Hadda:** [${q.current.title}](${q.current.url}) — ${q.current.duration}`);
-    q.queue.slice(0, 10).forEach((s, i) =>
-        lines.push(`**${i + 1}.** [${s.title}](${s.url}) — ${s.duration}`)
+    const lines = queue.songs.slice(0, 11).map((s, i) =>
+        i === 0
+            ? `🎵 **Hadda:** [${s.name}](${s.url}) — ${s.formattedDuration}`
+            : `**${i}.** [${s.name}](${s.url}) — ${s.formattedDuration}`
     );
-    if (q.queue.length > 10) lines.push(`*...iyo ${q.queue.length - 10} gabar oo kale*`);
+    if (queue.songs.length > 11) lines.push(`*...iyo ${queue.songs.length - 11} kale*`);
 
     return message.reply({
         embeds: [new EmbedBuilder()
@@ -268,16 +100,28 @@ function queueCmd(message) {
 
 // ── ?np ────────────────────────────────────────────────────────────
 function npCmd(message) {
-    const q = queues.get(message.guild.id);
-    if (!q?.current) return message.reply('⚠️ Hadda wax ma ciyaarayo.');
+    const queue = dt().getQueue(message.guild.id);
+    if (!queue?.songs[0]) return message.reply('⚠️ Hadda wax ma ciyaarayo.');
+    const s = queue.songs[0];
     return message.reply({
         embeds: [new EmbedBuilder()
             .setColor('#1db954')
             .setTitle('🎵 Hadda Ciyaaraysa')
-            .setDescription(`**[${q.current.title}](${q.current.url})**\n⏱ ${q.current.duration}`)
-            .setThumbnail(q.current.thumbnail || null)
+            .setDescription(`**[${s.name}](${s.url})**\n⏱ ${s.formattedDuration}`)
+            .setThumbnail(s.thumbnail)
         ]
     });
 }
 
-module.exports = { joinCmd, skipCmd, stopCmd, leaveCmd, queueCmd, npCmd };
+// ── ?volume <1-100> ────────────────────────────────────────────────
+async function volumeCmd(message, args) {
+    if (!isAdmin(message.author.id)) return message.reply('⛔ Admin kaliya.');
+    const queue = dt().getQueue(message.guild.id);
+    if (!queue) return message.reply('⚠️ Hadda music ma ciyaarayo.');
+    const vol = parseInt(args[0]);
+    if (isNaN(vol) || vol < 1 || vol > 100) return message.reply('⚠️ Volume: 1–100');
+    queue.setVolume(vol);
+    return message.reply(`🔊 Volume: **${vol}%**`);
+}
+
+module.exports = { joinCmd, skipCmd, stopCmd, pauseCmd, leaveCmd, queueCmd, npCmd, volumeCmd };

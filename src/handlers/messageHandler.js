@@ -229,6 +229,16 @@ module.exports = function setupMessageHandler(client) {
                 const m = getMusic();
                 return m ? m.npCmd(message) : message.reply('⚠️ Music packages install ma ahan.');
             }
+            case 'pause':
+            case 'resume': {
+                const m = getMusic();
+                return m ? m.pauseCmd(message) : null;
+            }
+            case 'volume':
+            case 'vol': {
+                const m = getMusic();
+                return m ? m.volumeCmd(message, args) : null;
+            }
 
             // ── Kale ──
             case 'cilada':

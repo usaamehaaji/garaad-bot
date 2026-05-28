@@ -102,6 +102,14 @@ const client = new Client({
     partials: [Partials.Channel, Partials.Message],
 });
 
+// ───── Music (DisTube) ─────
+try {
+    const { setupDisTube } = require('./src/music/disTubeSetup');
+    setupDisTube(client);
+} catch (e) {
+    console.warn('[Music] DisTube not loaded (run npm install):', e.message);
+}
+
 // ───── Handlers ─────
 setupMessageHandler(client);
 setupInteractionHandler(client);
