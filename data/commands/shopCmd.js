@@ -87,7 +87,7 @@ function shopEmbed(section, userId) {
             .setTitle('💰 Economy Shop')
             .setColor('#e67e22')
             .setDescription(
-                `🔫 **Rob Ticket** — ₿1,500\n  ↳ ?rob isticmaali karo (3 maalmood)\n\n` +
+                `🔫 **Rob Ticket** — ₿1,500\n  ↳ ?rob isticmaali karo (24 saac)\n\n` +
                 `🛡️ **Safety Shield** — ₿2,000\n  ↳ Rob-ka kaaga ilaaliya 24h\n  ${shieldActive ? `✅ Active — ${shieldHours}h haray` : '❌ Active ma aha'}`
             )
             .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
