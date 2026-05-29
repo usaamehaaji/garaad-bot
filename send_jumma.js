@@ -14,16 +14,13 @@ client.once('ready', async () => {
         const ch = await client.channels.fetch(CHANNEL_ID);
         if (!ch) { console.error('[Jumma] Channel lama helin'); process.exit(1); }
 
-        if (!fs.existsSync(IMAGE_PATH)) {
-            console.error('[Jumma] jumma.png lama helin — bot-ka folder-ka ku dhig');
-            process.exit(1);
+        const payload = { content: '@everyone 🕌 **جمعة مبارکة — Jumma Mubarak!**\n\n> 🤲 Jimcaha waa barakaysan yahay — Alle ha noo gaargaaro dhammaanteen!\n> ✨ Ducadaada maanta aqbaal ha ka dhigo\n\n**/All Stars • Garaad Bot App**' };
+
+        if (fs.existsSync(IMAGE_PATH)) {
+            payload.files = [new AttachmentBuilder(IMAGE_PATH, { name: 'jumma.png' })];
         }
 
-        await ch.send({
-            content: '@everyone 🕌 **Jumma Mubarak!**',
-            files: [new AttachmentBuilder(IMAGE_PATH, { name: 'jumma.png' })],
-        });
-
+        await ch.send(payload);
         console.log('[Jumma] ✅ La diray!');
     } catch (e) {
         console.error('[Jumma] Khalad:', e.message);
