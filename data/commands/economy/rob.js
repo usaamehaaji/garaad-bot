@@ -1,21 +1,14 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 
-const ROB_SUCCESS_RATE   = 0.45;
-const ROB_MIN_BTC        = 2_000;
+const ROB_SUCCESS_RATE   = 0.50;
+const ROB_MIN_BTC        = 1_000;
 const MAX_STEAL_FRACTION = 0.25;
-
-function todayStr() {
-    const d = new Date();
-    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-}
+const ROB_COOLDOWN_MS    = 30 * 60 * 1000; // 30 min between robs
 
 function closeRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-            .setCustomId(`close_rob_${userId}`)
-            .setLabel('✖ Close')
-            .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`close_rob_${userId}`).setLabel('✖ Xidh').setStyle(ButtonStyle.Danger),
     );
 }
 
@@ -24,15 +17,13 @@ module.exports = async function robCmd(message) {
     const target = message.mentions.users.first();
 
     if (!target)
-        return message.reply({ embeds: [new EmbedBuilder()
-            .setDescription('**Usage:** `?rob @user`\n⚠️ Requires a Rob Ticket — buy at `?shop`')
-            .setColor('#e74c3c')], components: [closeRow(userId)] });
+        return message.reply('⚠️ Isticmaal: `?rob @user`');
 
     if (target.id === userId)
-        return message.reply({ embeds: [new EmbedBuilder().setDescription("⚠️ You can't rob yourself.").setColor('#e74c3c')], components: [closeRow(userId)] });
+        return message.reply('⚠️ Adigu adiga ma dhici kartid.');
 
     if (target.bot)
-        return message.reply({ embeds: [new EmbedBuilder().setDescription("⚠️ You can't rob a bot.").setColor('#e74c3c')], components: [closeRow(userId)] });
+        return message.reply('⚠️ Bot ma dhici kartid.');
 
     checkEconUser(userId);
     checkEconUser(target.id);
@@ -40,53 +31,62 @@ module.exports = async function robCmd(message) {
     const robber = econData[userId];
     const victim = econData[target.id];
 
-    if (!(robber.inventory.robticketExpiry > Date.now()))
-        return message.reply({ embeds: [new EmbedBuilder()
-            .setDescription('⚠️ You need a **Rob Ticket** to rob. Buy one at `?shop` for ₿ 500 (active 3 days).')
-            .setColor('#e74c3c')], components: [closeRow(userId)] });
-
-    const today = todayStr();
-    if (robber.robsToday.date !== today) robber.robsToday = { date: today, count: 0 };
-
-    if ((victim.btc || 0) < ROB_MIN_BTC)
-        return message.reply({ embeds: [new EmbedBuilder()
-            .setDescription(`⚠️ Target doesn't have enough BTC (min **₿ ${ROB_MIN_BTC.toLocaleString()}**).`)
-            .setColor('#e74c3c')], components: [closeRow(userId)] });
-
-    if (victim.inventory.safetyExpiry > Date.now()) {
-        const hoursLeft = Math.ceil((victim.inventory.safetyExpiry - Date.now()) / 3600000);
-        return message.reply(`🛡️ **${target.username}** waxaa ilaaliya Safety Shield — dhac ka dib!\nGaashaanku weli shaqaynayaa: **${hoursLeft}h** active.`);
+    // Cooldown check
+    const lastRob = robber.lastRob || 0;
+    const cooldownLeft = ROB_COOLDOWN_MS - (Date.now() - lastRob);
+    if (cooldownLeft > 0) {
+        const mins = Math.ceil(cooldownLeft / 60000);
+        return message.reply(`⏳ **${mins} daqiiqo** ka dib isku day. Weli cooldown-ka ayaad joogtaa.`);
     }
 
-    robber.robsToday.count += 1;
-    const success = Math.random() < ROB_SUCCESS_RATE;
+    // Target must have enough BTC
+    if ((victim.btc || 0) < ROB_MIN_BTC)
+        return message.reply({ embeds: [new EmbedBuilder()
+            .setColor('#e74c3c')
+            .setDescription(`⚠️ **${target.username}** lacag ku filan ma hayo (ugu yaraan **₿${ROB_MIN_BTC.toLocaleString()}** ayaa looga baahan yahay).`)
+        ], components: [closeRow(userId)] });
+
+    // Shield check
+    if ((victim.inventory?.safetyExpiry || 0) > Date.now()) {
+        const hoursLeft = Math.ceil(((victim.inventory.safetyExpiry) - Date.now()) / 3600000);
+        return message.reply({ embeds: [new EmbedBuilder()
+            .setColor('#3498db')
+            .setDescription(`🛡️ **${target.username}** waxaa ilaaliya **Safety Shield** — ${hoursLeft}h haray.\nDhac kari maysid!`)
+        ], components: [closeRow(userId)] });
+    }
+
+    robber.lastRob = Date.now();
+    const success  = Math.random() < ROB_SUCCESS_RATE;
 
     if (success) {
         const stolen = Math.floor((victim.btc || 0) * MAX_STEAL_FRACTION);
-        victim.btc   = (victim.btc || 0) - stolen;
-        robber.btc   = (robber.btc || 0) + stolen;
+        victim.btc  = (victim.btc  || 0) - stolen;
+        robber.btc  = (robber.btc  || 0) + stolen;
         saveEcon();
         return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('🔫 Rob — Success!')
+            .setTitle('🔫 Rob — Guul!')
             .setColor('#2ecc71')
-            .setDescription(`✅ You robbed **${target.username}** successfully!`)
+            .setDescription(`✅ **${target.username}** si guul leh ayaad u dhacday!`)
             .addFields(
-                { name: '💰 Stolen',      value: `**+₿ ${stolen.toLocaleString()}**`,                     inline: true },
-                { name: '💳 Your Wallet', value: `**₿ ${robber.btc.toLocaleString()}**`,                  inline: true },
+                { name: '💰 La xaday',     value: `**+₿${stolen.toLocaleString()}**`,        inline: true },
+                { name: '💳 Lacagtaada',   value: `**₿${robber.btc.toLocaleString()}**`,      inline: true },
+                { name: '😢 Dhibbanaha',   value: `**₿${victim.btc.toLocaleString()}** haray`, inline: true },
             )
-            .setFooter({ text: 'Garaad Economy' })], components: [closeRow(userId)] });
+            .setFooter({ text: '30 daqiiqo ka dib mar labaad isku day' })
+        ], components: [closeRow(userId)] });
     } else {
-        const fine = Math.min(500, Math.floor((robber.btc || 0) * 0.10));
-        robber.btc = Math.max(0, (robber.btc || 0) - fine);
+        const penalty = Math.floor((robber.btc || 0) * 0.50);
+        robber.btc = Math.max(0, (robber.btc || 0) - penalty);
         saveEcon();
         return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('🚔 Rob — Failed!')
+            .setTitle('🚔 Rob — Fashilmay!')
             .setColor('#e74c3c')
-            .setDescription(`❌ You were caught trying to rob **${target.username}**!`)
+            .setDescription(`❌ La qabteen iyadoo la isku dayayo in **${target.username}** la dhaco!`)
             .addFields(
-                { name: '💸 Fine',        value: `**-₿ ${fine.toLocaleString()}**`,                       inline: true },
-                { name: '💳 Your Wallet', value: `**₿ ${robber.btc.toLocaleString()}**`,                  inline: true },
+                { name: '💸 Xanaaqsan',    value: `**-₿${penalty.toLocaleString()}**`,        inline: true },
+                { name: '💳 Lacagtaada',   value: `**₿${robber.btc.toLocaleString()}**`,      inline: true },
             )
-            .setFooter({ text: 'Garaad Economy' })], components: [closeRow(userId)] });
+            .setFooter({ text: '50% lacagtaadii waa la qaaday!' })
+        ], components: [closeRow(userId)] });
     }
 };

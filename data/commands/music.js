@@ -42,12 +42,28 @@ function controlRow(guildId) {
     );
 }
 
+function loopRow(guildId, loop) {
+    return new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`music_loop1_${guildId}`)  .setLabel('🔂 Loop Song').setStyle(loop === 'one' ? ButtonStyle.Success : ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`music_loopall_${guildId}`).setLabel('🔁 Loop All') .setStyle(loop === 'all' ? ButtonStyle.Success : ButtonStyle.Secondary),
+    );
+}
+
+function nowPlayingComponents(guildId, loop) {
+    return [controlRow(guildId), loopRow(guildId, loop || 'off')];
+}
+
 function playNext(guildId) {
     const q = queues.get(guildId);
-    if (!q || !q.queue.length) {
-        if (q) q.current = null;
-        return;
+    if (!q) return;
+
+    // Handle loop before consuming next song
+    if (q.current) {
+        if (q.loop === 'one')  q.queue.unshift(q.current);
+        else if (q.loop === 'all') q.queue.push(q.current);
     }
+
+    if (!q.queue.length) { q.current = null; return; }
     const song = q.queue.shift();
     q.current = song;
 
@@ -75,15 +91,16 @@ function playNext(guildId) {
     try {
         const res = createAudioResource(proc.stdout, { inputType: StreamType.Arbitrary });
         q.player.play(res);
+        const loopLabel = q.loop === 'one' ? ' 🔂' : q.loop === 'all' ? ' 🔁' : '';
         q.textChannel?.send({
-            embeds: [new EmbedBuilder().setColor('#1db954').setTitle('🎵 Hadda Ciyaaraysa')
+            embeds: [new EmbedBuilder().setColor('#1db954').setTitle(`🎵 Hadda Ciyaaraysa${loopLabel}`)
                 .setDescription(`**[${song.title}](${song.url})**`)
                 .addFields(
                     { name: '⏱', value: song.duration, inline: true },
                     { name: '📋', value: `${q.queue.length} haray`, inline: true },
                 )
                 .setThumbnail(song.thumbnail)],
-            components: [controlRow(guildId)],
+            components: nowPlayingComponents(guildId, q.loop),
         }).catch(() => {});
     } catch (e) {
         console.error('[Music]', e.message);
@@ -127,7 +144,7 @@ async function joinCmd(message, args) {
         const conn = joinVoiceChannel({ channelId: vc.id, guildId, adapterCreator: message.guild.voiceAdapterCreator, selfDeaf: false });
         const player = createAudioPlayer();
         conn.subscribe(player);
-        queues.set(guildId, { connection: conn, player, queue: [song], current: null, textChannel: message.channel });
+        queues.set(guildId, { connection: conn, player, queue: [song], current: null, textChannel: message.channel, loop: 'off' });
 
         player.on(AudioPlayerStatus.Idle, () => playNext(guildId));
         player.on('error', e => { console.error('[Music player]', e.message); playNext(guildId); });
@@ -161,10 +178,11 @@ function npMsgCmd(m) {
     m.reply({ embeds:[new EmbedBuilder().setColor('#1db954').setTitle('🎵 Hadda').setDescription(`**${q.current.title}**\n⏱ ${q.current.duration}`)] });
 }
 
+function loopById(g, mode) { const q = queues.get(g); if (q) q.loop = mode; }
 function getQueueObj(g) { return queues.get(g); }
 function skipById(g)    { queues.get(g)?.player.stop(); }
 function stopById(g)    { const q=queues.get(g); if(q){q.queue=[];q.player.stop();q.connection.destroy();queues.delete(g);} }
 function pauseById(g)   { const q=queues.get(g); if(!q)return null; const s=q.player.state.status; if(s===AudioPlayerStatus.Paused){q.player.unpause();return'resumed';}q.player.pause();return'paused'; }
 function leaveById(g)   { getVoiceConnection(g)?.destroy(); queues.delete(g); }
 
-module.exports = { joinCmd, skipMsgCmd, stopMsgCmd, leaveMsgCmd, queueMsgCmd, npMsgCmd, getQueueObj, skipById, stopById, pauseById, leaveById };
+module.exports = { joinCmd, skipMsgCmd, stopMsgCmd, leaveMsgCmd, queueMsgCmd, npMsgCmd, getQueueObj, skipById, stopById, pauseById, leaveById, loopById };

@@ -79,6 +79,21 @@ function shopEmbed(section, userId) {
             .setFooter({ text: 'Iibso: ?buy title <key>  •  Xidh: ?equip title <key>' });
     }
 
+    if (section === 'economy') {
+        const inv = ec.inventory || {};
+        const shieldActive = (inv.safetyExpiry || 0) > Date.now();
+        const shieldHours  = shieldActive ? Math.ceil((inv.safetyExpiry - Date.now()) / 3600000) : 0;
+        return new EmbedBuilder()
+            .setTitle('💰 Economy Shop')
+            .setColor('#e67e22')
+            .setDescription(
+                `🔫 **Rob Ticket** — ₿1,500\n  ↳ ?rob isticmaali karo (3 maalmood)\n\n` +
+                `🛡️ **Safety Shield** — ₿2,000\n  ↳ Rob-ka kaaga ilaaliya 24h\n  ${shieldActive ? `✅ Active — ${shieldHours}h haray` : '❌ Active ma aha'}`
+            )
+            .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
+            .setFooter({ text: 'Iibso: ?buy rob_ticket  ama  ?buy safety_shield' });
+    }
+
     // Default: main menu
     return new EmbedBuilder()
         .setTitle('🛒 Garaad Bot — Shop')
@@ -87,9 +102,10 @@ function shopEmbed(section, userId) {
             `🖼️ **Frames** — qurxinta profile-kaaga\n` +
             `⚡ **Boosters** — IQ/XP/BTC 2x\n` +
             `📦 **Loot Boxes** — abaalmarintyo random ah\n` +
-            `🏷️ **Titles** — cinwaanno aad isticmaali\n\n` +
+            `🏷️ **Titles** — cinwaanno aad isticmaali\n` +
+            `💰 **Economy** — Rob Ticket & Safety Shield\n\n` +
             `Isticmaal badhanka hoose ama:\n` +
-            `\`?shop frames\` \`?shop boosters\` \`?shop loot\` \`?shop titles\``
+            `\`?shop frames\` \`?shop boosters\` \`?shop loot\` \`?shop titles\` \`?shop economy\``
         )
         .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
         .setFooter({ text: 'Garaad Bot • Shop' });
@@ -165,12 +181,25 @@ function shopRows(section) {
         return rows;
     }
 
+    if (section === 'economy') {
+        return [
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('shop_buy_rob_ticket')    .setLabel('🔫 Rob Ticket  1.5k BTC').setStyle(ButtonStyle.Danger),
+                new ButtonBuilder().setCustomId('shop_buy_safety_shield') .setLabel('🛡️ Safety Shield  2k BTC').setStyle(ButtonStyle.Primary),
+            ),
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('shop_back').setLabel('← Back').setStyle(ButtonStyle.Secondary)
+            )
+        ];
+    }
+
     // Main menu
     return [new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId('shop_section_frames')  .setLabel('🖼️ Frames')  .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId('shop_section_boosters').setLabel('⚡ Boosters').setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId('shop_section_loot')    .setLabel('📦 Loot')    .setStyle(ButtonStyle.Danger),
         new ButtonBuilder().setCustomId('shop_section_titles')  .setLabel('🏷️ Titles')  .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('shop_section_economy') .setLabel('💰 Economy') .setStyle(ButtonStyle.Success),
     )];
 }
 
@@ -178,7 +207,7 @@ module.exports = async function shopCmd(message, args) {
     const userId  = message.author.id;
     checkUser(userId);
     const section = (args[0] || '').toLowerCase();
-    const valid   = ['frames', 'boosters', 'loot', 'titles', ''];
+    const valid   = ['frames', 'boosters', 'loot', 'titles', 'economy', ''];
     const sec     = valid.includes(section) ? section : '';
 
     return message.reply({ embeds: [shopEmbed(sec, userId)], components: shopRows(sec) });

@@ -30,6 +30,7 @@ const teamDuel        = require('../games/teamDuel');
 
 const jeebCmd         = require('../../data/commands/economy/jeeb');
 const tradeCmd        = require('../../data/commands/economy/trade');
+const robCmd          = require('../../data/commands/economy/rob');
 const cashflipCmd     = require('../../data/commands/economy/cashflip');
 const giveCmd         = require('../../data/commands/economy/give');
 const richCmd         = require('../../data/commands/economy/rich');
@@ -147,6 +148,9 @@ module.exports = function setupMessageHandler(client) {
             case 'jeeb':
                 return jeebCmd(message, args);
 
+
+            case 'rob':
+                return robCmd(message);
 
             case 'trade':
                 return tradeCmd(message, args);

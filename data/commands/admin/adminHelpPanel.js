@@ -47,13 +47,12 @@ function adminRow2(uid) {
     );
 }
 
-// Row 3: Broadcast | Bugs | Loans | Eid
+// Row 3: Broadcast | Bugs | Loans
 function adminRow3(uid) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`admin_broadcast_${uid}`) .setLabel('📢 Broadcast') .setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`admin_bugs_${uid}`)      .setLabel('🐛 Bugs')      .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`) .setLabel('💳 Loans')     .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_eid_${uid}`)       .setLabel('🌙 Ciid')      .setStyle(ButtonStyle.Success),
     );
 }
 

@@ -1262,8 +1262,6 @@ module.exports = function setupInteractionHandler(client) {
 
         // ── Music buttons ──
         if (id.startsWith('music_')) {
-            if (!require('../utils/admin').isAdmin(interaction.user.id))
-                return interaction.reply({ content: '⛔ Admin kaliya.', flags: MessageFlags.Ephemeral });
             let music;
             try { music = require('../../data/commands/music'); }
             catch { return interaction.reply({ content: '⚠️ Music install ma ahan.', flags: MessageFlags.Ephemeral }); }
@@ -1285,6 +1283,20 @@ module.exports = function setupInteractionHandler(client) {
                 if (q.current) lines.push(`🎵 **Hadda:** ${q.current.title} — ${q.current.duration}`);
                 q.queue.slice(0, 9).forEach((s, i) => lines.push(`**${i+1}.** ${s.title} — ${s.duration}`));
                 return interaction.reply({ embeds: [new EmbedBuilder().setTitle('🎶 Queue').setColor('#1db954').setDescription(lines.join('\n'))], flags: MessageFlags.Ephemeral });
+            }
+            if (action === 'loop1') {
+                const q = music.getQueueObj(guildId);
+                const cur = q?.loop || 'off';
+                const next = cur === 'one' ? 'off' : 'one';
+                music.loopById(guildId, next);
+                return interaction.reply({ content: next === 'one' ? '🔂 Loop Song — ON' : '🔂 Loop Song — OFF', flags: MessageFlags.Ephemeral });
+            }
+            if (action === 'loopall') {
+                const q = music.getQueueObj(guildId);
+                const cur = q?.loop || 'off';
+                const next = cur === 'all' ? 'off' : 'all';
+                music.loopById(guildId, next);
+                return interaction.reply({ content: next === 'all' ? '🔁 Loop All — ON' : '🔁 Loop All — OFF', flags: MessageFlags.Ephemeral });
             }
         }
 
@@ -1987,6 +1999,28 @@ module.exports = function setupInteractionHandler(client) {
                 ec.econTitles.push(key);
                 saveEcon();
                 return interaction.reply({ content: `✅ **${title.label}** la iibsaday! \`?equip title ${key}\` si aad u xidho.`, flags: MessageFlags.Ephemeral });
+            }
+
+            // ── Rob Ticket ──
+            if (id === 'shop_buy_rob_ticket') {
+                const PRICE = 1500;
+                if ((ec.btc || 0) < PRICE) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${PRICE.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc -= PRICE;
+                ec.inventory ??= {};
+                ec.inventory.robticketExpiry = Date.now() + 3 * 24 * 60 * 60 * 1000;
+                saveEcon();
+                return interaction.reply({ content: `✅ **🔫 Rob Ticket** la iibsaday! 3 maalmood active. \`?rob @user\` isticmaal.`, flags: MessageFlags.Ephemeral });
+            }
+
+            // ── Safety Shield ──
+            if (id === 'shop_buy_safety_shield') {
+                const PRICE = 2000;
+                if ((ec.btc || 0) < PRICE) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${PRICE.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc -= PRICE;
+                ec.inventory ??= {};
+                ec.inventory.safetyExpiry = Date.now() + 24 * 60 * 60 * 1000;
+                saveEcon();
+                return interaction.reply({ content: `✅ **🛡️ Safety Shield** la iibsaday! 24h active. Rob kaa kari maysid.`, flags: MessageFlags.Ephemeral });
             }
 
             return interaction.reply({ content: '⚠️ Unknown purchase type.', flags: MessageFlags.Ephemeral });
