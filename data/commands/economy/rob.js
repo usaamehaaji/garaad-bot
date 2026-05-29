@@ -1,16 +1,10 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 
 const ROB_SUCCESS_RATE   = 0.50;
 const ROB_MIN_BTC        = 1_000;
 const MAX_STEAL_FRACTION = 0.25;
-const ROB_COOLDOWN_MS    = 30 * 60 * 1000; // 30 min between robs
-
-function closeRow(userId) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`close_rob_${userId}`).setLabel('✖ Xidh').setStyle(ButtonStyle.Danger),
-    );
-}
+const ROB_COOLDOWN_MS    = 30 * 60 * 1000;
 
 module.exports = async function robCmd(message) {
     const userId = message.author.id;
@@ -44,7 +38,7 @@ module.exports = async function robCmd(message) {
         return message.reply({ embeds: [new EmbedBuilder()
             .setColor('#e74c3c')
             .setDescription(`⚠️ **${target.username}** lacag ku filan ma hayo (ugu yaraan **₿${ROB_MIN_BTC.toLocaleString()}** ayaa looga baahan yahay).`)
-        ], components: [closeRow(userId)] });
+        ] });
 
     // Shield check
     if ((victim.inventory?.safetyExpiry || 0) > Date.now()) {
@@ -52,7 +46,7 @@ module.exports = async function robCmd(message) {
         return message.reply({ embeds: [new EmbedBuilder()
             .setColor('#3498db')
             .setDescription(`🛡️ **${target.username}** waxaa ilaaliya **Safety Shield** — ${hoursLeft}h haray.\nDhac kari maysid!`)
-        ], components: [closeRow(userId)] });
+        ] });
     }
 
     robber.lastRob = Date.now();
@@ -73,7 +67,7 @@ module.exports = async function robCmd(message) {
                 { name: '😢 Dhibbanaha',   value: `**₿${victim.btc.toLocaleString()}** haray`, inline: true },
             )
             .setFooter({ text: '30 daqiiqo ka dib mar labaad isku day' })
-        ], components: [closeRow(userId)] });
+        ] });
     } else {
         const penalty = Math.floor((robber.btc || 0) * 0.50);
         robber.btc = Math.max(0, (robber.btc || 0) - penalty);
@@ -87,6 +81,6 @@ module.exports = async function robCmd(message) {
                 { name: '💳 Lacagtaada',   value: `**₿${robber.btc.toLocaleString()}**`,      inline: true },
             )
             .setFooter({ text: '50% lacagtaadii waa la qaaday!' })
-        ], components: [closeRow(userId)] });
+        ] });
     }
 };
