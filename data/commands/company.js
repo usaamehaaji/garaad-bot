@@ -6,6 +6,7 @@ const {
     getAllCompanies, getUserOwnedCompany, createCompany,
     saveCompanies, hashPass, checkPass, getCompanyLevel,
 } = require('../../src/economy/bankStore');
+const { checkRequirements, reqFailMessage } = require('../../src/utils/requirements');
 
 const CREATE_FEE = 250_000;
 const INDUSTRIES  = ['Tech', 'Media', 'Trading', 'Gaming', 'Education', 'Finance', 'Transport'];
@@ -24,6 +25,9 @@ async function companyCreateCmd(message, args) {
 
     if (getCompanyOf(message.author.id))
         return message.reply('⚠️ Horay shirkad ayaad u leedahay ama ku jirtaa. `?company` si aad u aragto.');
+
+    const { allMet, results } = checkRequirements(userData, econData, message.author.id, 'company');
+    if (!allMet) return message.reply(reqFailMessage(results, 'company'));
 
     if ((ec.btc || 0) < CREATE_FEE)
         return message.reply(`⚠️ **${fmtBtc(CREATE_FEE)}** ayaa loo baahan yahay. Haysataa: ${fmtBtc(ec.btc || 0)}`);

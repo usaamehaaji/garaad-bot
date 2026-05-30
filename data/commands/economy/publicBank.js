@@ -1,9 +1,11 @@
 const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+const { userData } = require('../../../src/store');
 const {
     getAllPublicBanks, getPublicBank, createPublicBank,
-    saveBanks, hashPass, checkPass, addTx,
+    saveBanks, hashPass, checkPass,
 } = require('../../../src/economy/bankStore');
+const { checkRequirements, reqFailMessage } = require('../../../src/utils/requirements');
 
 const CREATE_FEE = 100_000;
 function fmtBtc(n) { return `₿${Math.floor(n).toLocaleString()}`; }
@@ -17,6 +19,9 @@ async function createPublicBankCmd(message, args) {
     // Check if already owns one
     const existing = Object.values(getAllPublicBanks()).find(b => b.ownerId === message.author.id);
     if (existing) return message.reply(`⚠️ Horay ayaad bank u leedahay: **${existing.name}** (\`${existing.id}\`)`);
+
+    const { allMet, results } = checkRequirements(userData, econData, message.author.id, 'bank');
+    if (!allMet) return message.reply(reqFailMessage(results, 'bank'));
 
     if ((ec.btc || 0) < CREATE_FEE)
         return message.reply(`⚠️ **${fmtBtc(CREATE_FEE)} BTC** ayaa loo baahan yahay bangi u furin. Haysataa: ${fmtBtc(ec.btc || 0)}`);

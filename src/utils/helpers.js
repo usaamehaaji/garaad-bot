@@ -36,7 +36,7 @@ function checkUser(userId) {
                 duelWins: 0, duelLosses: 0, duelDraws: 0,
                 rushBest: 0,
                 quizWins: 0, quizPlayed: 0,
-                bugsReported: 0, lootOpened: 0,
+                bugsReported: 0, lootOpened: 0, flipsPlayed: 0, missionsCompleted: 0,
             },
             // ── New fields ──
             ownedFrames:  [],
@@ -93,7 +93,9 @@ function checkUser(userId) {
         s.quizWins      ??= 0;
         s.quizPlayed    ??= 0;
         s.bugsReported  ??= 0;
-        s.lootOpened    ??= 0;
+        s.lootOpened          ??= 0;
+        s.flipsPlayed         ??= 0;
+        s.missionsCompleted   ??= 0;
         // ── New fields ──
         d.ownedFrames  ??= [];
         d.activeFrame  ??= null;

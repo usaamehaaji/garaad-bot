@@ -13,6 +13,7 @@ const helpCmd         = require('../../data/commands/help');
 const profileCmd      = require('../../data/commands/profile');
 
 const topCmd          = require('../../data/commands/top');
+const { topIqCmd, topBtcCmd, topMissionsCmd, topStreakCmd, topFlipsCmd, topDuelsCmd } = require('../../data/commands/top');
 const todayCmd        = require('../../data/commands/today');
 
 const buyCmd          = require('../../data/commands/buy');
@@ -125,7 +126,14 @@ module.exports = function setupMessageHandler(client) {
 
 
             case 'top':
-                return topCmd(message, args);
+            case 'topiq':
+                return (command === 'topiq') ? topIqCmd(message) : topCmd(message, args);
+
+            case 'topbtc':        return topBtcCmd(message);
+            case 'topmissions':   return topMissionsCmd(message);
+            case 'topstreak':     return topStreakCmd(message);
+            case 'topflips':      return topFlipsCmd(message);
+            case 'topduels':      return topDuelsCmd(message);
 
             case 'today':
                 return todayCmd(message);

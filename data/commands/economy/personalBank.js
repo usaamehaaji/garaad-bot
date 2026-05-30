@@ -4,8 +4,8 @@ const { userData, saveData } = require('../../../src/store');
 const {
     getPersonalBank, createPersonalBank, addTx, saveBanks,
     hashPass, checkPass,
-    getPublicBank, getAllPublicBanks, createPublicBank,
 } = require('../../../src/economy/bankStore');
+const { checkRequirements, reqFailMessage } = require('../../../src/utils/requirements');
 
 const PERSONAL_BANK_FEE  = 0;        // free to create
 const TRANSFER_COOLDOWN  = 60_000;   // 1 min between transfers
@@ -20,6 +20,9 @@ async function bankCreateCmd(message) {
     const ec = econData[message.author.id];
     if (ec.personalBank)
         return message.reply(`🏦 Bank account horay baad u lahayd! ID: \`${ec.personalBank.bankId}\` — \`?bank\` si aad u aragto.`);
+
+    const { allMet, results } = checkRequirements(userData, econData, message.author.id, 'bank');
+    if (!allMet) return message.reply(reqFailMessage(results, 'bank'));
 
     const bank = createPersonalBank(econData, message.author.id, message.author.username);
     saveEcon();

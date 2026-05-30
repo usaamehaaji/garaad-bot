@@ -139,6 +139,14 @@ module.exports = async function cashflipCmd(message, args) {
     }
 
     recordFlip(userId, amount, win, walletBefore);
+    // Track flipsPlayed in userData stats
+    try {
+        const { userData, saveData } = require('../../../src/store');
+        const { checkUser } = require('../../../src/utils/helpers');
+        checkUser(userId);
+        userData[userId].stats.flipsPlayed = (userData[userId].stats.flipsPlayed || 0) + 1;
+        saveData();
+    } catch {}
     saveEcon();
 
     const freshState = getMarketState();

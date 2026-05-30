@@ -105,6 +105,7 @@ module.exports = async function missionsCmd(message, args) {
             d.lootBoxes       ??= {};
             d.lootBoxes[r.loot] = (d.lootBoxes[r.loot] || 0) + 1;
         }
+        d.stats.missionsCompleted = (d.stats.missionsCompleted || 0) + 1;
         checkAndAwardBadges(userId);
         saveData();
         if (r.btc) saveEcon();
