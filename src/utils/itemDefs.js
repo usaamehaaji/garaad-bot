@@ -3,24 +3,21 @@
 // =====================================================================
 
 const FRAMES = {
-    // ── Common ──
-    basic_blue:     { name: 'Blue Frame',       emoji: '🔵', rarity: 'Common',    price: 800,   sellFor: 200  },
-    basic_green:    { name: 'Green Frame',      emoji: '🟢', rarity: 'Common',    price: 800,   sellFor: 200  },
-    basic_red:      { name: 'Red Frame',        emoji: '🔴', rarity: 'Common',    price: 800,   sellFor: 200  },
-    // ── Rare ──
-    gold_ring:      { name: 'Gold Ring',        emoji: '🌕', rarity: 'Rare',      price: 2500,  sellFor: 800  },
-    silver_shine:   { name: 'Silver Shine',     emoji: '⚪', rarity: 'Rare',      price: 3000,  sellFor: 900  },
-    neon_purple:    { name: 'Neon Purple',      emoji: '💜', rarity: 'Rare',      price: 3500,  sellFor: 1000 },
-    // ── Epic ──
-    dragon_fire:    { name: 'Dragon Fire',      emoji: '🔥', rarity: 'Epic',      price: 6000,  sellFor: 2000 },
-    ice_crystal:    { name: 'Ice Crystal',      emoji: '❄️', rarity: 'Epic',      price: 7000,  sellFor: 2500 },
-    galaxy:         { name: 'Galaxy Frame',     emoji: '🌌', rarity: 'Epic',      price: 8000,  sellFor: 3000 },
-    // ── Legendary ──
-    somali_flag:    { name: 'Somali Flag 🇸🇴',  emoji: '🇸🇴', rarity: 'Legendary', price: 12000, sellFor: 5000 },
-    champion_gold:  { name: 'Champion Gold',    emoji: '🏆', rarity: 'Legendary', price: 15000, sellFor: 6000 },
-    // ── Mythic (loot box only) ──
+    // ── Hidden (existing owners keep, no longer buyable) ──
+    basic_blue:     { name: 'Blue Frame',       emoji: '🔵', rarity: 'Common',    price: 800,   sellFor: 200,   lootOnly: true },
+    basic_green:    { name: 'Green Frame',      emoji: '🟢', rarity: 'Common',    price: 800,   sellFor: 200,   lootOnly: true },
+    basic_red:      { name: 'Red Frame',        emoji: '🔴', rarity: 'Common',    price: 800,   sellFor: 200,   lootOnly: true },
+    gold_ring:      { name: 'Gold Ring',        emoji: '🌕', rarity: 'Rare',      price: 2500,  sellFor: 800,   lootOnly: true },
+    silver_shine:   { name: 'Silver Shine',     emoji: '⚪', rarity: 'Rare',      price: 3000,  sellFor: 900,   lootOnly: true },
+    neon_purple:    { name: 'Neon Purple',      emoji: '💜', rarity: 'Rare',      price: 3500,  sellFor: 1000,  lootOnly: true },
+    dragon_fire:    { name: 'Dragon Fire',      emoji: '🔥', rarity: 'Epic',      price: 6000,  sellFor: 2000,  lootOnly: true },
+    ice_crystal:    { name: 'Ice Crystal',      emoji: '❄️', rarity: 'Epic',      price: 7000,  sellFor: 2500,  lootOnly: true },
+    galaxy:         { name: 'Galaxy Frame',     emoji: '🌌', rarity: 'Epic',      price: 8000,  sellFor: 3000,  lootOnly: true },
+    champion_gold:  { name: 'Champion Gold',    emoji: '🏆', rarity: 'Legendary', price: 15000, sellFor: 6000,  lootOnly: true },
     legend_aura:    { name: 'Legend Aura',      emoji: '✨', rarity: 'Mythic',    price: 0,     sellFor: 10000, lootOnly: true },
     garaad_crown:   { name: 'Garaad Crown',     emoji: '👑', rarity: 'Mythic',    price: 0,     sellFor: 12000, lootOnly: true },
+    // ── Buyable ──
+    somali_flag:    { name: 'Somali 🇸🇴',        emoji: '🇸🇴', rarity: 'Legendary', price: 12000, sellFor: 5000 },
 };
 
 const BADGES = {
