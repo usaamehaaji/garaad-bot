@@ -49,13 +49,14 @@ module.exports = async function robCmd(message) {
             `💳 **Lacagta hadda kuu hartay**\n**₿${robber.btc.toLocaleString()}**`
         );
     } else {
-        const penaltyFrac = richTarget ? 0.50 : 0.20;
+        const penaltyFrac = richRobber ? 0.25 : (richTarget ? 0.50 : 0.20);
+        const penaltyPct  = richRobber ? '25%' : (richTarget ? '50%' : '20%');
         const penalty = Math.floor((robber.btc || 0) * penaltyFrac);
         robber.btc = Math.max(0, (robber.btc || 0) - penalty);
         saveEcon();
 
-        const richRobberNote = richRobber
-            ? `\n\n💡 **Lacagta badan tahay** — Adiga oo ₿5,000 ka badan leh, ma dhici kartid.`
+        const reason = richRobber
+            ? `\n\n💡 **Lacagta badan tahay** — ₿5,000 ka badan leh adiga, ma dhici kartid.`
             : '';
 
         return message.reply(
@@ -63,8 +64,8 @@ module.exports = async function robCmd(message) {
             `❌ Waxaad isku dayday inaad dhacdo \`${target.username}\`, balse way kaa badbaadday.\n\n` +
             `💸 **Lacagta kaa luntay**\n**₿${penalty.toLocaleString()}**\n\n` +
             `💰 **Lacagta hadda kuu hartay**\n**₿${robber.btc.toLocaleString()}**\n\n` +
-            `⚠️ **Ciqaab: ${richTarget ? '50%' : '20%'} lacagtaadii ayaa kaa luntay.**` +
-            richRobberNote
+            `⚠️ **Ciqaab: ${penaltyPct} lacagtaadii ayaa kaa luntay.**` +
+            reason
         );
     }
 };
