@@ -88,6 +88,58 @@ module.exports = async function adminCommand(message, args) {
         case 'bilow':
             return adminEconRestart(message);
 
+        // ?admin ebank reset — migrate garaad bank → personal bank, then zero old bank
+        case 'ebank': {
+            if ((args[0] || '').toLowerCase() !== 'reset')
+                return message.reply('⚠️ Isticmaal: `?admin ebank reset`');
+
+            const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
+            const { createPersonalBank } = require('../../../src/economy/bankStore');
+            const { userData } = require('../../../src/store');
+            const { checkUser } = require('../../../src/utils/helpers');
+
+            const users = Object.keys(econData).filter(k => /^\d{17,19}$/.test(k));
+            let migrated = 0, skipped = 0, totalMoved = 0;
+
+            for (const uid of users) {
+                const d = econData[uid];
+                const oldBalance = (d.banks?.garaad || 0);
+                if (!oldBalance) { skipped++; continue; }
+
+                // Create personal bank if doesn't exist
+                if (!d.personalBank) {
+                    checkUser(uid);
+                    const username = userData[uid]?.username || econData[uid]?.username || uid;
+                    createPersonalBank(econData, uid, username);
+                }
+
+                // Transfer balance
+                d.personalBank.balance   += oldBalance;
+                d.personalBank.deposits  += oldBalance;
+                d.personalBank.transactions = d.personalBank.transactions || [];
+                d.personalBank.transactions.unshift({
+                    type: 'received', amount: oldBalance,
+                    note: 'Garaad Bank migration', at: Date.now(),
+                });
+
+                // Zero old bank
+                d.banks.garaad = 0;
+                totalMoved += oldBalance;
+                migrated++;
+            }
+
+            saveEcon();
+            const { fmt } = require('../../../src/utils/helpers');
+            return message.reply(
+                `🔄 **Garaad Bank → Personal Bank Migration**\n\n` +
+                `✅ **${migrated}** player lacagtooda la wareejiyay\n` +
+                `💰 **Wadarta:** ₿${fmt(totalMoved)}\n` +
+                `⏭️ **${skipped}** player (lacag ma lahayn)\n\n` +
+                `📌 Garaad Bank (\`?ebank\`) haddeer eber.\n` +
+                `🏦 Lacagta \`?bank\` ku eeg.`
+            );
+        }
+
         case 'transfer':
         case 'bank':
         case 'send': {
