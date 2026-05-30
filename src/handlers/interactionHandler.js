@@ -2071,6 +2071,42 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
+        // ── Personal: view buttons ──
+        if (id.startsWith('rel_view_friends_') || id.startsWith('rel_view_partner_')) {
+            const ownerId = id.split('_').pop();
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { userData } = require('../store');
+            const { ensureRel, RING_NAMES } = require('../../data/commands/relationship');
+            checkUser(ownerId);
+            ensureRel(ownerId);
+            const d = userData[ownerId];
+
+            if (id.startsWith('rel_view_friends_')) {
+                const friendIds = d.friends || [];
+                if (!friendIds.length)
+                    return interaction.reply({ content: '📭 Saaxiib ma lihid weli.', flags: MessageFlags.Ephemeral });
+                const names = await Promise.all(friendIds.map(async fid => {
+                    try { const u = await client.users.fetch(fid); return `👤 **${u.username}**`; }
+                    catch { return `👤 <@${fid}>`; }
+                }));
+                return interaction.reply({ content: `**👥 Saaxiibada (${friendIds.length}):**\n${names.join('\n')}`, flags: MessageFlags.Ephemeral });
+            }
+
+            if (id.startsWith('rel_view_partner_')) {
+                const rel = d.relationship || {};
+                if (!rel.partnerId)
+                    return interaction.reply({ content: '💔 Partner ma lihid.', flags: MessageFlags.Ephemeral });
+                let pName = rel.partnerUsername || `<@${rel.partnerId}>`;
+                try { const u = await client.users.fetch(rel.partnerId); pName = u.username; } catch {}
+                const days = rel.since ? Math.floor((Date.now() - rel.since) / 86400000) : 0;
+                return interaction.reply({
+                    content: `💕 **Partner:** ${pName} ❤️ ${interaction.user.username}\n📅 **${days} Maalmood** wada joogaan\n${RING_NAMES[rel.ringType] || '💍'}`,
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+        }
+
         // ── Relationship: Friend request ──
         if (id.startsWith('rel_af_') || id.startsWith('rel_df_')) {
             const { userData, saveData } = require('../store');

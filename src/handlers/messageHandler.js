@@ -48,6 +48,7 @@ const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
+const personalCmd = require('../../data/commands/personal');
 const { getDisTube } = require('../music/disTubeSetup');
 
 
@@ -199,7 +200,10 @@ module.exports = function setupMessageHandler(client) {
             case 'sell':
                 return sellCmd(message, args);
 
-            // ── Relationship ──
+            // ── Personal / Relationship ──
+            case 'personal':
+                return personalCmd(message);
+
             case 'friend':
                 return friendCmd(message);
             case 'unfriend':
