@@ -57,6 +57,13 @@ function buildEduEmbed(userId) {
             `**\`${PREFIX}top\`** — Top 15 IQ\n` +
             `\n` +
 
+            `**💕 Xiriirka**\n` +
+            `**\`${PREFIX}personal\`** — Partner, saaxiibada iyo xiriirka\n` +
+            `**\`${PREFIX}friend @user\`** — Saaxiib codsi dir\n` +
+            `**\`${PREFIX}propose @user\`** — Guur u soo jed\n` +
+            `**\`${PREFIX}shop rings\`** — Rings iibso\n` +
+            `\n` +
+
             `**💬 Kale**\n` +
             `**\`${PREFIX}dm <fariin>\`** — Admin u dir fikrad ama talo\n` +
             `**\`${PREFIX}cilada [fariin]\`** — Cilad soo sheeg`
