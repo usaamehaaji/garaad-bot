@@ -39,11 +39,22 @@ module.exports = async function robCmd(message) {
         victim.btc  = (victim.btc  || 0) - stolen;
         robber.btc  = (robber.btc  || 0) + stolen;
         saveEcon();
-        return message.reply(`🔫 **Guul!** **${target.username}** ayaad dhacday!\n💰 La xaday: **+₿${stolen.toLocaleString()}** | 💳 Lacagtaada: **₿${robber.btc.toLocaleString()}**`);
+        return message.reply(
+            `🔫 **DHAC GUULAYSATAY!**\n\n` +
+            `✅ Waxaad si guul leh u dhacday **${target.username}**!\n\n` +
+            `💰 **Lacagta aad xaday**\n**₿${stolen.toLocaleString()}**\n\n` +
+            `💳 **Lacagta hadda kuu hartay**\n**₿${robber.btc.toLocaleString()}**`
+        );
     } else {
         const penalty = Math.floor((robber.btc || 0) * 0.50);
         robber.btc = Math.max(0, (robber.btc || 0) - penalty);
         saveEcon();
-        return message.reply(`🚔 **Fashilmay!** La qabteen — **₿${penalty.toLocaleString()}** (50%) lacagtaadii waa la qaaday!\n💳 Hadhay: **₿${robber.btc.toLocaleString()}**`);
+        return message.reply(
+            `🚔 **DHAC ISKU DAY FASHILMAY!**\n\n` +
+            `❌ Waxaad isku dayday inaad dhacdo **${target.username}**, balse way kaa badbaadday.\n\n` +
+            `💸 **Lacagta kaa luntay**\n**₿${penalty.toLocaleString()}**\n\n` +
+            `💰 **Lacagta hadda kuu hartay**\n**₿${robber.btc.toLocaleString()}**\n\n` +
+            `⚠️ **Ciqaab: 50% lacagtaadii ayaa kaa luntay.**`
+        );
     }
 };
