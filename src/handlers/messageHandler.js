@@ -47,6 +47,7 @@ const giveItemCmd     = require('../../data/commands/admin/giveItem');
 const lootboxCmd      = require('../../data/commands/lootbox');
 const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
+const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
 const { getDisTube } = require('../music/disTubeSetup');
 
 
@@ -136,7 +137,6 @@ module.exports = function setupMessageHandler(client) {
                 return duelCmd(message, args);
 
             case 'quiz':
-            case 'friends':
             case 'team':
                 return quizCmd(message, args);
 
@@ -198,6 +198,20 @@ module.exports = function setupMessageHandler(client) {
 
             case 'sell':
                 return sellCmd(message, args);
+
+            // ── Relationship ──
+            case 'friend':
+                return friendCmd(message);
+            case 'unfriend':
+                return unfriendCmd(message);
+            case 'friends':
+                return friendsListCmd(message);
+            case 'propose':
+                return proposeCmd(message);
+            case 'partner':
+                return partnerCmd(message);
+            case 'breakup':
+                return breakupCmd(message);
 
             // ── Missions ──
             case 'missions':

@@ -37,7 +37,12 @@ const BADGES = {
     legend_rank: { name: 'Legend Tier',   emoji: '👑', desc: 'Reach Legend rank (7000+ IQ)' },
     daily_7:     { name: 'Week Streak',   emoji: '📅', desc: '7 consecutive daily logins' },
     daily_30:    { name: 'Month Streak',  emoji: '🗓️', desc: '30 consecutive daily logins' },
-    loot_opener: { name: 'Loot Addict',   emoji: '📦', desc: 'Open 10 loot boxes' },
+    loot_opener:    { name: 'Loot Addict',    emoji: '📦', desc: 'Open 10 loot boxes' },
+    // ── Relationship badges ──
+    first_love:     { name: 'First Love',     emoji: '💕', desc: 'Get your first partner' },
+    engaged:        { name: 'Engaged',        emoji: '💍', desc: 'Accept a proposal' },
+    royal_couple:   { name: 'Royal Couple',   emoji: '👑', desc: 'Propose with Royal Ring' },
+    somali_couple:  { name: 'Somali Couple',  emoji: '🇸🇴', desc: 'Propose with Somali Ring' },
 };
 
 const BOOSTERS = {
@@ -103,4 +108,11 @@ function rollLoot(boxType) {
     return { type: table[0][0], key: table[0][1] };
 }
 
-module.exports = { FRAMES, BADGES, BOOSTERS, LOOT_BOXES, LOOT_TABLES, rollLoot };
+const RINGS = {
+    silver:  { name: 'Silver Ring',  emoji: '💍', price: 5_000,  sellFor: 2_000 },
+    diamond: { name: 'Diamond Ring', emoji: '💎', price: 15_000, sellFor: 6_000 },
+    royal:   { name: 'Royal Ring',   emoji: '👑', price: 30_000, sellFor: 12_000 },
+    somali:  { name: 'Somali Ring',  emoji: '🇸🇴', price: 50_000, sellFor: 20_000 },
+};
+
+module.exports = { FRAMES, BADGES, BOOSTERS, LOOT_BOXES, LOOT_TABLES, rollLoot, RINGS };

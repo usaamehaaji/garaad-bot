@@ -72,6 +72,18 @@ module.exports = async function profileCommand(message) {
 
     const tierColor = tier.color || '#9b59b6';
 
+    // Relationship
+    const { RING_NAMES } = require('./relationship');
+    const rel = data.relationship || {};
+    let relTxt = '💕 **Partner:** None';
+    if (rel.partnerId) {
+        let pName = rel.partnerUsername || `<@${rel.partnerId}>`;
+        try { const pu = await message.client.users.fetch(rel.partnerId); pName = pu.username; } catch {}
+        const days    = rel.since ? Math.floor((Date.now() - rel.since) / 86400000) : 0;
+        const ringTxt = RING_NAMES[rel.ringType] || '💍 Ring';
+        relTxt = `💕 **Partner:** ${pName} ❤️ ${target.username} · 📅 ${days} Days · ${ringTxt}`;
+    }
+
     const desc =
         `# 👤 ${target.username}${titlePart}\n` +
         `\n` +
@@ -83,6 +95,8 @@ module.exports = async function profileCommand(message) {
         `⭐ **XP:** ${(data.xp || 0).toLocaleString()}\n` +
         `🎮 **Games:** ${totalGames}\n` +
         `⚔️ **Duel Wins:** ${s.duelWins || 0}\n` +
+        `\n` +
+        `${relTxt}\n` +
         `\n` +
         `🖼️ **Frame:** ${frameTxt}\n` +
         `🏅 **Badges:** ${badgeStr}` +

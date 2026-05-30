@@ -6,7 +6,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { userData, saveData } = require('../../src/store');
 const { econData, saveEcon }  = require('../../src/economy/econStore');
 const { checkUser } = require('../../src/utils/helpers');
-const { FRAMES, BADGES, BOOSTERS, LOOT_BOXES } = require('../../src/utils/itemDefs');
+const { FRAMES, BADGES, BOOSTERS, LOOT_BOXES, RINGS } = require('../../src/utils/itemDefs');
 const { ECON_TITLES } = require('./economy/econShop');
 
 const RARITY_EMOJI = { Common: '⚪', Rare: '🔵', Epic: '🟣', Legendary: '🟡', Mythic: '🔴' };
@@ -94,6 +94,20 @@ function shopEmbed(section, userId) {
             .setFooter({ text: 'Iibso: ?buy rob_ticket  ama  ?buy safety_shield' });
     }
 
+    if (section === 'rings') {
+        const owned = (userData[userId]?.ownedRings) || {};
+        const lines = Object.entries(RINGS).map(([k, r]) => {
+            const count = owned[k] || 0;
+            return `${r.emoji} **${r.name}** — ₿${r.price.toLocaleString()}${count > 0 ? ` ✅ ×${count}` : ''}`;
+        });
+        return new EmbedBuilder()
+            .setTitle('💍 Ring Shop')
+            .setColor('#e91e8c')
+            .setDescription(lines.join('\n\n') + `\n\n_Ring waxaa loo baahan yahay ?propose si aad u guursan_`)
+            .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
+            .setFooter({ text: 'Iibso: ?buy ring silver  |  diamond  |  royal  |  somali' });
+    }
+
     // Default: main menu
     return new EmbedBuilder()
         .setTitle('🛒 Garaad Bot — Shop')
@@ -103,9 +117,10 @@ function shopEmbed(section, userId) {
             `⚡ **Boosters** — IQ/XP/BTC 2x\n` +
             `📦 **Loot Boxes** — abaalmarintyo random ah\n` +
             `🏷️ **Titles** — cinwaanno aad isticmaali\n` +
-            `💰 **Economy** — Rob Ticket & Safety Shield\n\n` +
+            `💰 **Economy** — Rob Ticket & Safety Shield\n` +
+            `💍 **Rings** — guurka loogu baahan yahay\n\n` +
             `Isticmaal badhanka hoose ama:\n` +
-            `\`?shop frames\` \`?shop boosters\` \`?shop loot\` \`?shop titles\` \`?shop economy\``
+            `\`?shop frames\` \`?shop boosters\` \`?shop loot\` \`?shop titles\` \`?shop economy\` \`?shop rings\``
         )
         .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
         .setFooter({ text: 'Garaad Bot • Shop' });
@@ -193,21 +208,40 @@ function shopRows(section) {
         ];
     }
 
+    if (section === 'rings') {
+        return [
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('shop_buy_ring_silver') .setLabel('💍 Silver  5k BTC')  .setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder().setCustomId('shop_buy_ring_diamond').setLabel('💎 Diamond  15k BTC').setStyle(ButtonStyle.Primary),
+                new ButtonBuilder().setCustomId('shop_buy_ring_royal')  .setLabel('👑 Royal  30k BTC')  .setStyle(ButtonStyle.Danger),
+                new ButtonBuilder().setCustomId('shop_buy_ring_somali') .setLabel('🇸🇴 Somali  50k BTC') .setStyle(ButtonStyle.Danger),
+            ),
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('shop_back').setLabel('← Back').setStyle(ButtonStyle.Secondary)
+            )
+        ];
+    }
+
     // Main menu
-    return [new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('shop_section_frames')  .setLabel('🖼️ Frames')  .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId('shop_section_boosters').setLabel('⚡ Boosters').setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId('shop_section_loot')    .setLabel('📦 Loot')    .setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId('shop_section_titles')  .setLabel('🏷️ Titles')  .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId('shop_section_economy') .setLabel('💰 Economy') .setStyle(ButtonStyle.Success),
-    )];
+    return [
+        new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId('shop_section_frames')  .setLabel('🖼️ Frames')  .setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder().setCustomId('shop_section_boosters').setLabel('⚡ Boosters').setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId('shop_section_loot')    .setLabel('📦 Loot')    .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId('shop_section_titles')  .setLabel('🏷️ Titles')  .setStyle(ButtonStyle.Success),
+        ),
+        new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId('shop_section_economy') .setLabel('💰 Economy') .setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId('shop_section_rings')   .setLabel('💍 Rings')   .setStyle(ButtonStyle.Primary),
+        ),
+    ];
 }
 
 module.exports = async function shopCmd(message, args) {
     const userId  = message.author.id;
     checkUser(userId);
     const section = (args[0] || '').toLowerCase();
-    const valid   = ['frames', 'boosters', 'loot', 'titles', 'economy', ''];
+    const valid   = ['frames', 'boosters', 'loot', 'titles', 'economy', 'rings', ''];
     const sec     = valid.includes(section) ? section : '';
 
     return message.reply({ embeds: [shopEmbed(sec, userId)], components: shopRows(sec) });

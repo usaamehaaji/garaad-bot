@@ -2023,6 +2023,24 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **🛡️ Safety Shield** la iibsaday! 24h active. Rob kaa kari maysid.`, flags: MessageFlags.Ephemeral });
             }
 
+            // ── Ring purchases ──
+            if (id.startsWith('shop_buy_ring_')) {
+                const { RINGS } = require('../../src/utils/itemDefs');
+                const { ensureRel } = require('../../data/commands/relationship');
+                const { userData, saveData } = require('../store');
+                const type = id.replace('shop_buy_ring_', '');
+                const ring = RINGS[type];
+                if (!ring) return interaction.reply({ content: '⚠️ Ring nooc ah ma jiro.', flags: MessageFlags.Ephemeral });
+                if ((ec.btc || 0) < ring.price) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${ring.price.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc -= ring.price;
+                checkUser(interaction.user.id);
+                ensureRel(interaction.user.id);
+                userData[interaction.user.id].ownedRings ??= { silver: 0, diamond: 0, royal: 0, somali: 0 };
+                userData[interaction.user.id].ownedRings[type] = (userData[interaction.user.id].ownedRings[type] || 0) + 1;
+                saveData(); saveEcon();
+                return interaction.reply({ content: `✅ **${ring.emoji} ${ring.name}** la iibsaday! (-₿${ring.price.toLocaleString()})\nIsticmaal: \`?propose @user\``, flags: MessageFlags.Ephemeral });
+            }
+
             return interaction.reply({ content: '⚠️ Unknown purchase type.', flags: MessageFlags.Ephemeral });
         }
 
@@ -2051,6 +2069,94 @@ module.exports = function setupInteractionHandler(client) {
                 )
             );
             return interaction.showModal(modal);
+        }
+
+        // ── Relationship: Friend request ──
+        if (id.startsWith('rel_af_') || id.startsWith('rel_df_')) {
+            const { userData, saveData } = require('../store');
+            const { ensureRel } = require('../../data/commands/relationship');
+            const fromId  = id.replace('rel_af_', '').replace('rel_df_', '');
+            const userId  = interaction.user.id;
+            checkUser(userId);
+            checkUser(fromId);
+            ensureRel(userId);
+            ensureRel(fromId);
+            const d = userData[userId];
+
+            if (!(d.pendingFriendReqs || []).includes(fromId))
+                return interaction.reply({ content: '⚠️ Codsi saaxiibtinimo kuu jirin.', flags: MessageFlags.Ephemeral });
+
+            d.pendingFriendReqs = d.pendingFriendReqs.filter(i => i !== fromId);
+
+            if (id.startsWith('rel_af_')) {
+                d.friends = d.friends || [];
+                userData[fromId].friends = userData[fromId].friends || [];
+                if (!d.friends.includes(fromId)) d.friends.push(fromId);
+                if (!userData[fromId].friends.includes(userId)) userData[fromId].friends.push(userId);
+                saveData();
+                let fromName = fromId;
+                try { const u = await client.users.fetch(fromId); fromName = u.username; } catch {}
+                await interaction.message.edit({ components: [] }).catch(() => {});
+                return interaction.reply({ content: `💕 **${fromName}** iyo adigu saaxiib baad noqdeen!`, flags: MessageFlags.Ephemeral });
+            } else {
+                saveData();
+                await interaction.message.edit({ components: [] }).catch(() => {});
+                return interaction.reply({ content: '❌ Codsiga saaxiibtinimada waa la diiday.', flags: MessageFlags.Ephemeral });
+            }
+        }
+
+        // ── Relationship: Proposal ──
+        if (id.startsWith('rel_ap_') || id.startsWith('rel_dp_')) {
+            const { userData, saveData } = require('../store');
+            const { ensureRel, RING_NAMES } = require('../../data/commands/relationship');
+            const fromId = id.replace('rel_ap_', '').replace('rel_dp_', '');
+            const userId = interaction.user.id;
+            checkUser(userId);
+            checkUser(fromId);
+            ensureRel(userId);
+            ensureRel(fromId);
+            const d       = userData[userId];
+            const fromD   = userData[fromId];
+            const proposal = d.pendingProposal;
+
+            if (!proposal || proposal.fromId !== fromId)
+                return interaction.reply({ content: '⚠️ Codsi guur kuu jirin.', flags: MessageFlags.Ephemeral });
+
+            d.pendingProposal = null;
+
+            if (id.startsWith('rel_dp_')) {
+                saveData();
+                await interaction.message.edit({ components: [] }).catch(() => {});
+                return interaction.reply({ content: '💔 Codsiga guurka waa la diiday.', flags: MessageFlags.Ephemeral });
+            }
+
+            // Accept — consume ring, create relationship
+            const ringType = proposal.ringType;
+            fromD.ownedRings ??= { silver: 0, diamond: 0, royal: 0, somali: 0 };
+            fromD.ownedRings[ringType] = Math.max(0, (fromD.ownedRings[ringType] || 0) - 1);
+
+            let fromName = proposal.fromUsername || fromId;
+            try { const u = await client.users.fetch(fromId); fromName = u.username; } catch {}
+
+            const now = Date.now();
+            d.relationship    = { partnerId: fromId, partnerUsername: fromName,          ringType, since: now };
+            fromD.relationship = { partnerId: userId, partnerUsername: interaction.user.username, ringType, since: now };
+
+            // Award badges
+            const awardBadge = (uid, badge) => {
+                userData[uid].badges ??= [];
+                if (!userData[uid].badges.includes(badge)) userData[uid].badges.push(badge);
+            };
+            awardBadge(userId, 'first_love'); awardBadge(userId, 'engaged');
+            awardBadge(fromId, 'first_love');
+            if (ringType === 'royal')  { awardBadge(userId, 'royal_couple');  awardBadge(fromId, 'royal_couple'); }
+            if (ringType === 'somali') { awardBadge(userId, 'somali_couple'); awardBadge(fromId, 'somali_couple'); }
+
+            saveData();
+            await interaction.message.edit({ components: [] }).catch(() => {});
+            return interaction.reply({
+                content: `💍 **${fromName}** ❤️ **${interaction.user.username}** — Hambalyo! Wada noloshiinna waa la xidey!\n${RING_NAMES[ringType]}`,
+            });
         }
 
         // ── Xir (Close) ──

@@ -45,6 +45,11 @@ function checkUser(userId) {
             boosters:     { doubleIq: 0, doubleXp: 0, doubleBtc: 0, iqShields: 0 },
             lootBoxes:    { common: 0, rare: 0, legendary: 0 },
             missions:     { date: '', tasks: [], baseline: {} },
+            relationship:      { partnerId: null, partnerUsername: null, ringType: null, since: null },
+            friends:           [],
+            pendingFriendReqs: [],
+            pendingProposal:   null,
+            ownedRings:        { silver: 0, diamond: 0, royal: 0, somali: 0 },
         };
     } else {
         const d = userData[userId];

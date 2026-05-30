@@ -6,7 +6,7 @@ const { userData, saveData } = require('../../src/store');
 const { econData, saveEcon }  = require('../../src/economy/econStore');
 const { PREFIX, SHOP_ITEMS, TITLES } = require('../../src/config');
 const { checkUser } = require('../../src/utils/helpers');
-const { FRAMES, BOOSTERS, LOOT_BOXES } = require('../../src/utils/itemDefs');
+const { FRAMES, BOOSTERS, LOOT_BOXES, RINGS } = require('../../src/utils/itemDefs');
 const { ECON_TITLES } = require('./economy/econShop');
 
 const CUSTOM_MAX_LEN = 24;
@@ -42,6 +42,24 @@ module.exports = async function buyCommand(message, args) {
         ec.inventory.robticketExpiry = Date.now() + 24 * 60 * 60 * 1000;
         saveEcon();
         return message.reply(`✅ **🔫 Rob Ticket** la iibsaday! (-₿${PRICE.toLocaleString()})\n24 saac \`?rob @user\` isticmaal.`);
+    }
+
+    // ── ?buy ring <type> ──
+    if (itemKey === 'ring') {
+        const { checkEconUser } = require('../../src/economy/econStore');
+        const { ensureRel } = require('./relationship');
+        const type = (args[1] || '').toLowerCase();
+        const ring = RINGS[type];
+        if (!ring) return message.reply(`⚠️ Noocyada: \`silver\`, \`diamond\`, \`royal\`, \`somali\`\nTusaale: \`?buy ring diamond\``);
+        checkEconUser(userId);
+        ensureRel(userId);
+        const ec = econData[userId];
+        if ((ec.btc || 0) < ring.price) return message.reply(`⚠️ BTC kuu ma filna. U baahan: **₿${ring.price.toLocaleString()}**, haysataa: **₿${(ec.btc||0).toLocaleString()}**.`);
+        ec.btc -= ring.price;
+        userData[userId].ownedRings ??= { silver: 0, diamond: 0, royal: 0, somali: 0 };
+        userData[userId].ownedRings[type] = (userData[userId].ownedRings[type] || 0) + 1;
+        saveData(); saveEcon();
+        return message.reply(`✅ **${ring.emoji} ${ring.name}** la iibsaday! (-₿${ring.price.toLocaleString()})\nIsticmaal: \`?propose @user\``);
     }
 
     // ── ?buy frame <key> ──
