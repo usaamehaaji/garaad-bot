@@ -93,6 +93,30 @@ module.exports = async function adminCommand(message, args) {
         case 'send': {
             const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
             const { fmt } = require('../../../src/utils/helpers');
+
+            // ?admin bank reset — reset all personal bank balances
+            if ((args[0] || '').toLowerCase() === 'reset') {
+                const users = Object.keys(econData).filter(k => /^\d{17,19}$/.test(k));
+                let count = 0;
+                for (const uid of users) {
+                    const d = econData[uid];
+                    if (d.personalBank) {
+                        d.personalBank.balance     = 0;
+                        d.personalBank.deposits    = 0;
+                        d.personalBank.withdrawals = 0;
+                        d.personalBank.transactions = [];
+                        count++;
+                    }
+                }
+                saveEcon();
+                return message.reply(
+                    `🏦 **Personal Bank Reset**\n\n` +
+                    `✅ **${count}** account balance eber (₿0) la dhigay.\n` +
+                    `📌 Account-yada weli jiraan — kaliya lacagta la tirtiraya.\n` +
+                    `🏛️ Public banks **ma taabanin.**`
+                );
+            }
+
             const target = message.mentions.users.first();
             const amount = Number((args.find(a => !isNaN(parseFloat(a))) || '').replace(/,/g, ''));
             if (!target) return message.reply('⚠️ Isticmaal: `?admin transfer @user 5000`');
