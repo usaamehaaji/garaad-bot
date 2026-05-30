@@ -72,6 +72,17 @@ module.exports = async function profileCommand(message) {
 
     const tierColor = tier.color || '#9b59b6';
 
+    // Bank & Company
+    const { getPersonalBank, getAllPublicBanks, getUserOwnedCompany, getCompanyLevel } = require('../../src/economy/bankStore');
+    const myBank    = getPersonalBank(econData, target.id);
+    const ownedBank = Object.values(getAllPublicBanks()).find(b => b.ownerId === target.id);
+    const company   = (() => { try { const { getAllCompanies } = require('../../src/economy/bankStore'); return Object.values(getAllCompanies()).find(c => c.ownerId === target.id || c.employees?.[target.id]) || null; } catch { return null; } })();
+
+    const bankTxt    = ownedBank ? `🏛️ **${ownedBank.name}** (Owner)` : myBank ? `🏦 Account: \`${myBank.bankId}\`` : '*None*';
+    const companyTxt = company
+        ? `🏢 **${company.name}** · ${company.employees?.[target.id]?.role || (company.ownerId === target.id ? 'Founder' : 'Employee')}`
+        : '*None*';
+
     // Relationship
     const { RING_NAMES } = require('./relationship');
     const rel = data.relationship || {};
@@ -97,6 +108,9 @@ module.exports = async function profileCommand(message) {
         `⚔️ **Duel Wins:** ${s.duelWins || 0}\n` +
         `\n` +
         `${relTxt}\n` +
+        `\n` +
+        `🏦 **Bank:** ${bankTxt}\n` +
+        `🏢 **Company:** ${companyTxt}\n` +
         `\n` +
         `🖼️ **Frame:** ${frameTxt}\n` +
         `🏅 **Badges:** ${badgeStr}` +

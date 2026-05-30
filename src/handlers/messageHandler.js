@@ -49,6 +49,9 @@ const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
 const personalCmd = require('../../data/commands/personal');
+const { bankCreateCmd, bankPasswordCmd, bankViewCmd, depositCmd, withdrawCmd, bankSendCmd } = require('../../data/commands/economy/personalBank');
+const { createPublicBankCmd, listPublicBanksCmd, bankInfoCmd, bankDepositCmd, bankWithdrawCmd, bankPasswordCmd: pubBankPwCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
+const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
 
 
@@ -173,8 +176,63 @@ module.exports = function setupMessageHandler(client) {
                 return econTitleCmd(message, args);
 
             case 'ebank':
-            case 'bank':
                 return ebankCmd(message, args);
+
+            // ── Personal Bank ──
+            case 'bank':
+                if (args[0] === 'create') return bankCreateCmd(message);
+                return bankViewCmd(message);
+
+            case 'bp':
+                return bankPasswordCmd(message, args);
+
+            case 'deposit':
+                return depositCmd(message, args);
+
+            case 'withdraw':
+                return withdrawCmd(message, args);
+
+            case 'banksend':
+                return bankSendCmd(message, args);
+
+            // ── Public Banks ──
+            case 'createbank':
+                return createPublicBankCmd(message, args);
+
+            case 'banks':
+                return listPublicBanksCmd(message);
+
+            case 'bankinfo':
+                return bankInfoCmd(message, args);
+
+            case 'bankdeposit':
+                return bankDepositCmd(message, args);
+
+            case 'bankwithdraw':
+                return bankWithdrawCmd(message, args);
+
+            case 'bankpassword':
+                return pubBankPwCmd(message, args);
+
+            case 'topbanks':
+                return topBanksCmd(message);
+
+            // ── Companies ──
+            case 'company': {
+                const sub = (args[0] || '').toLowerCase();
+                if (sub === 'create')    return companyCreateCmd(message, args.slice(1));
+                if (sub === 'hire')      return companyHireCmd(message);
+                if (sub === 'fire')      return companyFireCmd(message);
+                if (sub === 'employees') return companyEmployeesCmd(message);
+                if (sub === 'deposit')   return companyDepositCmd(message, args.slice(1));
+                if (sub === 'withdraw')  return companyWithdrawCmd(message, args.slice(1));
+                if (sub === 'transfer')  return companyTransferCmd(message, args.slice(1));
+                if (sub === 'password')  return companyPasswordCmd(message, args.slice(1));
+                return companyViewCmd(message);
+            }
+
+            case 'topcompanies':
+                return topCompaniesCmd(message);
 
             case 'treasury':
             case 'khaznad':

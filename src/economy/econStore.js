@@ -52,6 +52,7 @@ function checkEconUser(userId) {
         if (!d.weeklyEarned.btc) d.weeklyEarned.btc ??= d.weeklyEarned.usd || 0;
         d.efStreak      ??= 0;
         d.efLoseStreak  ??= 0;
+        d.personalBank  ??= null;
         d.efFlipCount   ??= 0;
         d.efProfile     ??= 'balanced';
         d.efRecentBets  ??= [];
