@@ -32,10 +32,12 @@ module.exports = async function robCmd(message) {
     }
 
     robber.lastRob = Date.now();
-    const success  = Math.random() < ROB_SUCCESS_RATE;
+    const richTarget   = (victim.btc || 0) >= 5_000;
+    const stealFrac    = richTarget ? 0.50 : MAX_STEAL_FRACTION;
+    const success      = Math.random() < ROB_SUCCESS_RATE;
 
     if (success) {
-        const stolen = Math.floor((victim.btc || 0) * MAX_STEAL_FRACTION);
+        const stolen = Math.floor((victim.btc || 0) * stealFrac);
         victim.btc  = (victim.btc  || 0) - stolen;
         robber.btc  = (robber.btc  || 0) + stolen;
         saveEcon();
@@ -46,7 +48,8 @@ module.exports = async function robCmd(message) {
             `💳 **Lacagta hadda kuu hartay**\n**₿${robber.btc.toLocaleString()}**`
         );
     } else {
-        const penalty = Math.floor((robber.btc || 0) * 0.50);
+        const penaltyFrac = richTarget ? 0.50 : 0.20;
+        const penalty = Math.floor((robber.btc || 0) * penaltyFrac);
         robber.btc = Math.max(0, (robber.btc || 0) - penalty);
         saveEcon();
         return message.reply(
@@ -54,7 +57,7 @@ module.exports = async function robCmd(message) {
             `❌ Waxaad isku dayday inaad dhacdo **${target.username}**, balse way kaa badbaadday.\n\n` +
             `💸 **Lacagta kaa luntay**\n**₿${penalty.toLocaleString()}**\n\n` +
             `💰 **Lacagta hadda kuu hartay**\n**₿${robber.btc.toLocaleString()}**\n\n` +
-            `⚠️ **Ciqaab: 50% lacagtaadii ayaa kaa luntay.**`
+            `⚠️ **Ciqaab: ${richTarget ? '50%' : '20%'} lacagtaadii ayaa kaa luntay.**`
         );
     }
 };
