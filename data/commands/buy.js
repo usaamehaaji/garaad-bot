@@ -16,6 +16,34 @@ module.exports = async function buyCommand(message, args) {
     checkUser(userId);
     const itemKey = (args[0] || '').toLowerCase();
 
+    // ── ?buy safety_shield ──
+    if (itemKey === 'safety_shield') {
+        const PRICE = 2000;
+        const { checkEconUser } = require('../../src/economy/econStore');
+        checkEconUser(userId);
+        const ec = econData[userId];
+        if ((ec.btc || 0) < PRICE) return message.reply(`⚠️ BTC kuu ma filna. U baahan: **₿${PRICE.toLocaleString()}**, haysataa: **₿${(ec.btc||0).toLocaleString()}**.`);
+        ec.btc -= PRICE;
+        ec.inventory ??= {};
+        ec.inventory.safetyExpiry = Date.now() + 24 * 60 * 60 * 1000;
+        saveEcon();
+        return message.reply(`✅ **🛡️ Safety Shield** la iibsaday! (-₿${PRICE.toLocaleString()})\n24 saac rob kaa kari maysid.`);
+    }
+
+    // ── ?buy rob_ticket ──
+    if (itemKey === 'rob_ticket') {
+        const PRICE = 1500;
+        const { checkEconUser } = require('../../src/economy/econStore');
+        checkEconUser(userId);
+        const ec = econData[userId];
+        if ((ec.btc || 0) < PRICE) return message.reply(`⚠️ BTC kuu ma filna. U baahan: **₿${PRICE.toLocaleString()}**, haysataa: **₿${(ec.btc||0).toLocaleString()}**.`);
+        ec.btc -= PRICE;
+        ec.inventory ??= {};
+        ec.inventory.robticketExpiry = Date.now() + 24 * 60 * 60 * 1000;
+        saveEcon();
+        return message.reply(`✅ **🔫 Rob Ticket** la iibsaday! (-₿${PRICE.toLocaleString()})\n24 saac \`?rob @user\` isticmaal.`);
+    }
+
     // ── ?buy frame <key> ──
     if (itemKey === 'frame') {
         const key   = (args[1] || '').toLowerCase();
