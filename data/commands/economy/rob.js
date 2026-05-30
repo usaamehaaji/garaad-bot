@@ -62,7 +62,7 @@ module.exports = async function robCmd(message) {
         return message.reply(
             `🚔 **DHAC ISKU DAY FASHILMAY!**\n\n` +
             `❌ Waxaad isku dayday inaad dhacdo \`${target.username}\`, balse kuma hergalin.\n\n` +
-            `💸 **Lacagta kaa luntay:** **₿${penalty.toLocaleString()}** · 💰 **Lacagta hartay:** **₿${robber.btc.toLocaleString()}**\n` +
+            `💸 **Loss:** **₿${penalty.toLocaleString()}** · 💰 **Wallet:** **₿${robber.btc.toLocaleString()}**\n` +
             `⚠️ **Ciqaab: ${penaltyPct}** lacagtaadii ayaa kaa luntay.` +
             reason
         );
