@@ -60,10 +60,10 @@ module.exports = async function robCmd(message) {
             : '';
 
         return message.reply(
-            `🚔 **DHAC ISKU DAY FASHILMAY!**\n` +
-            `❌ Waxaad isku dayday inaad dhacdo \`${target.username}\`, balse way kaa badbaadday.\n\n` +
-            `💸 **Lacagta kaa luntay:** ₿${penalty.toLocaleString()} · 💰 **Hadhay:** ₿${robber.btc.toLocaleString()}\n` +
-            `⚠️ Ciqaab: **${penaltyPct}** lacagtaadii ayaa kaa luntay.` +
+            `🚔 **DHAC ISKU DAY FASHILMAY!**\n\n` +
+            `❌ Waxaad isku dayday inaad dhacdo \`${target.username}\`, balse kuma hergalin.\n\n` +
+            `💸 **Lacagta kaa luntay:** **₿${penalty.toLocaleString()}** · 💰 **Lacagta hartay:** **₿${robber.btc.toLocaleString()}**\n` +
+            `⚠️ **Ciqaab: ${penaltyPct}** lacagtaadii ayaa kaa luntay.` +
             reason
         );
     }
