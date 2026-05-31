@@ -15,33 +15,39 @@ function cleanTitle(disp) {
     return disp;
 }
 
-function buildIqLines(top) {
-    return top.map(([id, data], i) => {
-        const s         = data.stats || {};
-        const disp      = cleanTitle(getDisplayTitle(id));
-        const titlePart = disp ? ` ・ ${disp}` : '';
-        const lvl       = getLevel(data.iq || 0);
+async function buildIqLines(top, client) {
+    const lines = await Promise.all(top.map(async ([id, data], i) => {
+        const s          = data.stats || {};
+        const disp       = cleanTitle(getDisplayTitle(id));
+        const titlePart  = disp ? ` ・ ${disp}` : '';
+        const lvl        = getLevel(data.iq || 0);
         const totalGames = (s.soloPlayed || 0) + (s.duelWins || 0) + (s.duelLosses || 0) + (s.duelDraws || 0);
-        const medal     = i < 3 ? `${MEDALS[i]} ` : '';
+        const medal      = i < 3 ? `${MEDALS[i]} ` : '';
+
+        let name = `<@${id}>`;
+        try { const u = await client.users.fetch(id); name = `@${u.username}`; } catch {}
 
         return (
-            `${medal}${CIRCLES[i]} <@${id}>${titlePart}\n` +
+            `${medal}${CIRCLES[i]} **${name}**${titlePart}\n` +
             `┆ 🧠 IQ: **${(data.iq || 0).toLocaleString()}**\n` +
             `┆ ⭐ Level: **${lvl}**\n` +
             `┆ 🎮 Games: **${totalGames}**\n` +
             `┆ ✅ Guulo: **${s.duelWins || 0}**\n` +
             `┆ ❌ Guuldarro: **${s.duelLosses || 0}**`
         );
-    }).join('\n\n');
+    }));
+    return lines.join('\n\n');
 }
 
 // ── Generic leaderboard builder ──────────────────────
 async function buildTopEmbed(message, title, color, entries, lineBuilder) {
     const top   = entries.slice(0, 10);
-    const lines = top.map((e, i) => {
+    const lines = await Promise.all(top.map(async (e, i) => {
         const medal = i < 3 ? MEDALS[i] : `**${i + 1}.**`;
-        return `${medal} ${lineBuilder(e, i)}`;
-    });
+        let name = `<@${e[0]}>`;
+        try { const u = await message.client.users.fetch(e[0]); name = `@${u.username}`; } catch {}
+        return `${medal} ${lineBuilder(e, i, name)}`;
+    }));
     const embed = new EmbedBuilder()
         .setTitle(title).setColor(color)
         .setDescription(lines.join('\n\n') || '_Wali cidna ma jiro_')
@@ -55,7 +61,7 @@ async function topIqCmd(message) {
         .filter(([id]) => /^\d{17,19}$/.test(id) && (userData[id].iq || 0) > 0)
         .sort(([, a], [, b]) => (b.iq || 0) - (a.iq || 0));
     return buildTopEmbed(message, '🧠 Top IQ', '#FFBF00', entries,
-        ([id, d]) => `<@${id}> — 🧠 **${(d.iq||0).toLocaleString()} IQ** · Lvl ${getLevel(d.iq||0)}`
+        ([id, d], i, name) => `**${name}** — 🧠 **${(d.iq||0).toLocaleString()} IQ** · Lvl ${getLevel(d.iq||0)}`
     );
 }
 
@@ -66,7 +72,7 @@ async function topBtcCmd(message) {
         .filter(([id]) => /^\d{17,19}$/.test(id) && (econData[id].btc || 0) > 0)
         .sort(([, a], [, b]) => (b.btc || 0) - (a.btc || 0));
     return buildTopEmbed(message, '💰 Top BTC', '#f39c12', entries,
-        ([id, d]) => `<@${id}> — 💰 **₿${Math.floor(d.btc||0).toLocaleString()}**`
+        ([id, d], i, name) => `**${name}** — 💰 **₿${Math.floor(d.btc||0).toLocaleString()}**`
     );
 }
 
@@ -76,7 +82,7 @@ async function topMissionsCmd(message) {
         .filter(([id]) => /^\d{17,19}$/.test(id) && (userData[id].stats?.missionsCompleted || 0) > 0)
         .sort(([, a], [, b]) => (b.stats?.missionsCompleted||0) - (a.stats?.missionsCompleted||0));
     return buildTopEmbed(message, '📋 Top Missions', '#2ecc71', entries,
-        ([id, d]) => `<@${id}> — 📋 **${d.stats?.missionsCompleted||0} missions**`
+        ([id, d], i, name) => `**${name}** — 📋 **${d.stats?.missionsCompleted||0} missions**`
     );
 }
 
@@ -87,7 +93,7 @@ async function topStreakCmd(message) {
         .filter(([id]) => /^\d{17,19}$/.test(id) && (econData[id].streak || 0) > 0)
         .sort(([, a], [, b]) => (b.streak||0) - (a.streak||0));
     return buildTopEmbed(message, '🔥 Top Streak', '#e74c3c', entries,
-        ([id, d]) => `<@${id}> — 🔥 **${d.streak||0} days**`
+        ([id, d], i, name) => `**${name}** — 🔥 **${d.streak||0} days**`
     );
 }
 
@@ -97,7 +103,7 @@ async function topFlipsCmd(message) {
         .filter(([id]) => /^\d{17,19}$/.test(id) && (userData[id].stats?.flipsPlayed || 0) > 0)
         .sort(([, a], [, b]) => (b.stats?.flipsPlayed||0) - (a.stats?.flipsPlayed||0));
     return buildTopEmbed(message, '🎲 Top Flips', '#9b59b6', entries,
-        ([id, d]) => `<@${id}> — 🎲 **${d.stats?.flipsPlayed||0} flips**`
+        ([id, d], i, name) => `**${name}** — 🎲 **${d.stats?.flipsPlayed||0} flips**`
     );
 }
 
@@ -107,7 +113,7 @@ async function topDuelsCmd(message) {
         .filter(([id]) => /^\d{17,19}$/.test(id) && (userData[id].stats?.duelWins || 0) > 0)
         .sort(([, a], [, b]) => (b.stats?.duelWins||0) - (a.stats?.duelWins||0));
     return buildTopEmbed(message, '⚔️ Top Duels', '#e67e22', entries,
-        ([id, d]) => `<@${id}> — ⚔️ **${d.stats?.duelWins||0} wins**`
+        ([id, d], i, name) => `**${name}** — ⚔️ **${d.stats?.duelWins||0} wins**`
     );
 }
 
@@ -120,7 +126,7 @@ module.exports = async function topCommand(message) {
         .sort(([, a], [, b]) => (b.iq || 0) - (a.iq || 0));
 
     const top      = allIq.slice(0, TOP_N);
-    const lines    = buildIqLines(top);
+    const lines    = await buildIqLines(top, message.client);
     const userRank = allIq.findIndex(([id]) => id === userId) + 1;
     const inTop    = userRank > 0 && userRank <= TOP_N;
 
