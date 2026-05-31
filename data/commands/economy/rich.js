@@ -12,15 +12,10 @@ module.exports = async function richCmd(message) {
         .slice(0, 10);
 
     const lines = await Promise.all(entries.map(async ({ uid, btc }, i) => {
-        let name;
-        try {
-            const member = await message.guild.members.fetch(uid).catch(() => null);
-            name = member?.displayName || `<@${uid}>`;
-        } catch {
-            name = `<@${uid}>`;
-        }
+        let name = `<@${uid}>`;
+        try { const u = await message.client.users.fetch(uid); name = `@${u.username}`; } catch {}
         const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `**${i + 1}.**`;
-        return `${medal} ${name} — ₿ **₿: ${fmt(btc)}**`;
+        return `${medal} **${name}** — ₿ **${fmt(btc)}**`;
     }));
 
     const closeRow = new ActionRowBuilder().addComponents(
