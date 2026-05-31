@@ -3,10 +3,12 @@ const { econData, checkEconUser, saveEcon, resetWeeklyEarnings } = require('../e
 const { userData }     = require('../store');
 const { getLevel, getDisplayTitle, checkUser } = require('../utils/helpers');
 
-const CHANNEL_ID    = '1504517873673048185';
-const WEEK_MS       = 7 * 24 * 60 * 60 * 1000;
-const FIRST_TICK_MS = 30 * 1000;
-const PRIZE_BTC     = 2_000;
+const CHANNEL_ID       = '1504517873673048185';
+const WEEK_MS          = 7 * 24 * 60 * 60 * 1000;
+const FIRST_TICK_MS    = 30 * 1000;
+const PRIZE_ECO_BTC    = 2_000;  // Top weekly earner
+const PRIZE_IQ_BTC     = 1_500;  // Top IQ winner
+const PRIZE_RICH_BTC   = 1_500;  // Top rich (highest BTC balance)
 
 const MEDALS = ['🥇', '🥈', '🥉'];
 
@@ -56,7 +58,25 @@ async function buildIqLines(client) {
         return `${medal} **${name}**${titlePart} — 🧠 ${(d.iq || 0).toLocaleString()} IQ · Lvl ${lvl}`;
     }));
 
-    return lines;
+    return { lines, winner: sorted[0] ? { uid: sorted[0][0], iq: sorted[0][1].iq || 0 } : null };
+}
+
+async function buildRichLines(client) {
+    const sorted = Object.entries(econData)
+        .filter(([k]) => /^\d{17,19}$/.test(k))
+        .map(([uid, d]) => ({ uid, btc: (d.btc || 0) + Object.values(d.banks || {}).reduce((s, v) => s + (v || 0), 0) }))
+        .filter(e => e.btc > 0)
+        .sort((a, b) => b.btc - a.btc)
+        .slice(0, 10);
+
+    const lines = await Promise.all(sorted.map(async ({ uid, btc }, i) => {
+        let name = `<@${uid}>`;
+        try { const u = await client.users.fetch(uid); name = u.username; } catch {}
+        const medal = MEDALS[i] || `**${i + 1}.**`;
+        return `${medal} **${name}** — ₿ ${btc.toLocaleString()} BTC`;
+    }));
+
+    return { lines, winner: sorted[0] || null };
 }
 
 async function sendLeaderboard(client) {
@@ -67,41 +87,67 @@ async function sendLeaderboard(client) {
             return;
         }
 
-        const [{ lines: ecoLines, winner }, iqLines] = await Promise.all([
+        const [{ lines: ecoLines, winner: ecoWinner }, { lines: iqLines, winner: iqWinner }, { lines: richLines, winner: richWinner }] = await Promise.all([
             buildEcoLines(client),
             buildIqLines(client),
+            buildRichLines(client),
         ]);
 
         const dateStr = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-        let prizeLine = '';
-        if (winner) {
-            checkEconUser(winner.uid);
-            econData[winner.uid].btc = (econData[winner.uid].btc || 0) + PRIZE_BTC;
-            saveEcon();
-            prizeLine = `\n\n🏆 **This Week's Winner:** <@${winner.uid}>\n₿ **+${PRIZE_BTC.toLocaleString()} BTC** prize awarded!`;
+        // Award prizes
+        let econChanged = false;
+
+        let ecoPrizeLine = '';
+        if (ecoWinner) {
+            checkEconUser(ecoWinner.uid);
+            econData[ecoWinner.uid].btc = (econData[ecoWinner.uid].btc || 0) + PRIZE_ECO_BTC;
+            econChanged = true;
+            ecoPrizeLine = `\n\n🏆 **Winner:** <@${ecoWinner.uid}> — **+₿ ${PRIZE_ECO_BTC.toLocaleString()} BTC** abaalmarinta!`;
         }
+
+        let iqPrizeLine = '';
+        if (iqWinner) {
+            checkEconUser(iqWinner.uid);
+            econData[iqWinner.uid].btc = (econData[iqWinner.uid].btc || 0) + PRIZE_IQ_BTC;
+            econChanged = true;
+            iqPrizeLine = `\n\n🏆 **Winner:** <@${iqWinner.uid}> — **+₿ ${PRIZE_IQ_BTC.toLocaleString()} BTC** abaalmarinta!`;
+        }
+
+        let richPrizeLine = '';
+        if (richWinner) {
+            checkEconUser(richWinner.uid);
+            econData[richWinner.uid].btc = (econData[richWinner.uid].btc || 0) + PRIZE_RICH_BTC;
+            econChanged = true;
+            richPrizeLine = `\n\n🏆 **Winner:** <@${richWinner.uid}> — **+₿ ${PRIZE_RICH_BTC.toLocaleString()} BTC** abaalmarinta!`;
+        }
+
+        if (econChanged) saveEcon();
 
         const ecoEmbed = new EmbedBuilder()
             .setTitle('💰 TOP 10 — Weekly Earners')
             .setColor('#f39c12')
-            .setDescription(
-                (ecoLines.join('\n') || '_No earnings recorded this week._') +
-                prizeLine
-            )
+            .setDescription((ecoLines.join('\n') || '_No earnings recorded this week._') + ecoPrizeLine)
             .setFooter({ text: `Garaad Economy • ${dateStr} • Earnings reset` })
             .setTimestamp();
 
         const iqEmbed = new EmbedBuilder()
             .setTitle('🧠 TOP 10 — Highest IQ')
             .setColor('#3498db')
-            .setDescription(iqLines.join('\n') || '_No data available._')
+            .setDescription((iqLines.join('\n') || '_No data available._') + iqPrizeLine)
             .setFooter({ text: `Garaad IQ System • ${dateStr}` })
+            .setTimestamp();
+
+        const richEmbed = new EmbedBuilder()
+            .setTitle('💎 TOP 10 — Richest Players')
+            .setColor('#2ecc71')
+            .setDescription((richLines.join('\n') || '_No data available._') + richPrizeLine)
+            .setFooter({ text: `Garaad Economy • Wallet + Bank combined • ${dateStr}` })
             .setTimestamp();
 
         await channel.send({
             content: '@everyone\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 **Garaad — Weekly Leaderboard**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-            embeds: [ecoEmbed, iqEmbed],
+            embeds: [ecoEmbed, iqEmbed, richEmbed],
         });
 
         resetWeeklyEarnings();
