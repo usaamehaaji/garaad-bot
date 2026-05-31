@@ -5,7 +5,6 @@ const {
     AudioPlayerStatus, VoiceConnectionStatus, entersState, getVoiceConnection,
     StreamType,
 } = require('@discordjs/voice');
-const play = require('play-dl');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { canPlayMusic, isAdmin } = require('../../src/utils/admin');
 
@@ -110,6 +109,27 @@ function playNext(guildId) {
     }
 }
 
+function ytdlpInfo(query) {
+    const isUrl = /^https?:\/\//.test(query);
+    const searchArg = isUrl ? query : `ytsearch1:${query}`;
+    return new Promise((resolve, reject) => {
+        const proc = spawn(YTDLP, [
+            '--dump-json', '--no-playlist',
+            '--quiet', '--no-warnings',
+            searchArg,
+        ]);
+        let out = '';
+        proc.stdout.on('data', d => { out += d; });
+        proc.stderr.on('data', d => console.error('[yt-dlp info]', d.toString().trim()));
+        proc.on('close', code => {
+            const line = out.trim().split('\n')[0];
+            if (!line) return reject(new Error('yt-dlp: xog lama helin'));
+            try { resolve(JSON.parse(line)); } catch (e) { reject(e); }
+        });
+        proc.on('error', reject);
+    });
+}
+
 async function joinCmd(message, args) {
     if (!canPlayMusic(message.author.id)) return message.reply('⛔ Ma haysatid fasax. Admin-ku wuxuu kuu siinayaa DJ fasaxa: `?dj @adigu`');
     const query = args.join(' ').trim();
@@ -119,20 +139,12 @@ async function joinCmd(message, args) {
 
     const msg = await message.reply('🔍 Raadinaya...');
     try {
-        let url = query;
-        if (play.yt_validate(query) !== 'video') {
-            const res = await play.search(query, { limit: 1 });
-            if (!res.length) return msg.edit('❌ Lama helin YouTube-ka.');
-            url = `https://www.youtube.com/watch?v=${res[0].id}`;
-        }
-        const info = await play.video_info(url);
-        const det  = info.video_details;
-        const songUrl = det.id ? `https://www.youtube.com/watch?v=${det.id}` : url;
+        const info = await ytdlpInfo(query);
         const song = {
-            title:     det.title,
-            url:       songUrl,
-            duration:  fmtDur(det.durationInSec),
-            thumbnail: det.thumbnails?.slice(-1)[0]?.url || null,
+            title:     info.title || query,
+            url:       info.webpage_url || `https://www.youtube.com/watch?v=${info.id}`,
+            duration:  fmtDur(info.duration),
+            thumbnail: info.thumbnail || null,
         };
 
         const guildId = message.guild.id;
