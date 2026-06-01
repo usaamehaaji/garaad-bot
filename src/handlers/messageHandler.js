@@ -386,6 +386,25 @@ module.exports = function setupMessageHandler(client) {
             case 'maalgashi':
                 return investCmd(message, args);
 
+            case 'reminder':
+            case 'xusuusin': {
+                checkUser(userId);
+                const d   = require('../../src/store').userData[userId];
+                const sub = (args[0] || '').toLowerCase();
+                if (sub === 'off' || sub === 'jooji') {
+                    d.reminderOptOut = true;
+                    require('../../src/store').saveData();
+                    return message.reply('🔕 **Xusuusinta waa la joojiyay.** Dib u fur: `?reminder on`');
+                }
+                if (sub === 'on' || sub === 'fur') {
+                    d.reminderOptOut = false;
+                    require('../../src/store').saveData();
+                    return message.reply('🔔 **Xusuusinta waa la furay.** DM ayaa la soo diri doonaa haddaad maqnaato.');
+                }
+                const status = d.reminderOptOut ? '🔕 Joojisan' : '🔔 Firfircoon';
+                return message.reply(`**Xusuusinta:** ${status}\n\`?reminder off\` — Jooji\n\`?reminder on\` — Fur`);
+            }
+
             // ── Werewolf ──
             case 'werewolf':
             case 'ww':

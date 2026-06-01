@@ -3285,6 +3285,25 @@ module.exports = function setupInteractionHandler(client) {
             }).catch(() => {});
         }
 
+        // ── Reminder opt-out ──────────────────────────────────────────────
+        if (id.startsWith('reminder_optout_')) {
+            const targetId = id.replace('reminder_optout_', '');
+            if (interaction.user.id !== targetId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { userData: uData, saveData: sd } = require('../store');
+            const { checkUser: cu } = require('../utils/helpers');
+            cu(targetId);
+            uData[targetId].reminderOptOut = true;
+            sd();
+            return interaction.update({
+                embeds: [new EmbedBuilder()
+                    .setColor('#95a5a6')
+                    .setDescription('🔕 **Xusuusinta waa la xiraa.**\nDM kuma soo dirin doono. Dib u fur: `?reminder on`')
+                ],
+                components: [],
+            });
+        }
+
         // ── Shared Access Panel ───────────────────────────────────────────
         if (id.startsWith('acc_')) {
             const parts    = id.split('_');

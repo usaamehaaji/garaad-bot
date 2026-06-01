@@ -41,6 +41,9 @@ function getUsersDueForReminder() {
         // Marna ma uusan ciyaarin
         if (!d.lastPlayed || d.lastPlayed === 0) continue;
 
+        // User opted out
+        if (d.reminderOptOut) continue;
+
         // Dhowaan ?today qaatay (waxba kuma muquuninayno)
         const sinceDaily = now - (d.lastDaily || 0);
         if (sinceDaily < REMINDER_MS) continue;

@@ -2,7 +2,7 @@
 // GARAAD BOT - Reminder Scheduler (24h DM)
 // =====================================================================
 
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { getUsersDueForReminder, markReminderSent } = require('../utils/reminders');
 const { PREFIX } = require('../config');
 
@@ -33,7 +33,14 @@ module.exports = function setupReminderScheduler(client) {
                         .setColor('#3498db')
                         .setFooter({ text: 'Garaad Bot — Mahadsanid' });
 
-                    await user.send({ embeds: [embed] });
+                    const row = new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setCustomId(`reminder_optout_${userId}`)
+                            .setLabel('🔕 Iska xir xusuusinta')
+                            .setStyle(ButtonStyle.Secondary),
+                    );
+
+                    await user.send({ embeds: [embed], components: [row] });
                     markReminderSent(userId);
                     success++;
                 } catch {
