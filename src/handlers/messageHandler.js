@@ -57,6 +57,7 @@ const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
 const passwordCmd     = require('../../data/commands/password');
 const accessCmd       = require('../../data/commands/access');
+const adminBankCmd    = require('../../data/commands/admin/adminBank');
 const investCmd       = require('../../data/commands/economy/invest');
 
 
@@ -385,6 +386,11 @@ module.exports = function setupMessageHandler(client) {
             case 'invest':
             case 'maalgashi':
                 return investCmd(message, args);
+
+            case 'adminbank': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
+                return adminBankCmd(message, args);
+            }
 
             case 'reminder':
             case 'xusuusin': {

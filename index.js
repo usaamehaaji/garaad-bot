@@ -129,6 +129,15 @@ client.once('clientReady', () => {
     tickMarket();
     setInterval(tickMarket, 60 * 1000);
 
+    // Bank expiry check — daily
+    const { checkAndCloseExpiredBanks } = require('./data/commands/economy/publicBank');
+    async function runBankExpiryCheck() {
+        const closed = await checkAndCloseExpiredBanks(client);
+        if (closed > 0) console.log(`[BankExpiry] ${closed} bank(s) la xiray, lacagta macaamiisha loo celiyay`);
+    }
+    runBankExpiryCheck();
+    setInterval(runBankExpiryCheck, 24 * 60 * 60 * 1000);
+
     // Activity status: ?caawin | X servers
     function updateStatus() {
         const count = client.guilds.cache.size;
