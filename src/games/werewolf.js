@@ -7,10 +7,70 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const games = new Map(); // guildId -> game state
 
 const ROLES = {
-    wolf:     { emoji: '🐺', name: 'Werewolf', color: '#e74c3c', desc: 'Habeenkii qof dooro oo dil. Maalintii is qarso.' },
-    seer:     { emoji: '🔮', name: 'Seer',     color: '#9b59b6', desc: 'Habeenkii qof baro — Werewolf miyuu yahay?' },
-    doctor:   { emoji: '💊', name: 'Doctor',   color: '#27ae60', desc: 'Habeenkii qof dooro oo badbaadi dilka.' },
-    villager: { emoji: '👨', name: 'Villager', color: '#3498db', desc: 'Maalintii sawiraha raadso oo codeey si aad werewolf u saarto.' },
+    wolf: {
+        emoji: '🐺', name: 'Werewolf', color: '#c0392b',
+        desc: 'Habeenkii qof dooro oo dil. Maalintii is qarso.',
+        thumbnail: 'https://i.imgur.com/KmGVAzk.png',
+        card: [
+            '```',
+            '╔══════════════════════╗',
+            '║   🐺  WEREWOLF  🐺   ║',
+            '║  ──────────────────  ║',
+            '║  ● Habeenkii:  DIL   ║',
+            '║  ● Maalintii: QARSO  ║',
+            '║  ● Kooxda: WOLVES    ║',
+            '╚══════════════════════╝',
+            '```',
+        ].join('\n'),
+    },
+    seer: {
+        emoji: '🔮', name: 'Seer', color: '#8e44ad',
+        desc: 'Habeenkii qof baro — Werewolf miyuu yahay?',
+        thumbnail: 'https://i.imgur.com/8YWXQNM.png',
+        card: [
+            '```',
+            '╔══════════════════════╗',
+            '║     🔮  SEER  🔮     ║',
+            '║  ──────────────────  ║',
+            '║  ● Habeenkii: BARO   ║',
+            '║  ● Maalintii: CODEEY ║',
+            '║  ● Awood: Wolf ogow  ║',
+            '╚══════════════════════╝',
+            '```',
+        ].join('\n'),
+    },
+    doctor: {
+        emoji: '💊', name: 'Doctor', color: '#27ae60',
+        desc: 'Habeenkii qof dooro oo badbaadi dilka.',
+        thumbnail: 'https://i.imgur.com/5QQ3hkQ.png',
+        card: [
+            '```',
+            '╔══════════════════════╗',
+            '║   💊  DOCTOR  💊     ║',
+            '║  ──────────────────  ║',
+            '║  ● Habeenkii: DAAWI  ║',
+            '║  ● Maalintii: CODEEY ║',
+            '║  ● Awood: Qof badbaadi║',
+            '╚══════════════════════╝',
+            '```',
+        ].join('\n'),
+    },
+    villager: {
+        emoji: '🏘️', name: 'Villager', color: '#2980b9',
+        desc: 'Maalintii sawiraha raadso oo codeey si aad werewolf u saarto.',
+        thumbnail: 'https://i.imgur.com/placeholder.png',
+        card: [
+            '```',
+            '╔══════════════════════╗',
+            '║  🏘️  VILLAGER  🏘️   ║',
+            '║  ──────────────────  ║',
+            '║  ● Awood: Codayn     ║',
+            '║  ● Hadal + Baro      ║',
+            '║  ● Saaro Wolf!       ║',
+            '╚══════════════════════╝',
+            '```',
+        ].join('\n'),
+    },
 };
 
 function assignRoles(n) {
@@ -112,20 +172,29 @@ async function startGame(game, client) {
         if (roles[i] === 'wolf') wolves.push(uid);
     });
 
-    // DM everyone their role
+    // DM everyone their role card
     for (const [uid, { role }] of game.players) {
         const r = ROLES[role];
         try {
             const u = await client.users.fetch(uid);
-            const extra = role === 'wolf' && wolves.length > 1
-                ? `\n\n🐺 **Werewolves kale:** ${wolves.filter(w => w !== uid).map(w => `<@${w}>`).join(', ')}`
+            const wolfExtra = role === 'wolf' && wolves.length > 1
+                ? `\n🐺 **Wolves kale:** ${wolves.filter(w => w !== uid).map(w => `<@${w}>`).join(', ')}`
                 : '';
             await u.send({ embeds: [
                 new EmbedBuilder()
-                    .setTitle(`🃏 Doorkaaga — ${r.emoji} ${r.name}`)
                     .setColor(r.color)
-                    .setDescription(r.desc + extra)
-                    .setFooter({ text: 'Garaad Werewolf • Sir ah — ha u sheegin!' })
+                    .setTitle(`🃏 Doorkaaga La Siiyay`)
+                    .setDescription(
+                        r.card +
+                        `\n**${r.emoji} ${r.name}**\n${r.desc}` +
+                        wolfExtra
+                    )
+                    .addFields(
+                        { name: '📜 Sharciga', value: r.desc, inline: false },
+                        { name: '🔒 Sir ah', value: 'Ha u sheegin ciyaaryahanada kale!', inline: false },
+                    )
+                    .setFooter({ text: `Garaad Werewolf • Wareeg ${game.round}` })
+                    .setTimestamp()
             ]});
         } catch {}
     }
