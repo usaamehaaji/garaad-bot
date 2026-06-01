@@ -69,8 +69,6 @@ function buildEduEmbed(userId) {
             `**\`${PREFIX}partner\`** — Partner-kaaga eeg\n` +
             `**\`${PREFIX}breakup\`** — Xiriirka jabi\n\n` +
 
-            `**🔓 Account Sharing**\n` +
-            `**\`${PREFIX}access @user <pw>\`** — Saxiib account-kiisa geli\n\n` +
 
             `**💬 Kale**\n` +
             `**\`${PREFIX}dm <fariin>\`** — Admin u dir fikrad\n` +
