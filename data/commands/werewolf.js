@@ -13,17 +13,22 @@ module.exports = async function werewolfCmd(message) {
 
     const game = {
         guildId,
-        hostId:      message.author.id,
-        phase:       'lobby',
-        players:     new Map([[message.author.id, null]]),
-        textChannel: message.channel,
-        round:       1,
-        votes:       new Map(),
+        hostId:       message.author.id,
+        phase:        'lobby',
+        players:      new Map([[message.author.id, null]]),
+        textChannel:  message.channel,
+        round:        1,
+        votes:        new Map(),
         nightActions: null,
-        nightTimer:  null,
-        dayTimer:    null,
-        voteTimer:   null,
-        voteMsg:     null,
+        nightTimer:   null,
+        dayTimer:     null,
+        voteTimer:    null,
+        elinTimer:    null,
+        kingTimer:    null,
+        voteMsg:      null,
+        necroUsed:    false,
+        elinPending:  null,
+        kingPending:  null,
     };
 
     games.set(guildId, game);

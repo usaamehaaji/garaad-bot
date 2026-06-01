@@ -26,7 +26,7 @@ const ROLES = {
     druid:    { emoji: '🌿', name: 'Duruid',       color: '#1abc9c', team: 'village',
                 dm: 'Habeenkii qof ka mid ah shacabka (Villager) dooro oo badbaadi.' },
     necro:    { emoji: '💀', name: 'Necro',        color: '#7f8c8d', team: 'village',
-                dm: 'Habeenkii qof dhintay dooro — doorkooda ogaan doontaa.' },
+                dm: 'Habeenkii qof dhintay dib u soo celi — hal mar oo kaliya!' },
     // ── Base villager ──
     villager: { emoji: '🔥', name: 'Dad Caadi',   color: '#2980b9', team: 'village',
                 dm: 'Maalintii u codeey dilaaga. Fikirkaaga isticmaal!' },
@@ -234,8 +234,8 @@ async function beginNight(game, client) {
         } else if (role === 'druid') {
             const targets = alive.filter(([tid]) => tid !== uid);
             if (targets.length) await sendDM('🌿 Cidda badbaadisaysaa dooro (good ama evil):', targets, ButtonStyle.Success, 'druid');
-        } else if (role === 'necro' && dead.length > 0) {
-            await sendDM('💀 Cidda dhintay doorkooda baro:', dead, ButtonStyle.Secondary, 'necro');
+        } else if (role === 'necro' && dead.length > 0 && !game.necroUsed) {
+            await sendDM('💀 Qof dhintay dooro — dib u soo celi (hal mar kaliya):', dead, ButtonStyle.Secondary, 'necro');
         }
     }
 
@@ -317,16 +317,15 @@ async function resolveNight(game, client) {
         }
     }
 
-    // Necro result
-    if (na.necroTarget) {
-        const tRole   = game.players.get(na.necroTarget)?.role;
-        const necroId = [...game.players.entries()].find(([, p]) => p.role === 'necro' && p.alive)?.[0];
-        if (necroId && tRole) {
+    // Necro: revive one dead player (once per game)
+    if (na.necroTarget && !game.necroUsed) {
+        const revived = game.players.get(na.necroTarget);
+        if (revived && !revived.alive) {
+            revived.alive    = true;
+            game.necroUsed   = true;
             const tn = await fetchName(na.necroTarget, client);
-            try {
-                const nu = await client.users.fetch(necroId);
-                await nu.send(`💀 **${tn}** doorkoodu wuxuu ahaa: ${ROLES[tRole].emoji} **${ROLES[tRole].name}**`).catch(() => {});
-            } catch {}
+            desc += `\n\n💀 **Necro** wuxuu dib u soo celiyay: **${tn}** — wuu noolaaday!`;
+            try { const u = await client.users.fetch(na.necroTarget); await u.send('💀 **Necro ayaa kuu soo nooleeyay!** Ciyaarta ayaad ku soo noqotay.').catch(() => {}); } catch {}
         }
     }
 
