@@ -57,6 +57,7 @@ const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
 const passwordCmd     = require('../../data/commands/password');
 const accessCmd       = require('../../data/commands/access');
+const investCmd       = require('../../data/commands/economy/invest');
 
 
 let _music = null;
@@ -378,9 +379,12 @@ module.exports = function setupMessageHandler(client) {
                 return passwordCmd(message, args);
 
             case 'access':
-            case 'gal':
             case 'galee':
                 return accessCmd(message, args);
+
+            case 'invest':
+            case 'maalgashi':
+                return investCmd(message, args);
 
             // ── Werewolf ──
             case 'werewolf':
