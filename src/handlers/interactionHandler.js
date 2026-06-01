@@ -12,7 +12,7 @@ const { userData, activeQuiz, activeDuels, activeTournament, isUserBusy, tournam
 const { checkUser }         = require('../utils/helpers');
 const { isAdmin }           = require('../utils/admin');
 const { QUIZ_MIN_PLAYERS, QUIZ_MAX_PLAYERS, DUEL_STAKE_IQ, TOURNAMENT_MIN_PLAYERS, TOURNAMENT_R1_QUESTIONS, TOURNAMENT_R2_QUESTIONS, TOURNAMENT_FINAL_QUESTIONS } = require('../config');
-const { buildEduEmbed, buildEcoEmbed, helpRow } = require('../../data/commands/help');
+const { buildEduEmbed, buildEcoEmbed, buildShopEmbed: buildHelpShopEmbed, buildWwEmbed, helpRow } = require('../../data/commands/help');
 
 function genCode() {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -1218,8 +1218,12 @@ module.exports = function setupInteractionHandler(client) {
         if (id.startsWith('help_shop_')) {
             const ownerId = id.replace('help_shop_', '');
             if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { buildShopEmbed } = require('../../data/commands/help');
-            return interaction.update({ embeds: [buildShopEmbed()], components: [helpRow(ownerId, 'shop')] });
+            return interaction.update({ embeds: [buildHelpShopEmbed()], components: [helpRow(ownerId, 'shop')] });
+        }
+        if (id.startsWith('help_ww_')) {
+            const ownerId = id.replace('help_ww_', '');
+            if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            return interaction.update({ embeds: [buildWwEmbed()], components: [helpRow(ownerId, 'ww')] });
         }
 
         // ── Inventory equip buttons ──

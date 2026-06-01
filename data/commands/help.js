@@ -18,8 +18,12 @@ function helpRow(userId, active) {
             .setStyle(active === 'eco' ? ButtonStyle.Success : ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(`help_shop_${userId}`)
-            .setLabel('🛒 Shop & Items')
+            .setLabel('🛒 Shop')
             .setStyle(active === 'shop' ? ButtonStyle.Primary : ButtonStyle.Secondary),
+        new ButtonBuilder()
+            .setCustomId(`help_ww_${userId}`)
+            .setLabel('🐺 Werewolf')
+            .setStyle(active === 'ww' ? ButtonStyle.Success : ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(`close_help_${userId}`)
             .setLabel('✖ Xir')
@@ -76,24 +80,42 @@ function buildEcoEmbed() {
         .setTitle('💰 Economy — Bitcoin System')
         .setColor('#f39c12')
         .setDescription(
-            `**👤 Lacagta**\n` +
-            `**\`${PREFIX}jeeb\`** — Jeebkaaga, bank iyo deynta\n` +
-            `**\`${PREFIX}shaqo\`** — Shaqo 8h mar → +150 BTC\n` +
-            `**\`${PREFIX}today\`** — Maalin kasta: +250 BTC + 3 IQ (24h)\n\n` +
+            `**👤 Jeeb & Shaqo**\n` +
+            `**\`${PREFIX}jeeb\`** — Jeebkaaga, bank iyo xaaladda\n` +
+            `**\`${PREFIX}shaqo\`** — Shaqo (8h mar) → BTC\n` +
+            `**\`${PREFIX}today\`** — Lacag + IQ maalin kasta (24h)\n` +
+            `**\`${PREFIX}rich\`** — Top 10 ugu hantida badan\n\n` +
 
-            `**🏦 Bank & Deyn**\n` +
-            `**\`${PREFIX}ebank\`** — Garaad Bank (1%/day) + Deyn (Khamiis–Jimce)\n` +
-            `**\`${PREFIX}list\`** — Liiska bank iyo deynta firfircoon\n\n` +
+            `**🏦 IQ Bank (Personal)**\n` +
+            `**\`${PREFIX}bank\`** — Bank-kaaga eeg\n` +
+            `**\`${PREFIX}bank create\`** — Bank account bilow\n` +
+            `**\`${PREFIX}deposit <xad>\`** — IQ dhig bank\n` +
+            `**\`${PREFIX}withdraw <xad>\`** — IQ bank ka qaado\n` +
+            `**\`${PREFIX}banksend @user <xad>\`** — IQ u dir qof\n\n` +
+
+            `**🏛️ Garaad Bank (BTC)**\n` +
+            `**\`${PREFIX}ebank\`** — BTC bank (1%/day interest) + Deyn\n` +
+            `**\`${PREFIX}list\`** — Liiska firfircoon\n\n` +
+
+            `**🏢 Public Banks & Companies**\n` +
+            `**\`${PREFIX}banks\`** — Banks oo dhan\n` +
+            `**\`${PREFIX}bankinfo <magac>\`** — Bank macluumaad\n` +
+            `**\`${PREFIX}bankdeposit\`** / **\`${PREFIX}bankwithdraw\`** — Dhig/Qaado\n` +
+            `**\`${PREFIX}topbanks\`** — Top banks\n` +
+            `**\`${PREFIX}company\`** — Shirkadaada\n` +
+            `**\`${PREFIX}topcompanies\`** — Top shirkadaha\n\n` +
 
             `**🎮 Ciyaaraha**\n` +
-            `**\`${PREFIX}trade\`** — Suuqa: BTC UP/DOWN saadaal\n` +
-            `**\`${PREFIX}ef 300 up\`** ama **\`down\`** — 50/50: WIN 2× ama LOSS\n\n` +
+            `**\`${PREFIX}trade\`** — BTC suuq: UP/DOWN saadaal\n` +
+            `**\`${PREFIX}ef <xad> up/down\`** — Ecoflip 50/50\n` +
+            `**\`${PREFIX}rob\`** — Qof xadi\n\n` +
 
             `**🤝 Bulshada**\n` +
-            `**\`${PREFIX}give @user btc 200\`** — BTC u dir player\n` +
-            `**\`${PREFIX}rich\`** — Top 10 qof ugu hantida badan dhaqaalaha`
+            `**\`${PREFIX}give @user btc <xad>\`** — BTC u dir\n` +
+            `**\`${PREFIX}trade\`** — Suuqa kala gad/iibso\n` +
+            `**\`${PREFIX}etitle\`** — Economy cinwaan xidh`
         )
-        .setFooter({ text: `Garaad Economy • Bitcoin kaliya` });
+        .setFooter({ text: `Garaad Economy • Bitcoin System` });
 }
 
 
@@ -133,6 +155,42 @@ function buildShopEmbed() {
         .setFooter({ text: 'Garaad Bot • Shop System • ?profile si aad u aragto frame + badges' });
 }
 
+function buildWwEmbed() {
+    return new EmbedBuilder()
+        .setTitle('🐺 Werewolf — Ciyaarta')
+        .setColor('#c0392b')
+        .setDescription(
+            `**🎮 Bilow**\n` +
+            `**\`${PREFIX}ww\`** — Lobby fur (5–12 qof)\n` +
+            `**\`${PREFIX}ww stop\`** — ⚙️ Admin: game jooji\n\n` +
+
+            `**⏱️ Wareegyada**\n` +
+            `🌙 **Habeenka** (60s) — Roles DM ayaa loo diraa\n` +
+            `☀️ **Maalinta** (45s) — Ku hadla channel-ka\n` +
+            `🗳️ **Codeynta** (60s) — Dilaaga codeey\n\n` +
+
+            `**🐍 Wolf Team**\n` +
+            `**🐍 Dilaaga** — Habeenki qof dil\n` +
+            `**🐍👁️ Dilaaga Aragti** — Dil + qof card arag\n\n` +
+
+            `**👥 Village Team**\n` +
+            `**👁️ Aragti** — Dilaaga garo (habeenki)\n` +
+            `**🏅 Dhaqtar** — Qof badbaadi (habeenki)\n` +
+            `**🎖️ Mayor** — Codadaadu = 2 vote\n` +
+            `**👸 Princess** — Wolf dilo → wolf dhintaa\n` +
+            `**🏹 Elin** — La dilo → qof aad doorato dhintaa\n` +
+            `**👑 King** — La dilo → successor awood\n` +
+            `**🌿 Duruid** — Qof kasta badbaadi (habeenki)\n` +
+            `**💀 Necro** — Qof dhintay dib u soo celi (1×)\n` +
+            `**🔥 Dad Caadi** — Codayn kaliya\n\n` +
+
+            `**🏆 Guusha**\n` +
+            `🐍 Wolves: Wolves ≥ Villagers tirada\n` +
+            `🔥 Villagers: Dhammaan wolves la saaro`
+        )
+        .setFooter({ text: 'Garaad Bot • Werewolf • ?ww bilow' });
+}
+
 module.exports = async function helpCommand(message) {
     const userId = message.author.id;
     return message.reply({ embeds: [buildEduEmbed(userId)], components: [helpRow(userId, 'edu')] });
@@ -141,4 +199,5 @@ module.exports = async function helpCommand(message) {
 module.exports.buildEduEmbed  = buildEduEmbed;
 module.exports.buildEcoEmbed  = buildEcoEmbed;
 module.exports.buildShopEmbed = buildShopEmbed;
+module.exports.buildWwEmbed   = buildWwEmbed;
 module.exports.helpRow        = helpRow;
