@@ -1,5 +1,5 @@
 // =====================================================================
-// CIYAARTA: Werewolf (Af-Soomaali)
+// CIYAARTA: Werewolf — Af-Soomaali (Full Roles)
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
@@ -7,19 +7,43 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const games = new Map();
 
 const ROLES = {
-    wolf:     { emoji: '🐍', name: 'Dilaaga',          color: '#c0392b' },
-    seer:     { emoji: '👁️', name: 'Aragti',            color: '#8e44ad' },
-    doctor:   { emoji: '🏅', name: 'Dhaqtar',           color: '#27ae60' },
-    villager: { emoji: '🔥', name: 'Dad Caadi',         color: '#2980b9' },
+    // ── Wolf team ──
+    wolf:     { emoji: '🐍', name: 'Dilaaga',    color: '#c0392b', team: 'wolf',
+                dm: 'Habeenkii qof dooro oo dil. Maalintii is qarso!' },
+    // ── Villager team — special ──
+    seer:     { emoji: '👁️', name: 'Aragti',      color: '#8e44ad', team: 'village',
+                dm: 'Habeenkii qof dooro — Dilaaga miyuu yahay ogaan doontaa.' },
+    doctor:   { emoji: '🏅', name: 'Dhaqtar',     color: '#27ae60', team: 'village',
+                dm: 'Habeenkii qof dooro oo badbaadi dilka. Nafsadaada sidoo kale.' },
+    mayor:    { emoji: '🎖️', name: 'Mayor',        color: '#e67e22', team: 'village',
+                dm: 'Codadaadu waxay u xisaabantaan 2 cod! Maalintii codeey.' },
+    princess: { emoji: '👸', name: 'Princess',     color: '#ff69b4', team: 'village',
+                dm: 'Hadduu Dilaagu kugu dilo, isagaa dhinta adna way ku sii noolaan doontaa!' },
+    king:     { emoji: '👑', name: 'King',         color: '#f1c40f', team: 'village',
+                dm: 'Haddaad dhimatid, qof aad dooran karto wuxuu helayaa awoodooda.' },
+    elin:     { emoji: '🏹', name: 'Elin',         color: '#e74c3c', team: 'village',
+                dm: 'Haddaad la saarto ama la dilid, qof dooran kartaa oo aad naftiisa la qaadid!' },
+    druid:    { emoji: '🌿', name: 'Duruid',       color: '#1abc9c', team: 'village',
+                dm: 'Habeenkii qof ka mid ah shacabka (Villager) dooro oo badbaadi.' },
+    necro:    { emoji: '💀', name: 'Necro',        color: '#7f8c8d', team: 'village',
+                dm: 'Habeenkii qof dhintay dooro — doorkooda ogaan doontaa.' },
+    // ── Base villager ──
+    villager: { emoji: '🔥', name: 'Dad Caadi',   color: '#2980b9', team: 'village',
+                dm: 'Maalintii u codeey dilaaga. Fikirkaaga isticmaal!' },
 };
 
+// Role assignment by player count
 function assignRoles(n) {
-    const roles = [];
-    roles.push('wolf');
-    if (n >= 10) roles.push('wolf');
-    roles.push('seer');
-    if (n >= 7) roles.push('doctor');
+    const roles = ['wolf', 'seer'];
+    if (n >= 6)  roles.push('doctor');
+    if (n >= 7)  roles.push('mayor');
+    if (n >= 8)  roles.push('princess');
+    if (n >= 9)  roles.push('elin');
+    if (n >= 10) { roles.push('wolf'); roles.push('king'); }
+    if (n >= 11) roles.push('druid');
+    if (n >= 12) roles.push('necro');
     while (roles.length < n) roles.push('villager');
+
     for (let i = roles.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [roles[i], roles[j]] = [roles[j], roles[i]];
@@ -31,17 +55,30 @@ function alivePlayers(game) {
     return [...game.players.entries()].filter(([, p]) => p.alive);
 }
 
+function deadPlayers(game) {
+    return [...game.players.entries()].filter(([, p]) => !p.alive);
+}
+
 function checkWin(game) {
     const alive  = alivePlayers(game);
     const wolves = alive.filter(([, p]) => p.role === 'wolf');
     const others = alive.filter(([, p]) => p.role !== 'wolf');
-    if (wolves.length === 0)          return 'dad';
-    if (wolves.length >= others.length) return 'dilaagayaal';
+    if (wolves.length === 0)             return 'dad';
+    if (wolves.length >= others.length)  return 'dilaagayaal';
     return null;
 }
 
 async function fetchName(uid, client) {
-    try { const u = await client.users.fetch(uid); return u.username; } catch { return `<@${uid}>`; }
+    try { const u = await client.users.fetch(uid); return u.username; } catch { return `User`; }
+}
+
+function makeButtons(targets, customIdPrefix, style, max = 5) {
+    return targets.slice(0, max).map(([uid, label]) =>
+        new ButtonBuilder()
+            .setCustomId(`${customIdPrefix}_${uid}`)
+            .setLabel(String(label).slice(0, 20))
+            .setStyle(style)
+    );
 }
 
 // ── Lobby ─────────────────────────────────────────────────────────────
@@ -82,25 +119,17 @@ async function startGame(game, client) {
         if (roles[i] === 'wolf') wolves.push(uid);
     });
 
-    // Count roles
-    const wolfCount     = roles.filter(r => r === 'wolf').length;
-    const doctorCount   = roles.filter(r => r === 'doctor').length;
-    const seerCount     = roles.filter(r => r === 'seer').length;
-    const villagerCount = roles.filter(r => r === 'villager').length;
+    // Count each role
+    const roleCounts = {};
+    for (const r of roles) roleCounts[r] = (roleCounts[r] || 0) + 1;
 
     // Player list
-    const nameList = await Promise.all(playerIds.map(async uid => {
-        const n = await fetchName(uid, client);
-        return `• ${n}`;
-    }));
+    const nameList = await Promise.all(playerIds.map(async uid => `• ${await fetchName(uid, client)}`));
 
-    // Role summary line
-    const roleSummary = [
-        wolfCount   ? `🐍 ${wolfCount} Dilaagayaal${wolfCount > 1 ? ' (is yaqaanaan)' : ''}` : '',
-        seerCount   ? `👁️ ${seerCount} Aragti` : '',
-        doctorCount ? `🏅 ${doctorCount} Dhaqtar` : '',
-        villagerCount ? `🔥 ${villagerCount} Dad Caadi` : '',
-    ].filter(Boolean).join(' • ');
+    // Role summary
+    const roleSummary = Object.entries(roleCounts)
+        .map(([r, cnt]) => `${ROLES[r].emoji} ${cnt} ${ROLES[r].name}${cnt > 1 && r === 'wolf' ? ' (is yaqaanaan)' : ''}`)
+        .join(' • ');
 
     await game.textChannel.send({
         content: `@everyone`,
@@ -124,24 +153,14 @@ async function startGame(game, client) {
             const wolfExtra = role === 'wolf' && wolves.length > 1
                 ? `\n\n🐍 **Dilaagayaasha kale:** ${wolves.filter(w => w !== uid).map(w => `<@${w}>`).join(', ')}`
                 : '';
-
-            const dmLines = {
-                wolf:     `Habeenkii qof dooro oo dil.\nMaalintii is qarso — Dad Caadi ha kuu garanaynin!`,
-                seer:     `Habeenkii qof dooro — Dilaaga miyuu yahay ogaan doontaa.\nMaalintii codeey.`,
-                doctor:   `Habeenkii qof dooro oo badbaadi dilka.\nNafsadaada sidoo kale badbaadin kartaa.`,
-                villager: `Maalintii u codeey dilaaga. Fikirkaaga isticmaal!`,
-            }[role];
-
-            await u.send({ embeds: [
-                new EmbedBuilder()
-                    .setColor(r.color)
-                    .setDescription(
-                        `**🎭 Doorkaaga — SIRTA KEEN!**\n\n` +
-                        `**${r.emoji} Waxaad tahay ${r.name.toUpperCase()} AH!**\n` +
-                        `${dmLines}` +
-                        wolfExtra +
-                        `\n\n*Tani waa sir — ciyaartoyda kale ha u sheegin!*`
-                    )
+            await u.send({ embeds: [new EmbedBuilder()
+                .setColor(r.color)
+                .setDescription(
+                    `**🎭 Doorkaaga — SIRTA KEEN!**\n\n` +
+                    `**${r.emoji} Waxaad tahay ${r.name.toUpperCase()} AH!**\n` +
+                    `${r.dm}${wolfExtra}\n\n` +
+                    `*Tani waa sir — ciyaartoyda kale ha u sheegin!*`
+                )
             ]});
         } catch {}
     }
@@ -153,59 +172,71 @@ async function startGame(game, client) {
 
 async function beginNight(game, client) {
     game.phase        = 'night';
-    game.nightActions = { wolfVotes: new Map(), seerTarget: null, doctorTarget: null };
+    game.nightActions = {
+        wolfVotes:    new Map(),
+        seerTarget:   null,
+        doctorTarget: null,
+        druidTarget:  null,
+        necroTarget:  null,
+    };
 
-    const alive = alivePlayers(game);
-
-    // Night announcement
-    const hasDoctor = [...game.players.values()].some(p => p.role === 'doctor' && p.alive);
-    const hasSeer   = [...game.players.values()].some(p => p.role === 'seer'   && p.alive);
+    const alive     = alivePlayers(game);
+    const dead      = deadPlayers(game);
+    const hasDoctor = [...game.players.values()].some(p => p.role === 'doctor'   && p.alive);
+    const hasSeer   = [...game.players.values()].some(p => p.role === 'seer'     && p.alive);
+    const hasDruid  = [...game.players.values()].some(p => p.role === 'druid'    && p.alive);
+    const hasNecro  = [...game.players.values()].some(p => p.role === 'necro'    && p.alive) && dead.length > 0;
 
     const lines = [
         `🌙 Habeenku wuu soo gudgalay... Dadku waa seexday.\n`,
         `🐍 Dilaagayaashu waxay dooranayaan qof ay dilaan (DM).`,
-        hasSeer   ? `👁️ Aragtidu wuxuu dooranayaa qof uu baro (DM).`            : '',
-        hasDoctor ? `🏅 Dhaqtarku wuxuu dooranayaa qof uu u badbaadıyo (DM).`  : '',
+        hasSeer   ? `👁️ Aragtidu wuxuu dooranayaa qof uu baro (DM).`             : '',
+        hasDoctor ? `🏅 Dhaqtarku wuxuu dooranayaa qof uu u badbaadıyo (DM).`   : '',
+        hasDruid  ? `🌿 Duruidu wuxuu dooranayaa shacab uu badbaadıyo (DM).`    : '',
+        hasNecro  ? `💀 Necro wuxuu dooranayaa qof dhintay uu baro (DM).`       : '',
         `\n⏳ **60 sekund**`,
     ].filter(Boolean).join('\n');
 
-    await game.textChannel.send({ embeds: [
-        new EmbedBuilder()
-            .setColor('#1a252f')
-            .setDescription(`**🌙 Habeenka ${game.round}**\n\n${lines}`)
+    await game.textChannel.send({ embeds: [new EmbedBuilder()
+        .setColor('#1a252f')
+        .setDescription(`**🌙 Habeenka ${game.round}**\n\n${lines}`)
     ]});
 
-    // Send DM action buttons
+    // Send DMs to special roles
     for (const [uid, { role, alive: isAlive }] of game.players) {
-        if (!isAlive || !['wolf', 'seer', 'doctor'].includes(role)) continue;
+        if (!isAlive) continue;
 
-        const targets = role === 'wolf'
-            ? alive.filter(([, p]) => p.role !== 'wolf')
-            : alive.filter(([tid]) => tid !== uid);
+        const sendDM = async (labelText, targets, style, prefix) => {
+            const u = await client.users.fetch(uid).catch(() => null);
+            if (!u || !targets.length) return;
+            const btns = [];
+            for (const [tid] of targets.slice(0, 5)) {
+                const tn = await fetchName(tid, client);
+                btns.push(new ButtonBuilder()
+                    .setCustomId(`ww_night_${prefix}_${game.guildId}_${tid}`)
+                    .setLabel(tn.slice(0, 20))
+                    .setStyle(style));
+            }
+            await u.send({
+                embeds: [new EmbedBuilder().setColor('#2c3e50').setDescription(`**${labelText}**`)],
+                components: [new ActionRowBuilder().addComponents(btns)],
+            }).catch(() => {});
+        };
 
-        const u = await client.users.fetch(uid).catch(() => null);
-        if (!u || !targets.length) continue;
-
-        const style = { wolf: ButtonStyle.Danger, seer: ButtonStyle.Primary, doctor: ButtonStyle.Success }[role];
-        const label = {
-            wolf:   '🐍 Cidda dilaysaa dooro:',
-            seer:   '👁️ Cidda baranaysaa dooro:',
-            doctor: '🏅 Cidda badbaadisaysaa dooro:',
-        }[role];
-
-        const buttons = [];
-        for (const [tid] of targets.slice(0, 5)) {
-            const tn = await fetchName(tid, client);
-            buttons.push(new ButtonBuilder()
-                .setCustomId(`ww_night_${role}_${game.guildId}_${tid}`)
-                .setLabel(tn.slice(0, 20))
-                .setStyle(style));
+        if (role === 'wolf') {
+            const targets = alive.filter(([, p]) => p.role !== 'wolf');
+            await sendDM('🐍 Cidda dilaysaa dooro:', targets, ButtonStyle.Danger, 'wolf');
+        } else if (role === 'seer') {
+            const targets = alive.filter(([tid]) => tid !== uid);
+            await sendDM('👁️ Cidda baranaysaa dooro:', targets, ButtonStyle.Primary, 'seer');
+        } else if (role === 'doctor') {
+            await sendDM('🏅 Cidda badbaadisaysaa dooro:', alive.filter(([tid]) => tid !== uid), ButtonStyle.Success, 'doctor');
+        } else if (role === 'druid') {
+            const targets = alive.filter(([tid]) => tid !== uid);
+            if (targets.length) await sendDM('🌿 Cidda badbaadisaysaa dooro (good ama evil):', targets, ButtonStyle.Success, 'druid');
+        } else if (role === 'necro' && dead.length > 0) {
+            await sendDM('💀 Cidda dhintay doorkooda baro:', dead, ButtonStyle.Secondary, 'necro');
         }
-
-        await u.send({
-            embeds: [new EmbedBuilder().setColor('#2c3e50').setDescription(`**${label}**`)],
-            components: [new ActionRowBuilder().addComponents(buttons)],
-        }).catch(() => {});
     }
 
     game.nightTimer = setTimeout(() => resolveNight(game, client), 60_000);
@@ -216,7 +247,7 @@ async function resolveNight(game, client) {
     game.phase = 'resolving';
     const na = game.nightActions;
 
-    // Wolf kill
+    // Wolf kill — majority vote or random
     let killed = null;
     if (na.wolfVotes.size > 0) {
         const tally = new Map();
@@ -227,37 +258,179 @@ async function resolveNight(game, client) {
         if (victims.length) killed = victims[Math.floor(Math.random() * victims.length)][0];
     }
 
-    if (killed && na.doctorTarget === killed) killed = null;
-
     let desc = '';
+
+    // Princess passive: if wolf kills Princess, a wolf dies instead
+    if (killed && game.players.get(killed)?.role === 'princess') {
+        const aliveWolves = alivePlayers(game).filter(([, p]) => p.role === 'wolf');
+        if (aliveWolves.length) {
+            const deadWolf = aliveWolves[Math.floor(Math.random() * aliveWolves.length)][0];
+            game.players.get(deadWolf).alive = false;
+            const wn = await fetchName(deadWolf, client);
+            const pn = await fetchName(killed, client);
+            desc += `👸 **${pn}** (Princess) dilayeen laakiin...\n🐍 **${wn}** (Dilaaga) baa dhintay! Princess waxay badbaashay!\n\n`;
+            try { const u = await client.users.fetch(deadWolf); await u.send('☠️ Princess waad dileen — Princess ayaa kuu dilay. Waa lagaa saaray!').catch(() => {}); } catch {}
+            killed = null;
+        }
+    }
+
+    // Doctor save
+    if (killed && na.doctorTarget === killed) { killed = null; desc += `🛡️ Dhaqtar ayaa qof badbaadiyay!\n\n`; }
+
+    // Druid save (villagers only)
+    if (killed && na.druidTarget === killed && game.players.get(killed)?.role === 'villager') {
+        killed = null; desc += `🌿 Duruid ayaa shacab badbaadiyay!\n\n`;
+    }
+
     if (killed) {
+        const killedRole = game.players.get(killed).role;
         game.players.get(killed).alive = false;
         const n = await fetchName(killed, client);
-        desc = `☠️ **${n}** habeenka la dilay!\n_Doorkoodu wuxuu ahaa: ${ROLES[game.players.get(killed).role]?.name}_`;
+        desc += `☠️ **${n}** habeenka la dilay! _(${ROLES[killedRole].emoji} ${ROLES[killedRole].name})_`;
         try { const u = await client.users.fetch(killed); await u.send('☠️ **Habeenka waxaa lagu dilay.** Daawo — hadal kari mayside.').catch(() => {}); } catch {}
-    } else {
-        desc = `🛡️ **Habeenka cidna ma dhimin!** Dhaqtar ayaa qof badbaadiyay.`;
+
+        // Elin revenge when killed at night
+        if (killedRole === 'elin') {
+            await triggerElinRevenge(killed, game, client, 'habeenka');
+            return; // triggerElinRevenge will continue the game
+        }
+
+        // King succession when killed at night
+        if (killedRole === 'king') {
+            await triggerKingSuccession(killed, game, client, desc);
+            return;
+        }
+    } else if (!desc) {
+        desc = `🛡️ **Habeenka cidna ma dhimin!**`;
     }
 
     // Seer result
     if (na.seerTarget) {
         const tRole  = game.players.get(na.seerTarget)?.role;
         const seerId = [...game.players.entries()].find(([, p]) => p.role === 'seer' && p.alive)?.[0];
-        if (seerId) {
+        if (seerId && tRole) {
             const tn = await fetchName(na.seerTarget, client);
             try {
                 const su = await client.users.fetch(seerId);
-                await su.send(`👁️ **${tn}** — ${tRole === 'wolf' ? '🐍 **DILAAGA AH!**' : `✅ Dilaaga ma aha (${ROLES[tRole]?.name})`}`).catch(() => {});
+                await su.send(`👁️ **${tn}** — ${tRole === 'wolf' ? '🐍 **DILAAGA AH!**' : `✅ Dilaaga ma aha (${ROLES[tRole].emoji} ${ROLES[tRole].name})`}`).catch(() => {});
             } catch {}
         }
     }
 
-    await game.textChannel.send({ embeds: [
-        new EmbedBuilder()
-            .setColor('#e67e22')
-            .setDescription(`**🌅 Maalinta waxaa dhacay:**\n\n${desc}`)
+    // Necro result
+    if (na.necroTarget) {
+        const tRole   = game.players.get(na.necroTarget)?.role;
+        const necroId = [...game.players.entries()].find(([, p]) => p.role === 'necro' && p.alive)?.[0];
+        if (necroId && tRole) {
+            const tn = await fetchName(na.necroTarget, client);
+            try {
+                const nu = await client.users.fetch(necroId);
+                await nu.send(`💀 **${tn}** doorkoodu wuxuu ahaa: ${ROLES[tRole].emoji} **${ROLES[tRole].name}**`).catch(() => {});
+            } catch {}
+        }
+    }
+
+    await game.textChannel.send({ embeds: [new EmbedBuilder()
+        .setColor('#e67e22')
+        .setDescription(`**🌅 Maalinta waxaa dhacay:**\n\n${desc}`)
     ]});
 
+    const result = checkWin(game);
+    if (result) return endGame(game, client, result);
+    await beginDay(game, client);
+}
+
+// ── Elin revenge ───────────────────────────────────────────────────────
+async function triggerElinRevenge(elinId, game, client, context) {
+    const targets = alivePlayers(game).filter(([tid]) => tid !== elinId);
+    if (!targets.length) {
+        await continueAfterSpecial(game, client);
+        return;
+    }
+
+    try {
+        const u   = await client.users.fetch(elinId);
+        const btns = [];
+        for (const [tid] of targets.slice(0, 5)) {
+            const tn = await fetchName(tid, client);
+            btns.push(new ButtonBuilder()
+                .setCustomId(`ww_elin_${game.guildId}_${tid}`)
+                .setLabel(tn.slice(0, 20))
+                .setStyle(ButtonStyle.Danger));
+        }
+        await u.send({
+            embeds: [new EmbedBuilder().setColor('#e74c3c').setDescription(
+                `🏹 **ELIN — Aakhir-dambe!**\n` +
+                `${context === 'habeenka' ? 'Habeenka waxaa lagu dilay' : 'Codeyn lagaa saaray'} — qof dooro oo naftiisa la qaado!\n⏳ 20 sekund`
+            )],
+            components: [new ActionRowBuilder().addComponents(btns)],
+        }).catch(() => {});
+    } catch {}
+
+    game.elinPending = elinId;
+    game.elinTimer = setTimeout(() => {
+        game.elinPending = null;
+        continueAfterSpecial(game, client);
+    }, 20_000);
+}
+
+// ── King succession ────────────────────────────────────────────────────
+async function triggerKingSuccession(kingId, game, client, nightDesc) {
+    const targets = alivePlayers(game).filter(([, p]) => p.team !== 'wolf');
+    if (!targets.length) {
+        await postNightResult(game, client, nightDesc);
+        return;
+    }
+
+    await game.textChannel.send({ embeds: [new EmbedBuilder()
+        .setColor('#f1c40f')
+        .setDescription(`**🌅 Maalinta waxaa dhacay:**\n\n${nightDesc}\n\n👑 **King wuu dhintay** — DM-ka ayuu ku dooran doona kii ku xiga!`)
+    ]});
+
+    try {
+        const u    = await client.users.fetch(kingId);
+        const btns = [];
+        for (const [tid] of targets.slice(0, 5)) {
+            const tn = await fetchName(tid, client);
+            btns.push(new ButtonBuilder()
+                .setCustomId(`ww_king_${game.guildId}_${tid}`)
+                .setLabel(tn.slice(0, 20))
+                .setStyle(ButtonStyle.Primary));
+        }
+        await u.send({
+            embeds: [new EmbedBuilder().setColor('#f1c40f').setDescription(
+                `👑 **KING — Kii ku xiga dooro!**\nQofka aad doorato wuxuu helayaa Seer awood (habeen kii danbe qof baran karaa).\n⏳ 20 sekund`
+            )],
+            components: [new ActionRowBuilder().addComponents(btns)],
+        }).catch(() => {});
+    } catch {}
+
+    game.kingPending = kingId;
+    game.kingTimer = setTimeout(async () => {
+        game.kingPending = null;
+        const result = checkWin(game);
+        if (result) return endGame(game, client, result);
+        await beginDay(game, client);
+    }, 20_000);
+}
+
+async function continueAfterSpecial(game, client) {
+    const result = checkWin(game);
+    if (result) return endGame(game, client, result);
+
+    if (game.phase === 'night' || game.phase === 'resolving') {
+        await beginDay(game, client);
+    } else {
+        game.round++;
+        await beginNight(game, client);
+    }
+}
+
+async function postNightResult(game, client, desc) {
+    await game.textChannel.send({ embeds: [new EmbedBuilder()
+        .setColor('#e67e22')
+        .setDescription(`**🌅 Maalinta waxaa dhacay:**\n\n${desc}`)
+    ]});
     const result = checkWin(game);
     if (result) return endGame(game, client, result);
     await beginDay(game, client);
@@ -272,15 +445,14 @@ async function beginDay(game, client) {
     const alive = alivePlayers(game);
     const names = await Promise.all(alive.map(async ([uid]) => `• ${await fetchName(uid, client)}`));
 
-    await game.textChannel.send({ embeds: [
-        new EmbedBuilder()
-            .setColor('#f39c12')
-            .setDescription(
-                `**☀️ Maalinta ${game.round}**\n\n` +
-                `Dadku wey tooseen. Ku hadla — dilaaga baaro!\n\n` +
-                `**Kuwa Nool (${alive.length}):**\n${names.join('\n')}\n\n` +
-                `💬 **45 sekund** — Codayntu waxay bilaaban doontaa...`
-            )
+    await game.textChannel.send({ embeds: [new EmbedBuilder()
+        .setColor('#f39c12')
+        .setDescription(
+            `**☀️ Maalinta ${game.round}**\n\n` +
+            `Dadku wey tooseen. Ku hadla — dilaaga baaro!\n\n` +
+            `**Kuwa Nool (${alive.length}):**\n${names.join('\n')}\n\n` +
+            `💬 **45 sekund** — Codayntu waxay bilaaban doontaa...`
+        )
     ]});
 
     game.dayTimer = setTimeout(() => beginVoting(game, client), 45_000);
@@ -317,16 +489,21 @@ async function beginVoting(game, client) {
         components: rows,
     });
 
-    game.voteMsg    = voteMsg;
-    game.voteTimer  = setTimeout(() => resolveVote(game, client), 60_000);
+    game.voteMsg   = voteMsg;
+    game.voteTimer = setTimeout(() => resolveVote(game, client), 60_000);
 }
 
 async function resolveVote(game, client) {
     clearTimeout(game.voteTimer);
     if (game.voteMsg) await game.voteMsg.edit({ components: [] }).catch(() => {});
 
+    // Tally — Mayor counts as 2
     const tally = new Map();
-    for (const t of game.votes.values()) tally.set(t, (tally.get(t) || 0) + 1);
+    for (const [voterId, target] of game.votes) {
+        const voterRole = game.players.get(voterId)?.role;
+        const weight    = voterRole === 'mayor' ? 2 : 1;
+        tally.set(target, (tally.get(target) || 0) + weight);
+    }
 
     let desc = '';
     if (!tally.size) {
@@ -337,18 +514,33 @@ async function resolveVote(game, client) {
             desc = '🤝 **Tie! Qof kama saarin** — wareeg kale.';
         } else {
             const eliminated = sorted[0][0];
+            const role       = game.players.get(eliminated).role;
+            const r          = ROLES[role];
             game.players.get(eliminated).alive = false;
-            const role = game.players.get(eliminated).role;
-            const r    = ROLES[role];
             const n    = await fetchName(eliminated, client);
-            const wasWolf = role === 'wolf';
-            desc = `🪓 **${n}** la saaray!\n${wasWolf ? `🐍 **DILAAGA AHAA! Guul Dad Caadi!**` : `✅ Dilaaga ma ahayn — **${r.emoji} ${r.name}** ahaa`}`;
-            try { const u = await client.users.fetch(eliminated); await u.send(`🪓 Ciyaartii lagaa saaray. ${wasWolf ? 'Dilaaga ahayd.' : 'Dilaaga ma ahayn.'}`).catch(() => {}); } catch {}
+            const wolf = role === 'wolf';
+            desc = `🪓 **${n}** la saaray!\n${wolf ? `🐍 **DILAAGA AHAA! Guul!**` : `✅ Dilaaga ma ahayn — **${r.emoji} ${r.name}** ahaa`}`;
+            try { const u = await client.users.fetch(eliminated); await u.send(`🪓 Ciyaartii lagaa saaray. ${wolf ? 'Dilaaga ahayd.' : 'Dilaaga ma ahayn.'}`).catch(() => {}); } catch {}
+
+            // Elin revenge when voted out
+            if (role === 'elin') {
+                await game.textChannel.send({ embeds: [new EmbedBuilder().setColor('#9b59b6').setDescription(`**📊 Natiijada Codaynta**\n\n${desc}`)] });
+                await triggerElinRevenge(eliminated, game, client, 'codeyn');
+                return;
+            }
+
+            // King succession when voted out
+            if (role === 'king') {
+                await game.textChannel.send({ embeds: [new EmbedBuilder().setColor('#9b59b6').setDescription(`**📊 Natiijada Codaynta**\n\n${desc}`)] });
+                await triggerKingSuccession(eliminated, game, client, desc);
+                return;
+            }
         }
     }
 
-    await game.textChannel.send({ embeds: [
-        new EmbedBuilder().setColor('#9b59b6').setDescription(`**📊 Natiijada Codaynta**\n\n${desc}`)
+    await game.textChannel.send({ embeds: [new EmbedBuilder()
+        .setColor('#9b59b6')
+        .setDescription(`**📊 Natiijada Codaynta**\n\n${desc}`)
     ]});
 
     const result = checkWin(game);
@@ -364,6 +556,8 @@ async function endGame(game, client, winner) {
     clearTimeout(game.nightTimer);
     clearTimeout(game.dayTimer);
     clearTimeout(game.voteTimer);
+    clearTimeout(game.elinTimer);
+    clearTimeout(game.kingTimer);
     game.phase = 'ended';
     games.delete(game.guildId);
 
@@ -375,15 +569,14 @@ async function endGame(game, client, winner) {
         return `${alive ? '✅' : '☠️'} **${n}** — ${r.emoji} ${r.name}`;
     }));
 
-    await game.textChannel.send({ embeds: [
-        new EmbedBuilder()
-            .setColor(dadWon ? '#27ae60' : '#e74c3c')
-            .setDescription(
-                `**${dadWon ? '🎉 DAD CAADU WAY GUULAYSTEEN!' : '🐍 DILAAGAYAASHU WAY GUULAYSTEEN!'}**\n\n` +
-                `${dadWon ? 'Dhammaan dilaagayaasha la saaray!' : 'Dilaagayaashu waxay xukunka qaataan!'}\n\n` +
-                `**Doorarka oo dhan:**\n${roleReveal.join('\n')}`
-            )
-            .setFooter({ text: 'Garaad Bot • Werewolf' })
+    await game.textChannel.send({ embeds: [new EmbedBuilder()
+        .setColor(dadWon ? '#27ae60' : '#e74c3c')
+        .setDescription(
+            `**${dadWon ? '🎉 DAD CAADU WAY GUULAYSTEEN!' : '🐍 DILAAGAYAASHU WAY GUULAYSTEEN!'}**\n\n` +
+            `${dadWon ? 'Dhammaan dilaagayaasha la saaray!' : 'Dilaagayaashu waxay xukunka qaataan!'}\n\n` +
+            `**Doorarka oo dhan:**\n${roleReveal.join('\n')}`
+        )
+        .setFooter({ text: 'Garaad Bot • Werewolf' })
     ]});
 }
 
@@ -393,7 +586,9 @@ function cancelGame(guildId) {
     clearTimeout(game.nightTimer);
     clearTimeout(game.dayTimer);
     clearTimeout(game.voteTimer);
+    clearTimeout(game.elinTimer);
+    clearTimeout(game.kingTimer);
     games.delete(guildId);
 }
 
-module.exports = { games, cancelGame, lobbyEmbed, lobbyRow, startGame, resolveNight, resolveVote, beginVoting, endGame };
+module.exports = { games, cancelGame, lobbyEmbed, lobbyRow, startGame, resolveNight, resolveVote, beginVoting, beginDay, endGame, checkWin, continueAfterSpecial };

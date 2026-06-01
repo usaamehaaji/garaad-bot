@@ -3367,6 +3367,51 @@ module.exports = function setupInteractionHandler(client) {
                 return;
             }
 
+            // Elin revenge kill
+            if (id.startsWith('ww_elin_')) {
+                const parts    = id.split('_');
+                const guildId  = parts[2];
+                const targetId = parts[3];
+                const game     = wwGames.get(guildId);
+                if (!game || !game.elinPending || game.elinPending !== interaction.user.id)
+                    return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
+                clearTimeout(game.elinTimer);
+                game.elinPending = null;
+                if (game.players.has(targetId) && game.players.get(targetId).alive) {
+                    game.players.get(targetId).alive = false;
+                    const tn = await interaction.client.users.fetch(targetId).then(u => u.username).catch(() => targetId);
+                    await game.textChannel.send({ embeds: [{ color: 0xe74c3c, description: `🏹 **Elin** — aakhir baan ku dilay: **@${tn}**!` }] });
+                    try { const u = await interaction.client.users.fetch(targetId); await u.send('🏹 Elin-ku aakhirkii buu kugu dilay!').catch(() => {}); } catch {}
+                }
+                await interaction.update({ embeds: [{ description: '✅ Ammaanka aad dooratay!' }], components: [] });
+                const { continueAfterSpecial } = require('../games/werewolf');
+                await continueAfterSpecial(game, interaction.client);
+                return;
+            }
+
+            // King succession
+            if (id.startsWith('ww_king_')) {
+                const parts    = id.split('_');
+                const guildId  = parts[2];
+                const targetId = parts[3];
+                const game     = wwGames.get(guildId);
+                if (!game || !game.kingPending || game.kingPending !== interaction.user.id)
+                    return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
+                clearTimeout(game.kingTimer);
+                game.kingPending = null;
+                if (game.players.has(targetId)) {
+                    game.players.get(targetId).kingSeer = true;
+                    const tn = await interaction.client.users.fetch(targetId).then(u => u.username).catch(() => targetId);
+                    await game.textChannel.send({ embeds: [{ color: 0xf1c40f, description: `👑 King-ku wuxuu dooraday **@${tn}** — awood cusub wuu helay!` }] });
+                    try { const u = await interaction.client.users.fetch(targetId); await u.send('👑 **King awooda ayuu ku wareejiyay!** Habeenka dambe qof baran kartaa (Seer awood).').catch(() => {}); } catch {}
+                }
+                await interaction.update({ embeds: [{ description: '✅ Doorashada la xaqiijiyay!' }], components: [] });
+                const result = require('../games/werewolf').games.get(guildId) ? require('../games/werewolf').checkWin?.(game) : null;
+                if (result) { const { endGame } = require('../games/werewolf'); return endGame(game, interaction.client, result); }
+                await require('../games/werewolf').beginDay?.(game, interaction.client);
+                return;
+            }
+
             // Day vote
             if (id.startsWith('ww_vote_')) {
                 const parts    = id.split('_');
