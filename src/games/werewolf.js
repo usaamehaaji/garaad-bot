@@ -8,28 +8,30 @@ const games = new Map();
 
 const ROLES = {
     // ── Wolf team ──
-    wolf:     { emoji: '🐍', name: 'Dilaaga',    color: '#c0392b', team: 'wolf',
-                dm: 'Habeenkii qof dooro oo dil. Maalintii is qarso!' },
+    wolf:     { emoji: '🐍',    name: 'Dilaaga',         color: '#c0392b', team: 'wolf',
+                dm: 'Habeenkii qof dooro oo dil. Cidda kale kuma sheegi kartid!' },
+    wolfSeer: { emoji: '🐍👁️', name: 'Dilaaga Aragti',   color: '#922b21', team: 'wolf',
+                dm: 'Dilaaga ah — laakiin habeenki qof dooro oo doorkooda si qarsoodi ah ogaan kartaa!' },
     // ── Villager team — special ──
-    seer:     { emoji: '👁️', name: 'Aragti',      color: '#8e44ad', team: 'village',
-                dm: 'Habeenkii qof dooro — Dilaaga miyuu yahay ogaan doontaa.' },
-    doctor:   { emoji: '🏅', name: 'Dhaqtar',     color: '#27ae60', team: 'village',
-                dm: 'Habeenkii qof dooro oo badbaadi dilka. Nafsadaada sidoo kale.' },
-    mayor:    { emoji: '🎖️', name: 'Mayor',        color: '#e67e22', team: 'village',
+    seer:     { emoji: '👁️',   name: 'Aragti',           color: '#8e44ad', team: 'village',
+                dm: 'Habeen kasta qof dooro — Dilaaga miyuu yahay ogaan doontaa.' },
+    doctor:   { emoji: '🏅',   name: 'Dhaqtar',           color: '#27ae60', team: 'village',
+                dm: 'Habeen kasta qof badbaadi. Haddii dilaagu ku beegsado qofkaas, wuu noolaanayaa.' },
+    mayor:    { emoji: '🎖️',   name: 'Mayor',              color: '#e67e22', team: 'village',
                 dm: 'Codadaadu waxay u xisaabantaan 2 cod! Maalintii codeey.' },
-    princess: { emoji: '👸', name: 'Princess',     color: '#ff69b4', team: 'village',
-                dm: 'Hadduu Dilaagu kugu dilo, isagaa dhinta adna way ku sii noolaan doontaa!' },
-    king:     { emoji: '👑', name: 'King',         color: '#f1c40f', team: 'village',
-                dm: 'Haddaad dhimatid, qof aad dooran karto wuxuu helayaa awoodooda.' },
-    elin:     { emoji: '🏹', name: 'Elin',         color: '#e74c3c', team: 'village',
+    princess: { emoji: '👸',   name: 'Princess',           color: '#ff69b4', team: 'village',
+                dm: 'Hadduu Dilaagu kugu dilo, isagaa dhinta — adna way ku sii noolaan doontaa!' },
+    king:     { emoji: '👑',   name: 'King',               color: '#f1c40f', team: 'village',
+                dm: 'Haddaad dhimatid, qof aad doorato wuxuu helayaa awoodooda.' },
+    elin:     { emoji: '🏹',   name: 'Elin',               color: '#e74c3c', team: 'village',
                 dm: 'Haddaad la saarto ama la dilid, qof dooran kartaa oo aad naftiisa la qaadid!' },
-    druid:    { emoji: '🌿', name: 'Duruid',       color: '#1abc9c', team: 'village',
-                dm: 'Habeenkii qof ka mid ah shacabka (Villager) dooro oo badbaadi.' },
-    necro:    { emoji: '💀', name: 'Necro',        color: '#7f8c8d', team: 'village',
-                dm: 'Habeenkii qof dhintay dib u soo celi — hal mar oo kaliya!' },
+    druid:    { emoji: '🌿',   name: 'Duruid',             color: '#1abc9c', team: 'village',
+                dm: 'Habeen kasta qof kasta dooro (good ama evil) — wuu badbaadi doonaa.' },
+    necro:    { emoji: '💀',   name: 'Necro',              color: '#7f8c8d', team: 'village',
+                dm: 'Qof dhintay dib u soo celi — hal mar oo kaliya habeenka!' },
     // ── Base villager ──
-    villager: { emoji: '🔥', name: 'Dad Caadi',   color: '#2980b9', team: 'village',
-                dm: 'Maalintii u codeey dilaaga. Fikirkaaga isticmaal!' },
+    villager: { emoji: '🔥',   name: 'Dad Caadi',          color: '#2980b9', team: 'village',
+                dm: 'Maalintii u code dilaaga. Fikirkaaga isticmaal!' },
 };
 
 // Role assignment by player count
@@ -39,7 +41,7 @@ function assignRoles(n) {
     if (n >= 7)  roles.push('mayor');
     if (n >= 8)  roles.push('princess');
     if (n >= 9)  roles.push('elin');
-    if (n >= 10) { roles.push('wolf'); roles.push('king'); }
+    if (n >= 10) { roles.push('wolfSeer'); roles.push('king'); }
     if (n >= 11) roles.push('druid');
     if (n >= 12) roles.push('necro');
     while (roles.length < n) roles.push('villager');
@@ -59,10 +61,12 @@ function deadPlayers(game) {
     return [...game.players.entries()].filter(([, p]) => !p.alive);
 }
 
+function isWolf(role) { return role === 'wolf' || role === 'wolfSeer'; }
+
 function checkWin(game) {
     const alive  = alivePlayers(game);
-    const wolves = alive.filter(([, p]) => p.role === 'wolf');
-    const others = alive.filter(([, p]) => p.role !== 'wolf');
+    const wolves = alive.filter(([, p]) => isWolf(p.role));
+    const others = alive.filter(([, p]) => !isWolf(p.role));
     if (wolves.length === 0)             return 'dad';
     if (wolves.length >= others.length)  return 'dilaagayaal';
     return null;
@@ -116,7 +120,7 @@ async function startGame(game, client) {
 
     playerIds.forEach((uid, i) => {
         game.players.set(uid, { role: roles[i], alive: true });
-        if (roles[i] === 'wolf') wolves.push(uid);
+        if (isWolf(roles[i])) wolves.push(uid);
     });
 
     // Count each role
@@ -150,7 +154,7 @@ async function startGame(game, client) {
         const r = ROLES[role];
         try {
             const u = await client.users.fetch(uid);
-            const wolfExtra = role === 'wolf' && wolves.length > 1
+            const wolfExtra = isWolf(role) && wolves.length > 1
                 ? `\n\n🐍 **Dilaagayaasha kale:** ${wolves.filter(w => w !== uid).map(w => `<@${w}>`).join(', ')}`
                 : '';
             await u.send({ embeds: [new EmbedBuilder()
@@ -173,11 +177,12 @@ async function startGame(game, client) {
 async function beginNight(game, client) {
     game.phase        = 'night';
     game.nightActions = {
-        wolfVotes:    new Map(),
-        seerTarget:   null,
-        doctorTarget: null,
-        druidTarget:  null,
-        necroTarget:  null,
+        wolfVotes:      new Map(),
+        wolfSeerTarget: null,
+        seerTarget:     null,
+        doctorTarget:   null,
+        druidTarget:    null,
+        necroTarget:    null,
     };
 
     const alive     = alivePlayers(game);
@@ -224,8 +229,11 @@ async function beginNight(game, client) {
         };
 
         if (role === 'wolf') {
-            const targets = alive.filter(([, p]) => p.role !== 'wolf');
+            const targets = alive.filter(([, p]) => !isWolf(p.role));
             await sendDM('🐍 Cidda dilaysaa dooro:', targets, ButtonStyle.Danger, 'wolf');
+        } else if (role === 'wolfSeer') {
+            const targets = alive.filter(([tid]) => tid !== uid);
+            await sendDM('🐍👁️ Cidda doorkooda baranaysaa dooro:', targets, ButtonStyle.Danger, 'wolfSeer');
         } else if (role === 'seer') {
             const targets = alive.filter(([tid]) => tid !== uid);
             await sendDM('👁️ Cidda baranaysaa dooro:', targets, ButtonStyle.Primary, 'seer');
@@ -254,7 +262,7 @@ async function resolveNight(game, client) {
         for (const t of na.wolfVotes.values()) tally.set(t, (tally.get(t) || 0) + 1);
         killed = [...tally.entries()].sort((a, b) => b[1] - a[1])[0][0];
     } else {
-        const victims = alivePlayers(game).filter(([, p]) => p.role !== 'wolf');
+        const victims = alivePlayers(game).filter(([, p]) => !isWolf(p.role));
         if (victims.length) killed = victims[Math.floor(Math.random() * victims.length)][0];
     }
 
@@ -262,7 +270,7 @@ async function resolveNight(game, client) {
 
     // Princess passive: if wolf kills Princess, a wolf dies instead
     if (killed && game.players.get(killed)?.role === 'princess') {
-        const aliveWolves = alivePlayers(game).filter(([, p]) => p.role === 'wolf');
+        const aliveWolves = alivePlayers(game).filter(([, p]) => isWolf(p.role));
         if (aliveWolves.length) {
             const deadWolf = aliveWolves[Math.floor(Math.random() * aliveWolves.length)][0];
             game.players.get(deadWolf).alive = false;
@@ -313,6 +321,19 @@ async function resolveNight(game, client) {
             try {
                 const su = await client.users.fetch(seerId);
                 await su.send(`👁️ **${tn}** — ${tRole === 'wolf' ? '🐍 **DILAAGA AH!**' : `✅ Dilaaga ma aha (${ROLES[tRole].emoji} ${ROLES[tRole].name})`}`).catch(() => {});
+            } catch {}
+        }
+    }
+
+    // WolfSeer result
+    if (na.wolfSeerTarget) {
+        const tRole     = game.players.get(na.wolfSeerTarget)?.role;
+        const wolfSeerId = [...game.players.entries()].find(([, p]) => p.role === 'wolfSeer' && p.alive)?.[0];
+        if (wolfSeerId && tRole) {
+            const tn = await fetchName(na.wolfSeerTarget, client);
+            try {
+                const wu = await client.users.fetch(wolfSeerId);
+                await wu.send(`🐍👁️ **${tn}** doorkoodu wuxuu yahay: ${ROLES[tRole].emoji} **${ROLES[tRole].name}**`).catch(() => {});
             } catch {}
         }
     }

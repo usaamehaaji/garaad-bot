@@ -3344,26 +3344,34 @@ module.exports = function setupInteractionHandler(client) {
                 const game   = wwGames.get(guildId);
                 if (!game || game.phase !== 'night') return interaction.reply({ content: '⚠️ Habeenka ciyaar ma jirto.', flags: MessageFlags.Ephemeral });
                 const player = game.players.get(interaction.user.id);
-                if (!player || player.role !== role || !player.alive) return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
+                const validRole = player?.role === role || (role === 'wolf' && player?.role === 'wolfSeer') || (role === 'wolfSeer' && player?.role === 'wolfSeer');
+                if (!player || !validRole || !player.alive) return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
 
                 const na = game.nightActions;
-                let confirmMsg = '';
+                let tn = targetId;
+                try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
 
-                if (role === 'wolf') {
-                    na.wolfVotes.set(interaction.user.id, targetId);
-                    let tn = targetId; try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
-                    confirmMsg = `🐺 Doorashadaadu waa: **@${tn}**`;
-                } else if (role === 'seer') {
-                    na.seerTarget = targetId;
-                    let tn = targetId; try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
-                    confirmMsg = `🔮 Barishadaadu waa: **@${tn}** — Natiijada habeenka dambe ayaad helaysaa`;
-                } else if (role === 'doctor') {
-                    na.doctorTarget = targetId;
-                    let tn = targetId; try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
-                    confirmMsg = `💊 Badbaadishadaadu waa: **@${tn}**`;
-                }
+                const confirmMap = {
+                    wolf:     `🐍 Doortay inaad dilid: **${tn}**. Natiijada habeenka sugid...`,
+                    wolfSeer: `🐍👁️ Doortay inaad barato: **${tn}**. Natiijada habeenka sugid...`,
+                    seer:     `👁️ Doortay inaad barato: **${tn}**. Natiijada habeenka sugid...`,
+                    doctor:   `🏅 Doortay inaad badbaadiso: **${tn}**. Natiijada habeenka sugid...`,
+                    druid:    `🌿 Doortay inaad badbaadiso: **${tn}**. Natiijada habeenka sugid...`,
+                    necro:    `💀 Doortay inaad soo celiso: **${tn}**. Natiijada habeenka sugid...`,
+                };
 
-                await interaction.update({ embeds: [{ description: `✅ ${confirmMsg}` }], components: [] });
+                if (role === 'wolf' || role === 'wolfSeer') {
+                    if (role === 'wolf') na.wolfVotes.set(interaction.user.id, targetId);
+                    else na.wolfSeerTarget = targetId;
+                } else if (role === 'seer')   { na.seerTarget   = targetId; }
+                  else if (role === 'doctor')  { na.doctorTarget = targetId; }
+                  else if (role === 'druid')   { na.druidTarget  = targetId; }
+                  else if (role === 'necro')   { na.necroTarget  = targetId; }
+
+                await interaction.update({
+                    embeds: [{ description: confirmMap[role] || `✅ Doorashada la xaqiijiyay: **${tn}**` }],
+                    components: [],
+                });
                 return;
             }
 
