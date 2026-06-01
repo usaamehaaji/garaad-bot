@@ -21,10 +21,6 @@ function helpRow(userId, active) {
             .setLabel('🛒 Shop')
             .setStyle(active === 'shop' ? ButtonStyle.Primary : ButtonStyle.Secondary),
         new ButtonBuilder()
-            .setCustomId(`help_ww_${userId}`)
-            .setLabel('🐺 Werewolf')
-            .setStyle(active === 'ww' ? ButtonStyle.Success : ButtonStyle.Secondary),
-        new ButtonBuilder()
             .setCustomId(`close_help_${userId}`)
             .setLabel('✖ Xir')
             .setStyle(ButtonStyle.Danger),
