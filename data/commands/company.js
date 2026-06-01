@@ -216,6 +216,102 @@ async function companyPasswordCmd(message, args) {
     return message.channel.send(`✅ <@${message.author.id}> 🏢 **${company.name}** password waa la dhigay.`);
 }
 
+// ── ?company invest <xad> <nooc> ──────────────────────
+const INVEST_TYPES = {
+    ammaan:      { label: '🟢 Ammaan (Safe)',        win: 0.80, minWin: 0.05, maxWin: 0.15, minLoss: 0.01, maxLoss: 0.05 },
+    safe:        { label: '🟢 Ammaan (Safe)',        win: 0.80, minWin: 0.05, maxWin: 0.15, minLoss: 0.01, maxLoss: 0.05 },
+    dhexdhexaad: { label: '🟡 Dhexdhexaad (Medium)', win: 0.60, minWin: 0.15, maxWin: 0.30, minLoss: 0.10, maxLoss: 0.20 },
+    medium:      { label: '🟡 Dhexdhexaad (Medium)', win: 0.60, minWin: 0.15, maxWin: 0.30, minLoss: 0.10, maxLoss: 0.20 },
+    khatar:      { label: '🔴 Khatar (Risky)',       win: 0.40, minWin: 0.30, maxWin: 0.60, minLoss: 0.15, maxLoss: 0.40 },
+    risky:       { label: '🔴 Khatar (Risky)',       win: 0.40, minWin: 0.30, maxWin: 0.60, minLoss: 0.15, maxLoss: 0.40 },
+};
+
+const INVEST_COOLDOWN = 8 * 60 * 60 * 1000; // 8 saacadood
+
+async function companyInvestCmd(message, args) {
+    checkEconUser(message.author.id);
+    const company = getCompanyOf(message.author.id);
+    if (!company) return message.reply('⚠️ Shirkad ma lihid.');
+
+    // ?company invest (no args) — show options
+    if (!args[0] || args[0] === 'info' || args[0] === 'status') {
+        const last = company.lastInvest || 0;
+        const wait = INVEST_COOLDOWN - (Date.now() - last);
+        const coolLine = wait > 0
+            ? `⏳ Invest cooldown: **${Math.ceil(wait / 3600000)}h ${Math.ceil((wait % 3600000) / 60000)}m**`
+            : `✅ Invest geli kartaa`;
+
+        return message.reply({ embeds: [new EmbedBuilder()
+            .setColor('#9b59b6')
+            .setTitle('📈 Company Investment')
+            .setDescription(
+                `**Treasury:** ${fmtBtc(company.treasury || 0)}\n${coolLine}\n\n` +
+                `**Invest noocyada:**\n` +
+                `🟢 \`ammaan\` — 80% guul (+5–15%) | 20% qasaaro (-1–5%)\n` +
+                `🟡 \`dhexdhexaad\` — 60% guul (+15–30%) | 40% qasaaro (-10–20%)\n` +
+                `🔴 \`khatar\` — 40% guul (+30–60%) | 60% qasaaro (-15–40%)\n\n` +
+                `**Isticmaal:** \`?company invest <xad> <nooc>\`\n` +
+                `Tusaale: \`?company invest 10000 ammaan\``
+            )
+        ]});
+    }
+
+    const amount = Math.floor(Number(args[0]));
+    const type   = INVEST_TYPES[(args[1] || '').toLowerCase()];
+
+    if (!amount || amount <= 0)
+        return message.reply('⚠️ Xaddad sax ah geli. Tusaale: `?company invest 10000 ammaan`');
+    if (!type)
+        return message.reply('⚠️ Nooca sax ah dooro: `ammaan` / `dhexdhexaad` / `khatar`');
+    if (amount < 1000)
+        return message.reply('⚠️ Ugu yaraan ₿1,000 ayaa loo baahan invest.');
+    if (amount > (company.treasury || 0))
+        return message.reply(`⚠️ Treasury ma filna. Haraagga: ${fmtBtc(company.treasury || 0)}`);
+
+    // Cooldown check
+    const now  = Date.now();
+    const last = company.lastInvest || 0;
+    const wait = INVEST_COOLDOWN - (now - last);
+    if (wait > 0) {
+        const h = Math.floor(wait / 3600000);
+        const m = Math.ceil((wait % 3600000) / 60000);
+        return message.reply(`⏳ **${h}h ${m}m** sug ka dibna invest galin kartaa.`);
+    }
+
+    // Calculate result
+    const won = Math.random() < type.win;
+    const pct  = won
+        ? type.minWin  + Math.random() * (type.maxWin  - type.minWin)
+        : type.minLoss + Math.random() * (type.maxLoss - type.minLoss);
+    const change   = Math.floor(amount * pct);
+    const profit   = won ? change : -change;
+    const newTreas = (company.treasury || 0) + profit;
+
+    company.treasury  = newTreas;
+    company.lastInvest = now;
+    if (!company.investHistory) company.investHistory = [];
+    company.investHistory.unshift({ type: args[1], amount, profit, at: now });
+    if (company.investHistory.length > 10) company.investHistory.length = 10;
+    saveCompanies();
+
+    const color = won ? '#27ae60' : '#e74c3c';
+    const emoji = won ? '📈' : '📉';
+    const sign  = won ? '+' : '-';
+
+    return message.reply({ embeds: [new EmbedBuilder()
+        .setColor(color)
+        .setTitle(`${emoji} Company Investment — ${won ? 'GUUL' : 'QASAARO'}`)
+        .setDescription(
+            `**${company.name}** — ${type.label}\n\n` +
+            `💵 **Invest-ka:** ${fmtBtc(amount)}\n` +
+            `${emoji} **Natiiio:** **${sign}${fmtBtc(Math.abs(profit))}** (${sign}${(pct * 100).toFixed(1)}%)\n` +
+            `💰 **Treasury hadda:** ${fmtBtc(newTreas)}\n\n` +
+            `⏳ Invest-ka xiga: **8 saacadood** gudahood`
+        )
+        .setFooter({ text: 'Garaad Bot • Company Invest • ?company invest' })
+    ]});
+}
+
 // ── ?topcompanies ─────────────────────────────────────
 async function topCompaniesCmd(message) {
     const all = Object.values(getAllCompanies()).sort((a, b) => (b.treasury || 0) - (a.treasury || 0)).slice(0, 10);
@@ -235,5 +331,5 @@ async function topCompaniesCmd(message) {
 module.exports = {
     companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd,
     companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd,
-    companyTransferCmd, companyPasswordCmd, topCompaniesCmd,
+    companyTransferCmd, companyPasswordCmd, topCompaniesCmd, companyInvestCmd,
 };

@@ -52,7 +52,7 @@ const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupC
 const personalCmd = require('../../data/commands/personal');
 const { bankCreateCmd, bankPasswordCmd, bankViewCmd, depositCmd, withdrawCmd, bankSendCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, bankInfoCmd, bankDepositCmd, bankWithdrawCmd, bankPasswordCmd: pubBankPwCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
-const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd } = require('../../data/commands/company');
+const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd, companyInvestCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
 const passwordCmd     = require('../../data/commands/password');
@@ -239,6 +239,7 @@ module.exports = function setupMessageHandler(client) {
                 if (sub === 'withdraw')  return companyWithdrawCmd(message, args.slice(1));
                 if (sub === 'transfer')  return companyTransferCmd(message, args.slice(1));
                 if (sub === 'password')  return companyPasswordCmd(message, args.slice(1));
+                if (sub === 'invest')    return companyInvestCmd(message, args.slice(1));
                 return companyViewCmd(message);
             }
 

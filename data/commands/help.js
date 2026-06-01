@@ -69,8 +69,7 @@ function buildEduEmbed(userId) {
             `**\`${PREFIX}partner\`** — Partner-kaaga eeg\n` +
             `**\`${PREFIX}breakup\`** — Xiriirka jabi\n\n` +
 
-            `**🔐 Account Sharing**\n` +
-            `**\`${PREFIX}password create <pw>\`** — Share password samee\n` +
+            `**🔓 Account Sharing**\n` +
             `**\`${PREFIX}access @user <pw>\`** — Saxiib account-kiisa geli\n\n` +
 
             `**💬 Kale**\n` +
@@ -117,6 +116,7 @@ function buildEcoEmbed() {
             `**\`${PREFIX}company\`** — Shirkadaada eeg\n` +
             `**\`${PREFIX}company create <magac>\`** — Shirkad bilow\n` +
             `**\`${PREFIX}company hire/fire/deposit/withdraw\`** — Maamul\n` +
+            `**\`${PREFIX}company invest <xad> <nooc>\`** — 📈 Lacag invest geli\n` +
             `**\`${PREFIX}topcompanies\`** — Top shirkadaha\n\n` +
 
             `**🎮 Ciyaaraha**\n` +
