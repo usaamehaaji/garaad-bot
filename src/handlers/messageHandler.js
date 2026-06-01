@@ -55,6 +55,7 @@ const { createPublicBankCmd, listPublicBanksCmd, bankInfoCmd, bankDepositCmd, ba
 const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
+const passwordCmd     = require('../../data/commands/password');
 
 
 let _music = null;
@@ -368,6 +369,11 @@ module.exports = function setupMessageHandler(client) {
 
             case 'dm':
                 return dmCmd(message, args);
+
+            case 'password':
+            case 'passwd':
+            case 'pw':
+                return passwordCmd(message, args);
 
             // ── Werewolf ──
             case 'werewolf':
