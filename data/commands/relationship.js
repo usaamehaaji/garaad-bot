@@ -133,13 +133,37 @@ async function proposeCmd(message) {
     receiver.pendingProposal = { fromId: message.author.id, fromUsername: message.author.username, ringType };
     saveData();
 
-    const row = new ActionRowBuilder().addComponents(
+    const RING_DISPLAY = {
+        silver:  { emoji: '💍', label: 'Silver Ring',  desc: 'Qurux fudud oo xushmad leh',    color: '#bdc3c7' },
+        diamond: { emoji: '💎', label: 'Diamond Ring', desc: 'Qiimo sarreeya — jaceyl dhabta', color: '#85c1e9' },
+        royal:   { emoji: '👑', label: 'Royal Ring',   desc: 'Boqornimada jaceylka',           color: '#f1c40f' },
+        somali:  { emoji: '🇸🇴', label: 'Somali Ring',  desc: 'Dhaqanka iyo jaceylka',          color: '#4CAF50' },
+    };
+
+    const ring = RING_DISPLAY[ringType];
+    const row  = new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`rel_ap_${message.author.id}`).setLabel('💍 Haa, Waan Aqbalayaa!').setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId(`rel_dp_${message.author.id}`).setLabel('💔 Maya').setStyle(ButtonStyle.Danger),
     );
 
     return message.reply({
-        content: `💍 <@${target.id}> — **${message.author.username}** wuxuu kuu soo jeedinaayaa guur!\n\n${RING_NAMES[ringType]} 💝`,
+        content: `<@${target.id}>`,
+        embeds: [new EmbedBuilder()
+            .setColor(ring.color)
+            .setTitle('💍 Guurta Codsi')
+            .setDescription(
+                `**${message.author.username}** wuxuu kuu soo jeedinaayaa guur! 💝\n\n` +
+                `\`\`\`\n` +
+                `  ╔══════════════════════════╗\n` +
+                `  ║   ${ring.emoji}  ${ring.label.padEnd(18)}${ring.emoji}  ║\n` +
+                `  ║   ✨ ${ring.desc.padEnd(22)}  ║\n` +
+                `  ╚══════════════════════════╝\n` +
+                `\`\`\`\n` +
+                `_Qalbigeyga ku haya... ma aqbali doontaa?_ 💌`
+            )
+            .setFooter({ text: `${message.author.username} → ${target.username}` })
+            .setTimestamp()
+        ],
         components: [row],
     });
 }
