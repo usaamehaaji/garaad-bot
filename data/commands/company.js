@@ -208,7 +208,7 @@ async function companyPasswordCmd(message, args) {
     const pw      = args[0];
     const company = getUserOwnedCompany(message.author.id);
     if (!company) return message.reply('⚠️ Shirkad ma lihid ama adiga owner ma aha.');
-    if (!pw || pw.length < 4) return message.reply('⚠️ Password ugu yaraan 4 xaraf. `?company password <pw>`');
+    if (!pw || pw.length < 6) return message.reply('⚠️ Password ugu yaraan 4 xaraf. `?company password <pw>`');
 
     company.passwordHash = hashPass(pw);
     saveCompanies();

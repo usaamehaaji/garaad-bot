@@ -42,7 +42,7 @@ async function bankPasswordCmd(message, args) {
     if (!ec.personalBank) return message.reply('⚠️ Bank account ma lihid. `?bank create` bilow.');
 
     const pw = args[0];
-    if (!pw || pw.length < 4) return message.reply('⚠️ Password-ka ugu yaraan 4 xaraf. Tusaale: `?bp MyPass123`');
+    if (!pw || pw.length < 6) return message.reply('⚠️ Password-ka **ugu yaraan 6 xaraf** ah geli (xaraf + number). Tusaale: `?bp MyPass99`');
     if (pw.length > 32) return message.reply('⚠️ Password-ka aad u dheer (max 32 xaraf).');
 
     ec.personalBank.passwordHash = hashPass(pw);

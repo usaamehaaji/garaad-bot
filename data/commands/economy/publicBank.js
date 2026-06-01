@@ -159,7 +159,7 @@ async function bankPasswordCmd(message, args) {
     const bank = getPublicBank(id);
     if (!bank) return message.reply(`⚠️ Bank \`${id}\` lama helin.`);
     if (bank.ownerId !== message.author.id) return message.reply('⚠️ Bangiga owner-kiisa oo keliya ayaa password dhigi kara.');
-    if (!pw || pw.length < 4) return message.reply('⚠️ Password ugu yaraan 4 xaraf. `?bankpassword <ID> <password>`');
+    if (!pw || pw.length < 6) return message.reply('⚠️ Password ugu yaraan 4 xaraf. `?bankpassword <ID> <password>`');
 
     bank.passwordHash = hashPass(pw);
     saveBanks();

@@ -20,8 +20,8 @@ module.exports = async function passwordCmd(message, args) {
     // ?password create <pw>
     if (sub === 'create') {
         const pw = args[1];
-        if (!pw || pw.length < 4)
-            return bad(message, `⚠️ \`?password create <password>\` — ugu yaraan 4 xaraf.\nTusaale: \`?password create 1234\``);
+        if (!pw || pw.length < 6)
+            return bad(message, `⚠️ Password **ugu yaraan 6 xaraf** ah geli (xaraf + number).\nTusaale: \`?password create Pass99\``);
         if (d.accountPassword)
             return bad(message, `⚠️ Password horay u haysataa.\nBeddel: \`?password change <hore> <cusub>\``);
         d.accountPassword = pw;
@@ -41,8 +41,8 @@ module.exports = async function passwordCmd(message, args) {
             return bad(message, `⚠️ Password ma lihid. \`?password create <pw>\` bilow.`);
         if (oldPw !== d.accountPassword)
             return bad(message, `❌ Password-kii hore waa khalad.`);
-        if (newPw.length < 4)
-            return bad(message, `⚠️ Password cusub ugu yaraan 4 xaraf.`);
+        if (newPw.length < 6)
+            return bad(message, `⚠️ Password cusub **ugu yaraan 6 xaraf** ah geli.`);
         d.accountPassword = newPw;
         saveData();
         try { await message.delete(); } catch {}
