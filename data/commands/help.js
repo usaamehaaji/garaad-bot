@@ -69,9 +69,9 @@ function buildEduEmbed(userId) {
             `**\`${PREFIX}partner\`** — Partner-kaaga eeg\n` +
             `**\`${PREFIX}breakup\`** — Xiriirka jabi\n\n` +
 
-            `**🔐 Ammaanka**\n` +
-            `**\`${PREFIX}password create <pw>\`** — Account password samee\n` +
-            `**\`${PREFIX}password change <hore> <cusub>\`** — Password beddel\n\n` +
+            `**🔐 Account Sharing**\n` +
+            `**\`${PREFIX}password create <pw>\`** — Share password samee\n` +
+            `**\`${PREFIX}access @user <pw>\`** — Saxiib account-kiisa geli\n\n` +
 
             `**💬 Kale**\n` +
             `**\`${PREFIX}dm <fariin>\`** — Admin u dir fikrad\n` +
@@ -96,7 +96,7 @@ function buildEcoEmbed() {
             `**🏦 Personal Bank (BTC)**\n` +
             `**\`${PREFIX}bank\`** — Bank-kaaga eeg\n` +
             `**\`${PREFIX}bank create\`** — Bank account bilow\n` +
-            `**\`${PREFIX}bp <password>\`** — Bank password dhig\n` +
+            `**\`${PREFIX}bp <password>\`** — Bank password dhig (withdraw/send ilaaliso)\n` +
             `**\`${PREFIX}deposit <xad>\`** — BTC dhig bank\n` +
             `**\`${PREFIX}withdraw <xad> [pw]\`** — BTC bank ka qaado\n` +
             `**\`${PREFIX}banksend @user <xad> [pw]\`** — BTC u dir qof\n\n` +
