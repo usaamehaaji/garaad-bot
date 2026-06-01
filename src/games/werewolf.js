@@ -187,18 +187,20 @@ async function beginNight(game, client) {
 
     const alive     = alivePlayers(game);
     const dead      = deadPlayers(game);
-    const hasDoctor = [...game.players.values()].some(p => p.role === 'doctor'   && p.alive);
-    const hasSeer   = [...game.players.values()].some(p => p.role === 'seer'     && p.alive);
-    const hasDruid  = [...game.players.values()].some(p => p.role === 'druid'    && p.alive);
-    const hasNecro  = [...game.players.values()].some(p => p.role === 'necro'    && p.alive) && dead.length > 0;
+    const hasDoctor   = [...game.players.values()].some(p => p.role === 'doctor'   && p.alive);
+    const hasSeer     = [...game.players.values()].some(p => p.role === 'seer'     && p.alive);
+    const hasDruid    = [...game.players.values()].some(p => p.role === 'druid'    && p.alive);
+    const hasWolfSeer = [...game.players.values()].some(p => p.role === 'wolfSeer' && p.alive);
+    const hasNecro    = [...game.players.values()].some(p => p.role === 'necro'    && p.alive) && dead.length > 0 && !game.necroUsed;
 
     const lines = [
         `🌙 Habeenku wuu soo gudgalay... Dadku waa seexday.\n`,
         `🐍 Dilaagayaashu waxay dooranayaan qof ay dilaan (DM).`,
-        hasSeer   ? `👁️ Aragtidu wuxuu dooranayaa qof uu baro (DM).`             : '',
-        hasDoctor ? `🏅 Dhaqtarku wuxuu dooranayaa qof uu u badbaadıyo (DM).`   : '',
-        hasDruid  ? `🌿 Duruidu wuxuu dooranayaa shacab uu badbaadıyo (DM).`    : '',
-        hasNecro  ? `💀 Necro wuxuu dooranayaa qof dhintay uu baro (DM).`       : '',
+        hasWolfSeer ? `🐍👁️ Dilaaga Aragtidu wuxuu barayaa qof doorkooda (DM).`   : '',
+        hasSeer     ? `👁️ Aragtidu wuxuu dooranayaa qof uu baro (DM).`            : '',
+        hasDoctor   ? `🏅 Dhaqtarku wuxuu dooranayaa qof uu u badbaadıyo (DM).`  : '',
+        hasDruid    ? `🌿 Duruidu wuxuu dooranayaa qof uu badbaadıyo (DM).`      : '',
+        hasNecro    ? `💀 Necro wuxuu dib u soo celin karaa qof dhintay (DM).`   : '',
         `\n⏳ **60 sekund**`,
     ].filter(Boolean).join('\n');
 
@@ -228,12 +230,13 @@ async function beginNight(game, client) {
             }).catch(() => {});
         };
 
-        if (role === 'wolf') {
+        if (isWolf(role)) {
             const targets = alive.filter(([, p]) => !isWolf(p.role));
             await sendDM('🐍 Cidda dilaysaa dooro:', targets, ButtonStyle.Danger, 'wolf');
-        } else if (role === 'wolfSeer') {
-            const targets = alive.filter(([tid]) => tid !== uid);
-            await sendDM('🐍👁️ Cidda doorkooda baranaysaa dooro:', targets, ButtonStyle.Danger, 'wolfSeer');
+            if (role === 'wolfSeer') {
+                const seeTargets = alive.filter(([tid]) => tid !== uid);
+                await sendDM('🐍👁️ Cidda doorkooda baranaysaa dooro:', seeTargets, ButtonStyle.Secondary, 'wolfSeer');
+            }
         } else if (role === 'seer') {
             const targets = alive.filter(([tid]) => tid !== uid);
             await sendDM('👁️ Cidda baranaysaa dooro:', targets, ButtonStyle.Primary, 'seer');
@@ -285,9 +288,9 @@ async function resolveNight(game, client) {
     // Doctor save
     if (killed && na.doctorTarget === killed) { killed = null; desc += `🛡️ Dhaqtar ayaa qof badbaadiyay!\n\n`; }
 
-    // Druid save (villagers only)
-    if (killed && na.druidTarget === killed && game.players.get(killed)?.role === 'villager') {
-        killed = null; desc += `🌿 Duruid ayaa shacab badbaadiyay!\n\n`;
+    // Druid save (anyone)
+    if (killed && na.druidTarget === killed) {
+        killed = null; desc += `🌿 Duruid ayaa qof badbaadiyay!\n\n`;
     }
 
     if (killed) {
@@ -396,7 +399,7 @@ async function triggerElinRevenge(elinId, game, client, context) {
 
 // ── King succession ────────────────────────────────────────────────────
 async function triggerKingSuccession(kingId, game, client, nightDesc) {
-    const targets = alivePlayers(game).filter(([, p]) => p.team !== 'wolf');
+    const targets = alivePlayers(game).filter(([, p]) => !isWolf(p.role));
     if (!targets.length) {
         await postNightResult(game, client, nightDesc);
         return;
@@ -538,7 +541,7 @@ async function resolveVote(game, client) {
             const r          = ROLES[role];
             game.players.get(eliminated).alive = false;
             const n    = await fetchName(eliminated, client);
-            const wolf = role === 'wolf';
+            const wolf = isWolf(role);
             desc = `🪓 **${n}** la saaray!\n${wolf ? `🐍 **DILAAGA AHAA! Guul!**` : `✅ Dilaaga ma ahayn — **${r.emoji} ${r.name}** ahaa`}`;
             try { const u = await client.users.fetch(eliminated); await u.send(`🪓 Ciyaartii lagaa saaray. ${wolf ? 'Dilaaga ahayd.' : 'Dilaaga ma ahayn.'}`).catch(() => {}); } catch {}
 

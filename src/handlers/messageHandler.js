@@ -372,8 +372,16 @@ module.exports = function setupMessageHandler(client) {
             // ── Werewolf ──
             case 'werewolf':
             case 'ww':
-            case 'wwolf':
+            case 'wwolf': {
+                if (args[0] === 'stop' && isAdmin(userId)) {
+                    const { games: wwG, cancelGame } = require('../games/werewolf');
+                    const g = wwG.get(message.guild.id);
+                    if (!g) return message.reply('⚠️ Ciyaar ma jirto.');
+                    cancelGame(message.guild.id);
+                    return message.reply('🛑 Werewolf game la joojiyay.');
+                }
                 return werewolfCmd(message);
+            }
         }
     });
 };
