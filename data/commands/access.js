@@ -65,13 +65,14 @@ module.exports = async function accessCmd(message, args) {
 
     const pw = args[1] || '';
 
-    checkUser(target.id);
-    const targetData = userData[target.id];
+    const { econData: eData, checkEconUser: cEcon } = require('../../src/economy/econStore');
+    cEcon(target.id);
+    const targetEcon = eData[target.id];
 
-    // Password check
-    if (targetData.accountPassword && targetData.accountPassword !== pw) {
+    // Password check — unified password from ?bp
+    if (targetEcon.accountPassword && targetEcon.accountPassword !== pw) {
         return message.reply({ embeds: [new EmbedBuilder().setColor('#e74c3c').setDescription(
-            `🔐 **Password qalad!**\n${target.username} wuxuu leeyahay account password.\n` +
+            `🔐 **Password qalad!**\n${target.username} wuxuu leeyahay account password (\`?bp\`).\n` +
             `Isticmaal: \`?access @${target.username} <password>\``
         )]});
     }

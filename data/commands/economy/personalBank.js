@@ -35,21 +35,26 @@ async function bankCreateCmd(message) {
     );
 }
 
-// ── ?bp <password> ────────────────────────────────────
+// ── ?bp <password> — UNIFIED password (bank + sharing) ───
 async function bankPasswordCmd(message, args) {
     checkEconUser(message.author.id);
     const ec = econData[message.author.id];
-    if (!ec.personalBank) return message.reply('⚠️ Bank account ma lihid. `?bank create` bilow.');
 
     const pw = args[0];
-    if (!pw || pw.length < 6) return message.reply('⚠️ Password-ka **ugu yaraan 6 xaraf** ah geli (xaraf + number). Tusaale: `?bp MyPass99`');
+    if (!pw || pw.length < 6) return message.reply(
+        '⚠️ Password-ka **ugu yaraan 6 xaraf** ah geli (xaraf + number).\n' +
+        'Tusaale: `?bp MyPass99`\n\n' +
+        '_Password-kani wuxuu ilaalinayaa: withdraw, banksend, iyo saxiib access._'
+    );
     if (pw.length > 32) return message.reply('⚠️ Password-ka aad u dheer (max 32 xaraf).');
 
-    ec.personalBank.passwordHash = hashPass(pw);
+    ec.accountPassword = pw;
+    // Also keep personalBank.passwordHash in sync for backward compat
+    if (ec.personalBank) ec.personalBank.passwordHash = hashPass(pw);
     saveEcon();
 
     try { await message.delete(); } catch {}
-    return message.channel.send(`✅ <@${message.author.id}> Bank password-kaaga waa la dhigay.`);
+    return message.channel.send(`✅ <@${message.author.id}> **Password la dhigay** — withdraw, banksend iyo \`?access\` labadaba wuu ilaalinayaa.`);
 }
 
 // ── ?bank ─────────────────────────────────────────────
@@ -112,9 +117,9 @@ async function withdrawCmd(message, args) {
     const pw     = args[1];
     if (!amount || amount <= 0) return message.reply('⚠️ Isticmaal: `?withdraw <amount> <password>`');
 
-    if (bank.passwordHash) {
+    if (ec.accountPassword) {
         if (!pw) return message.reply('🔐 Password-ka geli. Isticmaal: `?withdraw <amount> <password>`');
-        if (!checkPass(pw, bank.passwordHash)) return message.reply('❌ Password-ka waa khalad.');
+        if (pw !== ec.accountPassword) return message.reply('❌ Password-ka waa khalad.');
         try { await message.delete(); } catch {}
     }
 
@@ -149,9 +154,9 @@ async function bankSendCmd(message, args) {
     const pw     = args[2];
     if (!amount || amount <= 0) return message.reply('⚠️ Isticmaal: `?banksend @user <amount> <password>`');
 
-    if (myBank.passwordHash) {
+    if (ec.accountPassword) {
         if (!pw) return message.reply('🔐 Password-kaaga geli. `?banksend @user <amount> <password>`');
-        if (!checkPass(pw, myBank.passwordHash)) return message.reply('❌ Password-kaaga waa khalad.');
+        if (pw !== ec.accountPassword) return message.reply('❌ Password-kaaga waa khalad.');
         try { await message.delete(); } catch {}
     }
 

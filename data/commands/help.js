@@ -130,8 +130,8 @@ function buildEcoEmbed() {
             `**\`${PREFIX}etitle\`** — Economy cinwaan xidh\n` +
             `**\`${PREFIX}khaznad\`** — Treasury eeg\n\n` +
 
-            `**🔓 Wadaagga Account**\n` +
-            `**\`${PREFIX}password create <pw>\`** — Share password samee\n` +
+            `**🔐 Password & Wadaag**\n` +
+            `**\`${PREFIX}bp <password>\`** — Hal password (withdraw + banksend + access)\n` +
             `**\`${PREFIX}access @saxiib <pw>\`** — Saxiib account-kiisa geli (bank + company)`
         )
         .setFooter({ text: `Garaad Economy • [pw] = password required if set` });
