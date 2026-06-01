@@ -3285,6 +3285,139 @@ module.exports = function setupInteractionHandler(client) {
             }).catch(() => {});
         }
 
+        // ── Shared Access Panel ───────────────────────────────────────────
+        if (id.startsWith('acc_')) {
+            const parts    = id.split('_');
+            const action   = parts[1];
+            const targetId = parts[2];
+            const callerId = parts[3] || parts[2];
+
+            // Close
+            if (action === 'close') {
+                if (interaction.user.id !== callerId) return interaction.reply({ content: '⚠️', flags: MessageFlags.Ephemeral });
+                return interaction.update({ embeds: [{ description: '✖ Access panel la xiraa.' }], components: [] });
+            }
+
+            // Validate session
+            const sessionKey = `${callerId}_${targetId}`;
+            const session    = global.accessSessions?.get(sessionKey);
+            if (!session || Date.now() > session.expiresAt) {
+                return interaction.reply({ content: '⏰ Access waxay dhammaysay. \`?access @user <pw>\` ku noqo.', flags: MessageFlags.Ephemeral });
+            }
+            if (interaction.user.id !== callerId) {
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            }
+
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            const { userData: uData } = require('../store');
+            const { fmt: fmtH } = require('../utils/helpers');
+            checkEconUser(targetId);
+            checkEconUser(callerId);
+            const ecT = eData[targetId];
+            const ecC = eData[callerId];
+
+            function fmtB(n) { return `₿${Math.floor(n||0).toLocaleString()}`; }
+
+            // Bank view
+            if (action === 'bank') {
+                const bank = ecT.personalBank;
+                if (!bank) return interaction.reply({ content: '⚠️ Bank account ma laha.', flags: MessageFlags.Ephemeral });
+                let tName = targetId; try { const u = await interaction.client.users.fetch(targetId); tName = u.username; } catch {}
+                return interaction.reply({ flags: MessageFlags.Ephemeral, embeds: [new EmbedBuilder()
+                    .setColor('#2ecc71')
+                    .setTitle(`🏦 ${tName}'s Bank`)
+                    .setDescription(
+                        `💰 **Haraagga:** ${fmtB(bank.balance)}\n` +
+                        `📥 **Wadarta la geliyay:** ${fmtB(bank.deposits)}\n` +
+                        `📤 **Wadarta la bixiyay:** ${fmtB(bank.withdrawals)}`
+                    )
+                ]});
+            }
+
+            // Company view
+            if (action === 'company') {
+                const comp = ecT.company;
+                if (!comp) return interaction.reply({ content: '⚠️ Company ma laha.', flags: MessageFlags.Ephemeral });
+                let tName = targetId; try { const u = await interaction.client.users.fetch(targetId); tName = u.username; } catch {}
+                return interaction.reply({ flags: MessageFlags.Ephemeral, embeds: [new EmbedBuilder()
+                    .setColor('#3498db')
+                    .setTitle(`🏢 ${comp.name}`)
+                    .setDescription(
+                        `👤 **Owner:** ${tName}\n` +
+                        `💰 **Treasury:** ${fmtB(comp.treasury)}\n` +
+                        `👥 **Employees:** ${comp.employees?.length || 0}`
+                    )
+                ]});
+            }
+
+            // Deposit (from caller's wallet → target's bank)
+            if (action === 'deposit') {
+                const bank = ecT.personalBank;
+                if (!bank) return interaction.reply({ content: '⚠️ Bank account ma laha.', flags: MessageFlags.Ephemeral });
+                const { ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+                const modal = new ModalBuilder()
+                    .setCustomId(`acc_dep_modal_${targetId}_${callerId}`)
+                    .setTitle('📥 Deposit → Bank');
+                modal.addComponents(new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka BTC').setStyle(TextInputStyle.Short).setPlaceholder('500').setRequired(true)
+                ));
+                return interaction.showModal(modal);
+            }
+
+            // Withdraw (from target's bank → caller's wallet)
+            if (action === 'withdraw') {
+                const bank = ecT.personalBank;
+                if (!bank) return interaction.reply({ content: '⚠️ Bank account ma laha.', flags: MessageFlags.Ephemeral });
+                const { ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+                const modal = new ModalBuilder()
+                    .setCustomId(`acc_wd_modal_${targetId}_${callerId}`)
+                    .setTitle('📤 Withdraw ← Bank');
+                modal.addComponents(new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('amount').setLabel('Xaddadka BTC').setStyle(TextInputStyle.Short).setPlaceholder('500').setRequired(true)
+                ));
+                return interaction.showModal(modal);
+            }
+        }
+
+        // ── Access panel modals ────────────────────────────────────────────
+        if (interaction.isModalSubmit?.() && id.startsWith('acc_dep_modal_')) {
+            const parts    = id.split('_');
+            const targetId = parts[3];
+            const callerId = parts[4];
+            const amount   = parseInt(interaction.fields.getTextInputValue('amount'));
+            if (isNaN(amount) || amount <= 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            checkEconUser(targetId); checkEconUser(callerId);
+            const ecC = eData[callerId]; const bank = eData[targetId].personalBank;
+            if (!bank) return interaction.reply({ content: '⚠️ Bank ma laha.', flags: MessageFlags.Ephemeral });
+            if ((ecC.btc || 0) < amount) return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid. Haysataa: ₿${(ecC.btc||0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
+            ecC.btc = (ecC.btc || 0) - amount;
+            bank.balance  += amount;
+            bank.deposits += amount;
+            saveEcon();
+            let tName = targetId; try { const u = await interaction.client.users.fetch(targetId); tName = u.username; } catch {}
+            return interaction.reply({ content: `📥 **₿${amount.toLocaleString()}** waxaad gelisay **${tName}**'s bank!`, flags: MessageFlags.Ephemeral });
+        }
+
+        if (interaction.isModalSubmit?.() && id.startsWith('acc_wd_modal_')) {
+            const parts    = id.split('_');
+            const targetId = parts[3];
+            const callerId = parts[4];
+            const amount   = parseInt(interaction.fields.getTextInputValue('amount'));
+            if (isNaN(amount) || amount <= 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            checkEconUser(targetId); checkEconUser(callerId);
+            const bank = eData[targetId].personalBank;
+            if (!bank) return interaction.reply({ content: '⚠️ Bank ma laha.', flags: MessageFlags.Ephemeral });
+            if (bank.balance < amount) return interaction.reply({ content: `⚠️ Bank ma filna. Haraagga: ₿${bank.balance.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+            bank.balance      -= amount;
+            bank.withdrawals  += amount;
+            eData[callerId].btc = (eData[callerId].btc || 0) + amount;
+            saveEcon();
+            let tName = targetId; try { const u = await interaction.client.users.fetch(targetId); tName = u.username; } catch {}
+            return interaction.reply({ content: `📤 **₿${amount.toLocaleString()}** ka soo baxday **${tName}**'s bank — jeebkaaga!`, flags: MessageFlags.Ephemeral });
+        }
+
         // ── Werewolf ──────────────────────────────────────────────────────
         if (id.startsWith('ww_')) {
             const { games: wwGames, lobbyEmbed, lobbyRow, startGame, endGame } = require('../games/werewolf');
