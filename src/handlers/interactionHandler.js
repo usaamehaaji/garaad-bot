@@ -3281,6 +3281,109 @@ module.exports = function setupInteractionHandler(client) {
             }).catch(() => {});
         }
 
+        // ── Werewolf ──────────────────────────────────────────────────────
+        if (id.startsWith('ww_')) {
+            const { games: wwGames, lobbyEmbed, lobbyRow, startGame, endGame } = require('../games/werewolf');
+
+            // Lobby: Join
+            if (id.startsWith('ww_join_')) {
+                const hostId  = id.replace('ww_join_', '');
+                const game    = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
+                if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
+                if (game.players.size >= 12) return interaction.reply({ content: '⚠️ Lobby buuxday (max 12).', flags: MessageFlags.Ephemeral });
+                if (game.players.has(interaction.user.id)) return interaction.reply({ content: '⚠️ Horay ayaad ku jirtay.', flags: MessageFlags.Ephemeral });
+                game.players.set(interaction.user.id, null);
+                const embed = await lobbyEmbed(game, interaction.client);
+                const row   = lobbyRow(hostId, game.players.size >= 5);
+                await interaction.update({ embeds: [embed], components: [row] });
+                return;
+            }
+
+            // Lobby: Leave
+            if (id.startsWith('ww_leave_')) {
+                const hostId = id.replace('ww_leave_', '');
+                const game   = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
+                if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
+                if (interaction.user.id === hostId) return interaction.reply({ content: '⚠️ Host ma bixin karo. Jooji haddaad rabto.', flags: MessageFlags.Ephemeral });
+                game.players.delete(interaction.user.id);
+                const embed = await lobbyEmbed(game, interaction.client);
+                const row   = lobbyRow(hostId, game.players.size >= 5);
+                await interaction.update({ embeds: [embed], components: [row] });
+                return;
+            }
+
+            // Lobby: Start (host only)
+            if (id.startsWith('ww_start_')) {
+                const hostId = id.replace('ww_start_', '');
+                if (interaction.user.id !== hostId) return interaction.reply({ content: '⚠️ Host kaliya ayaa bilaabi kara.', flags: MessageFlags.Ephemeral });
+                const game = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
+                if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
+                if (game.players.size < 5) return interaction.reply({ content: '⚠️ Ugu yaraan 5 qof ayaa loo baahanyahay.', flags: MessageFlags.Ephemeral });
+                await interaction.update({ embeds: [{ title: '🐺 Werewolf — Bilaabanaya...', description: 'Doorarka DM-ka ayaa loo diraysaa. Sugso!' }], components: [] });
+                await startGame(game, interaction.client);
+                return;
+            }
+
+            // Lobby: Cancel (host only)
+            if (id.startsWith('ww_cancel_')) {
+                const hostId = id.replace('ww_cancel_', '');
+                if (interaction.user.id !== hostId) return interaction.reply({ content: '⚠️ Host kaliya ayaa joojin kara.', flags: MessageFlags.Ephemeral });
+                const game = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
+                if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
+                wwGames.delete(game.guildId);
+                await interaction.update({ embeds: [{ title: '🐺 Werewolf — La joojiyay', description: 'Ciyaarta waa la joojiyay.' }], components: [] });
+                return;
+            }
+
+            // Night action: wolf/seer/doctor (from DM)
+            if (id.startsWith('ww_night_')) {
+                const parts  = id.split('_'); // ww_night_role_guildId_targetId
+                const role   = parts[2];
+                const guildId = parts[3];
+                const targetId = parts[4];
+                const game   = wwGames.get(guildId);
+                if (!game || game.phase !== 'night') return interaction.reply({ content: '⚠️ Habeenka ciyaar ma jirto.', flags: MessageFlags.Ephemeral });
+                const player = game.players.get(interaction.user.id);
+                if (!player || player.role !== role || !player.alive) return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
+
+                const na = game.nightActions;
+                let confirmMsg = '';
+
+                if (role === 'wolf') {
+                    na.wolfVotes.set(interaction.user.id, targetId);
+                    let tn = targetId; try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
+                    confirmMsg = `🐺 Doorashadaadu waa: **@${tn}**`;
+                } else if (role === 'seer') {
+                    na.seerTarget = targetId;
+                    let tn = targetId; try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
+                    confirmMsg = `🔮 Barishadaadu waa: **@${tn}** — Natiijada habeenka dambe ayaad helaysaa`;
+                } else if (role === 'doctor') {
+                    na.doctorTarget = targetId;
+                    let tn = targetId; try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
+                    confirmMsg = `💊 Badbaadishadaadu waa: **@${tn}**`;
+                }
+
+                await interaction.update({ embeds: [{ description: `✅ ${confirmMsg}` }], components: [] });
+                return;
+            }
+
+            // Day vote
+            if (id.startsWith('ww_vote_')) {
+                const parts    = id.split('_');
+                const guildId  = parts[2];
+                const targetId = parts[3];
+                const game     = wwGames.get(guildId);
+                if (!game || game.phase !== 'vote') return interaction.reply({ content: '⚠️ Codayn ma jirto.', flags: MessageFlags.Ephemeral });
+                const voter = game.players.get(interaction.user.id);
+                if (!voter || !voter.alive) return interaction.reply({ content: '⚠️ Ma codeyn kartid.', flags: MessageFlags.Ephemeral });
+                if (interaction.user.id === targetId) return interaction.reply({ content: '⚠️ Nafsadaada ma codeyn kartid.', flags: MessageFlags.Ephemeral });
+                game.votes.set(interaction.user.id, targetId);
+                let tn = targetId; try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
+                await interaction.reply({ content: `✅ Codadaadii: **@${tn}**`, flags: MessageFlags.Ephemeral });
+                return;
+            }
+        }
+
         // ── Catch-all: tournament answer buttons orphaned after bot restart ──
         if (id.startsWith('tna_')) {
             const guildId = interaction.guildId;

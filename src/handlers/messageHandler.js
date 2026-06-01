@@ -54,6 +54,7 @@ const { bankCreateCmd, bankPasswordCmd, bankViewCmd, depositCmd, withdrawCmd, ba
 const { createPublicBankCmd, listPublicBanksCmd, bankInfoCmd, bankDepositCmd, bankWithdrawCmd, bankPasswordCmd: pubBankPwCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
 const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
+const werewolfCmd     = require('../../data/commands/werewolf');
 
 
 let _music = null;
@@ -367,6 +368,12 @@ module.exports = function setupMessageHandler(client) {
 
             case 'dm':
                 return dmCmd(message, args);
+
+            // ── Werewolf ──
+            case 'werewolf':
+            case 'ww':
+            case 'wwolf':
+                return werewolfCmd(message);
         }
     });
 };
