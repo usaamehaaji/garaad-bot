@@ -132,7 +132,11 @@ function buildEcoEmbed() {
             `**\`${PREFIX}give @user btc <xad>\`** — BTC u dir\n` +
             `**\`${PREFIX}missions\`** — Hawlaha maalinlaha\n` +
             `**\`${PREFIX}etitle\`** — Economy cinwaan xidh\n` +
-            `**\`${PREFIX}khaznad\`** — Treasury eeg`
+            `**\`${PREFIX}khaznad\`** — Treasury eeg\n\n` +
+
+            `**🔓 Wadaagga Account**\n` +
+            `**\`${PREFIX}password create <pw>\`** — Share password samee\n` +
+            `**\`${PREFIX}access @saxiib <pw>\`** — Saxiib account-kiisa geli (bank + company)`
         )
         .setFooter({ text: `Garaad Economy • [pw] = password required if set` });
 }

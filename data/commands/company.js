@@ -231,7 +231,11 @@ const INVEST_COOLDOWN = 8 * 60 * 60 * 1000; // 8 saacadood
 async function companyInvestCmd(message, args) {
     checkEconUser(message.author.id);
     const company = getCompanyOf(message.author.id);
-    if (!company) return message.reply('⚠️ Shirkad ma lihid.');
+    // No company — redirect to personal invest
+    if (!company) {
+        const investCmd = require('../economy/invest');
+        return investCmd(message, args);
+    }
 
     // ?company invest (no args) — show options
     if (!args[0] || args[0] === 'info' || args[0] === 'status') {
