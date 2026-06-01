@@ -24,7 +24,12 @@ function buildAdminEmbed(uid) {
             `🎁 Give  •  🧠 Give IQ  •  🏆 Champion\n` +
             `💬 DM  •  💸 Transfer  •  👥 Players\n` +
             `📢 Broadcast  •  🐛 Bugs  •  💳 Loans` +
-            (isOwner ? `\n🏛️ Top-up  •  👥 Admin  •  ♻️ Reset` : '')
+            (isOwner ? `\n🏛️ Top-up  •  👥 Admin  •  ♻️ Reset` : '') +
+            `\n\n**🏦 Bank Commands (text):**\n` +
+            `\`?adminbank pw @user\` — Personal bank password reset\n` +
+            `\`?adminbank view @user\` — User bank info eeg\n` +
+            `\`?adminbank tax <ID> <%>\` — Macaamiisha tax qaado\n` +
+            `\`?adminbank close <ID>\` — Bank xir + lacag celi`
         )
         .setFooter({ text: 'Garaad Admin' });
 }
