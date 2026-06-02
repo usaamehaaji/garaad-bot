@@ -61,7 +61,7 @@ function buildEduEmbed(userId) {
             `**💕 Xiriirka**\n` +
             `**\`${PREFIX}personal\`** — Partner, saaxiibada, xiriirka\n` +
             `**\`${PREFIX}friend @user\`** — Saaxiib codsi dir\n` +
-            `**\`${PREFIX}propose @user\`** — Guur u soo jed\n` +
+            `**\`${PREFIX}propose @user\`** — u soo jedi\n` +
             `**\`${PREFIX}partner\`** — Partner-kaaga eeg\n` +
             `**\`${PREFIX}breakup\`** — Xiriirka jabi\n\n` +
 
