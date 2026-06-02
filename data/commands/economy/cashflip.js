@@ -5,7 +5,7 @@ const { getMarketState, calculateOutcome, recordFlip } = require('../../../src/e
 const { fmt } = require('../../../src/utils/helpers');
 
 const PROFIT_RATE = 0.95;
-const COOLDOWN_MS = 8_000;
+const COOLDOWN_MS = 15_000;
 const MIN_BET     = 10;
 const MAX_BET     = 50_000;
 
@@ -104,7 +104,7 @@ module.exports = async function cashflipCmd(message, args) {
     const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
     if (cdLeft > 0)
-        return message.reply(`⏳ Sug **${cdLeft}s** kadib isku day.`);
+        return message.reply(`⏳ Flip cooldown: Sug **${cdLeft}s** kadib mar kale isku day.`);
 
     flipCooldowns.set(userId, Date.now() + COOLDOWN_MS);
 
