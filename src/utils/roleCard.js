@@ -8,7 +8,7 @@ const ROLE_STYLES = {
     wolf:     { bg: '#1a0000', border: '#c0392b', accent: '#e74c3c', emoji: '🐺', label: 'WEREWOLF' },
     seer:     { bg: '#0d0020', border: '#8e44ad', accent: '#9b59b6', emoji: '🔮', label: 'SEER'     },
     doctor:   { bg: '#001a0d', border: '#1e8449', accent: '#27ae60', emoji: '💊', label: 'DOCTOR'   },
-    villager: { bg: '#001020', border: '#1a5276', accent: '#2980b9', emoji: '🏘️', label: 'VILLAGER' },
+    villager: { bg: '#001020', border: '#1a5276', accent: '#2980b9', emoji: '🏘️', label: 'SOCIETY' },
 };
 
 const ROLE_DESC = {

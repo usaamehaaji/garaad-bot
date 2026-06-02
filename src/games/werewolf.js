@@ -17,17 +17,17 @@ const ROLES = {
                 dm: 'Habeen kasta qof dooro — Dilaaga miyuu yahay ogaan doontaa.' },
     doctor:   { emoji: '🏅',   name: 'Dhaqtar',           color: '#27ae60', team: 'village',
                 dm: 'Habeen kasta qof badbaadi. Haddii dilaagu ku beegsado qofkaas, wuu noolaanayaa.' },
-    mayor:    { emoji: '🎖️',   name: 'Mayor',              color: '#e67e22', team: 'village',
+    mayor:    { emoji: '🎖️',   name: 'Duqa',               color: '#e67e22', team: 'village',
                 dm: 'Codadaadu waxay u xisaabantaan 2 cod! Maalintii codeey.' },
-    princess: { emoji: '👸',   name: 'Princess',           color: '#ff69b4', team: 'village',
+    princess: { emoji: '👸',   name: 'Boqorad',           color: '#ff69b4', team: 'village',
                 dm: 'Hadduu Dilaagu kugu dilo, isagaa dhinta — adna way ku sii noolaan doontaa!' },
-    king:     { emoji: '👑',   name: 'King',               color: '#f1c40f', team: 'village',
+    king:     { emoji: '👑',   name: 'Boqor',              color: '#f1c40f', team: 'village',
                 dm: 'Haddaad dhimatid, qof aad doorato wuxuu helayaa awoodooda.' },
     elin:     { emoji: '🏹',   name: 'Elin',               color: '#e74c3c', team: 'village',
                 dm: 'Haddaad la saarto ama la dilid, qof dooran kartaa oo aad naftiisa la qaadid!' },
     druid:    { emoji: '🌿',   name: 'Duruid',             color: '#1abc9c', team: 'village',
                 dm: 'Habeen kasta qof kasta dooro (good ama evil) — wuu badbaadi doonaa.' },
-    necro:    { emoji: '💀',   name: 'Necro',              color: '#7f8c8d', team: 'village',
+    necro:    { emoji: '💀',   name: 'Dib Nool',           color: '#7f8c8d', team: 'village',
                 dm: 'Qof dhintay dib u soo celi — hal mar oo kaliya habeenka!' },
     // ── Base villager ──
     villager: { emoji: '🔥',   name: 'Dad Caadi',          color: '#2980b9', team: 'village',
@@ -201,7 +201,7 @@ async function beginNight(game, client) {
         hasDoctor   ? `🏅 Dhaqtarku wuxuu dooranayaa qof uu u badbaadıyo (DM).`  : '',
         hasDruid    ? `🌿 Duruidu wuxuu dooranayaa qof uu badbaadıyo (DM).`      : '',
         hasNecro    ? `💀 Necro wuxuu dib u soo celin karaa qof dhintay (DM).`   : '',
-        `\n⏳ **60 sekund**`,
+        `\n⏳ **60 seconds**`,
     ].filter(Boolean).join('\n');
 
     await game.textChannel.send({ embeds: [new EmbedBuilder()
@@ -384,7 +384,7 @@ async function triggerElinRevenge(elinId, game, client, context) {
         await u.send({
             embeds: [new EmbedBuilder().setColor('#e74c3c').setDescription(
                 `🏹 **ELIN — Aakhir-dambe!**\n` +
-                `${context === 'habeenka' ? 'Habeenka waxaa lagu dilay' : 'Codeyn lagaa saaray'} — qof dooro oo naftiisa la qaado!\n⏳ 20 sekund`
+                `${context === 'habeenka' ? 'Habeenka waxaa lagu dilay' : 'Codeyn lagaa saaray'} — qof dooro oo naftiisa la qaado!\n⏳ 20 seconds`
             )],
             components: [new ActionRowBuilder().addComponents(btns)],
         }).catch(() => {});
@@ -422,7 +422,7 @@ async function triggerKingSuccession(kingId, game, client, nightDesc) {
         }
         await u.send({
             embeds: [new EmbedBuilder().setColor('#f1c40f').setDescription(
-                `👑 **KING — Kii ku xiga dooro!**\nQofka aad doorato wuxuu helayaa Seer awood (habeen kii danbe qof baran karaa).\n⏳ 20 sekund`
+                `👑 **KING — Kii ku xiga dooro!**\nQofka aad doorato wuxuu helayaa Seer awood (habeen kii danbe qof baran karaa).\n⏳ 20 seconds`
             )],
             components: [new ActionRowBuilder().addComponents(btns)],
         }).catch(() => {});
@@ -474,7 +474,7 @@ async function beginDay(game, client) {
             `**☀️ Maalinta ${game.round}**\n\n` +
             `Dadku wey tooseen. Ku hadla — dilaaga baaro!\n\n` +
             `**Kuwa Nool (${alive.length}):**\n${names.join('\n')}\n\n` +
-            `💬 **45 sekund** — Codayntu waxay bilaaban doontaa...`
+            `💬 **45 seconds** — Codayntu waxay bilaaban doontaa...`
         )
     ]});
 
@@ -506,7 +506,7 @@ async function beginVoting(game, client) {
                 `**☀️ Maalinta ${game.round} — Codeynta**\n` +
                 `Yaa dilaagu yahay?\n\n` +
                 `**${alive.length} qof** ayaa nool. Buttons-ka hoose guji si aad u codeeyso.\n` +
-                `⏳ **60 sekund**`
+                `⏳ **60 seconds**`
             )
         ],
         components: rows,
