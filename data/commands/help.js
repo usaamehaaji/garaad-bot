@@ -91,8 +91,7 @@ function buildEcoEmbed() {
             `**\`${PREFIX}bank create\`** — Bank account bilow\n` +
             `**\`${PREFIX}bp <password>\`** — Bank password dhig (withdraw/send ilaaliso)\n` +
             `**\`${PREFIX}deposit <xad>\`** — BTC dhig bank\n` +
-            `**\`${PREFIX}withdraw <xad> [pw]\`** — BTC bank ka qaado\n` +
-            `**\`${PREFIX}banksend @user <xad> [pw]\`** — BTC u dir qof\n\n` +
+            `**\`${PREFIX}withdraw <xad> [pw]\`** — BTC bank ka qaado\n` +            `**\`${PREFIX}banksend @user <xad> [pw]\`** — BTC u dir qof\n\n` +
 
             `**🏛️ Garaad Bank (BTC)**\n` +
             `**\`${PREFIX}ebank\`** — BTC bank (1%/day) + Deyn\n` +
