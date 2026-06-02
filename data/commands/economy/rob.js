@@ -1,9 +1,10 @@
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 
-const ROB_SUCCESS_RATE   = 0.50;
-const ROB_MIN_BTC        = 1_000;
-const MAX_STEAL_FRACTION = 0.25;
-const ROB_COOLDOWN_MS    = 30 * 60 * 1000;
+const ROB_SUCCESS_RATE        = 0.50;
+const ROB_MIN_BTC             = 1_000;
+const MAX_STEAL_FRACTION      = 0.25;
+const ROB_COMMAND_COOLDOWN_MS = 15 * 60 * 1000;    // 15 minutes between command uses
+const TARGET_ROB_COOLDOWN_MS  = 15 * 60 * 1000;    // 15 minutes per victim target
 
 module.exports = async function robCmd(message) {
     const userId = message.author.id;
@@ -18,10 +19,15 @@ module.exports = async function robCmd(message) {
 
     const robber = econData[userId];
     const victim = econData[target.id];
+    robber.lastRobTargets ??= {};
 
-    const cooldownLeft = ROB_COOLDOWN_MS - (Date.now() - (robber.lastRob || 0));
-    if (cooldownLeft > 0)
-        return message.reply(`⏳ **${Math.ceil(cooldownLeft / 60000)} daqiiqo** ka dib isku day.`);
+    const commandCooldownLeft = ROB_COMMAND_COOLDOWN_MS - (Date.now() - (robber.lastRob || 0));
+    if (commandCooldownLeft > 0)
+        return message.reply(`⏳ Sug **${Math.ceil(commandCooldownLeft / 60000)} daqiiqo** kadib mar kale isku day.`);
+
+    const targetCooldownLeft = TARGET_ROB_COOLDOWN_MS - (Date.now() - (robber.lastRobTargets[target.id] || 0));
+    if (targetCooldownLeft > 0)
+        return message.reply(`⏳ Sug **${Math.ceil(targetCooldownLeft / 60000)} daqiiqo** kadib **${target.username}** mar kale dhacdo.`);
 
     if ((victim.btc || 0) < ROB_MIN_BTC)
         return message.reply(`⚠️ **${target.username}** lacag ku filan ma hayo (ugu yaraan **₿${ROB_MIN_BTC.toLocaleString()}**).`);
@@ -32,6 +38,7 @@ module.exports = async function robCmd(message) {
     }
 
     robber.lastRob = Date.now();
+    robber.lastRobTargets[target.id] = robber.lastRob;
     const richRobber  = (robber.btc || 0) > 5_000;
     const richTarget  = (victim.btc || 0) >= 5_000;
     const stealFrac   = richTarget ? 0.50 : MAX_STEAL_FRACTION;

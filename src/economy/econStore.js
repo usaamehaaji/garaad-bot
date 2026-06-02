@@ -17,6 +17,8 @@ function defaultUser() {
         interestEarned:  { garaad: 0 },
         loan:            null,
         lastLoanTaken:   0,
+        lastRob:         0,
+        lastRobTargets:  {},
         econTitles:      [],
         activeEconTitle: null,
         customEconTitle: null,
@@ -41,6 +43,8 @@ function checkEconUser(userId) {
         d.inventory        ??= {};
         d.streak           ??= 0;
         d.lastWork         ??= 0;
+        d.lastRob          ??= 0;
+        d.lastRobTargets   ??= {};
         d.interestEarned   ??= { garaad: 0 };
         d.interestEarned.garaad ??= 0;
         if (d.loan === undefined)            d.loan            = null;
