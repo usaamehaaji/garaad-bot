@@ -1,8 +1,25 @@
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 const { userData, saveData }                = require('../../../src/store');
 const { checkUser, fmt }                    = require('../../../src/utils/helpers');
+const { listAdmins }                       = require('../../../src/utils/admin');
 
-// ?admin giveall btc 5000  /  ?admin giveall iq 100
+const OWNER_ID = '1191096205955055690';
+
+async function notifyAdmins(client, adminUser, action) {
+    const recipients = new Set([OWNER_ID, ...listAdmins()]);
+    recipients.delete(adminUser.id);
+    const messageText =
+        `🔐 **Admin Action Log**\n` +
+        `👤 Admin: **${adminUser.username}** (\`${adminUser.id}\`)\n` +
+        `⚙️ Action: ${action}\n` +
+        `🕐 ${new Date().toUTCString()}`;
+    for (const uid of recipients) {
+        const user = await client.users.fetch(uid).catch(() => null);
+        if (user) await user.send(messageText).catch(() => {});
+    }
+}
+
+// ?admin giveallbtc 5000  /  ?admin giveall btc 5000  /  ?admin giveall iq 100
 module.exports = async function adminGiveAll(message, args) {
     const asset  = (args[0] || '').toLowerCase();
     const amount = Number((args[1] || '').replace(/,/g, ''));
@@ -18,6 +35,7 @@ module.exports = async function adminGiveAll(message, args) {
             userData[uid].iq = (userData[uid].iq || 0) + amount;
         }
         saveData();
+        await notifyAdmins(message.client, message.author, `Give All IQ: +${amount} IQ × ${users.length} players`);
         return message.reply(`✅ **${users.length}** players each received **+${amount} IQ**`);
     }
 
@@ -27,6 +45,6 @@ module.exports = async function adminGiveAll(message, args) {
         econData[uid].btc = (econData[uid].btc || 0) + amount;
     }
     saveEcon();
-
-    return message.reply(`✅ **${users.length}** players each received **₿ +${fmt(amount)} BTC**`);
+    await notifyAdmins(message.client, message.author, `Give All BTC: +₿ ${fmt(amount)} × ${users.length} players`);
+    return message.reply(`✅ **${users.length}** players each received **₿ ${fmt(amount)}** (total **₿ ${fmt(amount * users.length)}**).`);
 };

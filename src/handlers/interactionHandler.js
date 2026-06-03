@@ -543,6 +543,23 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `✅ **${users.length}** players qof walba wuxuu helay **+${amount} IQ**`, flags: MessageFlags.Ephemeral });
             }
 
+            if (interaction.customId.startsWith('admin_m_giveall_btc_')) {
+                if (!require('../utils/admin').isAdmin(interaction.user.id))
+                    return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+                const amount = parseFloat(interaction.fields.getTextInputValue('amount').replace(/,/g, ''));
+                if (isNaN(amount) || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 5000).', flags: MessageFlags.Ephemeral });
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const users = Object.keys(eData).filter(k => /^\d{17,19}$/.test(k));
+                for (const uid of users) {
+                    checkEconUser(uid);
+                    eData[uid].btc = (eData[uid].btc || 0) + amount;
+                }
+                saveEcon();
+                await notifyAdmins(interaction.client, interaction.user, `Give All BTC: **+₿ ${amount.toLocaleString()}** × ${users.length} players`);
+                return interaction.reply({ content: `✅ **${users.length}** players qof walba wuxuu helay **₿ ${amount.toLocaleString()}**. Wadarta: **₿ ${ (amount * users.length).toLocaleString() }**`, flags: MessageFlags.Ephemeral });
+            }
+
             // ── Admin Aqoon modal: Give IQ ──
             if (interaction.customId.startsWith('admin_aq_m_giveiq_')) {
                 if (!require('../utils/admin').isAdmin(interaction.user.id))
@@ -1342,6 +1359,22 @@ module.exports = function setupInteractionHandler(client) {
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder().setCustomId('amount').setLabel('IQ xaddadka (qof walba)').setStyle(TextInputStyle.Short)
                         .setPlaceholder('Tusaale: 100').setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        if (id.startsWith('admin_giveall_btc_')) {
+            const ownerId = id.replace('admin_giveall_btc_', '');
+            if (interaction.user.id !== ownerId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            if (!require('../utils/admin').isAdmin(ownerId))
+                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder().setCustomId(`admin_m_giveall_btc_${ownerId}`).setTitle('₿ Give BTC — All Players');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('amount').setLabel('BTC xaddadka (qof walba)').setStyle(TextInputStyle.Short)
+                        .setPlaceholder('Tusaale: 5000').setRequired(true)
                 ),
             );
             return interaction.showModal(modal);
