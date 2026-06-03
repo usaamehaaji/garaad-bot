@@ -146,7 +146,6 @@ module.exports = function setupMessageHandler(client) {
 
             case 'show':
             case 'cooldown':
-            case 'showcooldown':
             case 'cooldowns':
                 return showCmd(message);
 
