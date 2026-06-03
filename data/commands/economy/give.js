@@ -8,8 +8,7 @@ function buildUsageEmbed() {
     return new EmbedBuilder()
         .setDescription(
             `**Usage:** ` +
-            `\`?give @user 300\` • \`?give @user gold 300\` • \`?give 300\` (reply to a user's message)\n` +
-            `BTC transfers must use wallets only: \`?btc send 200\``
+            `\`?give @user 300\` • \`?give @user gold 300\` • \`?give 300\` (reply to a user's message)`
         )
         .setColor('#e74c3c');
 }
