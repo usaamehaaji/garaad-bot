@@ -84,7 +84,6 @@ function buildEcoEmbed() {
             `**\`${PREFIX}jeeb\`** — Jeebkaaga, bank iyo xaaladda\n` +
             `**\`${PREFIX}shaqo\`** — Shaqo (8h mar) → BTC\n` +
             `**\`${PREFIX}today\`** — BTC + IQ maalin kasta (24h)\n` +
-            `**\`${PREFIX}show\`** — Muujin cooldowns-ka \`?today\`, \`?shaqo\`, \`?ron\`\n` +
             `**\`${PREFIX}rich\`** — Top 10 ugu hantida badan\n\n` +
 
             `**🏦 Personal Bank (BTC)**\n` +

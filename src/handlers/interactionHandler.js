@@ -2007,7 +2007,7 @@ module.exports = function setupInteractionHandler(client) {
 
             // ── Rob Ticket ──
             if (id === 'shop_buy_rob_ticket') {
-                const PRICE = 1500;
+                const PRICE = 500;
                 if ((ec.btc || 0) < PRICE) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${PRICE.toLocaleString()}`, flags: MessageFlags.Ephemeral });
                 ec.btc -= PRICE;
                 ec.inventory ??= {};

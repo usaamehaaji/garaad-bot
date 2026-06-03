@@ -32,7 +32,7 @@ module.exports = async function buyCommand(message, args) {
 
     // ── ?buy rob_ticket ──
     if (itemKey === 'rob_ticket') {
-        const PRICE = 1500;
+        const PRICE = 500;
         const { checkEconUser } = require('../../src/economy/econStore');
         checkEconUser(userId);
         const ec = econData[userId];
