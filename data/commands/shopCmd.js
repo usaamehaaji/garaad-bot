@@ -88,7 +88,7 @@ function shopEmbed(section, userId) {
             .setColor('#e67e22')
             .setDescription(
                 `🔫 **Rob Ticket** — ₿1,500\n  ↳ ?rob isticmaali karo (24 saac)\n\n` +
-                `🛡️ **Safety Shield** — ₿2,000\n  ↳ Rob-ka kaaga ilaaliya 24h\n  ${shieldActive ? `✅ Active — ${shieldHours}h haray` : '❌ Active ma aha'}`
+                `🛡️ **Safety Shield** — ₿300\n  ↳ Rob-ka kaaga ilaaliya 24h\n  ${shieldActive ? `✅ Active — ${shieldHours}h haray` : '❌ Active ma aha'}`
             )
             .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
             .setFooter({ text: 'Iibso: ?buy rob_ticket  ama  ?buy safety_shield' });
@@ -200,7 +200,7 @@ function shopRows(section) {
         return [
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder().setCustomId('shop_buy_rob_ticket')    .setLabel('🔫 Rob Ticket  1.5k BTC').setStyle(ButtonStyle.Danger),
-                new ButtonBuilder().setCustomId('shop_buy_safety_shield') .setLabel('🛡️ Safety Shield  2k BTC').setStyle(ButtonStyle.Primary),
+                new ButtonBuilder().setCustomId('shop_buy_safety_shield') .setLabel('🛡️ Safety Shield  300 BTC').setStyle(ButtonStyle.Primary),
             ),
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder().setCustomId('shop_back').setLabel('← Back').setStyle(ButtonStyle.Secondary)

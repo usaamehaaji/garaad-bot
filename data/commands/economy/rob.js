@@ -21,6 +21,10 @@ module.exports = async function robCmd(message) {
     const victim = econData[target.id];
     robber.lastRobTargets ??= {};
 
+    if ((robber.inventory?.robticketExpiry || 0) <= Date.now()) {
+        return message.reply('⚠️ Ma haysatid Rob Ticket oo ansax ah. Iibso `?buy rob_ticket` si aad u dhacdo 24 saac gudahood.');
+    }
+
     const commandCooldownLeft = ROB_COMMAND_COOLDOWN_MS - (Date.now() - (robber.lastRob || 0));
     if (commandCooldownLeft > 0)
         return message.reply(`⏳ Sug **${Math.ceil(commandCooldownLeft / 60000)} daqiiqo** kadib mar kale isku day.`);

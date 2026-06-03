@@ -15,6 +15,7 @@ const profileCmd      = require('../../data/commands/profile');
 const topCmd          = require('../../data/commands/top');
 const { topIqCmd, topBtcCmd, topMissionsCmd, topStreakCmd, topFlipsCmd, topDuelsCmd } = require('../../data/commands/top');
 const todayCmd        = require('../../data/commands/today');
+const showCmd         = require('../../data/commands/show');
 
 const buyCmd          = require('../../data/commands/buy');
 const soloCmd         = require('../../data/commands/solo');
@@ -142,6 +143,12 @@ module.exports = function setupMessageHandler(client) {
 
             case 'today':
                 return todayCmd(message);
+
+            case 'show':
+            case 'cooldown':
+            case 'showcooldown':
+            case 'cooldowns':
+                return showCmd(message);
 
             case 'buy':
                 return buyCmd(message, args);

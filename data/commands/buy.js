@@ -18,7 +18,7 @@ module.exports = async function buyCommand(message, args) {
 
     // ── ?buy safety_shield ──
     if (itemKey === 'safety_shield') {
-        const PRICE = 2000;
+        const PRICE = 300;
         const { checkEconUser } = require('../../src/economy/econStore');
         checkEconUser(userId);
         const ec = econData[userId];

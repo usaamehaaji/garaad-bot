@@ -2013,12 +2013,12 @@ module.exports = function setupInteractionHandler(client) {
                 ec.inventory ??= {};
                 ec.inventory.robticketExpiry = Date.now() + 24 * 60 * 60 * 1000;
                 saveEcon();
-                return interaction.reply({ content: `✅ **🔫 Rob Ticket** la iibsaday! 3 maalmood active. \`?rob @user\` isticmaal.`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `✅ **🔫 Rob Ticket** la iibsaday! 24 saac active. \`?rob @user\` isticmaal.`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Safety Shield ──
             if (id === 'shop_buy_safety_shield') {
-                const PRICE = 2000;
+                const PRICE = 300;
                 if ((ec.btc || 0) < PRICE) return interaction.reply({ content: `⚠️ BTC kuu ma filna. U baahan: ₿${PRICE.toLocaleString()}`, flags: MessageFlags.Ephemeral });
                 ec.btc -= PRICE;
                 ec.inventory ??= {};
