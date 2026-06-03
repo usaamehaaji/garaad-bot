@@ -6,10 +6,17 @@ const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold' };
 
 module.exports = async function giveCmd(message, args) {
     const userId = message.author.id;
-    let target = message.mentions.users.first();
+    let target = message.mentions.users.first() || message.mentions.repliedUser;
 
     if (!target && message.reference?.messageId) {
-        const refMsg = await message.channel.messages.fetch(message.reference.messageId).catch(() => null);
+        const refChannel = message.reference.channelId
+            ? await message.client.channels.fetch(message.reference.channelId).catch(() => null)
+            : message.channel;
+
+        const refMsg = refChannel?.messages?.fetch
+            ? await refChannel.messages.fetch(message.reference.messageId).catch(() => null)
+            : null;
+
         if (refMsg && refMsg.author && !refMsg.author.bot) {
             target = refMsg.author;
         }
