@@ -17,8 +17,9 @@ module.exports = async function giveCmd(message, args) {
 
     if (!target) {
         return message.reply({ embeds: [new EmbedBuilder()
-            .setDescription('**Usage:** `?give @user btc 200` · `?give @user gold 300` · `?give @user 300`
-`Or reply to a user message with: `?give 300` or `?give gold 300`')
+            .setDescription(`**Usage:** ` +
+                `?give @user btc 200 · ?give @user gold 300 · ?give @user 300\n` +
+                `Or reply to a user message with: ?give 300 or ?give gold 300`)
             .setColor('#e74c3c')] });
     }
 
@@ -50,8 +51,9 @@ module.exports = async function giveCmd(message, args) {
 
     if (!['btc', 'gold'].includes(asset) || isNaN(amount) || amount <= 0)
         return message.reply({ embeds: [new EmbedBuilder()
-            .setDescription('**Usage:** `?give @user btc 200` · `?give @user gold 300` · `?give @user 300`
-`Or reply to a user message with: `?give 300` or `?give gold 300`')
+            .setDescription(`**Usage:** ` +
+                `?give @user btc 200 · ?give @user gold 300 · ?give @user 300\n` +
+                `Or reply to a user message with: ?give 300 or ?give gold 300`)
             .setColor('#e74c3c')] });
 
     // ── BTC / Gold ──
