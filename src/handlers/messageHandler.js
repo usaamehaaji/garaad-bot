@@ -298,8 +298,14 @@ module.exports = function setupMessageHandler(client) {
             // ── Missions ──
             case 'missions':
             case 'mission':
+            case 'm':
             case 'hawl':
                 return missionsCmd(message, args);
+
+            case 'mc1':
+            case 'mc2':
+            case 'mc3':
+                return missionsCmd(message, ['claim', command.slice(2)]);
 
             // ── Admin: Give item ──
             case 'giveitem':

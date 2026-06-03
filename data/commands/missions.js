@@ -137,11 +137,27 @@ module.exports = async function missionsCmd(message, args) {
     });
 
     const allDone  = d.missions.tasks.every(t => t.claimed);
+    const completedUsers = Object.entries(userData).filter(([_uid, u]) =>
+        u.missions?.date === d.missions.date &&
+        Array.isArray(u.missions?.tasks) &&
+        u.missions.tasks.length === 3 &&
+        u.missions.tasks.every(task => task.claimed)
+    );
+    const completedText = completedUsers.length === 0
+        ? 'Wali cidna ma dhammaystirin maanta.'
+        : completedUsers.slice(0, 5).map(([uid, u]) => {
+            const name = econData[uid]?.username;
+            return name ? `**${name}**` : `<@${uid}>`;
+        }).join('\n') + (completedUsers.length > 5 ? `\n…+${completedUsers.length - 5} kale` : '');
+
     const embed = new EmbedBuilder()
         .setTitle('📋 Howlaha Maalinlaha ah — Daily Missions')
         .setColor('#3498db')
         .setDescription(lines.join('\n\n'))
-        .addFields({ name: '📅 Taariikhda', value: `Maanta: **${d.missions.date}**`, inline: true })
+        .addFields(
+            { name: '📅 Taariikhda', value: `Maanta: **${d.missions.date}**`, inline: true },
+            { name: '✅ Dhameystiray maanta', value: completedText }
+        )
         .setFooter({ text: allDone ? '🎉 Dhamaan missions waa la dhamaystiray!' : 'Isticmaal ?missions claim <1/2/3> marka dhammaato' });
 
     return message.reply({ embeds: [embed] });

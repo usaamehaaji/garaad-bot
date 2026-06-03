@@ -167,8 +167,8 @@ function buildShopEmbed() {
             `**\`${PREFIX}sell frame <key>\`** — Frame iib BTC\n\n` +
 
             `**📋 Missions**\n` +
-            `**\`${PREFIX}missions\`** — Howlaha maanta (3 daily tasks)\n` +
-            `**\`${PREFIX}missions claim 1\`** — Abaalmarinta qaado`
+            `**\`${PREFIX}missions\` / \`${PREFIX}m\`** — Howlaha maanta (3 daily tasks)\n` +
+            `**\`${PREFIX}missions claim 1\` / \`${PREFIX}mc1\`** — Abaalmarinta qaado`
         )
         .setFooter({ text: 'Garaad Bot • Shop System • ?profile si aad u aragto frame + badges' });
 }
