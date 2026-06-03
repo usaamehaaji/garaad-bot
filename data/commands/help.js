@@ -124,9 +124,11 @@ function buildEcoEmbed() {
             `**\`${PREFIX}rob\`** — Qof xadi\n\n` +
 
             `**🤝 Bulshada**\n` +
-            `**\`${PREFIX}give @user btc <xad>\`** — BTC u dir\n` +
+            `**\`${PREFIX}give @user <xad>\`** — Cash u dir (reply + ?give 300 sidoo kale)\n` +
+            `**\`${PREFIX}give @user gold <xad>\`** — Gold u dir\n` +
             `**\`${PREFIX}missions\`** — Hawlaha maalinlaha\n` +
             `**\`${PREFIX}etitle\`** — Economy cinwaan xidh\n` +
+            `**\`BTC transfers use wallets only: ?btc send <amount>\`**\n` +
             `**\`${PREFIX}khaznad\`** — Treasury eeg\n\n` +
 
             `**🔐 Password & Wadaag**\n` +
