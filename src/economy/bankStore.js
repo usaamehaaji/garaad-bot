@@ -31,10 +31,32 @@ function hashPass(pw) {
 function checkPass(pw, hash) { return hashPass(pw) === hash; }
 
 // ── ID generators ─────────────────────────────────────
-function genBankId() {
-    const n = Math.floor(Math.random() * 90000) + 10000;
-    return `GB-${n}`;
+function namePrefix(str) {
+    // "Kormaal Bank" → "KB"  |  "hawo" → "HWB"  |  "ahmed" → "AHB"
+    const words = str.trim().split(/\s+/).filter(Boolean);
+    if (words.length >= 2) {
+        return words.map(w => w[0].toUpperCase()).join('').slice(0, 4);
+    }
+    // Single word: first letter + first consonant after pos 0 + B
+    const upper     = str.toUpperCase().replace(/[^A-Z]/g, '');
+    const first     = upper[0] || 'X';
+    const rest      = upper.slice(1);
+    const consonant = rest.split('').find(c => !'AEIOU'.includes(c)) || rest[0] || 'B';
+    return (first + consonant + 'B').slice(0, 4);
 }
+
+function genPublicBankId(name) {
+    const prefix = namePrefix(name);
+    const n = Math.floor(Math.random() * 90000) + 10000;
+    return `${prefix}:${n}`;
+}
+
+function genPersonalBankId(username) {
+    const prefix = namePrefix(username);
+    const n = Math.floor(Math.random() * 90000) + 10000;
+    return `${prefix}:${n}`;
+}
+
 function genCompanyId() {
     const n = Math.floor(Math.random() * 90000) + 10000;
     return `GC-${n}`;
@@ -44,9 +66,9 @@ function genCompanyId() {
 function getPersonalBank(econData, userId) { return econData[userId]?.personalBank || null; }
 
 function createPersonalBank(econData, userId, username) {
-    if (econData[userId].personalBank) return null; // already exists
+    if (econData[userId].personalBank) return null;
     let bankId;
-    do { bankId = genBankId(); } while (Object.values(econData).some(d => d.personalBank?.bankId === bankId));
+    do { bankId = genPersonalBankId(username); } while (Object.values(econData).some(d => d.personalBank?.bankId === bankId));
     econData[userId].personalBank = {
         bankId,
         owner: username,
@@ -73,7 +95,7 @@ function getAllPublicBanks() { return banksData; }
 
 function createPublicBank(ownerId, ownerUsername, name) {
     let id;
-    do { id = genBankId(); } while (banksData[id]);
+    do { id = genPublicBankId(name); } while (banksData[id]);
     banksData[id] = {
         id, name, ownerId, ownerUsername,
         balance:      0,
