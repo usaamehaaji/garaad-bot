@@ -80,6 +80,9 @@ module.exports = async function adminCommand(message, args) {
         case 'economy':
             return adminEconPanel(message, args);
 
+        case 'giveallbtc':
+            return adminGiveAll(message, ['btc', ...args]);
+
         case 'giveall':
         case 'siidhamaan':
             return adminGiveAll(message, args);
