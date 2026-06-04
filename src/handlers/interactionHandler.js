@@ -2550,7 +2550,7 @@ module.exports = function setupInteractionHandler(client) {
             const d = eData[userId];
             applyInterest(d);
             saveEcon();
-            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId)] });
+            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), closeRow(userId)] });
         }
 
         // ── View Public Bank from directory ──
@@ -2652,7 +2652,7 @@ module.exports = function setupInteractionHandler(client) {
             const d = eData[userId];
             applyInterest(d);
             saveEcon();
-            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId)] });
+            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), closeRow(userId)] });
         }
 
         // ── Deposit into Garaad Bank (from directory) ──
@@ -3105,7 +3105,7 @@ module.exports = function setupInteractionHandler(client) {
             saveEcon();
 
             if (section === 'main') {
-                return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId)] });
+                return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), closeRow(userId)] });
             }
             if (section === 'khaznad') {
                 return interaction.update({ embeds: [buildKhaznadEmbed()], components: [backRow(userId)] });
