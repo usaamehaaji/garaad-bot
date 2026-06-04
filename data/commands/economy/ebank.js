@@ -181,6 +181,7 @@ function ebCloseRow(userId) {
         new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆️ Withdraw') .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`eco_eb_deen_${userId}`)            .setLabel('💳 Loan')     .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`eco_eb_transfer_${userId}`)        .setLabel('💸 Transfer') .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`eco_eb_allbanks_${userId}`)        .setLabel('🏦 All Banks').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`close_ebank_${userId}`)            .setLabel('✖ Close')     .setStyle(ButtonStyle.Danger),
     );
 }

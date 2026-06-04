@@ -124,64 +124,196 @@ async function bankViewCmd(message) {
     return message.reply({ embeds: [embed], components: [bankViewRow(message.author.id)] });
 }
 
-// ── ?bank — directory: public + personal banks ────────
-async function bankDirectoryCmd(message) {
+// ── buildBankDirectory — shared by ?bank button + ?bank cmd ──
+function buildBankDirectory(userId) {
     const pubBanks = Object.values(getAllPublicBanks())
         .filter(b => (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXPIRY_MS)
         .sort((a, b) => (b.balance || 0) - (a.balance || 0))
-        .slice(0, 6);
+        .slice(0, 4);
 
     const persBanks = Object.entries(econData)
-        .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank)
+        .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank && uid !== userId)
         .map(([uid, d]) => ({
+            uid,
             bank:      d.personalBank,
             custCount: Object.keys(d.personalBank.customers || {}).length,
-            custTotal: getTotalCustomerDeposits(d.personalBank),
         }))
-        .sort((a, b) => b.custTotal - a.custTotal)
-        .slice(0, 6);
+        .sort((a, b) => b.custCount - a.custCount)
+        .slice(0, 4);
 
-    if (!pubBanks.length && !persBanks.length)
-        return message.reply('📭 Wali bangi la abuuri waayay. `?bc` ama `?createbank <name>` isticmaal!');
-
-    let desc = '';
+    let desc = `**🏦 Garaad Bank** — 1% faa'iido maalinlaha\n\n`;
     if (pubBanks.length) {
         desc += `**🏛️ Public Banks:**\n`;
         desc += pubBanks.map((b, i) =>
-            `**${i + 1}.** 🏛️ **${b.name}** · \`${b.id}\`\n` +
-            `   💰 ${fmtBtc(b.balance)} · 👥 ${Object.keys(b.customers || {}).length} macaamiil · 👤 ${b.ownerUsername}`
+            `**${i + 1}.** 🏛️ **${b.name}** · \`${b.id}\` · 💰 ${fmtBtc(b.balance)} · 👥 ${Object.keys(b.customers || {}).length}`
         ).join('\n') + '\n\n';
     }
     if (persBanks.length) {
         desc += `**🏦 Personal Banks:**\n`;
         desc += persBanks.map((e, i) =>
-            `**${i + 1}.** 🏦 **${e.bank.owner}** · \`${e.bank.bankId}\`\n` +
-            `   💰 ${fmtBtc(e.bank.balance)} · 👥 ${e.custCount} macaamiil · 📈 +2%/maalin`
+            `**${i + 1}.** 🏦 **${e.bank.owner}** · \`${e.bank.bankId}\` · 💰 ${fmtBtc(e.bank.balance)} · 👥 ${e.custCount}`
         ).join('\n');
     }
-    desc += '\n\n📌 Lacag geliso — **Deposit** button taabo!';
+    if (!pubBanks.length && !persBanks.length)
+        desc += `_Wali bangi kale ma jiro. \`?createbank <name>\` isticmaal!_`;
 
-    const userId = message.author.id;
-    return message.reply({
-        embeds: [new EmbedBuilder()
-            .setTitle('🏦 Banks — Directory')
-            .setColor('#2471a3')
-            .setDescription(desc)
-            .setFooter({ text: '?bv — bangigaaga arag  •  ?bc — personal bank  •  ?createbank <name> — public bank' })],
-        components: [new ActionRowBuilder().addComponents(
+    const embed = new EmbedBuilder()
+        .setTitle('🏦 Banks — Directory')
+        .setColor('#2471a3')
+        .setDescription(desc)
+        .setFooter({ text: '?bd <bank> <amount> • ?bw <bank> <amount> • ?createbank <name>' });
+
+    const components = [];
+
+    // Row 1: Garaad Bank + public banks
+    const row1 = new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`dep_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Primary),
+        ...pubBanks.map(b =>
             new ButtonBuilder()
-                .setCustomId(`pbank_dep_btn_${userId}`)
-                .setLabel('📥 Lacag Geli (Deposit)')
-                .setStyle(ButtonStyle.Success),
-            new ButtonBuilder()
-                .setCustomId(`close_bankdir_${userId}`)
-                .setLabel('✖ Close')
-                .setStyle(ButtonStyle.Danger),
-        )],
+                .setCustomId(`dep_pub_${b.id}_${userId}`)
+                .setLabel(`🏛️ ${b.name.slice(0, 20)}`)
+                .setStyle(ButtonStyle.Success)
+        )
+    );
+    components.push(row1);
+
+    // Row 2: Personal banks
+    if (persBanks.length) {
+        const row2 = new ActionRowBuilder().addComponents(
+            ...persBanks.map(e =>
+                new ButtonBuilder()
+                    .setCustomId(`dep_pers_${e.uid}_${userId}`)
+                    .setLabel(`🏦 ${e.bank.owner.slice(0, 20)}`)
+                    .setStyle(ButtonStyle.Secondary)
+            )
+        );
+        components.push(row2);
+    }
+
+    // Close row
+    components.push(new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`eco_eb_back_dir_${userId}`).setLabel('🔙 Back').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
+    ));
+
+    return { embed, components };
+}
+
+// ── ?bank — shows ebank panel (same as ?ebank) ────────
+async function bankDirectoryCmd(message) {
+    const { ebankCmd } = require('../../data/commands/economy/ebank');
+    return ebankCmd(message);
+}
+
+// ── ?bd <bank name/id> <amount> ───────────────────────
+async function bankDepositTextCmd(message, args) {
+    if (args.length < 2) return message.reply('⚠️ Isticmaal: `?bd <bank name/ID> <amount>`\nTusaale: `?bd Kormaal Bank 5000`');
+    const amount  = Math.floor(Number(args[args.length - 1]));
+    const bankRef = args.slice(0, -1).join(' ').trim().toLowerCase();
+    if (!amount || amount <= 0) return message.reply('⚠️ Xaddad sax ah geli. Tusaale: `?bd Kormaal Bank 5000`');
+
+    checkEconUser(message.author.id);
+    const ec = econData[message.author.id];
+    if ((ec.btc || 0) < amount) return message.reply(`⚠️ Jeebkaagu ma filna. Haysataa: ${fmtBtc(ec.btc || 0)}`);
+
+    // Check Garaad Bank
+    if (bankRef === 'garaad' || bankRef === 'garaad bank' || bankRef === 'ebank') {
+        ec.banks        = ec.banks        || { garaad: 0 };
+        ec.banks.garaad = (ec.banks.garaad || 0) + amount;
+        ec.btc          = (ec.btc || 0) - amount;
+        saveEcon();
+        return message.reply(`📥 **${fmtBtc(amount)}** → 🏦 **Garaad Bank**\n💰 Bank hadda: **${fmtBtc(ec.banks.garaad)}**`);
+    }
+
+    // Search personal banks
+    const foundPers = Object.entries(econData).find(([uid, d]) => {
+        if (!/^\d{17,19}$/.test(uid) || !d?.personalBank) return false;
+        const b = d.personalBank;
+        return b.owner.toLowerCase() === bankRef || b.bankId.toLowerCase() === bankRef;
     });
+    if (foundPers) {
+        const [tId, tEc] = foundPers;
+        if (tId === message.author.id) return message.reply('⚠️ Bank-kaaga laftiis: `?bv` fur.');
+        const tBank = tEc.personalBank;
+        applyBankProfit(tBank);
+        ec.btc = (ec.btc || 0) - amount;
+        tBank.customers = tBank.customers || {};
+        tBank.customers[message.author.id] ??= { username: message.author.username, balance: 0, depositedAt: Date.now() };
+        tBank.customers[message.author.id].balance += amount;
+        addTx(tBank, 'customer_deposit', amount, `← ${message.author.username}`);
+        saveEcon();
+        return message.reply(`📥 **${fmtBtc(amount)}** → 🏦 **${tBank.owner}**'s Bank\n💼 Haysataa: **${fmtBtc(tBank.customers[message.author.id].balance)}**`);
+    }
+
+    // Search public banks
+    const { getAllPublicBanks: _gpb, saveBanks } = require('../../../src/economy/bankStore');
+    const pubBank = Object.values(_gpb()).find(b =>
+        (b.name || '').toLowerCase() === bankRef || (b.id || '').toLowerCase() === bankRef
+    );
+    if (!pubBank) return message.reply(`⚠️ **"${bankRef}"** — bank lama helin. \`?bank\` ka eeg liiska.`);
+    if ((Date.now() - (pubBank.lastActivity || pubBank.createdAt)) >= PUB_EXPIRY_MS)
+        return message.reply(`⚠️ **${pubBank.name}** waa la xiray.`);
+
+    ec.btc = (ec.btc || 0) - amount;
+    pubBank.balance       = (pubBank.balance || 0) + amount;
+    pubBank.totalDeposits = (pubBank.totalDeposits || 0) + amount;
+    pubBank.lastActivity  = Date.now();
+    pubBank.customers     = pubBank.customers || {};
+    pubBank.customers[message.author.id] ??= { balance: 0, username: message.author.username, joinedAt: Date.now() };
+    pubBank.customers[message.author.id].balance += amount;
+    saveBanks();
+    saveEcon();
+    return message.reply(`📥 **${fmtBtc(amount)}** → 🏛️ **${pubBank.name}**\n💰 Bangiga: **${fmtBtc(pubBank.balance)}**`);
+}
+
+// ── ?bw <bank name/id> <amount> ───────────────────────
+async function bankWithdrawTextCmd(message, args) {
+    if (args.length < 2) return message.reply('⚠️ Isticmaal: `?bw <bank name/ID> <amount>`\nTusaale: `?bw Kormaal Bank 2000`');
+    const amount  = Math.floor(Number(args[args.length - 1]));
+    const bankRef = args.slice(0, -1).join(' ').trim().toLowerCase();
+    if (!amount || amount <= 0) return message.reply('⚠️ Xaddad sax ah geli.');
+
+    checkEconUser(message.author.id);
+    const ec = econData[message.author.id];
+
+    // Check personal banks
+    const foundPers = Object.entries(econData).find(([uid, d]) => {
+        if (!/^\d{17,19}$/.test(uid) || !d?.personalBank) return false;
+        const b = d.personalBank;
+        return b.owner.toLowerCase() === bankRef || b.bankId.toLowerCase() === bankRef;
+    });
+    if (foundPers) {
+        const [, tEc] = foundPers;
+        const tBank   = tEc.personalBank;
+        const myRec   = tBank.customers?.[message.author.id];
+        if (!myRec || (myRec.balance || 0) <= 0) return message.reply(`⚠️ **${tBank.owner}**'s bank lacag kuma dhigin.`);
+        if (amount > myRec.balance) return message.reply(`⚠️ Haysataa: ${fmtBtc(myRec.balance)} kaliya.`);
+        myRec.balance      -= amount;
+        ec.btc              = (ec.btc || 0) + amount;
+        addTx(tBank, 'customer_withdraw', amount, `→ ${message.author.username}`);
+        saveEcon();
+        return message.reply(`📤 **${fmtBtc(amount)}** ← 🏦 **${tBank.owner}**'s Bank\n💼 Hadhay: **${fmtBtc(myRec.balance)}**`);
+    }
+
+    // Check public banks
+    const { getAllPublicBanks: _gpb2, saveBanks: _sb2 } = require('../../../src/economy/bankStore');
+    const pubBank = Object.values(_gpb2()).find(b =>
+        (b.name || '').toLowerCase() === bankRef || (b.id || '').toLowerCase() === bankRef
+    );
+    if (!pubBank) return message.reply(`⚠️ **"${bankRef}"** — bank lama helin.`);
+    const myRec = pubBank.customers?.[message.author.id];
+    if (!myRec || (myRec.balance || 0) <= 0) return message.reply(`⚠️ **${pubBank.name}** lacag kuma dhigin.`);
+    if (amount > myRec.balance) return message.reply(`⚠️ Haysataa: ${fmtBtc(myRec.balance)} kaliya.`);
+    myRec.balance      -= amount;
+    pubBank.balance     = Math.max(0, (pubBank.balance || 0) - amount);
+    ec.btc              = (ec.btc || 0) + amount;
+    _sb2();
+    saveEcon();
+    return message.reply(`📤 **${fmtBtc(amount)}** ← 🏛️ **${pubBank.name}**\n💼 Hadhay: **${fmtBtc(myRec.balance)}**`);
 }
 
 module.exports = {
     bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd,
+    bankDepositTextCmd, bankWithdrawTextCmd, buildBankDirectory,
     getTotalCustomerDeposits, applyBankProfit, bankViewRow,
 };
