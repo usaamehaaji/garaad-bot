@@ -1,10 +1,10 @@
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 
-const ROB_SUCCESS_RATE        = 0.50;
-const ROB_MIN_BTC             = 1_000;
-const MAX_STEAL_FRACTION      = 0.25;
-const ROB_COMMAND_COOLDOWN_MS = 15 * 60 * 1000;    // 15 minutes between command uses
-const TARGET_ROB_COOLDOWN_MS  = 15 * 60 * 1000;    // 15 minutes per victim target
+const ROB_COOLDOWN_MS        = 15 * 60 * 1000;  // 15 minutes
+const TARGET_COOLDOWN_MS     = 15 * 60 * 1000;  // 15 minutes per target
+const ROB_MIN_BTC            = 1_000;
+const MAX_STEAL_FRACTION     = 0.25;
+const ROB_SUCCESS_RATE       = 0.50;
 
 module.exports = async function robCmd(message) {
     const userId = message.author.id;
@@ -21,15 +21,11 @@ module.exports = async function robCmd(message) {
     const victim = econData[target.id];
     robber.lastRobTargets ??= {};
 
-    if ((robber.inventory?.robticketExpiry || 0) <= Date.now()) {
-        return message.reply('⚠️ Ma haysatid Rob Ticket oo ansax ah. Iibso `?buy rob_ticket` si aad u dhacdo 24 saac gudahood.');
-    }
+    const cooldownLeft = ROB_COOLDOWN_MS - (Date.now() - (robber.lastRob || 0));
+    if (cooldownLeft > 0)
+        return message.reply(`⏳ Sug **${Math.ceil(cooldownLeft / 60000)} daqiiqo** kadib mar kale isku day.`);
 
-    const commandCooldownLeft = ROB_COMMAND_COOLDOWN_MS - (Date.now() - (robber.lastRob || 0));
-    if (commandCooldownLeft > 0)
-        return message.reply(`⏳ Sug **${Math.ceil(commandCooldownLeft / 60000)} daqiiqo** kadib mar kale isku day.`);
-
-    const targetCooldownLeft = TARGET_ROB_COOLDOWN_MS - (Date.now() - (robber.lastRobTargets[target.id] || 0));
+    const targetCooldownLeft = TARGET_COOLDOWN_MS - (Date.now() - (robber.lastRobTargets[target.id] || 0));
     if (targetCooldownLeft > 0)
         return message.reply(`⏳ Sug **${Math.ceil(targetCooldownLeft / 60000)} daqiiqo** kadib **${target.username}** mar kale dhacdo.`);
 
@@ -43,39 +39,35 @@ module.exports = async function robCmd(message) {
 
     robber.lastRob = Date.now();
     robber.lastRobTargets[target.id] = robber.lastRob;
-    const richRobber  = (robber.btc || 0) > 5_000;
-    const richTarget  = (victim.btc || 0) >= 5_000;
-    const stealFrac   = richTarget ? 0.50 : MAX_STEAL_FRACTION;
-    const success     = richRobber ? false : Math.random() < ROB_SUCCESS_RATE;
+
+    const richRobber = (robber.btc || 0) > 5_000;
+    const richTarget = (victim.btc  || 0) >= 5_000;
+    const stealFrac  = richTarget ? 0.50 : MAX_STEAL_FRACTION;
+    const success    = richRobber ? false : Math.random() < ROB_SUCCESS_RATE;
 
     if (success) {
         const stolen = Math.floor((victim.btc || 0) * stealFrac);
-        victim.btc  = (victim.btc  || 0) - stolen;
-        robber.btc  = (robber.btc  || 0) + stolen;
+        victim.btc   = (victim.btc  || 0) - stolen;
+        robber.btc   = (robber.btc  || 0) + stolen;
         saveEcon();
         return message.reply(
             `🔫 **DHAC GUULAYSATAY!**\n\n` +
             `✅ Waxaad si guul leh u dhacday **${target.username}**!\n\n` +
-            `💰 **Lacagta aad xaday**\n**₿${stolen.toLocaleString()}**\n\n` +
-            `💳 **Lacagta hadda kuu hartay**\n**₿${robber.btc.toLocaleString()}**`
+            `💰 **La xaday:** ₿${stolen.toLocaleString()}\n` +
+            `💳 **Wallet:** ₿${robber.btc.toLocaleString()}`
         );
     } else {
         const penaltyFrac = richRobber ? 0.25 : (richTarget ? 0.50 : 0.20);
         const penaltyPct  = richRobber ? '25%' : (richTarget ? '50%' : '20%');
-        const penalty = Math.floor((robber.btc || 0) * penaltyFrac);
-        robber.btc = Math.max(0, (robber.btc || 0) - penalty);
+        const penalty     = Math.floor((robber.btc || 0) * penaltyFrac);
+        robber.btc        = Math.max(0, (robber.btc || 0) - penalty);
         saveEcon();
-
-        const reason = richRobber
-            ? `\n\n💡 **Lacagta badan tahay** — ₿5,000 ka badan leh adiga, ma dhici kartid.`
-            : '';
-
         return message.reply(
-            `🚔 **DHAC ISKU DAY FASHILMAY!**\n\n` +
-            `❌ Waxaad isku dayday inaad dhacdo \`${target.username}\`, balse kuma hergalin.\n\n` +
-            `💸 **Loss:** **₿${penalty.toLocaleString()}** · 💰 **Wallet:** **₿${robber.btc.toLocaleString()}**\n` +
-            `⚠️ **Ciqaab: ${penaltyPct}** lacagtaadii ayaa kaa luntay.` +
-            reason
+            `🚔 **DHAC FASHILMAY!**\n\n` +
+            `❌ Kuma hergelin **${target.username}**.\n\n` +
+            `💸 **Loss:** ₿${penalty.toLocaleString()} · 💳 **Wallet:** ₿${robber.btc.toLocaleString()}\n` +
+            `⚠️ **Ciqaab: ${penaltyPct}**` +
+            (richRobber ? `\n💡 Lacagta badan tahay — ma dhici kartid.` : '')
         );
     }
 };
