@@ -192,24 +192,31 @@ function buildBankDirectory(userId) {
 
 // ── Sub-panels for public + personal banks ────────────
 function buildPubBankPanel(bank, userId) {
-    const myBal     = bank.customers?.[userId]?.balance || 0;
-    const custCount = Object.keys(bank.customers || {}).length;
+    const myBal       = bank.customers?.[userId]?.balance || 0;
+    const custCount   = Object.keys(bank.customers || {}).length;
+    const totalDep    = Object.values(bank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
+    const lastAct     = bank.lastActivity ? fmtDate(bank.lastActivity) : fmtDate(bank.createdAt);
+
     const embed = new EmbedBuilder()
         .setTitle(`🏛️ ${bank.name}`)
         .setColor('#27ae60')
-        .setDescription(
-            `🆔 **ID:** \`${bank.id}\`\n` +
-            `👤 **Owner:** ${bank.ownerUsername}\n\n` +
-            `💰 **Bangiga haraagga:** ${fmtBtc(bank.balance || 0)}\n` +
-            `👥 **Macaamiisha:** ${custCount}\n\n` +
-            `💼 **Adiga haysataa:** ${fmtBtc(myBal)}`
+        .addFields(
+            { name: '🆔 Bank ID',       value: `\`${bank.id}\``,             inline: true },
+            { name: '👔 CEO',           value: `**${bank.ownerUsername}**`,  inline: true },
+            { name: '📈 Rate',          value: `**N/A**`,                    inline: true },
+            { name: '💰 Balance',       value: fmtBtc(bank.balance || 0),    inline: true },
+            { name: '👥 Customers',     value: `**${custCount}**`,           inline: true },
+            { name: '📅 Last Activity', value: lastAct,                      inline: true },
+            { name: '📊 Total Deposits',value: fmtBtc(totalDep),             inline: true },
+            { name: '💼 Your Deposit',  value: fmtBtc(myBal),                inline: true },
         )
         .setFooter({ text: 'Deposit → lacag geli  •  Withdraw → lacagtaada ka qaad' });
+
     const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`dep_pub_${bank.id}_${userId}`).setLabel('⬇️ Deposit').setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`wd_pub_${bank.id}_${userId}`).setLabel('⬆️ Withdraw').setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`back_to_banks_${userId}`).setLabel('🔙 Banks').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`dep_pub_${bank.id}_${userId}`).setLabel('⬇ Deposit') .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`wd_pub_${bank.id}_${userId}`) .setLabel('⬆ Withdraw').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`back_to_banks_${userId}`)     .setLabel('🔙 Back')   .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)       .setLabel('✖ Xir')     .setStyle(ButtonStyle.Danger),
     );
     return { embed, components: [row] };
 }
@@ -218,23 +225,28 @@ function buildPersBankPanel(bank, ownerId, userId) {
     const myBal     = bank.customers?.[userId]?.balance || 0;
     const custCount = Object.keys(bank.customers || {}).length;
     const custTotal = getTotalCustomerDeposits(bank);
+    const profit    = bank.profitEarned || 0;
+
     const embed = new EmbedBuilder()
         .setTitle(`🏦 ${bank.owner}'s Bank`)
         .setColor('#2ecc71')
-        .setDescription(
-            `🆔 **ID:** \`${bank.bankId}\`\n` +
-            `👤 **Owner:** ${bank.owner}\n\n` +
-            `💰 **Bangiga haraagga:** ${fmtBtc(bank.balance || 0)}\n` +
-            `👥 **Macaamiisha:** ${custCount} · 💼 **Lacagtooda:** ${fmtBtc(custTotal)}\n` +
-            `📈 **Faa'iido:** +2%/maalin\n\n` +
-            `💼 **Adiga haysataa:** ${fmtBtc(myBal)}`
+        .addFields(
+            { name: '🆔 Bank ID',      value: `\`${bank.bankId}\``,     inline: true },
+            { name: '👔 CEO',          value: `**${bank.owner}**`,      inline: true },
+            { name: '📈 Rate',         value: `**+2%/day**`,            inline: true },
+            { name: '💰 Balance',      value: fmtBtc(bank.balance || 0),inline: true },
+            { name: '👥 Customers',    value: `**${custCount}**`,       inline: true },
+            { name: '📊 Cust. Deposits',value: fmtBtc(custTotal),       inline: true },
+            { name: '💸 Profit Earned',value: fmtBtc(profit),           inline: true },
+            { name: '💼 Your Deposit', value: fmtBtc(myBal),            inline: true },
         )
         .setFooter({ text: 'Deposit → lacag geli  •  Withdraw → lacagtaada ka qaad' });
+
     const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`dep_pers_${ownerId}_${userId}`).setLabel('⬇️ Deposit').setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`wd_pers_${ownerId}_${userId}`).setLabel('⬆️ Withdraw').setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`back_to_banks_${userId}`).setLabel('🔙 Banks').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`dep_pers_${ownerId}_${userId}`).setLabel('⬇ Deposit') .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`wd_pers_${ownerId}_${userId}`) .setLabel('⬆ Withdraw').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`back_to_banks_${userId}`)      .setLabel('🔙 Back')   .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)        .setLabel('✖ Xir')     .setStyle(ButtonStyle.Danger),
     );
     return { embed, components: [row] };
 }
