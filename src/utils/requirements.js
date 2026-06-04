@@ -2,7 +2,7 @@ const { getLevel } = require('./helpers');
 
 const BANK_REQ = {
     iq:       50,
-    btc:      1_000_000,
+    btc:      100_000,
     missions: 5,
 };
 
