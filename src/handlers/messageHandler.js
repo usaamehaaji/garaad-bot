@@ -215,13 +215,11 @@ module.exports = function setupMessageHandler(client) {
 
             // ── Public Banks ──
             case 'banks':
+            case 'topbanks':
                 return allBanksCmd(message);
 
             case 'createbank':
                 return createPublicBankCmd(message, args);
-
-            case 'topbanks':
-                return topBanksCmd(message);
 
             // ── Companies ──
             case 'company': {
