@@ -45,11 +45,10 @@ async function createPublicBankCmd(message, args) {
     return message.reply(
         `🏛️ **${bank.name}** la abuurtay!\n\n` +
         `🆔 **Bank ID:** \`${bank.id}\`\n` +
-        `👤 **Owner:** ${bank.owner || message.author.username}\n` +
+        `👤 **Owner:** ${message.author.username}\n` +
         `💸 **Kharash:** ${fmtBtc(CREATE_FEE)} (Treasury u tagay)\n` +
         `⏳ **Mudada:** 2 toddobaad — haddaan shaqo lahayn wuu xirmaa, macaamiisha lacagta waa loo celin\n\n` +
-        `📌 Password dhig: \`?bankpassword ${bank.id} <password>\`\n` +
-        `📢 Kulanka la wadaag: \`?bankinfo ${bank.id}\``
+        `📌 Dadka lacag ku dhigi karaan: \`?bank\``
     );
 }
 

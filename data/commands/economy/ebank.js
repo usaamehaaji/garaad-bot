@@ -67,7 +67,6 @@ function bankTotalInterest() {
 // ── Embeds ────────────────────────────────────────────────────────
 
 function buildMainEmbed(d) {
-    const t = getTreasury();
     return new EmbedBuilder()
         .setTitle('🏦 Garaad Bank')
         .setColor('#2471a3')
@@ -75,7 +74,6 @@ function buildMainEmbed(d) {
             { name: '💳 Wallet',          value: `**₿ ${fmt(d.btc || 0)}**`,                    inline: true },
             { name: '🏦 Bank Balance',    value: `**₿ ${fmt(d.banks.garaad)}**`,                 inline: true },
             { name: '📈 Interest Earned', value: `**+₿ ${fmt(d.interestEarned?.garaad || 0)}**`, inline: true },
-            { name: '🏛️ Treasury',        value: `**₿ ${fmt(t.balance || 0)}**`,                 inline: true },
             { name: '📊 Interest Rate',   value: '**1% per day** _(10% tax)_',                   inline: true },
         )
         .setFooter({ text: 'Garaad Bank • 1% daily interest • 10% tax to treasury' });
@@ -173,7 +171,6 @@ function buildLoanEmbed(d) {
 
 function bankFullRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eb_khaznad_${userId}`)         .setLabel('🏛️ Treasury').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId(`eco_eb_garaad_${userId}`)          .setLabel('🏦 Bank')    .setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇️ Deposit') .setStyle(ButtonStyle.Success),
     );

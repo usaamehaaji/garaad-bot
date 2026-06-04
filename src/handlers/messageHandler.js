@@ -201,11 +201,8 @@ module.exports = function setupMessageHandler(client) {
             case 'bank':
                 return bankDirectoryCmd(message);
 
-            case 'bv':          // ?bv  — view your own bank
+            case 'bv':
                 return bankViewCmd(message);
-
-            case 'bc':          // ?bc  — short for ?bank create
-                return bankCreateCmd(message);
 
             case 'bp':
                 return bankPasswordCmd(message, args);
