@@ -90,7 +90,7 @@ function buildEcoEmbed() {
             `\`${PREFIX}bank\` — Banks panel · \`${PREFIX}banks\` — Liiska\n` +
             `\`${PREFIX}d <bank> <xad>\` — Dhig · \`${PREFIX}w <bank> <xad>\` — Qaad\n` +
             `_?d garaad 500 · ?d Kormaal Bank 1000 · ?w garaad 200_\n` +
-            `\`${PREFIX}createbank <magac>\` — Public bank abuur\n\n` +
+            `\`${PREFIX}cb <magac>\` — Public bank abuur\n\n` +
 
             `**🏢 Shirkad**\n` +
             `\`${PREFIX}company\` — Eeg · \`${PREFIX}company create <magac>\` — Bilow\n` +

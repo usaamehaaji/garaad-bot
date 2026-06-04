@@ -218,6 +218,7 @@ module.exports = function setupMessageHandler(client) {
             case 'topbanks':
                 return allBanksCmd(message);
 
+            case 'cb':
             case 'createbank':
                 return createPublicBankCmd(message, args);
 
