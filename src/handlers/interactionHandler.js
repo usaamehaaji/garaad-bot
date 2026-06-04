@@ -254,62 +254,117 @@ module.exports = function setupInteractionHandler(client) {
 
             // ── Ebank: bank transfer modal submit ──
             if (interaction.customId.startsWith('eco_ebmod_transfer_')) {
-                const rest    = interaction.customId.replace('eco_ebmod_transfer_garaad_', '');
-                const ownerId = rest;
-
-                if (interaction.user.id !== ownerId) {
+                const ownerId  = interaction.customId.replace('eco_ebmod_transfer_garaad_', '');
+                if (interaction.user.id !== ownerId)
                     return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-                }
 
-                const targetId = interaction.fields.getTextInputValue('eco_eb_target').trim().replace(/[<@!>]/g, '');
-                const amount   = parseInt(interaction.fields.getTextInputValue('eco_eb_amount'));
+                const targetInput = interaction.fields.getTextInputValue('eco_eb_target').trim();
+                const bankInput   = (interaction.fields.getTextInputValue('eco_eb_bankname') || '').trim().toLowerCase();
+                const amount      = parseInt(interaction.fields.getTextInputValue('eco_eb_amount'));
 
-                if (!amount || isNaN(amount) || amount <= 0) {
+                if (!amount || isNaN(amount) || amount <= 0)
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 500).', flags: MessageFlags.Ephemeral });
-                }
-                if (targetId === ownerId) {
-                    return interaction.reply({ content: '⚠️ Adiga nafta bank-kaaga uma dirin kartid.', flags: MessageFlags.Ephemeral });
-                }
-
-                const TRANSFER_TAX_RATE = 0.05; // 5%
 
                 const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
+                const { addTx, getAllPublicBanks, saveBanks } = require('../economy/bankStore');
                 const { closeRow } = require('../../data/commands/economy/ebank');
-
                 checkEconUser(ownerId);
+
+                // Find target by username or user ID
+                let targetId = null;
+                const rawId = targetInput.replace(/[<@!>]/g, '');
+                if (/^\d{17,19}$/.test(rawId)) {
+                    targetId = rawId;
+                } else {
+                    const found = Object.entries(eData).find(([, d]) =>
+                        d?.username?.toLowerCase() === targetInput.toLowerCase()
+                    );
+                    if (found) targetId = found[0];
+                }
+                if (!targetId)
+                    return interaction.reply({ content: `⚠️ **"${targetInput}"** — qof lama helin. Username ama ID saxan geli.`, flags: MessageFlags.Ephemeral });
+                if (targetId === ownerId)
+                    return interaction.reply({ content: '⚠️ Adiga nafta uma dirin kartid.', flags: MessageFlags.Ephemeral });
+
                 checkEconUser(targetId);
-                const sender   = eData[ownerId];
+                const sender = eData[ownerId];
+                if ((sender.banks?.garaad || 0) < amount)
+                    return interaction.reply({ content: `⚠️ Garaad Bank-kaagu ma filna. Haysataa: **₿${(sender.banks?.garaad || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+
+                const TRANSFER_TAX = 0.05;
+                const tax      = Math.max(1, Math.floor(amount * TRANSFER_TAX));
+                const received = amount - tax;
+                sender.banks.garaad -= amount;
+                addToTreasury(tax);
+
+                let destLabel = '';
                 const receiver = eData[targetId];
 
-                if ((sender.banks?.garaad || 0) < amount) {
-                    return interaction.reply({ content: `⚠️ Bank-kaagu lacag ku filan ma lahan. Haysataa: **₿: ${(sender.banks?.garaad || 0).toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                if (!bankInput || bankInput === 'garaad' || bankInput === 'garaad bank') {
+                    // → Garaad Bank
+                    receiver.banks ??= { garaad: 0 };
+                    receiver.banks.garaad = (receiver.banks.garaad || 0) + received;
+                    destLabel = '🏦 Garaad Bank';
+                } else {
+                    // Search personal bank
+                    const persBank = receiver.personalBank;
+                    if (persBank && (persBank.owner.toLowerCase() === bankInput || persBank.bankId.toLowerCase() === bankInput || bankInput === 'personal')) {
+                        applyBankProfit_inline(persBank);
+                        persBank.customers = persBank.customers || {};
+                        persBank.customers[targetId] ??= { username: receiver.username || targetId, balance: 0, depositedAt: Date.now() };
+                        persBank.customers[targetId].balance += received;
+                        addTx(persBank, 'customer_deposit', received, `← transfer ${interaction.user.username}`);
+                        destLabel = `🏦 ${persBank.owner}'s Bank`;
+                    } else {
+                        // Search public bank
+                        const PUB_EXP = 14 * 24 * 60 * 60 * 1000;
+                        const pubBank = Object.values(getAllPublicBanks()).find(b =>
+                            (b.name || '').toLowerCase() === bankInput ||
+                            (b.id   || '').toLowerCase() === bankInput
+                        );
+                        if (!pubBank)
+                            return interaction.reply({ content: `⚠️ **"${bankInput}"** — bank lama helin. "garaad", personal bank ama public bank magaciisa qor.`, flags: MessageFlags.Ephemeral });
+                        if ((Date.now() - (pubBank.lastActivity || pubBank.createdAt)) >= PUB_EXP)
+                            return interaction.reply({ content: `⚠️ **${pubBank.name}** waa la xiray.`, flags: MessageFlags.Ephemeral });
+                        pubBank.balance       = (pubBank.balance || 0) + received;
+                        pubBank.totalDeposits = (pubBank.totalDeposits || 0) + received;
+                        pubBank.lastActivity  = Date.now();
+                        pubBank.customers     = pubBank.customers || {};
+                        pubBank.customers[targetId] ??= { balance: 0, username: receiver.username || targetId, joinedAt: Date.now() };
+                        pubBank.customers[targetId].balance += received;
+                        saveBanks();
+                        destLabel = `🏛️ ${pubBank.name}`;
+                    }
                 }
 
-                const tax      = Math.max(1, Math.floor(amount * TRANSFER_TAX_RATE));
-                const received = amount - tax;
-
-                sender.banks.garaad   -= amount;
-                receiver.banks        ??= { garaad: 0 };
-                receiver.banks.garaad += received;
-                addToTreasury(tax);
                 saveEcon();
-
                 let receiverName = targetId;
                 try { const u = await interaction.client.users.fetch(targetId); receiverName = u.username; } catch {}
 
                 return interaction.update({ embeds: [new EmbedBuilder()
-                    .setTitle('💸 Bank Transfer — Success!')
+                    .setTitle('💸 Transfer — Guul!')
                     .setColor('#27ae60')
-                    .setDescription(`**${interaction.user.username}** → **${receiverName}**`)
+                    .setDescription(`**${interaction.user.username}** → **${receiverName}** (${destLabel})`)
                     .addFields(
-                        { name: '💰 Sent',              value: `**₿ ${amount.toLocaleString()}**`,                  inline: true },
-                        { name: '🏛️ Fee (5%)',          value: `**-₿ ${tax.toLocaleString()}**`,                    inline: true },
-                        { name: '✅ Received',          value: `**₿ ${received.toLocaleString()}**`,                inline: true },
-                        { name: '🏦 Your Bank',         value: `**₿ ${sender.banks.garaad.toLocaleString()}**`,     inline: true },
-                        { name: '🏦 Their Bank',        value: `**₿ ${receiver.banks.garaad.toLocaleString()}**`,   inline: true },
+                        { name: '💰 La diray',   value: `**₿${amount.toLocaleString()}**`,                          inline: true },
+                        { name: '🏛️ Canshuur 5%', value: `**-₿${tax.toLocaleString()}**`,                           inline: true },
+                        { name: '✅ La helay',    value: `**₿${received.toLocaleString()}**`,                        inline: true },
+                        { name: '🏦 Bangigaaga',  value: `**₿${(sender.banks?.garaad || 0).toLocaleString()}**`,    inline: true },
+                        { name: '📍 Galay',       value: `**${destLabel}**`,                                        inline: true },
                     )
-                    .setFooter({ text: 'Garaad Bank • 5% transfer fee' }),
+                    .setFooter({ text: 'Garaad Bank • 5% canshuur' }),
                 ], components: [closeRow(ownerId)] });
+
+                function applyBankProfit_inline(bank) {
+                    const now = Date.now(); bank.lastProfitAt ??= now;
+                    const days = Math.floor((now - bank.lastProfitAt) / 86400000);
+                    if (days > 0) {
+                        const ct = Object.values(bank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
+                        const p  = Math.floor(ct * 0.02 * days);
+                        if (p > 0) { bank.balance += p; bank.profitEarned = (bank.profitEarned || 0) + p; }
+                        bank.lastProfitAt = now;
+                    }
+                }
             }
 
             // ── Cashflip: amount modal submit ──
@@ -3125,15 +3180,23 @@ module.exports = function setupInteractionHandler(client) {
                     new ActionRowBuilder().addComponents(
                         new TextInputBuilder()
                             .setCustomId('eco_eb_target')
-                            .setLabel('Qofka User ID-giisa (right-click → Copy ID)')
+                            .setLabel('Qofka magaciisa (username)')
                             .setStyle(TextInputStyle.Short)
-                            .setPlaceholder('123456789012345678')
+                            .setPlaceholder('Tusaale: Ahmed')
+                            .setRequired(true)
+                    ),
+                    new ActionRowBuilder().addComponents(
+                        new TextInputBuilder()
+                            .setCustomId('eco_eb_bankname')
+                            .setLabel('Bank magaciisa (baniga lacagta lagu dari)')
+                            .setStyle(TextInputStyle.Short)
+                            .setPlaceholder('garaad | Kormaal Bank | GB-72957')
                             .setRequired(true)
                     ),
                     new ActionRowBuilder().addComponents(
                         new TextInputBuilder()
                             .setCustomId('eco_eb_amount')
-                            .setLabel(`Xaddadka (Bank-kaaga: ₿: ${(d.banks?.garaad || 0).toLocaleString()})`)
+                            .setLabel(`Xaddadka (₿: ${(d.banks?.garaad || 0).toLocaleString()} haysataa)`)
                             .setStyle(TextInputStyle.Short)
                             .setPlaceholder('500')
                             .setRequired(true)
