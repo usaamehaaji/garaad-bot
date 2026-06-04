@@ -1184,7 +1184,7 @@ module.exports = function setupInteractionHandler(client) {
                 const amount   = Math.floor(Number(interaction.fields.getTextInputValue('ball_amount')));
                 if (!amount || amount <= 0)
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
-                const fakeMsg = { author: interaction.user, mentions: { users: { first: () => null } }, reply: (c) => interaction.reply({ ...c, flags: MessageFlags.Ephemeral }) };
+                const fakeMsg = { author: interaction.user, mentions: { users: { first: () => null } }, reply: (c) => interaction.reply({ ...(typeof c === 'string' ? { content: c } : c), flags: MessageFlags.Ephemeral }) };
                 const { depositAnyCmd } = require('../../data/commands/economy/personalBank');
                 return depositAnyCmd({ ...fakeMsg, author: interaction.user }, [bankRef, String(amount)]);
             }
@@ -1197,7 +1197,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (!amount || amount <= 0)
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
                 const { withdrawAnyCmd } = require('../../data/commands/economy/personalBank');
-                const fakeMsg = { author: interaction.user, reply: (c) => interaction.reply({ ...c, flags: MessageFlags.Ephemeral }) };
+                const fakeMsg = { author: interaction.user, reply: (c) => interaction.reply({ ...(typeof c === 'string' ? { content: c } : c), flags: MessageFlags.Ephemeral }) };
                 return withdrawAnyCmd(fakeMsg, [bankRef, String(amount)]);
             }
 
