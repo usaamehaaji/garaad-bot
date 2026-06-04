@@ -239,16 +239,92 @@ function buildPersBankPanel(bank, ownerId, userId) {
     return { embed, components: [row] };
 }
 
-// ── ?bank — bank directory ────────────────────────────
+// ── ?bank — all banks panel, 3 buttons ───────────────
 async function bankDirectoryCmd(message) {
     try {
         checkEconUser(message.author.id);
-        const { embed, components } = buildBankDirectory(message.author.id);
+        const userId = message.author.id;
+
+        const pubBanks = Object.values(getAllPublicBanks())
+            .filter(b => (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXPIRY_MS)
+            .sort((a, b) => (b.balance || 0) - (a.balance || 0));
+
+        const persBanks = Object.entries(econData)
+            .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank)
+            .map(([uid, d]) => ({ bank: d.personalBank }))
+            .sort((a, b) => (b.bank.balance || 0) - (a.bank.balance || 0));
+
+        let desc = `🏦 **Garaad Bank** — 1%/day\n`;
+        if (pubBanks.length) {
+            desc += `\n🏛️ **Public Banks:**\n`;
+            desc += pubBanks.map(b =>
+                `🏛 **${b.name}** · \`${b.id}\` · ${fmtBtc(b.balance || 0)}`
+            ).join('\n');
+        }
+        if (persBanks.length) {
+            desc += `\n\n🏦 **Personal Banks:**\n`;
+            desc += persBanks.map(e =>
+                `🏦 **${e.bank.owner}** · \`${e.bank.bankId}\` · ${fmtBtc(e.bank.balance || 0)}`
+            ).join('\n');
+        }
+        if (!pubBanks.length && !persBanks.length)
+            desc += `\n_\`?cb <name>\` public bank abuur_`;
+
+        const embed = new EmbedBuilder()
+            .setTitle('🏦 Banks')
+            .setColor('#2471a3')
+            .setDescription(desc)
+            .setFooter({ text: '?d <bank> <xad> · ?w <bank> <xad>' });
+
+        const components = [new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId(`bank_all_dep_${userId}`).setLabel('⬇ Deposit').setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId(`bank_all_wd_${userId}`) .setLabel('⬆ Withdraw').setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId(`close_ebank_${userId}`) .setLabel('✖ Xir')     .setStyle(ButtonStyle.Danger),
+        )];
+
         return message.reply({ embeds: [embed], components });
     } catch (err) {
         console.error('[bankDirectoryCmd]', err);
         return message.reply('⚠️ Khalad ayaa dhacay. Dib u isku day.');
     }
+}
+
+// ── ?jb — player's own bank balances ─────────────────
+async function jbCmd(message) {
+    checkEconUser(message.author.id);
+    const userId = message.author.id;
+    const ec     = econData[userId];
+
+    const garaad = ec.banks?.garaad || 0;
+    const persBank = ec.personalBank;
+
+    // Find deposits in public/personal banks
+    const deposits = [];
+    for (const [uid, d] of Object.entries(econData)) {
+        if (!/^\d{17,19}$/.test(uid) || !d?.personalBank || uid === userId) continue;
+        const rec = d.personalBank.customers?.[userId];
+        if (rec && (rec.balance || 0) > 0)
+            deposits.push({ name: `🏦 ${d.personalBank.owner}'s Bank`, bal: rec.balance });
+    }
+    for (const b of Object.values(getAllPublicBanks())) {
+        const rec = b.customers?.[userId];
+        if (rec && (rec.balance || 0) > 0)
+            deposits.push({ name: `🏛 ${b.name}`, bal: rec.balance });
+    }
+
+    let desc = `🏦 **Garaad Bank:** ${fmtBtc(garaad)}\n`;
+    if (persBank) desc += `🏦 **${persBank.owner}'s Bank (yours):** ${fmtBtc(persBank.balance || 0)}\n`;
+    if (deposits.length) {
+        desc += `\n**📥 Deposits in other banks:**\n`;
+        desc += deposits.map(d => `${d.name}: ${fmtBtc(d.bal)}`).join('\n');
+    }
+    if (!persBank && !deposits.length) desc += `\n_Wax bank ah kuma dhigin._`;
+
+    return message.reply({ embeds: [new EmbedBuilder()
+        .setTitle(`💰 ${message.author.username} — Bank Balances`)
+        .setColor('#2ecc71')
+        .setDescription(desc)
+    ]});
 }
 
 // ── ?bd <bank name/id> <amount> ───────────────────────
@@ -528,7 +604,7 @@ function getBankButtons(userId) {
 
 module.exports = {
     bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd,
-    depositAnyCmd, withdrawAnyCmd, allBanksCmd,
+    depositAnyCmd, withdrawAnyCmd, allBanksCmd, jbCmd,
     buildBankDirectory, buildPubBankPanel, buildPersBankPanel,
     getBankButtons,
     getTotalCustomerDeposits, applyBankProfit, bankViewRow,

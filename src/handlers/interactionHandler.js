@@ -1177,6 +1177,30 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `📥 **₿${amount.toLocaleString()}** → 🏦 **${tBank.owner}**'s Bank\n💼 Haysataa: ₿${tBank.customers[userId].balance.toLocaleString()}`, flags: MessageFlags.Ephemeral });
             }
 
+            // ── ?bank Deposit modal ──
+            if (interaction.customId.startsWith('bank_all_dep_modal_')) {
+                const userId   = interaction.customId.replace('bank_all_dep_modal_', '');
+                const bankRef  = interaction.fields.getTextInputValue('ball_bank').trim();
+                const amount   = Math.floor(Number(interaction.fields.getTextInputValue('ball_amount')));
+                if (!amount || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const fakeMsg = { author: interaction.user, mentions: { users: { first: () => null } }, reply: (c) => interaction.reply({ ...c, flags: MessageFlags.Ephemeral }) };
+                const { depositAnyCmd } = require('../../data/commands/economy/personalBank');
+                return depositAnyCmd({ ...fakeMsg, author: interaction.user }, [bankRef, String(amount)]);
+            }
+
+            // ── ?bank Withdraw modal ──
+            if (interaction.customId.startsWith('bank_all_wd_modal_')) {
+                const userId   = interaction.customId.replace('bank_all_wd_modal_', '');
+                const bankRef  = interaction.fields.getTextInputValue('ball_bank').trim();
+                const amount   = Math.floor(Number(interaction.fields.getTextInputValue('ball_amount')));
+                if (!amount || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const { withdrawAnyCmd } = require('../../data/commands/economy/personalBank');
+                const fakeMsg = { author: interaction.user, reply: (c) => interaction.reply({ ...c, flags: MessageFlags.Ephemeral }) };
+                return withdrawAnyCmd(fakeMsg, [bankRef, String(amount)]);
+            }
+
             // ── Personal Bank View: own deposit modal ──
             if (interaction.customId.startsWith('pbank_own_dep_modal_')) {
                 const userId = interaction.user.id;
@@ -2584,6 +2608,44 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
+        // ── ?bank Deposit button → modal (amount + bank name) ──
+        if (id.startsWith('bank_all_dep_')) {
+            const userId = id.replace('bank_all_dep_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder()
+                .setCustomId(`bank_all_dep_modal_${userId}`)
+                .setTitle('⬇ Deposit');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('ball_bank').setLabel('Bank magaciisa').setPlaceholder('garaad · Kormaal Bank · ahmed').setStyle(TextInputStyle.Short).setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('ball_amount').setLabel('Xaddadka (BTC)').setPlaceholder('1000').setStyle(TextInputStyle.Short).setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── ?bank Withdraw button → modal (amount + bank name) ──
+        if (id.startsWith('bank_all_wd_')) {
+            const userId = id.replace('bank_all_wd_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const modal = new ModalBuilder()
+                .setCustomId(`bank_all_wd_modal_${userId}`)
+                .setTitle('⬆ Withdraw');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('ball_bank').setLabel('Bank magaciisa').setPlaceholder('garaad · Kormaal Bank · ahmed').setStyle(TextInputStyle.Short).setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder().setCustomId('ball_amount').setLabel('Xaddadka (BTC)').setPlaceholder('500').setStyle(TextInputStyle.Short).setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
         // ── Back to ebank main panel ──
         if (id.startsWith('back_to_banks_') || id.startsWith('bank_view_garaad_')) {
             const userId = id.startsWith('back_to_banks_')
@@ -2592,14 +2654,12 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow, closeRow } = require('../../data/commands/economy/ebank');
-            const { getBankButtons } = require('../../data/commands/economy/personalBank');
+            const { applyInterest, buildMainEmbed, bankFullRow } = require('../../data/commands/economy/ebank');
             checkEconUser(userId);
             const d = eData[userId];
             applyInterest(d);
             saveEcon();
-            const otherRows = getBankButtons(userId);
-            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows] });
+            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId)] });
         }
 
         // ── View Public Bank from directory ──
@@ -2696,14 +2756,12 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow, closeRow } = require('../../data/commands/economy/ebank');
-            const { getBankButtons } = require('../../data/commands/economy/personalBank');
+            const { applyInterest, buildMainEmbed, bankFullRow } = require('../../data/commands/economy/ebank');
             checkEconUser(userId);
             const d = eData[userId];
             applyInterest(d);
             saveEcon();
-            const otherRows = getBankButtons(userId);
-            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows] });
+            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId)] });
         }
 
         // ── Deposit into Garaad Bank (from directory) ──
@@ -3156,7 +3214,7 @@ module.exports = function setupInteractionHandler(client) {
             saveEcon();
 
             if (section === 'main') {
-                return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId)] });
+                return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId)] });
             }
             if (section === 'khaznad') {
                 return interaction.update({ embeds: [buildKhaznadEmbed()], components: [backRow(userId)] });
@@ -3166,7 +3224,7 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(userId, hasLoan, d)] });
             }
             if (section === 'garaad') {
-                return interaction.update({ embeds: [buildBankEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId)] });
+                return interaction.update({ embeds: [buildBankEmbed(d)], components: [bankFullRow(userId)] });
             }
             if (section === 'transfer') {
                 const modal = new ModalBuilder()

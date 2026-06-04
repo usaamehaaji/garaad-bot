@@ -174,15 +174,12 @@ function bankFullRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇ Deposit')  .setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆ Withdraw') .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)            .setLabel('✖ Xir')      .setStyle(ButtonStyle.Danger),
     );
 }
 
 function ebCloseRow(userId) {
-    return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eb_deen_${userId}`)     .setLabel('💳 Loan')    .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_eb_allbanks_${userId}`) .setLabel('🏛 Banks')   .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)     .setLabel('✖ Close')    .setStyle(ButtonStyle.Danger),
-    );
+    return null; // merged into bankFullRow
 }
 
 function actionRow(userId) {
@@ -235,11 +232,9 @@ module.exports = async function ebankCmd(message) {
     const d = econData[userId];
     applyInterest(d);
     saveEcon();
-    let otherRows = [];
-    try { const { getBankButtons } = require('../economy/personalBank'); otherRows = getBankButtons(userId); } catch {}
     return message.reply({
         embeds:     [buildMainEmbed(d)],
-        components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows],
+        components: [bankFullRow(userId)],
     });
 };
 
