@@ -55,7 +55,6 @@ function buildEduEmbed(userId) {
             `**👤 Profile & Standings**\n` +
             `**\`${PREFIX}profile\`** — IQ, level, stats, frame\n` +
             `**\`${PREFIX}top\`** — Top 15 IQ ranking\n` +
-            `**\`${PREFIX}top iq/btc/duels/flips/missions\`** — Leaderboards\n` +
             `**\`${PREFIX}today\`** — Maalin kasta: BTC + IQ (24h)\n\n` +
 
             `**💕 Xiriirka**\n` +
