@@ -1959,29 +1959,6 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.update({ embeds: [buildAllPlayersEmbed(page)], components: [buildPlayersPageRow(page, totalPages, ownerId)] });
         }
 
-        // ── Admin Econ: Loans button ──
-        if (id.startsWith('admin_eco_loans_')) {
-            const ownerId = id.replace('admin_eco_loans_', '');
-            if (interaction.user.id !== ownerId)
-                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            if (!require('../utils/admin').isAdmin(ownerId))
-                return interaction.reply({ content: '⛔ Admin maahan.', flags: MessageFlags.Ephemeral });
-            const { econData: eData } = require('../economy/econStore');
-            const loans = Object.entries(eData)
-                .filter(([k, d]) => /^[0-9]{17,19}$/.test(k) && d.loan?.owed > 0)
-                .map(([uid, d]) => {
-                    const days = Math.floor((Date.now() - d.loan.takenAt) / 86400000);
-                    const left = Math.max(0, 3 - days);
-                    return `${left === 0 ? '🔴' : '💳'} <@${uid}> — **₿: ${d.loan.owed.toLocaleString()}** | ${left === 0 ? '**OVERDUE**' : `${left}d`}`;
-                });
-            const { getRows } = require('../../data/commands/admin/adminHelpPanel');
-            const loansEmbed = new EmbedBuilder()
-                .setTitle(`💳 Deynta (${loans.length})`)
-                .setColor('#e74c3c')
-                .setDescription(loans.join('\n') || '_Cidna deen kuma jirto._')
-                .setFooter({ text: 'Garaad Admin' });
-            return interaction.update({ embeds: [loansEmbed], components: getRows(ownerId) });
-        }
 
         // ── Admin Econ: Top-up Treasury button → modal ──
         if (id.startsWith('admin_eco_topup_')) {
@@ -3237,7 +3214,7 @@ module.exports = function setupInteractionHandler(client) {
         if (id.startsWith('eco_eb_') && !id.startsWith('eco_eba_')) {
             const parts   = id.split('_');
             const userId  = parts[parts.length - 1];
-            const section = parts[2]; // main | khaznad | garaad | deen
+            const section = parts[2]; // main | khaznad | garaad
 
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
@@ -3245,8 +3222,8 @@ module.exports = function setupInteractionHandler(client) {
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
             const {
                 applyInterest,
-                buildMainEmbed, buildBankEmbed, buildKhaznadEmbed, buildDeenEmbed,
-                bankFullRow, ebCloseRow, deenRow, backRow,
+                buildMainEmbed, buildBankEmbed, buildKhaznadEmbed,
+                bankFullRow, ebCloseRow, backRow,
             } = require('../../data/commands/economy/ebank');
             checkEconUser(userId);
             const d = eData[userId];
@@ -3258,10 +3235,6 @@ module.exports = function setupInteractionHandler(client) {
             }
             if (section === 'khaznad') {
                 return interaction.update({ embeds: [buildKhaznadEmbed()], components: [backRow(userId)] });
-            }
-            if (section === 'deen') {
-                const hasLoan = !!(d.loan && d.loan.owed > 0);
-                return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(userId, hasLoan, d)] });
             }
             if (section === 'garaad') {
                 return interaction.update({ embeds: [buildBankEmbed(d)], components: [bankFullRow(userId)] });
@@ -3364,50 +3337,6 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
-        // ── Deen: Take loan — give 2,000 BTC (Thursday only, once/week) ──
-        if (id.startsWith('eco_dn_take_')) {
-            const ownerId = id.replace('eco_dn_take_', '');
-            if (interaction.user.id !== ownerId)
-                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { buildDeenEmbed, deenRow, isBankOpen, usedWeeklyLoan, LOAN_MAX, LOAN_OWED } = require('../../data/commands/economy/ebank');
-            checkEconUser(ownerId);
-            const d = eData[ownerId];
-            if (!isBankOpen())
-                return interaction.reply({ content: '⚠️ Keedsane Bank maanta xiran yahay — Khamiis 1am soo noqo.', flags: MessageFlags.Ephemeral });
-            if (usedWeeklyLoan(d))
-                return interaction.reply({ content: '⚠️ Isbuucaan deen horay u qaaday — toddobaadka xiga soo noqo.', flags: MessageFlags.Ephemeral });
-            if (d.loan && d.loan.owed > 0)
-                return interaction.reply({ content: '⚠️ Deen jirto — marka hore celib.', flags: MessageFlags.Ephemeral });
-            const { getTreasury, deductFromTreasury } = require('../economy/econStore');
-            if (!deductFromTreasury(LOAN_MAX))
-                return interaction.reply({ content: `⚠️ Khaznadda lacag ma filan — admin ayaa toddobaadkiiba lacag ku shubaa.\n🏛️ Hadda: **₿: ${fmt((getTreasury().balance || 0))}**`, flags: MessageFlags.Ephemeral });
-            d.btc            = (d.btc || 0) + LOAN_MAX;
-            d.lastLoanTaken  = Date.now();
-            d.loan           = { asset: 'btc', amount: LOAN_MAX, owed: LOAN_OWED, takenAt: Date.now() };
-            saveEcon();
-            return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(ownerId, true, d)] });
-        }
-
-        // ── Deen: Repay loan — $2,005 back to treasury ──
-        if (id.startsWith('eco_dn_pay_')) {
-            const ownerId = id.replace('eco_dn_pay_', '');
-            if (interaction.user.id !== ownerId)
-                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { econData: eData, checkEconUser, saveEcon, addToTreasury } = require('../economy/econStore');
-            const { buildDeenEmbed, deenRow, LOAN_OWED } = require('../../data/commands/economy/ebank');
-            checkEconUser(ownerId);
-            const d = eData[ownerId];
-            if (!d.loan || d.loan.owed <= 0)
-                return interaction.reply({ content: '⚠️ Deen ma jirto.', flags: MessageFlags.Ephemeral });
-            if ((d.btc || 0) < d.loan.owed)
-                return interaction.reply({ content: `⚠️ BTC kugu filna ma lihid.\nDeentaadu: **₿: ${d.loan.owed}** | Haysataa: **₿: ${d.btc || 0}**`, flags: MessageFlags.Ephemeral });
-            d.btc  = (d.btc || 0) - d.loan.owed;
-            addToTreasury(LOAN_OWED);
-            d.loan  = null;
-            saveEcon();
-            return interaction.update({ embeds: [buildDeenEmbed(d)], components: [deenRow(ownerId, false, d)] });
-        }
 
         // ── Trade: Refresh market view ──
         if (id.startsWith('eco_trefresh_')) {

@@ -7,10 +7,9 @@ const OWNER_ID = '1191096205955055690';
 function buildAdminEmbed(uid) {
     const users = Object.entries(econData).filter(([k]) => /^\d{17,19}$/.test(k));
     const t     = getTreasury();
-    let totalBtc = 0, activeLoans = 0;
+    let totalBtc = 0;
     for (const [, d] of users) {
-        totalBtc   += d.btc || 0;
-        if (d.loan?.owed > 0) activeLoans++;
+        totalBtc += d.btc || 0;
     }
     const isOwner = uid === OWNER_ID;
     return new EmbedBuilder()
@@ -18,12 +17,11 @@ function buildAdminEmbed(uid) {
         .setColor('#8e44ad')
         .setDescription(
             `**🏛️ Treasury:** ${fmt(t.balance)} BTC\n` +
-            `**👥 Players:** ${users.length} | **₿ Circulation:** ${fmt(totalBtc)} BTC\n` +
-            `**💳 Active Loans:** ${activeLoans}\n\n` +
+            `**👥 Players:** ${users.length} | **₿ Circulation:** ${fmt(totalBtc)} BTC\n\n` +
             `**Actions:**\n` +
             `🎁 Give User  •  🧠 Give IQ  •  ₿ Give All BTC  •  🏆 Champion\n` +
             `💬 DM  •  💸 Transfer  •  👥 Players\n` +
-            `📢 Broadcast  •  🐛 Bugs  •  💳 Loans` +
+            `📢 Broadcast  •  🐛 Bugs` +
             (isOwner ? `\n🏛️ Top-up  •  👥 Admin  •  ♻️ Reset` : '') +
             `\n\n**🏦 Bank Commands (text):**\n` +
             `\`?adminbank pw @user\` — Personal bank password reset\n` +
@@ -53,12 +51,11 @@ function adminRow2(uid) {
     );
 }
 
-// Row 3: Broadcast | Bugs | Loans
+// Row 3: Broadcast | Bugs
 function adminRow3(uid) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`admin_broadcast_${uid}`) .setLabel('📢 Broadcast') .setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setCustomId(`admin_bugs_${uid}`)      .setLabel('🐛 Bugs')      .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`admin_eco_loans_${uid}`) .setLabel('💳 Loans')     .setStyle(ButtonStyle.Secondary),
     );
 }
 
