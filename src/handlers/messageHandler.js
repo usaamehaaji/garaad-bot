@@ -51,7 +51,7 @@ const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
 const personalCmd = require('../../data/commands/personal');
-const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, bankDepositTextCmd, bankWithdrawTextCmd } = require('../../data/commands/economy/personalBank');
+const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
 const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd, companyInvestCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
@@ -197,11 +197,6 @@ module.exports = function setupMessageHandler(client) {
             case 'ebank':
                 return ebankCmd(message, args);
 
-            case 'bd':
-                return bankDepositTextCmd(message, args);
-
-            case 'bw':
-                return bankWithdrawTextCmd(message, args);
 
             // ── Personal Bank ──
             case 'bank':
