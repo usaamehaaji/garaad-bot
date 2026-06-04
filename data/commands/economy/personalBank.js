@@ -9,7 +9,7 @@ const { checkRequirements, reqFailMessage } = require('../../../src/utils/requir
 const PROFIT_RATE     = 0.02;
 const PROFIT_INTERVAL = 24 * 60 * 60 * 1000;
 
-function fmtBtc(n)  { return `₿${Math.floor(n).toLocaleString()}`; }
+function fmtBtc(n)  { const v = Math.floor(n || 0); return `₿${isNaN(v) ? 0 : v.toLocaleString()}`; }
 function fmtDate(ts) { return new Date(ts).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
 
 function getTotalCustomerDeposits(bank) {
@@ -164,30 +164,28 @@ function buildBankDirectory(userId) {
         .setFooter({ text: 'Bank taabo → Deposit & Withdraw' });
 
     const components = [];
-    const row1 = new ActionRowBuilder().addComponents(
+    const row1Btns = [
         new ButtonBuilder().setCustomId(`bank_view_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Primary),
         ...pubBanks.map(b =>
             new ButtonBuilder()
                 .setCustomId(`bank_view_pub_${b.id}_${userId}`)
                 .setLabel(`🏛️ ${b.name.slice(0, 20)}`)
                 .setStyle(ButtonStyle.Success)
-        )
-    );
-    components.push(row1);
+        ),
+    ];
+    components.push(new ActionRowBuilder().addComponents(row1Btns));
     if (persBanks.length) {
-        const row2 = new ActionRowBuilder().addComponents(
-            ...persBanks.map(e =>
-                new ButtonBuilder()
-                    .setCustomId(`bank_view_pers_${e.uid}_${userId}`)
-                    .setLabel(`🏦 ${e.bank.owner.slice(0, 20)}`)
-                    .setStyle(ButtonStyle.Secondary)
-            )
+        const row2Btns = persBanks.map(e =>
+            new ButtonBuilder()
+                .setCustomId(`bank_view_pers_${e.uid}_${userId}`)
+                .setLabel(`🏦 ${e.bank.owner.slice(0, 20)}`)
+                .setStyle(ButtonStyle.Secondary)
         );
-        components.push(row2);
+        components.push(new ActionRowBuilder().addComponents(row2Btns));
     }
-    components.push(new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger)
-    ));
+    components.push(new ActionRowBuilder().addComponents([
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
+    ]));
 
     return { embed, components };
 }
@@ -243,9 +241,14 @@ function buildPersBankPanel(bank, ownerId, userId) {
 
 // ── ?bank — bank directory ────────────────────────────
 async function bankDirectoryCmd(message) {
-    checkEconUser(message.author.id);
-    const { embed, components } = buildBankDirectory(message.author.id);
-    return message.reply({ embeds: [embed], components });
+    try {
+        checkEconUser(message.author.id);
+        const { embed, components } = buildBankDirectory(message.author.id);
+        return message.reply({ embeds: [embed], components });
+    } catch (err) {
+        console.error('[bankDirectoryCmd]', err);
+        return message.reply('⚠️ Khalad ayaa dhacay. Dib u isku day.');
+    }
 }
 
 // ── ?bd <bank name/id> <amount> ───────────────────────
