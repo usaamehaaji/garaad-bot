@@ -978,6 +978,133 @@ module.exports = function setupInteractionHandler(client) {
                 }
             }
 
+            // ── Personal Bank View: own deposit modal ──
+            if (interaction.customId.startsWith('pbank_own_dep_modal_')) {
+                const userId = interaction.user.id;
+                const amount = Math.floor(Number(interaction.fields.getTextInputValue('pbank_own_amount')));
+                if (!amount || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { addTx } = require('../economy/bankStore');
+                const { bankViewRow } = require('../../data/commands/economy/personalBank');
+                checkEconUser(userId);
+                const ec   = eData[userId];
+                const bank = ec.personalBank;
+                if (!bank) return interaction.reply({ content: '⚠️ Bank account ma lihid. `?bc` isticmaal.', flags: MessageFlags.Ephemeral });
+                if ((ec.btc || 0) < amount)
+                    return interaction.reply({ content: `⚠️ Jeebkaagu ma filna. Haysataa: ₿${Math.floor(ec.btc || 0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
+
+                ec.btc          = (ec.btc || 0) - amount;
+                bank.balance   += amount;
+                bank.deposits   = (bank.deposits || 0) + amount;
+                addTx(bank, 'deposit', amount, 'jeeb → bangi');
+                saveEcon();
+                return interaction.reply({
+                    content: `📥 **₿${amount.toLocaleString()}** jeebka → bangiga\n💰 **Bangi hadda:** ₿${bank.balance.toLocaleString()}`,
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+
+            // ── Personal Bank View: own withdraw modal ──
+            if (interaction.customId.startsWith('pbank_own_wd_modal_')) {
+                const userId = interaction.user.id;
+                const amount = Math.floor(Number(interaction.fields.getTextInputValue('pbank_wd_amount')));
+                const pw     = (interaction.fields.getTextInputValue('pbank_wd_pw') || '').trim();
+                if (!amount || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { addTx } = require('../economy/bankStore');
+                checkEconUser(userId);
+                const ec   = eData[userId];
+                const bank = ec.personalBank;
+                if (!bank) return interaction.reply({ content: '⚠️ Bank account ma lihid.', flags: MessageFlags.Ephemeral });
+
+                if (ec.accountPassword && ec.accountPassword !== pw)
+                    return interaction.reply({ content: '❌ Password-ka waa khalad.', flags: MessageFlags.Ephemeral });
+                if (amount > bank.balance)
+                    return interaction.reply({ content: `⚠️ Bangiga lacag ku filan kuma jirto. Haraagga: ₿${bank.balance.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+
+                bank.balance     -= amount;
+                bank.withdrawals  = (bank.withdrawals || 0) + amount;
+                ec.btc            = (ec.btc || 0) + amount;
+                addTx(bank, 'withdraw', amount, 'bangi → jeeb');
+                saveEcon();
+                return interaction.reply({
+                    content: `📤 **₿${amount.toLocaleString()}** bangiga → jeebka\n💳 **Jeebka hadda:** ₿${ec.btc.toLocaleString()}`,
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+
+            // ── Personal Bank: deposit modal ──
+            if (interaction.customId.startsWith('pbank_dep_modal_')) {
+                const userId = interaction.user.id;
+                const input  = interaction.fields.getTextInputValue('pbank_bank_name').trim();
+                const amount = Math.floor(Number(interaction.fields.getTextInputValue('pbank_amount')));
+
+                if (!amount || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 1000).', flags: MessageFlags.Ephemeral });
+
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { addTx } = require('../economy/bankStore');
+
+                const found = Object.entries(eData).find(([uid, d]) => {
+                    if (!/^\d{17,19}$/.test(uid) || !d?.personalBank) return false;
+                    const b = d.personalBank;
+                    return b.owner.toLowerCase() === input.toLowerCase() ||
+                           b.bankId.toUpperCase() === input.toUpperCase();
+                });
+
+                if (!found)
+                    return interaction.reply({ content: `⚠️ **"${input}"** magaciisa ama ID-giisa leh bank ma helin. Liiska eeg oo si sax ah u qor.`, flags: MessageFlags.Ephemeral });
+
+                const [targetId, targetEc] = found;
+                const targetBank = targetEc.personalBank;
+
+                if (targetId === userId)
+                    return interaction.reply({ content: '⚠️ Bank-kaaga laftiis: `?deposit <amount>`', flags: MessageFlags.Ephemeral });
+
+                checkEconUser(userId);
+                const ec = eData[userId];
+                if ((ec.btc || 0) < amount)
+                    return interaction.reply({ content: `⚠️ Jeebkaagu ma filna. Haysataa: ₿${Math.floor(ec.btc || 0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
+
+                // Apply pending profit
+                const nowTs = Date.now();
+                targetBank.lastProfitAt ??= nowTs;
+                const profDays = Math.floor((nowTs - targetBank.lastProfitAt) / 86400000);
+                if (profDays > 0) {
+                    const ct = Object.values(targetBank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
+                    if (ct > 0) {
+                        const profit = Math.floor(ct * 0.02 * profDays);
+                        if (profit > 0) {
+                            targetBank.balance      += profit;
+                            targetBank.profitEarned  = (targetBank.profitEarned || 0) + profit;
+                            addTx(targetBank, 'profit', profit, `Faa'iido macaamiisha (${profDays} maalin)`);
+                        }
+                    }
+                    targetBank.lastProfitAt = nowTs;
+                }
+
+                ec.btc = (ec.btc || 0) - amount;
+                targetBank.customers = targetBank.customers || {};
+                if (!targetBank.customers[userId])
+                    targetBank.customers[userId] = { username: interaction.user.username, balance: 0, depositedAt: Date.now() };
+                targetBank.customers[userId].balance += amount;
+                addTx(targetBank, 'customer_deposit', amount, `← ${interaction.user.username}`);
+                saveEcon();
+
+                const myBal = targetBank.customers[userId].balance;
+                return interaction.reply({
+                    content:
+                        `📥 **₿${amount.toLocaleString()}** → 🏦 **${targetBank.owner}**'s Bank\n` +
+                        `💼 Bangigaas adigu haysataa: **₿${myBal.toLocaleString()}**\n` +
+                        `📌 Dib u qaad: \`?pwithdraw @${targetBank.owner} <amount>\``,
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+
             // (eco_dnmod_ and eco_dnpay_ removed — deen is now button-only, no modals)
 
             // ── Shop: Custom name title modal ──
@@ -2230,6 +2357,76 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.reply({
                 content: `💍 **${fromName}** ❤️ **${interaction.user.username}** — Hambalyo! Wada noloshiinna waa la xidey!\n${RING_NAMES[ringType]}`,
             });
+        }
+
+        // ── Personal Bank View: Deposit button (own bank) ──
+        if (id.startsWith('pbank_own_dep_')) {
+            const modal = new ModalBuilder()
+                .setCustomId(`pbank_own_dep_modal_${interaction.user.id}`)
+                .setTitle('📥 Bangigaaga — Lacag Geli');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder()
+                        .setCustomId('pbank_own_amount')
+                        .setLabel('Xaddadka lacagta (BTC)')
+                        .setPlaceholder('Tusaale: 5000')
+                        .setStyle(TextInputStyle.Short)
+                        .setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Personal Bank View: Withdraw button (own bank) ──
+        if (id.startsWith('pbank_own_wd_')) {
+            const modal = new ModalBuilder()
+                .setCustomId(`pbank_own_wd_modal_${interaction.user.id}`)
+                .setTitle('📤 Bangigaaga — Lacag Ka Qaad');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder()
+                        .setCustomId('pbank_wd_amount')
+                        .setLabel('Xaddadka lacagta (BTC)')
+                        .setPlaceholder('Tusaale: 2000')
+                        .setStyle(TextInputStyle.Short)
+                        .setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder()
+                        .setCustomId('pbank_wd_pw')
+                        .setLabel('Password (haddaad dhigtay)')
+                        .setPlaceholder('Password-kaaga geli, haddaanay jirin — bannaanka ka daa')
+                        .setStyle(TextInputStyle.Short)
+                        .setRequired(false)
+                ),
+            );
+            return interaction.showModal(modal);
+        }
+
+        // ── Personal Bank: deposit button → open modal ──
+        if (id.startsWith('pbank_dep_btn_')) {
+            const modal = new ModalBuilder()
+                .setCustomId(`pbank_dep_modal_${interaction.user.id}`)
+                .setTitle('💰 Personal Bank — Lacag Geli');
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder()
+                        .setCustomId('pbank_bank_name')
+                        .setLabel('Bank owner-ka magaciisa ama Bank ID')
+                        .setPlaceholder('Tusaale: Ahmed  ama  GB-12345')
+                        .setStyle(TextInputStyle.Short)
+                        .setRequired(true)
+                ),
+                new ActionRowBuilder().addComponents(
+                    new TextInputBuilder()
+                        .setCustomId('pbank_amount')
+                        .setLabel('Xaddadka lacagta (BTC)')
+                        .setPlaceholder('Tusaale: 5000')
+                        .setStyle(TextInputStyle.Short)
+                        .setRequired(true)
+                ),
+            );
+            return interaction.showModal(modal);
         }
 
         // ── Xir (Close) ──

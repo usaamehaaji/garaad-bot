@@ -51,8 +51,8 @@ const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
 const personalCmd = require('../../data/commands/personal');
-const { bankCreateCmd, bankPasswordCmd, bankViewCmd, depositCmd, withdrawCmd, bankSendCmd } = require('../../data/commands/economy/personalBank');
-const { createPublicBankCmd, listPublicBanksCmd, bankInfoCmd, bankDepositCmd, bankWithdrawCmd, bankPasswordCmd: pubBankPwCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
+const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd } = require('../../data/commands/economy/personalBank');
+const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
 const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd, companyInvestCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
@@ -200,19 +200,16 @@ module.exports = function setupMessageHandler(client) {
             // ── Personal Bank ──
             case 'bank':
                 if (args[0] === 'create') return bankCreateCmd(message);
+                return bankDirectoryCmd(message);
+
+            case 'bv':          // ?bv  — view your own bank
                 return bankViewCmd(message);
+
+            case 'bc':          // ?bc  — short for ?bank create
+                return bankCreateCmd(message);
 
             case 'bp':
                 return bankPasswordCmd(message, args);
-
-            case 'deposit':
-                return depositCmd(message, args);
-
-            case 'withdraw':
-                return withdrawCmd(message, args);
-
-            case 'banksend':
-                return bankSendCmd(message, args);
 
             // ── Public Banks ──
             case 'createbank':
@@ -220,18 +217,6 @@ module.exports = function setupMessageHandler(client) {
 
             case 'banks':
                 return listPublicBanksCmd(message);
-
-            case 'bankinfo':
-                return bankInfoCmd(message, args);
-
-            case 'bankdeposit':
-                return bankDepositCmd(message, args);
-
-            case 'bankwithdraw':
-                return bankWithdrawCmd(message, args);
-
-            case 'bankpassword':
-                return pubBankPwCmd(message, args);
 
             case 'topbanks':
                 return topBanksCmd(message);
