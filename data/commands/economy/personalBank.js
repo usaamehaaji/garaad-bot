@@ -427,7 +427,7 @@ async function bankDepositTextCmd(message, args) {
     pubBank.customers[message.author.id].balance += amount;
     saveBanks();
     saveEcon();
-    return message.reply(`📥 **${fmtBtc(amount)}** → 🏛️ **${pubBank.name}**\n💰 Bangiga: **${fmtBtc(pubBank.balance)}**`);
+    return message.reply(`📥 **${fmtBtc(amount)}** → 🏛️ **${pubBank.name}**\n💼 Haysataa: **${fmtBtc(pubBank.customers[message.author.id].balance)}**`);
 }
 
 // ── ?w <bank> <amount> — withdraw from any bank ──────
@@ -565,7 +565,7 @@ async function depositAnyCmd(message, args) {
     pubBank.customers[message.author.id].balance += amount;
     saveBanks();
     saveEcon();
-    return message.reply(`📥 **${fmtBtc(amount)}** → 🏛️ **${pubBank.name}** (\`${pubBank.id}\`)\n💰 Bangiga: **${fmtBtc(pubBank.balance)}**`);
+    return message.reply(`📥 **${fmtBtc(amount)}** → 🏛️ **${pubBank.name}** (\`${pubBank.id}\`)\n💼 Haysataa: **${fmtBtc(pubBank.customers[message.author.id].balance)}**`);
 }
 
 // ── ?banks — dhammaan banks + qiyamkooda ─────────────
