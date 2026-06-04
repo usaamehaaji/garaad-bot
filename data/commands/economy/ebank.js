@@ -67,16 +67,17 @@ function bankTotalInterest() {
 // ── Embeds ────────────────────────────────────────────────────────
 
 function buildMainEmbed(d) {
+    const loan    = d.loan;
+    const hasLoan = !!(loan && loan.owed > 0);
     return new EmbedBuilder()
         .setTitle('🏦 Garaad Bank')
-        .setColor('#2471a3')
-        .addFields(
-            { name: '💳 Wallet',          value: `**₿ ${fmt(d.btc || 0)}**`,                    inline: true },
-            { name: '🏦 Bank Balance',    value: `**₿ ${fmt(d.banks.garaad)}**`,                 inline: true },
-            { name: '📈 Interest Earned', value: `**+₿ ${fmt(d.interestEarned?.garaad || 0)}**`, inline: true },
-            { name: '📊 Interest Rate',   value: '**1% per day** _(10% tax)_',                   inline: true },
+        .setColor('#1a73e8')
+        .setDescription(
+            `💳 **Wallet:** ₿ ${fmt(d.btc || 0)}　　🏦 **Bank:** ₿ ${fmt(d.banks?.garaad || 0)}\n` +
+            `📈 **Earned:** +₿ ${fmt(d.interestEarned?.garaad || 0)}　　📊 **1%/day**` +
+            (hasLoan ? `\n⚠️ **Loan:** ₿ ${fmt(loan.owed)} due` : '')
         )
-        .setFooter({ text: 'Garaad Bank • 1% daily interest • 10% tax to treasury' });
+        .setFooter({ text: 'Garaad Bank • 1% daily interest' });
 }
 
 function buildBankEmbed(d) {
@@ -171,17 +172,17 @@ function buildLoanEmbed(d) {
 
 function bankFullRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eb_garaad_${userId}`)          .setLabel('🏦 Bank')     .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇️ Deposit')  .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆️ Withdraw') .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇ Deposit')  .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆ Withdraw') .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`eco_eb_transfer_${userId}`)        .setLabel('💸 Transfer') .setStyle(ButtonStyle.Secondary),
     );
 }
 
 function ebCloseRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eb_deen_${userId}`)     .setLabel('💳 Loan')     .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`eco_eb_transfer_${userId}`) .setLabel('💸 Transfer') .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`eco_eb_allbanks_${userId}`) .setLabel('🏦 All Banks').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eb_deen_${userId}`)     .setLabel('💳 Loan')    .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`eco_eb_allbanks_${userId}`) .setLabel('🏛 Banks')   .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)     .setLabel('✖ Close')    .setStyle(ButtonStyle.Danger),
     );
 }
 
@@ -239,7 +240,7 @@ module.exports = async function ebankCmd(message) {
     try { const { getBankButtons } = require('../economy/personalBank'); otherRows = getBankButtons(userId); } catch {}
     return message.reply({
         embeds:     [buildMainEmbed(d)],
-        components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows, closeRow(userId)],
+        components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows],
     });
 };
 
