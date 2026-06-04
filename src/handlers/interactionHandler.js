@@ -193,7 +193,7 @@ module.exports = function setupInteractionHandler(client) {
             }
 
             // ── Ebank: amount modal submit ──
-            if (interaction.customId.startsWith('eco_ebmod_')) {
+            if (interaction.customId.startsWith('eco_ebmod_') && !interaction.customId.startsWith('eco_ebmod_transfer_')) {
                 const rest     = interaction.customId.replace('eco_ebmod_', '');
                 const parts    = rest.split('_');
                 const ownerId  = parts[parts.length - 1];
