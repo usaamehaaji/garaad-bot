@@ -86,23 +86,15 @@ function buildEcoEmbed() {
             `**\`${PREFIX}today\`** — BTC + IQ maalin kasta (24h)\n` +
             `**\`${PREFIX}rich\`** — Top 10 ugu hantida badan\n\n` +
 
-            `**🏦 Personal Bank (BTC)**\n` +
-            `**\`${PREFIX}bank\`** — Bank-kaaga eeg\n` +
-            `**\`${PREFIX}bank create\`** — Bank account bilow\n` +
-            `**\`${PREFIX}bp <password>\`** — Bank password dhig (withdraw/send ilaaliso)\n` +
-            `**\`${PREFIX}deposit <xad>\`** — BTC dhig bank\n` +
-            `**\`${PREFIX}withdraw <xad> [pw]\`** — BTC bank ka qaado\n` +            `**\`${PREFIX}banksend @user <xad> [pw]\`** — BTC u dir qof\n\n` +
-
-            `**🏛️ Garaad Bank (BTC)**\n` +
-            `**\`${PREFIX}ebank\`** — BTC bank (1%/day) + Deyn\n` +
-            `**\`${PREFIX}list\`** — Banks + deynta liis\n\n` +
-
-            `**🏢 Public Banks**\n` +
-            `**\`${PREFIX}banks\`** — Banks oo dhan\n` +
-            `**\`${PREFIX}createbank <magac>\`** — Bank cusub samee\n` +
-            `**\`${PREFIX}bankinfo <magac>\`** — Bank macluumaad\n` +
-            `**\`${PREFIX}bankdeposit <magac> <xad>\`** — Dhig\n` +
-            `**\`${PREFIX}bankwithdraw <magac> <xad> <pw>\`** — Qaado\n` +
+            `**🏦 Banks**\n` +
+            `**\`${PREFIX}bank\`** — Dhammaan banks + Garaad Bank panel\n` +
+            `**\`${PREFIX}banks\`** — Banks oo dhan + qiyamkooda\n` +
+            `**\`${PREFIX}deposit <bank> <xad>\`** — Bank lacag geli (**\`?d\`** sidoo)\n` +
+            `_Tusaale: \`?d garaad 500\` · \`?d Kormaal Bank 1000\`_\n` +
+            `**\`${PREFIX}bv\`** — Bangigaaga personal eeg\n` +
+            `**\`${PREFIX}bank create\`** — Personal bank bilow\n` +
+            `**\`${PREFIX}bp <password>\`** — Bank password dhig\n` +
+            `**\`${PREFIX}createbank <magac>\`** — Public bank samee\n` +
             `**\`${PREFIX}topbanks\`** — Top 10 banks\n\n` +
 
             `**🏢 Shirkadaha**\n` +
