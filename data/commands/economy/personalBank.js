@@ -256,6 +256,7 @@ async function bankDirectoryCmd(message) {
     try {
         checkEconUser(message.author.id);
         const userId = message.author.id;
+        const ec     = econData[userId];
 
         const pubBanks = Object.values(getAllPublicBanks())
             .filter(b => (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXPIRY_MS)
@@ -263,21 +264,50 @@ async function bankDirectoryCmd(message) {
 
         const persBanks = Object.entries(econData)
             .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank)
-            .map(([uid, d]) => ({ bank: d.personalBank }))
+            .map(([uid, d]) => ({ uid, bank: d.personalBank }))
             .sort((a, b) => (b.bank.balance || 0) - (a.bank.balance || 0));
 
-        let desc = `🏦 **Garaad Bank** — 1%/day\n`;
+        // My balances
+        const myGaraad  = ec.banks?.garaad || 0;
+        const myWallet  = ec.btc || 0;
+
+        // Collect all my deposits in other banks
+        let myBankTotal = myGaraad;
+        const myDepLines = [];
+        for (const b of pubBanks) {
+            const dep = b.customers?.[userId]?.balance || 0;
+            if (dep > 0) { myBankTotal += dep; myDepLines.push(`  └ 🏛 **${b.name}:** ${fmtBtc(dep)}`); }
+        }
+        for (const e of persBanks) {
+            const dep = e.bank.customers?.[userId]?.balance || 0;
+            if (dep > 0) { myBankTotal += dep; myDepLines.push(`  └ 🏦 **${e.bank.owner}'s Bank:** ${fmtBtc(dep)}`); }
+        }
+        const myTotal = myWallet + myBankTotal;
+
+        // Balance summary at top
+        let desc = `**━━ Hantidaada ━━**\n`;
+        desc += `💳 **Wallet:** ${fmtBtc(myWallet)}\n`;
+        desc += `🏦 **Garaad Bank:** ${fmtBtc(myGaraad)}\n`;
+        if (myDepLines.length) desc += myDepLines.join('\n') + '\n';
+        desc += `📊 **Wadarta:** ${fmtBtc(myTotal)}\n`;
+        desc += `\n**━━ Banks ━━**\n`;
+        desc += `🏦 **Garaad Bank** — 1%/day\n`;
+
         if (pubBanks.length) {
             desc += `\n🏛️ **Public Banks:**\n`;
-            desc += pubBanks.map(b =>
-                `🏛 **${b.name}** · \`${b.id}\` · ${fmtBtc(b.balance || 0)}`
-            ).join('\n');
+            desc += pubBanks.map(b => {
+                const myDep = b.customers?.[userId]?.balance || 0;
+                return `🏛 **${b.name}** · \`${b.id}\` · ${fmtBtc(b.balance || 0)}` +
+                       (myDep > 0 ? `\n  └ ${fmtBtc(myDep)} _(adiga)_` : '');
+            }).join('\n');
         }
         if (persBanks.length) {
             desc += `\n\n🏦 **Personal Banks:**\n`;
-            desc += persBanks.map(e =>
-                `🏦 **${e.bank.owner}** · \`${e.bank.bankId}\` · ${fmtBtc(e.bank.balance || 0)}`
-            ).join('\n');
+            desc += persBanks.map(e => {
+                const myDep = e.bank.customers?.[userId]?.balance || 0;
+                return `🏦 **${e.bank.owner}** · \`${e.bank.bankId}\` · ${fmtBtc(e.bank.balance || 0)}` +
+                       (myDep > 0 ? `\n  └ ${fmtBtc(myDep)} _(adiga)_` : '');
+            }).join('\n');
         }
         if (!pubBanks.length && !persBanks.length)
             desc += `\n_\`?cb <name>\` public bank abuur_`;
@@ -286,7 +316,7 @@ async function bankDirectoryCmd(message) {
             .setTitle('🏦 Banks')
             .setColor('#2471a3')
             .setDescription(desc)
-            .setFooter({ text: '?d <bank> <xad> · ?w <bank> <xad>' });
+            .setFooter({ text: '?d <bank> <xad>  ·  ?w <bank> <xad>' });
 
         const components = [new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId(`bank_all_dep_${userId}`).setLabel('⬇ Deposit').setStyle(ButtonStyle.Success),
