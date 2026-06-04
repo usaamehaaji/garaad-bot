@@ -174,7 +174,6 @@ function bankFullRow(userId) {
     return new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇ Deposit')  .setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆ Withdraw') .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`eco_eb_transfer_${userId}`)        .setLabel('💸 Transfer') .setStyle(ButtonStyle.Secondary),
     );
 }
 

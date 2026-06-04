@@ -165,12 +165,12 @@ function buildBankDirectory(userId) {
 
     const components = [];
     const row1Btns = [
-        new ButtonBuilder().setCustomId(`bank_view_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`bank_view_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Secondary),
         ...pubBanks.map(b =>
             new ButtonBuilder()
                 .setCustomId(`bank_view_pub_${b.id}_${userId}`)
-                .setLabel(`🏛️ ${b.name.slice(0, 20)}`)
-                .setStyle(ButtonStyle.Success)
+                .setLabel(`🏛 ${b.name.slice(0, 20)}`)
+                .setStyle(ButtonStyle.Secondary)
         ),
     ];
     components.push(new ActionRowBuilder().addComponents(row1Btns));
@@ -508,8 +508,8 @@ function getBankButtons(userId) {
         ...pubBanks.map(b =>
             new ButtonBuilder()
                 .setCustomId(`bank_view_pub_${b.id}_${userId}`)
-                .setLabel(`🏛️ ${b.name.slice(0, 20)}`)
-                .setStyle(ButtonStyle.Success)
+                .setLabel(`🏛 ${b.name.slice(0, 20)}`)
+                .setStyle(ButtonStyle.Secondary)
         ),
         ...persBanks.map(e =>
             new ButtonBuilder()
