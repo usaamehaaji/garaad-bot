@@ -1,7 +1,7 @@
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 
-const ROB_COOLDOWN_MS        = 15 * 60 * 1000;  // 15 minutes
-const TARGET_COOLDOWN_MS     = 15 * 60 * 1000;  // 15 minutes per target
+const WINDOW_MS   = 15 * 60 * 1000;  // 15-minute window
+const MAX_ROBS    = 2;               // max 2 robs per window
 const ROB_MIN_BTC            = 1_000;
 const MAX_STEAL_FRACTION     = 0.25;
 const ROB_SUCCESS_RATE       = 0.50;
@@ -20,12 +20,21 @@ module.exports = async function robCmd(message) {
     const robber = econData[userId];
     const victim = econData[target.id];
     robber.lastRobTargets ??= {};
+    robber.robWindow      ??= { count: 0, start: 0 };
 
-    const cooldownLeft = ROB_COOLDOWN_MS - (Date.now() - (robber.lastRob || 0));
-    if (cooldownLeft > 0)
-        return message.reply(`⏳ Sug **${Math.ceil(cooldownLeft / 60000)} daqiiqo** kadib mar kale isku day.`);
+    const now = Date.now();
 
-    const targetCooldownLeft = TARGET_COOLDOWN_MS - (Date.now() - (robber.lastRobTargets[target.id] || 0));
+    // Reset window if 15 min passed
+    if (now - robber.robWindow.start >= WINDOW_MS) {
+        robber.robWindow = { count: 0, start: now };
+    }
+
+    if (robber.robWindow.count >= MAX_ROBS) {
+        const wait = Math.ceil((WINDOW_MS - (now - robber.robWindow.start)) / 60000);
+        return message.reply(`⏳ **2 rob** 15 daqiiqo gudahood isticmaashay. Sug **${wait} daqiiqo**!`);
+    }
+
+    const targetCooldownLeft = WINDOW_MS - (now - (robber.lastRobTargets[target.id] || 0));
     if (targetCooldownLeft > 0)
         return message.reply(`⏳ Sug **${Math.ceil(targetCooldownLeft / 60000)} daqiiqo** kadib **${target.username}** mar kale dhacdo.`);
 
@@ -37,10 +46,11 @@ module.exports = async function robCmd(message) {
         return message.reply(`🛡️ **${target.username}** Safety Shield waxaa ilaaliya — ${h}h haray.`);
     }
 
-    robber.lastRob = Date.now();
-    robber.lastRobTargets[target.id] = robber.lastRob;
+    robber.lastRob = now;
+    robber.lastRobTargets[target.id] = now;
+    robber.robWindow.count++;
 
-    const richRobber = (robber.btc || 0) > 5_000;
+    const richRobber = (robber.btc  || 0) > 5_000;
     const richTarget = (victim.btc  || 0) >= 5_000;
     const stealFrac  = richTarget ? 0.50 : MAX_STEAL_FRACTION;
     const success    = richRobber ? false : Math.random() < ROB_SUCCESS_RATE;
