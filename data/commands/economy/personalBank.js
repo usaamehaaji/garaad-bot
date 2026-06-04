@@ -492,9 +492,44 @@ async function allBanksCmd(message) {
     });
 }
 
+// ── getBankButtons — bank buttons for ebank panel ─────
+function getBankButtons(userId) {
+    const pubBanks = Object.values(getAllPublicBanks())
+        .filter(b => (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXPIRY_MS)
+        .sort((a, b) => (b.balance || 0) - (a.balance || 0))
+        .slice(0, 5);
+
+    const persBanks = Object.entries(econData)
+        .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank)
+        .map(([uid, d]) => ({ uid, bank: d.personalBank }))
+        .slice(0, 5);
+
+    const allBtns = [
+        ...pubBanks.map(b =>
+            new ButtonBuilder()
+                .setCustomId(`bank_view_pub_${b.id}_${userId}`)
+                .setLabel(`🏛️ ${b.name.slice(0, 20)}`)
+                .setStyle(ButtonStyle.Success)
+        ),
+        ...persBanks.map(e =>
+            new ButtonBuilder()
+                .setCustomId(`bank_view_pers_${e.uid}_${userId}`)
+                .setLabel(`🏦 ${e.bank.owner.slice(0, 20)}`)
+                .setStyle(ButtonStyle.Secondary)
+        ),
+    ];
+
+    const rows = [];
+    for (let i = 0; i < Math.min(allBtns.length, 10); i += 5) {
+        rows.push(new ActionRowBuilder().addComponents(allBtns.slice(i, i + 5)));
+    }
+    return rows;
+}
+
 module.exports = {
     bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd,
     depositAnyCmd, withdrawAnyCmd, allBanksCmd,
     buildBankDirectory, buildPubBankPanel, buildPersBankPanel,
+    getBankButtons,
     getTotalCustomerDeposits, applyBankProfit, bankViewRow,
 };

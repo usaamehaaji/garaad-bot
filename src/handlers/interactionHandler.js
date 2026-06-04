@@ -2584,28 +2584,22 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
-        // ── Back to bank directory ──
-        if (id.startsWith('back_to_banks_')) {
-            const userId = id.replace('back_to_banks_', '');
-            if (interaction.user.id !== userId)
-                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { buildBankDirectory } = require('../../data/commands/economy/personalBank');
-            const { embed, components } = buildBankDirectory(userId);
-            return interaction.update({ embeds: [embed], components });
-        }
-
-        // ── View Garaad Bank from directory ──
-        if (id.startsWith('bank_view_garaad_')) {
-            const userId = id.replace('bank_view_garaad_', '');
+        // ── Back to ebank main panel ──
+        if (id.startsWith('back_to_banks_') || id.startsWith('bank_view_garaad_')) {
+            const userId = id.startsWith('back_to_banks_')
+                ? id.replace('back_to_banks_', '')
+                : id.replace('bank_view_garaad_', '');
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
             const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow, closeRow } = require('../../data/commands/economy/ebank');
+            const { getBankButtons } = require('../../data/commands/economy/personalBank');
             checkEconUser(userId);
             const d = eData[userId];
             applyInterest(d);
             saveEcon();
-            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), closeRow(userId)] });
+            const otherRows = getBankButtons(userId);
+            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows, closeRow(userId)] });
         }
 
         // ── View Public Bank from directory ──
@@ -2703,11 +2697,13 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
             const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow, closeRow } = require('../../data/commands/economy/ebank');
+            const { getBankButtons } = require('../../data/commands/economy/personalBank');
             checkEconUser(userId);
             const d = eData[userId];
             applyInterest(d);
             saveEcon();
-            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), closeRow(userId)] });
+            const otherRows = getBankButtons(userId);
+            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows, closeRow(userId)] });
         }
 
         // ── Deposit into Garaad Bank (from directory) ──

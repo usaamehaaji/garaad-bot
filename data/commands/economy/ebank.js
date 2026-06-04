@@ -235,9 +235,11 @@ module.exports = async function ebankCmd(message) {
     const d = econData[userId];
     applyInterest(d);
     saveEcon();
+    let otherRows = [];
+    try { const { getBankButtons } = require('../economy/personalBank'); otherRows = getBankButtons(userId); } catch {}
     return message.reply({
         embeds:     [buildMainEmbed(d)],
-        components: [bankFullRow(userId), ebCloseRow(userId), closeRow(userId)],
+        components: [bankFullRow(userId), ebCloseRow(userId), ...otherRows, closeRow(userId)],
     });
 };
 
