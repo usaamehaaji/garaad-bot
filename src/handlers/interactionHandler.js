@@ -1063,14 +1063,13 @@ module.exports = function setupInteractionHandler(client) {
                 const targetBank = targetEc.personalBank;
 
                 if (targetId === userId)
-                    return interaction.reply({ content: '⚠️ Bank-kaaga laftiis: `?deposit <amount>`', flags: MessageFlags.Ephemeral });
+                    return interaction.reply({ content: '⚠️ Bank-kaaga laftiis: `?bv` fur oo Deposit taabo.', flags: MessageFlags.Ephemeral });
 
                 checkEconUser(userId);
                 const ec = eData[userId];
                 if ((ec.btc || 0) < amount)
                     return interaction.reply({ content: `⚠️ Jeebkaagu ma filna. Haysataa: ₿${Math.floor(ec.btc || 0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
 
-                // Apply pending profit
                 const nowTs = Date.now();
                 targetBank.lastProfitAt ??= nowTs;
                 const profDays = Math.floor((nowTs - targetBank.lastProfitAt) / 86400000);
@@ -1095,12 +1094,10 @@ module.exports = function setupInteractionHandler(client) {
                 addTx(targetBank, 'customer_deposit', amount, `← ${interaction.user.username}`);
                 saveEcon();
 
-                const myBal = targetBank.customers[userId].balance;
                 return interaction.reply({
                     content:
                         `📥 **₿${amount.toLocaleString()}** → 🏦 **${targetBank.owner}**'s Bank\n` +
-                        `💼 Bangigaas adigu haysataa: **₿${myBal.toLocaleString()}**\n` +
-                        `📌 Dib u qaad: \`?pwithdraw @${targetBank.owner} <amount>\``,
+                        `💼 Bangigaas adigu haysataa: **₿${targetBank.customers[userId].balance.toLocaleString()}**`,
                     flags: MessageFlags.Ephemeral,
                 });
             }

@@ -127,7 +127,6 @@ async function bankDirectoryCmd(message) {
     const banks = Object.entries(econData)
         .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank)
         .map(([uid, d]) => ({
-            uid,
             bank:      d.personalBank,
             custCount: Object.keys(d.personalBank.customers || {}).length,
             custTotal: getTotalCustomerDeposits(d.personalBank),
