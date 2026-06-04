@@ -201,8 +201,6 @@ module.exports = function setupMessageHandler(client) {
             case 'bank':
                 return bankDirectoryCmd(message);
 
-            case 'bv':
-                return bankViewCmd(message);
 
             case 'deposit':
             case 'd':

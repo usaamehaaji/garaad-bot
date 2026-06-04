@@ -91,8 +91,6 @@ function buildEcoEmbed() {
             `**\`${PREFIX}banks\`** — Banks oo dhan + qiyamkooda\n` +
             `**\`${PREFIX}deposit <bank> <xad>\`** — Bank lacag geli (**\`?d\`** sidoo)\n` +
             `_Tusaale: \`?d garaad 500\` · \`?d Kormaal Bank 1000\`_\n` +
-            `**\`${PREFIX}bv\`** — Bangigaaga personal eeg\n` +
-            `**\`${PREFIX}bank create\`** — Personal bank bilow\n` +
             `**\`${PREFIX}bp <password>\`** — Bank password dhig\n` +
             `**\`${PREFIX}createbank <magac>\`** — Public bank samee\n` +
             `**\`${PREFIX}topbanks\`** — Top 10 banks\n\n` +
