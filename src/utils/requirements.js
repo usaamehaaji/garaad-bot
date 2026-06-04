@@ -1,11 +1,9 @@
 const { getLevel } = require('./helpers');
 
 const BANK_REQ = {
-    level:    1,
-    iq:       100,
-    btc:      100_000,
-    missions: 50,
-    streak:   7,
+    iq:       50,
+    btc:      1_000_000,
+    missions: 5,
 };
 
 const COMPANY_REQ = {
@@ -29,16 +27,15 @@ function checkRequirements(userData, econData, userId, type) {
     const streak     = ec.streak || 0;
     const duelWins   = d.stats?.duelWins || 0;
 
-    const results = [
-        { label: `Level ${req.level}+`,           met: level >= req.level,      have: `Level ${level}` },
-        { label: `${req.iq}+ IQ`,                 met: iq >= req.iq,            have: `${iq} IQ` },
-        { label: `₿${req.btc.toLocaleString()}+`, met: btc >= req.btc,          have: `₿${Math.floor(btc).toLocaleString()}` },
-        { label: `${req.missions} Missions`,       met: missions >= req.missions, have: `${missions} done` },
-        { label: `${req.streak}-Day Streak`,       met: streak >= req.streak,    have: `${streak} days` },
-    ];
+    const results = [];
+    if (req.level    != null) results.push({ label: `Level ${req.level}+`,           met: level    >= req.level,    have: `Level ${level}` });
+    if (req.iq       != null) results.push({ label: `${req.iq}+ IQ`,                 met: iq       >= req.iq,       have: `${iq} IQ` });
+    if (req.btc      != null) results.push({ label: `₿${req.btc.toLocaleString()}+`, met: btc      >= req.btc,      have: `₿${Math.floor(btc).toLocaleString()}` });
+    if (req.missions != null) results.push({ label: `${req.missions} Missions`,       met: missions >= req.missions, have: `${missions} done` });
+    if (req.streak   != null) results.push({ label: `${req.streak}-Day Streak`,       met: streak   >= req.streak,   have: `${streak} days` });
 
     if (type === 'company') {
-        results.push({ label: `${req.duelWins}+ Duel Wins`, met: duelWins >= req.duelWins, have: `${duelWins} wins` });
+        if (req.duelWins != null) results.push({ label: `${req.duelWins}+ Duel Wins`, met: duelWins >= req.duelWins, have: `${duelWins} wins` });
     }
 
     const allMet = results.every(r => r.met);
