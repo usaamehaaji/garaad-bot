@@ -199,7 +199,6 @@ module.exports = function setupMessageHandler(client) {
 
             // ── Personal Bank ──
             case 'bank':
-                if (args[0] === 'create') return bankCreateCmd(message);
                 return bankDirectoryCmd(message);
 
             case 'bv':          // ?bv  — view your own bank
@@ -214,9 +213,6 @@ module.exports = function setupMessageHandler(client) {
             // ── Public Banks ──
             case 'createbank':
                 return createPublicBankCmd(message, args);
-
-            case 'banks':
-                return listPublicBanksCmd(message);
 
             case 'topbanks':
                 return topBanksCmd(message);

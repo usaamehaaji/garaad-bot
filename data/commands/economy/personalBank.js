@@ -1,7 +1,9 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 const { userData } = require('../../../src/store');
-const { createPersonalBank, addTx, hashPass } = require('../../../src/economy/bankStore');
+const { createPersonalBank, addTx, hashPass, getAllPublicBanks } = require('../../../src/economy/bankStore');
+
+const PUB_EXPIRY_MS = 14 * 24 * 60 * 60 * 1000;
 const { checkRequirements, reqFailMessage } = require('../../../src/utils/requirements');
 
 const PROFIT_RATE     = 0.02;
@@ -122,32 +124,50 @@ async function bankViewCmd(message) {
     return message.reply({ embeds: [embed], components: [bankViewRow(message.author.id)] });
 }
 
-// ── ?bank — directory of all personal banks ───────────
+// ── ?bank — directory: public + personal banks ────────
 async function bankDirectoryCmd(message) {
-    const banks = Object.entries(econData)
+    const pubBanks = Object.values(getAllPublicBanks())
+        .filter(b => (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXPIRY_MS)
+        .sort((a, b) => (b.balance || 0) - (a.balance || 0))
+        .slice(0, 6);
+
+    const persBanks = Object.entries(econData)
         .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank)
         .map(([uid, d]) => ({
             bank:      d.personalBank,
             custCount: Object.keys(d.personalBank.customers || {}).length,
             custTotal: getTotalCustomerDeposits(d.personalBank),
         }))
-        .sort((a, b) => b.custTotal - a.custTotal);
+        .sort((a, b) => b.custTotal - a.custTotal)
+        .slice(0, 6);
 
-    if (!banks.length)
-        return message.reply('📭 Wali bangi la abuuri waayay. `?bc` isticmaal bangi abuuro!');
+    if (!pubBanks.length && !persBanks.length)
+        return message.reply('📭 Wali bangi la abuuri waayay. `?bc` ama `?createbank <name>` isticmaal!');
 
-    const lines = banks.slice(0, 10).map((e, i) =>
-        `**${i + 1}.** 🏦 **${e.bank.owner}** · \`${e.bank.bankId}\`\n` +
-        `   💰 ${fmtBtc(e.bank.balance)} · 👥 ${e.custCount} macaamiil · 📈 **+2% /maalin**`
-    );
+    let desc = '';
+    if (pubBanks.length) {
+        desc += `**🏛️ Public Banks:**\n`;
+        desc += pubBanks.map((b, i) =>
+            `**${i + 1}.** 🏛️ **${b.name}** · \`${b.id}\`\n` +
+            `   💰 ${fmtBtc(b.balance)} · 👥 ${Object.keys(b.customers || {}).length} macaamiil · 👤 ${b.ownerUsername}`
+        ).join('\n') + '\n\n';
+    }
+    if (persBanks.length) {
+        desc += `**🏦 Personal Banks:**\n`;
+        desc += persBanks.map((e, i) =>
+            `**${i + 1}.** 🏦 **${e.bank.owner}** · \`${e.bank.bankId}\`\n` +
+            `   💰 ${fmtBtc(e.bank.balance)} · 👥 ${e.custCount} macaamiil · 📈 +2%/maalin`
+        ).join('\n');
+    }
+    desc += '\n\n📌 Lacag geliso — **Deposit** button taabo!';
 
     const userId = message.author.id;
     return message.reply({
         embeds: [new EmbedBuilder()
-            .setTitle('🏦 Personal Banks — Directory')
+            .setTitle('🏦 Banks — Directory')
             .setColor('#2471a3')
-            .setDescription(lines.join('\n\n') + '\n\n📌 Lacag geliso — **Deposit** button taabo!')
-            .setFooter({ text: '?bv — bangigaaga arag  •  ?bc — bank cusub abuur' })],
+            .setDescription(desc)
+            .setFooter({ text: '?bv — bangigaaga arag  •  ?bc — personal bank  •  ?createbank <name> — public bank' })],
         components: [new ActionRowBuilder().addComponents(
             new ButtonBuilder()
                 .setCustomId(`pbank_dep_btn_${userId}`)

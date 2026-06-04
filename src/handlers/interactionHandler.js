@@ -1037,7 +1037,7 @@ module.exports = function setupInteractionHandler(client) {
                 });
             }
 
-            // ── Personal Bank: deposit modal ──
+            // ── Bank deposit modal (personal + public) ──
             if (interaction.customId.startsWith('pbank_dep_modal_')) {
                 const userId = interaction.user.id;
                 const input  = interaction.fields.getTextInputValue('pbank_bank_name').trim();
@@ -1047,57 +1047,86 @@ module.exports = function setupInteractionHandler(client) {
                     return interaction.reply({ content: '⚠️ Xaddad sax ah geli (tusaale: 1000).', flags: MessageFlags.Ephemeral });
 
                 const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-                const { addTx } = require('../economy/bankStore');
+                const { addTx, getAllPublicBanks, saveBanks } = require('../economy/bankStore');
+                checkEconUser(userId);
+                const ec = eData[userId];
 
-                const found = Object.entries(eData).find(([uid, d]) => {
+                if ((ec.btc || 0) < amount)
+                    return interaction.reply({ content: `⚠️ Jeebkaagu ma filna. Haysataa: ₿${Math.floor(ec.btc || 0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
+
+                // ── 1. Search personal banks ──
+                const foundPers = Object.entries(eData).find(([uid, d]) => {
                     if (!/^\d{17,19}$/.test(uid) || !d?.personalBank) return false;
                     const b = d.personalBank;
                     return b.owner.toLowerCase() === input.toLowerCase() ||
                            b.bankId.toUpperCase() === input.toUpperCase();
                 });
 
-                if (!found)
-                    return interaction.reply({ content: `⚠️ **"${input}"** magaciisa ama ID-giisa leh bank ma helin. Liiska eeg oo si sax ah u qor.`, flags: MessageFlags.Ephemeral });
+                if (foundPers) {
+                    const [targetId, targetEc] = foundPers;
+                    const targetBank = targetEc.personalBank;
+                    if (targetId === userId)
+                        return interaction.reply({ content: '⚠️ Bank-kaaga laftiis: `?bv` fur oo Deposit taabo.', flags: MessageFlags.Ephemeral });
 
-                const [targetId, targetEc] = found;
-                const targetBank = targetEc.personalBank;
-
-                if (targetId === userId)
-                    return interaction.reply({ content: '⚠️ Bank-kaaga laftiis: `?bv` fur oo Deposit taabo.', flags: MessageFlags.Ephemeral });
-
-                checkEconUser(userId);
-                const ec = eData[userId];
-                if ((ec.btc || 0) < amount)
-                    return interaction.reply({ content: `⚠️ Jeebkaagu ma filna. Haysataa: ₿${Math.floor(ec.btc || 0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
-
-                const nowTs = Date.now();
-                targetBank.lastProfitAt ??= nowTs;
-                const profDays = Math.floor((nowTs - targetBank.lastProfitAt) / 86400000);
-                if (profDays > 0) {
-                    const ct = Object.values(targetBank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
-                    if (ct > 0) {
-                        const profit = Math.floor(ct * 0.02 * profDays);
-                        if (profit > 0) {
-                            targetBank.balance      += profit;
-                            targetBank.profitEarned  = (targetBank.profitEarned || 0) + profit;
-                            addTx(targetBank, 'profit', profit, `Faa'iido macaamiisha (${profDays} maalin)`);
+                    const nowTs = Date.now();
+                    targetBank.lastProfitAt ??= nowTs;
+                    const profDays = Math.floor((nowTs - targetBank.lastProfitAt) / 86400000);
+                    if (profDays > 0) {
+                        const ct = Object.values(targetBank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
+                        if (ct > 0) {
+                            const profit = Math.floor(ct * 0.02 * profDays);
+                            if (profit > 0) {
+                                targetBank.balance     += profit;
+                                targetBank.profitEarned = (targetBank.profitEarned || 0) + profit;
+                                addTx(targetBank, 'profit', profit, `Faa'iido macaamiisha (${profDays} maalin)`);
+                            }
                         }
+                        targetBank.lastProfitAt = nowTs;
                     }
-                    targetBank.lastProfitAt = nowTs;
+                    ec.btc = (ec.btc || 0) - amount;
+                    targetBank.customers = targetBank.customers || {};
+                    if (!targetBank.customers[userId])
+                        targetBank.customers[userId] = { username: interaction.user.username, balance: 0, depositedAt: Date.now() };
+                    targetBank.customers[userId].balance += amount;
+                    addTx(targetBank, 'customer_deposit', amount, `← ${interaction.user.username}`);
+                    saveEcon();
+                    return interaction.reply({
+                        content:
+                            `📥 **₿${amount.toLocaleString()}** → 🏦 **${targetBank.owner}**'s Bank\n` +
+                            `💼 Bangigaas adigu haysataa: **₿${targetBank.customers[userId].balance.toLocaleString()}**`,
+                        flags: MessageFlags.Ephemeral,
+                    });
                 }
 
-                ec.btc = (ec.btc || 0) - amount;
-                targetBank.customers = targetBank.customers || {};
-                if (!targetBank.customers[userId])
-                    targetBank.customers[userId] = { username: interaction.user.username, balance: 0, depositedAt: Date.now() };
-                targetBank.customers[userId].balance += amount;
-                addTx(targetBank, 'customer_deposit', amount, `← ${interaction.user.username}`);
-                saveEcon();
+                // ── 2. Search public banks ──
+                const PUB_EXPIRY = 14 * 24 * 60 * 60 * 1000;
+                const allPub  = getAllPublicBanks();
+                const pubBank = Object.values(allPub).find(b =>
+                    (b.name || '').toLowerCase() === input.toLowerCase() ||
+                    (b.id   || '').toUpperCase() === input.toUpperCase()
+                );
 
+                if (!pubBank)
+                    return interaction.reply({ content: `⚠️ **"${input}"** — bank lama helin. Magaca ama ID-ga si sax ah u qor.`, flags: MessageFlags.Ephemeral });
+
+                if ((Date.now() - (pubBank.lastActivity || pubBank.createdAt)) >= PUB_EXPIRY)
+                    return interaction.reply({ content: `⚠️ **${pubBank.name}** waa la xiray (2 toddobaad shaqo la'aan).`, flags: MessageFlags.Ephemeral });
+
+                ec.btc = (ec.btc || 0) - amount;
+                pubBank.balance       = (pubBank.balance || 0) + amount;
+                pubBank.totalDeposits = (pubBank.totalDeposits || 0) + amount;
+                pubBank.reputation    = Math.floor((pubBank.reputation || 0) + amount / 10000);
+                pubBank.lastActivity  = Date.now();
+                pubBank.customers     = pubBank.customers || {};
+                pubBank.customers[userId] ??= { balance: 0, username: interaction.user.username, joinedAt: Date.now() };
+                pubBank.customers[userId].balance += amount;
+                saveBanks();
+                saveEcon();
                 return interaction.reply({
                     content:
-                        `📥 **₿${amount.toLocaleString()}** → 🏦 **${targetBank.owner}**'s Bank\n` +
-                        `💼 Bangigaas adigu haysataa: **₿${targetBank.customers[userId].balance.toLocaleString()}**`,
+                        `📥 **₿${amount.toLocaleString()}** → 🏛️ **${pubBank.name}**\n` +
+                        `💰 Bangiga haraagga: ₿${pubBank.balance.toLocaleString()}\n` +
+                        `💼 Adiga haysataa: ₿${pubBank.customers[userId].balance.toLocaleString()}`,
                     flags: MessageFlags.Ephemeral,
                 });
             }
@@ -2404,7 +2433,7 @@ module.exports = function setupInteractionHandler(client) {
         if (id.startsWith('pbank_dep_btn_')) {
             const modal = new ModalBuilder()
                 .setCustomId(`pbank_dep_modal_${interaction.user.id}`)
-                .setTitle('💰 Personal Bank — Lacag Geli');
+                .setTitle('💰 Bank — Lacag Geli');
             modal.addComponents(
                 new ActionRowBuilder().addComponents(
                     new TextInputBuilder()
