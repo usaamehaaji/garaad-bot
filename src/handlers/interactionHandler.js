@@ -978,6 +978,64 @@ module.exports = function setupInteractionHandler(client) {
                 }
             }
 
+            // ── Withdraw: Public Bank modal ──
+            if (interaction.customId.startsWith('wd_pub_modal_')) {
+                const rest   = interaction.customId.replace('wd_pub_modal_', '');
+                const lastU  = rest.lastIndexOf('_');
+                const bankId = rest.substring(0, lastU);
+                const userId = rest.substring(lastU + 1);
+                if (interaction.user.id !== userId)
+                    return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+                const amount = Math.floor(Number(interaction.fields.getTextInputValue('wd_amount')));
+                if (!amount || amount <= 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { getAllPublicBanks, saveBanks } = require('../economy/bankStore');
+                const { buildPubBankPanel } = require('../../data/commands/economy/personalBank');
+                checkEconUser(userId);
+                const ec   = eData[userId];
+                const bank = Object.values(getAllPublicBanks()).find(b => b.id === bankId || b.id === bankId.toUpperCase());
+                if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin.', flags: MessageFlags.Ephemeral });
+                const myRec = bank.customers?.[userId];
+                if (!myRec || (myRec.balance || 0) <= 0) return interaction.reply({ content: `⚠️ **${bank.name}** lacag kuma dhigin.`, flags: MessageFlags.Ephemeral });
+                if (amount > myRec.balance) return interaction.reply({ content: `⚠️ Haysataa: ₿${myRec.balance.toLocaleString()} kaliya.`, flags: MessageFlags.Ephemeral });
+                myRec.balance      -= amount;
+                bank.balance        = Math.max(0, (bank.balance || 0) - amount);
+                ec.btc              = (ec.btc || 0) + amount;
+                saveBanks(); saveEcon();
+                const { embed, components } = buildPubBankPanel(bank, userId);
+                return interaction.update({ embeds: [embed], components,
+                    content: `📤 **₿${amount.toLocaleString()}** ← 🏛️ **${bank.name}**` });
+            }
+
+            // ── Withdraw: Personal Bank modal ──
+            if (interaction.customId.startsWith('wd_pers_modal_')) {
+                const rest    = interaction.customId.replace('wd_pers_modal_', '');
+                const lastU   = rest.lastIndexOf('_');
+                const ownerId = rest.substring(0, lastU);
+                const userId  = rest.substring(lastU + 1);
+                if (interaction.user.id !== userId)
+                    return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+                const amount = Math.floor(Number(interaction.fields.getTextInputValue('wd_amount')));
+                if (!amount || amount <= 0) return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { addTx } = require('../economy/bankStore');
+                const { buildPersBankPanel } = require('../../data/commands/economy/personalBank');
+                checkEconUser(userId);
+                const ec    = eData[userId];
+                const bank  = eData[ownerId]?.personalBank;
+                if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin.', flags: MessageFlags.Ephemeral });
+                const myRec = bank.customers?.[userId];
+                if (!myRec || (myRec.balance || 0) <= 0) return interaction.reply({ content: `⚠️ **${bank.owner}**'s bank lacag kuma dhigin.`, flags: MessageFlags.Ephemeral });
+                if (amount > myRec.balance) return interaction.reply({ content: `⚠️ Haysataa: ₿${myRec.balance.toLocaleString()} kaliya.`, flags: MessageFlags.Ephemeral });
+                myRec.balance -= amount;
+                ec.btc         = (ec.btc || 0) + amount;
+                addTx(bank, 'customer_withdraw', amount, `→ ${interaction.user.username}`);
+                saveEcon();
+                const { embed, components } = buildPersBankPanel(bank, ownerId, userId);
+                return interaction.update({ embeds: [embed], components,
+                    content: `📤 **₿${amount.toLocaleString()}** ← 🏦 **${bank.owner}**'s Bank` });
+            }
+
             // ── Deposit: Garaad Bank modal ──
             if (interaction.customId.startsWith('dep_garaad_modal_')) {
                 const userId = interaction.customId.replace('dep_garaad_modal_', '');
@@ -2469,6 +2527,108 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.reply({
                 content: `💍 **${fromName}** ❤️ **${interaction.user.username}** — Hambalyo! Wada noloshiinna waa la xidey!\n${RING_NAMES[ringType]}`,
             });
+        }
+
+        // ── Back to bank directory ──
+        if (id.startsWith('back_to_banks_')) {
+            const userId = id.replace('back_to_banks_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { buildBankDirectory } = require('../../data/commands/economy/personalBank');
+            const { embed, components } = buildBankDirectory(userId);
+            return interaction.update({ embeds: [embed], components });
+        }
+
+        // ── View Garaad Bank from directory ──
+        if (id.startsWith('bank_view_garaad_')) {
+            const userId = id.replace('bank_view_garaad_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow } = require('../../data/commands/economy/ebank');
+            checkEconUser(userId);
+            const d = eData[userId];
+            applyInterest(d);
+            saveEcon();
+            return interaction.update({ embeds: [buildMainEmbed(d)], components: [bankFullRow(userId), ebCloseRow(userId)] });
+        }
+
+        // ── View Public Bank from directory ──
+        if (id.startsWith('bank_view_pub_') && !id.includes('modal')) {
+            const rest   = id.replace('bank_view_pub_', '');
+            const lastU  = rest.lastIndexOf('_');
+            const bankId = rest.substring(0, lastU);
+            const userId = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { getAllPublicBanks } = require('../economy/bankStore');
+            const { buildPubBankPanel } = require('../../data/commands/economy/personalBank');
+            const bank = Object.values(getAllPublicBanks()).find(b => b.id === bankId || b.id === bankId.toUpperCase());
+            if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin.', flags: MessageFlags.Ephemeral });
+            const { embed, components } = buildPubBankPanel(bank, userId);
+            return interaction.update({ embeds: [embed], components });
+        }
+
+        // ── View Personal Bank from directory ──
+        if (id.startsWith('bank_view_pers_') && !id.includes('modal')) {
+            const rest    = id.replace('bank_view_pers_', '');
+            const lastU   = rest.lastIndexOf('_');
+            const ownerId = rest.substring(0, lastU);
+            const userId  = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData } = require('../economy/econStore');
+            const { buildPersBankPanel } = require('../../data/commands/economy/personalBank');
+            const bank = eData[ownerId]?.personalBank;
+            if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin.', flags: MessageFlags.Ephemeral });
+            const { embed, components } = buildPersBankPanel(bank, ownerId, userId);
+            return interaction.update({ embeds: [embed], components });
+        }
+
+        // ── Withdraw from Public Bank ──
+        if (id.startsWith('wd_pub_') && !id.includes('modal')) {
+            const rest   = id.replace('wd_pub_', '');
+            const lastU  = rest.lastIndexOf('_');
+            const bankId = rest.substring(0, lastU);
+            const userId = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { getAllPublicBanks } = require('../economy/bankStore');
+            const bank = Object.values(getAllPublicBanks()).find(b => b.id === bankId || b.id === bankId.toUpperCase());
+            const myBal = bank?.customers?.[userId]?.balance || 0;
+            const modal = new ModalBuilder()
+                .setCustomId(`wd_pub_modal_${bankId}_${userId}`)
+                .setTitle(`⬆️ Withdraw — ${bank?.name || bankId}`);
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder().setCustomId('wd_amount')
+                    .setLabel(`Xaddadka (max: ₿${myBal.toLocaleString()})`)
+                    .setPlaceholder('Tusaale: 2000')
+                    .setStyle(TextInputStyle.Short).setRequired(true)
+            ));
+            return interaction.showModal(modal);
+        }
+
+        // ── Withdraw from Personal Bank ──
+        if (id.startsWith('wd_pers_') && !id.includes('modal')) {
+            const rest    = id.replace('wd_pers_', '');
+            const lastU   = rest.lastIndexOf('_');
+            const ownerId = rest.substring(0, lastU);
+            const userId  = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData } = require('../economy/econStore');
+            const bank  = eData[ownerId]?.personalBank;
+            const myBal = bank?.customers?.[userId]?.balance || 0;
+            const modal = new ModalBuilder()
+                .setCustomId(`wd_pers_modal_${ownerId}_${userId}`)
+                .setTitle(`⬆️ Withdraw — ${bank?.owner || 'Bank'}`);
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder().setCustomId('wd_amount')
+                    .setLabel(`Xaddadka (max: ₿${myBal.toLocaleString()})`)
+                    .setPlaceholder('Tusaale: 1000')
+                    .setStyle(TextInputStyle.Short).setRequired(true)
+            ));
+            return interaction.showModal(modal);
         }
 
         // ── All Banks button in ebank panel ──

@@ -124,7 +124,7 @@ async function bankViewCmd(message) {
     return message.reply({ embeds: [embed], components: [bankViewRow(message.author.id)] });
 }
 
-// ── buildBankDirectory — shared by ?bank button + ?bank cmd ──
+// ── buildBankDirectory — shared by ?bank + button ─────
 function buildBankDirectory(userId) {
     const pubBanks = Object.values(getAllPublicBanks())
         .filter(b => (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXPIRY_MS)
@@ -132,7 +132,7 @@ function buildBankDirectory(userId) {
         .slice(0, 4);
 
     const persBanks = Object.entries(econData)
-        .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank && uid !== userId)
+        .filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank)
         .map(([uid, d]) => ({
             uid,
             bank:      d.personalBank,
@@ -161,42 +161,84 @@ function buildBankDirectory(userId) {
         .setTitle('🏦 Banks — Directory')
         .setColor('#2471a3')
         .setDescription(desc)
-        .setFooter({ text: '?bd <bank> <amount> • ?bw <bank> <amount> • ?createbank <name>' });
+        .setFooter({ text: 'Bank taabo → Deposit & Withdraw' });
 
     const components = [];
-
-    // Row 1: Garaad Bank + public banks
     const row1 = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`dep_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`bank_view_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Primary),
         ...pubBanks.map(b =>
             new ButtonBuilder()
-                .setCustomId(`dep_pub_${b.id}_${userId}`)
+                .setCustomId(`bank_view_pub_${b.id}_${userId}`)
                 .setLabel(`🏛️ ${b.name.slice(0, 20)}`)
                 .setStyle(ButtonStyle.Success)
         )
     );
     components.push(row1);
-
-    // Row 2: Personal banks
     if (persBanks.length) {
         const row2 = new ActionRowBuilder().addComponents(
             ...persBanks.map(e =>
                 new ButtonBuilder()
-                    .setCustomId(`dep_pers_${e.uid}_${userId}`)
+                    .setCustomId(`bank_view_pers_${e.uid}_${userId}`)
                     .setLabel(`🏦 ${e.bank.owner.slice(0, 20)}`)
                     .setStyle(ButtonStyle.Secondary)
             )
         );
         components.push(row2);
     }
-
-    // Close row
     components.push(new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eb_back_dir_${userId}`).setLabel('🔙 Back').setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger)
     ));
 
     return { embed, components };
+}
+
+// ── Sub-panels for public + personal banks ────────────
+function buildPubBankPanel(bank, userId) {
+    const myBal     = bank.customers?.[userId]?.balance || 0;
+    const custCount = Object.keys(bank.customers || {}).length;
+    const embed = new EmbedBuilder()
+        .setTitle(`🏛️ ${bank.name}`)
+        .setColor('#27ae60')
+        .setDescription(
+            `🆔 **ID:** \`${bank.id}\`\n` +
+            `👤 **Owner:** ${bank.ownerUsername}\n\n` +
+            `💰 **Bangiga haraagga:** ${fmtBtc(bank.balance || 0)}\n` +
+            `👥 **Macaamiisha:** ${custCount}\n\n` +
+            `💼 **Adiga haysataa:** ${fmtBtc(myBal)}`
+        )
+        .setFooter({ text: 'Deposit → lacag geli  •  Withdraw → lacagtaada ka qaad' });
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`dep_pub_${bank.id}_${userId}`).setLabel('⬇️ Deposit').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`wd_pub_${bank.id}_${userId}`).setLabel('⬆️ Withdraw').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`back_to_banks_${userId}`).setLabel('🔙 Banks').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
+    );
+    return { embed, components: [row] };
+}
+
+function buildPersBankPanel(bank, ownerId, userId) {
+    const myBal     = bank.customers?.[userId]?.balance || 0;
+    const custCount = Object.keys(bank.customers || {}).length;
+    const custTotal = getTotalCustomerDeposits(bank);
+    const embed = new EmbedBuilder()
+        .setTitle(`🏦 ${bank.owner}'s Bank`)
+        .setColor('#2ecc71')
+        .setDescription(
+            `🆔 **ID:** \`${bank.bankId}\`\n` +
+            `👤 **Owner:** ${bank.owner}\n\n` +
+            `💰 **Bangiga haraagga:** ${fmtBtc(bank.balance || 0)}\n` +
+            `👥 **Macaamiisha:** ${custCount} · 💼 **Lacagtooda:** ${fmtBtc(custTotal)}\n` +
+            `📈 **Faa'iido:** +2%/maalin\n\n` +
+            `💼 **Adiga haysataa:** ${fmtBtc(myBal)}`
+        )
+        .setFooter({ text: 'Deposit → lacag geli  •  Withdraw → lacagtaada ka qaad' });
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId(`dep_pers_${ownerId}_${userId}`).setLabel('⬇️ Deposit').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`wd_pers_${ownerId}_${userId}`).setLabel('⬆️ Withdraw').setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`back_to_banks_${userId}`).setLabel('🔙 Banks').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`).setLabel('✖ Close').setStyle(ButtonStyle.Danger),
+    );
+    return { embed, components: [row] };
 }
 
 // ── ?bank — shows ebank panel (same as ?ebank) ────────
@@ -314,6 +356,6 @@ async function bankWithdrawTextCmd(message, args) {
 
 module.exports = {
     bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd,
-    bankDepositTextCmd, bankWithdrawTextCmd, buildBankDirectory,
+    buildBankDirectory, buildPubBankPanel, buildPersBankPanel,
     getTotalCustomerDeposits, applyBankProfit, bankViewRow,
 };

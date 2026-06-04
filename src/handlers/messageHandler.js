@@ -195,7 +195,7 @@ module.exports = function setupMessageHandler(client) {
                 return econTitleCmd(message, args);
 
             case 'ebank':
-                return ebankCmd(message, args);
+                return bankDirectoryCmd(message);
 
 
             // ── Personal Bank ──
