@@ -241,10 +241,11 @@ function buildPersBankPanel(bank, ownerId, userId) {
     return { embed, components: [row] };
 }
 
-// ── ?bank — shows ebank panel (same as ?ebank) ────────
+// ── ?bank — bank directory ────────────────────────────
 async function bankDirectoryCmd(message) {
-    const { ebankCmd } = require('../../data/commands/economy/ebank');
-    return ebankCmd(message);
+    checkEconUser(message.author.id);
+    const { embed, components } = buildBankDirectory(message.author.id);
+    return message.reply({ embeds: [embed], components });
 }
 
 // ── ?bd <bank name/id> <amount> ───────────────────────
