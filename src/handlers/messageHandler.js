@@ -53,13 +53,12 @@ const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupC
 const personalCmd = require('../../data/commands/personal');
 const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, allBanksCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
-const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd, companyInvestCmd } = require('../../data/commands/company');
+const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
 const passwordCmd     = require('../../data/commands/password');
 const accessCmd       = require('../../data/commands/access');
 const adminBankCmd    = require('../../data/commands/admin/adminBank');
-const investCmd       = require('../../data/commands/economy/invest');
 
 
 let _music = null;
@@ -233,7 +232,6 @@ module.exports = function setupMessageHandler(client) {
                 if (sub === 'withdraw')  return companyWithdrawCmd(message, args.slice(1));
                 if (sub === 'transfer')  return companyTransferCmd(message, args.slice(1));
                 if (sub === 'password')  return companyPasswordCmd(message, args.slice(1));
-                if (sub === 'invest')    return companyInvestCmd(message, args.slice(1));
                 return companyViewCmd(message);
             }
 
@@ -381,9 +379,6 @@ module.exports = function setupMessageHandler(client) {
             case 'galee':
                 return accessCmd(message, args);
 
-            case 'invest':
-            case 'maalgashi':
-                return investCmd(message, args);
 
             case 'adminbank': {
                 if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');

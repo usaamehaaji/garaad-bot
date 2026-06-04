@@ -101,14 +101,8 @@ function buildEcoEmbed() {
             `**\`${PREFIX}company\`** — Shirkadaada eeg\n` +
             `**\`${PREFIX}company create <magac>\`** — Shirkad bilow\n` +
             `**\`${PREFIX}company hire/fire/deposit/withdraw\`** — Maamul\n` +
-            `**\`${PREFIX}company invest <xad> <nooc>\`** — 📈 Lacag invest geli\n` +
             `**\`${PREFIX}topcompanies\`** — Top shirkadaha\n\n` +
 
-            `**📈 Invest**\n` +
-            `**\`${PREFIX}invest <xad> ammaan\`** — 🟢 80% guul (+5–15%)\n` +
-            `**\`${PREFIX}invest <xad> dhexdhexaad\`** — 🟡 60% guul (+15–30%)\n` +
-            `**\`${PREFIX}invest <xad> khatar\`** — 🔴 40% guul (+30–60%)\n` +
-            `**\`${PREFIX}company invest\`** — Company treasury ku invest\n\n` +
 
             `**🎮 Ciyaaraha**\n` +
             `**\`${PREFIX}trade\`** — Suuqa: BTC UP/DOWN saadaal\n` +
