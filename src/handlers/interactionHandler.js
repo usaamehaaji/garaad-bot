@@ -1111,6 +1111,26 @@ module.exports = function setupInteractionHandler(client) {
                 return interaction.reply({ content: `📥 **₿${amount.toLocaleString()}** → 🏦 **Garaad Bank**\n💰 Bank: **₿${d.banks.garaad.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
             }
 
+            // ── Withdraw: Garaad Bank modal ──
+            if (interaction.customId.startsWith('wd_garaad_modal_')) {
+                const userId = interaction.customId.replace('wd_garaad_modal_', '');
+                if (interaction.user.id !== userId)
+                    return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+                const amount = Math.floor(Number(interaction.fields.getTextInputValue('wd_amount')));
+                if (!amount || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                checkEconUser(userId);
+                const d = eData[userId];
+                const garaadBal = d.banks?.garaad || 0;
+                if (garaadBal < amount)
+                    return interaction.reply({ content: `⚠️ Garaad Bank kugu filna ma lihid. Haysataa: ₿${garaadBal.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                d.banks.garaad -= amount;
+                d.btc = (d.btc || 0) + amount;
+                saveEcon();
+                return interaction.reply({ content: `📤 **₿${amount.toLocaleString()}** ← 🏦 **Garaad Bank**\n💰 Bank hadhay: **₿${d.banks.garaad.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+            }
+
             // ── Deposit: Public Bank modal ──
             if (interaction.customId.startsWith('dep_pub_modal_')) {
                 const rest   = interaction.customId.replace('dep_pub_modal_', '');
@@ -2608,42 +2628,46 @@ module.exports = function setupInteractionHandler(client) {
             });
         }
 
-        // ── ?bank Deposit button → modal (amount + bank name) ──
+        // ── ?bank Deposit button → bank selection panel ──
         if (id.startsWith('bank_all_dep_')) {
             const userId = id.replace('bank_all_dep_', '');
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const modal = new ModalBuilder()
-                .setCustomId(`bank_all_dep_modal_${userId}`)
-                .setTitle('⬇ Deposit');
-            modal.addComponents(
-                new ActionRowBuilder().addComponents(
-                    new TextInputBuilder().setCustomId('ball_bank').setLabel('Bank magaciisa').setPlaceholder('garaad · Kormaal Bank · ahmed').setStyle(TextInputStyle.Short).setRequired(true)
-                ),
-                new ActionRowBuilder().addComponents(
-                    new TextInputBuilder().setCustomId('ball_amount').setLabel('Xaddadka (BTC)').setPlaceholder('1000').setStyle(TextInputStyle.Short).setRequired(true)
-                ),
-            );
-            return interaction.showModal(modal);
+            const { econData: eData2 } = require('../economy/econStore');
+            const { getAllPublicBanks: _gpb2 } = require('../economy/bankStore');
+            const PUB_EXP = 14 * 24 * 60 * 60 * 1000;
+            const pubB = Object.values(_gpb2()).filter(b => (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXP).sort((a, b) => (b.balance || 0) - (a.balance || 0)).slice(0, 4);
+            const persB = Object.entries(eData2).filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank && uid !== userId).map(([uid, d]) => ({ uid, bank: d.personalBank })).slice(0, 4);
+            const btns = [
+                new ButtonBuilder().setCustomId(`dep_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Success),
+                ...pubB.map(b => new ButtonBuilder().setCustomId(`dep_pub_${b.id}_${userId}`).setLabel(`🏛 ${b.name.slice(0, 20)}`).setStyle(ButtonStyle.Secondary)),
+                ...persB.map(e => new ButtonBuilder().setCustomId(`dep_pers_${e.uid}_${userId}`).setLabel(`🏦 ${e.bank.owner.slice(0, 20)}`).setStyle(ButtonStyle.Secondary)),
+            ];
+            const rows = [];
+            for (let i = 0; i < Math.min(btns.length, 10); i += 5) rows.push(new ActionRowBuilder().addComponents(btns.slice(i, i + 5)));
+            return interaction.reply({ content: '**📥 Xoolo geli — bank dooro:**', components: rows, flags: MessageFlags.Ephemeral });
         }
 
-        // ── ?bank Withdraw button → modal (amount + bank name) ──
+        // ── ?bank Withdraw button → bank selection panel ──
         if (id.startsWith('bank_all_wd_')) {
             const userId = id.replace('bank_all_wd_', '');
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const modal = new ModalBuilder()
-                .setCustomId(`bank_all_wd_modal_${userId}`)
-                .setTitle('⬆ Withdraw');
-            modal.addComponents(
-                new ActionRowBuilder().addComponents(
-                    new TextInputBuilder().setCustomId('ball_bank').setLabel('Bank magaciisa').setPlaceholder('garaad · Kormaal Bank · ahmed').setStyle(TextInputStyle.Short).setRequired(true)
-                ),
-                new ActionRowBuilder().addComponents(
-                    new TextInputBuilder().setCustomId('ball_amount').setLabel('Xaddadka (BTC)').setPlaceholder('500').setStyle(TextInputStyle.Short).setRequired(true)
-                ),
-            );
-            return interaction.showModal(modal);
+            const { econData: eData3 } = require('../economy/econStore');
+            const { getAllPublicBanks: _gpb3 } = require('../economy/bankStore');
+            const PUB_EXP = 14 * 24 * 60 * 60 * 1000;
+            const pubB = Object.values(_gpb3()).filter(b => (b.customers?.[userId]?.balance || 0) > 0 && (Date.now() - (b.lastActivity || b.createdAt)) < PUB_EXP).slice(0, 4);
+            const persB = Object.entries(eData3).filter(([uid, d]) => /^\d{17,19}$/.test(uid) && d?.personalBank && uid !== userId && (d.personalBank.customers?.[userId]?.balance || 0) > 0).map(([uid, d]) => ({ uid, bank: d.personalBank })).slice(0, 4);
+            const garaadBal = eData3[userId]?.banks?.garaad || 0;
+            const btns = [];
+            if (garaadBal > 0) btns.push(new ButtonBuilder().setCustomId(`wd_garaad_${userId}`).setLabel('🏦 Garaad Bank').setStyle(ButtonStyle.Primary));
+            btns.push(...pubB.map(b => new ButtonBuilder().setCustomId(`wd_pub_${b.id}_${userId}`).setLabel(`🏛 ${b.name.slice(0, 20)}`).setStyle(ButtonStyle.Secondary)));
+            btns.push(...persB.map(e => new ButtonBuilder().setCustomId(`wd_pers_${e.uid}_${userId}`).setLabel(`🏦 ${e.bank.owner.slice(0, 20)}`).setStyle(ButtonStyle.Secondary)));
+            if (!btns.length)
+                return interaction.reply({ content: '⚠️ Wax bank ah lacag kuma dhigna.', flags: MessageFlags.Ephemeral });
+            const rows = [];
+            for (let i = 0; i < Math.min(btns.length, 10); i += 5) rows.push(new ActionRowBuilder().addComponents(btns.slice(i, i + 5)));
+            return interaction.reply({ content: '**📤 Lacag ka qaad — bank dooro:**', components: rows, flags: MessageFlags.Ephemeral });
         }
 
         // ── Back to ebank main panel ──
@@ -2774,6 +2798,22 @@ module.exports = function setupInteractionHandler(client) {
                 .setTitle('🏦 Garaad Bank — Deposit');
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder().setCustomId('dep_amount').setLabel('Xaddadka BTC').setPlaceholder('Tusaale: 5000').setStyle(TextInputStyle.Short).setRequired(true)
+            ));
+            return interaction.showModal(modal);
+        }
+
+        // ── Withdraw from Garaad Bank ──
+        if (id.startsWith('wd_garaad_') && !id.includes('modal')) {
+            const userId = id.replace('wd_garaad_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { econData: eData } = require('../economy/econStore');
+            const bal = eData[userId]?.banks?.garaad || 0;
+            const modal = new ModalBuilder()
+                .setCustomId(`wd_garaad_modal_${userId}`)
+                .setTitle('🏦 Garaad Bank — Withdraw');
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder().setCustomId('wd_amount').setLabel(`Xaddadka BTC (Max: ₿${bal.toLocaleString()})`).setPlaceholder('Tusaale: 5000').setStyle(TextInputStyle.Short).setRequired(true)
             ));
             return interaction.showModal(modal);
         }
