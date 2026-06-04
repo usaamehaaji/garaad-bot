@@ -36,13 +36,11 @@ const robCmd          = require('../../data/commands/economy/rob');
 const cashflipCmd     = require('../../data/commands/economy/cashflip');
 const giveCmd         = require('../../data/commands/economy/give');
 const richCmd         = require('../../data/commands/economy/rich');
-const ebankCmd        = require('../../data/commands/economy/ebank');
 const treasuryCmdFn   = require('../../data/commands/economy/treasuryCmd');
 
 const shaqoCmd        = require('../../data/commands/economy/shaqo');
 const bankListCmd     = require('../../data/commands/economy/bankList');
 const econTitleCmd    = require('../../data/commands/economy/econTitle');
-const dmCmd           = require('../../data/commands/dm');
 const ciidCmd         = require('../../data/commands/admin/ciidCmd');
 const missionsCmd     = require('../../data/commands/missions');
 const giveItemCmd     = require('../../data/commands/admin/giveItem');
@@ -53,11 +51,8 @@ const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupC
 const personalCmd = require('../../data/commands/personal');
 const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, withdrawAnyCmd, allBanksCmd, jbCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
-const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
-const passwordCmd     = require('../../data/commands/password');
-const accessCmd       = require('../../data/commands/access');
 const adminBankCmd    = require('../../data/commands/admin/adminBank');
 
 
@@ -224,22 +219,6 @@ module.exports = function setupMessageHandler(client) {
             case 'createbank':
                 return createPublicBankCmd(message, args);
 
-            // ── Companies ──
-            case 'company': {
-                const sub = (args[0] || '').toLowerCase();
-                if (sub === 'create')    return companyCreateCmd(message, args.slice(1));
-                if (sub === 'hire')      return companyHireCmd(message);
-                if (sub === 'fire')      return companyFireCmd(message);
-                if (sub === 'employees') return companyEmployeesCmd(message);
-                if (sub === 'deposit')   return companyDepositCmd(message, args.slice(1));
-                if (sub === 'withdraw')  return companyWithdrawCmd(message, args.slice(1));
-                if (sub === 'transfer')  return companyTransferCmd(message, args.slice(1));
-                if (sub === 'password')  return companyPasswordCmd(message, args.slice(1));
-                return companyViewCmd(message);
-            }
-
-            case 'topcompanies':
-                return topCompaniesCmd(message);
 
             case 'treasury':
             case 'khaznad':
@@ -305,7 +284,6 @@ module.exports = function setupMessageHandler(client) {
             case 'stop':  { const m = getMusic(); if (m) m.stopMsgCmd(message);  return; }
             case 'leave': { const m = getMusic(); if (m) m.leaveMsgCmd(message); return; }
             case 'queue': { const m = getMusic(); if (m) m.queueMsgCmd(message); return; }
-            case 'np':    { const m = getMusic(); if (m) m.npMsgCmd(message);    return; }
 
 
 
@@ -370,17 +348,6 @@ module.exports = function setupMessageHandler(client) {
             case 'tremove':
                 return teamDuel.cmdTeamRemove(message);
 
-            case 'dm':
-                return dmCmd(message, args);
-
-            case 'password':
-            case 'passwd':
-            case 'pw':
-                return passwordCmd(message, args);
-
-            case 'access':
-            case 'galee':
-                return accessCmd(message, args);
 
 
             case 'adminbank': {
