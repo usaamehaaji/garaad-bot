@@ -87,36 +87,25 @@ function buildEcoEmbed() {
             `**\`${PREFIX}rich\`** — Top 10 ugu hantida badan\n\n` +
 
             `**🏦 Banks**\n` +
-            `**\`${PREFIX}bank\`** — Dhammaan banks + Garaad Bank panel\n` +
-            `**\`${PREFIX}banks\`** — Banks oo dhan + qiyamkooda\n` +
-            `**\`${PREFIX}deposit <bank> <xad>\`** — Bank lacag geli (**\`?d\`** sidoo)\n` +
-            `_Tusaale: \`?d garaad 500\` · \`?d Kormaal Bank 1000\`_\n` +
-            `**\`${PREFIX}bp <password>\`** — Bank password dhig\n` +
-            `**\`${PREFIX}createbank <magac>\`** — Public bank samee\n` +
-            `**\`${PREFIX}topbanks\`** — Top 10 banks\n\n` +
+            `\`${PREFIX}bank\` — Banks panel · \`${PREFIX}banks\` — Liiska\n` +
+            `\`${PREFIX}d <bank> <xad>\` — Dhig · \`${PREFIX}w <bank> <xad>\` — Qaad\n` +
+            `_?d garaad 500 · ?d Kormaal Bank 1000 · ?w garaad 200_\n` +
+            `\`${PREFIX}createbank <magac>\` — Public bank · \`${PREFIX}topbanks\`\n\n` +
 
-            `**🏢 Shirkadaha**\n` +
-            `**\`${PREFIX}company\`** — Shirkadaada eeg\n` +
-            `**\`${PREFIX}company create <magac>\`** — Shirkad bilow\n` +
-            `**\`${PREFIX}topcompanies\`** — Top shirkadaha\n\n` +
+            `**🏢 Shirkad**\n` +
+            `\`${PREFIX}company\` — Eeg · \`${PREFIX}company create <magac>\` — Bilow\n` +
+            `\`${PREFIX}topcompanies\` — Top shirkadaha\n\n` +
 
-
-            `**🎮 Ciyaaraha**\n` +
-            `**\`${PREFIX}trade\`** — Suuqa: BTC UP/DOWN saadaal\n` +
-            `**\`${PREFIX}ef <xad> up/down\`** — Ecoflip 50/50\n` +
-            `**\`${PREFIX}rob\`** — Qof xadi\n\n` +
+            `**🎮 Ciyaar**\n` +
+            `\`${PREFIX}trade\` — BTC UP/DOWN · \`${PREFIX}ef <xad>\` — Ecoflip\n` +
+            `\`${PREFIX}rob\` — Xadi\n\n` +
 
             `**🤝 Bulshada**\n` +
-            `**\`${PREFIX}give @user <xad>\`** — Cash u dir (reply + ?give 300 sidoo kale)\n` +
-            `**\`${PREFIX}give @user gold <xad>\`** — Gold u dir\n` +
-            `**\`${PREFIX}missions\`** — Hawlaha maalinlaha\n` +
-            `**\`${PREFIX}etitle\`** — Economy cinwaan xidh\n` +
-            `**\`BTC transfers use wallets only: ?btc send <amount>\`**\n` +
-            `**\`${PREFIX}khaznad\`** — Treasury eeg\n\n` +
+            `\`${PREFIX}give @user <xad>\` — Dir · \`${PREFIX}missions\` — Hawlaha\n` +
+            `\`${PREFIX}etitle\` — Cinwaan · \`${PREFIX}khaznad\` — Treasury\n\n` +
 
-            `**🔐 Password & Wadaag**\n` +
-            `**\`${PREFIX}bp <password>\`** — Hal password (withdraw + banksend + access)\n` +
-            `**\`${PREFIX}access @saxiib <pw>\`** — Saxiib account-kiisa geli (bank + company)`
+            `**🔐 Password**\n` +
+            `\`${PREFIX}bp <pw>\` — Bank password · \`${PREFIX}access @user <pw>\` — Wadaag`
         )
         .setFooter({ text: `Garaad Economy • [pw] = password required if set` });
 }
