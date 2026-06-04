@@ -148,7 +148,7 @@ function createCompany(ownerId, ownerUsername, name, industry) {
 
 module.exports = {
     loadBanks, loadCompanies, saveBanks, saveCompanies,
-    hashPass, checkPass,
+    hashPass, checkPass, namePrefix,
     getPersonalBank, createPersonalBank, addTx,
     getPublicBank, getAllPublicBanks, createPublicBank,
     getCompany, getAllCompanies, getUserCompany, getUserOwnedCompany,

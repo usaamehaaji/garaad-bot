@@ -137,6 +137,53 @@ module.exports = async function adminBankCmd(message, args) {
         ]});
     }
 
+    // ── adminbank rename <oldID> <newID> → rename bank ID ──
+    if (sub === 'rename') {
+        const oldId = (args[1] || '').trim();
+        const newId = (args[2] || '').trim();
+        if (!oldId || !newId)
+            return message.reply('⚠️ `?adminbank rename <oldID> <newID>`\nTusaale: `?adminbank rename GB-72957 KB:72957`');
+
+        const allBanks = getAllPublicBanks();
+        const bank     = allBanks[oldId] || allBanks[oldId.toUpperCase()];
+        const resolvedOld = allBanks[oldId] ? oldId : oldId.toUpperCase();
+
+        if (!bank) return message.reply(`⚠️ Bank \`${oldId}\` lama helin.`);
+        if (allBanks[newId]) return message.reply(`⚠️ ID \`${newId}\` horay u jirtaa.`);
+
+        // Copy to new key, update internal id, delete old key
+        allBanks[newId]    = { ...bank, id: newId };
+        delete allBanks[resolvedOld];
+        saveBanks();
+
+        return message.reply(
+            `✅ Bank ID waa la beddelay!\n` +
+            `🔄 **${bank.name}:** \`${resolvedOld}\` → \`${newId}\``
+        );
+    }
+
+    // ── adminbank migrate → rename all GB- banks to name-based IDs ──
+    if (sub === 'migrate') {
+        const { namePrefix } = require('../../../src/economy/bankStore');
+        const allBanks = getAllPublicBanks();
+        const oldKeys  = Object.keys(allBanks).filter(k => k.startsWith('GB-'));
+        if (!oldKeys.length) return message.reply('✅ Migrate gareynta ma baahna — banks cusub ID-yo cusub leeyihiin.');
+
+        const changes = [];
+        for (const oldId of oldKeys) {
+            const bank  = allBanks[oldId];
+            const prefix = namePrefix(bank.name || 'GB');
+            const n      = Math.floor(Math.random() * 90000) + 10000;
+            let   newId  = `${prefix}:${n}`;
+            while (allBanks[newId]) newId = `${prefix}:${Math.floor(Math.random() * 90000) + 10000}`;
+            allBanks[newId] = { ...bank, id: newId };
+            delete allBanks[oldId];
+            changes.push(`\`${oldId}\` → \`${newId}\` (${bank.name})`);
+        }
+        saveBanks();
+        return message.reply(`✅ **${changes.length} bank** migrate la sameeyay:\n${changes.join('\n')}`);
+    }
+
     // Default: show help
     return message.reply({ embeds: [new EmbedBuilder()
         .setColor('#9b59b6')
@@ -145,7 +192,9 @@ module.exports = async function adminBankCmd(message, args) {
             `\`?adminbank pw @user\` — Personal bank password reset\n` +
             `\`?adminbank view @user\` — Personal bank xog eeg\n` +
             `\`?adminbank tax <ID> <percent>\` — Macaamiisha tax qaado\n` +
-            `\`?adminbank close <ID>\` — Bank xir + lacag celi`
+            `\`?adminbank close <ID>\` — Bank xir + lacag celi\n` +
+            `\`?adminbank rename <oldID> <newID>\` — Bank ID bedel\n` +
+            `\`?adminbank migrate\` — GB-XXXXX → name-based IDs`
         )
     ]});
 };
