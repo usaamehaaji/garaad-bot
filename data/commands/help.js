@@ -66,10 +66,8 @@ function buildEduEmbed(userId) {
 
 
             `**💬 Kale**\n` +
-            `**\`${PREFIX}dm <fariin>\`** — Admin u dir fikrad\n` +
             `**\`${PREFIX}cilada [fariin]\`** — Cilad soo sheeg\n` +
-            `**\`${PREFIX}champion\`** — Champion-ka eeg\n` +
-            `**\`${PREFIX}eray\`** — Eray cusub baro`
+            `**\`${PREFIX}champion\`** — Champion-ka eeg`
         )
         .setFooter({ text: `Prefix: ${PREFIX} • ⚙️ = Admin kaliya` });
 }
@@ -91,9 +89,6 @@ function buildEcoEmbed() {
             `_?d garaad 500 · ?d Kormaal Bank 1000 · ?w garaad 200_\n` +
             `\`${PREFIX}cb <magac>\` — Public bank abuur\n\n` +
 
-            `**🏢 Shirkad**\n` +
-            `\`${PREFIX}company\` — Eeg · \`${PREFIX}company create <magac>\` — Bilow\n` +
-            `\`${PREFIX}topcompanies\` — Top shirkadaha\n\n` +
 
             `**🎮 Ciyaar**\n` +
             `\`${PREFIX}trade\` — BTC UP/DOWN · \`${PREFIX}ef <xad>\` — Ecoflip\n` +
@@ -104,7 +99,7 @@ function buildEcoEmbed() {
             `\`${PREFIX}etitle\` — Cinwaan · \`${PREFIX}khaznad\` — Treasury\n\n` +
 
             `**🔐 Password**\n` +
-            `\`${PREFIX}bp <pw>\` — Bank password · \`${PREFIX}access @user <pw>\` — Wadaag`
+            `\`${PREFIX}bp <pw>\` — Bank password dhig`
         )
         .setFooter({ text: `Garaad Economy • [pw] = password required if set` });
 }
