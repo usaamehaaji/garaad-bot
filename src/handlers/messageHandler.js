@@ -51,7 +51,7 @@ const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
 const personalCmd = require('../../data/commands/personal');
-const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, allBanksCmd } = require('../../data/commands/economy/personalBank');
+const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, withdrawAnyCmd, allBanksCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
 const { companyCreateCmd, companyViewCmd, companyHireCmd, companyFireCmd, companyEmployeesCmd, companyDepositCmd, companyWithdrawCmd, companyTransferCmd, companyPasswordCmd, topCompaniesCmd } = require('../../data/commands/company');
 const { getDisTube } = require('../music/disTubeSetup');
@@ -205,6 +205,10 @@ module.exports = function setupMessageHandler(client) {
             case 'deposit':
             case 'd':
                 return depositAnyCmd(message, args);
+
+            case 'withdraw':
+            case 'w':
+                return withdrawAnyCmd(message, args);
 
             case 'bp':
                 return bankPasswordCmd(message, args);

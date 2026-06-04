@@ -2600,7 +2600,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow } = require('../../data/commands/economy/ebank');
+            const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow, closeRow } = require('../../data/commands/economy/ebank');
             checkEconUser(userId);
             const d = eData[userId];
             applyInterest(d);
@@ -2702,7 +2702,7 @@ module.exports = function setupInteractionHandler(client) {
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
-            const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow } = require('../../data/commands/economy/ebank');
+            const { applyInterest, buildMainEmbed, bankFullRow, ebCloseRow, closeRow } = require('../../data/commands/economy/ebank');
             checkEconUser(userId);
             const d = eData[userId];
             applyInterest(d);
