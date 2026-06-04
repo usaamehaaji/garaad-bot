@@ -98,7 +98,6 @@ function buildEcoEmbed() {
             `**🏢 Shirkadaha**\n` +
             `**\`${PREFIX}company\`** — Shirkadaada eeg\n` +
             `**\`${PREFIX}company create <magac>\`** — Shirkad bilow\n` +
-            `**\`${PREFIX}company hire/fire/deposit/withdraw\`** — Maamul\n` +
             `**\`${PREFIX}topcompanies\`** — Top shirkadaha\n\n` +
 
 
