@@ -233,9 +233,11 @@ module.exports = function setupInteractionHandler(client) {
                         .setFooter({ text: 'Garaad Bank • 1% daily interest on deposits' }),
                     ], components: [closeRow(ownerId)] });
                 } else {
-                    if (d.banks[bank] < amount) {
-                        return interaction.reply({ content: `⚠️ Not enough in bank. Balance: **₿ ${d.banks[bank].toLocaleString()}**`, flags: MessageFlags.Ephemeral });
+                    const bankBal = d.banks?.[bank] || 0;
+                    if (bankBal < amount) {
+                        return interaction.reply({ content: `⚠️ Garaad Bank kugu filna ma lihid. Haysataa: **₿ ${bankBal.toLocaleString()}**`, flags: MessageFlags.Ephemeral });
                     }
+                    d.banks        = d.banks || {};
                     d.banks[bank] -= amount;
                     d.btc          = (d.btc || 0) + amount;
                     saveEcon();
@@ -3289,7 +3291,7 @@ module.exports = function setupInteractionHandler(client) {
             const d         = eData[userId];
             const bankLabel = bank.charAt(0).toUpperCase() + bank.slice(1);
             const isDeposit = action === 'deposit';
-            const maxAmt    = isDeposit ? (d.btc || 0) : d.banks[bank];
+            const maxAmt    = isDeposit ? (d.btc || 0) : (d.banks?.[bank] || 0);
             const label     = isDeposit ? `Dhig (Max: ₿: ${maxAmt.toLocaleString()})` : `Bax (Max: ₿: ${maxAmt.toLocaleString()})`;
 
             const modal = new ModalBuilder()
