@@ -53,6 +53,7 @@ const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAn
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
 const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
+const { joinCmd, leaveCmd: vcLeaveCmd } = require('../../data/commands/join');
 const adminBankCmd    = require('../../data/commands/admin/adminBank');
 
 
@@ -373,6 +374,14 @@ module.exports = function setupMessageHandler(client) {
                 const status = d.reminderOptOut ? '🔕 Joojisan' : '🔔 Firfircoon';
                 return message.reply(`**Xusuusinta:** ${status}\n\`?reminder off\` — Jooji\n\`?reminder on\` — Fur`);
             }
+
+            // ── Voice ──
+            case 'join':
+            case 'jion':
+                return joinCmd(message);
+            case 'vcleave':
+            case 'vleave':
+                return vcLeaveCmd(message);
 
             // ── Werewolf ──
             case 'werewolf':
