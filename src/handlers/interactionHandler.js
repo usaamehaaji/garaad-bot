@@ -44,9 +44,7 @@ async function notifyAdmins(client, adminUser, action) {
 module.exports = function setupInteractionHandler(client) {
     client.on('interactionCreate', async (interaction) => {
 
-        // ── Modal Submit: IQ dhigo / IQ la bax ──
         if (interaction.isModalSubmit()) {
-            const { iqRow, balanceEmbed } = require('../../data/commands/bank');
             const { saveData } = require('../utils/helpers');
 
             // ── Treasury modals (owner only) ──
@@ -90,50 +88,6 @@ module.exports = function setupInteractionHandler(client) {
                 }
             }
 
-            if (interaction.customId.startsWith('iq_dhigo_modal_')) {
-                const ownerId = interaction.customId.replace('iq_dhigo_modal_', '');
-                checkUser(ownerId);
-                const d      = userData[ownerId];
-                const amount = parseInt(interaction.fields.getTextInputValue('iq_amount'), 10);
-                if (!amount || isNaN(amount) || amount <= 0) {
-                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
-                }
-                if (d.iq < amount) {
-                    return interaction.reply({ content: `⚠️ IQ kugu filna ma lihid. IQ-daadu waa **${d.iq}**.`, flags: MessageFlags.Ephemeral });
-                }
-                d.iq           -= amount;
-                d.bank.balance += amount;
-                d.bank.transactions.unshift({ type: 'deposit', amount, at: Date.now() });
-                if (d.bank.transactions.length > 20) d.bank.transactions.length = 20;
-                saveData();
-                return interaction.reply({
-                    embeds: [balanceEmbed(d, `✅ **${amount} IQ** bank dhigatay`)],
-                    components: [iqRow(ownerId)],
-                });
-            }
-
-            if (interaction.customId.startsWith('iq_labax_modal_')) {
-                const ownerId = interaction.customId.replace('iq_labax_modal_', '');
-                checkUser(ownerId);
-                const d      = userData[ownerId];
-                const input  = interaction.fields.getTextInputValue('iq_amount').trim();
-                const amount = input === '0' || input === '' ? d.bank.balance : parseInt(input, 10);
-                if (!amount || isNaN(amount) || amount <= 0) {
-                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
-                }
-                if (d.bank.balance < amount) {
-                    return interaction.reply({ content: `⚠️ Bank kaaga IQ kugu filna ma lihid. Kaydku waa **${d.bank.balance} IQ**.`, flags: MessageFlags.Ephemeral });
-                }
-                d.bank.balance -= amount;
-                d.iq           += amount;
-                d.bank.transactions.unshift({ type: 'withdraw', amount, at: Date.now() });
-                if (d.bank.transactions.length > 20) d.bank.transactions.length = 20;
-                saveData();
-                return interaction.reply({
-                    embeds: [balanceEmbed(d, `✅ **${amount} IQ** bank laga baxay`)],
-                    components: [iqRow(ownerId)],
-                });
-            }
 
             // ── Give: amount modal submit ──
             if (interaction.customId.startsWith('eco_gvmod_')) {
