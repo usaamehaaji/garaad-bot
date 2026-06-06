@@ -7,6 +7,7 @@ const { PREFIX } = require('../config');
 const { checkUser }   = require('../utils/helpers');
 const { isAdmin }     = require('../utils/admin');
 const { setEconUsername } = require('../economy/econStore');
+const { disabledChannels, saveConfig } = require('../store');
 
 const helpCmd         = require('../../data/commands/help');
 
@@ -88,6 +89,7 @@ module.exports = function setupMessageHandler(client) {
     client.on('messageCreate', async (message) => {
         if (message.author.bot)                  return;
         if (!message.content.startsWith(PREFIX)) return;
+        if (disabledChannels.has(message.channel.id) && !isAdmin(message.author.id)) return;
 
         const args    = message.content.slice(PREFIX.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
@@ -354,6 +356,22 @@ module.exports = function setupMessageHandler(client) {
             case 'adminbank': {
                 if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
                 return adminBankCmd(message, args);
+            }
+
+            case 'off': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
+                const chId = args[0] || message.channel.id;
+                disabledChannels.add(chId);
+                saveConfig();
+                return message.reply(`🔕 Channel \`${chId}\` bot waa la joojiyay.`);
+            }
+
+            case 'on': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
+                const chId = args[0] || message.channel.id;
+                disabledChannels.delete(chId);
+                saveConfig();
+                return message.reply(`🔔 Channel \`${chId}\` bot waa la furay.`);
             }
 
             case 'reminder':

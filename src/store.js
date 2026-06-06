@@ -5,9 +5,32 @@
 const fs   = require('fs');
 const path = require('path');
 
-const DATA_PATH = path.join(__dirname, '..', 'data', 'users.json');
+const DATA_PATH        = path.join(__dirname, '..', 'data', 'users.json');
+const CONFIG_PATH      = path.join(__dirname, '..', 'data', 'botConfig.json');
 
 let userData = {};
+
+// Channels where bot commands are disabled
+const disabledChannels = new Set();
+
+function loadConfig() {
+    try {
+        if (fs.existsSync(CONFIG_PATH)) {
+            const cfg = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+            (cfg.disabledChannels || []).forEach(id => disabledChannels.add(id));
+        }
+    } catch (e) {
+        console.error('[Config] Khalad akhrinaynta botConfig.json:', e.message);
+    }
+}
+
+function saveConfig() {
+    try {
+        fs.writeFileSync(CONFIG_PATH, JSON.stringify({ disabledChannels: [...disabledChannels] }, null, 2));
+    } catch (e) {
+        console.error('[Config] Khalad keydintiinta botConfig.json:', e.message);
+    }
+}
 
 const activeGames      = new Map(); // userId    -> solo game state
 const activeDuels      = new Map(); // channelId -> duel state
@@ -90,6 +113,9 @@ module.exports = {
     userData,
     loadData,
     saveData,
+    loadConfig,
+    saveConfig,
+    disabledChannels,
     activeGames,
     activeDuels,
     activeRush,

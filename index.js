@@ -76,7 +76,7 @@ const { restoreSoloGames }      = require('./src/games/solo');
 const { restoreQuizGames }      = require('./src/games/quiz');
 const { restoreDuelGames }      = require('./src/games/duel');
 const { connectDB }             = require('./src/db');
-const { loadData }              = require('./src/store');
+const { loadData, loadConfig }  = require('./src/store');
 const { loadEcon }              = require('./src/economy/econStore');
 const { restorePredictions }    = require('./src/economy/prediction');
 const { tickMarket }            = require('./src/economy/market');
@@ -188,6 +188,7 @@ if (!token) {
 (async () => {
     await connectDB();
     await loadData();
+    loadConfig();
     await loadEcon();
     loadBanks();
     loadCompanies();
