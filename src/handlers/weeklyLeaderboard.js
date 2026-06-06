@@ -3,7 +3,7 @@ const { econData, checkEconUser, saveEcon, resetWeeklyEarnings } = require('../e
 const { userData }     = require('../store');
 const { getLevel, getDisplayTitle, checkUser } = require('../utils/helpers');
 
-const CHANNEL_ID       = '1504517873673048185';
+const CHANNEL_IDS      = ['1504517873673048185', '1510701592708517898'];
 const WEEK_MS          = 7 * 24 * 60 * 60 * 1000;
 const FIRST_TICK_MS    = 30 * 1000;
 const PRIZE_ECO_BTC    = 2_000;  // Top weekly earner
@@ -81,12 +81,6 @@ async function buildRichLines(client) {
 
 async function sendLeaderboard(client) {
     try {
-        const channel = await client.channels.fetch(CHANNEL_ID).catch(() => null);
-        if (!channel) {
-            console.error('[WeeklyLB] Channel not found:', CHANNEL_ID);
-            return;
-        }
-
         const [{ lines: ecoLines, winner: ecoWinner }, { lines: iqLines, winner: iqWinner }, { lines: richLines, winner: richWinner }] = await Promise.all([
             buildEcoLines(client),
             buildIqLines(client),
@@ -145,10 +139,16 @@ async function sendLeaderboard(client) {
             .setFooter({ text: `Garaad Economy • Wallet + Bank combined • ${dateStr}` })
             .setTimestamp();
 
-        await channel.send({
+        const payload = {
             content: '@everyone\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 **Garaad — Weekly Leaderboard**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
             embeds: [ecoEmbed, iqEmbed, richEmbed],
-        });
+        };
+
+        for (const id of CHANNEL_IDS) {
+            const ch = await client.channels.fetch(id).catch(() => null);
+            if (!ch) { console.error('[WeeklyLB] Channel not found:', id); continue; }
+            await ch.send(payload);
+        }
 
         resetWeeklyEarnings();
         console.log('[WeeklyLB] ✅ Leaderboard posted, earnings reset');
