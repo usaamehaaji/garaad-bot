@@ -24,12 +24,12 @@ const RING_DISPLAY = {
     somali:  { emoji: '🇸🇴', label: 'Somali Ring',  desc: 'Dhaqanka iyo jaceylka',          color: '#4CAF50' },
 };
 
-// Active proposal timers: proposerId → timeoutId
+// Active proposal timers: proposerId → { timer, msgRef, targetId }
 const _proposalTimers = new Map();
 
 function ensureRel(userId) {
     const d = userData[userId];
-    d.relationship      ??= { partnerId: null, partnerUsername: null, ringType: null, since: null };
+    d.relationship      ??= { partnerId: null, partnerUsername: null, ringType: null, since: null, proposerId: null };
     d.friends           ??= [];
     d.pendingFriendReqs ??= [];
     d.pendingProposal   ??= null;
@@ -135,11 +135,9 @@ async function proposeCmd(message) {
     if (receiver.relationship?.partnerId)
         return message.reply(`💔 **${target.username}** horay ayuu guuran yahay.`);
 
-    // Check if sender already has a pending outgoing proposal
     if (_proposalTimers.has(message.author.id))
         return message.reply('⏳ Codsi guur ayaad horay u dirtay — sug jawaabta.');
 
-    // Find best ring owned
     const rings = sender.ownedRings || {};
     const ringType = rings.somali > 0 ? 'somali'
         : rings.royal   > 0 ? 'royal'
@@ -153,9 +151,8 @@ async function proposeCmd(message) {
     receiver.pendingProposal = { fromId: message.author.id, fromUsername: message.author.username, ringType };
     saveData();
 
-    const ring = RING_DISPLAY[ringType];
+    const ring  = RING_DISPLAY[ringType];
     const price = RING_PRICES[ringType];
-    const refund = Math.floor(price / 3);
 
     const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId(`rel_ap_${message.author.id}`).setLabel('💍 Haa, Waan Aqbalayaa!').setStyle(ButtonStyle.Success),
@@ -196,16 +193,13 @@ async function proposeCmd(message) {
     const timer = setTimeout(async () => {
         _proposalTimers.delete(message.author.id);
 
-        // Return ring to proposer if still pending
-        checkUser(message.author.id);
-        ensureRel(message.author.id);
+        // Only fire if proposal is STILL pending (not yet accepted/declined)
         const rd = userData[target.id];
-        if (rd && rd.pendingProposal?.fromId === message.author.id) {
-            rd.pendingProposal = null;
-            saveData();
-        }
+        if (!rd || rd.pendingProposal?.fromId !== message.author.id) return; // already answered — skip
 
-        // Disable buttons
+        rd.pendingProposal = null;
+        saveData();
+
         const disabledRow = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId(`rel_ap_${message.author.id}`).setLabel('💍 Haa, Waan Aqbalayaa!').setStyle(ButtonStyle.Success).setDisabled(true),
             new ButtonBuilder().setCustomId(`rel_dp_${message.author.id}`).setLabel('💔 Maya').setStyle(ButtonStyle.Danger).setDisabled(true),
@@ -229,7 +223,7 @@ async function proposeCmd(message) {
     _proposalTimers.set(message.author.id, { timer, msgRef: sent, targetId: target.id });
 }
 
-// Clear timer when proposal is answered (called from interactionHandler)
+// Clear timer when proposal is answered (called from interactionHandler on accept OR decline)
 function clearProposalTimer(fromId) {
     const entry = _proposalTimers.get(fromId);
     if (entry) {
@@ -254,6 +248,7 @@ async function partnerCmd(message) {
     const ringTxt = RING_NAMES[rel.ringType] || '💍 Ring';
     const price   = RING_PRICES[rel.ringType] || 0;
     const refund  = Math.floor(price / 3);
+    const iAmProposer = (rel.proposerId === message.author.id);
 
     return message.reply({
         embeds: [new EmbedBuilder()
@@ -263,7 +258,9 @@ async function partnerCmd(message) {
                 `💕 **Partner:**\n${partnerName} ❤️ ${message.author.username}\n\n` +
                 `📅 **Wada joognaan:**\n${days} Maalmood\n\n` +
                 `${ringTxt}\n\n` +
-                `_Haddaad ?breakup samayso: ₿${refund.toLocaleString()} BTC ayaad heli kartaa (hadduu kuu jabiyay)_`
+                iAmProposer
+                    ? `_Adiga ring-ka baad bixisay — haddaad jabiso lacag la celin maayo_`
+                    : `_Hadduu partner-kaagu jabiso: ₿${refund.toLocaleString()} BTC ayaad heli kartaa_`
             )],
     });
 }
@@ -280,43 +277,45 @@ async function breakupCmd(message) {
     const partnerId   = d.relationship.partnerId;
     const partnerName = d.relationship.partnerUsername || `<@${partnerId}>`;
     const ringType    = d.relationship.ringType;
+    // proposerId = qofkii ring-ka bixiyay (proposer)
+    const proposerId  = d.relationship.proposerId || null;
 
-    // Adigu jabisay → lacag la celin maayo
-    d.relationship = { partnerId: null, partnerUsername: null, ringType: null, since: null };
+    // Adiga jabisay mise partner-kaaga?
+    // Haddaan anigu proposer ahayn → ANIGU jabisay proposer-ka (ring buyer) → refund sii
+    // Haddaan anigu proposer ahay → Anigu jabisay — lacag la celin maayo
+    const iAmProposer = (proposerId === message.author.id);
 
+    // Clear both relationships
+    d.relationship = { partnerId: null, partnerUsername: null, ringType: null, since: null, proposerId: null };
     const pd = userData[partnerId];
     if (pd) {
         ensureRel(partnerId);
+        pd.relationship = { partnerId: null, partnerUsername: null, ringType: null, since: null, proposerId: null };
+    }
 
-        // Hadduu partner-ka kale uu horay u jabiyay (pendingBreakup), kuma celin
-        // Adigu jabisay: ADIGA lacag la celin maayo, partner-kana wax lama siin
-        pd.relationship = { partnerId: null, partnerUsername: null, ringType: null, since: null };
+    let refundMsg = '';
+
+    if (!iAmProposer && proposerId && ringType && RING_PRICES[ringType]) {
+        // Adigu (receiver) ayaad jabisay → ring buyer (proposerId) lacag la celiyaa
+        const price  = RING_PRICES[ringType];
+        const refund = Math.floor(price / 3);
+        if (refund > 0) {
+            checkEconUser(proposerId);
+            econData[proposerId].btc = (econData[proposerId].btc || 0) + refund;
+            saveEcon();
+            refundMsg = `\n💰 <@${proposerId}> — ₿${refund.toLocaleString()} BTC ayaa laguugu celiyay (ring qiimihiisa ÷ 3).`;
+        }
+    } else {
+        refundMsg = `\n_(Adiga aad jabisay — lacag la celin maayo)_`;
     }
 
     saveData();
-
-    return message.reply(
-        `💔 **${partnerName}** xiriirkii wuu dhammaaday.\n` +
-        `_(Adigu aad jabisay — lacag la celin maayo)_`
-    );
-}
-
-// Called from interactionHandler when PARTNER initiates breakup
-// → gives PROPOSER (ring buyer) a refund of price/3
-function processBreakupRefund(breakerUserId, otherUserId, ringType) {
-    const price  = RING_PRICES[ringType] || 0;
-    const refund = Math.floor(price / 3);
-    if (refund > 0 && otherUserId) {
-        checkEconUser(otherUserId);
-        econData[otherUserId].btc = (econData[otherUserId].btc || 0) + refund;
-        saveEcon();
-    }
-    return refund;
+    return message.reply(`💔 **${partnerName}** xiriirkii wuu dhammaaday.${refundMsg}`);
 }
 
 module.exports = {
     friendCmd, unfriendCmd, friendsListCmd,
     proposeCmd, partnerCmd, breakupCmd,
     ensureRel, RING_NAMES, RING_PRICES, RING_DISPLAY,
-    clearProposalTimer, processBreakupRefund,
+    clearProposalTimer,
 };
