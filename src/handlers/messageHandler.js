@@ -89,7 +89,8 @@ module.exports = function setupMessageHandler(client) {
     client.on('messageCreate', async (message) => {
         if (message.author.bot)                  return;
         if (!message.content.startsWith(PREFIX)) return;
-        if (disabledChannels.has(message.channel.id) && !isAdmin(message.author.id)) return;
+        if (disabledChannels.has(message.channel.id) && !isAdmin(message.author.id))
+            return message.reply('🔕 **Channel-kan bot waa la joojiyay.** Admin kala xiriir.').catch(() => {});
 
         const args    = message.content.slice(PREFIX.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
