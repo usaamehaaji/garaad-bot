@@ -166,7 +166,7 @@ function getNextSundayEAT() {
     const next = new Date(eat);
     next.setUTCDate(eat.getUTCDate() + daysUntilSunday);
     next.setUTCHours(16, 0, 0, 0); // 19:00 EAT = 16:00 UTC
-    if (next.getTime() <= now + 3 * 60 * 60 * 1000) {
+    if (next.getTime() <= Date.now()) {
         next.setUTCDate(next.getUTCDate() + 7);
     }
     return next.getTime();
