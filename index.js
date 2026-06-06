@@ -101,7 +101,7 @@ setupMessageHandler(client);
 setupInteractionHandler(client);
 
 // ───── Ready ─────
-client.once('clientReady', () => {
+client.once('ready', () => {
     console.log('');
     console.log('╔══════════════════════════════════════╗');
     console.log(`║  ✅  Garaad Bot v2 — SHAQAYNAYA      ║`);
