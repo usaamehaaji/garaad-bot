@@ -1,3052 +1,1877 @@
 [
   {
-    "question": "1. Ururkii SYL waxaa la aasaasay sanadkee?",
-    "options": [
-      "1943",
-      "1960",
-      "1945",
-      "1950"
-    ],
-    "correct": "1943"
-  },
-  {
-    "question": "2. Yaa ahaa madaxweynihii ugu horreeyay Soomaaliya?",
-    "options": [
-      "Siyaad Barre",
-      "Cabdirashiid Sharmaarke",
-      "Cali Mahdi",
-      "Aadan Cadde"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "3. Soomaaliya xorriyadda waxay qaadatay sanadkee?",
-    "options": [
-      "1970",
-      "1958",
-      "1960",
-      "1965"
-    ],
-    "correct": "1960"
-  },
-  {
-    "question": "4. Sayid Maxamed Cabdulle Xasan wuxuu hoggaaminayay?",
-    "options": [
-      "Maxkamadaha",
-      "Xisbigii SDP",
-      "Daraawiishta",
-      "SYL"
-    ],
-    "correct": "Daraawiishta"
-  },
-  {
-    "question": "5. Dagaalkii Daraawiishta wuxuu socday ku dhowaad imisa sano?",
-    "options": [
-      "20 sano",
-      "15 sano",
-      "10 sano",
-      "30 sano"
-    ],
-    "correct": "20 sano"
-  },
-  {
-    "question": "6. Af-Soomaaliga waxaa far rasmi ah loo sameeyay sanadkee?",
-    "options": [
-      "1969",
-      "1972",
-      "1980",
-      "1975"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "7. Madaxweynihii la dilay sanadkii 1969 wuxuu ahaa?",
-    "options": [
-      "Siyaad Barre",
-      "Cumar Carte",
-      "Aadan Cadde",
-      "Cabdirashiid Sharmaarke"
-    ],
+    "question": "Kee ka mid ah haldooradan Soomaaliyeed aan ahayn abwaan?",
+    "options": ["Hadraawi","Gaarriye","Timacadde","Cabdirashiid Sharmaarke"],
     "correct": "Cabdirashiid Sharmaarke"
   },
   {
-    "question": "8. Kacaankii militariga Soomaaliya wuxuu dhacay?",
-    "options": [
-      "1991",
-      "1977",
-      "1960",
-      "1969"
-    ],
-    "correct": "1969"
+    "question": "Kee ka mid ah dalalkan aan xubin ka ahayn Jaamacadda Carabta?",
+    "options": ["Soomaaliya","Jabuuti","Iran","Masar"],
+    "correct": "Iran"
   },
   {
-    "question": "9. Maxamed Siyaad Barre wuxuu xilka qabtay kadib?",
-    "options": [
-      "Afgambi",
-      "Doorasho",
-      "Heshiis",
-      "Dagaal"
-    ],
-    "correct": "Afgambi"
+    "question": "Run mise Been: Cabdirashiid Cali Sharmaarke wuxuu ahaa Ra'iisul Wasaare iyo Madaxweyne labadaba.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "10. Dagaalkii Soomaaliya iyo Itoobiya ee Ogaadeen wuxuu dhacay?",
-    "options": [
-      "1977",
-      "1991",
-      "1965",
-      "1982"
-    ],
-    "correct": "1977"
+    "question": "Kee ka mid ah saxaabadan loogu yeero Seeftii Alle?",
+    "options": ["Cumar bin Khadaab","Khaalid bin Waliid","Abuu Cubeyda","Salmaan Al-Faarisi"],
+    "correct": "Khaalid bin Waliid"
   },
   {
-    "question": "11. Ururkii SYL micnihiisu waa?",
-    "options": [
-      "Somali Year League",
-      "Somali League Union",
-      "Somali Youth League",
-      "Somali Youth Liberty"
-    ],
-    "correct": "Somali Youth League"
+    "question": "Erayga English-ka ah ee 'Ancient' micnihiisu waa?",
+    "options": ["Casri","Qadiimi","Degdeg badan","Mustaqbal"],
+    "correct": "Qadiimi"
   },
   {
-    "question": "12. Gobolka Somaliland wuxuu ku dhawaaqay gooni isu taag sanadkee?",
-    "options": [
-      "1995",
-      "1988",
-      "2000",
-      "1991"
-    ],
-    "correct": "1991"
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Banaadir?",
+    "options": ["Yaaqshiid","Xamar Weyne","Hodan","Baydhabo"],
+    "correct": "Baydhabo"
   },
   {
-    "question": "13. Dowladdii dhexe ee Soomaaliya waxay burburtay sanadkii?",
-    "options": [
-      "1990",
-      "1995",
-      "1991",
-      "1988"
-    ],
-    "correct": "1991"
+    "question": "Haddii aad tartan ku jirto oo aad dhaafto qofka kaalinta labaad ku jira, kaalinta meeqaad noqonaysaa?",
+    "options": ["Kow","Labaad","Saddexaad","Afraad"],
+    "correct": "Labaad"
   },
   {
-    "question": "14. Puntland waxaa la aasaasay sanadkee?",
-    "options": [
-      "2000",
-      "1998",
-      "2004",
-      "1995"
-    ],
-    "correct": "1998"
+    "question": "Kee aan ka mid ahayn Khulafadii Raashidiinta?",
+    "options": ["Abuu Bakar","Cusmaan","Cali","Mucaawiya"],
+    "correct": "Mucaawiya"
   },
   {
-    "question": "15. Magaalada Carta waxay ku taallaa dalka?",
-    "options": [
-      "Jabuuti",
-      "Yemen",
-      "Kenya",
-      "Itoobiya"
-    ],
-    "correct": "Jabuuti"
+    "question": "Run mise Been: Meeraha Venus ayaa ugu dhow Dhulka mararka qaar.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "16. Shirkii Carta ee Soomaaliya wuxuu dhacay sanadkee?",
-    "options": [
-      "2006",
-      "2000",
-      "1998",
-      "2004"
-    ],
-    "correct": "2000"
+    "question": "Kee aan waligiis noqon Madaxweynaha Soomaaliya?",
+    "options": ["Aadan Cabdulle Cismaan","Cumar Carte Qaalib","Xasan Sheekh Maxamuud","Cabdirashiid Cali Sharmaarke"],
+    "correct": "Cumar Carte Qaalib"
   },
   {
-    "question": "17. TFG waxaa la aasaasay sanadkee?",
-    "options": [
-      "2000",
-      "2008",
-      "2012",
-      "2004"
-    ],
-    "correct": "2004"
+    "question": "Kee ka mid ah madaxdan Soomaaliyeed aan waligiis noqon Madaxweyne?",
+    "options": ["Aadan Cabdulle Cismaan","Cabdirashiid Cali Sharmaarke","Cumar Carte Qaalib","Xasan Sheekh Maxamuud"],
+    "correct": "Cumar Carte Qaalib"
   },
   {
-    "question": "18. AMISOM waxay Soomaaliya timid sanadkee?",
-    "options": [
-      "2007",
-      "2012",
-      "2005",
-      "2010"
-    ],
-    "correct": "2007"
+    "question": "Kee ka mid ah magaalooyinkan aan ahayn caasimad dowlad-goboleed Soomaaliyeed?",
+    "options": ["Dhuusamareeb","Jowhar","Kismaayo","Baraawe"],
+    "correct": "Baraawe"
   },
   {
-    "question": "19. Dastuurka Federaalka Soomaaliya waxaa la ansixiyay sanadkee?",
-    "options": [
-      "2004",
-      "2008",
-      "2016",
-      "2012"
-    ],
-    "correct": "2012"
+    "question": "Ururkii SYL markii hore waxaa lagu magacaabi jiray?",
+    "options": ["Somali National League","Somali Youth Club","Somali Freedom Party","Somali Liberation Union"],
+    "correct": "Somali Youth Club"
   },
   {
-    "question": "20. Xasan Sheekh Maxamuud markii ugu horreysay madaxweyne wuxuu noqday?",
-    "options": [
-      "2017",
-      "2012",
-      "2022",
-      "2010"
-    ],
-    "correct": "2012"
+    "question": "Kee aan ka mid ahayn Khulafadii Raashidiinta?",
+    "options": ["Abuu Bakar","Cumar","Mucaawiya","Cusmaan"],
+    "correct": "Mucaawiya"
   },
   {
-    "question": "Qorraxdu waxay ka soo baxdaa galbeed oo ay dhacdo bari.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Run mise Been: Dagaalkii Ogaadeen wuxuu dhacay 1977.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Reliable' micnihiisu waa?",
+    "options": ["La isku halayn karo","Qani","Degdeg badan","Caajis"],
+    "correct": "La isku halayn karo"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan lahayn xeeb?",
+    "options": ["Itoobiya","Kenya","Soomaaliya","Jabuuti"],
+    "correct": "Itoobiya"
+  },
+  {
+    "question": "Qof ayaa sheegay: 'Waxaan leeyahay laba wiil, mid walbana wuxuu leeyahay walaal keliya.' Imisa carruur ah ayaa jira?",
+    "options": ["2","3","4","5"],
+    "correct": "2"
+  },
+  {
+    "question": "Kee aan waligiis ku guuleysan Koobka Adduunka?",
+    "options": ["Brazil","Germany","Netherlands","Argentina"],
+    "correct": "Netherlands"
+  },
+  {
+    "question": "Nebigii loo yaqaanay Khaliilullaah waa?",
+    "options": ["Muuse","Ciise","Ibraahim","Nuux"],
+    "correct": "Ibraahim"
+  },
+  {
+    "question": "Kee ka mid ah gobolladan aan xuduud la lahayn Itoobiya?",
+    "options": ["Bakool","Gedo","Bari","Hiiraan"],
+    "correct": "Bari"
+  },
+  {
+    "question": "Run mise Been: Dayaxu wuxuu ka weyn yahay meeraha Mercury.",
+    "options": ["Run","Been"],
     "correct": "Been"
   },
   {
-    "question": "Biyaha 100°C (heerkulka badda 1 atm) ayay ku karkaraan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee loo yaqaan Aabbaha Xisaabta Casriga ah?",
+    "options": ["Newton","Euclid","Al-Khwarizmi","Einstein"],
+    "correct": "Al-Khwarizmi"
+  },
+  {
+    "question": "Erayga 'Ancient' micnihiisu waa?",
+    "options": ["Qadiimi","Cusub","Mustaqbal","Degdeg"],
+    "correct": "Qadiimi"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan Carabi ahayn?",
+    "options": ["Suudaan","Masar","Iran","Ciraaq"],
+    "correct": "Iran"
+  },
+  {
+    "question": "Haddii aad ka hormarto qofka labaad ku jira tartan, kaalinta meeqaad gelaysaa?",
+    "options": ["1aad","2aad","3aad","4aad"],
+    "correct": "2aad"
+  },
+  {
+    "question": "Kee ka mid ah saxaabadan loogu bishaareeyay Jannada?",
+    "options": ["Abuu Bakar","Abuu Lahab","Abuu Jahal","Waliid"],
+    "correct": "Abuu Bakar"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay xubin ka tahay Jaamacadda Carabta.",
+    "options": ["Run","Been"],
     "correct": "Run"
   },
   {
-    "question": "Soomaaliya waxay leedahay xuduud badeed.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee ka mid ah hal-abuurayaashan aan ahayn gabayaa Soomaaliyeed?",
+    "options": ["Hadraawi","Gaarriye","Timacadde","Aadan Cadde"],
+    "correct": "Aadan Cadde"
+  },
+  {
+    "question": "Kee ugu dhow qorraxda?",
+    "options": ["Venus","Mercury","Earth","Mars"],
+    "correct": "Mercury"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Expand' waa?",
+    "options": ["Increase","Grow","Contract","Develop"],
+    "correct": "Contract"
+  },
+  {
+    "question": "Run mise Been: CPU waa qaybta ugu muhiimsan ee habaynta xogta kombiyuutarka.",
+    "options": ["Run","Been"],
     "correct": "Run"
   },
   {
-    "question": "Afrika waa qaaradda ugu weyn adduunka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee ka mid ah magaalooyinkan ku taalla gobolka Bari?",
+    "options": ["Boosaaso","Baydhabo","Beledweyne","Marka"],
+    "correct": "Boosaaso"
+  },
+  {
+    "question": "Haddii 10 qof ay 10 daqiiqo ku qabtaan 10 shaqo, imisa daqiiqo ayay 100 qof ku qabanayaan 100 shaqo?",
+    "options": ["10","50","100","1"],
+    "correct": "10"
+  },
+  {
+    "question": "Kee aan ka tirsanayn dalalka Geeska Afrika?",
+    "options": ["Soomaaliya","Itoobiya","Jabuuti","Tanzania"],
+    "correct": "Tanzania"
+  },
+  {
+    "question": "Kee ka mid ah dowladahan aan xubin ka ahayn Midowga Afrika?",
+    "options": ["Soomaaliya","Marooko","Brazil","Masar"],
+    "correct": "Brazil"
+  },
+  {
+    "question": "Run mise Been: Cabdirashiid Cali Sharmaarke waxaa la dilay isagoo Madaxweyne ah.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan loo diray reer Banii Israa'iil?",
+    "options": ["Muuse","Saalix","Huud","Shuucayb"],
+    "correct": "Muuse"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Ambitious' micnihiisu waa?",
+    "options": ["Hammi badan","Caajis","Cabsi badan","Aamusnaan badan"],
+    "correct": "Hammi badan"
+  },
+  {
+    "question": "Kee aan waligiis noqon Ra'iisul Wasaare Soomaaliya?",
+    "options": ["Xasan Cali Khayre","Maxamed Xuseen Rooble","Faarax Cabdiiq Shakuur","Cumar Cabdirashiid"],
+    "correct": "Faarax Cabdiiq Shakuur"
+  },
+  {
+    "question": "Haddii aad haysato 3 tufaax oo aad 2 bixiso, imisa tufaax ayaad haysataa?",
+    "options": ["1","2","3","5"],
+    "correct": "3"
+  },
+  {
+    "question": "Kee ka mid ah badahan aan taaban Soomaaliya?",
+    "options": ["Badweynta Hindiya","Gacanka Cadmeed","Badda Cas","Midna"],
+    "correct": "Badda Cas"
+  },
+  {
+    "question": "Run mise Been: Af-Soomaaligu waa af ka tirsan laanta Kushitigga.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ahaa ninkii ugu horreeyay ee dayaxa cagta saara?",
+    "options": ["Yuri Gagarin","Neil Armstrong","Buzz Aldrin","John Glenn"],
+    "correct": "Neil Armstrong"
+  },
+  {
+    "question": "Kee ka mid ah saxaabadan aan ka qayb gelin dagaalkii Badar?",
+    "options": ["Abuu Bakar","Cumar","Cusmaan","Khaalid bin Waliid"],
+    "correct": "Khaalid bin Waliid"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Generous' waa?",
+    "options": ["Kind","Helpful","Selfish","Friendly"],
+    "correct": "Selfish"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Gedo?",
+    "options": ["Baardheere","Luuq","Doolow","Qardho"],
+    "correct": "Qardho"
+  },
+  {
+    "question": "Run mise Been: Mercury waa meeraha ugu yar nidaamka qorraxda.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan waligiis gumaysan Soomaaliya?",
+    "options": ["Talyaani","Ingiriis","Faransiis","Boortaqiis"],
+    "correct": "Boortaqiis"
+  },
+  {
+    "question": "Haddii shalay ay ahayd Isniin, berri maxay noqonaysaa?",
+    "options": ["Talaado","Arbaco","Khamiis","Jimco"],
+    "correct": "Arbaco"
+  },
+  {
+    "question": "Kee aan ka mid ahayn tiirarka Islaamka?",
+    "options": ["Salaad","Soon","Sadaqo","Xaj"],
+    "correct": "Sadaqo"
+  },
+  {
+    "question": "Kee ka mid ah madaxweynayaashan laba jeer xilka qabtay?",
+    "options": ["Aadan Cadde","Xasan Sheekh Maxamuud","Cabdullaahi Yuusuf","Cali Mahdi"],
+    "correct": "Xasan Sheekh Maxamuud"
+  },
+  {
+    "question": "Run mise Been: Jupiter waa meeraha ugu weyn nidaamka qorraxda.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Ancient Civilization' micnihiisu waa?",
+    "options": ["Ilbaxnimo qadiimi ah","Dowlad cusub","Bulsho casri ah","Qabiil"],
+    "correct": "Ilbaxnimo qadiimi ah"
+  },
+  {
+    "question": "Kee ka mid ah haldooradan Soomaaliyeed ahaa gabayaa iyo qoraa labadaba?",
+    "options": ["Hadraawi","Aadan Cadde","Cabdirashiid Sharmaarke","Cabdullaahi Yuusuf"],
+    "correct": "Hadraawi"
+  },
+  {
+    "question": "Qof baa leh 4 gabdhood, gabadh kastana waxay leedahay hal walaal. Imisa carruur ah ayaa jira?",
+    "options": ["5","8","4","6"],
+    "correct": "5"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan ku yaallin Afrika?",
+    "options": ["Togo","Benin","Bhutan","Ghana"],
+    "correct": "Bhutan"
+  },
+  {
+    "question": "Run mise Been: DNS wuxuu u beddelaa magacyada domain-ka IP Address.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee loo yaqaan Boqorka Kaynta?",
+    "options": ["Shabeel","Libaax","Maroodi","Geri"],
+    "correct": "Libaax"
+  },
+  {
+    "question": "Kee aan ka tirsanayn dowlad-goboleedyada Soomaaliya?",
+    "options": ["Puntland","Galmudug","Jubbaland","Hararland"],
+    "correct": "Hararland"
+  },
+  {
+    "question": "Kee ka mid ah boqortooyooyinkan taariikhda Soomaaliya aan ka jirin?",
+    "options": ["Ajuuraan","Geledi","Majeerteen","Ottoman"],
+    "correct": "Ottoman"
+  },
+  {
+    "question": "Run mise Been: Sayid Maxamed Cabdulle Xasan wuxuu ku dhashay Taleex.",
+    "options": ["Run","Been"],
     "correct": "Been"
   },
   {
-    "question": "Qur'aanka wuxuu leeyahay 114 suuradood.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee ka mid ah saxaabadan loo yaqaan Tarjumaanka Qur'aanka?",
+    "options": ["Ibnu Cabbaas","Abuu Hureyra","Salmaan Al-Faarisi","Bilal"],
+    "correct": "Ibnu Cabbaas"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Obstacle' micnihiisu waa?",
+    "options": ["Fursad","Caqabad","Guul","Qorshe"],
+    "correct": "Caqabad"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan ku hadlin Carabi luqad rasmi ah?",
+    "options": ["Masar","Aljeeriya","Pakistan","Suudaan"],
+    "correct": "Pakistan"
+  },
+  {
+    "question": "Haddii aad leedahay 6 ukumo, 2 jabaan, 2 la cunaa, 2na la kariyaa, imisa ukumo ayaa kuu haray?",
+    "options": ["0","2","4","6"],
+    "correct": "4"
+  },
+  {
+    "question": "Kee aan waligiis ku guuleysan Ballon d'Or?",
+    "options": ["Lionel Messi","Cristiano Ronaldo","Neymar Jr","Luka Modric"],
+    "correct": "Neymar Jr"
+  },
+  {
+    "question": "Run mise Been: Webiga Jubba wuxuu ku darsamaa Badweynta Hindiya.",
+    "options": ["Run","Been"],
     "correct": "Run"
   },
   {
-    "question": "Maalmuhu 24 saacadood ayay qaataan dhulka (qiyaas ahaan).",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin Somaliland?",
+    "options": ["Burco","Ceerigaabo","Laascaanood","Gaalkacyo"],
+    "correct": "Gaalkacyo"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii ugu horreeyay ee Soomaaliya ee lagu doorto nidaamka federaalka?",
+    "options": ["Aadan Cadde","Cabdullaahi Yuusuf Axmed","Cabdirashiid Sharmaarke","Xasan Sheekh Maxamuud"],
+    "correct": "Cabdullaahi Yuusuf Axmed"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Victory' waa?",
+    "options": ["Success","Defeat","Glory","Pride"],
+    "correct": "Defeat"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan lagu naanaysi jiray Ruuxullaah?",
+    "options": ["Muuse","Ciise","Ibraahim","Yuusuf"],
+    "correct": "Ciise"
+  },
+  {
+    "question": "Run mise Been: Venus waa meeraha ugu kulul nidaamka qorraxda.",
+    "options": ["Run","Been"],
     "correct": "Run"
   },
   {
-    "question": "Dayaxu wuxuu iftiiminayaa naftiisa sida qorraxda.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee ka mid ah dowladahan aan xubin ka ahayn Golaha Ammaanka ee joogtada ah?",
+    "options": ["Maraykanka","Ruushka","Jarmalka","Shiinaha"],
+    "correct": "Jarmalka"
+  },
+  {
+    "question": "Qof ayaa leh 3 gabdhood. Mid kasta waxay leedahay laba walaalo ah. Imisa carruur ah ayaa jira?",
+    "options": ["5","6","7","9"],
+    "correct": "5"
+  },
+  {
+    "question": "Kee aan ka mid ahayn geesiyaashii Daraawiishta?",
+    "options": ["Sayid Maxamed Cabdulle Xasan","Xaaji Suudi","Ibraahim Gurey","Aadan Cadde"],
+    "correct": "Aadan Cadde"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Fragile' micnihiisu waa?",
+    "options": ["Adag","Jilicsan","Cusub","Qaalisan"],
+    "correct": "Jilicsan"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay xubin ka tahay Qaramada Midoobay.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan ku yaallin Geeska Afrika?",
+    "options": ["Eritrea","Jabuuti","Uganda","Itoobiya"],
+    "correct": "Uganda"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan aan waligiis u ciyaarin Barcelona?",
+    "options": ["Ronaldinho","Xavi","Steven Gerrard","Iniesta"],
+    "correct": "Steven Gerrard"
+  },
+  {
+    "question": "Run mise Been: HTML waa luqad barnaamij dhamaystiran.",
+    "options": ["Run","Been"],
     "correct": "Been"
   },
   {
-    "question": "Oksijiinta waa gaas aadanaha neefsashada u baahan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee adaan ka jeediya Islaamka?",
+    "options": ["Bilal bin Rabaax","Abuu Bakar","Cumar","Salmaan Al-Faarisi"],
+    "correct": "Bilal bin Rabaax"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan lahayn hub nukliyeer?",
+    "options": ["Pakistan","Hindiya","Waqooyiga Kuuriya","Jarmalka"],
+    "correct": "Jarmalka"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Accurate' micnihiisu waa?",
+    "options": ["Sax ah","Degdeg ah","Adag","Jaban"],
+    "correct": "Sax ah"
+  },
+  {
+    "question": "Haddii aad 8 qof ugu qaybisid 8 keeg si qof walba u helo hal keeg, sidee hal keeg ugu reebi kartaa saxanka?",
+    "options": ["Suurtagal ma aha","Qofka ugu dambeeya keegga iyo saxanka sii","Hal keeg qari","Keegga kala jar"],
+    "correct": "Qofka ugu dambeeya keegga iyo saxanka sii"
+  },
+  {
+    "question": "Kee ka mid ah dowladahan aan waligiis gumaysan qayb ka mid ah Soomaaliya?",
+    "options": ["Talyaani","Ingiriis","Faransiis","Belgium"],
+    "correct": "Belgium"
+  },
+  {
+    "question": "Run mise Been: Aadan Cabdulle Cismaan wuxuu ahaa madaxweynihii ugu horreeyay Soomaaliya.",
+    "options": ["Run","Been"],
     "correct": "Run"
   },
   {
-    "question": "Wadnaha wuxuu ku yaalaa dhinaca midig ee laabta (caadi ahaan).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
+    "question": "Kee ka mid ah saxaabada loogu naanayso Amiinka Umadda?",
+    "options": ["Cumar bin Khadaab","Abuu Cubeyda bin Al-Jarraax","Cali bin Abii Daalib","Bilal bin Rabaax"],
+    "correct": "Abuu Cubeyda bin Al-Jarraax"
   },
   {
-    "question": "Kelyaha waxay ka saaraan wasakhda dhiigga.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Erayga English-ka ah ee 'Persistent' micnihiisu waa?",
+    "options": ["Dulqaad badan","Joogteeya dadaalka","Degdeg badan","Xanaaq badan"],
+    "correct": "Joogteeya dadaalka"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Bari?",
+    "options": ["Boosaaso","Qandala","Caluula","Garoowe"],
+    "correct": "Garoowe"
+  },
+  {
+    "question": "Haddii 5 mashiin ay 5 daqiiqo ku sameeyaan 5 alaab, imisa daqiiqo ayay 100 mashiin ku sameynayaan 100 alaab?",
+    "options": ["5","10","50","100"],
+    "correct": "5"
+  },
+  {
+    "question": "Kee aan ka mid ahayn tiirarka Iimaanka?",
+    "options": ["Malaa'igta","Kutubta","Sadaqada","Qadarka"],
+    "correct": "Sadaqada"
+  },
+  {
+    "question": "Run mise Been: Jupiter wuxuu leeyahay dayaxyo ka badan Dhulka.",
+    "options": ["Run","Been"],
     "correct": "Run"
   },
   {
-    "question": "Xisaabta: 12 × 12 = 144.",
-    "options": [
-      "Run",
-      "Been"
-    ],
+    "question": "Kee ka mid ah ciyaartoydan aan waligiis ku guuleysan Koobka Adduunka?",
+    "options": ["Lionel Messi","Kylian Mbappe","Cristiano Ronaldo","Andres Iniesta"],
+    "correct": "Cristiano Ronaldo"
+  },
+  {
+    "question": "Kee ahaa ra'iisul wasaarihii ugu horreeyay Soomaaliya?",
+    "options": ["Cabdullaahi Ciise","Cabdirashiid Sharmaarke","Cumar Carte","Nuur Xasan Xuseen"],
+    "correct": "Cabdullaahi Ciise"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Ancient' waa?",
+    "options": ["Historic","Modern","Old","Traditional"],
+    "correct": "Modern"
+  },
+  {
+    "question": "Kee ka mid ah dowladahan aan xubin ka ahayn G20?",
+    "options": ["Maraykan","Shiinaha","Hindiya","Soomaaliya"],
+    "correct": "Soomaaliya"
+  },
+  {
+    "question": "Run mise Been: Webiga Shabeelle mararka qaar ma gaaro badda.",
+    "options": ["Run","Been"],
     "correct": "Run"
   },
   {
-    "question": "Xisaabta: 0 ÷ 5 = 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
+    "question": "Kee ka mid ah nebiyadan loo yaqaan Dabiixullaah?",
+    "options": ["Ismaaciil","Yuusuf","Muuse","Daawuud"],
+    "correct": "Ismaaciil"
   },
   {
-    "question": "Ingiriis: jamaca \"child\" waa \"children\".",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
+    "question": "Qof ayaa 10 dabaq ka soo dhacay balse waxba ma gaarin. Sidee?",
+    "options": ["Wuu duulay","Dabaqa koowaad ayuu ka dhacay","Wuxuu ka soo dhacay jaranjaro","Wuxuu ka soo dhacay dabaqa hoose"],
+    "correct": "Dabaqa koowaad ayuu ka dhacay"
   },
   {
-    "question": "Caasimadda Kenya waa Nairobi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Itoobiya waa Nairobi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Muqdisho waa caasimadda dowlad-goboleedka Soomaaliya (Federaal).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Soomaaliya waxay xornimada ka heshay Talyaaniga sanadkii 1960.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xasan Cali Khayre wuxuu xilligii 2017–2020 u ahaa R/Wasaaraha Xukuumadda Federaalka Soomaaliya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xasan Cali Khayre wuxuu xilligaas u ahaa Madaxweyne Soomaaliya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Ururka Qaramada Midoobay (UN) wuxuu caawiyaa nabadda iyo horumarinta.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "NATO waa urur ganacsi oo keliya (ma aha mid militariga ah).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Qorraxda waa xiddig (star) sida xiddigaha kale.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dayaxu waa xiddig iskiis iftiiminaya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Saddex-xagal gudihiisa wadarta xaglaha waa 180°.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Labajibbaar wuxuu leeyahay 6 dhinac oo isku dherer ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Webiga Niil waa mid ka mid ah webiyada ugu waaweyn Afrika.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Badweynta Hindiya waxay u dhaxaysaa Hindiya iyo Afrika.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Koonfur Afrika waxay hore u lahayd nidaam apartheid.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Hargeysa waa caasimadda Somaliland (ma aha caasimadda Federaalka).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "HTTPS wuxuu isticmaalaa encryption badanaa (TLS).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Bluetooth wuxuu u baahan yahay internet si uu u shaqeeyo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "DNS wuxuu u tarjumayaa magaca domain → cinwaanka IP.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "RAM waa xusuus ku meel gaar ah (ma aha kayd joogto oo keliya).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Phishing waa isku day lagu khiyaaneeyo dadka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "2FA wuxuu xoojiyaa amniga akoonka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Password \"123456\" waa mid amaan ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Backup-ka xogta waa caado wanaagsan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "GPS wuxuu isticmaalaa dayaxyo satellite.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Wi‑Fi iyo internet waa isku macno.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "JSON waa qaab xog (ma aha luqad barnaamij oo buuxa).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "HTML waa luqad calaamadeyn (markup) webka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Linux waa nidaam hawleed oo furan badanaa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Malware waa barnaamij xun.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Firewall wuxuu caawiyaa ilaalinta shabakadda.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "CPU waa \"Central Processing Unit\".",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "GPU wuxuu caawiyaa xisaabinta sawirrada iyo AI.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "SSD inta badan waa ka dhaqso badan HDD.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "SQL injection waa nooc weerar ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "HTTPS bog kasta wuxuu ka dhigan yahay in uu sax yahay (100%).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Cookies waxay kaydiyaan macluumaad goobaha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Incognito mode wuxuu ka dhigayaa inaad noqotid qarsoon 100%.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Cloud storage wuxuu kaydiyaa xog server fog.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Blockchain wuxuu isticmaalaa silsilad blocks.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Bitcoin waa nooc cryptocurrency ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "AI (sirdoonka macmalka ah) wuxuu isticmaali karaa barashada mashiinka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Machine learning waa qayb ka mid ah AI.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Overfitting waa dhibaato marka moodel uu xasuusto tabaruka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Correlation macnaheedu waa isku mid causation.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Unicode wuxuu taageerayaa xarfaha luqado badan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "UTF-8 waa encoding caan ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Big O notation wuxuu qiyaasaa xawaaraha algorithm.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Stack waa LIFO.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Queue waa FIFO.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Recursion wuxuu u baahan yahay xaalad saldhig (base case).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Deadlock waa dhibaato is xannibaada thread-yada.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Virtual memory wuxuu isticmaalaa disk sida xusuus dheeri ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Garbage collection wuxuu xoreeyaa xusuusta aan loo baahnayn.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "REST waa qaab API oo caan ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "GraphQL waa luqad weydiimo API ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Docker wuxuu isticmaalaa containers.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Kubernetes wuxuu maareeyaa containers.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Git waa nidaam maamulka nooca (version control).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "OAuth waa hab galitaan (login) oo caan ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "JWT waa nooc token authentication ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Zero-day vulnerability waa cilad aan weli la hakin.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Ninkii xilligii 2017–2020 u ahaa R/Wasaaraha Xukuumadda Federaalka Soomaaliya waa kee?",
-    "options": [
-      "Cabdullaahi Deni",
-      "Xasan Cali Khayre",
-      "Cumar Cabdirashiid Cali Sharmaarke",
-      "Maxamed Xuseen Rooble"
-    ],
-    "correct": "Xasan Cali Khayre"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Norway?",
-    "options": [
-      "Oslo",
-      "Sofia",
-      "Astana",
-      "Prague"
-    ],
-    "correct": "Oslo"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Sweden?",
-    "options": [
-      "Prague",
-      "Tallinn",
-      "Dublin",
-      "Stockholm"
-    ],
-    "correct": "Stockholm"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Denmark?",
-    "options": [
-      "Copenhagen",
-      "Lisbon",
-      "Asunción",
-      "Mexico City"
-    ],
-    "correct": "Copenhagen"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Finland?",
-    "options": [
-      "Ankara",
-      "Tripoli",
-      "Helsinki",
-      "Santiago"
-    ],
-    "correct": "Helsinki"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Iceland?",
-    "options": [
-      "Reykjavik",
-      "Sofia",
-      "Wellington",
-      "Kinshasa"
-    ],
-    "correct": "Reykjavik"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Ireland?",
-    "options": [
-      "Wellington",
-      "Dublin",
-      "Helsinki",
-      "Islamabad"
-    ],
-    "correct": "Dublin"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Portugal?",
-    "options": [
-      "Valletta",
-      "Lisbon",
-      "Ljubljana",
-      "New Delhi"
-    ],
-    "correct": "Lisbon"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Greece?",
-    "options": [
-      "Athens",
-      "Astana",
-      "Libreville",
-      "Budapest"
-    ],
-    "correct": "Athens"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Romania?",
-    "options": [
-      "Bogotá",
-      "Bucharest",
-      "Sofia",
-      "Stockholm"
-    ],
-    "correct": "Bucharest"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Hungary?",
-    "options": [
-      "Kyiv",
-      "Budapest",
-      "Podgorica",
-      "Damascus"
-    ],
-    "correct": "Budapest"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Czechia?",
-    "options": [
-      "Lisbon",
-      "Prague",
-      "Bern",
-      "Bratislava"
-    ],
-    "correct": "Prague"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Slovakia?",
-    "options": [
-      "Bratislava",
-      "Zagreb",
-      "Tirana",
-      "Copenhagen"
-    ],
-    "correct": "Bratislava"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Croatia?",
-    "options": [
-      "Yamoussoukro",
-      "London",
-      "Accra",
-      "Zagreb"
-    ],
-    "correct": "Zagreb"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Serbia?",
-    "options": [
-      "Belgrade",
-      "Bratislava",
-      "Ottawa",
-      "Dublin"
-    ],
-    "correct": "Belgrade"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Slovenia?",
-    "options": [
-      "Stockholm",
-      "Tunis",
-      "Sofia",
-      "Ljubljana"
-    ],
-    "correct": "Ljubljana"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Bulgaria?",
-    "options": [
-      "Sofia",
-      "Kingston",
-      "Manama",
-      "Lima"
-    ],
-    "correct": "Sofia"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Poland?",
-    "options": [
-      "Kabul",
-      "Singapore",
-      "Djibouti",
-      "Warsaw"
-    ],
-    "correct": "Warsaw"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Ukraine?",
-    "options": [
-      "Reykjavik",
-      "Santiago",
-      "Libreville",
-      "Kyiv"
-    ],
-    "correct": "Kyiv"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Belarus?",
-    "options": [
-      "Havana",
-      "Rabat",
-      "Minsk",
-      "Vientiane"
-    ],
-    "correct": "Minsk"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Moldova?",
-    "options": [
-      "Bucharest",
-      "Chișinău",
-      "Havana",
-      "Abuja"
-    ],
-    "correct": "Chișinău"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Estonia?",
-    "options": [
-      "Tallinn",
-      "Bogotá",
-      "Beirut",
-      "Damascus"
-    ],
-    "correct": "Tallinn"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Latvia?",
-    "options": [
-      "Riga",
-      "N'Djamena",
-      "Abu Dhabi",
-      "Thimphu"
-    ],
-    "correct": "Riga"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Lithuania?",
-    "options": [
-      "Sana'a",
-      "Vilnius",
-      "Athens",
-      "Muqdisho"
-    ],
-    "correct": "Vilnius"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Turkey?",
-    "options": [
-      "Libreville",
-      "Tokyo",
-      "Ankara",
-      "Kuala Lumpur"
-    ],
-    "correct": "Ankara"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Iran?",
-    "options": [
-      "Manama",
-      "Tallinn",
-      "Lusaka",
-      "Tehran"
-    ],
-    "correct": "Tehran"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Iraq?",
-    "options": [
-      "Muqdisho",
-      "Baghdad",
-      "Caracas",
-      "Accra"
-    ],
-    "correct": "Baghdad"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Syria?",
-    "options": [
-      "Maputo",
-      "Bandar Seri Begawan",
-      "Damascus",
-      "Prague"
-    ],
-    "correct": "Damascus"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Lebanon?",
-    "options": [
-      "Bamako",
-      "Sofia",
-      "Beirut",
-      "Taipei"
-    ],
-    "correct": "Beirut"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Jordan?",
-    "options": [
-      "Kyiv",
-      "Amman",
-      "Djibouti",
-      "Baghdad"
-    ],
-    "correct": "Amman"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Israel?",
-    "options": [
-      "Jerusalem",
-      "Tehran",
-      "Juba",
-      "Dublin"
-    ],
-    "correct": "Jerusalem"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Palestine (caan)?",
-    "options": [
-      "Rabat",
-      "Hanoi",
-      "Ramallah",
-      "Kuala Lumpur"
-    ],
-    "correct": "Ramallah"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Saudi Arabia?",
-    "options": [
-      "Georgetown",
-      "Tripoli",
-      "Riyadh",
-      "Yamoussoukro"
-    ],
-    "correct": "Riyadh"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka UAE?",
-    "options": [
-      "Abu Dhabi",
-      "Ljubljana",
-      "Oslo",
-      "Muscat"
-    ],
-    "correct": "Abu Dhabi"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Qatar?",
-    "options": [
-      "Jerusalem",
-      "Oslo",
-      "Doha",
-      "Tunis"
-    ],
-    "correct": "Doha"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Kuwait?",
-    "options": [
-      "Kuala Lumpur",
-      "Kathmandu",
-      "Caracas",
-      "Kuwait City"
-    ],
-    "correct": "Kuwait City"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Bahrain?",
-    "options": [
-      "Lima",
-      "Ramallah",
-      "Stockholm",
-      "Manama"
-    ],
-    "correct": "Manama"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Oman?",
-    "options": [
-      "Kuwait City",
-      "Wellington",
-      "Manama",
-      "Muscat"
-    ],
-    "correct": "Muscat"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Yemen (caan)?",
-    "options": [
-      "Dhaka",
-      "Bern",
-      "Sana'a",
-      "Lisbon"
-    ],
-    "correct": "Sana'a"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Pakistan?",
-    "options": [
-      "Islamabad",
-      "Zagreb",
-      "Berlin",
-      "Canberra"
-    ],
-    "correct": "Islamabad"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Afghanistan?",
-    "options": [
-      "Kabul",
-      "Vientiane",
-      "Maputo",
-      "Budapest"
-    ],
-    "correct": "Kabul"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka India?",
-    "options": [
-      "Beijing",
-      "Vilnius",
-      "New Delhi",
-      "Tbilisi"
-    ],
-    "correct": "New Delhi"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Bangladesh?",
-    "options": [
-      "Vilnius",
-      "Baku",
-      "Dhaka",
-      "Jerusalem"
-    ],
-    "correct": "Dhaka"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Sri Lanka?",
-    "options": [
-      "Moscow",
-      "Khartoum",
-      "Colombo",
-      "Amsterdam"
-    ],
-    "correct": "Colombo"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Nepal?",
-    "options": [
-      "Quito",
-      "Libreville",
-      "Kathmandu",
-      "Caracas"
-    ],
-    "correct": "Kathmandu"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Bhutan?",
-    "options": [
-      "Sofia",
-      "Kathmandu",
-      "New Delhi",
-      "Thimphu"
-    ],
-    "correct": "Thimphu"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Myanmar?",
-    "options": [
-      "Djibouti",
-      "Naypyidaw",
-      "Luxembourg City",
-      "Reykjavik"
-    ],
-    "correct": "Naypyidaw"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Thailand?",
-    "options": [
-      "Juba",
-      "Tripoli",
-      "Bangkok",
-      "Naypyidaw"
-    ],
-    "correct": "Bangkok"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Cambodia?",
-    "options": [
-      "Sarajevo",
-      "Phnom Penh",
-      "Bangkok",
-      "Oslo"
-    ],
-    "correct": "Phnom Penh"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Laos?",
-    "options": [
-      "Vientiane",
-      "Warsaw",
-      "Bratislava",
-      "Prague"
-    ],
-    "correct": "Vientiane"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Vietnam?",
-    "options": [
-      "Libreville",
-      "Hanoi",
-      "Oslo",
-      "Astana"
-    ],
-    "correct": "Hanoi"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Malaysia?",
-    "options": [
-      "Athens",
-      "Sana'a",
-      "Helsinki",
-      "Kuala Lumpur"
-    ],
-    "correct": "Kuala Lumpur"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Singapore?",
-    "options": [
-      "Thimphu",
-      "Singapore",
-      "Tunis",
-      "Paris"
-    ],
-    "correct": "Singapore"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Indonesia?",
-    "options": [
-      "Sofia",
-      "Jakarta",
-      "Gaborone",
-      "Canberra"
-    ],
-    "correct": "Jakarta"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Philippines?",
-    "options": [
-      "Algiers",
-      "Thimphu",
-      "Jerusalem",
-      "Manila"
-    ],
-    "correct": "Manila"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Brunei?",
-    "options": [
-      "Bandar Seri Begawan",
-      "Tunis",
-      "Dakar",
-      "Zagreb"
-    ],
-    "correct": "Bandar Seri Begawan"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka China?",
-    "options": [
-      "Paris",
-      "Libreville",
-      "Beijing",
-      "Mexico City"
-    ],
-    "correct": "Beijing"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Japan?",
-    "options": [
-      "Dakar",
-      "Sana'a",
-      "Kuwait City",
-      "Tokyo"
-    ],
-    "correct": "Tokyo"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka South Korea?",
-    "options": [
-      "Sofia",
-      "Rabat",
-      "Caracas",
-      "Seoul"
-    ],
-    "correct": "Seoul"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka North Korea?",
-    "options": [
-      "Asunción",
-      "Algiers",
-      "Nairobi",
-      "Pyongyang"
-    ],
-    "correct": "Pyongyang"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Mongolia?",
-    "options": [
-      "Sofia",
-      "Ulaanbaatar",
-      "Dakar",
-      "Lima"
-    ],
-    "correct": "Ulaanbaatar"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Taiwan (caan)?",
-    "options": [
-      "Addis Ababa",
-      "Vientiane",
-      "Dublin",
-      "Taipei"
-    ],
-    "correct": "Taipei"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Australia?",
-    "options": [
-      "Madrid",
-      "Canberra",
-      "Kabul",
-      "Sana'a"
-    ],
-    "correct": "Canberra"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka New Zealand?",
-    "options": [
-      "Tbilisi",
-      "Wellington",
-      "Gitega",
-      "Rome"
-    ],
-    "correct": "Wellington"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Canada?",
-    "options": [
-      "Ulaanbaatar",
-      "Vientiane",
-      "Havana",
-      "Ottawa"
-    ],
-    "correct": "Ottawa"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Mexico?",
-    "options": [
-      "Mexico City",
-      "Windhoek",
-      "Kinshasa",
-      "Asunción"
-    ],
-    "correct": "Mexico City"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Cuba?",
-    "options": [
-      "Vienna",
-      "Tripoli",
-      "Asunción",
-      "Havana"
-    ],
-    "correct": "Havana"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Jamaica?",
-    "options": [
-      "Naypyidaw",
-      "Kingston",
-      "Beijing",
-      "Phnom Penh"
-    ],
-    "correct": "Kingston"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Brazil?",
-    "options": [
-      "Zagreb",
-      "Oslo",
-      "Brasília",
-      "Chișinău"
-    ],
-    "correct": "Brasília"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Argentina?",
-    "options": [
-      "Buenos Aires",
-      "Seoul",
-      "Niamey",
-      "Warsaw"
-    ],
-    "correct": "Buenos Aires"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Chile?",
-    "options": [
-      "Santiago",
-      "Gitega",
-      "Georgetown",
-      "Nicosia"
-    ],
-    "correct": "Santiago"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Peru?",
-    "options": [
-      "Tbilisi",
-      "Lima",
-      "Berlin",
-      "Tashkent"
-    ],
-    "correct": "Lima"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Colombia?",
-    "options": [
-      "Kuwait City",
-      "Djibouti",
-      "Bogotá",
-      "Tehran"
-    ],
-    "correct": "Bogotá"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Venezuela?",
-    "options": [
-      "Nicosia",
-      "Bandar Seri Begawan",
-      "Lisbon",
-      "Caracas"
-    ],
-    "correct": "Caracas"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Ecuador?",
-    "options": [
-      "Georgetown",
-      "Vienna",
-      "Quito",
-      "Libreville"
-    ],
-    "correct": "Quito"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Bolivia?",
-    "options": [
-      "Copenhagen",
-      "Asmara",
-      "Helsinki",
-      "Sucre"
-    ],
-    "correct": "Sucre"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Paraguay?",
-    "options": [
-      "Tashkent",
-      "Asunción",
-      "Bucharest",
-      "Dhaka"
-    ],
-    "correct": "Asunción"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Uruguay?",
-    "options": [
-      "Quito",
-      "Stockholm",
-      "Montevideo",
-      "Khartoum"
-    ],
-    "correct": "Montevideo"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Guyana?",
-    "options": [
-      "Kabul",
-      "New Delhi",
-      "Buenos Aires",
-      "Georgetown"
-    ],
-    "correct": "Georgetown"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Suriname?",
-    "options": [
-      "Thimphu",
-      "Tripoli",
-      "Paramaribo",
-      "Tehran"
-    ],
-    "correct": "Paramaribo"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Egypt?",
-    "options": [
-      "Kathmandu",
-      "Kingston",
-      "Kuwait City",
-      "Cairo"
-    ],
-    "correct": "Cairo"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Libya?",
-    "options": [
-      "Cairo",
-      "Reykjavik",
-      "Tripoli",
-      "Ottawa"
-    ],
-    "correct": "Tripoli"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Tunisia?",
-    "options": [
-      "Tokyo",
-      "Bangkok",
-      "Tunis",
-      "Kuwait City"
-    ],
-    "correct": "Tunis"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Algeria?",
-    "options": [
-      "Rabat",
-      "Doha",
-      "Algiers",
-      "Cairo"
-    ],
-    "correct": "Algiers"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Morocco?",
-    "options": [
-      "Kigali",
-      "Maputo",
-      "Jerusalem",
-      "Rabat"
-    ],
-    "correct": "Rabat"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Sudan?",
-    "options": [
-      "Oslo",
-      "New Delhi",
-      "Montevideo",
-      "Khartoum"
-    ],
-    "correct": "Khartoum"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka South Sudan?",
-    "options": [
-      "Ramallah",
-      "Kingston",
-      "Juba",
-      "Beijing"
-    ],
-    "correct": "Juba"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Ethiopia?",
-    "options": [
-      "Ljubljana",
-      "Ramallah",
-      "Addis Ababa",
-      "Thimphu"
-    ],
-    "correct": "Addis Ababa"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Eritrea?",
-    "options": [
-      "Skopje",
-      "Georgetown",
-      "Dodoma",
-      "Asmara"
-    ],
-    "correct": "Asmara"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Djibouti?",
-    "options": [
-      "Windhoek",
-      "Stockholm",
-      "Oslo",
-      "Djibouti"
-    ],
-    "correct": "Djibouti"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Kenya?",
-    "options": [
-      "Wellington",
-      "Dhaka",
-      "Nairobi",
-      "Stockholm"
-    ],
-    "correct": "Nairobi"
-  },
-  {
-    "question": "Waa maxay caasimadda dalka Uganda?",
-    "options": [
-      "Moscow",
-      "Kuwait City",
-      "Kampala",
-      "Nairobi"
-    ],
+    "question": "Kee aan ka mid ahayn gobollada Soomaaliya?",
+    "options": ["Bakool","Hiiraan","Nugaal","Kampala"],
     "correct": "Kampala"
   },
   {
-    "question": "Waa maxay caasimadda dalka Rwanda?",
-    "options": [
-      "Ottawa",
-      "Doha",
-      "Damascus",
-      "Kigali"
-    ],
-    "correct": "Kigali"
+    "question": "Erayga English-ka ah ee 'Betray' micnihiisu waa?",
+    "options": ["Caawin","Khiyaamid","Dhiirigelin","Difaacid"],
+    "correct": "Khiyaamid"
   },
   {
-    "question": "Waa maxay caasimadda dalka Burundi?",
-    "options": [
-      "Djibouti",
-      "Berlin",
-      "Luanda",
-      "Gitega"
-    ],
-    "correct": "Gitega"
+    "question": "Run mise Been: Mercury wuxuu leeyahay sanad ka gaaban kan Dhulka.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay caasimadda dalka Tanzania?",
-    "options": [
-      "Dodoma",
-      "Tunis",
-      "Ankara",
-      "Asunción"
-    ],
-    "correct": "Dodoma"
+    "question": "Kee ka mid ah saxaabada ugu warinta badan xadiisyada?",
+    "options": ["Abuu Hureyra","Cali","Cusmaan","Zubeyr"],
+    "correct": "Abuu Hureyra"
   },
   {
-    "question": "Waa maxay caasimadda dalka Zambia?",
-    "options": [
-      "Sana'a",
-      "Lusaka",
-      "Brussels",
-      "Ottawa"
-    ],
-    "correct": "Lusaka"
+    "question": "Kee ka mid ah waddamadan aan lahayn xubin joogto ah Golaha Ammaanka?",
+    "options": ["Ruushka","Faransiiska","Japan","Shiinaha"],
+    "correct": "Japan"
   },
   {
-    "question": "Waa maxay caasimadda dalka Zimbabwe?",
-    "options": [
-      "Harare",
-      "Copenhagen",
-      "Ankara",
-      "Kabul"
-    ],
-    "correct": "Harare"
+    "question": "Run mise Been: Linux waa nidaam hawleed furan (Open Source).",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay caasimadda dalka Botswana?",
-    "options": [
-      "Astana",
-      "Canberra",
-      "Oslo",
-      "Gaborone"
-    ],
-    "correct": "Gaborone"
+    "question": "Kee ka mid ah magaalooyinkan aan ahayn magaalo Soomaaliyeed?",
+    "options": ["Baydhabo","Beledweyne","Nairobi","Dhuusamareeb"],
+    "correct": "Nairobi"
   },
   {
-    "question": "Waa maxay caasimadda dalka Namibia?",
-    "options": [
-      "Warsaw",
-      "Brussels",
-      "Amman",
-      "Windhoek"
-    ],
-    "correct": "Windhoek"
+    "question": "Erayga English-ka ah ee 'Wealthy' micnihiisu waa?",
+    "options": ["Sabool","Qani","Daallan","Caqli badan"],
+    "correct": "Qani"
   },
   {
-    "question": "Waa maxay caasimadda dalka Mozambique?",
-    "options": [
-      "Phnom Penh",
-      "Athens",
-      "Maputo",
-      "Ljubljana"
-    ],
-    "correct": "Maputo"
+    "question": "Kee ahaa saynisyahankii hindisay aragtida cuf-isjiidadka?",
+    "options": ["Einstein","Newton","Tesla","Galileo"],
+    "correct": "Newton"
   },
   {
-    "question": "Waa maxay caasimadda dalka Malawi?",
-    "options": [
-      "Lilongwe",
-      "Dhaka",
-      "Copenhagen",
-      "Libreville"
-    ],
-    "correct": "Lilongwe"
+    "question": "Haddii aad hal guri leedahay oo dhammaan darbiyadu koonfur u jeedaan, bannaankana orso cad joogo, gurigu xaggee ku yaal?",
+    "options": ["Koonfurta Afrika","Cirifka Waqooyi","Soomaaliya","Kanada"],
+    "correct": "Cirifka Waqooyi"
   },
   {
-    "question": "Waa maxay caasimadda dalka Angola?",
-    "options": [
-      "Vilnius",
-      "Luanda",
-      "Ljubljana",
-      "Harare"
-    ],
-    "correct": "Luanda"
+    "question": "Kee ka mid ah boqorradan Soomaaliyeed aan ka tirsanaan boqortooyadii Geledi?",
+    "options": ["Yuusuf Maxamuud Ibraahim","Axmed Yuusuf","Cismaan Maxamuud","Midna"],
+    "correct": "Cismaan Maxamuud"
   },
   {
-    "question": "Waa maxay caasimadda dalka DRC?",
-    "options": [
-      "Prague",
-      "Kinshasa",
-      "Jerusalem",
-      "New Delhi"
-    ],
-    "correct": "Kinshasa"
+    "question": "Run mise Been: Soomaaliya waxay ku taallaa labada cirif ee dhulbaraha.",
+    "options": ["Run","Been"],
+    "correct": "Been"
   },
   {
-    "question": "Waa maxay caasimadda dalka Congo?",
-    "options": [
-      "Muscat",
-      "Luxembourg City",
-      "Tirana",
-      "Brazzaville"
-    ],
-    "correct": "Brazzaville"
+    "question": "Kee ka mid ah saxaabada loogu yeero Sayfullaah (Seeftii Alle)?",
+    "options": ["Cali bin Abii Daalib","Khaalid bin Waliid","Zubeyr bin Cawwaam","Sacad bin Abii Waqaas"],
+    "correct": "Khaalid bin Waliid"
   },
   {
-    "question": "Waa maxay caasimadda dalka Gabon?",
-    "options": [
-      "Ljubljana",
-      "Beirut",
-      "Tunis",
-      "Libreville"
-    ],
-    "correct": "Libreville"
+    "question": "Erayga English-ka ah ee 'Honest' micnihiisu waa?",
+    "options": ["Daacad","Qani","Aamusnaan badan","Caajis"],
+    "correct": "Daacad"
   },
   {
-    "question": "Waa maxay caasimadda dalka Cameroon?",
-    "options": [
-      "Belgrade",
-      "Muscat",
-      "Yaoundé",
-      "Helsinki"
-    ],
-    "correct": "Yaoundé"
+    "question": "Kee aan waligiis noqon Madaxweynaha Soomaaliya?",
+    "options": ["Cumar Carte Qaalib","Cabdullaahi Yuusuf","Xasan Sheekh Maxamuud","Shariif Sheekh Axmed"],
+    "correct": "Cumar Carte Qaalib"
   },
   {
-    "question": "Waa maxay caasimadda dalka Nigeria?",
-    "options": [
-      "Luanda",
-      "Yerevan",
-      "Helsinki",
-      "Abuja"
-    ],
-    "correct": "Abuja"
+    "question": "Haddii aad leedahay 12 ido ah, dhammaantoodna way dhinteen marka laga reebo 5, imisa ayaa kuu hartay?",
+    "options": ["0","5","7","12"],
+    "correct": "5"
   },
   {
-    "question": "Waa maxay caasimadda dalka Ghana?",
-    "options": [
-      "Athens",
-      "Vientiane",
-      "Havana",
-      "Accra"
-    ],
-    "correct": "Accra"
+    "question": "Kee ka mid ah waddamadan aan Afrika ku taallin?",
+    "options": ["Mali","Niger","Nepal","Chad"],
+    "correct": "Nepal"
   },
   {
-    "question": "Waa maxay caasimadda dalka Ivory Coast?",
-    "options": [
-      "Bucharest",
-      "Gitega",
-      "Yamoussoukro",
-      "Oslo"
-    ],
-    "correct": "Yamoussoukro"
+    "question": "Run mise Been: CPU wuxuu u taagan yahay Central Processing Unit.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay caasimadda dalka Senegal?",
-    "options": [
-      "Beijing",
-      "Montevideo",
-      "Dakar",
-      "Sofia"
-    ],
-    "correct": "Dakar"
+    "question": "Kee ahaa madaxweynihii Soomaaliya xilligii dastuurka cusub la ansixiyay 2012?",
+    "options": ["Shariif Sheekh Axmed","Xasan Sheekh Maxamuud","Cabdullaahi Yuusuf","Farmaajo"],
+    "correct": "Shariif Sheekh Axmed"
   },
   {
-    "question": "Waa maxay caasimadda dalka Mali?",
-    "options": [
-      "Bamako",
-      "Kathmandu",
-      "Ankara",
-      "Muscat"
-    ],
-    "correct": "Bamako"
+    "question": "Kee ka mid ah nebiyadan loogu yeero Kaliimullaah?",
+    "options": ["Muuse","Ciise","Ibraahim","Yuusuf"],
+    "correct": "Muuse"
   },
   {
-    "question": "Waa maxay caasimadda dalka Niger?",
-    "options": [
-      "Windhoek",
-      "Damascus",
-      "Niamey",
-      "Sana'a"
-    ],
-    "correct": "Niamey"
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Victory' waa?",
+    "options": ["Success","Defeat","Glory","Achievement"],
+    "correct": "Defeat"
   },
   {
-    "question": "Waa maxay caasimadda dalka Chad?",
-    "options": [
-      "N'Djamena",
-      "Thimphu",
-      "Tallinn",
-      "Tokyo"
-    ],
-    "correct": "N'Djamena"
+    "question": "Kee ka mid ah magaalooyinkan aan deked lahayn?",
+    "options": ["Boosaaso","Kismaayo","Berbera","Baydhabo"],
+    "correct": "Baydhabo"
   },
   {
-    "question": "Waa maxay caasimadda dalka Somalia?",
-    "options": [
-      "Stockholm",
-      "Sucre",
-      "Kathmandu",
-      "Muqdisho"
-    ],
-    "correct": "Muqdisho"
+    "question": "Run mise Been: Saturn waa meeraha leh giraannada ugu caansan.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay caasimadda dalka Kazakhstan?",
-    "options": [
-      "Chișinău",
-      "Yaoundé",
-      "New Delhi",
-      "Astana"
-    ],
-    "correct": "Astana"
+    "question": "Kee aan ka tirsanayn Khulafadii Raashidiinta?",
+    "options": ["Abuu Bakar","Cumar","Cusmaan","Khaalid bin Waliid"],
+    "correct": "Khaalid bin Waliid"
   },
   {
-    "question": "Waa maxay caasimadda dalka Uzbekistan?",
-    "options": [
-      "Bamako",
-      "Tashkent",
-      "Doha",
-      "New Delhi"
-    ],
-    "correct": "Tashkent"
+    "question": "Qof ayaa dhalashadiisii 25aad u dabaaldegay isagoo 100 jir ah. Sidee?",
+    "options": ["Wuu been sheegay","Leap Year ayuu dhashay","Wuu qaldamay","Suurtagal ma aha"],
+    "correct": "Leap Year ayuu dhashay"
   },
   {
-    "question": "Waa maxay caasimadda dalka Russia?",
-    "options": [
-      "Tehran",
-      "Moscow",
-      "Oslo",
-      "Ljubljana"
-    ],
-    "correct": "Moscow"
+    "question": "Kee ka mid ah dalalkan aan lahayn xeeb?",
+    "options": ["Bolivia","Peru","Chile","Ecuador"],
+    "correct": "Bolivia"
   },
   {
-    "question": "Waa maxay caasimadda dalka Germany?",
-    "options": [
-      "London",
-      "Rome",
-      "Tbilisi",
-      "Berlin"
-    ],
-    "correct": "Berlin"
+    "question": "Erayga English-ka ah ee 'Brilliant' micnihiisu waa?",
+    "options": ["Aad u caqli badan","Sabool","Dhaadheer","Gaaban"],
+    "correct": "Aad u caqli badan"
   },
   {
-    "question": "Waa maxay caasimadda dalka France?",
-    "options": [
-      "Paris",
-      "Kuwait City",
-      "Kabul",
-      "Tunis"
-    ],
-    "correct": "Paris"
+    "question": "Run mise Been: Soomaaliya waxay ku jirtaa Geeska Afrika.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay caasimadda dalka Italy?",
-    "options": [
-      "Rome",
-      "Madrid",
-      "Stockholm",
-      "Buenos Aires"
-    ],
-    "correct": "Rome"
+    "question": "Kee ka mid ah ciyaartoydan aan waligiis ku guuleysan Champions League?",
+    "options": ["Cristiano Ronaldo","Lionel Messi","Zlatan Ibrahimovic","Luka Modric"],
+    "correct": "Zlatan Ibrahimovic"
   },
   {
-    "question": "Waa maxay caasimadda dalka Spain?",
-    "options": [
-      "Brussels",
-      "Madrid",
-      "Ljubljana",
-      "Beirut"
-    ],
-    "correct": "Madrid"
+    "question": "Kee ahaa ninkii ugu horreeyay ee hawada sare taga?",
+    "options": ["Neil Armstrong","Yuri Gagarin","Buzz Aldrin","John Glenn"],
+    "correct": "Yuri Gagarin"
   },
   {
-    "question": "Waa maxay caasimadda dalka UK?",
-    "options": [
-      "Tirana",
-      "London",
-      "Phnom Penh",
-      "Stockholm"
-    ],
-    "correct": "London"
+    "question": "Run mise Been: HTML waa luqad Programming ah.",
+    "options": ["Run","Been"],
+    "correct": "Been"
   },
   {
-    "question": "Waa maxay caasimadda dalka Netherlands?",
-    "options": [
-      "Brussels",
-      "Kampala",
-      "Amsterdam",
-      "Lilongwe"
-    ],
-    "correct": "Amsterdam"
+    "question": "Kee ka mid ah waddamadan aan xubin ka ahayn Jaamacadda Carabta?",
+    "options": ["Soomaaliya","Masar","Pakistan","Suudaan"],
+    "correct": "Pakistan"
   },
   {
-    "question": "Waa maxay caasimadda dalka Belgium?",
-    "options": [
-      "Lima",
-      "Brussels",
-      "Sarajevo",
-      "Canberra"
-    ],
-    "correct": "Brussels"
+    "question": "Erayga English-ka ah ee 'Scarce' micnihiisu waa?",
+    "options": ["Yar oo adag in la helo","Badan","Raqiis","Degdeg"],
+    "correct": "Yar oo adag in la helo"
   },
   {
-    "question": "Waa maxay caasimadda dalka Switzerland?",
-    "options": [
-      "Taipei",
-      "Reykjavik",
-      "Bern",
-      "Ramallah"
-    ],
-    "correct": "Bern"
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee Islaamka qaata ragga waaweyn?",
+    "options": ["Abuu Bakar","Cumar","Cusmaan","Cali"],
+    "correct": "Abuu Bakar"
   },
   {
-    "question": "Waa maxay caasimadda dalka Austria?",
-    "options": [
-      "Brussels",
-      "Amman",
-      "Vienna",
-      "Athens"
-    ],
-    "correct": "Vienna"
+    "question": "Haddii aad ka saarto hal xaraf erayga 'TODDOBA', eray kale oo Soomaali ah ayaa soo baxaya. Kee?",
+    "options": ["ODDOBA","TODBA","DOOBA","TODA"],
+    "correct": "TODBA"
   },
   {
-    "question": "Waa maxay caasimadda dalka Luxembourg?",
-    "options": [
-      "Tokyo",
-      "Luxembourg City",
-      "Oslo",
-      "Thimphu"
-    ],
-    "correct": "Luxembourg City"
+    "question": "Kee ka mid ah dowladahan aan waligiis ku guuleysan Koobka Adduunka?",
+    "options": ["Brazil","Argentina","Netherlands","Germany"],
+    "correct": "Netherlands"
   },
   {
-    "question": "Waa maxay caasimadda dalka Malta?",
-    "options": [
-      "Valletta",
-      "Yerevan",
-      "Lusaka",
-      "Vientiane"
-    ],
-    "correct": "Valletta"
+    "question": "Run mise Been: Cabdirashiid Cali Sharmaarke wuxuu ahaa Ra'iisul Wasaare iyo Madaxweyne labadaba.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay caasimadda dalka Cyprus?",
-    "options": [
-      "Cairo",
-      "Helsinki",
-      "Sucre",
-      "Nicosia"
-    ],
-    "correct": "Nicosia"
+    "question": "Kee ka mid ah saxaabada loo yaqaan Tarjumaanul Qur'aan?",
+    "options": ["Ibnu Cabbaas","Ibnu Cumar","Abuu Hureyra","Salmaan Al-Faarisi"],
+    "correct": "Ibnu Cabbaas"
   },
   {
-    "question": "Waa maxay caasimadda dalka Albania?",
-    "options": [
-      "Belgrade",
-      "Lima",
-      "Beijing",
-      "Tirana"
-    ],
-    "correct": "Tirana"
+    "question": "Erayga English-ka ah ee 'Loyal' micnihiisu waa?",
+    "options": ["Daacad","Bakhiil","Qani","Degdeg badan"],
+    "correct": "Daacad"
   },
   {
-    "question": "Waa maxay caasimadda dalka North Macedonia?",
-    "options": [
-      "Skopje",
-      "Algiers",
-      "Pyongyang",
-      "Kuwait City"
-    ],
-    "correct": "Skopje"
+    "question": "Kee aan ka mid ahayn dowlad-goboleedyada Soomaaliya?",
+    "options": ["Puntland","Galmudug","Jubbaland","Somaliland"],
+    "correct": "Somaliland"
   },
   {
-    "question": "Waa maxay caasimadda dalka Bosnia?",
-    "options": [
-      "Sarajevo",
-      "Prague",
-      "Asunción",
-      "Kuwait City"
-    ],
-    "correct": "Sarajevo"
+    "question": "Haddii diyaarad ku dhacdo xadka u dhexeeya Soomaaliya iyo Itoobiya, xaggee lagu aasayaa dadkii badbaaday?",
+    "options": ["Soomaaliya","Itoobiya","Labada dal","Meelna"],
+    "correct": "Meelna"
   },
   {
-    "question": "Waa maxay caasimadda dalka Montenegro?",
-    "options": [
-      "Helsinki",
-      "Podgorica",
-      "Bratislava",
-      "Astana"
-    ],
-    "correct": "Podgorica"
+    "question": "Kee ka mid ah nebiyadan loo yaqaan Dabiixullaah?",
+    "options": ["Ismaaciil","Yuusuf","Muuse","Daawuud"],
+    "correct": "Ismaaciil"
   },
   {
-    "question": "Waa maxay caasimadda dalka Georgia?",
-    "options": [
-      "Oslo",
-      "Canberra",
-      "Tbilisi",
-      "Havana"
-    ],
-    "correct": "Tbilisi"
+    "question": "Run mise Been: Neptune waa meeraha ugu fog qorraxda.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay caasimadda dalka Armenia?",
-    "options": [
-      "Yerevan",
-      "Bogotá",
-      "Yamoussoukro",
-      "Santiago"
-    ],
-    "correct": "Yerevan"
+    "question": "Kee ka mid ah waddamadan aan ku hadlin Isbaanish luqad rasmi ah?",
+    "options": ["Mexico","Argentina","Brazil","Chile"],
+    "correct": "Brazil"
   },
   {
-    "question": "Waa maxay caasimadda dalka Azerbaijan?",
-    "options": [
-      "Zagreb",
-      "Baku",
-      "Yerevan",
-      "Tehran"
-    ],
-    "correct": "Baku"
+    "question": "Kee ahaa madaxweynihii Soomaaliya markii ugu horreysay ee xilka qabtay laba jeer oo kala duwan?",
+    "options": ["Aadan Cadde","Cabdullaahi Yuusuf","Xasan Sheekh Maxamuud","Cali Mahdi"],
+    "correct": "Xasan Sheekh Maxamuud"
   },
   {
-    "question": "Waa maxay caasimadda dalka United States?",
-    "options": [
-      "Brazzaville",
-      "Dhaka",
-      "Tbilisi",
-      "Washington, D.C."
-    ],
-    "correct": "Washington, D.C."
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Expand' waa?",
+    "options": ["Increase","Develop","Contract","Grow"],
+    "correct": "Contract"
   },
   {
-    "question": "Waa maxay 3 + 10?",
-    "options": [
-      "15",
-      "12",
-      "13",
-      "14"
-    ],
-    "correct": "13"
+    "question": "Kee ka mid ah saxaabadan aan lagu tirin tobanka Jannada loogu bishaareeyay?",
+    "options": ["Talxa","Zubeyr","Abuu Cubeyda","Bilal"],
+    "correct": "Bilal"
   },
   {
-    "question": "Waa maxay 4 + 5?",
-    "options": [
-      "10",
-      "11",
-      "9",
-      "8"
-    ],
-    "correct": "9"
+    "question": "Run mise Been: Boqortooyadii Ajuuraan waxay ahayd dowlad Soomaaliyeed.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 5 + 12?",
-    "options": [
-      "16",
-      "17",
-      "19",
-      "18"
-    ],
-    "correct": "17"
+    "question": "Qof ayaa 30 sano jiray sanadkii 2020, haddana 25 sano ayuu jiray sanadkii 2025. Sidee?",
+    "options": ["Wuu been sheegay","Taariikhda BC ayuu ka hadlayay","Wuu qaldamay","Suurtagal ma aha"],
+    "correct": "Taariikhda BC ayuu ka hadlayay"
   },
   {
-    "question": "Waa maxay 6 + 7?",
-    "options": [
-      "12",
-      "14",
-      "15",
-      "13"
-    ],
-    "correct": "13"
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Mudug?",
+    "options": ["Gaalkacyo","Xarardheere","Hobyo","Qardho"],
+    "correct": "Qardho"
   },
   {
-    "question": "Waa maxay 7 + 14?",
-    "options": [
-      "22",
-      "21",
-      "20",
-      "23"
-    ],
-    "correct": "21"
+    "question": "Erayga English-ka ah ee 'Precise' micnihiisu waa?",
+    "options": ["Sax ah","Degdeg ah","Gaabis ah","Jaban"],
+    "correct": "Sax ah"
   },
   {
-    "question": "Waa maxay 8 + 9?",
-    "options": [
-      "19",
-      "17",
-      "16",
-      "18"
-    ],
-    "correct": "17"
+    "question": "Kee ka mid ah dalalkan aan lahayn hub nukliyeer?",
+    "options": ["Pakistan","Hindiya","Israel","Talyaani"],
+    "correct": "Talyaani"
   },
   {
-    "question": "Waa maxay 9 + 4?",
-    "options": [
-      "13",
-      "15",
-      "12",
-      "14"
-    ],
-    "correct": "13"
+    "question": "Run mise Been: SQL waa luqad loo isticmaalo keydka xogta.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 10 + 11?",
-    "options": [
-      "22",
-      "20",
-      "23",
-      "21"
-    ],
-    "correct": "21"
+    "question": "Kee ahaa saynisyahankii hindisay Theory of Relativity?",
+    "options": ["Newton","Einstein","Tesla","Faraday"],
+    "correct": "Einstein"
   },
   {
-    "question": "Waa maxay 11 + 6?",
-    "options": [
-      "17",
-      "18",
-      "19",
-      "16"
-    ],
-    "correct": "17"
+    "question": "Kee ka mid ah waddamadan aan xubin ka ahayn Qaramada Midoobay?",
+    "options": ["Soomaaliya","Kosovo","Masar","Kenya"],
+    "correct": "Kosovo"
   },
   {
-    "question": "Waa maxay 12 + 13?",
-    "options": [
-      "27",
-      "25",
-      "24",
-      "26"
-    ],
-    "correct": "25"
+    "question": "Erayga English-ka ah ee 'Generosity' micnihiisu waa?",
+    "options": ["Nacasnimo","Deeqsinimo","Dagaal","Aamusnaan"],
+    "correct": "Deeqsinimo"
   },
   {
-    "question": "Waa maxay 2 + 8?",
-    "options": [
-      "9",
-      "12",
-      "11",
-      "10"
-    ],
+    "question": "Kee ka mid ah webiyadan ugu dheer dunida?",
+    "options": ["Jubba","Shabeelle","Niil","Tana"],
+    "correct": "Niil"
+  },
+  {
+    "question": "Run mise Been: Bluetooth wuxuu shaqayn karaa internet la'aan.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee Nabi Muxamed (NNKH) rumeeya ragga waaweyn?",
+    "options": ["Cumar","Cusmaan","Abuu Bakar","Cali"],
+    "correct": "Abuu Bakar"
+  },
+  {
+    "question": "Haddii aad leedahay hal kabriid oo keliya qol mugdi ah oo ay ku jiraan shumac, foorno iyo laambad saliid ah, maxaad marka hore shidaysaa?",
+    "options": ["Shumaca","Foornada","Laambadda","Kabriidka"],
+    "correct": "Kabriidka"
+  },
+  {
+    "question": "Kee ka mid ah madaxdan aan waligiis noqon Madaxweynaha Soomaaliya?",
+    "options": ["Cumar Carte Qaalib","Cabdullaahi Yuusuf","Shariif Sheekh Axmed","Xasan Sheekh Maxamuud"],
+    "correct": "Cumar Carte Qaalib"
+  },
+  {
+    "question": "Run mise Been: Aadan Cabdulle Cismaan wuxuu ahaa madaxweynihii ugu horreeyay Soomaaliya.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee loo yaqaan Faaruuq?",
+    "options": ["Abuu Bakar","Cumar bin Khadaab","Cusmaan bin Cafaan","Cali bin Abii Daalib"],
+    "correct": "Cumar bin Khadaab"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Honour' micnihiisu waa?",
+    "options": ["Sharaf","Murugo","Cabsi","Dagaal"],
+    "correct": "Sharaf"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan lahayn xeeb?",
+    "options": ["Uganda","Kenya","Soomaaliya","Tanzania"],
+    "correct": "Uganda"
+  },
+  {
+    "question": "Haddii aad ka hormarto qofka ugu dambeeya tartan, kaalinta meeqaad gelaysaa?",
+    "options": ["1aad","2aad","Ma suurtagasho","3aad"],
+    "correct": "Ma suurtagasho"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan lagu sheegay Qur'aanka ugu badan?",
+    "options": ["Muuse","Ibraahim","Ciise","Nuux"],
+    "correct": "Muuse"
+  },
+  {
+    "question": "Run mise Been: Jupiter waa meeraha ugu weyn nidaamka qorraxda.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee aan ka mid ahayn dalalka Geeska Afrika?",
+    "options": ["Soomaaliya","Itoobiya","Jabuuti","Ghana"],
+    "correct": "Ghana"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay nalka korontada ee ganacsi ahaan loo isticmaalo?",
+    "options": ["Tesla","Newton","Thomas Edison","Einstein"],
+    "correct": "Thomas Edison"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Justice' micnihiisu waa?",
+    "options": ["Cadaalad","Aargoosi","Xukun","Cabsi"],
+    "correct": "Cadaalad"
+  },
+  {
+    "question": "Run mise Been: Linux waa nidaam hawleed furan.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin Soomaaliya?",
+    "options": ["Baydhabo","Boosaaso","Mombasa","Jowhar"],
+    "correct": "Mombasa"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee adaan qaada?",
+    "options": ["Bilal","Cali","Cumar","Salmaan"],
+    "correct": "Bilal"
+  },
+  {
+    "question": "Wax badan ayaan leeyahay laakiin meel yar ayaan gala. Waa maxay?",
+    "options": ["Maskax","USB","Buug","Qalin"],
+    "correct": "USB"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan xubin ka ahayn G7?",
+    "options": ["Japan","Germany","India","Canada"],
+    "correct": "India"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Rare' micnihiisu waa?",
+    "options": ["Naadir","Caadi","Jaban","Cusub"],
+    "correct": "Naadir"
+  },
+  {
+    "question": "Run mise Been: Mercury ayaa ugu dhow qorraxda.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee aan ka mid ahayn Khulafadii Raashidiinta?",
+    "options": ["Abuu Bakar","Cumar","Cusmaan","Khaalid bin Waliid"],
+    "correct": "Khaalid bin Waliid"
+  },
+  {
+    "question": "Kee ka mid ah gobolladan aan ku jirin Puntland?",
+    "options": ["Bari","Nugaal","Sanaag","Bakool"],
+    "correct": "Bakool"
+  },
+  {
+    "question": "Haddii 10 qof ay 10 daqiiqo ku qabtaan 10 shaqo, imisa daqiiqo ayay 100 qof ku qabanayaan 100 shaqo?",
+    "options": ["10","100","50","1"],
     "correct": "10"
   },
   {
-    "question": "Waa maxay 3 + 3?",
-    "options": [
-      "5",
-      "8",
-      "7",
-      "6"
-    ],
-    "correct": "6"
+    "question": "Erayga English-ka ah ee 'Temporary' micnihiisu waa?",
+    "options": ["Ku meel gaar","Joogto","Degdeg","Gaabis"],
+    "correct": "Ku meel gaar"
   },
   {
-    "question": "Waa maxay 4 + 10?",
-    "options": [
-      "13",
-      "14",
-      "15",
-      "16"
-    ],
-    "correct": "14"
+    "question": "Run mise Been: Dayaxu isagaa iftiin sameeya.",
+    "options": ["Run","Been"],
+    "correct": "Been"
   },
   {
-    "question": "Waa maxay 5 + 5?",
-    "options": [
-      "9",
-      "11",
-      "12",
-      "10"
-    ],
-    "correct": "10"
+    "question": "Kee ka mid ah ciyaartoydan aan ku guuleysan Ballon d'Or?",
+    "options": ["Messi","Cristiano","Neymar","Modric"],
+    "correct": "Neymar"
   },
   {
-    "question": "Waa maxay 6 + 12?",
-    "options": [
-      "19",
-      "18",
-      "20",
-      "17"
-    ],
-    "correct": "18"
+    "question": "Kee ahaa madaxweynihii Soomaaliya ee la doortay 2022?",
+    "options": ["Farmaajo","Xasan Sheekh","Shariif","Cabdullaahi Yuusuf"],
+    "correct": "Xasan Sheekh"
   },
   {
-    "question": "Waa maxay 7 + 7?",
-    "options": [
-      "13",
-      "14",
-      "16",
-      "15"
-    ],
-    "correct": "14"
+    "question": "Erayga English-ka ah ee 'Ancient' micnihiisu waa?",
+    "options": ["Qadiimi","Cusub","Mustaqbal","Degdeg"],
+    "correct": "Qadiimi"
   },
   {
-    "question": "Waa maxay 8 + 14?",
-    "options": [
-      "23",
-      "24",
-      "22",
-      "21"
-    ],
-    "correct": "22"
+    "question": "Run mise Been: Soomaaliya waxay xubin ka tahay Qaramada Midoobay.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 9 + 9?",
-    "options": [
-      "17",
-      "20",
-      "19",
-      "18"
-    ],
-    "correct": "18"
+    "question": "Kee ka mid ah magaalooyinkan deked leh?",
+    "options": ["Baydhabo","Boosaaso","Buuhoodle","Jowhar"],
+    "correct": "Boosaaso"
   },
   {
-    "question": "Waa maxay 10 + 4?",
-    "options": [
-      "16",
-      "13",
-      "15",
-      "14"
-    ],
-    "correct": "14"
+    "question": "Kee loo yaqaan Amiinul Ummah?",
+    "options": ["Abuu Cubeyda","Bilal","Salmaan","Talxa"],
+    "correct": "Abuu Cubeyda"
   },
   {
-    "question": "Waa maxay 11 + 11?",
-    "options": [
-      "24",
-      "21",
-      "23",
-      "22"
-    ],
-    "correct": "22"
+    "question": "Waxaan leeyahay il laakiin wax ma arko. Waa maxay?",
+    "options": ["Irbad","Qof","Bisad","Shimbir"],
+    "correct": "Irbad"
   },
   {
-    "question": "Waa maxay 12 + 6?",
-    "options": [
-      "20",
-      "19",
-      "17",
-      "18"
-    ],
-    "correct": "18"
+    "question": "Kee ka mid ah dalalkan aan Carabi ahayn?",
+    "options": ["Masar","Suudaan","Iran","Ciraaq"],
+    "correct": "Iran"
   },
   {
-    "question": "Waa maxay 2 + 13?",
-    "options": [
-      "17",
-      "16",
-      "15",
-      "14"
-    ],
-    "correct": "15"
+    "question": "Erayga English-ka ah ee 'Wealth' micnihiisu waa?",
+    "options": ["Hanti","Saboolnimo","Deyn","Murugo"],
+    "correct": "Hanti"
   },
   {
-    "question": "Waa maxay 3 + 8?",
-    "options": [
-      "13",
-      "10",
-      "12",
-      "11"
-    ],
-    "correct": "11"
+    "question": "Run mise Been: SQL waxaa loo isticmaalaa Database.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 4 + 3?",
-    "options": [
-      "9",
-      "6",
-      "7",
-      "8"
-    ],
-    "correct": "7"
+    "question": "Kee ahaa saynisyahankii Theory of Relativity?",
+    "options": ["Newton","Einstein","Tesla","Darwin"],
+    "correct": "Einstein"
   },
   {
-    "question": "Waa maxay 5 + 10?",
-    "options": [
-      "14",
-      "15",
-      "16",
-      "17"
-    ],
-    "correct": "15"
+    "question": "Kee aan ka mid ahayn dalalka Bariga Afrika?",
+    "options": ["Kenya","Uganda","Tanzania","Portugal"],
+    "correct": "Portugal"
   },
   {
-    "question": "Waa maxay 6 + 5?",
-    "options": [
-      "13",
-      "12",
-      "10",
-      "11"
-    ],
-    "correct": "11"
+    "question": "Erayga English-ka ah ee 'Courage' micnihiisu waa?",
+    "options": ["Geesinimo","Cabsi","Murugo","Daal"],
+    "correct": "Geesinimo"
   },
   {
-    "question": "Waa maxay 7 + 12?",
-    "options": [
-      "18",
-      "21",
-      "19",
-      "20"
-    ],
-    "correct": "19"
+    "question": "Run mise Been: Venus ayaa ka kulul Mercury.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 8 + 7?",
-    "options": [
-      "16",
-      "17",
-      "15",
-      "14"
-    ],
-    "correct": "15"
+    "question": "Kee ka mid ah webiyadan mara Soomaaliya?",
+    "options": ["Niil","Jubba","Amazon","Danube"],
+    "correct": "Jubba"
   },
   {
-    "question": "Waa maxay 9 + 14?",
-    "options": [
-      "22",
-      "24",
-      "25",
-      "23"
-    ],
-    "correct": "23"
+    "question": "Kee ahaa saxaabigii ugu warinta badnaa xadiisyada?",
+    "options": ["Abuu Hureyra","Cumar","Cusmaan","Cali"],
+    "correct": "Abuu Hureyra"
   },
   {
-    "question": "Waa maxay 10 + 9?",
-    "options": [
-      "18",
-      "19",
-      "21",
-      "20"
-    ],
-    "correct": "19"
+    "question": "Wax badan ayaan wareegaa laakiin meel kama dhaqaaqo. Waa maxay?",
+    "options": ["Saacad","Gaari","Qof","Kubad"],
+    "correct": "Saacad"
   },
   {
-    "question": "Waa maxay 11 + 4?",
-    "options": [
-      "17",
-      "16",
-      "14",
-      "15"
-    ],
-    "correct": "15"
+    "question": "Kee ka mid ah madaxdan aan waligiis noqon Ra'iisul Wasaare Soomaaliya?",
+    "options": ["Maxamed Xuseen Rooble","Xasan Cali Khayre","Cabdiraxmaan Cabdishakuur","Cumar Cabdirashiid"],
+    "correct": "Cabdiraxmaan Cabdishakuur"
   },
   {
-    "question": "Waa maxay 12 + 11?",
-    "options": [
-      "24",
-      "23",
-      "22",
-      "25"
-    ],
-    "correct": "23"
+    "question": "Run mise Been: Soomaaliya waxay leedahay xeebta ugu dheer Afrika.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 2 + 6?",
-    "options": [
-      "9",
-      "8",
-      "10",
-      "7"
-    ],
+    "question": "Kee ka mid ah saxaabada loogu yeero Asadullaah?",
+    "options": ["Cali bin Abii Daalib","Bilal","Talxa","Salmaan"],
+    "correct": "Cali bin Abii Daalib"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Reliable' micnihiisu waa?",
+    "options": ["La isku halayn karo","Jaban","Qatar badan","Degdeg badan"],
+    "correct": "La isku halayn karo"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan lahayn boqor?",
+    "options": ["Jordan","Morocco","Saudi Arabia","Turkey"],
+    "correct": "Turkey"
+  },
+  {
+    "question": "Qof ayaa gurigiisa ka baxay isagoo u socday koonfur. Wuxuu 1 km u socday koonfur, 1 km bari, 1 km waqooyi. Wuxuu ku noqday halkii uu ka baxay. Xaggee ayuu joogay?",
+    "options": ["Muqdisho","Nairobi","Cirifka Waqooyi","Qaahira"],
+    "correct": "Cirifka Waqooyi"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya ee ugu horreeyay ka dib dowladdii KMG?",
+    "options": ["Cabdullaahi Yuusuf","Xasan Sheekh","Shariif Sheekh Axmed","Farmaajo"],
+    "correct": "Xasan Sheekh"
+  },
+  {
+    "question": "Run mise Been: Pluto hadda si rasmi ah looguma tiriyo meerayaasha waaweyn.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan loogu yeero Khaliilullaah?",
+    "options": ["Muuse","Ibraahim","Nuux","Yuusuf"],
+    "correct": "Ibraahim"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Victory' waa?",
+    "options": ["Defeat","Success","Pride","Achievement"],
+    "correct": "Defeat"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Gedo?",
+    "options": ["Luuq","Doolow","Baardheere","Jowhar"],
+    "correct": "Jowhar"
+  },
+  {
+    "question": "Haddii 8 qof ay 8 saacadood ku dhisaan 8 darbi, imisa saacadood ayay 16 qof ku dhisayaan 16 darbi?",
+    "options": ["8","16","4","32"],
     "correct": "8"
   },
   {
-    "question": "Waa maxay 3 + 13?",
-    "options": [
-      "18",
-      "16",
-      "17",
-      "15"
-    ],
-    "correct": "16"
+    "question": "Kee aan ka mid ahayn tobanka Jannada loogu bishaareeyay?",
+    "options": ["Talxa","Zubeyr","Bilal","Sacad bin Abii Waqaas"],
+    "correct": "Bilal"
   },
   {
-    "question": "Waa maxay 4 + 8?",
-    "options": [
-      "14",
-      "12",
-      "11",
-      "13"
-    ],
+    "question": "Run mise Been: Java iyo JavaScript waa isku luqad.",
+    "options": ["Run","Been"],
+    "correct": "Been"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan xubin ka ahayn BRICS 2025?",
+    "options": ["Brazil","Russia","India","Spain"],
+    "correct": "Spain"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Fragile' micnihiisu waa?",
+    "options": ["Jilicsan","Adag","Dheer","Qaro weyn"],
+    "correct": "Jilicsan"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii sharciyada dhaqdhaqaaqa dejiyay?",
+    "options": ["Einstein","Newton","Tesla","Bohr"],
+    "correct": "Newton"
+  },
+  {
+    "question": "Run mise Been: Bluetooth wuxuu shaqeeyaa internet la'aan.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah gobolladan aan ku jirin Somaliland?",
+    "options": ["Togdheer","Awdal","Waqooyi Galbeed","Hiiraan"],
+    "correct": "Hiiraan"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee Islaamka qaatay ragga waaweyn?",
+    "options": ["Abuu Bakar","Cumar","Cusmaan","Cali"],
+    "correct": "Abuu Bakar"
+  },
+  {
+    "question": "Waxaan leeyahay qoor laakiin madax ma lihi. Waa maxay?",
+    "options": ["Dhalo","Qof","Geel","Shimbir"],
+    "correct": "Dhalo"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan Afrika ku taallin?",
+    "options": ["Niger","Chad","Bhutan","Mali"],
+    "correct": "Bhutan"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Scarce' micnihiisu waa?",
+    "options": ["Naadir","Badan","Jaban","Fudud"],
+    "correct": "Naadir"
+  },
+  {
+    "question": "Run mise Been: Saturn wuxuu leeyahay giraanno.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 2017?",
+    "options": ["Farmaajo","Xasan Sheekh","Shariif Sheekh Axmed","Cali Mahdi"],
+    "correct": "Farmaajo"
+  },
+  {
+    "question": "Kee ka mid ah dowladahan aan waligiis martigelin Koobka Adduunka?",
+    "options": ["Brazil","Germany","Portugal","Qatar"],
+    "correct": "Portugal"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay ku taallaa labada dhinac ee dhulbaraha.",
+    "options": ["Run","Been"],
+    "correct": "Been"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu yeero Dhuu Nuurayn?",
+    "options": ["Cumar","Cali","Cusmaan","Talxa"],
+    "correct": "Cusmaan"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Eloquent' micnihiisu waa?",
+    "options": ["Hadal yaqaan","Aamusan","Daalan","Qani"],
+    "correct": "Hadal yaqaan"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya markii ugu horreysay ee lagu doorto Muqdisho kadib dowladdii KMG?",
+    "options": ["Cabdullaahi Yuusuf","Shariif Sheekh Axmed","Xasan Sheekh Maxamuud","Farmaajo"],
+    "correct": "Xasan Sheekh Maxamuud"
+  },
+  {
+    "question": "Haddii aad leedahay 5 shumac oo gubanaya, dabayshuna damiso 2, imisa shumac ayaa kuu haraya?",
+    "options": ["2","3","5","0"],
+    "correct": "2"
+  },
+  {
+    "question": "Kee aan ka mid ahayn webiyada Soomaaliya?",
+    "options": ["Jubba","Shabeelle","Tana","Midna"],
+    "correct": "Tana"
+  },
+  {
+    "question": "Run mise Been: Mars wuxuu leeyahay laba dayax.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan ahaa boqor?",
+    "options": ["Daawuud","Yaxye","Zakariye","Yuunus"],
+    "correct": "Daawuud"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Generous' waa?",
+    "options": ["Kind","Selfish","Helpful","Polite"],
+    "correct": "Selfish"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Bari?",
+    "options": ["Boosaaso","Qandala","Caluula","Buuhoodle"],
+    "correct": "Buuhoodle"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii sameeyay periodic table-ka casriga ah?",
+    "options": ["Newton","Mendeleev","Einstein","Faraday"],
+    "correct": "Mendeleev"
+  },
+  {
+    "question": "Run mise Been: Antarctica waa meel aan lahayn waddan si rasmi ah u leh.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabadan lagu dilay dagaalkii Mu'tah?",
+    "options": ["Zayd bin Haaritha","Abuu Bakar","Cumar","Bilal"],
+    "correct": "Zayd bin Haaritha"
+  },
+  {
+    "question": "Waxaan leeyahay furayaal badan laakiin albaab ma furo. Waa maxay?",
+    "options": ["Keyboard","Quful","Guri","Gaari"],
+    "correct": "Keyboard"
+  },
+  {
+    "question": "Kee aan ka tirsanayn dalalka Scandinavian-ka?",
+    "options": ["Norway","Sweden","Denmark","Finland"],
+    "correct": "Finland"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Diligent' micnihiisu waa?",
+    "options": ["Hawlkar","Caajis","Murugsan","Daalan"],
+    "correct": "Hawlkar"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay ku jirtaa UTC+3.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan ugu badan ku guuleystay Ballon d'Or?",
+    "options": ["Cristiano Ronaldo","Lionel Messi","Cruyff","Platini"],
+    "correct": "Lionel Messi"
+  },
+  {
+    "question": "Kee ahaa ra'iisul wasaarihii ugu horreeyay ee Soomaaliya?",
+    "options": ["Cabdullaahi Ciise","Cabdirashiid Sharmaarke","Maxamed Ibraahim Cigaal","Cumar Carte"],
+    "correct": "Cabdullaahi Ciise"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Transparent' micnihiisu waa?",
+    "options": ["Hufan","Madow","Qaro weyn","Adag"],
+    "correct": "Hufan"
+  },
+  {
+    "question": "Run mise Been: GPU waxaa loo isticmaalaa AI iyo Graphics.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee Nabi Muxamed (NNKH) rumeeya carruurta?",
+    "options": ["Cali bin Abii Daalib","Bilal","Cumar","Talxa"],
+    "correct": "Cali bin Abii Daalib"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan lahayn xubin joogto ah Golaha Ammaanka?",
+    "options": ["China","France","India","Russia"],
+    "correct": "India"
+  },
+  {
+    "question": "Wax kasta way iga sii badanayaan markaad iga qaaddo. Waa maxay?",
+    "options": ["God","Lacag","Biyo","Qalin"],
+    "correct": "God"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan xubin ka ahayn NATO?",
+    "options": ["Germany","Turkey","Japan","France"],
+    "correct": "Japan"
+  },
+  {
+    "question": "Run mise Been: Maxamed Siyaad Barre wuxuu talada ku qabsaday afgambi militari.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Seefta Alle?",
+    "options": ["Khaalid bin Waliid","Cali bin Abii Daalib","Cumar bin Khadaab","Bilal bin Rabaax"],
+    "correct": "Khaalid bin Waliid"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Brilliant' micnihiisu waa?",
+    "options": ["Aad u caqli badan","Caajis","Murugsan","Sabool"],
+    "correct": "Aad u caqli badan"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Mudug?",
+    "options": ["Gaalkacyo","Hobyo","Xarardheere","Qardho"],
+    "correct": "Qardho"
+  },
+  {
+    "question": "Haddii 7 digaag ay 7 maalmood ku dhigaan 7 ukun, imisa ukun ayay 21 digaag ku dhigayaan 21 maalmood?",
+    "options": ["21","49","63","147"],
+    "correct": "63"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 1969 markii la dilay?",
+    "options": ["Aadan Cadde","Cabdirashiid Cali Sharmaarke","Maxamed Siyaad Barre","Cali Mahdi"],
+    "correct": "Cabdirashiid Cali Sharmaarke"
+  },
+  {
+    "question": "Run mise Been: Venus ayaa leh maalin ka dheer sanadkeeda.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan lagu tilmaamay Ruuxullaah?",
+    "options": ["Muuse","Ciise","Ibraahim","Nuux"],
+    "correct": "Ciise"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Ancient' waa?",
+    "options": ["Historic","Modern","Traditional","Old"],
+    "correct": "Modern"
+  },
+  {
+    "question": "Kee aan ka mid ahayn dalalka G20?",
+    "options": ["India","Brazil","Somalia","China"],
+    "correct": "Somalia"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay taleefanka?",
+    "options": ["Thomas Edison","Nikola Tesla","Alexander Graham Bell","Newton"],
+    "correct": "Alexander Graham Bell"
+  },
+  {
+    "question": "Run mise Been: Linux waa nidaam hawleed lacag la'aan lagu isticmaali karo.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Amiinul Ummah?",
+    "options": ["Abuu Cubeyda","Bilal","Salmaan","Abuu Hureyra"],
+    "correct": "Abuu Cubeyda"
+  },
+  {
+    "question": "Waxaan leeyahay lugo badan laakiin ma socdo. Waa maxay?",
+    "options": ["Miis","Faras","Geel","Qof"],
+    "correct": "Miis"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan ku hadlin Faransiis luqad rasmi ah?",
+    "options": ["Senegal","Mali","Brazil","Niger"],
+    "correct": "Brazil"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Scarcity' micnihiisu waa?",
+    "options": ["Badnaan","Yaraansho","Qaniimo","Xoog"],
+    "correct": "Yaraansho"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay ku taallaa Waqooyiga Dhulbaraha.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan aan waligiis ku guuleysan Champions League?",
+    "options": ["Steven Gerrard","Zlatan Ibrahimovic","Luka Modric","Sergio Ramos"],
+    "correct": "Zlatan Ibrahimovic"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee hijrooda Madiina si uu dadka u baro Islaamka?",
+    "options": ["Muscab bin Cumeyr","Bilal","Cali","Talxa"],
+    "correct": "Muscab bin Cumeyr"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Accurate' micnihiisu waa?",
+    "options": ["Sax ah","Degdeg ah","Qaro weyn","Gaabis"],
+    "correct": "Sax ah"
+  },
+  {
+    "question": "Run mise Been: HTML waa luqad Programming ah.",
+    "options": ["Run","Been"],
+    "correct": "Been"
+  },
+  {
+    "question": "Kee ka mid ah gobolladan aan xuduud la lahayn Itoobiya?",
+    "options": ["Gedo","Bakool","Banaadir","Hiiraan"],
+    "correct": "Banaadir"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii sameeyay sharciyada cuf-isjiidadka?",
+    "options": ["Newton","Einstein","Galileo","Darwin"],
+    "correct": "Newton"
+  },
+  {
+    "question": "Waxaan sii qoyaa marka aan qalajiyo. Waa maxay?",
+    "options": ["Tuwaal","Biyo","Qalin","Warqad"],
+    "correct": "Tuwaal"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan waligiis ku guuleysan Copa América?",
+    "options": ["Argentina","Brazil","Uruguay","Mexico"],
+    "correct": "Mexico"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay ku taallaa laba bad oo kala ah Badweynta Hindiya iyo Gacanka Cadmeed.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu yeero Tarjumaanul Qur'aan?",
+    "options": ["Ibnu Cabbaas","Ibnu Cumar","Abuu Hureyra","Bilal"],
+    "correct": "Ibnu Cabbaas"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Resilient' micnihiisu waa?",
+    "options": ["Adkaysi badan","Caajis","Qani","Murugsan"],
+    "correct": "Adkaysi badan"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya markii la dhisay Dowladdii Federaalka Ku-meelgaarka ahayd?",
+    "options": ["Cabdullaahi Yuusuf Axmed","Shariif Sheekh Axmed","Xasan Sheekh Maxamuud","Farmaajo"],
+    "correct": "Cabdullaahi Yuusuf Axmed"
+  },
+  {
+    "question": "Haddii 4 bisadood ay 4 daqiiqo ku qabtaan 4 jiir, imisa daqiiqo ayay 20 bisadood ku qabanayaan 20 jiir?",
+    "options": ["4","20","16","80"],
+    "correct": "4"
+  },
+  {
+    "question": "Kee aan ka mid ahayn magaalooyinka gobolka Nugaal?",
+    "options": ["Garoowe","Burtinle","Eyl","Baydhabo"],
+    "correct": "Baydhabo"
+  },
+  {
+    "question": "Run mise Been: Neptune waxaa la helay ka dib Uranus.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan loo yaqaan Nabiyullaah?",
+    "options": ["Nuux","Muuse","Ciise","Ibraahim"],
+    "correct": "Nuux"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Permanent' waa?",
+    "options": ["Temporary","Stable","Constant","Fixed"],
+    "correct": "Temporary"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan xubin ka ahayn Midowga Afrika?",
+    "options": ["Kenya","Nigeria","Pakistan","Soomaaliya"],
+    "correct": "Pakistan"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii loo yaqaan Aabbaha Kombiyuutarka?",
+    "options": ["Alan Turing","Charles Babbage","Bill Gates","Steve Jobs"],
+    "correct": "Charles Babbage"
+  },
+  {
+    "question": "Run mise Been: JavaScript waxaa lagu isticmaali karaa Browser-ka dhexdiisa.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Dhatun Nitaaqayn?",
+    "options": ["Caasha","Asma bint Abii Bakar","Xafsa","Sumaya"],
+    "correct": "Asma bint Abii Bakar"
+  },
+  {
+    "question": "Waxaan leeyahay ilkaha badan laakiin wax ma qaniino. Waa maxay?",
+    "options": ["Shanlo","Libaax","Eey","Bisad"],
+    "correct": "Shanlo"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan ku hadlin Portuguese luqad rasmi ah?",
+    "options": ["Brazil","Portugal","Mozambique","Argentina"],
+    "correct": "Argentina"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Obstacle' micnihiisu waa?",
+    "options": ["Caqabad","Guul","Fursad","Nabad"],
+    "correct": "Caqabad"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay leedahay laba webi oo waaweyn.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan ku guuleystay Koobka Adduunka iyo Ballon d'Or isla sannad gudihiis?",
+    "options": ["Fabio Cannavaro","Neymar","Zidane","Ronaldinho"],
+    "correct": "Fabio Cannavaro"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee adaan ka jeediya Madiina?",
+    "options": ["Bilal bin Rabaax","Abuu Bakar","Cali","Cumar"],
+    "correct": "Bilal bin Rabaax"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Abundant' micnihiisu waa?",
+    "options": ["Badan","Yar","Qaali","Jaban"],
+    "correct": "Badan"
+  },
+  {
+    "question": "Run mise Been: SSD guud ahaan wuu ka dheereeyaa HDD.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah gobolladan aan ku jirin Koonfur Galbeed?",
+    "options": ["Baay","Bakool","Shabeellaha Hoose","Mudug"],
+    "correct": "Mudug"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay AC Electricity-ga casriga ah?",
+    "options": ["Tesla","Edison","Newton","Faraday"],
+    "correct": "Tesla"
+  },
+  {
+    "question": "Waxaan leeyahay madax iyo dabo laakiin jir ma lihi. Waa maxay?",
+    "options": ["Lacag qadaadiic ah","Mas","Kalluun","Shimbir"],
+    "correct": "Lacag qadaadiic ah"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan waligiis martigelin Olimbikada Xagaaga?",
+    "options": ["Brazil","China","India","Japan"],
+    "correct": "India"
+  },
+  {
+    "question": "Run mise Been: Maxamed Cabdulle Xasan wuxuu ahaa hoggaamiyihii Daraawiishta.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu yeero Dhal-Nuurka Umadda?",
+    "options": ["Abuu Bakar","Cumar","Cusmaan","Bilal"],
+    "correct": "Cusmaan"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Humble' micnihiisu waa?",
+    "options": ["Is-hoosaysiiya","Kibir badan","Qani","Murugsan"],
+    "correct": "Is-hoosaysiiya"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 2009?",
+    "options": ["Cabdullaahi Yuusuf","Shariif Sheekh Axmed","Farmaajo","Xasan Sheekh"],
+    "correct": "Shariif Sheekh Axmed"
+  },
+  {
+    "question": "Haddii 1 nin uu 1 ceel qodo 1 maalin gudaheed, imisa maalmood ayay 10 nin ku qodayaan 10 ceel?",
+    "options": ["1","10","100","5"],
+    "correct": "1"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Baay?",
+    "options": ["Baydhabo","Diinsoor","Qansax Dheere","Jowhar"],
+    "correct": "Jowhar"
+  },
+  {
+    "question": "Run mise Been: Uranus wuxuu u wareegaa dhinac jiif ah marka loo eego meerayaasha kale.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan loo diray reer Madyan?",
+    "options": ["Huud","Saalix","Shuucayb","Yuunus"],
+    "correct": "Shuucayb"
+  },
+  {
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Expand' waa?",
+    "options": ["Grow","Increase","Contract","Develop"],
+    "correct": "Contract"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan ku jirin Bariga Afrika?",
+    "options": ["Kenya","Uganda","Tanzania","Ghana"],
+    "correct": "Ghana"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay World Wide Web-ka?",
+    "options": ["Bill Gates","Steve Jobs","Tim Berners-Lee","Alan Turing"],
+    "correct": "Tim Berners-Lee"
+  },
+  {
+    "question": "Run mise Been: Python waa luqad Programming.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Saaxibkii Rasuulka ee godka?",
+    "options": ["Abuu Bakar","Cumar","Bilal","Salmaan"],
+    "correct": "Abuu Bakar"
+  },
+  {
+    "question": "Waxaan leeyahay magaalooyin laakiin dad ma lihi. Waa maxay?",
+    "options": ["Khariidad","Buug","Sawir","TV"],
+    "correct": "Khariidad"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan ku hadlin Carabi luqad rasmi ah?",
+    "options": ["Aljeeriya","Masar","Iran","Suudaan"],
+    "correct": "Iran"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Wise' micnihiisu waa?",
+    "options": ["Xikmad badan","Degdeg badan","Qani","Gaaban"],
+    "correct": "Xikmad badan"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay xubin ka tahay Midowga Afrika.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan ugu badan goolasha ka dhaliyay Koobka Adduunka?",
+    "options": ["Pele","Miroslav Klose","Messi","Ronaldo Nazario"],
+    "correct": "Miroslav Klose"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee Qur'aanka si cod dheer uga akhriya Makka?",
+    "options": ["Ibnu Mascuud","Bilal","Cali","Abuu Bakar"],
+    "correct": "Ibnu Mascuud"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Valuable' micnihiisu waa?",
+    "options": ["Qiimo leh","Jaban","Yar","Daciif"],
+    "correct": "Qiimo leh"
+  },
+  {
+    "question": "Run mise Been: DNS wuxuu magaca website-ka u beddelaa IP Address.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah gobolladan aan ku jirin Hirshabelle?",
+    "options": ["Hiiraan","Shabeellaha Dhexe","Mudug","Midna"],
+    "correct": "Mudug"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay aragtida Evolution?",
+    "options": ["Einstein","Newton","Darwin","Tesla"],
+    "correct": "Darwin"
+  },
+  {
+    "question": "Waxaan sii weynaadaa marka wax laga iga qaado. Waa maxay?",
+    "options": ["God","Buug","Qalin","Koob"],
+    "correct": "God"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan waligiis xubin ka noqon Midowga Yurub?",
+    "options": ["Norway","Spain","Italy","France"],
+    "correct": "Norway"
+  },
+  {
+    "question": "Run mise Been: Soomaaliya waxay leedahay xuduud badeed ka dheer tan Kenya.",
+    "options": ["Run","Been"],
+    "correct": "Run"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Al-Siddiiq?",
+    "options": ["Cumar","Cusmaan","Abuu Bakar","Cali"],
+    "correct": "Abuu Bakar"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Determine' micnihiisu waa?",
+    "options": ["Go'aamin","Ka carar","Dhis","Qari"],
+    "correct": "Go'aamin"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya ee ugu horreeyay ee laba jeer oo kala duwan xilka qabta?",
+    "options": ["Aadan Cadde","Cabdullaahi Yuusuf","Xasan Sheekh Maxamuud","Cali Mahdi"],
+    "correct": "Xasan Sheekh Maxamuud"
+  },
+  {
+    "question": "Haddii 12 qof ay 12 saac ku qabtaan 12 shaqo, imisa saac ayay 24 qof ku qabanayaan 24 shaqo?",
+    "options": ["12","24","6","48"],
     "correct": "12"
   },
   {
-    "question": "Waa maxay 5 + 3?",
-    "options": [
-      "8",
-      "7",
-      "10",
-      "9"
-    ],
-    "correct": "8"
+    "question": "Kee aan ka mid ahayn magaalooyinka gobolka Galgaduud?",
+    "options": ["Dhuusamareeb","Cadaado","Ceelbuur","Jowhar"],
+    "correct": "Jowhar"
   },
   {
-    "question": "Waa maxay 6 + 10?",
-    "options": [
-      "16",
-      "18",
-      "15",
-      "17"
-    ],
-    "correct": "16"
+    "question": "Run mise Been: Dayaxa Titan wuxuu ka tirsan yahay Saturn.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 7 + 5?",
-    "options": [
-      "13",
-      "14",
-      "11",
-      "12"
-    ],
-    "correct": "12"
+    "question": "Kee ka mid ah nebiyadan loo diray reer Caad?",
+    "options": ["Huud","Saalix","Shuucayb","Yuunus"],
+    "correct": "Huud"
   },
   {
-    "question": "Waa maxay 8 + 12?",
-    "options": [
-      "19",
-      "21",
-      "22",
-      "20"
-    ],
-    "correct": "20"
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Accept' waa?",
+    "options": ["Receive","Reject","Allow","Take"],
+    "correct": "Reject"
   },
   {
-    "question": "Waa maxay 9 + 7?",
-    "options": [
-      "16",
-      "15",
-      "17",
-      "18"
-    ],
-    "correct": "16"
+    "question": "Kee ka mid ah waddamadan aan lahayn lacagta Euro?",
+    "options": ["Germany","France","Poland","Spain"],
+    "correct": "Poland"
   },
   {
-    "question": "Waa maxay 10 + 14?",
-    "options": [
-      "23",
-      "26",
-      "25",
-      "24"
-    ],
-    "correct": "24"
+    "question": "Kee ahaa saynisyahankii loo yaqaan Aabbaha AI?",
+    "options": ["Alan Turing","John McCarthy","Bill Gates","Elon Musk"],
+    "correct": "John McCarthy"
   },
   {
-    "question": "Waa maxay 11 + 9?",
-    "options": [
-      "20",
-      "19",
-      "22",
-      "21"
-    ],
-    "correct": "20"
+    "question": "Run mise Been: Soomaaliya waxay ku jirtaa GMT+3.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 12 + 4?",
-    "options": [
-      "16",
-      "17",
-      "15",
-      "18"
-    ],
-    "correct": "16"
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Dhal-Nuurka Islaamka?",
+    "options": ["Cusmaan","Cumar","Bilal","Talxa"],
+    "correct": "Cusmaan"
   },
   {
-    "question": "Waa maxay 2 + 11?",
-    "options": [
-      "15",
-      "13",
-      "12",
-      "14"
-    ],
-    "correct": "13"
+    "question": "Waxaan leeyahay gacmo laakiin ma sacbiyo. Waa maxay?",
+    "options": ["Saacad","Qof","Bisad","Shimbir"],
+    "correct": "Saacad"
   },
   {
-    "question": "Waa maxay 3 + 6?",
-    "options": [
-      "8",
-      "9",
-      "11",
-      "10"
-    ],
-    "correct": "9"
+    "question": "Kee ka mid ah waddamadan aan ku yaallin Koonfurta Ameerika?",
+    "options": ["Peru","Bolivia","Panama","Chile"],
+    "correct": "Panama"
   },
   {
-    "question": "Waa maxay 4 + 13?",
-    "options": [
-      "17",
-      "19",
-      "16",
-      "18"
-    ],
-    "correct": "17"
+    "question": "Erayga English-ka ah ee 'Cautious' micnihiisu waa?",
+    "options": ["Taxaddar leh","Degdeg badan","Faraxsan","Dagaalyahan"],
+    "correct": "Taxaddar leh"
   },
   {
-    "question": "Waa maxay 5 + 8?",
-    "options": [
-      "12",
-      "13",
-      "14",
-      "15"
-    ],
-    "correct": "13"
+    "question": "Run mise Been: Linux waxaa sameeyay Linus Torvalds.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 6 + 3?",
-    "options": [
-      "11",
-      "8",
-      "9",
-      "10"
-    ],
-    "correct": "9"
+    "question": "Kee ka mid ah ciyaartoydan ugu badan Champions League ku guuleystay?",
+    "options": ["Cristiano Ronaldo","Paco Gento","Messi","Modric"],
+    "correct": "Paco Gento"
   },
   {
-    "question": "Waa maxay 7 + 10?",
-    "options": [
-      "19",
-      "18",
-      "16",
-      "17"
-    ],
-    "correct": "17"
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee ku dhasha qoys Muslim ah?",
+    "options": ["Cali bin Abii Daalib","Cabdullaahi bin Zubeyr","Xasan bin Cali","Usaama bin Zayd"],
+    "correct": "Cabdullaahi bin Zubeyr"
   },
   {
-    "question": "Waa maxay 8 + 5?",
-    "options": [
-      "12",
-      "13",
-      "15",
-      "14"
-    ],
-    "correct": "13"
+    "question": "Erayga English-ka ah ee 'Ancient Ruins' micnihiisu waa?",
+    "options": ["Burbur qadiimi ah","Dhismaha cusub","Qalcad casri ah","Tuulo yar"],
+    "correct": "Burbur qadiimi ah"
   },
   {
-    "question": "Waa maxay 9 + 12?",
-    "options": [
-      "22",
-      "20",
-      "23",
-      "21"
-    ],
-    "correct": "21"
+    "question": "Run mise Been: GPU wuxuu ka fiican yahay CPU howlaha sawir-gacmeedka.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 10 + 7?",
-    "options": [
-      "19",
-      "17",
-      "18",
-      "16"
-    ],
-    "correct": "17"
+    "question": "Kee ka mid ah gobolladan aan ku jirin Jubbaland?",
+    "options": ["Gedo","Jubbada Dhexe","Jubbada Hoose","Bakool"],
+    "correct": "Bakool"
   },
   {
-    "question": "Waa maxay 11 + 14?",
-    "options": [
-      "24",
-      "27",
-      "26",
-      "25"
-    ],
-    "correct": "25"
+    "question": "Kee ahaa saynisyahankii helay Penicillin?",
+    "options": ["Alexander Fleming","Louis Pasteur","Darwin","Faraday"],
+    "correct": "Alexander Fleming"
   },
   {
-    "question": "Waa maxay 12 + 9?",
-    "options": [
-      "23",
-      "22",
-      "20",
-      "21"
-    ],
-    "correct": "21"
+    "question": "Waxaan jebin karaa laakiin lama taaban karo. Waa maxay?",
+    "options": ["Ballan","Dhagax","Qalin","Albaab"],
+    "correct": "Ballan"
   },
   {
-    "question": "Waa maxay 2 + 4?",
-    "options": [
-      "5",
-      "7",
-      "6",
-      "8"
-    ],
-    "correct": "6"
+    "question": "Kee ka mid ah waddamadan aan waligiis ku guuleysan UEFA Euro?",
+    "options": ["Spain","Germany","Netherlands","Belgium"],
+    "correct": "Belgium"
   },
   {
-    "question": "Waa maxay 3 + 11?",
-    "options": [
-      "15",
-      "16",
-      "13",
-      "14"
-    ],
-    "correct": "14"
+    "question": "Run mise Been: Soomaaliya waxay xubin ka tahay Ururka Iskaashiga Islaamka (OIC).",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 4 + 6?",
-    "options": [
-      "11",
-      "12",
-      "9",
-      "10"
-    ],
-    "correct": "10"
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Dhalinyaradii Jannada?",
+    "options": ["Xasan iyo Xuseen","Talxa iyo Zubeyr","Bilal iyo Salmaan","Abuu Bakar iyo Cumar"],
+    "correct": "Xasan iyo Xuseen"
   },
   {
-    "question": "Waa maxay 5 + 13?",
-    "options": [
-      "20",
-      "17",
-      "18",
-      "19"
-    ],
-    "correct": "18"
+    "question": "Erayga English-ka ah ee 'Generosity' micnihiisu waa?",
+    "options": ["Deeqsinimo","Bakhiilnimo","Murugo","Cabsi"],
+    "correct": "Deeqsinimo"
   },
   {
-    "question": "Waa maxay 6 + 8?",
-    "options": [
-      "13",
-      "14",
-      "15",
-      "16"
-    ],
-    "correct": "14"
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 2012?",
+    "options": ["Shariif Sheekh Axmed","Xasan Sheekh Maxamuud","Farmaajo","Cabdullaahi Yuusuf"],
+    "correct": "Xasan Sheekh Maxamuud"
   },
   {
-    "question": "Waa maxay 7 + 3?",
-    "options": [
-      "11",
-      "12",
-      "10",
-      "9"
-    ],
-    "correct": "10"
+    "question": "Haddii 3 mashiin ay 3 daqiiqo ku sameeyaan 3 alaab, imisa daqiiqo ayay 30 mashiin ku sameeyaan 30 alaab?",
+    "options": ["3","30","10","90"],
+    "correct": "3"
   },
   {
-    "question": "Waa maxay 8 + 10?",
-    "options": [
-      "17",
-      "18",
-      "19",
-      "20"
-    ],
-    "correct": "18"
+    "question": "Kee aan ka mid ahayn magaalooyinka gobolka Hiiraan?",
+    "options": ["Beledweyne","Buulo Burte","Jalalaqsi","Garoowe"],
+    "correct": "Garoowe"
   },
   {
-    "question": "Waa maxay 9 + 5?",
-    "options": [
-      "13",
-      "16",
-      "14",
-      "15"
-    ],
-    "correct": "14"
+    "question": "Run mise Been: Jupiter wuxuu leeyahay giraanno.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 10 + 12?",
-    "options": [
-      "22",
-      "24",
-      "23",
-      "21"
-    ],
-    "correct": "22"
+    "question": "Kee ka mid ah nebiyadan loo diray reer Nineveh?",
+    "options": ["Yuunus","Huud","Saalix","Shuucayb"],
+    "correct": "Yuunus"
   },
   {
-    "question": "Waa maxay 11 + 7?",
-    "options": [
-      "20",
-      "17",
-      "19",
-      "18"
-    ],
-    "correct": "18"
+    "question": "Erayga English-ka ah ee kasoo horjeeda 'Honest' waa?",
+    "options": ["Truthful","Loyal","Dishonest","Kind"],
+    "correct": "Dishonest"
   },
   {
-    "question": "Waa maxay 12 + 14?",
-    "options": [
-      "25",
-      "27",
-      "28",
-      "26"
-    ],
-    "correct": "26"
+    "question": "Kee ka mid ah dalalkan aan lahayn lacagta Dollar?",
+    "options": ["USA","Canada","Australia","Japan"],
+    "correct": "Japan"
   },
   {
-    "question": "Waa maxay 2 + 9?",
-    "options": [
-      "12",
-      "11",
-      "13",
-      "10"
-    ],
-    "correct": "11"
+    "question": "Kee ahaa saynisyahankii hindisay raadiyaha casriga ah?",
+    "options": ["Tesla","Marconi","Edison","Faraday"],
+    "correct": "Marconi"
   },
   {
-    "question": "Waa maxay 3 + 4?",
-    "options": [
-      "6",
-      "9",
-      "8",
-      "7"
-    ],
-    "correct": "7"
+    "question": "Run mise Been: Python waxaa markii ugu horreysay la sii daayay 1991.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 4 + 11?",
-    "options": [
-      "17",
-      "16",
-      "15",
-      "14"
-    ],
-    "correct": "15"
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Xibri Ummadan?",
+    "options": ["Ibnu Cabbaas","Ibnu Mascuud","Abuu Hureyra","Talxa"],
+    "correct": "Ibnu Cabbaas"
   },
   {
-    "question": "Waa maxay 5 + 6?",
-    "options": [
-      "13",
-      "11",
-      "10",
-      "12"
-    ],
-    "correct": "11"
+    "question": "Waxaan leeyahay af laakiin ma hadlo. Waa maxay?",
+    "options": ["Webi","Qof","Raadiyo","Telefoon"],
+    "correct": "Webi"
   },
   {
-    "question": "Waa maxay 6 + 13?",
-    "options": [
-      "19",
-      "18",
-      "20",
-      "21"
-    ],
-    "correct": "19"
+    "question": "Kee ka mid ah waddamadan aan ku yaallin Aasiya?",
+    "options": ["Vietnam","Thailand","Mongolia","Hungary"],
+    "correct": "Hungary"
   },
   {
-    "question": "Waa maxay 7 + 8?",
-    "options": [
-      "16",
-      "17",
-      "15",
-      "14"
-    ],
-    "correct": "15"
+    "question": "Erayga English-ka ah ee 'Efficient' micnihiisu waa?",
+    "options": ["Wax-ku-ool ah","Gaabis ah","Jaban","Murugsan"],
+    "correct": "Wax-ku-ool ah"
   },
   {
-    "question": "Waa maxay 8 + 3?",
-    "options": [
-      "10",
-      "13",
-      "12",
-      "11"
-    ],
-    "correct": "11"
+    "question": "Run mise Been: Soomaaliya waxay leedahay laba aqal baarlamaan.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 9 + 10?",
-    "options": [
-      "20",
-      "19",
-      "18",
-      "21"
-    ],
-    "correct": "19"
+    "question": "Kee ka mid ah ciyaartoydan ugu badan goolasha ka dhaliyay Champions League?",
+    "options": ["Messi","Cristiano Ronaldo","Benzema","Lewandowski"],
+    "correct": "Cristiano Ronaldo"
   },
   {
-    "question": "Waa maxay 10 + 5?",
-    "options": [
-      "16",
-      "14",
-      "15",
-      "17"
-    ],
-    "correct": "15"
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee ku shahiida dagaalkii Badar?",
+    "options": ["Mihja'","Bilal","Talxa","Cali"],
+    "correct": "Mihja'"
   },
   {
-    "question": "Waa maxay 11 + 12?",
-    "options": [
-      "25",
-      "22",
-      "24",
-      "23"
-    ],
-    "correct": "23"
+    "question": "Erayga English-ka ah ee 'Valuable Asset' micnihiisu waa?",
+    "options": ["Hanti qiimo leh","Guri duug ah","Alaab jaban","Deyn"],
+    "correct": "Hanti qiimo leh"
   },
   {
-    "question": "Waa maxay 12 + 7?",
-    "options": [
-      "21",
-      "20",
-      "19",
-      "18"
-    ],
-    "correct": "19"
+    "question": "Run mise Been: SSD ma laha qaybo dhaqaaqaya sida HDD.",
+    "options": ["Run","Been"],
+    "correct": "Run"
   },
   {
-    "question": "Waa maxay 2 + 14?",
-    "options": [
-      "15",
-      "16",
-      "17",
-      "18"
-    ],
-    "correct": "16"
+    "question": "Kee ka mid ah gobolladan aan ku jirin Puntland?",
+    "options": ["Bari","Nugaal","Mudug","Shabeellaha Dhexe"],
+    "correct": "Shabeellaha Dhexe"
   },
   {
-    "question": "Waa maxay 3 + 9?",
-    "options": [
-      "13",
-      "11",
-      "14",
-      "12"
-    ],
-    "correct": "12"
+    "question": "Kee ahaa saynisyahankii hindisay tallaalka furuqa?",
+    "options": ["Edward Jenner","Pasteur","Darwin","Einstein"],
+    "correct": "Edward Jenner"
   },
   {
-    "question": "Waa maxay 4 + 4?",
-    "options": [
-      "9",
-      "7",
-      "10",
-      "8"
-    ],
-    "correct": "8"
-  },
-  {
-    "question": "Waa maxay 5 + 11?",
-    "options": [
-      "16",
-      "15",
-      "18",
-      "17"
-    ],
-    "correct": "16"
-  },
-  {
-    "question": "Waa maxay 6 + 6?",
-    "options": [
-      "13",
-      "11",
-      "12",
-      "14"
-    ],
-    "correct": "12"
-  },
-  {
-    "question": "Waa maxay 7 + 13?",
-    "options": [
-      "19",
-      "20",
-      "21",
-      "22"
-    ],
-    "correct": "20"
-  },
-  {
-    "question": "Waa maxay 8 + 8?",
-    "options": [
-      "17",
-      "15",
-      "16",
-      "18"
-    ],
-    "correct": "16"
-  },
-  {
-    "question": "Waa maxay 9 + 3?",
-    "options": [
-      "14",
-      "12",
-      "13",
-      "11"
-    ],
-    "correct": "12"
-  },
-  {
-    "question": "Waa maxay 10 + 10?",
-    "options": [
-      "22",
-      "19",
-      "20",
-      "21"
-    ],
-    "correct": "20"
-  },
-  {
-    "question": "Waa maxay 11 + 5?",
-    "options": [
-      "18",
-      "17",
-      "15",
-      "16"
-    ],
-    "correct": "16"
-  },
-  {
-    "question": "Waa maxay 12 + 12?",
-    "options": [
-      "26",
-      "24",
-      "25",
-      "23"
-    ],
-    "correct": "24"
-  },
-  {
-    "question": "Waa maxay 2 + 7?",
-    "options": [
-      "10",
-      "11",
-      "9",
-      "8"
-    ],
-    "correct": "9"
+    "question": "Waxaan leeyahay qoorta laakiin madax ma lihi, labo gacmood laakiin faro ma lihi. Waa maxay?",
+    "options": ["Funaanad","Qof","Geed","Miis"],
+    "correct": "Funaanad"
   }
 ]
