@@ -3290,5 +3290,645 @@
       "Cabdirashiid Sharmaarke"
     ],
     "correct": "Xasan Cali Khayre"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan xubin ka ahayn OPEC?",
+    "options": [
+      "Saudi Arabia",
+      "Iraq",
+      "Norway",
+      "UAE"
+    ],
+    "correct": "Norway"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii 3aad ee Soomaaliya?",
+    "options": [
+      "Aadan Cadde",
+      "Cabdirashiid Sharmaarke",
+      "Maxamed Siyaad Barre",
+      "Cali Mahdi"
+    ],
+    "correct": "Maxamed Siyaad Barre"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Seyful Islaam?",
+    "options": [
+      "Khaalid bin Waliid",
+      "Cali",
+      "Bilal",
+      "Talxa"
+    ],
+    "correct": "Khaalid bin Waliid"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay Radioactivity?",
+    "options": [
+      "Henri Becquerel",
+      "Newton",
+      "Tesla",
+      "Faraday"
+    ],
+    "correct": "Henri Becquerel"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan ku yaallin Aasiya?",
+    "options": [
+      "Japan",
+      "Thailand",
+      "Nepal",
+      "Chile"
+    ],
+    "correct": "Chile"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan ku guuleystay Ballon d'Or 2018?",
+    "options": [
+      "Modric",
+      "Messi",
+      "Ronaldo",
+      "Mbappe"
+    ],
+    "correct": "Modric"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee Islaamka qaatay haweenka?",
+    "options": [
+      "Khadija",
+      "Caasha",
+      "Xafsa",
+      "Asma"
+    ],
+    "correct": "Khadija"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Brave' micnihiisu waa?",
+    "options": [
+      "Geesi",
+      "Cabsi badan",
+      "Caajis",
+      "Murugsan"
+    ],
+    "correct": "Geesi"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan xubin ka ahayn EU?",
+    "options": [
+      "Germany",
+      "Italy",
+      "Switzerland",
+      "France"
+    ],
+    "correct": "Switzerland"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay Telephone Exchange?",
+    "options": [
+      "Tivadar Puskas",
+      "Bell",
+      "Tesla",
+      "Newton"
+    ],
+    "correct": "Tivadar Puskas"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Amiinka Umadda?",
+    "options": [
+      "Abuu Cubeyda",
+      "Bilal",
+      "Cali",
+      "Talxa"
+    ],
+    "correct": "Abuu Cubeyda"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Sanaag?",
+    "options": [
+      "Ceerigaabo",
+      "Badhan",
+      "Laasqoray",
+      "Jowhar"
+    ],
+    "correct": "Jowhar"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii sameeyay sharciyada genetics-ka?",
+    "options": [
+      "Gregor Mendel",
+      "Darwin",
+      "Newton",
+      "Einstein"
+    ],
+    "correct": "Gregor Mendel"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan aan ku guuleysan World Cup?",
+    "options": [
+      "Cristiano Ronaldo",
+      "Messi",
+      "Mbappe",
+      "Iniesta"
+    ],
+    "correct": "Cristiano Ronaldo"
+  },
+  {
+    "question": "Kee ahaa saxaabigii ugu horreeyay ee qora Qur'aanka?",
+    "options": [
+      "Zayd bin Thaabit",
+      "Bilal",
+      "Cali",
+      "Talxa"
+    ],
+    "correct": "Zayd bin Thaabit"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Respect' micnihiisu waa?",
+    "options": [
+      "Ixtiraam",
+      "Nacayb",
+      "Murugo",
+      "Cabsi"
+    ],
+    "correct": "Ixtiraam"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay AC Motor?",
+    "options": [
+      "Tesla",
+      "Edison",
+      "Newton",
+      "Faraday"
+    ],
+    "correct": "Tesla"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Al-Faaruuq?",
+    "options": [
+      "Cumar",
+      "Abuu Bakar",
+      "Cusmaan",
+      "Cali"
+    ],
+    "correct": "Cumar"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Failure' micnihiisu waa?",
+    "options": [
+      "Guuldarro",
+      "Guul",
+      "Abaalmarin",
+      "Fursad"
+    ],
+    "correct": "Guuldarro"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii helay Electromagnetic Induction?",
+    "options": [
+      "Faraday",
+      "Newton",
+      "Tesla",
+      "Bohr"
+    ],
+    "correct": "Faraday"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan ku jirin BRICS?",
+    "options": [
+      "Brazil",
+      "Russia",
+      "China",
+      "Spain"
+    ],
+    "correct": "Spain"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay WWW?",
+    "options": [
+      "Tim Berners-Lee",
+      "Bill Gates",
+      "Jobs",
+      "Turing"
+    ],
+    "correct": "Tim Berners-Lee"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan ku guuleystay Ballon d'Or 2023?",
+    "options": [
+      "Messi",
+      "Haaland",
+      "Mbappe",
+      "Bellingham"
+    ],
+    "correct": "Messi"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii ugu horreeyay ee Soomaaliya?",
+    "options": [
+      "Aadan Cadde",
+      "Sharmaarke",
+      "Siyaad Barre",
+      "Cali Mahdi"
+    ],
+    "correct": "Aadan Cadde"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Challenge' micnihiisu waa?",
+    "options": [
+      "Caqabad",
+      "Fursad",
+      "Guul",
+      "Sharaf"
+    ],
+    "correct": "Caqabad"
+  },
+  {
+    "question": "Kee ka mid ah madaxdan aan waligiis noqon Madaxweynaha Kenya?",
+    "options": [
+      "Jomo Kenyatta",
+      "Daniel arap Moi",
+      "Raila Odinga",
+      "Uhuru Kenyatta"
+    ],
+    "correct": "Raila Odinga"
+  },
+  {
+    "question": "Kee ka mid ah saxaabadan aan ka mid ahayn afarta Khaliif?",
+    "options": [
+      "Abuu Bakar",
+      "Cumar",
+      "Cusmaan",
+      "Bilal"
+    ],
+    "correct": "Bilal"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Freedom' micnihiisu waa?",
+    "options": [
+      "Xorriyad",
+      "Xabsi",
+      "Caddaalad",
+      "Awood"
+    ],
+    "correct": "Xorriyad"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 1969 ka hor afgambiga?",
+    "options": [
+      "Cabdirashiid Cali Sharmaarke",
+      "Aadan Cabdulle Cismaan",
+      "Maxamed Siyaad Barre",
+      "Cali Mahdi"
+    ],
+    "correct": "Cabdirashiid Cali Sharmaarke"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay telefoonka?",
+    "options": [
+      "Alexander Graham Bell",
+      "Newton",
+      "Tesla",
+      "Faraday"
+    ],
+    "correct": "Alexander Graham Bell"
+  },
+  {
+    "question": "Kee ka mid ah webiyadan aan marin Soomaaliya?",
+    "options": [
+      "Jubba",
+      "Shabeelle",
+      "Amazon",
+      "Midna"
+    ],
+    "correct": "Amazon"
+  },
+  {
+    "question": "Kee ahaa saxaabigii loogu naanaysi jiray Al-Siddiiq?",
+    "options": [
+      "Abuu Bakar",
+      "Cumar",
+      "Cusmaan",
+      "Cali"
+    ],
+    "correct": "Abuu Bakar"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan ku guuleystay Ballon d'Or 2022?",
+    "options": [
+      "Karim Benzema",
+      "Messi",
+      "Mbappe",
+      "Haaland"
+    ],
+    "correct": "Karim Benzema"
+  },
+  {
+    "question": "Kee ka mid ah nebiyadan loo yaqaan Khaliilullaah?",
+    "options": [
+      "Ibraahim",
+      "Muuse",
+      "Ciise",
+      "Nuux"
+    ],
+    "correct": "Ibraahim"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Knowledge' micnihiisu waa?",
+    "options": [
+      "Aqoon",
+      "Maal",
+      "Sharaf",
+      "Xoog"
+    ],
+    "correct": "Aqoon"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan xubin ka ahayn BRICS?",
+    "options": [
+      "Brazil",
+      "India",
+      "China",
+      "Norway"
+    ],
+    "correct": "Norway"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay nalka korontada ee ganacsi ahaan loo isticmaalay?",
+    "options": [
+      "Thomas Edison",
+      "Tesla",
+      "Newton",
+      "Einstein"
+    ],
+    "correct": "Thomas Edison"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii sameeyay aragtida Relativity?",
+    "options": [
+      "Albert Einstein",
+      "Newton",
+      "Darwin",
+      "Faraday"
+    ],
+    "correct": "Albert Einstein"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Success' micnihiisu waa?",
+    "options": [
+      "Guul",
+      "Khasaare",
+      "Murugo",
+      "Cabsi"
+    ],
+    "correct": "Guul"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan aan waligiis ku guuleysan Ballon d'Or?",
+    "options": [
+      "Neymar",
+      "Messi",
+      "Cristiano Ronaldo",
+      "Kaka"
+    ],
+    "correct": "Neymar"
+  },
+  {
+    "question": "Kee ka mid ah madaxdan aan waligiis noqon Madaxweynaha Faransiiska?",
+    "options": [
+      "Emmanuel Macron",
+      "Francois Hollande",
+      "Angela Merkel",
+      "Jacques Chirac"
+    ],
+    "correct": "Angela Merkel"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 2021?",
+    "options": [
+      "Farmaajo",
+      "Xasan Sheekh",
+      "Shariif Sheekh Axmed",
+      "Cabdiqaasim"
+    ],
+    "correct": "Farmaajo"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada aan ka mid ahayn tobanka Jannada loogu bishaareeyay?",
+    "options": [
+      "Talxa",
+      "Zubeyr",
+      "Sacad bin Abii Waqaas",
+      "Bilal"
+    ],
+    "correct": "Bilal"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Opportunity' micnihiisu waa?",
+    "options": [
+      "Fursad",
+      "Caqabad",
+      "Murugo",
+      "Ciqaab"
+    ],
+    "correct": "Fursad"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Nugaal?",
+    "options": [
+      "Garoowe",
+      "Burtinle",
+      "Eyl",
+      "Marka"
+    ],
+    "correct": "Marka"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay mashiinka daabacaadda?",
+    "options": [
+      "Johannes Gutenberg",
+      "Newton",
+      "Tesla",
+      "Einstein"
+    ],
+    "correct": "Johannes Gutenberg"
+  },
+  {
+    "question": "Kee ka mid ah dalalkan aan ku yaallin Yurub?",
+    "options": [
+      "Austria",
+      "Belgium",
+      "Paraguay",
+      "Portugal"
+    ],
+    "correct": "Paraguay"
+  },
+  {
+    "question": "Kee ka mid ah ciyaartoydan ku guuleystay Ballon d'Or 2005?",
+    "options": [
+      "Ronaldinho",
+      "Kaka",
+      "Messi",
+      "Cristiano Ronaldo"
+    ],
+    "correct": "Ronaldinho"
+  },
+  {
+    "question": "Kee ahaa saxaabigii loogu naanaysi jiray Tarjumaanul Qur'aan?",
+    "options": [
+      "Ibnu Cabbaas",
+      "Ibnu Mascuud",
+      "Bilal",
+      "Talxa"
+    ],
+    "correct": "Ibnu Cabbaas"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 2004?",
+    "options": [
+      "Cabdullaahi Yuusuf Axmed",
+      "Cabdiqaasim Salaad Xasan",
+      "Shariif Sheekh Axmed",
+      "Farmaajo"
+    ],
+    "correct": "Cabdullaahi Yuusuf Axmed"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Honesty' micnihiisu waa?",
+    "options": [
+      "Daacadnimo",
+      "Khiyaano",
+      "Qabyaalad",
+      "Nacayb"
+    ],
+    "correct": "Daacadnimo"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay Battery-ga casriga ah?",
+    "options": [
+      "Alessandro Volta",
+      "Tesla",
+      "Newton",
+      "Faraday"
+    ],
+    "correct": "Alessandro Volta"
+  },
+  {
+    "question": "Kee ka mid ah saxaabada loogu naanaysi jiray Dhuu Nuurayn?",
+    "options": [
+      "Cusmaan bin Cafaan",
+      "Abuu Bakar",
+      "Cumar",
+      "Cali"
+    ],
+    "correct": "Cusmaan bin Cafaan"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan ku taallin gobolka Hiiraan?",
+    "options": [
+      "Beledweyne",
+      "Buulo Burte",
+      "Jalalaqsi",
+      "Qardho"
+    ],
+    "correct": "Qardho"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii hindisay Telescope-ka la hagaajiyay?",
+    "options": [
+      "Galileo",
+      "Newton",
+      "Darwin",
+      "Faraday"
+    ],
+    "correct": "Galileo"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Decision' micnihiisu waa?",
+    "options": [
+      "Go'aan",
+      "Shaki",
+      "Dood",
+      "Murugo"
+    ],
+    "correct": "Go'aan"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii helay sharciga cuf-isjiidadka?",
+    "options": [
+      "Isaac Newton",
+      "Einstein",
+      "Tesla",
+      "Bohr"
+    ],
+    "correct": "Isaac Newton"
+  },
+  {
+    "question": "Kee ka mid ah waddamadan aan ku jirin Geeska Afrika?",
+    "options": [
+      "Soomaaliya",
+      "Jabuuti",
+      "Itoobiya",
+      "Gabon"
+    ],
+    "correct": "Gabon"
+  },
+  {
+    "question": "Kee ahaa madaxweynihii Soomaaliya sanadkii 1967?",
+    "options": [
+      "Cabdirashiid Cali Sharmaarke",
+      "Aadan Cabdulle Cismaan",
+      "Maxamed Siyaad Barre",
+      "Cali Mahdi"
+    ],
+    "correct": "Cabdirashiid Cali Sharmaarke"
+  },
+  {
+    "question": "Erayga English-ka ah ee 'Creative' micnihiisu waa?",
+    "options": [
+      "Hal-abuur leh",
+      "Caajis",
+      "Daciif",
+      "Murugsan"
+    ],
+    "correct": "Hal-abuur leh"
+  },
+  {
+    "question": "Kee ka mid ah magaalooyinkan aan deked ahayn?",
+    "options": [
+      "Boosaaso",
+      "Kismaayo",
+      "Berbera",
+      "Baydhabo"
+    ],
+    "correct": "Baydhabo"
+  },
+  {
+    "question": "Kee ahaa saynisyahankii loo yaqaan Aabbaha Chemistry-ga Casriga ah?",
+    "options": [
+      "Antoine Lavoisier",
+      "Newton",
+      "Tesla",
+      "Faraday"
+    ],
+    "correct": "Antoine Lavoisier"
+  },
+  {
+    "question": "Kee ka mid ah madaxdan aan waligiis noqon Madaxweynaha Itoobiya?",
+    "options": [
+      "Mulatu Teshome",
+      "Sahle-Work Zewde",
+      "Abiy Ahmed",
+      "Girma Wolde-Giorgis"
+    ],
+    "correct": "Abiy Ahmed"
+  },
+  {
+    "question": "Kee ka mid ah saxaabadan aan ka mid ahayn tobanka Jannada loogu bishaareeyay?",
+    "options": [
+      "Talxa",
+      "Zubeyr",
+      "Sacad bin Abii Waqaas",
+      "Bilal"
+    ],
+    "correct": "Bilal"
   }
 ]
