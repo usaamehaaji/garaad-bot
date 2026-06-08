@@ -50,6 +50,8 @@ const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
 const personalCmd = require('../../data/commands/personal');
+const qCmd        = require('../../data/commands/q');
+const qcCmd       = require('../../data/commands/qc');
 const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, withdrawAnyCmd, allBanksCmd, jbCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
 const { getDisTube } = require('../music/disTubeSetup');
@@ -127,6 +129,13 @@ module.exports = function setupMessageHandler(client) {
             case 'p':
                 return profileCmd(message);
 
+            case 'q':
+                return qCmd(message);
+
+            case 'qc':
+            case 'quiz_category':
+                return qcCmd(message, args);
+
 
 
             case 'top':
@@ -158,6 +167,11 @@ module.exports = function setupMessageHandler(client) {
                 return duelCmd(message, args);
 
             case 'quiz':
+                // ?quiz category <cat> → redirect to qcCmd
+                if (args[0] && args[0].toLowerCase() === 'category') {
+                    return qcCmd(message, args.slice(1));
+                }
+                return quizCmd(message, args);
             case 'team':
                 return quizCmd(message, args);
 
