@@ -41,7 +41,7 @@ module.exports = async function todayCommand(message) {
         econData[userId].streak = 1;
     }
 
-    const iqGain = 3;
+    const iqGain = 5;
     userData[userId].iq        = (userData[userId].iq || 0) + iqGain;
     userData[userId].lastDaily = Date.now();
     econData[userId].btc       = (econData[userId].btc || 0) + DAILY_BTC;
