@@ -119,9 +119,6 @@ module.exports = async function cashflipCmd(message, args) {
         return message.reply(`⚠️ Treasury funds low — market temporarily closed. Balance: **₿ ${fmt(treasury.balance || 0)}**`);
     }
 
-    // 2 second suspense then result
-    await new Promise(r => setTimeout(r, 2000));
-
     const walletBefore = d.btc || 0;
     d.btc = walletBefore - amount;
     const fs = getFlipStats(d);
