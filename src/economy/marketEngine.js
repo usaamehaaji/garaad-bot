@@ -126,25 +126,21 @@ function calculateOutcome(userId, betAmount, direction) {
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Direction-ka qofka la barbardhig suuqa
-    // Haddii direction == suuqa => guul awood badan
-    // Haddii direction != suuqa => khasaare awood badan
-    const marketIsUp = currentState === 'UP';
+    // Qofka doorashada la barbardhig suuqa si toos ah
+    const marketIsUp     = currentState === 'UP';
     const playerPickedUp = direction === 'u';
+
+    // Haddii labaduba isku mid yihiin = WIN, haddii kala duwan yihiin = LOSS
     const correctGuess = (playerPickedUp === marketIsUp);
 
-    // Haddii qofku sax doortay, win probability waa 0.75-0.85
-    // Haddii qofku khalad doortay, win probability waa 0.10-0.20
-    let prob = correctGuess ? 0.80 : 0.15;
-
-    prob += streakModifier(d);
-    prob += recoveryModifier(d);
-    prob += antiFarmModifier(d);
-    prob = Math.max(0.05, Math.min(0.92, prob));
+    // Win = 100% haddii sax, Loss = 100% haddii khalad
+    // Small random (5%) khalad dhici kara
+    const rand = Math.random();
+    const win  = correctGuess ? rand < 0.95 : rand < 0.05;
 
     return {
-        win:         Math.random() < prob,
-        probability: prob,
+        win,
+        probability: correctGuess ? 0.95 : 0.05,
         stateName:   currentState,
         stateInfo:   STATES[currentState] || STATES.UP,
     };
