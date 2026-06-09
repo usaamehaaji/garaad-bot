@@ -18,10 +18,8 @@ function getFlipStats(d) {
 
 
 function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
-    // Suuqa label Soomaali ah
-    const suuqLabel = state.trend === 'up'  ? '⬆️ Up'
-                    : state.trend === 'down' ? '⬇️ Down'
-                    : `${state.icon} ${state.label}`;
+    // Suuqa: kaliya UP ama DOWN
+    const suuqLabel = state.name === 'UP' ? '⬆️ Up' : '⬇️ Down';
 
     const winDesc =
         `🎯 **Doorashada:** ${dirLabel}\n` +
