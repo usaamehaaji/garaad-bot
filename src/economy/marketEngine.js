@@ -121,16 +121,26 @@ function antiFarmModifier(d) {
 
 // ── Main outcome calculation ─────────────────────────────────────────
 
-function calculateOutcome(userId, betAmount) {
+function calculateOutcome(userId, betAmount, direction) {
     const { econData, checkEconUser } = require('./econStore');
     checkEconUser(userId);
     const d = econData[userId];
 
-    let prob = (STATES[currentState] || STATES.UP).baseWin;
+    // Direction-ka qofka la barbardhig suuqa
+    // Haddii direction == suuqa => guul awood badan
+    // Haddii direction != suuqa => khasaare awood badan
+    const marketIsUp = currentState === 'UP';
+    const playerPickedUp = direction === 'u';
+    const correctGuess = (playerPickedUp === marketIsUp);
+
+    // Haddii qofku sax doortay, win probability waa 0.75-0.85
+    // Haddii qofku khalad doortay, win probability waa 0.10-0.20
+    let prob = correctGuess ? 0.80 : 0.15;
+
     prob += streakModifier(d);
     prob += recoveryModifier(d);
     prob += antiFarmModifier(d);
-    prob = Math.max(0.08, Math.min(0.85, prob));
+    prob = Math.max(0.05, Math.min(0.92, prob));
 
     return {
         win:         Math.random() < prob,
