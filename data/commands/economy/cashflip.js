@@ -18,21 +18,29 @@ function getFlipStats(d) {
 
 
 function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
-    const returnedLine = win
-        ? `📈 Faa'iidada: **+${fmt(profit)} BTC**`
-        : `📉 Khasaaraha: **-${fmt(amount)} BTC**`;
+    const winDesc =
+        `🎯 **Doorashada:** ${dirLabel}\n` +
+        `${state.icon} **Suuqa:** ${state.label}\n\n` +
+        `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
+        `🏆 **Heshay:** ${fmt(amount + profit)} BTC\n` +
+        `📈 **Faa'iido:** +${fmt(profit)} BTC\n\n` +
+        `👛 **New Wallet:** ${fmt(newBal)} BTC`;
+
+    const lossDesc =
+        `🎯 **Doorashada:** ${dirLabel}\n` +
+        `${state.icon} **Suuqa:** ${state.label}\n\n` +
+        `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
+        `📉 **Khasaaraha:** -${fmt(amount)} BTC\n\n` +
+        `👛 **New Wallet:** ${fmt(newBal)} BTC`;
 
     return new EmbedBuilder()
-        .setTitle(win ? '📈 Economy Flip — GUUL! ✅' : '📉 Economy Flip — GUUL-DARRO! ❌')
+        .setTitle(win ? '📈 Economy Flip' : '📉 Economy Flip')
         .setColor(win ? '#2ecc71' : '#e74c3c')
         .setDescription(
-            `🎯 **Doorashada:** ${dirLabel}\n` +
-            `${state.icon} **Suuqa:** ${state.label} — ${state.desc}\n\n` +
-            `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
-            `${returnedLine}\n\n` +
-            `👛 **Wallet:** ${fmt(newBal)} BTC`
+            (win ? '✅ **GUUL!**\n\n' : '❌ **GUUL-DARRO!**\n\n') +
+            (win ? winDesc : lossDesc)
         )
-        .setFooter({ text: 'Garaad Economy • ?ef mar kale isku day' });
+        .setFooter({ text: 'Garaad Economy • ?trade tijaabi' });
 }
 
 module.exports = async function cashflipCmd(message, args) {
