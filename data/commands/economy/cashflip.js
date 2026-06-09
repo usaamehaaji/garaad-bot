@@ -19,20 +19,20 @@ function getFlipStats(d) {
 
 function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
     const returnedLine = win
-        ? `✅ Returned: **${fmt(amount + profit)} BTC** _(+${fmt(profit)} BTC profit)_`
-        : `❌ Returned: **0 BTC** _(−${fmt(amount)} BTC loss)_`;
+        ? `📈 Faa'iidada: **+${fmt(profit)} BTC**`
+        : `📉 Khasaaraha: **-${fmt(amount)} BTC**`;
 
     return new EmbedBuilder()
-        .setTitle(win ? '✅ Economy Flip — WIN' : '❌ Economy Flip — LOSS')
+        .setTitle(win ? '📈 Economy Flip — GUUL! ✅' : '📉 Economy Flip — GUUL-DARRO! ❌')
         .setColor(win ? '#2ecc71' : '#e74c3c')
         .setDescription(
-            `🎯 Direction: **${dirLabel}**\n` +
-            `${state.icon} Market: **${state.label}** — ${state.desc}\n\n` +
-            `💰 Bet: **${fmt(amount)} BTC**\n` +
+            `🎯 **Doorashada:** ${dirLabel}\n` +
+            `${state.icon} **Suuqa:** ${state.label} — ${state.desc}\n\n` +
+            `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
             `${returnedLine}\n\n` +
-            `₿ Wallet: **${fmt(newBal)} BTC**`
+            `👛 **Wallet:** ${fmt(newBal)} BTC`
         )
-        .setFooter({ text: 'Garaad Economy • ?ef to play again' });
+        .setFooter({ text: 'Garaad Economy • ?ef mar kale isku day' });
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -60,25 +60,25 @@ module.exports = async function cashflipCmd(message, args) {
         });
 
         return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('🏆 Top Flippers')
+            .setTitle('🏆 Ugu Wanaagsan Flip-yada')
             .setColor('#f39c12')
             .setDescription(lines.join('\n\n'))
-            .setFooter({ text: 'Garaad Economy • Treasury-backed market' })] });
+            .setFooter({ text: 'Garaad Economy • Suuq Treasury-ku taageero' })] });
     }
 
     // ── No args: market overview ──
     if (!args || args.length === 0) {
         const t  = getTreasury();
         return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('📊 Garaad Market')
+            .setTitle('📊 Garaad Suuq')
             .setColor('#f39c12')
             .addFields(
-                { name: `${state.icon} State`, value: `**${state.label}**`,            inline: true },
-                { name: '📋 Desc',              value: `${state.desc}`,                 inline: true },
-                { name: '🏛️ Treasury',          value: `**₿ ${fmt(t.balance || 0)}**`, inline: true },
+                { name: `${state.icon} Xaalad`, value: `**${state.label}**`,            inline: true },
+                { name: '📋 Faahfaahin',         value: `${state.desc}`,                 inline: true },
+                { name: '🏛️ Khaznad',            value: `**₿ ${fmt(t.balance || 0)}**`, inline: true },
             )
-            .setDescription(`Bet: \`?ef 500 u\` or \`?ef 500 d\` · Min **₿${MIN_BET}**\n\`?ef top\` — leaderboard`)
-            .setFooter({ text: 'Garaad Economy • Treasury-backed market' })] });
+            .setDescription(`Rahmad: \`?ef 500 u\` ama \`?ef 500 d\` · Ugu yar **₿${MIN_BET}**\n\`?ef top\` — koorontada`)
+            .setFooter({ text: 'Garaad Economy • Suuq Treasury-ku taageero' })] });
     }
 
     // ── Parse args ──
@@ -90,16 +90,16 @@ module.exports = async function cashflipCmd(message, args) {
     if (direction === 'down') direction = 'd';
 
     if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'u' && direction !== 'd'))
-        return message.reply(`⚠️ Isticmaal: \`?ef 500 u\`  ama  \`?ef 500 d\`\nWallet: **₿ ${fmt(d.btc || 0)}**`);
+        return message.reply(`⚠️ Isticmaal: \`?ef 500 u\`  ama  \`?ef 500 d\`\n👛 Wallet: **₿ ${fmt(d.btc || 0)}**`);
 
     if (amount < MIN_BET)
-        return message.reply(`⚠️ Min bet waa **₿ ${MIN_BET.toLocaleString()}**. Kor u qaad.`);
+        return message.reply(`⚠️ Ugu yar bet waa **₿ ${MIN_BET.toLocaleString()}**. Kor u qaad.`);
 
     if (amount > MAX_BET)
-        return message.reply(`⚠️ Max bet waa **₿ ${fmt(MAX_BET)}**. Hoos u dhig.`);
+        return message.reply(`⚠️ Ugu badan bet waa **₿ ${fmt(MAX_BET)}**. Hoos u dhig.`);
 
     if ((d.btc || 0) < amount)
-        return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿ ${fmt(d.btc || 0)}**`);
+        return message.reply(`⚠️ BTC kugu filna ma lihid. 👛 Wallet: **₿ ${fmt(d.btc || 0)}**`);
 
     const cdUntil = flipCooldowns.get(userId) || 0;
     const cdLeft  = Math.ceil((cdUntil - Date.now()) / 1000);
