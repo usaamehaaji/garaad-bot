@@ -18,9 +18,14 @@ function getFlipStats(d) {
 
 
 function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
+    // Suuqa label Soomaali ah
+    const suuqLabel = state.trend === 'up'  ? '⬆️ Up'
+                    : state.trend === 'down' ? '⬇️ Down'
+                    : `${state.icon} ${state.label}`;
+
     const winDesc =
         `🎯 **Doorashada:** ${dirLabel}\n` +
-        `${state.icon} **Suuqa:** ${state.label}\n\n` +
+        `📊 **Suuqa:** ${suuqLabel}\n\n` +
         `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
         `🏆 **Heshay:** ${fmt(amount + profit)} BTC\n` +
         `📈 **Faa'iido:** +${fmt(profit)} BTC\n\n` +
@@ -28,13 +33,13 @@ function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
 
     const lossDesc =
         `🎯 **Doorashada:** ${dirLabel}\n` +
-        `${state.icon} **Suuqa:** ${state.label}\n\n` +
+        `📊 **Suuqa:** ${suuqLabel}\n\n` +
         `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
         `📉 **Khasaaraha:** -${fmt(amount)} BTC\n\n` +
         `👛 **New Wallet:** ${fmt(newBal)} BTC`;
 
     return new EmbedBuilder()
-        .setTitle(win ? '📈 Economy Flip' : '📉 Economy Flip')
+        .setTitle('📈 Economy Flip')
         .setColor(win ? '#2ecc71' : '#e74c3c')
         .setDescription(
             (win ? '✅ **GUUL!**\n\n' : '❌ **GUUL-DARRO!**\n\n') +
