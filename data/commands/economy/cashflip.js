@@ -121,7 +121,7 @@ module.exports = async function cashflipCmd(message, args) {
 
     const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
 
-    const { win } = calculateOutcome(userId, amount);
+    const { win } = calculateOutcome(userId, amount, direction);
     const profit   = Math.floor(amount * PROFIT_RATE);
     const treasury = getTreasury();
 
