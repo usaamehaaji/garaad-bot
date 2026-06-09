@@ -18,20 +18,21 @@ function getFlipStats(d) {
 
 
 function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
-    // Suuqa: kaliya UP ama DOWN
+    // Suuqa: kaliya UP ama DOWN - ka dib natiijada ayaa lagu muujiyaa
     const suuqLabel = state.name === 'UP' ? '⬆️ Up' : '⬇️ Down';
+    const suuqIcon  = state.name === 'UP' ? '📈' : '📉';
 
     const winDesc =
-        `🎯 **Doorashada:** ${dirLabel}\n` +
-        `📊 **Suuqa:** ${suuqLabel}\n\n` +
+        `🎯 **Doorashadaada:** ${dirLabel}\n` +
+        `${suuqIcon} **Suuqa:** ${suuqLabel}\n\n` +
         `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
         `🏆 **Heshay:** ${fmt(amount + profit)} BTC\n` +
         `📈 **Faa'iido:** +${fmt(profit)} BTC\n\n` +
         `👛 **New Wallet:** ${fmt(newBal)} BTC`;
 
     const lossDesc =
-        `🎯 **Doorashada:** ${dirLabel}\n` +
-        `📊 **Suuqa:** ${suuqLabel}\n\n` +
+        `🎯 **Doorashadaada:** ${dirLabel}\n` +
+        `${suuqIcon} **Suuqa:** ${suuqLabel}\n\n` +
         `💰 **Gelisay:** ${fmt(amount)} BTC\n` +
         `📉 **Khasaaraha:** -${fmt(amount)} BTC\n\n` +
         `👛 **New Wallet:** ${fmt(newBal)} BTC`;
@@ -43,7 +44,7 @@ function buildResultEmbed(win, dirLabel, amount, profit, newBal, state) {
             (win ? '✅ **GUUL!**\n\n' : '❌ **GUUL-DARRO!**\n\n') +
             (win ? winDesc : lossDesc)
         )
-        .setFooter({ text: 'Garaad Economy • ?trade tijaabi' });
+        .setFooter({ text: 'Garaad Economy • ?ef to play again' });
 }
 
 module.exports = async function cashflipCmd(message, args) {
@@ -81,15 +82,18 @@ module.exports = async function cashflipCmd(message, args) {
     if (!args || args.length === 0) {
         const t  = getTreasury();
         return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('📊 Garaad Suuq')
+            .setTitle('📊 Garaad Economy Flip')
             .setColor('#f39c12')
-            .addFields(
-                { name: `${state.icon} Xaalad`, value: `**${state.label}**`,            inline: true },
-                { name: '📋 Faahfaahin',         value: `${state.desc}`,                 inline: true },
-                { name: '🏛️ Khaznad',            value: `**₿ ${fmt(t.balance || 0)}**`, inline: true },
+            .setDescription(
+                `🎲 **Qaabka ciyaarta:**\n` +
+                `Suuqa wuxuu u socda **⬆️ Up** ama **⬇️ Down** — adiga ma garanayso!\n` +
+                `Dooro direction-kaaga, haddii sax = GUUL, haddii khalad = GUUL-DARRO\n\n` +
+                `▸ \`?ef 500 u\` — Aad u maleynaysaa UP\n` +
+                `▸ \`?ef 500 d\` — Aad u maleynaysaa DOWN\n\n` +
+                `💰 Ugu yar: **₿${MIN_BET}** · Ugu badan: **₿${fmt(MAX_BET)}**\n` +
+                `🏛️ Khaznad: **₿ ${fmt(t.balance || 0)}**`
             )
-            .setDescription(`Rahmad: \`?ef 500 u\` ama \`?ef 500 d\` · Ugu yar **₿${MIN_BET}**\n\`?ef top\` — koorontada`)
-            .setFooter({ text: 'Garaad Economy • Suuq Treasury-ku taageero' })] });
+            .setFooter({ text: 'Garaad Economy • ?ef top koorontada' })] });
     }
 
     // ── Parse args ──
