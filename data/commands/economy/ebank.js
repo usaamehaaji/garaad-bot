@@ -67,14 +67,71 @@ function bankTotalInterest() {
 // ── Embeds ────────────────────────────────────────────────────────
 
 function buildMainEmbed(d) {
+    const wallet   = fmt(d.btc || 0);
+    const garaad   = fmt(d.banks?.garaad || 0);
+    const pubBanks = Object.values(require('../../../src/economy/bankStore').getAllPublicBanks());
+    const myPub    = pubBanks.find(b => b.members?.[d.__id__ || ''] || b.deposits?.[d.__id__ || '']);
+    const pubName  = myPub ? myPub.name : null;
+    const pubBal   = myPub ? fmt(myPub.deposits?.[d.__id__ || ''] || 0) : '0';
+    const total    = fmt((d.btc || 0) + (d.banks?.garaad || 0) + (myPub ? (myPub.deposits?.[d.__id__ || ''] || 0) : 0));
+    const pubTotal = myPub ? fmt(myPub.balance || 0) : '₿0';
+    const garaadTotal = fmt(bankTotalDeposits());
+
+    const desc =
+        `━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `\n` +
+        `💰 **𝐇𝐀𝐍𝐓𝐈𝐃𝐀𝐀𝐃𝐀**\n` +
+        `\n` +
+        `💵 Wallet         ➜ ₿${wallet}\n` +
+        `🏦 Garaad Bank    ➜ ₿${garaad}\n` +
+        (pubName ? `🏛️ ${pubName}   ➜ ₿${pubBal}\n` : `🏛️ Kormaal Bank   ➜ ₿0\n`) +
+        `\n` +
+        `📊 Wadarta Guud   ➜ ₿${total}\n` +
+        `\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `\n` +
+        `🏦 **𝐁𝐀𝐍𝐊𝐈𝐘𝐀𝐃𝐀**\n` +
+        `\n` +
+        `💎 Garaad Bank\n` +
+        `└ 📈 Interest: 1% Maalinle\n` +
+        `└ 💰 Kaydka Bankiga: ₿${garaadTotal}\n` +
+        `\n` +
+        (pubName
+            ? `🌐 ${pubName}\n` +
+              `└ 💰 Kaydka Bankiga: ₿${pubTotal}\n` +
+              `└ 📥 Kaydkaaga: ₿${pubBal}\n`
+            : `🌐 Kormaal Bank\n` +
+              `└ 💰 Kaydka Bankiga: ₿0\n` +
+              `└ 📥 Kaydkaaga: ₿0\n`
+        ) +
+        `\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `\n` +
+        `⚙️ **𝐀𝐌𝐀𝐑𝐑𝐀𝐃𝐀**\n` +
+        `\n` +
+        `📥 Deposit\n` +
+        `➜ \`?d Garaad Bank <xad>\`\n` +
+        (pubName ? `➜ \`?d ${pubName} <xad>\`\n` : `➜ \`?d Kormaal Bank <xad>\`\n`) +
+        `\n` +
+        `📤 Withdraw\n` +
+        `➜ \`?w Garaad Bank <xad>\`\n` +
+        (pubName ? `➜ \`?w ${pubName} <xad>\`\n` : `➜ \`?w Kormaal Bank <xad>\`\n`) +
+        `\n` +
+        `📋 Tusaalooyin\n` +
+        `\n` +
+        `➜ \`?d Garaad Bank 250\`\n` +
+        (pubName ? `➜ \`?d ${pubName} 500\`\n` : `➜ \`?d Kormaal Bank 500\`\n`) +
+        `\n` +
+        `➜ \`?w Garaad Bank 50\`\n` +
+        (pubName ? `➜ \`?w ${pubName} 100\`\n` : `➜ \`?w Kormaal Bank 100\`\n`) +
+        `\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
     return new EmbedBuilder()
-        .setTitle('🏦 Garaad Bank')
+        .setTitle('🏛️ 🏦 𝐁𝐀𝐍𝐊 𝐌𝐀𝐍𝐀𝐆𝐄𝐑')
         .setColor('#1a73e8')
-        .setDescription(
-            `💳 **Wallet:** ₿ ${fmt(d.btc || 0)}　　🏦 **Bank:** ₿ ${fmt(d.banks?.garaad || 0)}\n` +
-            `📈 **Earned:** +₿ ${fmt(d.interestEarned?.garaad || 0)}　　📊 **1%/day**`
-        )
-        .setFooter({ text: 'Garaad Bank • 1% daily interest' });
+        .setDescription(desc)
+        .setFooter({ text: '🟢 DEPOSIT   🔵 WITHDRAW   🔴 XIR' });
 }
 
 function buildBankEmbed(d) {
@@ -109,9 +166,9 @@ function buildTreasuryEmbed() {
 
 function bankFullRow(userId) {
     return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('⬇ Deposit')  .setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('⬆ Withdraw') .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)            .setLabel('✖ Xir')      .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId(`eco_eba_deposit_garaad_${userId}`) .setLabel('🟢 DEPOSIT')  .setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId(`eco_eba_withdraw_garaad_${userId}`).setLabel('🔵 WITHDRAW') .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId(`close_ebank_${userId}`)            .setLabel('🔴 XIR')      .setStyle(ButtonStyle.Danger),
     );
 }
 
