@@ -74,6 +74,12 @@ module.exports = async function profileCommand(message) {
 
 
 
+    // Bank only (no company)
+    const { getPersonalBank, getAllPublicBanks } = require('../../src/economy/bankStore');
+    const myBank    = getPersonalBank(econData, target.id);
+    const ownedBank = Object.values(getAllPublicBanks()).find(b => b.ownerId === target.id);
+    const bankTxt   = ownedBank ? `🏛️ **${ownedBank.name}** (Owner)` : myBank ? `🏦 Account: \`${myBank.bankId}\`` : '*None*';
+
     // Relationship
     const { RING_NAMES } = require('./relationship');
     const rel = data.relationship || {};
@@ -104,6 +110,8 @@ module.exports = async function profileCommand(message) {
         `${relTxt}\n` +
         `\n` +
 
+        `🏦 **Bank:** ${bankTxt}\n` +
+        `\n` +
         `🖼️ **Frame:** ${frameTxt}\n` +
         `🏅 **Badges:** ${badgeStr}` +
         (boostLines.length ? `\n⚡ **Boosters:** ${boostLines.join(' • ')}` : '');
