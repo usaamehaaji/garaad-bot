@@ -29,6 +29,11 @@ module.exports = async function profileCommand(message) {
     checkEconUser(target.id);
     checkAndAwardBadges(target.id);
 
+    // Get display name: server nickname > globalName > username
+    let targetMember = null;
+    try { targetMember = await message.guild?.members.fetch(target.id); } catch {}
+    const displayName = targetMember?.nickname || target.globalName || target.displayName || target.username;
+
     const data = userData[target.id];
     const econ = econData[target.id] || {};
 
@@ -89,11 +94,11 @@ module.exports = async function profileCommand(message) {
         try { const pu = await message.client.users.fetch(rel.partnerId); pName = pu.username; } catch {}
         const days    = rel.since ? Math.floor((Date.now() - rel.since) / 86400000) : 0;
         const ringTxt = RING_NAMES[rel.ringType] || '💍 Ring';
-        relTxt = `💕 **Partner:** ${pName} ❤️ ${target.username} · 📅 ${days} Days · ${ringTxt}`;
+        relTxt = `💕 **Partner:** ${pName} ❤️ ${displayName} · 📅 ${days} Days · ${ringTxt}`;
     }
 
     const desc =
-        `# 👤 ${target.username}${titlePart}\n` +
+        `# 👤 ${displayName}${titlePart}\n` +
         `\n` +
         `${tier.emoji} **${tier.name}** Tier  •  🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
         `\`${progressBar(pct)}\` ${pct}%` + (needed > 0 ? `  *(${needed} IQ → next tier)*` : ' *(MAX TIER)*') + `\n` +
