@@ -35,6 +35,7 @@ const jeebCmd         = require('../../data/commands/economy/jeeb');
 const tradeCmd        = require('../../data/commands/economy/trade');
 const robCmd          = require('../../data/commands/economy/rob');
 const cashflipCmd     = require('../../data/commands/economy/cashflip');
+const investCmd       = require('../../data/commands/economy/invest');
 const giveCmd         = require('../../data/commands/economy/give');
 const richCmd         = require('../../data/commands/economy/rich');
 const treasuryCmdFn   = require('../../data/commands/economy/treasuryCmd');
@@ -193,6 +194,9 @@ module.exports = function setupMessageHandler(client) {
             case 'ecoflip':
             case 'ef':
                 return cashflipCmd(message, args);
+
+            case 'invest':
+                return investCmd(message, args);
 
             case 'give':
                 return giveCmd(message, args);
