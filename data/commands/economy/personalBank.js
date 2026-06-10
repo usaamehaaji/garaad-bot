@@ -284,39 +284,64 @@ async function bankDirectoryCmd(message) {
         }
         const myTotal = myWallet + myBankTotal;
 
-        // Balance summary at top
-        let desc = `**━━ Hantidaada ━━**\n`;
-        desc += `💳 **Wallet:** ${fmtBtc(myWallet)}\n`;
-        desc += `🏦 **Garaad Bank:** ${fmtBtc(myGaraad)}\n`;
-        if (myDepLines.length) desc += myDepLines.join('\n') + '\n';
-        desc += `📊 **Wadarta:** ${fmtBtc(myTotal)}\n`;
-        desc += `\n**━━ Banks ━━**\n`;
-        desc += `🏦 **Garaad Bank** — 1%/day\n`;
+        // New Bank Manager panel
+        const pubName  = pubBanks.length ? pubBanks[0].name : 'Kormaal Bank';
+        const pubBal   = pubBanks.length ? (pubBanks[0].customers?.[userId]?.balance || 0) : 0;
+        const pubTotal = pubBanks.length ? (pubBanks[0].balance || 0) : 0;
+        const garaadTotal = Object.values(econData)
+            .filter(d => d && typeof d === 'object' && !d.__treasury__)
+            .reduce((s, d) => s + (d.banks?.garaad || 0), 0);
 
-        if (pubBanks.length) {
-            desc += `\n🏛️ **Public Banks:**\n`;
-            desc += pubBanks.map(b => {
-                const myDep = b.customers?.[userId]?.balance || 0;
-                return `🏛 **${b.name}** · \`${b.id}\` · ${fmtBtc(b.balance || 0)}` +
-                       (myDep > 0 ? `\n  └ ${fmtBtc(myDep)} _(adiga)_` : '');
-            }).join('\n');
-        }
-        if (persBanks.length) {
-            desc += `\n\n🏦 **Personal Banks:**\n`;
-            desc += persBanks.map(e => {
-                const myDep = e.bank.customers?.[userId]?.balance || 0;
-                return `🏦 **${e.bank.owner}** · \`${e.bank.bankId}\` · ${fmtBtc(e.bank.balance || 0)}` +
-                       (myDep > 0 ? `\n  └ ${fmtBtc(myDep)} _(adiga)_` : '');
-            }).join('\n');
-        }
-        if (!pubBanks.length && !persBanks.length)
-            desc += `\n_\`?cb <name>\` public bank abuur_`;
+        let desc = '';
+        desc += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+        desc += `\n`;
+        desc += `💰 **𝐇𝐀𝐍𝐓𝐈𝐃𝐀𝐀𝐃𝐀**\n`;
+        desc += `\n`;
+        desc += `💵 Wallet         ➜ ${fmtBtc(myWallet)}\n`;
+        desc += `🏦 Garaad Bank    ➜ ${fmtBtc(myGaraad)}\n`;
+        desc += `🏛️ ${pubName.padEnd(14)}➜ ${fmtBtc(pubBal)}\n`;
+        desc += `\n`;
+        desc += `📊 Wadarta Guud   ➜ ${fmtBtc(myTotal)}\n`;
+        desc += `\n`;
+        desc += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+        desc += `\n`;
+        desc += `🏦 **𝐁𝐀𝐍𝐊𝐈𝐘𝐀𝐃𝐀**\n`;
+        desc += `\n`;
+        desc += `💎 Garaad Bank\n`;
+        desc += `└ 📈 Interest: 1% Maalinle\n`;
+        desc += `└ 💰 Kaydka Bankiga: ${fmtBtc(garaadTotal)}\n`;
+        desc += `\n`;
+        desc += `🌐 ${pubName}\n`;
+        desc += `└ 💰 Kaydka Bankiga: ${fmtBtc(pubTotal)}\n`;
+        desc += `└ 📥 Kaydkaaga: ${fmtBtc(pubBal)}\n`;
+        desc += `\n`;
+        desc += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+        desc += `\n`;
+        desc += `⚙️ **𝐀𝐌𝐀𝐑𝐑𝐀𝐃𝐀**\n`;
+        desc += `\n`;
+        desc += `📥 Deposit\n`;
+        desc += `➜ \`?d Garaad Bank <xad>\`\n`;
+        desc += `➜ \`?d ${pubName} <xad>\`\n`;
+        desc += `\n`;
+        desc += `📤 Withdraw\n`;
+        desc += `➜ \`?w Garaad Bank <xad>\`\n`;
+        desc += `➜ \`?w ${pubName} <xad>\`\n`;
+        desc += `\n`;
+        desc += `📋 Tusaalooyin\n`;
+        desc += `\n`;
+        desc += `➜ \`?d Garaad Bank 250\`\n`;
+        desc += `➜ \`?d ${pubName} 500\`\n`;
+        desc += `\n`;
+        desc += `➜ \`?w Garaad Bank 50\`\n`;
+        desc += `➜ \`?w ${pubName} 100\`\n`;
+        desc += `\n`;
+        desc += `━━━━━━━━━━━━━━━━━━━━━━━━━━`;
 
         const embed = new EmbedBuilder()
-            .setTitle('🏦 Banks')
-            .setColor('#2471a3')
+            .setTitle('🏛️ 🏦 𝐁𝐀𝐍𝐊 𝐌𝐀𝐍𝐀𝐆𝐄𝐑')
+            .setColor('#1a73e8')
             .setDescription(desc)
-            .setFooter({ text: '?d <bank> <xad>  ·  ?w <bank> <xad>' });
+            .setFooter({ text: '🟢 DEPOSIT   🔵 WITHDRAW   🔴 XIR' });
 
         const components = [new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId(`bank_all_dep_${userId}`).setLabel('⬇ Deposit').setStyle(ButtonStyle.Success),
