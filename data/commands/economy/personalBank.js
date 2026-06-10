@@ -285,34 +285,50 @@ async function bankDirectoryCmd(message) {
         const myTotal = myWallet + myBankTotal;
 
         // New Bank Manager panel
-        const pubName  = pubBanks.length ? pubBanks[0].name : 'Kormaal Bank';
-        const pubBal   = pubBanks.length ? (pubBanks[0].customers?.[userId]?.balance || 0) : 0;
-        const pubTotal = pubBanks.length ? (pubBanks[0].balance || 0) : 0;
         const garaadTotal = Object.values(econData)
             .filter(d => d && typeof d === 'object' && !d.__treasury__)
             .reduce((s, d) => s + (d.banks?.garaad || 0), 0);
+
+        // Build HANTIDAADA lines — wallet + garaad + all pub banks player is in
+        const hLines = [];
+        hLines.push(`💵 Wallet         ➜ ${fmtBtc(myWallet)}`);
+        hLines.push(`🏦 Garaad Bank    ➜ ${fmtBtc(myGaraad)}`);
+        let runningTotal = myWallet + myGaraad;
+        for (const pb of pubBanks) {
+            const myDep = pb.customers?.[userId]?.balance || 0;
+            runningTotal += myDep;
+            const nameShort = (pb.name || 'Bank').slice(0, 14).padEnd(14);
+            hLines.push(`🏛️ ${nameShort} ➜ ${fmtBtc(myDep)}`);
+        }
+
+        // Build BANKIYADA lines — all pub banks details
+        const bLines = [];
+        bLines.push(`💎 Garaad Bank`);
+        bLines.push(`└ 💰 Kaydka Bankiga: ${fmtBtc(garaadTotal)}`);
+        for (const pb of pubBanks) {
+            const myDep = pb.customers?.[userId]?.balance || 0;
+            const fee   = pb.depositFee != null ? pb.depositFee : 1;
+            bLines.push(``);
+            bLines.push(`🌐 ${pb.name}`);
+            bLines.push(`└ 💰 Kaydka Bankiga: ${fmtBtc(pb.balance || 0)}`);
+            bLines.push(`└ 📥 Kaydkaaga: ${fmtBtc(myDep)}`);
+            bLines.push(`└ 💸 Owner Fee: ${fee}% deposit kasta`);
+        }
 
         const desc = [
             `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
             ``,
             `💰 **𝐇𝐀𝐍𝐓𝐈𝐃𝐀𝐀𝐃𝐀**`,
             ``,
-            `💵 Wallet         ➜ ${fmtBtc(myWallet)}`,
-            `🏦 Garaad Bank    ➜ ${fmtBtc(myGaraad)}`,
-            `🏛️ ${pubName.padEnd(14)} ➜ ${fmtBtc(pubBal)}`,
+            ...hLines,
             ``,
-            `📊 Wadarta Guud   ➜ ${fmtBtc(myTotal)}`,
+            `📊 Wadarta Guud   ➜ ${fmtBtc(runningTotal)}`,
             ``,
             `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
             ``,
             `🏦 **𝐁𝐀𝐍𝐊𝐈𝐘𝐀𝐃𝐀**`,
             ``,
-            `💎 Garaad Bank`,
-            `└ 💰 Kaydka Bankiga: ${fmtBtc(garaadTotal)}`,
-            ``,
-            `🌐 ${pubName}`,
-            `└ 💰 Kaydka Bankiga: ${fmtBtc(pubTotal)}`,
-            `└ 📥 Kaydkaaga: ${fmtBtc(pubBal)}`,
+            ...bLines,
             ``,
             `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
             ``,
