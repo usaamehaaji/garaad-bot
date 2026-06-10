@@ -158,14 +158,15 @@ async function sendLeaderboard(client) {
     }
 }
 
-function getNextSundayEAT() {
+function getNextFridayEAT() {
     const now = Date.now();
+    // EAT = UTC+3
     const eat = new Date(now + 3 * 60 * 60 * 1000);
-    const day = eat.getUTCDay();
-    let daysUntilSunday = day === 0 ? 0 : 7 - day;
+    const day = eat.getUTCDay(); // 0=Sun, 5=Fri
+    let daysUntilFriday = day <= 5 ? 5 - day : 7 - (day - 5);
     const next = new Date(eat);
-    next.setUTCDate(eat.getUTCDate() + daysUntilSunday);
-    next.setUTCHours(16, 0, 0, 0); // 19:00 EAT = 16:00 UTC
+    next.setUTCDate(eat.getUTCDate() + daysUntilFriday);
+    next.setUTCHours(15, 30, 0, 0); // 18:30 EAT = 15:30 UTC
     if (next.getTime() <= Date.now()) {
         next.setUTCDate(next.getUTCDate() + 7);
     }
@@ -174,11 +175,12 @@ function getNextSundayEAT() {
 
 module.exports = function setupWeeklyLeaderboard(client) {
     function scheduleNext() {
-        const nextMs  = getNextSundayEAT();
+        const nextMs  = getNextFridayEAT();
         const delayMs = Math.max(0, nextMs - Date.now());
         const days    = Math.floor(delayMs / 86400000);
         const hours   = Math.floor((delayMs % 86400000) / 3600000);
-        console.log(`[WeeklyLB] Next: Sunday 19:00 EAT (~${days}d ${hours}h)`);
+        const mins    = Math.floor((delayMs % 3600000) / 60000);
+        console.log(`[WeeklyLB] Next: Jimce (Friday) 18:30 EAT (~${days}d ${hours}h ${mins}m)`);
 
         setTimeout(async () => {
             await sendLeaderboard(client);
@@ -189,5 +191,5 @@ module.exports = function setupWeeklyLeaderboard(client) {
     }
 
     setTimeout(() => scheduleNext(), FIRST_TICK_MS);
-    console.log('[WeeklyLB] ✅ Weekly leaderboard scheduler started');
+    console.log('[WeeklyLB] ✅ Weekly leaderboard scheduler started — Jimce 18:30 EAT');
 };
