@@ -443,16 +443,32 @@ async function bankDepositTextCmd(message, args) {
     if ((Date.now() - (pubBank.lastActivity || pubBank.createdAt)) >= PUB_EXPIRY_MS)
         return message.reply(`⚠️ **${pubBank.name}** waa la xiray.`);
 
+    // Owner gets 1% fee on every deposit
+    const feeRate  = 0.01;
+    const fee      = Math.max(1, Math.floor(amount * feeRate));
+    const credited = amount - fee;
+
     ec.btc = (ec.btc || 0) - amount;
-    pubBank.balance       = (pubBank.balance || 0) + amount;
-    pubBank.totalDeposits = (pubBank.totalDeposits || 0) + amount;
+    pubBank.balance       = (pubBank.balance || 0) + credited;
+    pubBank.totalDeposits = (pubBank.totalDeposits || 0) + credited;
     pubBank.lastActivity  = Date.now();
     pubBank.customers     = pubBank.customers || {};
     pubBank.customers[message.author.id] ??= { balance: 0, username: message.author.username, joinedAt: Date.now() };
-    pubBank.customers[message.author.id].balance += amount;
+    pubBank.customers[message.author.id].balance += credited;
+
+    // Give fee to owner
+    if (pubBank.ownerId) {
+        checkEconUser(pubBank.ownerId);
+        econData[pubBank.ownerId].btc = (econData[pubBank.ownerId].btc || 0) + fee;
+    }
+
     saveBanks();
     saveEcon();
-    return message.reply(`📥 **${fmtBtc(amount)}** → 🏛️ **${pubBank.name}**\n💼 Haysataa: **${fmtBtc(pubBank.customers[message.author.id].balance)}**`);
+    return message.reply(
+        `📥 **${fmtBtc(amount)}** → 🏛️ **${pubBank.name}**\n` +
+        `💰 Kaydkaaga: **${fmtBtc(pubBank.customers[message.author.id].balance)}**\n` +
+        `💸 Owner fee: **${fmtBtc(fee)}** (1%)`
+    );
 }
 
 // ── ?w <bank> <amount> — withdraw from any bank ──────
