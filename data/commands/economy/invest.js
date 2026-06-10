@@ -8,9 +8,9 @@ const MAX_INVEST   = 500_000;
 const COOLDOWN_MS  = 6 * 60 * 60 * 1000; // 6 saacadood
 
 const PLANS = {
-    yar:    { label: '🌱 Yar',    minHours: 1,  maxHours: 3,  minRate: 0.08, maxRate: 0.18 },
-    dhexe:  { label: '📈 Dhexe',  minHours: 3,  maxHours: 8,  minRate: 0.15, maxRate: 0.35 },
-    weyn:   { label: '🚀 Weyn',   minHours: 8,  maxHours: 24, minRate: 0.25, maxRate: 0.60 },
+    1000:  { label: '🌱 Basic',   minHours: 1,  maxHours: 3,  minRate: 0.08, maxRate: 0.18, defaultAmt: 1000  },
+    5000:  { label: '📈 Standard',minHours: 3,  maxHours: 8,  minRate: 0.15, maxRate: 0.35, defaultAmt: 5000  },
+    10000: { label: '🚀 Premium', minHours: 8,  maxHours: 24, minRate: 0.25, maxRate: 0.60, defaultAmt: 10000 },
 };
 
 const investCooldowns = new Map();
@@ -27,9 +27,9 @@ function buildHelpEmbed() {
         .setDescription(
             '💡 **Lacagta ku shub ganacsi — faa\'iido hel!**\n\n' +
             '**Qaababka:**\n' +
-            '`?invest yar 1000` — 🌱 Yar (1-3 saac) · +8%-18%\n' +
-            '`?invest dhexe 5000` — 📈 Dhexe (3-8 saac) · +15%-35%\n' +
-            '`?invest weyn 10000` — 🚀 Weyn (8-24 saac) · +25%-60%\n\n' +
+            '`?invest 1000` — 🌱 Basic (1-3 saac) · +8%-18%\n' +
+            '`?invest 5000` — 📈 Standard (3-8 saac) · +15%-35%\n' +
+            '`?invest 10000` — 🚀 Premium (8-24 saac) · +25%-60%\n\n' +
             '`?invest` — Invest-kaaga daawo\n' +
             `💰 Ugu yar: **₿${MIN_INVEST.toLocaleString()}** · Ugu badan: **₿${MAX_INVEST.toLocaleString()}**`
         )
@@ -97,19 +97,18 @@ module.exports = async function investCmd(message, args) {
             .setFooter({ text: 'Garaad Economy • ?invest cusub bilaaw' })] });
     }
 
-    // ?invest <plan> <amount>
-    const planKey = args[0]?.toLowerCase();
-    const plan = PLANS[planKey];
-
-    if (!plan) {
-        return message.reply({ embeds: [buildHelpEmbed()] });
-    }
-
-    const amount = parseInt(args[1], 10);
+    // ?invest <amount> — amount determines the plan
+    const amount = parseInt(args[0], 10);
     if (!amount || isNaN(amount) || amount < MIN_INVEST)
-        return message.reply(`⚠️ Ugu yar **₿${MIN_INVEST.toLocaleString()}** ayaad gelin kartaa.`);
+        return message.reply({ embeds: [buildHelpEmbed()] });
     if (amount > MAX_INVEST)
         return message.reply(`⚠️ Ugu badan **₿${MAX_INVEST.toLocaleString()}** ayaad gelin kartaa.`);
+
+    // Pick plan based on amount
+    let planKey = '1000';
+    if (amount >= 10000) planKey = '10000';
+    else if (amount >= 5000) planKey = '5000';
+    const plan = PLANS[planKey];
     if ((d.btc || 0) < amount)
         return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿${fmt(d.btc || 0)}**`);
 
