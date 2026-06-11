@@ -158,27 +158,36 @@ async function sendLeaderboard(client) {
     }
 }
 
-function getNextSundayEAT() {
+function getNextLeaderboardTime() {
     const now = Date.now();
-    const eat = new Date(now + 3 * 60 * 60 * 1000);
-    const day = eat.getUTCDay();
-    let daysUntilSunday = day === 0 ? 0 : 7 - day;
-    const next = new Date(eat);
-    next.setUTCDate(eat.getUTCDate() + daysUntilSunday);
-    next.setUTCHours(16, 0, 0, 0); // 19:00 EAT = 16:00 UTC
-    if (next.getTime() <= now + 3 * 60 * 60 * 1000) {
-        next.setUTCDate(next.getUTCDate() + 7);
+    const eatNow = new Date(now + 3 * 60 * 60 * 1000);
+    const nextToday = new Date(eatNow);
+    nextToday.setUTCHours(19, 0, 0, 0);
+
+    if (eatNow.getTime() <= nextToday.getTime()) {
+        return nextToday.getTime() - 3 * 60 * 60 * 1000;
     }
-    return next.getTime();
+
+    const day = eatNow.getUTCDay();
+    const daysUntilSunday = day === 0 ? 0 : 7 - day;
+    const nextSunday = new Date(eatNow);
+    nextSunday.setUTCDate(eatNow.getUTCDate() + daysUntilSunday);
+    nextSunday.setUTCHours(16, 0, 0, 0); // 19:00 EAT = 16:00 UTC
+
+    if (nextSunday.getTime() <= now + 3 * 60 * 60 * 1000) {
+        nextSunday.setUTCDate(nextSunday.getUTCDate() + 7);
+    }
+
+    return nextSunday.getTime();
 }
 
 module.exports = function setupWeeklyLeaderboard(client) {
     function scheduleNext() {
-        const nextMs  = getNextSundayEAT();
+        const nextMs  = getNextLeaderboardTime();
         const delayMs = Math.max(0, nextMs - Date.now());
         const days    = Math.floor(delayMs / 86400000);
         const hours   = Math.floor((delayMs % 86400000) / 3600000);
-        console.log(`[WeeklyLB] Next: Sunday 19:00 EAT (~${days}d ${hours}h)`);
+        console.log(`[WeeklyLB] Next: 19:00 EAT (~${days}d ${hours}h)`);
 
         setTimeout(async () => {
             await sendLeaderboard(client);

@@ -3,9 +3,10 @@
 // =====================================================================
 
 const { MessageFlags, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle, StringSelectMenuBuilder } = require('discord.js');
-const { handleSoloAnswer, handleSoloLeaderboard } = require('../games/solo');
+const { handleSoloAnswer, handleSoloLeaderboard, handleSoloReplay } = require('../games/solo');
 const { startDuelGame }     = require('../games/duel');
 const { beginQuizGame, refreshLobby: refreshQuizLobby } = require('../games/quiz');
+const { handleMissionClaim } = require('../../data/commands/missions');
 const { beginRound, openGamePhase, sendRegistrationCode, handlePanelButton, GAME_CHANNEL_ID, ANNOUNCE_CHANNEL_ID } = require('../games/tournament');
 const { deleteTournamentState } = require('../utils/tournamentPersist');
 const { userData, activeQuiz, activeDuels, activeTournament, isUserBusy, tournamentRegistry } = require('../store');
@@ -1593,6 +1594,14 @@ module.exports = function setupInteractionHandler(client) {
             const ownerId = id.replace('help_ww_', '');
             if (interaction.user.id !== ownerId) return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
             return interaction.update({ embeds: [buildWwEmbed()], components: [helpRow(ownerId, 'ww')] });
+        }
+
+        if (id.startsWith('solo_replay_')) {
+            return handleSoloReplay(interaction);
+        }
+
+        if (id.startsWith('missions_claim_')) {
+            return handleMissionClaim(interaction);
         }
 
         // ── Inventory equip buttons ──

@@ -145,6 +145,10 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 .setLabel('🏆 IQ Leaderboard')
                 .setStyle(ButtonStyle.Primary),
             new ButtonBuilder()
+                .setCustomId(`solo_replay_${userId}`)
+                .setLabel('🎮 Ciyaar mar kale')
+                .setStyle(ButtonStyle.Success),
+            new ButtonBuilder()
                 .setCustomId(`close_solo_${userId}`)
                 .setLabel('Iska xir')
                 .setStyle(ButtonStyle.Danger),
