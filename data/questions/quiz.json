@@ -1,179 +1,982 @@
 [
   {
-    "question": "Waa ku bamaad kee kii yiri: 'Haddaan dhoofay dalkaygii ahaa, mid u dhow ma arag'?",
-    "options": ["Sayid Maxamed Cabdille Xasan", "Maxamed Ibraahim Warsame (Hadraawi)", "Cabdillaahi Suldaan Timacadde", "Cali Cilmi Afyare"],
-    "correct": "Maxamed Ibraahim Warsame (Hadraawi)"
+    "question": "Webiga ugu dheer adduunka waa?",
+    "options": [
+      "Amazon",
+      "Mississippi",
+      "Nile",
+      "Yangtze"
+    ],
+    "correct": "Nile"
   },
   {
-    "question": "Sannadkee ayay Khilafadii Cusmaaniyiintu si rasmi ah ula wareegtay maamulka magaalada Saylac ee dalka Soomaaliya?",
-    "options": ["1453", "1548", "1875", "1914"],
-    "correct": "1548"
+    "question": "Buurta ugu dheer adduunka waa?",
+    "options": [
+      "K2",
+      "Kilimanjaro",
+      "Everest",
+      "Mont Blanc"
+    ],
+    "correct": "Everest"
   },
   {
-    "question": "Waa maxay faa'iidada ugu weyn ee ay dawladnimadu u leedahay bulshada?",
-    "options": ["In qof kasta uu hanti gaar ah helo", "Sugidda amniga, kala dambaynta, iyo cadaaladda", "In qabiil kasta uu madaxwayne yeesho", "In canshuurta dadka laga cafiyo"],
-    "correct": "Sugidda amniga, kala dambaynta, iyo cadaaladda"
+    "question": "Waddanka ugu weyn adduunka waa?",
+    "options": [
+      "Canada",
+      "USA",
+      "China",
+      "Russia"
+    ],
+    "correct": "Russia"
   },
   {
-    "question": "Waa maxay faa'iidada caafimaad ee laga helo cunista khudaarta cagaaran sida koosta ama borokoliga?",
-    "options": ["Waxay kordhisaa miisaanka jirka si degdeg ah", "Waxay qani ku tahay birta (Iron) iyo fiitamiinnada difaaca jirka xoojiya", "Waxay daawaysaa sonkorowga hal maalin gudaheeda", "Waxay bedeshaa hurdada habeenkii"],
-    "correct": "Waxay qani ku tahay birta (Iron) iyo fiitamiinnada difaaca jirka xoojiya"
+    "question": "Atomka waxaa ka kooban?",
+    "options": [
+      "Proton iyo Neutron",
+      "Proton, Neutron iyo Electron",
+      "Electron iyo Proton",
+      "Neutron iyo Electron"
+    ],
+    "correct": "Proton, Neutron iyo Electron"
   },
   {
-    "question": "Kumaa ahaa khaliifkii ugu horreeyay ee rasmiga ah ee hoggaaminayay Khilafadii Cusmaaniyiinta (Ottoman Empire)?",
-    "options": ["Suleiman the Magnificent", "Osman I", "Mehmed II", "Selim I"],
-    "correct": "Osman I"
+    "question": "Soomaaliya waxay ka mid noqotay UN sanadkee?",
+    "options": [
+      "1958",
+      "1960",
+      "1962",
+      "1965"
+    ],
+    "correct": "1960"
   },
   {
-    "question": "Maxaa loo yaqaanaa aqalka hiddaha iyo dhaqanka Soomaalida ee laga sameeyo dhajiska iyo cawska la dhuftay?",
-    "options": ["Aqalka Somal", "Mundul", "Sariir dhowr ah", "Guryaha dhoobada"],
-    "correct": "Aqalka Somal"
+    "question": "Dagaalkii Adduunka 2aad wuxuu dhammaday sanadkee?",
+    "options": [
+      "1943",
+      "1944",
+      "1945",
+      "1946"
+    ],
+    "correct": "1945"
   },
   {
-    "question": "Waa maxay ujeedada ugu weyn ee loo sameeyo Dastuurka dalka?",
-    "options": ["In lagu xaddido awoodaha madaxda laguna ilaaliyo xuquuqda muwaidinka", "In lacag lagaga raadiyo hay'adaha caalamiga ah", "In lagu bedelo diinta rasmiga ah ee dalka", "In qof kasta loo ogolaado inuu sameeyo wuxuu doono"],
-    "correct": "In lagu xaddido awoodaha madaxda laguna ilaaliyo xuquuqda muwaidinka"
+    "question": "Google waxaa aasaasay?",
+    "options": [
+      "Bill Gates iyo Paul Allen",
+      "Larry Page iyo Sergey Brin",
+      "Steve Jobs",
+      "Zuckerberg"
+    ],
+    "correct": "Larry Page iyo Sergey Brin"
   },
   {
-    "question": "Hormoonkee ayaa jirku soo daayaa marka uu qofku lakulmo cabsi ama walwal degdeg ah, kaas oo kordhiya garaaca wadnaha?",
-    "options": ["Insulin", "Melatonin", "Adrenaline", "Thyroxine"],
-    "correct": "Adrenaline"
+    "question": "GDP waxay u taagan tahay?",
+    "options": [
+      "Gross Domestic Product",
+      "General Domestic Payment",
+      "Grand Development Plan",
+      "Government Program"
+    ],
+    "correct": "Gross Domestic Product"
   },
   {
-    "question": "Maahmaahda Soomaaliyeed ee dhiiri-gelisa midnimada waxay tirahdaa: 'Far keliya ______ ee ma dhaqdo'. Maxaa ka dhiman?",
-    "options": ["Waxba ma qaaddo", "Fool wax ma xishto", "Weji ma dhaqdo", "Ciid ma tirto"],
-    "correct": "Weji ma dhaqdo"
+    "question": "Xayawaanka ugu dheer adduunka waa?",
+    "options": [
+      "Maroodi",
+      "Giraffe",
+      "Blue Whale",
+      "Ostrich"
+    ],
+    "correct": "Giraffe"
   },
   {
-    "question": "Sultan Selim I wuxuu qabsaday magaalada Qaahira sannadkii 1517, isagoo soo afjaray xukunkii maamulkii Masar ka jiray ee ahaa?",
-    "options": ["Mamlukiinta", "Faadumiyiinta", "Umawiyiinta", "Saba'iyiinta"],
-    "correct": "Mamlukiinta"
+    "question": "Olympics ugu horeysay waxaa la bilaabay sanadkee?",
+    "options": [
+      "1892",
+      "1896",
+      "1900",
+      "1904"
+    ],
+    "correct": "1896"
   },
   {
-    "question": "Waa maxay shaqada ugu weyn ee ay qabtaan unugyada dhiigga cas (Red Blood Cells)?",
-    "options": ["Inay la dagaalamaan jimmiga", "Inay oksijiinta geeyaan unugyada jirka", "Inay dhiigga baraf ka dhigaan", "Inay soo saaraan dheecaanka caloosha"],
-    "correct": "Inay oksijiinta geeyaan unugyada jirka"
+    "question": "Nebiyadii Islaamku waa imisa lagu sheego Quraanka?",
+    "options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "correct": "25"
   },
   {
-    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Dardaaran' ee uu kaga hadlayay dabeecadaha aadanaha?",
-    "options": ["Salaan Carrabay", "Cabdillaahi Suldaan Timacadde", "Qamaan Bulxan", "Cali Cilmi Afyare"],
-    "correct": "Salaan Carrabay"
+    "question": "Luuqadda ugu badan lo'aad adduunka waa?",
+    "options": [
+      "English",
+      "Spanish",
+      "Mandarin Chinese",
+      "Arabic"
+    ],
+    "correct": "Mandarin Chinese"
   },
   {
-    "question": "Kumaa ahaa reer-galbeedkii u horreeyey ee magaalada Harar u dhuunta soo gala isagoo iska dhigaya Muslim, qarnigii 19-aad?",
-    "options": ["Richard Burton", "John Speke", "Vasco da Gama", "Charles de Gaulle"],
-    "correct": "Richard Burton"
+    "question": "Maskaxda bini-aadamka waxay ka kooban tahay imisa boqolkiiba biyo?",
+    "options": [
+      "60%",
+      "73%",
+      "85%",
+      "90%"
+    ],
+    "correct": "73%"
   },
   {
-    "question": "Waa maxay xanuunka yimaada marka jidhku waayo ama uu farsamayn waayo hormoonka loo yaqaan Insulin?",
-    "options": ["Dhiig-kar", "Sonkorow (Diabetes)", "Asma (Nfiska)", "Anemia"],
-    "correct": "Sonkorow (Diabetes)"
+    "question": "FIFA World Cup 2022 waxaa guuleystay?",
+    "options": [
+      "France",
+      "Brazil",
+      "Argentina",
+      "Germany"
+    ],
+    "correct": "Argentina"
   },
   {
-    "question": "Yaa guulaystay dagaalkii weynaa ee 'Chaldiran' sannadkii 1514 ee dhexmaray Cusmaaniyiinta iyo Booqortooyadii Safawiyiinta?",
-    "options": ["Shah Ismail", "Sultan Selim I", "Suleiman the Magnificent", "Abbas I"],
-    "correct": "Sultan Selim I"
+    "question": "Caasimadda Australia waa?",
+    "options": [
+      "Sydney",
+      "Melbourne",
+      "Brisbane",
+      "Canberra"
+    ],
+    "correct": "Canberra"
   },
   {
-    "question": "Dhaqanka Soomaalida, marka Geela la rabo in biyo looga soo saaro ceel aad u dheer, maxaa la qaadaa si uu u cabo?",
-    "options": ["Heeso-ceel (Alloole)", "Gabayo dhaadheer", "Qaylo iyo jiibin", "Buranbur"],
-    "correct": "Heeso-ceel (Alloole)"
+    "question": "Vitamin D waxaa ugu fiican laga helaa?",
+    "options": [
+      "Cuntada",
+      "Qorraxda",
+      "Biyo",
+      "Xayawaanka"
+    ],
+    "correct": "Qorraxda"
   },
   {
-    "question": "Abwaan Cabdillaahi Suldaan Timacadde gabaygii caanka ahaa ee uu tiriyay maalintii xorriyadda ee 1960, maxaa magaciisa la oron jiray?",
-    "options": ["Kana siib kana sudh", "Dardaaran", "Xorriyad", "Daba-gallooc"],
-    "correct": "Kana siib kana sudh"
+    "question": "DNA waxay u taagan tahay?",
+    "options": [
+      "Deoxyribonucleic Acid",
+      "Diribonucleic Acid",
+      "Deoxyribose Nucleotide Arrangement",
+      "Deoxyribose Nucleic Adenine"
+    ],
+    "correct": "Deoxyribonucleic Acid"
   },
   {
-    "question": "Fiitamiinkee ayaa ugu muhiimsan caafimaadka indhaha iyo aragga dadka?",
-    "options": ["Vitamin C", "Vitamin B6", "Vitamin A", "Vitamin K"],
-    "correct": "Vitamin A"
+    "question": "Lambarka Pi (pi) dhawr jibbaaran waa?",
+    "options": [
+      "3.14",
+      "3.41",
+      "3.71",
+      "4.14"
+    ],
+    "correct": "3.14"
   },
   {
-    "question": "Magaaladii Constantinople ee caasimadda u ahayd Bizantium, magacay u bedeshay Khilafadii Cusmaaniyiintu markay qabsadeen?",
-    "options": ["Ankara", "Istanbul (Islaambool)", "Bursa", "Izmir"],
-    "correct": "Istanbul (Islaambool)"
+    "question": "Haradda ugu weyn adduunka waa?",
+    "options": [
+      "Lake Victoria",
+      "Lake Superior",
+      "Caspian Sea",
+      "Aral Sea"
+    ],
+    "correct": "Caspian Sea"
   },
   {
-    "question": "Maxaa loo yaqaanaa lacagta rasmiga ah ee ay dawladdu soo saarto si loogu dhex sarrifto ganacsiga dalka gudihiisa?",
-    "options": ["Doolar", "Shilin ama Lacagta Qaranka", "Xoolo dhab ah", "Dhabanno"],
-    "correct": "Shilin ama Lacagta Qaranka"
+    "question": "Nelson Mandela wuxuu xabsiga ku jiray muddo?",
+    "options": [
+      "17 sano",
+      "21 sano",
+      "27 sano",
+      "32 sano"
+    ],
+    "correct": "27 sano"
   },
   {
-    "question": "Sahaabigii ugu horreeyey ee dhasha Hijrada ka dib magaalada Madiina wuxuu ahaa?",
-    "options": ["Cabdullaahi bin Zubayr", "Asma bint Abi Bakr", "Usama bin Zayd", "Anas bin Malik"],
-    "correct": "Cabdullaahi bin Zubayr"
+    "question": "Bitcoin waxaa aasaasay?",
+    "options": [
+      "Mark Zuckerberg",
+      "Satoshi Nakamoto",
+      "Elon Musk",
+      "Bill Gates"
+    ],
+    "correct": "Satoshi Nakamoto"
   },
   {
-    "question": "Dagaalkii caanka ahaa ee 'Preveza' sannadkii 1538 ee dhexmaray maraakiibtii Khilafadii Cusmaaniyiinta iyo reer Yurub, kumaa ahaa taliyihii weynaa ee Cusmaaniyiinta?",
-    "options": ["Hayreddin Barbarossa", "Piri Reis", "Turgut Reis", "Oruç Reis"],
-    "correct": "Hayreddin Barbarossa"
+    "question": "Xanuunka Malaria waxaa geesta?",
+    "options": [
+      "Bakteeriyada",
+      "Virus",
+      "Parasite Plasmodium",
+      "Fungi"
+    ],
+    "correct": "Parasite Plasmodium"
   },
   {
-    "question": "Waa maxay muhiimadda koowaad ee uu leeyahay nidaamka 'Garsoorka' madax-bannaan ee dalka dhexdiisa?",
-    "options": ["Inuu difaaco danaha dawladda uun", "Inuu xalliyo khilaafaadka bulshada si cadaalad ah", "Inuu lacag ka qaado dadka", "Inuu bedelo go'aamada madaxweynaha markasta"],
-    "correct": "Inuu xalliyo khilaafaadka bulshada si cadaalad ah"
+    "question": "Meeraheeda ugu weyn Nidaamka Qorraxda waa?",
+    "options": [
+      "Saturn",
+      "Neptune",
+      "Uranus",
+      "Jupiter"
+    ],
+    "correct": "Jupiter"
   },
   {
-    "question": "Waa maxay shaqada ugu weyn ee unugyada dhiigga cad (White Blood Cells) ee ku dhex jira jirka bini-aadamka?",
-    "options": ["Inay oksijiinta geeyaan unugyada", "Inay la dhashaan oo ay iska caabiyaan jimmiga", "Inay dhiigga joojiyaan marka la dhaawacmo", "Inay jidhka siiyaan midabka maqaarka"],
-    "correct": "Inay la dhashaan oo ay iska caabiyaan jimmiga"
+    "question": "Heesta Soomaali Hanoolaato waxaa tiryay?",
+    "options": [
+      "Hadraawi",
+      "Cali Sugulle",
+      "Timacadde",
+      "Qamaan Bulxan"
+    ],
+    "correct": "Cali Sugulle"
   },
   {
-    "question": "Dhaqanka Soomaalida, maxaa loo yaqaanaa caanaha dhowrka maalmood la ruxayay ee dhanaan, ee weelka dhiisha lagu keydiyo?",
-    "options": ["Garoor", "Suusa", "Ciir", "Dhanyar"],
-    "correct": "Ciir"
+    "question": "Internet waxaa la abuuray sanadkee?",
+    "options": [
+      "1969",
+      "1979",
+      "1989",
+      "1999"
+    ],
+    "correct": "1969"
   },
   {
-    "question": "Sultan Suleiman 'The Magnificent' maxaa loogu yeeri jiray taariikhda dhexdeeda sababo la xiriira xeerarkii uu dajiyay?",
-    "options": ["Kanuni", "Fatih", "Yavuz", "Gazi"],
-    "correct": "Kanuni"
+    "question": "Haddii 3x + 6 = 21, x = ?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
   },
   {
-    "question": "Maxaa loo yaqaanaa hab-dhaqanka Soomaalida ee ah in qof dhibaataysan ama xoolo beelay lagu caawiyo xoolo nool?",
-    "options": ["Qaaran", "Irmaan", "Xoolo-guri", "Xoolo-goyn"],
-    "correct": "Qaaran"
+    "question": "Khilafadii Umawiyiinta caasimaddeeda waxay ahayd?",
+    "options": [
+      "Baghdad",
+      "Makkah",
+      "Damascus",
+      "Cairo"
+    ],
+    "correct": "Damascus"
   },
   {
-    "question": "Xubintee ka mid ah jidhka bini-aadamka ayaa soo saarta dheecaanka 'Bile' ee caawiya dhalaalinta dufanka?",
-    "options": ["Caloosha", "Pankereaska", "Beerka", "Kelyaha"],
+    "question": "Dagaalkii Ogaden wuxuu dhammaday sanadkee?",
+    "options": [
+      "1976",
+      "1977",
+      "1978",
+      "1979"
+    ],
+    "correct": "1978"
+  },
+  {
+    "question": "Caasimadda Japan waa?",
+    "options": [
+      "Osaka",
+      "Kyoto",
+      "Tokyo",
+      "Hiroshima"
+    ],
+    "correct": "Tokyo"
+  },
+  {
+    "question": "Jirka bini-aadamka wuxuu ka kooban yahay imisa lafo?",
+    "options": [
+      "186",
+      "206",
+      "226",
+      "256"
+    ],
+    "correct": "206"
+  },
+  {
+    "question": "Caasimadda Nigeria waa?",
+    "options": [
+      "Lagos",
+      "Kano",
+      "Abuja",
+      "Port Harcourt"
+    ],
+    "correct": "Abuja"
+  },
+  {
+    "question": "Xawaaraha codka hawo-dhexeedka waa?",
+    "options": [
+      "343 m/s",
+      "200 m/s",
+      "500 m/s",
+      "700 m/s"
+    ],
+    "correct": "343 m/s"
+  },
+  {
+    "question": "Geeraar waa nooc gabay Soomaali ah oo?",
+    "options": [
+      "Jacaylka",
+      "Geesinnimada",
+      "Munaasabadaha",
+      "Diinta"
+    ],
+    "correct": "Geesinnimada"
+  },
+  {
+    "question": "2 + 2 x 4 = ?",
+    "options": [
+      "16",
+      "10",
+      "8",
+      "12"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "Caasimadda Saudi Arabia waa?",
+    "options": [
+      "Jeddah",
+      "Mecca",
+      "Medina",
+      "Riyadh"
+    ],
+    "correct": "Riyadh"
+  },
+  {
+    "question": "Suuradda ugu dheer Quraanka waa?",
+    "options": [
+      "Al-Baqarah",
+      "Aali Imraan",
+      "An-Nisaa",
+      "Al-Maidah"
+    ],
+    "correct": "Al-Baqarah"
+  },
+  {
+    "question": "Xoogga jiidashada dhulku (Gravity) waa imisa m/s2?",
+    "options": [
+      "7.8",
+      "9.8",
+      "11.8",
+      "13.8"
+    ],
+    "correct": "9.8"
+  },
+  {
+    "question": "Amazon waxaa aasaasay?",
+    "options": [
+      "Elon Musk",
+      "Jeff Bezos",
+      "Bill Gates",
+      "Mark Zuckerberg"
+    ],
+    "correct": "Jeff Bezos"
+  },
+  {
+    "question": "Kacaankii Siyaad Barre wuxuu dhacay sanadkee?",
+    "options": [
+      "1967",
+      "1969",
+      "1971",
+      "1973"
+    ],
+    "correct": "1969"
+  },
+  {
+    "question": "Xayawaanka ugu culus adduunka waa?",
+    "options": [
+      "Maroodi",
+      "Blue Whale",
+      "Hippo",
+      "Rhino"
+    ],
+    "correct": "Blue Whale"
+  },
+  {
+    "question": "Biyo waxay karaan heerka?",
+    "options": [
+      "90C",
+      "95C",
+      "100C",
+      "105C"
+    ],
+    "correct": "100C"
+  },
+  {
+    "question": "Qorraxda nidaamkeeda waxaa ka jira imisa meerood?",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correct": "8"
+  },
+  {
+    "question": "Caasimadda Iran waa?",
+    "options": [
+      "Isfahan",
+      "Mashhad",
+      "Tabriz",
+      "Tehran"
+    ],
+    "correct": "Tehran"
+  },
+  {
+    "question": "Inflation waxay ka dhacaa marka?",
+    "options": [
+      "Qiimayaashu hoosaan",
+      "Qiimayaashu koradaan degdeg",
+      "Lacagtu batsato",
+      "Dakhligu yaraado"
+    ],
+    "correct": "Qiimayaashu koradaan degdeg"
+  },
+  {
+    "question": "Suugaanta Soomaalida nooca Buraanbur waxaa gabayadiisa tiriya?",
+    "options": [
+      "Ragga",
+      "Dumarka",
+      "Carruurta",
+      "Waayeelka"
+    ],
+    "correct": "Dumarka"
+  },
+  {
+    "question": "Shimbirka ugu degdegga badan adduunka waa?",
+    "options": [
+      "Eagle",
+      "Falcon",
+      "Swift",
+      "Hummingbird"
+    ],
+    "correct": "Falcon"
+  },
+  {
+    "question": "Sharciga Ohm V = I x R wuxuu la xiiriiraa?",
+    "options": [
+      "Magnetism",
+      "Korontada",
+      "Gravity",
+      "Codka"
+    ],
+    "correct": "Korontada"
+  },
+  {
+    "question": "Caasimadda France waa?",
+    "options": [
+      "Lyon",
+      "Marseille",
+      "Paris",
+      "Toulouse"
+    ],
+    "correct": "Paris"
+  },
+  {
+    "question": "Xanuunka HIV wuxuu weeraraa?",
+    "options": [
+      "Wadnaha",
+      "Unugaha difaaca CD4",
+      "Kelyaha",
+      "Beerka"
+    ],
+    "correct": "Unugaha difaaca CD4"
+  },
+  {
+    "question": "Luuqadda Af-Soomaali waxaa loo qoray alifbeeto rasmi sanadkee?",
+    "options": [
+      "1962",
+      "1969",
+      "1972",
+      "1975"
+    ],
+    "correct": "1972"
+  },
+  {
+    "question": "Caasimadda Turkey waa?",
+    "options": [
+      "Istanbul",
+      "Izmir",
+      "Antalya",
+      "Ankara"
+    ],
+    "correct": "Ankara"
+  },
+  {
+    "question": "Martin Luther King Jr. waxaa la dilay sanadkee?",
+    "options": [
+      "1966",
+      "1967",
+      "1968",
+      "1969"
+    ],
+    "correct": "1968"
+  },
+  {
+    "question": "Masjidka ugu weyn adduunka waa?",
+    "options": [
+      "Al-Aqsa",
+      "An-Nabawi",
+      "Al-Haram",
+      "Umar"
+    ],
+    "correct": "Al-Haram"
+  },
+  {
+    "question": "Haddii radius 10cm, aagga wareegga (Pi=3.14) waa?",
+    "options": [
+      "314cm2",
+      "300cm2",
+      "250cm2",
+      "280cm2"
+    ],
+    "correct": "314cm2"
+  },
+  {
+    "question": "SpaceX waxaa aasaasay?",
+    "options": [
+      "Jeff Bezos",
+      "Richard Branson",
+      "Elon Musk",
+      "Bill Gates"
+    ],
+    "correct": "Elon Musk"
+  },
+  {
+    "question": "Xanuunka Hepatitis wuxuu saameeyaa?",
+    "options": [
+      "Kelyaha",
+      "Beerka",
+      "Wadnaha",
+      "Sanbabada"
+    ],
     "correct": "Beerka"
   },
   {
-    "question": "Waa maxay faa'iidada dhaqaale ee ugu weyn ee ay leedahay in dalku yeesho deked caalami ah oo nidaamsan?",
-    "options": ["In kalluunka oo dhan halkaas lagu cuno", "Inay fududayso dhoofinta iyo soo dejinta badeecadaha", "Inay dadka deegaanka u noqoto meel lagu dabaasho", "Inay dawladdu canshuur ka qaaddo doonyaha yaryar"],
-    "correct": "Inay fududayso dhoofinta iyo soo dejinta badeecadaha"
+    "question": "Caasimadda Pakistan waa?",
+    "options": [
+      "Karachi",
+      "Lahore",
+      "Peshawar",
+      "Islamabad"
+    ],
+    "correct": "Islamabad"
   },
   {
-    "question": "Maahmaahda Soomaaliyeed ee ka hadasha aqoonta waxay tirahdaa: 'Aqooon la'aan waa ______'. Maxaa ka dhiman?",
-    "options": ["Iftiin la'aan", "Hanti la'aan", "Guri la'aan", "Arag la'aan"],
-    "correct": "Arag la'aan"
+    "question": "Dagaalkii Badr wuxuu dhacay sanadkee Hijri?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": "2"
   },
   {
-    "question": "Sannadkee ayay guuldaraysatay go'doomintii labaad ee Khilafadii Cusmaaniyiintu ku qaadeen magaalada Vienna ee dalka Austria?",
-    "options": ["1453", "1529", "1683", "1789"],
-    "correct": "1683"
+    "question": "LCM of 4 and 6 = ?",
+    "options": [
+      "8",
+      "10",
+      "12",
+      "14"
+    ],
+    "correct": "12"
   },
   {
-    "question": "Maxaa sababa cudurka duumada (Malaria) ee ku dhaca bini-aadamka?",
-    "options": ["Biyo wasakh ah oo la cabo", "Kuddo ama dulin uu gudbiyo kaneecada dhedig", "Cunista hilib aan bislaan", "Fadhiisiga qorraxda muddo deer"],
-    "correct": "Kuddo ama dulin uu gudbiyo kaneecada dhedig"
+    "question": "Caasimadda UAE waa?",
+    "options": [
+      "Dubai",
+      "Sharjah",
+      "Ajman",
+      "Abu Dhabi"
+    ],
+    "correct": "Abu Dhabi"
   },
   {
-    "question": "Dhaqanka iyo hiddaha Soomaalida, maxaa loo yaqaanaa qalabka ka samaysan hargaha ee raga reer miyiga ah ku qaataan biyaha?",
-    "options": ["Dhiil", "Sibraar", "Haan", "Barkimo"],
-    "correct": "Sibraar"
+    "question": "Xiddigta ugu dhow dhulka (ka baxsan qorraxda) waa?",
+    "options": [
+      "Sirius",
+      "Alpha Centauri",
+      "Betelgeuse",
+      "Vega"
+    ],
+    "correct": "Alpha Centauri"
   },
   {
-    "question": "Kumaa ahaa geesigii Soomaaliyeed ee hoggaaminayay dhalinyaradii u halgantay xorriyadda dalka ee SYL sannadkii 1943?",
-    "options": ["Cabdullaahi Ciise Maxamud", "Aadan Cabdulle Cusmaan", "Yaasiin Xaji Cusmaan", "Maxamed Cabdille Xasan"],
-    "correct": "Yaasiin Xaji Cusmaan"
+    "question": "Caasimadda India waa?",
+    "options": [
+      "Mumbai",
+      "Kolkata",
+      "Chennai",
+      "New Delhi"
+    ],
+    "correct": "New Delhi"
   },
   {
-    "question": "Suradii ugu dambaysay ee lagu soo dejiyo Quraanka Kariimka ah iyadoo dhammaystiran waxay ahayd?",
-    "options": ["An-Nas", "Al-Ma'idah", "Al-Nasr", "Al-Ikhlas"],
-    "correct": "Al-Nasr"
+    "question": "NaCl waa?",
+    "options": [
+      "Sokor",
+      "Cusbo",
+      "Biyo",
+      "Barafka"
+    ],
+    "correct": "Cusbo"
   },
   {
-    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Xalaal dhuux'?",
-    "options":
+    "question": "Penicillin waxaa helay?",
+    "options": [
+      "Louis Pasteur",
+      "Alexander Fleming",
+      "Marie Curie",
+      "Edward Jenner"
+    ],
+    "correct": "Alexander Fleming"
+  },
+  {
+    "question": "Caasimadda South Korea waa?",
+    "options": [
+      "Busan",
+      "Incheon",
+      "Daegu",
+      "Seoul"
+    ],
+    "correct": "Seoul"
+  },
+  {
+    "question": "Caasimadda Egypt waa?",
+    "options": [
+      "Alexandria",
+      "Giza",
+      "Luxor",
+      "Cairo"
+    ],
+    "correct": "Cairo"
+  },
+  {
+    "question": "Caasimadda Kenya waa?",
+    "options": [
+      "Mombasa",
+      "Kisumu",
+      "Nakuru",
+      "Nairobi"
+    ],
+    "correct": "Nairobi"
+  },
+  {
+    "question": "Caasimadda Ethiopia waa?",
+    "options": [
+      "Dire Dawa",
+      "Harar",
+      "Addis Ababa",
+      "Gondar"
+    ],
+    "correct": "Addis Ababa"
+  },
+  {
+    "question": "1000 / 25 = ?",
+    "options": [
+      "35",
+      "40",
+      "45",
+      "50"
+    ],
+    "correct": "40"
+  },
+  {
+    "question": "Badweynta ugu weyn adduunka waa?",
+    "options": [
+      "Atlantic",
+      "Indian",
+      "Arctic",
+      "Pacific"
+    ],
+    "correct": "Pacific"
+  },
+  {
+    "question": "Magaalada ugu weyn Somaliland waa?",
+    "options": [
+      "Berbera",
+      "Burco",
+      "Borama",
+      "Hargeisa"
+    ],
+    "correct": "Hargeisa"
+  },
+  {
+    "question": "UN waxaa la aasaasay sanadkee?",
+    "options": [
+      "1943",
+      "1944",
+      "1945",
+      "1946"
+    ],
+    "correct": "1945"
+  },
+  {
+    "question": "Tirada xargaha (Chromosomes) ee bini-aadamka waa imisa?",
+    "options": [
+      "23",
+      "44",
+      "46",
+      "48"
+    ],
+    "correct": "46"
+  },
+  {
+    "question": "Wikipedia waxaa la bilaabay sanadkee?",
+    "options": [
+      "1999",
+      "2000",
+      "2001",
+      "2002"
+    ],
+    "correct": "2001"
+  },
+  {
+    "question": "Xanuunka Cholera waxaa ku faafa?",
+    "options": [
+      "Hawo",
+      "Biyo wasakhaysan",
+      "Xayawaanka",
+      "Taabasho"
+    ],
+    "correct": "Biyo wasakhaysan"
+  },
+  {
+    "question": "Caasimadda Brazil waa?",
+    "options": [
+      "Rio de Janeiro",
+      "Sao Paulo",
+      "Brasilia",
+      "Salvador"
+    ],
+    "correct": "Brasilia"
+  },
+  {
+    "question": "Marvel (MCU) movie ugu horeysay waa?",
+    "options": [
+      "Thor",
+      "Captain America",
+      "Iron Man",
+      "Spider-Man"
+    ],
+    "correct": "Iron Man"
+  },
+  {
+    "question": "Midowgii Soviet wuxuu kala baxay sanadkee?",
+    "options": [
+      "1989",
+      "1990",
+      "1991",
+      "1992"
+    ],
+    "correct": "1991"
+  },
+  {
+    "question": "Caasimadda China waa?",
+    "options": [
+      "Shanghai",
+      "Guangzhou",
+      "Beijing",
+      "Shenzhen"
+    ],
+    "correct": "Beijing"
+  },
+  {
+    "question": "Haddii aagga gooska 64cm2, dhinackiisu waa imisa?",
+    "options": [
+      "6cm",
+      "7cm",
+      "8cm",
+      "9cm"
+    ],
+    "correct": "8cm"
+  },
+  {
+    "question": "Caasimadda Somalia waa?",
+    "options": [
+      "Berbera",
+      "Kismayo",
+      "Bossaso",
+      "Mogadishu"
+    ],
+    "correct": "Mogadishu"
+  },
+  {
+    "question": "Xanuunka COVID-19 waxaa geesta?",
+    "options": [
+      "Bakteeriya",
+      "SARS-CoV-2 virus",
+      "Fungi",
+      "Parasite"
+    ],
+    "correct": "SARS-CoV-2 virus"
+  },
+  {
+    "question": "Caasimadda Iraq waa?",
+    "options": [
+      "Mosul",
+      "Basra",
+      "Kirkuk",
+      "Baghdad"
+    ],
+    "correct": "Baghdad"
+  },
+  {
+    "question": "Caasimadda Morocco waa?",
+    "options": [
+      "Casablanca",
+      "Marrakech",
+      "Fez",
+      "Rabat"
+    ],
+    "correct": "Rabat"
+  },
+  {
+    "question": "Factorial 5! = ?",
+    "options": [
+      "60",
+      "100",
+      "120",
+      "150"
+    ],
+    "correct": "120"
+  },
+  {
+    "question": "Caasimadda Germany waa?",
+    "options": [
+      "Hamburg",
+      "Munich",
+      "Frankfurt",
+      "Berlin"
+    ],
+    "correct": "Berlin"
+  },
+  {
+    "question": "Caasimadda USA waa?",
+    "options": [
+      "New York",
+      "Los Angeles",
+      "Chicago",
+      "Washington DC"
+    ],
+    "correct": "Washington DC"
+  },
+  {
+    "question": "Dheecaanka Insulin wuxuu xukuma?",
+    "options": [
+      "Dhiig-karka",
+      "Sokorta dhiigga",
+      "Xawaaraha wadnaha",
+      "Neefsashada"
+    ],
+    "correct": "Sokorta dhiigga"
+  },
+  {
+    "question": "Xarunta kuleylka (Absolute Zero) waa imisa Celsius?",
+    "options": [
+      "-100C",
+      "-173C",
+      "-273C",
+      "-373C"
+    ],
+    "correct": "-273C"
+  },
+  {
+    "question": "Caasimadda Italy waa?",
+    "options": [
+      "Milan",
+      "Naples",
+      "Rome",
+      "Florence"
+    ],
+    "correct": "Rome"
+  },
+  {
+    "question": "Caasimadda Spain waa?",
+    "options": [
+      "Barcelona",
+      "Valencia",
+      "Seville",
+      "Madrid"
+    ],
+    "correct": "Madrid"
+  },
+  {
+    "question": "Nobel Prize waxaa la bilaabay sanadkee?",
+    "options": [
+      "1895",
+      "1898",
+      "1901",
+      "1905"
+    ],
+    "correct": "1901"
+  },
+  {
+    "question": "Caasimadda Mexico waa?",
+    "options": [
+      "Guadalajara",
+      "Monterrey",
+      "Tijuana",
+      "Mexico City"
+    ],
+    "correct": "Mexico City"
+  },
+  {
+    "question": "Caasimadda Venezuela waa?",
+    "options": [
+      "Maracaibo",
+      "Valencia",
+      "Barquisimeto",
+      "Caracas"
+    ],
+    "correct": "Caracas"
+  },
+  {
+    "question": "Caasimadda Argentina waa?",
+    "options": [
+      "Cordoba",
+      "Rosario",
+      "Mendoza",
+      "Buenos Aires"
+    ],
+    "correct": "Buenos Aires"
+  },
+  {
+    "question": "Caasimadda Canada waa?",
+    "options": [
+      "Toronto",
+      "Vancouver",
+      "Montreal",
+      "Ottawa"
+    ],
+    "correct": "Ottawa"
+  },
+  {
+    "question": "Caasimadda Afghanistan waa?",
+    "options": [
+      "Kandahar",
+      "Herat",
+      "Mazar-i-Sharif",
+      "Kabul"
+    ],
+    "correct": "Kabul"
+  },
+  {
+    "question": "Caasimadda Bangladesh waa?",
+    "options": [
+      "Chittagong",
+      "Sylhet",
+      "Rajshahi",
+      "Dhaka"
+    ],
+    "correct": "Dhaka"
+  }
+]
