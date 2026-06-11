@@ -9258,5 +9258,425 @@
       "325"
     ],
     "correct": "275"
+  },
+  {
+    "question": "Waa ku bamaad kee kii yiri: 'Haddaan dhoofay dalkaygii ahaa, mid u dhow ma arag'?",
+    "options": [
+      "Sayid Maxamed Cabdille Xasan",
+      "Maxamed Ibraahim Warsame (Hadraawi)",
+      "Cabdillaahi Suldaan Timacadde",
+      "Cali Cilmi Afyare"
+    ],
+    "correct": "Maxamed Ibraahim Warsame (Hadraawi)"
+  },
+  {
+    "question": "Sannadkee ayay Khilafadii Cusmaaniyiintu si rasmi ah ula wareegtay maamulka magaalada Saylac ee dalka Soomaaliya?",
+    "options": [
+      "1453",
+      "1548",
+      "1875",
+      "1914"
+    ],
+    "correct": "1548"
+  },
+  {
+    "question": "Waa maxay faa'iidada ugu weyn ee ay dawladnimadu u leedahay bulshada?",
+    "options": [
+      "In qof kasta uu hanti gaar ah helo",
+      "Sugidda amniga, kala dambaynta, iyo cadaaladda",
+      "In qabiil kasta uu madaxwayne yeesho",
+      "In canshuurta dadka laga cafiyo"
+    ],
+    "correct": "Sugidda amniga, kala dambaynta, iyo cadaaladda"
+  },
+  {
+    "question": "Waa maxay faa'iidada caafimaad ee laga helo cunista khudaarta cagaaran sida koosta ama borokoliga?",
+    "options": [
+      "Waxay kordhisaa miisaanka jirka si degdeg ah",
+      "Waxay qani ku tahay birta (Iron) iyo fiitamiinnada difaaca jirka xoojiya",
+      "Waxay daawaysaa sonkorowga hal maalin gudaheeda",
+      "Waxay bedeshaa hurdada habeenkii"
+    ],
+    "correct": "Waxay qani ku tahay birta (Iron) iyo fiitamiinnada difaaca jirka xoojiya"
+  },
+  {
+    "question": "Kumaa ahaa khaliifkii ugu horreeyay ee rasmiga ah ee hoggaaminayay Khilafadii Cusmaaniyiinta (Ottoman Empire)?",
+    "options": [
+      "Suleiman the Magnificent",
+      "Osman I",
+      "Mehmed II",
+      "Selim I"
+    ],
+    "correct": "Osman I"
+  },
+  {
+    "question": "Maxaa loo yaqaanaa aqalka hiddaha iyo dhaqanka Soomaalida ee laga sameeyo dhajiska iyo cawska la dhuftay?",
+    "options": [
+      "Aqalka Somal",
+      "Mundul",
+      "Sariir dhowr ah",
+      "Guryaha dhoobada"
+    ],
+    "correct": "Aqalka Somal"
+  },
+  {
+    "question": "Waa maxay ujeedada ugu weyn ee loo sameeyo Dastuurka dalka?",
+    "options": [
+      "In lagu xaddido awoodaha madaxda laguna ilaaliyo xuquuqda muwaidinka",
+      "In lacag lagaga raadiyo hay'adaha caalamiga ah",
+      "In lagu bedelo diinta rasmiga ah ee dalka",
+      "In qof kasta loo ogolaado inuu sameeyo wuxuu doono"
+    ],
+    "correct": "In lagu xaddido awoodaha madaxda laguna ilaaliyo xuquuqda muwaidinka"
+  },
+  {
+    "question": "Hormoonkee ayaa jirku soo daayaa marka uu qofku lakulmo cabsi ama walwal degdeg ah, kaas oo kordhiya garaaca wadnaha?",
+    "options": [
+      "Insulin",
+      "Melatonin",
+      "Adrenaline",
+      "Thyroxine"
+    ],
+    "correct": "Adrenaline"
+  },
+  {
+    "question": "Maahmaahda Soomaaliyeed ee dhiiri-gelisa midnimada waxay tirahdaa: 'Far keliya ______ ee ma dhaqdo'. Maxaa ka dhiman?",
+    "options": [
+      "Waxba ma qaaddo",
+      "Fool wax ma xishto",
+      "Weji ma dhaqdo",
+      "Ciid ma tirto"
+    ],
+    "correct": "Weji ma dhaqdo"
+  },
+  {
+    "question": "Sultan Selim I wuxuu qabsaday magaalada Qaahira sannadkii 1517, isagoo soo afjaray xukunkii qaybtaas ka jiray ee maamulaayay dalka Masar. Maxay ahaayeen maamulkaas?",
+    "options": [
+      "Mamlukiinta",
+      "Faadumiyiinta",
+      "Umawiyiinta",
+      "Saba'iyiinta"
+    ],
+    "correct": "Mamlukiinta"
+  },
+  {
+    "question": "Waa maxay shaqada ugu weyn ee ay qabtaan unugyada dhiigga cas (Red Blood Cells)?",
+    "options": [
+      "Inay la dagaalamaan jimmiga iyo xanuunada",
+      "Inay oksijiinta geeyaan unugyada jirka oo dhan",
+      "Inay dhiigga baraf ka dhigaan marka la dhaawacmo",
+      "Inay soo saaraan dheecaanka caloosha"
+    ],
+    "correct": "Inay oksijiinta geeyaan unugyada jirka oo dhan"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Dardaaran' ee uu kaga hadlayay dabeecadaha aadanaha iyo saaxiibtinimada?",
+    "options": [
+      "Salaan Carrabay",
+      "Cabdillaahi Suldaan Timacadde",
+      "Qamaan Bulxan",
+      "Cali Cilmi Afyare"
+    ],
+    "correct": "Salaan Carrabay"
+  },
+  {
+    "question": "Kumaa ahaa reer-galbeedkii u horreeyey ee magaalada baraysan ee Harar u dhuunta soo gala isagoo iska dhigaya Muslim, qarnigii 19-aad?",
+    "options": [
+      "Richard Burton",
+      "John Speke",
+      "Vasco da Gama",
+      "Charles de Gaulle"
+    ],
+    "correct": "Richard Burton"
+  },
+  {
+    "question": "Waa maxay xanuunka yimaada marka jidhku waayo ama uu farsamayn waayo hormoonka loo yaqaan Insulin?",
+    "options": [
+      "Dhiig-kar",
+      "Sonkorow (Diabetes)",
+      "Asma (Nfiska)",
+      "Anemia"
+    ],
+    "correct": "Sonkorow (Diabetes)"
+  },
+  {
+    "question": "Yaa guulaystay dagaalkii weynaa ee 'Chaldiran' sannadkii 1514 ee dhexmaray Cusmaaniyiinta iyo Booqortooyadii Safawiyiinta ee reer Faaris?",
+    "options": [
+      "Shah Ismail",
+      "Sultan Selim I",
+      "Suleiman the Magnificent",
+      "Abbas I"
+    ],
+    "correct": "Sultan Selim I"
+  },
+  {
+    "question": "Maxaa loola jeedaa ereyga dhaqanka Soomaalida ee 'Guri-guri' marka laga hadlayo ciyaaraha carruurta?",
+    "options": [
+      "Ciyaar astaan u ah dhismaha guriga dhabta ah iyo barashada nolosha",
+      "In guriga la dhex cararo habeenkii",
+      "Dagaal dhagaxaan la isu tuurayo",
+      "Ciyaar hiddaha iyo taariikhda lagu barto"
+    ],
+    "correct": "Ciyaar astaan u ah dhismaha guriga dhabta ah iyo barashada nolosha"
+  },
+  {
+    "question": "Waa maxay muhiimadda ay leedahay in dawladdu yeelato Ciidan Qalab ah oo madax-bannaan?",
+    "options": [
+      "Si ay u cabsi geliyaan shacabka canshuurta diida",
+      "Si ay u difaacaan madax-bannaanida dalka iyo xudduudaha qaranka",
+      "Si ay ugu duulaan waddamada dariska ah dhib la'aan",
+      "Si ay u maamulaan doorashooyinka gobolada uun"
+    ],
+    "correct": "Si ay u difaacaan madax-bannaanida dalka iyo xudduudaha qaranka"
+  },
+  {
+    "question": "Abwaan Cabdillaahi Suldaan Timacadde gabaygii caanka ahaa ee uu tiriyay maalintii xorriyadda ee 1960, maxaa magaciisa la oron jiray?",
+    "options": [
+      "Kana siib kana sudh",
+      "Dardaaran",
+      "Xorriyad",
+      "Daba-gallooc"
+    ],
+    "correct": "Kana siib kana sudh"
+  },
+  {
+    "question": "Fiitamiinkee ayaa ugu muhiimsan caafimaadka indhaha iyo aragga dadka?",
+    "options": [
+      "Vitamin C",
+      "Vitamin B6",
+      "Vitamin A",
+      "Vitamin K"
+    ],
+    "correct": "Vitamin A"
+  },
+  {
+    "question": "Magaaladii Constantinople ee caasimadda u ahayd Booqortooyadii Bizantium, magacay u bedeshay Khilafadii Cusmaaniyiintu markay qabsadeen?",
+    "options": [
+      "Ankara",
+      "Istanbul (Islaambool)",
+      "Bursa",
+      "Izmir"
+    ],
+    "correct": "Istanbul (Islaambool)"
+  },
+  {
+    "question": "Maxaa loo yaqaanaa lacagta rasmiga ah ee ay dawladdu soo saarto si loogu dhex sarrifto ganacsiga dalka gudihiisa?",
+    "options": [
+      "Doolar",
+      "Shilin ama Lacagta Qaranka",
+      "Xoolo dhab ah",
+      "Dhabanno"
+    ],
+    "correct": "Shilin ama Lacagta Qaranka"
+  },
+  {
+    "question": "Dhaqanka Soomaalida, marka Geela la rabo in biyo looga soo saaro ceel aad u dheer, maxaa la qaadaa si geelu si dhib yar ugu cabo?",
+    "options": [
+      "Heeso-ceel (Alloole)",
+      "Gabayo dhaadheer",
+      "Qaylo iyo jiibin",
+      "Buranbur"
+    ],
+    "correct": "Heeso-ceel (Alloole)"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Guunyo' ee kaga hadlayay qiimaha geela?",
+    "options": [
+      "Ismaaciil Mire",
+      "Sayid Maxamed Cabdille Xasan",
+      "Xaaji Aadan Af-qallooc",
+      "Qamaan Bulxan"
+    ],
+    "correct": "Ismaaciil Mire"
+  },
+  {
+    "question": "Xubintee ka mid ah jidhka bini-aadamka ayaa u qaabilsan sifaynta dhiigga iyo ka saarista wasakhda dareeraha ah (Urine)?",
+    "options": [
+      "Beerka",
+      "Kelyaha",
+      "Sanbabada",
+      "Caloosha"
+    ],
+    "correct": "Kelyaha"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Xalaal dhuux' ee loogu qubrayay dadka kibra?",
+    "options": [
+      "Qamaan Bulxan",
+      "Salaan Carrabay",
+      "Sayid Maxamed Cabdille Xasan",
+      "Ismaaciil Mire"
+    ],
+    "correct": "Qamaan Bulxan"
+  },
+  {
+    "question": "Dagaalkii caanka ahaa ee 'Preveza' sannadkii 1538 ee dhexmaray maraakiibtii Khilafadii Cusmaaniyiinta iyo reer Yurub, kumaa ahaa taliyihii weynaa ee Cusmaaniyiinta u hoggaaminayay badda?",
+    "options": [
+      "Hayreddin Barbarossa",
+      "Piri Reis",
+      "Turgut Reis",
+      "Oruç Reis"
+    ],
+    "correct": "Hayreddin Barbarossa"
+  },
+  {
+    "question": "Waa maxay muhiimadda koowaad ee uu leeyahay nidaamka 'Garsoorka' madax-bannaan ee dalka dhexdiisa?",
+    "options": [
+      "Inuu difaaco danaha xubnaha dawladda oo kaliya",
+      "Inuu xalliyo khilaafaadka bulshada isagoo raacaya sharciga iyo cadaaladda",
+      "Inuu lacag ka qaado dadka dacwada ku guulaysta",
+      "Inuu bedelo go'aamada madaxweynaha markasta"
+    ],
+    "correct": "Inuu xalliyo khilaafaadka bulshada isagoo raacaya sharciga iyo cadaaladda"
+  },
+  {
+    "question": "Waa maxay shaqada ugu weyn ee unugyada dhiigga cad (White Blood Cells) ee ku dhex jira jirka bini-aadamka?",
+    "options": [
+      "Inay oksijiinta geeyaan unugyada",
+      "Inay la dhashaan oo ay iska caabiyaan jimmiga iyo cudurrada",
+      "Inay dhiigga joojiyaan marka uu qofku dhaawacmo",
+      "Inay jidhka siiyaan midabka maqaarka"
+    ],
+    "correct": "Inay la dhashaan oo ay iska caabiyaan jimmiga iyo cudurrada"
+  },
+  {
+    "question": "Dhaqanka Soomaalida, maxaa loo yaqaanaa caanaha dhowrka maalmood laga sakhraamay ee dhanaan, ee weelka dhoobada ama dhiisha lagu keydiyo?",
+    "options": [
+      "Garoor",
+      "Suusa",
+      "Ciir",
+      "Dhanyar"
+    ],
+    "correct": "Ciir"
+  },
+  {
+    "question": "Sannadkee ayay si rasmi ah u dhalatay dawladdii ugu horraysay ee Soomaaliyeed ee xor ah, yeelatana calan iyo madaxbannaani sugan?",
+    "options": [
+      "1954",
+      "1960",
+      "1969",
+      "1977"
+    ],
+    "correct": "1960"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii wadaniyada ahaa ee 'Kani waa kii dhabsee kor u qaada calanka'?",
+    "options": [
+      "Cabdillaahi Suldaan Timacadde",
+      "Maxamed Ibraahim Warsame (Hadraawi)",
+      "Cali Sugulle Duniyo",
+      "Abwaan Cabdi Galayax"
+    ],
+    "correct": "Cabdillaahi Suldaan Timacadde"
+  },
+  {
+    "question": "Waa maxay fitamiinka inta badan laga helo khudaarta dhanaan sida liinta, kaas oo caawiya bogsashada nabada iyo difaaca jirka?",
+    "options": [
+      "Vitamin A",
+      "Vitamin D",
+      "Vitamin C",
+      "Vitamin E"
+    ],
+    "correct": "Vitamin C"
+  },
+  {
+    "question": "Sultan Suleiman 'The Magnificent' wuxuu caan ku ahaa inuu qoro xeerar iyo qawaaniin sugan oo habaynayay maamulka dawladda. Maxaa loogu yeeri jiray taariikhda dhexdeeda?",
+    "options": [
+      "Kanuni",
+      "Fatih",
+      "Yavuz",
+      "Gazi"
+    ],
+    "correct": "Kanuni"
+  },
+  {
+    "question": "Maxaa loo yaqaanaa hab-dhaqanka Soomaalida ee ah in qof dhibaataysan ama xoolo beelay lagu caawiyo xoolo nool si uu dib ugu soo kabto?",
+    "options": [
+      "Qaaran",
+      "Irmaan",
+      "Xoolo-guri",
+      "Xoolo-goyn"
+    ],
+    "correct": "Qaaran"
+  },
+  {
+    "question": "Xubintee ka mid ah jidhka bini-aadamka ayaa soo saarta dheecaanka 'Bile' ee caawiya dhalaalinta iyo dheef-shiidka dufanka?",
+    "options": [
+      "Caloosha",
+      "Pankereaska",
+      "Beerka",
+      "Kelyaha"
+    ],
+    "correct": "Beerka"
+  },
+  {
+    "question": "Waa maxay faa'iidada dhaqaale ee ugu weyn ee ay leedahay in dalku yeesho deked caalami ah oo nidaamsan?",
+    "options": [
+      "In kalluunka oo dhan halkaas lagu cuno",
+      "Inay fududayso dhoofinta iyo soo dejinta badeecadaha, korna u qaaddo ganacsiga qaranka",
+      "Inay dadka deegaanka uun u noqoto meel lagu dabaasho",
+      "Inay dawladdu canshuur ka qaaddo doonyaha yaryar oo kaliya"
+    ],
+    "correct": "Inay fududayso dhoofinta iyo soo dejinta badeecadaha, korna u qaaddo ganacsiga qaranka"
+  },
+  {
+    "question": "Maahmaahda Soomaaliyeed ee ka hadasha aqoonta waxay tirahdaa: 'Aqooon la'aan waa ______'. Maxaa ka dhiman?",
+    "options": [
+      "Iftiin la'aan",
+      "Hanti la'aan",
+      "Guri la'aan",
+      "Arag la'aan"
+    ],
+    "correct": "Arag la'aan"
+  },
+  {
+    "question": "Sannadkee ayay guuldaraysatay go'doomintii labaad ee Khilafadii Cusmaaniyiintu ku qaadeen magaalada Vienna ee dalka Austria, taas oo isbedel weyn ku keentay taariikhda Yurub?",
+    "options": [
+      "1453",
+      "1529",
+      "1683",
+      "1789"
+    ],
+    "correct": "1683"
+  },
+  {
+    "question": "Maxaa sababa cudurka duumada (Malaria) ee ku dhaca bini-aadamka?",
+    "options": [
+      "Biyo wasakh ah oo la cabo uun",
+      "Kuddo ama dulin uu gudbiyo kaneecada dhedig ee Anopheles",
+      "Cunista hilib aan bislaan",
+      "Fadhiisiga qorraxda muddo dheer"
+    ],
+    "correct": "Kuddo ama dulin uu gudbiyo kaneecada dhedig ee Anopheles"
+  },
+  {
+    "question": "Dhaqanka iyo hiddaha Soomaalida, maxaa loo yaqaanaa qalabka ka samaysan maqaarka ama hargaha ee raga reer miyiga ah ay ku qaataan biyaha marka ay safarka yihiin?",
+    "options": [
+      "Dhiil",
+      "Sibraar",
+      "Haan",
+      "Barkimo"
+    ],
+    "correct": "Sibraar"
+  },
+  {
+    "question": "Kumaa ahaa geesigii Soomaaliyeed ee hoggaaminayay dhalinyaradii u halgantay xorriyadda dalka ee SYL sannadkii 1943?",
+    "options": [
+      "Cabdullaahi Ciise Maxamud",
+      "Aadan Cabdulle Cusmaan",
+      "Yaasiin Xaji Cusmaan",
+      "Maxamed Cabdille Xasan"
+    ],
+    "correct": "Yaasiin Xaji Cusmaan"
+  },
+  {
+    "question": "Waa maxay ujeedada rasmiga ah ee loo sameeyo 'Baasaboorka' muwaidinka uu leeyahay dawladnimada?",
+    "options": [
+      "In qofka loogu aqoonsado inuu yahay taajir dalkiisa ka dhex muuqda",
+      "Inuu u noqdo aqoonsi sharci ah oo caalami ah marka uu u safrayo dalka dibaddiisa",
+      "In lagu koontaroolo lacagaha qofka u soo xarooda uun",
+      "In qof kasta lagu qasbo inuu dalka ka baxo"
+    ],
+    "correct": "Inuu u noqdo aqoonsi sharci ah oo caalami ah marka uu u safrayo dalka dibaddiisa"
   }
 ]
