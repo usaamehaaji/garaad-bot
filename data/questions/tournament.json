@@ -1,307 +1,1112 @@
 [
   {
-    "question":"Caasimadda Soomaaliya waa?",
-    "options":["Hargeysa","Muqdisho","Baydhabo","Kismaayo"],
-    "correct":"Muqdisho"
+    "question": "Caasimadda Soomaaliya waa?",
+    "options": [
+      "Hargeysa",
+      "Muqdisho",
+      "Baydhabo",
+      "Kismaayo"
+    ],
+    "correct": "Muqdisho"
   },
   {
-    "question":"Soomaaliya waxay xorriyadda qaadatay sanadkee?",
-    "options":["1950","1960","1970","1980"],
-    "correct":"1960"
+    "question": "Soomaaliya waxay xorriyadda qaadatay sanadkee?",
+    "options": [
+      "1950",
+      "1960",
+      "1970",
+      "1980"
+    ],
+    "correct": "1960"
   },
   {
-    "question":"Midabka dhexe ee calanka Soomaaliya waa?",
-    "options":["Casaan","Cagaar","Buluug","Madow"],
-    "correct":"Buluug"
+    "question": "Midabka dhexe ee calanka Soomaaliya waa?",
+    "options": [
+      "Casaan",
+      "Cagaar",
+      "Buluug",
+      "Madow"
+    ],
+    "correct": "Buluug"
   },
   {
-    "question":"Xiddigta calanka Soomaaliya waxay leedahay imisa gees?",
-    "options":["4","5","6","7"],
-    "correct":"5"
+    "question": "Xiddigta calanka Soomaaliya waxay leedahay imisa gees?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "5"
   },
   {
-    "question":"Geela labka ah waxaa la yiraahdaa?",
-    "options":["Qaalin","Rati","Nirig","Weyl"],
-    "correct":"Rati"
+    "question": "Geela labka ah waxaa la yiraahdaa?",
+    "options": [
+      "Qaalin",
+      "Rati",
+      "Nirig",
+      "Weyl"
+    ],
+    "correct": "Rati"
   },
   {
-    "question":"Sayid Maxamed Cabdulle Xasan waxaa loo yaqaanay?",
-    "options":["Boqorka Soomaaliya","Hoggaamiyihii Daraawiishta","Suldaan","Abwaan"],
-    "correct":"Hoggaamiyihii Daraawiishta"
+    "question": "Sayid Maxamed Cabdulle Xasan waxaa loo yaqaanay?",
+    "options": [
+      "Boqorka Soomaaliya",
+      "Hoggaamiyihii Daraawiishta",
+      "Suldaan",
+      "Abwaan"
+    ],
+    "correct": "Hoggaamiyihii Daraawiishta"
   },
   {
-    "question":"Dhaqdhaqaaqii Daraawiishta wuxuu la dagaallamay?",
-    "options":["Itoobiya","Ingiriiska","Talyaaniga","Jabuuti"],
-    "correct":"Ingiriiska"
+    "question": "Dhaqdhaqaaqii Daraawiishta wuxuu la dagaallamay?",
+    "options": [
+      "Itoobiya",
+      "Ingiriiska",
+      "Talyaaniga",
+      "Jabuuti"
+    ],
+    "correct": "Ingiriiska"
   },
   {
-    "question":"Gabayga 'Koofilow waa kaa qaaday' waxaa tiriyay?",
-    "options":["Hadraawi","Sayid Maxamed Cabdulle Xasan","Timacadde","Raage Ugaas"],
-    "correct":"Sayid Maxamed Cabdulle Xasan"
+    "question": "Gabayga 'Koofilow waa kaa qaaday' waxaa tiriyay?",
+    "options": [
+      "Hadraawi",
+      "Sayid Maxamed Cabdulle Xasan",
+      "Timacadde",
+      "Raage Ugaas"
+    ],
+    "correct": "Sayid Maxamed Cabdulle Xasan"
   },
   {
-    "question":"Gobolka Banaadir caasimaddiisu waa?",
-    "options":["Jowhar","Muqdisho","Marka","Kismaayo"],
-    "correct":"Muqdisho"
+    "question": "Gobolka Banaadir caasimaddiisu waa?",
+    "options": [
+      "Jowhar",
+      "Muqdisho",
+      "Marka",
+      "Kismaayo"
+    ],
+    "correct": "Muqdisho"
   },
   {
-    "question":"Gobolka Hiiraan caasimaddiisu waa?",
-    "options":["Balcad","Beledweyne","Dhuusamareeb","Gaalkacyo"],
-    "correct":"Beledweyne"
+    "question": "Gobolka Hiiraan caasimaddiisu waa?",
+    "options": [
+      "Balcad",
+      "Beledweyne",
+      "Dhuusamareeb",
+      "Gaalkacyo"
+    ],
+    "correct": "Beledweyne"
   },
   {
-    "question":"Gobolka Bay caasimaddiisu waa?",
-    "options":["Baraawe","Baydhabo","Boosaaso","Buulobarde"],
-    "correct":"Baydhabo"
+    "question": "Gobolka Bay caasimaddiisu waa?",
+    "options": [
+      "Baraawe",
+      "Baydhabo",
+      "Boosaaso",
+      "Buulobarde"
+    ],
+    "correct": "Baydhabo"
   },
   {
-    "question":"Gobolka Mudug caasimaddiisu waa?",
-    "options":["Cadaado","Gaalkacyo","Qardho","Ceerigaabo"],
-    "correct":"Gaalkacyo"
+    "question": "Gobolka Mudug caasimaddiisu waa?",
+    "options": [
+      "Cadaado",
+      "Gaalkacyo",
+      "Qardho",
+      "Ceerigaabo"
+    ],
+    "correct": "Gaalkacyo"
   },
   {
-    "question":"Xoolaha ugu badan ee Soomaalidu dhaqato waa?",
-    "options":["Digaag","Fardo","Geel","Bakeyle"],
-    "correct":"Geel"
+    "question": "Xoolaha ugu badan ee Soomaalidu dhaqato waa?",
+    "options": [
+      "Digaag",
+      "Fardo",
+      "Geel",
+      "Bakeyle"
+    ],
+    "correct": "Geel"
   },
   {
-    "question":"Soomaalidu badanaa maxay ku nool yihiin?",
-    "options":["Beeraha","Kalluumaysi","Xoolo dhaqasho","Macdan"],
-    "correct":"Xoolo dhaqasho"
+    "question": "Soomaalidu badanaa maxay ku nool yihiin?",
+    "options": [
+      "Beeraha",
+      "Kalluumaysi",
+      "Xoolo dhaqasho",
+      "Macdan"
+    ],
+    "correct": "Xoolo dhaqasho"
   },
   {
-    "question":"Magaalada dekedda weyn leh ee Soomaaliya waa?",
-    "options":["Baydhabo","Muqdisho","Dhuusamareeb","Buuhoodle"],
-    "correct":"Muqdisho"
+    "question": "Magaalada dekedda weyn leh ee Soomaaliya waa?",
+    "options": [
+      "Baydhabo",
+      "Muqdisho",
+      "Dhuusamareeb",
+      "Buuhoodle"
+    ],
+    "correct": "Muqdisho"
   },
   {
-    "question":"Webiga ugu dheer Soomaaliya waa?",
-    "options":["Jubba","Shabeelle","Nile","Awash"],
-    "correct":"Jubba"
+    "question": "Webiga ugu dheer Soomaaliya waa?",
+    "options": [
+      "Jubba",
+      "Shabeelle",
+      "Nile",
+      "Awash"
+    ],
+    "correct": "Jubba"
   },
   {
-    "question":"Soomaaliya waxay ku taallaa qaaradda?",
-    "options":["Asia","Europe","Africa","America"],
-    "correct":"Africa"
+    "question": "Soomaaliya waxay ku taallaa qaaradda?",
+    "options": [
+      "Asia",
+      "Europe",
+      "Africa",
+      "America"
+    ],
+    "correct": "Africa"
   },
   {
-    "question":"Dalka Itoobiya caasimaddiisu waa?",
-    "options":["Nairobi","Asmara","Addis Ababa","Qaahira"],
-    "correct":"Addis Ababa"
+    "question": "Dalka Itoobiya caasimaddiisu waa?",
+    "options": [
+      "Nairobi",
+      "Asmara",
+      "Addis Ababa",
+      "Qaahira"
+    ],
+    "correct": "Addis Ababa"
   },
   {
-    "question":"Dalka Kenya caasimaddiisu waa?",
-    "options":["Mombasa","Nairobi","Kampala","Kigali"],
-    "correct":"Nairobi"
+    "question": "Dalka Kenya caasimaddiisu waa?",
+    "options": [
+      "Mombasa",
+      "Nairobi",
+      "Kampala",
+      "Kigali"
+    ],
+    "correct": "Nairobi"
   },
   {
-    "question":"Dalka Jabuuti caasimaddiisu waa?",
-    "options":["Tajoura","Ali Sabieh","Jabuuti","Diridhaba"],
-    "correct":"Jabuuti"
+    "question": "Dalka Jabuuti caasimaddiisu waa?",
+    "options": [
+      "Tajoura",
+      "Ali Sabieh",
+      "Jabuuti",
+      "Diridhaba"
+    ],
+    "correct": "Jabuuti"
   },
   {
-    "question":"Qaaradda Afrika dalka ugu weyn waa?",
-    "options":["Kenya","Algeria","Sudan","Somalia"],
-    "correct":"Algeria"
+    "question": "Qaaradda Afrika dalka ugu weyn waa?",
+    "options": [
+      "Kenya",
+      "Algeria",
+      "Sudan",
+      "Somalia"
+    ],
+    "correct": "Algeria"
   },
   {
-    "question":"Madaxweynaha ugu horreeyay Soomaaliya wuxuu ahaa?",
-    "options":["Aadan Cadde","Siyaad Barre","Cabdullaahi Yuusuf","Shariif Sheekh"],
-    "correct":"Aadan Cadde"
+    "question": "Madaxweynaha ugu horreeyay Soomaaliya wuxuu ahaa?",
+    "options": [
+      "Aadan Cadde",
+      "Siyaad Barre",
+      "Cabdullaahi Yuusuf",
+      "Shariif Sheekh"
+    ],
+    "correct": "Aadan Cadde"
   },
   {
-    "question":"Ra’iisul wasaare waa?",
-    "options":["Taliyaha ciidanka","Madaxa dowladda","Guddoomiyaha gobolka","Duqa magaalada"],
-    "correct":"Madaxa dowladda"
+    "question": "Ra’iisul wasaare waa?",
+    "options": [
+      "Taliyaha ciidanka",
+      "Madaxa dowladda",
+      "Guddoomiyaha gobolka",
+      "Duqa magaalada"
+    ],
+    "correct": "Madaxa dowladda"
   },
   {
-    "question":"Diinta dadka Soomaaliyeed intooda badan waa?",
-    "options":["Kirishtaan","Yahuud","Islaam","Budhis"],
-    "correct":"Islaam"
+    "question": "Diinta dadka Soomaaliyeed intooda badan waa?",
+    "options": [
+      "Kirishtaan",
+      "Yahuud",
+      "Islaam",
+      "Budhis"
+    ],
+    "correct": "Islaam"
   },
   {
-    "question":"Quraanka Kariimka wuxuu ka kooban yahay imisa suuradood?",
-    "options":["100","114","120","99"],
-    "correct":"114"
+    "question": "Quraanka Kariimka wuxuu ka kooban yahay imisa suuradood?",
+    "options": [
+      "100",
+      "114",
+      "120",
+      "99"
+    ],
+    "correct": "114"
   },
   {
-    "question":"Muslimku maalintii imisa jeer ayuu tukadaa?",
-    "options":["3","4","5","6"],
-    "correct":"5"
+    "question": "Muslimku maalintii imisa jeer ayuu tukadaa?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
   },
   {
-    "question":"Bisha Soonka waxaa la yiraahdaa?",
-    "options":["Shacbaan","Ramadaan","Muxarram","Safar"],
-    "correct":"Ramadaan"
+    "question": "Bisha Soonka waxaa la yiraahdaa?",
+    "options": [
+      "Shacbaan",
+      "Ramadaan",
+      "Muxarram",
+      "Safar"
+    ],
+    "correct": "Ramadaan"
   },
   {
-    "question":"Nabiga ugu dambeeyay waa?",
-    "options":["Nabi Muuse","Nabi Ciise","Nabi Maxamed SCW","Nabi Ibraahim"],
-    "correct":"Nabi Maxamed SCW"
+    "question": "Nabiga ugu dambeeyay waa?",
+    "options": [
+      "Nabi Muuse",
+      "Nabi Ciise",
+      "Nabi Maxamed SCW",
+      "Nabi Ibraahim"
+    ],
+    "correct": "Nabi Maxamed SCW"
   },
   {
-    "question":"Magaalada uu Nabi Maxamed SCW ku dhashay waa?",
-    "options":["Madiina","Makka","Qudus","Damacas"],
-    "correct":"Makka"
+    "question": "Magaalada uu Nabi Maxamed SCW ku dhashay waa?",
+    "options": [
+      "Madiina",
+      "Makka",
+      "Qudus",
+      "Damacas"
+    ],
+    "correct": "Makka"
   },
   {
-    "question":"Kacbadu waxay ku taallaa?",
-    "options":["Madiina","Makka","Qaahira","Doha"],
-    "correct":"Makka"
+    "question": "Kacbadu waxay ku taallaa?",
+    "options": [
+      "Madiina",
+      "Makka",
+      "Qaahira",
+      "Doha"
+    ],
+    "correct": "Makka"
   },
   {
-    "question":"Ciidda Soonfur waxaa kale oo loo yaqaan?",
-    "options":["Ciidul Adxaa","Ciidul Fidriga","Mowliid","Ashuuro"],
-    "correct":"Ciidul Fidriga"
+    "question": "Ciidda Soonfur waxaa kale oo loo yaqaan?",
+    "options": [
+      "Ciidul Adxaa",
+      "Ciidul Fidriga",
+      "Mowliid",
+      "Ashuuro"
+    ],
+    "correct": "Ciidul Fidriga"
   },
   {
-    "question":"Aabaha nebiyada waxaa loo yaqaan?",
-    "options":["Nabi Muuse","Nabi Ibraahim","Nabi Nuux","Nabi Yuusuf"],
-    "correct":"Nabi Ibraahim"
+    "question": "Aabaha nebiyada waxaa loo yaqaan?",
+    "options": [
+      "Nabi Muuse",
+      "Nabi Ibraahim",
+      "Nabi Nuux",
+      "Nabi Yuusuf"
+    ],
+    "correct": "Nabi Ibraahim"
   },
   {
-    "question":"Libaaxu wuxuu ka tirsan yahay?",
-    "options":["Xamaarato","Shimbir","Dugaag","Kalluun"],
-    "correct":"Dugaag"
+    "question": "Libaaxu wuxuu ka tirsan yahay?",
+    "options": [
+      "Xamaarato",
+      "Shimbir",
+      "Dugaag",
+      "Kalluun"
+    ],
+    "correct": "Dugaag"
   },
   {
-    "question":"Xayawaanka loo yaqaan boqorka duurka waa?",
-    "options":["Maroodi","Shabeel","Libaax","Waraabe"],
-    "correct":"Libaax"
+    "question": "Xayawaanka loo yaqaan boqorka duurka waa?",
+    "options": [
+      "Maroodi",
+      "Shabeel",
+      "Libaax",
+      "Waraabe"
+    ],
+    "correct": "Libaax"
   },
   {
-    "question":"Shimbirka qaranka Soomaaliya waa?",
-    "options":["Gorgor","Baalley","Gorayo","Qoolley"],
-    "correct":"Baalley"
+    "question": "Shimbirka qaranka Soomaaliya waa?",
+    "options": [
+      "Gorgor",
+      "Baalley",
+      "Gorayo",
+      "Qoolley"
+    ],
+    "correct": "Baalley"
   },
   {
-    "question":"Midkee ka mid ah waa webi Soomaaliya mara?",
-    "options":["Nile","Jubba","Amazon","Yangtze"],
-    "correct":"Jubba"
+    "question": "Midkee ka mid ah waa webi Soomaaliya mara?",
+    "options": [
+      "Nile",
+      "Jubba",
+      "Amazon",
+      "Yangtze"
+    ],
+    "correct": "Jubba"
   },
   {
-    "question":"Afka hooyo ee Soomaaliya waa?",
-    "options":["Carabi","English","Soomaali","Talyaani"],
-    "correct":"Soomaali"
+    "question": "Afka hooyo ee Soomaaliya waa?",
+    "options": [
+      "Carabi",
+      "English",
+      "Soomaali",
+      "Talyaani"
+    ],
+    "correct": "Soomaali"
   },
   {
-    "question":"Lacagta Soomaaliya waa?",
-    "options":["Birr","Dollar","Shilin Soomaali","Dirham"],
-    "correct":"Shilin Soomaali"
+    "question": "Lacagta Soomaaliya waa?",
+    "options": [
+      "Birr",
+      "Dollar",
+      "Shilin Soomaali",
+      "Dirham"
+    ],
+    "correct": "Shilin Soomaali"
   },
   {
-    "question":"Soomaaliya xeebteedu waxay ku taallaa?",
-    "options":["Badweynta Atlantic","Badweynta Hindiya","Badda Cas","Mediterranean"],
-    "correct":"Badweynta Hindiya"
+    "question": "Soomaaliya xeebteedu waxay ku taallaa?",
+    "options": [
+      "Badweynta Atlantic",
+      "Badweynta Hindiya",
+      "Badda Cas",
+      "Mediterranean"
+    ],
+    "correct": "Badweynta Hindiya"
   },
   {
-    "question":"Magaalada Kismaayo waxay ku taallaa gobolka?",
-    "options":["Bari","Jubbada Hoose","Nugaal","Bay"],
-    "correct":"Jubbada Hoose"
+    "question": "Magaalada Kismaayo waxay ku taallaa gobolka?",
+    "options": [
+      "Bari",
+      "Jubbada Hoose",
+      "Nugaal",
+      "Bay"
+    ],
+    "correct": "Jubbada Hoose"
   },
   {
-    "question":"Magaalada Hargeysa waxay ku taallaa?",
-    "options":["Somaliland","Puntland","Galmudug","Hirshabeelle"],
-    "correct":"Somaliland"
+    "question": "Magaalada Hargeysa waxay ku taallaa?",
+    "options": [
+      "Somaliland",
+      "Puntland",
+      "Galmudug",
+      "Hirshabeelle"
+    ],
+    "correct": "Somaliland"
   },
   {
-    "question":"Magaalada Boosaaso waxay ku taallaa gobolka?",
-    "options":["Bari","Mudug","Sool","Awdal"],
-    "correct":"Bari"
+    "question": "Magaalada Boosaaso waxay ku taallaa gobolka?",
+    "options": [
+      "Bari",
+      "Mudug",
+      "Sool",
+      "Awdal"
+    ],
+    "correct": "Bari"
   },
   {
-    "question":"Gobolka Galgaduud caasimaddiisu waa?",
-    "options":["Cadaado","Dhuusamareeb","Gaalkacyo","Guriceel"],
-    "correct":"Dhuusamareeb"
+    "question": "Gobolka Galgaduud caasimaddiisu waa?",
+    "options": [
+      "Cadaado",
+      "Dhuusamareeb",
+      "Gaalkacyo",
+      "Guriceel"
+    ],
+    "correct": "Dhuusamareeb"
   },
   {
-    "question":"Dhaqanka Soomaalida gabaygu wuxuu ka tirsan yahay?",
-    "options":["Ciyaar","Suugaan","Ganacsi","Beeraha"],
-    "correct":"Suugaan"
+    "question": "Dhaqanka Soomaalida gabaygu wuxuu ka tirsan yahay?",
+    "options": [
+      "Ciyaar",
+      "Suugaan",
+      "Ganacsi",
+      "Beeraha"
+    ],
+    "correct": "Suugaan"
   },
   {
-    "question":"Abwaanka Hadraawi wuxuu caan ku ahaa?",
-    "options":["Kubadda","Suugaanta","Ganacsiga","Daawada"],
-    "correct":"Suugaanta"
+    "question": "Abwaanka Hadraawi wuxuu caan ku ahaa?",
+    "options": [
+      "Kubadda",
+      "Suugaanta",
+      "Ganacsiga",
+      "Daawada"
+    ],
+    "correct": "Suugaanta"
   },
   {
-    "question":"Geelu wuxuu caan ku yahay?",
-    "options":["Degaanka biyaha","Samirka","Duulista","Dabaasha"],
-    "correct":"Samirka"
+    "question": "Geelu wuxuu caan ku yahay?",
+    "options": [
+      "Degaanka biyaha",
+      "Samirka",
+      "Duulista",
+      "Dabaasha"
+    ],
+    "correct": "Samirka"
   },
   {
-    "question":"Xoolaha Soomaalida ugu qiimaha badan waa?",
-    "options":["Digaag","Geel","Bakeyle","Bisad"],
-    "correct":"Geel"
+    "question": "Xoolaha Soomaalida ugu qiimaha badan waa?",
+    "options": [
+      "Digaag",
+      "Geel",
+      "Bakeyle",
+      "Bisad"
+    ],
+    "correct": "Geel"
   },
   {
-    "question":"Magaalada Marka waxay ku taallaa gobolka?",
-    "options":["Shabeellaha Hoose","Bay","Mudug","Bari"],
-    "correct":"Shabeellaha Hoose"
+    "question": "Magaalada Marka waxay ku taallaa gobolka?",
+    "options": [
+      "Shabeellaha Hoose",
+      "Bay",
+      "Mudug",
+      "Bari"
+    ],
+    "correct": "Shabeellaha Hoose"
   },
   {
-    "question":"Magaalada Beledweyne waxay ku taallaa gobolka?",
-    "options":["Hiiraan","Bay","Bakool","Nugaal"],
-    "correct":"Hiiraan"
+    "question": "Magaalada Beledweyne waxay ku taallaa gobolka?",
+    "options": [
+      "Hiiraan",
+      "Bay",
+      "Bakool",
+      "Nugaal"
+    ],
+    "correct": "Hiiraan"
   },
   {
-    "question":"Dalka Uganda caasimaddiisu waa?",
-    "options":["Kampala","Nairobi","Kigali","Juba"],
-    "correct":"Kampala"
+    "question": "Dalka Uganda caasimaddiisu waa?",
+    "options": [
+      "Kampala",
+      "Nairobi",
+      "Kigali",
+      "Juba"
+    ],
+    "correct": "Kampala"
   },
   {
-    "question":"Dalka Masar caasimaddiisu waa?",
-    "options":["Alexandria","Qaahira","Aswan","Luxor"],
-    "correct":"Qaahira"
+    "question": "Dalka Masar caasimaddiisu waa?",
+    "options": [
+      "Alexandria",
+      "Qaahira",
+      "Aswan",
+      "Luxor"
+    ],
+    "correct": "Qaahira"
   },
   {
-    "question":"Midkee ka mid ah waa waddan Afrika ku yaal?",
-    "options":["Brazil","Somalia","Japan","Canada"],
-    "correct":"Somalia"
+    "question": "Midkee ka mid ah waa waddan Afrika ku yaal?",
+    "options": [
+      "Brazil",
+      "Somalia",
+      "Japan",
+      "Canada"
+    ],
+    "correct": "Somalia"
   },
   {
-    "question":"Midabka calanka Itoobiya waxaa ku jira?",
-    "options":["Buluug","Cagaar","Madow","Cadaan"],
-    "correct":"Cagaar"
+    "question": "Midabka calanka Itoobiya waxaa ku jira?",
+    "options": [
+      "Buluug",
+      "Cagaar",
+      "Madow",
+      "Cadaan"
+    ],
+    "correct": "Cagaar"
   },
   {
-    "question":"Xiddigta Soomaaliya waxay astaan u tahay?",
-    "options":["5-ta Soomaaliyeed","5 qaaradood","5 badood","5 magaalo"],
-    "correct":"5-ta Soomaaliyeed"
+    "question": "Xiddigta Soomaaliya waxay astaan u tahay?",
+    "options": [
+      "5-ta Soomaaliyeed",
+      "5 qaaradood",
+      "5 badood",
+      "5 magaalo"
+    ],
+    "correct": "5-ta Soomaaliyeed"
   },
   {
-    "question":"Soomaalidu waxay caan ku tahay?",
-    "options":["Barafka","Martisoorka","Kaymaha","Tareennada"],
-    "correct":"Martisoorka"
+    "question": "Soomaalidu waxay caan ku tahay?",
+    "options": [
+      "Barafka",
+      "Martisoorka",
+      "Kaymaha",
+      "Tareennada"
+    ],
+    "correct": "Martisoorka"
   },
   {
-    "question":"Magaalada Baydhabo waxaa loo yaqaan?",
-    "options":["Magaalada nabadda","Baydhabo Janaay","Magaalada xeebta","Magaalada geela"],
-    "correct":"Baydhabo Janaay"
+    "question": "Magaalada Baydhabo waxaa loo yaqaan?",
+    "options": [
+      "Magaalada nabadda",
+      "Baydhabo Janaay",
+      "Magaalada xeebta",
+      "Magaalada geela"
+    ],
+    "correct": "Baydhabo Janaay"
   },
   {
-    "question":"Dhulka Soomaaliya intiisa badan waa?",
-    "options":["Buuro","Lama degaan","Bannaan","Baraf"],
-    "correct":"Bannaan"
+    "question": "Dhulka Soomaaliya intiisa badan waa?",
+    "options": [
+      "Buuro",
+      "Lama degaan",
+      "Bannaan",
+      "Baraf"
+    ],
+    "correct": "Bannaan"
   },
   {
-    "question":"Dadka Soomaaliyeed waxay badanaa ku hadlaan?",
-    "options":["Faransiis","Soomaali","Hindi","Turki"],
-    "correct":"Soomaali"
+    "question": "Dadka Soomaaliyeed waxay badanaa ku hadlaan?",
+    "options": [
+      "Faransiis",
+      "Soomaali",
+      "Hindi",
+      "Turki"
+    ],
+    "correct": "Soomaali"
   },
   {
-    "question":"Ciidanka Daraawiishta waxaa hoggaamin jiray?",
-    "options":["Aadan Cadde","Sayid Maxamed","Siyaad Barre","Sharmaarke"],
-    "correct":"Sayid Maxamed"
+    "question": "Ciidanka Daraawiishta waxaa hoggaamin jiray?",
+    "options": [
+      "Aadan Cadde",
+      "Sayid Maxamed",
+      "Siyaad Barre",
+      "Sharmaarke"
+    ],
+    "correct": "Sayid Maxamed"
   },
   {
-    "question":"Midkee ka mid ah waa xoolo nool?",
-    "options":["Geel","Gaari","Doon","Diyaarad"],
-    "correct":"Geel"
+    "question": "Midkee ka mid ah waa xoolo nool?",
+    "options": [
+      "Geel",
+      "Gaari",
+      "Doon",
+      "Diyaarad"
+    ],
+    "correct": "Geel"
   },
   {
-    "question":"Soomaaliya waxay leedahay xeeb dheer oo ku taal?",
-    "options":["Badda Cas","Badweynta Hindiya","Atlantic","Pacific"],
-    "correct":"Badweynta Hindiya"
+    "question": "Soomaaliya waxay leedahay xeeb dheer oo ku taal?",
+    "options": [
+      "Badda Cas",
+      "Badweynta Hindiya",
+      "Atlantic",
+      "Pacific"
+    ],
+    "correct": "Badweynta Hindiya"
+  },
+  {
+    "question": "Waa ku bamaad kee kii yiri: 'Haddaan dhoofay dalkaygii ahaa, mid u dhow ma arag'?",
+    "options": [
+      "Sayid Maxamed Cabdille Xasan",
+      "Maxamed Ibraahim Warsame (Hadraawi)",
+      "Cabdillaahi Suldaan Timacadde",
+      "Cali Cilmi Afyare"
+    ],
+    "correct": "Maxamed Ibraahim Warsame (Hadraawi)"
+  },
+  {
+    "question": "Sannadkee ayay Khilafadii Cusmaaniyiintu si rasmi ah ula wareegtay maamulka magaalada Saylac ee dalka Soomaaliya?",
+    "options": [
+      "1453",
+      "1548",
+      "1875",
+      "1914"
+    ],
+    "correct": "1548"
+  },
+  {
+    "question": "Waa maxay faa'iidada ugu weyn ee ay dawladnimadu u leedahay bulshada?",
+    "options": [
+      "In qof kasta uu hanti gaar ah helo",
+      "Sugidda amniga, kala dambaynta, iyo cadaaladda",
+      "In qabiil kasta uu madaxwayne yeesho",
+      "In canshuurta dadka laga cafiyo"
+    ],
+    "correct": "Sugidda amniga, kala dambaynta, iyo cadaaladda"
+  },
+  {
+    "question": "Waa maxay faa'iidada caafimaad ee laga helo cunista khudaarta cagaaran sida koosta ama borokoliga?",
+    "options": [
+      "Waxay kordhisaa miisaanka jirka si degdeg ah",
+      "Waxay qani ku tahay birta (Iron) iyo fiitamiinnada difaaca jirka xoojiya",
+      "Waxay daawaysaa sonkorowga hal maalin gudaheeda",
+      "Waxay bedeshaa hurdada habeenkii"
+    ],
+    "correct": "Waxay qani ku tahay birta (Iron) iyo fiitamiinnada difaaca jirka xoojiya"
+  },
+  {
+    "question": "Kumaa ahaa khaliifkii ugu horreeyay ee rasmiga ah ee hoggaaminayay Khilafadii Cusmaaniyiinta (Ottoman Empire)?",
+    "options": [
+      "Suleiman the Magnificent",
+      "Osman I",
+      "Mehmed II",
+      "Selim I"
+    ],
+    "correct": "Osman I"
+  },
+  {
+    "question": "Maxaa loo yaqaanaa aqalka hiddaha iyo dhaqanka Soomaalida ee laga sameeyo dhajiska iyo cawska la dhuftay?",
+    "options": [
+      "Aqalka Somal",
+      "Mundul",
+      "Sariir dhowr ah",
+      "Guryaha dhoobada"
+    ],
+    "correct": "Aqalka Somal"
+  },
+  {
+    "question": "Waa maxay ujeedada ugu weyn ee loo sameeyo Dastuurka dalka?",
+    "options": [
+      "In lagu xaddido awoodaha madaxda laguna ilaaliyo xuquuqda muwaidinka",
+      "In lacag lagaga raadiyo hay'adaha caalamiga ah",
+      "In lagu bedelo diinta rasmiga ah ee dalka",
+      "In qof kasta loo ogolaado inuu sameeyo wuxuu doono"
+    ],
+    "correct": "In lagu xaddido awoodaha madaxda laguna ilaaliyo xuquuqda muwaidinka"
+  },
+  {
+    "question": "Hormoonkee ayaa jirku soo daayaa marka uu qofku lakulmo cabsi ama walwal degdeg ah, kaas oo kordhiya garaaca wadnaha?",
+    "options": [
+      "Insulin",
+      "Melatonin",
+      "Adrenaline",
+      "Thyroxine"
+    ],
+    "correct": "Adrenaline"
+  },
+  {
+    "question": "Maahmaahda Soomaaliyeed ee dhiiri-gelisa midnimada waxay tirahdaa: 'Far keliya ______ ee ma dhaqdo'. Maxaa ka dhiman?",
+    "options": [
+      "Waxba ma qaaddo",
+      "Fool wax ma xishto",
+      "Weji ma dhaqdo",
+      "Ciid ma tirto"
+    ],
+    "correct": "Weji ma dhaqdo"
+  },
+  {
+    "question": "Sultan Selim I wuxuu qabsaday magaalada Qaahira sannadkii 1517, isagoo soo afjaray xukunkii maamulkii Masar ka jiray ee ahaa?",
+    "options": [
+      "Mamlukiinta",
+      "Faadumiyiinta",
+      "Umawiyiinta",
+      "Saba'iyiinta"
+    ],
+    "correct": "Mamlukiinta"
+  },
+  {
+    "question": "Waa maxay shaqada ugu weyn ee ay qabtaan unugyada dhiigga cas (Red Blood Cells)?",
+    "options": [
+      "Inay la dagaalamaan jimmiga",
+      "Inay oksijiinta geeyaan unugyada jirka",
+      "Inay dhiigga baraf ka dhigaan",
+      "Inay soo saaraan dheecaanka caloosha"
+    ],
+    "correct": "Inay oksijiinta geeyaan unugyada jirka"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Dardaaran' ee uu kaga hadlayay dabeecadaha aadanaha?",
+    "options": [
+      "Salaan Carrabay",
+      "Cabdillaahi Suldaan Timacadde",
+      "Qamaan Bulxan",
+      "Cali Cilmi Afyare"
+    ],
+    "correct": "Salaan Carrabay"
+  },
+  {
+    "question": "Kumaa ahaa reer-galbeedkii u horreeyey ee magaalada Harar u dhuunta soo gala isagoo iska dhigaya Muslim, qarnigii 19-aad?",
+    "options": [
+      "Richard Burton",
+      "John Speke",
+      "Vasco da Gama",
+      "Charles de Gaulle"
+    ],
+    "correct": "Richard Burton"
+  },
+  {
+    "question": "Waa maxay xanuunka yimaada marka jidhku waayo ama uu farsamayn waayo hormoonka loo yaqaan Insulin?",
+    "options": [
+      "Dhiig-kar",
+      "Sonkorow (Diabetes)",
+      "Asma (Nfiska)",
+      "Anemia"
+    ],
+    "correct": "Sonkorow (Diabetes)"
+  },
+  {
+    "question": "Yaa guulaystay dagaalkii weynaa ee 'Chaldiran' sannadkii 1514 ee dhexmaray Cusmaaniyiinta iyo Booqortooyadii Safawiyiinta?",
+    "options": [
+      "Shah Ismail",
+      "Sultan Selim I",
+      "Suleiman the Magnificent",
+      "Abbas I"
+    ],
+    "correct": "Sultan Selim I"
+  },
+  {
+    "question": "Dhaqanka Soomaalida, marka Geela la rabo in biyo looga soo saaro ceel aad u dheer, maxaa la qaadaa si uu u cabo?",
+    "options": [
+      "Heeso-ceel (Alloole)",
+      "Gabayo dhaadheer",
+      "Qaylo iyo jiibin",
+      "Buranbur"
+    ],
+    "correct": "Heeso-ceel (Alloole)"
+  },
+  {
+    "question": "Abwaan Cabdillaahi Suldaan Timacadde gabaygii caanka ahaa ee uu tiriyay maalintii xorriyadda ee 1960, maxaa magaciisa la oron jiray?",
+    "options": [
+      "Kana siib kana sudh",
+      "Dardaaran",
+      "Xorriyad",
+      "Daba-gallooc"
+    ],
+    "correct": "Kana siib kana sudh"
+  },
+  {
+    "question": "Fiitamiinkee ayaa ugu muhiimsan caafimaadka indhaha iyo aragga dadka?",
+    "options": [
+      "Vitamin C",
+      "Vitamin B6",
+      "Vitamin A",
+      "Vitamin K"
+    ],
+    "correct": "Vitamin A"
+  },
+  {
+    "question": "Magaaladii Constantinople ee caasimadda u ahayd Bizantium, magacay u bedeshay Khilafadii Cusmaaniyiintu markay qabsadeen?",
+    "options": [
+      "Ankara",
+      "Istanbul (Islaambool)",
+      "Bursa",
+      "Izmir"
+    ],
+    "correct": "Istanbul (Islaambool)"
+  },
+  {
+    "question": "Maxaa loo yaqaanaa lacagta rasmiga ah ee ay dawladdu soo saarto si loogu dhex sarrifto ganacsiga dalka gudihiisa?",
+    "options": [
+      "Doolar",
+      "Shilin ama Lacagta Qaranka",
+      "Xoolo dhab ah",
+      "Dhabanno"
+    ],
+    "correct": "Shilin ama Lacagta Qaranka"
+  },
+  {
+    "question": "Sahaabigii ugu horreeyey ee dhasha Hijrada ka dib magaalada Madiina wuxuu ahaa?",
+    "options": [
+      "Cabdullaahi bin Zubayr",
+      "Asma bint Abi Bakr",
+      "Usama bin Zayd",
+      "Anas bin Malik"
+    ],
+    "correct": "Cabdullaahi bin Zubayr"
+  },
+  {
+    "question": "Dagaalkii caanka ahaa ee 'Preveza' sannadkii 1538 ee dhexmaray maraakiibtii Khilafadii Cusmaaniyiinta iyo reer Yurub, kumaa ahaa taliyihii weynaa ee Cusmaaniyiinta?",
+    "options": [
+      "Hayreddin Barbarossa",
+      "Piri Reis",
+      "Turgut Reis",
+      "Oruç Reis"
+    ],
+    "correct": "Hayreddin Barbarossa"
+  },
+  {
+    "question": "Waa maxay muhiimadda koowaad ee uu leeyahay nidaamka 'Garsoorka' madax-bannaan ee dalka dhexdiisa?",
+    "options": [
+      "Inuu difaaco danaha dawladda uun",
+      "Inuu xalliyo khilaafaadka bulshada si cadaalad ah",
+      "Inuu lacag ka qaado dadka",
+      "Inuu bedelo go'aamada madaxweynaha markasta"
+    ],
+    "correct": "Inuu xalliyo khilaafaadka bulshada si cadaalad ah"
+  },
+  {
+    "question": "Waa maxay shaqada ugu weyn ee unugyada dhiigga cad (White Blood Cells) ee ku dhex jira jirka bini-aadamka?",
+    "options": [
+      "Inay oksijiinta geeyaan unugyada",
+      "Inay la dhashaan oo ay iska caabiyaan jimmiga",
+      "Inay dhiigga joojiyaan marka la dhaawacmo",
+      "Inay jidhka siiyaan midabka maqaarka"
+    ],
+    "correct": "Inay la dhashaan oo ay iska caabiyaan jimmiga"
+  },
+  {
+    "question": "Dhaqanka Soomaalida, maxaa loo yaqaanaa caanaha dhowrka maalmood la ruxayay ee dhanaan, ee weelka dhiisha lagu keydiyo?",
+    "options": [
+      "Garoor",
+      "Suusa",
+      "Ciir",
+      "Dhanyar"
+    ],
+    "correct": "Ciir"
+  },
+  {
+    "question": "Sultan Suleiman 'The Magnificent' maxaa loogu yeeri jiray taariikhda dhexdeeda sababo la xiriira xeerarkii uu dajiyay?",
+    "options": [
+      "Kanuni",
+      "Fatih",
+      "Yavuz",
+      "Gazi"
+    ],
+    "correct": "Kanuni"
+  },
+  {
+    "question": "Maxaa loo yaqaanaa hab-dhaqanka Soomaalida ee ah in qof dhibaataysan ama xoolo beelay lagu caawiyo xoolo nool?",
+    "options": [
+      "Qaaran",
+      "Irmaan",
+      "Xoolo-guri",
+      "Xoolo-goyn"
+    ],
+    "correct": "Qaaran"
+  },
+  {
+    "question": "Xubintee ka mid ah jidhka bini-aadamka ayaa soo saarta dheecaanka 'Bile' ee caawiya dhalaalinta dufanka?",
+    "options": [
+      "Caloosha",
+      "Pankereaska",
+      "Beerka",
+      "Kelyaha"
+    ],
+    "correct": "Beerka"
+  },
+  {
+    "question": "Waa maxay faa'iidada dhaqaale ee ugu weyn ee ay leedahay in dalku yeesho deked caalami ah oo nidaamsan?",
+    "options": [
+      "In kalluunka oo dhan halkaas lagu cuno",
+      "Inay fududayso dhoofinta iyo soo dejinta badeecadaha",
+      "Inay dadka deegaanka u noqoto meel lagu dabaasho",
+      "Inay dawladdu canshuur ka qaaddo doonyaha yaryar"
+    ],
+    "correct": "Inay fududayso dhoofinta iyo soo dejinta badeecadaha"
+  },
+  {
+    "question": "Maahmaahda Soomaaliyeed ee ka hadasha aqoonta waxay tirahdaa: 'Aqooon la'aan waa ______'. Maxaa ka dhiman?",
+    "options": [
+      "Iftiin la'aan",
+      "Hanti la'aan",
+      "Guri la'aan",
+      "Arag la'aan"
+    ],
+    "correct": "Arag la'aan"
+  },
+  {
+    "question": "Sannadkee ayay guuldaraysatay go'doomintii labaad ee Khilafadii Cusmaaniyiintu ku qaadeen magaalada Vienna ee dalka Austria?",
+    "options": [
+      "1453",
+      "1529",
+      "1683",
+      "1789"
+    ],
+    "correct": "1683"
+  },
+  {
+    "question": "Maxaa sababa cudurka duumada (Malaria) ee ku dhaca bini-aadamka?",
+    "options": [
+      "Biyo wasakh ah oo la cabo",
+      "Kuddo ama dulin uu gudbiyo kaneecada dhedig",
+      "Cunista hilib aan bislaan",
+      "Fadhiisiga qorraxda muddo deer"
+    ],
+    "correct": "Kuddo ama dulin uu gudbiyo kaneecada dhedig"
+  },
+  {
+    "question": "Dhaqanka iyo hiddaha Soomaalida, maxaa loo yaqaanaa qalabka ka samaysan hargaha ee raga reer miyiga ah ku qaataan biyaha?",
+    "options": [
+      "Dhiil",
+      "Sibraar",
+      "Haan",
+      "Barkimo"
+    ],
+    "correct": "Sibraar"
+  },
+  {
+    "question": "Kumaa ahaa geesigii Soomaaliyeed ee hoggaaminayay dhalinyaradii u halgantay xorriyadda dalka ee SYL sannadkii 1943?",
+    "options": [
+      "Cabdullaahi Ciise Maxamud",
+      "Aadan Cabdulle Cusmaan",
+      "Yaasiin Xaji Cusmaan",
+      "Maxamed Cabdille Xasan"
+    ],
+    "correct": "Yaasiin Xaji Cusmaan"
+  },
+  {
+    "question": "Suradii ugu dambaysay ee lagu soo dejiyo Quraanka Kariimka ah iyadoo dhammaystiran waxay ahayd?",
+    "options": [
+      "An-Nas",
+      "Al-Ma'idah",
+      "Al-Nasr",
+      "Al-Ikhlas"
+    ],
+    "correct": "Al-Nasr"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Xalaal dhuux'?",
+    "options": [
+      "Qamaan Bulxan",
+      "Salaan Carrabay",
+      "Sayid Maxamed Cabdille Xasan",
+      "Ismaaciil Mire"
+    ],
+    "correct": "Qamaan Bulxan"
+  },
+  {
+    "question": "Xubintee ka mid ah jidhka bini-aadamka ayaa u qaabilsan sifaynta dhiigga iyo ka saarista wasakhda dareeraha ah?",
+    "options": [
+      "Beerka",
+      "Kelyaha",
+      "Sanbabada",
+      "Caloosha"
+    ],
+    "correct": "Kelyaha"
+  },
+  {
+    "question": "Waa maxay fitamiinka uu jirku si dabiici ah u samaysan karo marka uu qofku u dhawaado iftiinka qorraxda subaxdii?",
+    "options": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin D",
+      "Vitamin B12"
+    ],
+    "correct": "Vitamin D"
+  },
+  {
+    "question": "Sannadkee ayay si rasmi ah u dhalatay dawladdii ugu horraysey ee Soomaaliyeed ee xor ah, yeelatana calan?",
+    "options": [
+      "1954",
+      "1960",
+      "1969",
+      "1977"
+    ],
+    "correct": "1960"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii caanka ahaa ee 'Guunyo' ee kaga hadlayay qiimaha geela?",
+    "options": [
+      "Ismaaciil Mire",
+      "Sayid Maxamed Cabdille Xasan",
+      "Xaaji Aadan Af-qallooc",
+      "Qamaan Bulxan"
+    ],
+    "correct": "Ismaaciil Mire"
+  },
+  {
+    "question": "Dagaalkii u dhexeeyey Muslimiinta iyo reer Faaris ee uu ku shahiiday saabiigii weynaa ee Rustam lagu dilay wuxuu ahaa?",
+    "options": [
+      "Al-Qadisiyyah",
+      "Yarmouk",
+      "Nahrawan",
+      "Badr"
+    ],
+    "correct": "Al-Qadisiyyah"
+  },
+  {
+    "question": "Waa maxay ujeedada rasmiga ah ee loo sameeyo 'Baasaboorka' muwaidinka?",
+    "options": [
+      "In qofka loogu aqoonsado inuu yahay taajir",
+      "Inuu u noqdo aqoonsi sharci ah oo caalami ah marka uu safrayo",
+      "In lagu koontaroolo lacagaha qofka u soo xarooda",
+      "In qof kasta lagu qasbo inuu dalka ka baxo"
+    ],
+    "correct": "Inuu u noqdo aqoonsi sharci ah oo caalami ah marka uu safrayo"
+  },
+  {
+    "question": "Waa maxay fitamiinka inta badan laga helo khudaarta dhanaan sida liinta, kaas oo caawiya difaaca jirka?",
+    "options": [
+      "Vitamin A",
+      "Vitamin D",
+      "Vitamin C",
+      "Vitamin E"
+    ],
+    "correct": "Vitamin C"
+  },
+  {
+    "question": "Kumaa ahaa reer-galbeedkii u horreeyey ee helay ilbiriqsiga webiga Nile ee agagaarka harada Victoria?",
+    "options": [
+      "John Hanning Speke",
+      "Richard Burton",
+      "David Livingstone",
+      "Henry Morton Stanley"
+    ],
+    "correct": "John Hanning Speke"
+  },
+  {
+    "question": "Maxaa loola jeedaa ereyga dhaqanka Soomaalida ee 'Xilo' ama 'Xoolo xilo'?",
+    "options": [
+      "Geela laguu guuriyo",
+      "Dumarka sharafta leh ee guriga maamula",
+      "Riyaha iyo idaha yaryar",
+      "Qalabka guriga lagu qurxiyo"
+    ],
+    "correct": "Dumarka sharafta leh ee guriga maamula"
+  },
+  {
+    "question": "Sannadkee ayay dhacday dhimashadii caanka ahayd ee hogaamiyihii Khilafadii Cusmaaniyiinta ee Sultan Suleiman the Magnificent?",
+    "options": [
+      "1520",
+      "1566",
+      "1599",
+      "1623"
+    ],
+    "correct": "1566"
+  },
+  {
+    "question": "Waa ku bamaad kee kii tiriyay gabaygii wadaniyada ahaa ee 'Kani waa kii dhabsee kor u qaada calanka'?",
+    "options": [
+      "Cabdillaahi Suldaan Timacadde",
+      "Maxamed Ibraahim Warsame (Hadraawi)",
+      "Cali Sugulle Duniyo",
+      "Abwaan Cabdi Galayax"
+    ],
+    "correct": "Cabdillaahi Suldaan Timacadde"
+  },
+  {
+    "question": "Xubintee ka mid ah hab-dhiska dheef-shiidka ayaa u qaabilsan nuugista nafaqada raashinka ee ugu muhiimsan?",
+    "options": [
+      "Caloosha weyn",
+      "Mindhicirka yar",
+      "Xameetida",
+      "Hunguriga"
+    ],
+    "correct": "Mindhicirka yar"
+  },
+  {
+    "question": "Kumaa ahaa madaxweynihii ugu horreeyay ee rasmiga ah ee ay yeelato Jamhuuriyadda Soomaaliya sannadkii 1960?",
+    "options": [
+      "Aadan Cabdulle Cusmaan",
+      "Cabdirashiid Cali Sharmaarke",
+      "Maxamed Siyaad Barre",
+      "Cabdillaahi Ciise Maxamuud"
+    ],
+    "correct": "Aadan Cabdulle Cusmaan"
+  },
+  {
+    "question": "Maahmaahda Soomaaliyeed ee dhiiri-gelisa shaqada waxay tirahdaa: 'Nin aan shaqaysan ______'. Maxaa ka dhiman?",
+    "options": [
+      "Ma dhargo",
+      "Ma sheekaysan karo",
+      "Shaahi ma cabo",
+      "Guri ma dhisto"
+    ],
+    "correct": "Ma sheekaysan karo"
   }
 ]
