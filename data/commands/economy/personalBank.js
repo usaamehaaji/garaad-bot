@@ -5,6 +5,7 @@ const { createPersonalBank, addTx, hashPass, getAllPublicBanks } = require('../.
 
 const PUB_EXPIRY_MS = 14 * 24 * 60 * 60 * 1000;
 const { checkRequirements, reqFailMessage } = require('../../../src/utils/requirements');
+const { getDisplayName } = require('../../../src/utils/helpers');
 
 const PROFIT_RATE     = 0.02;
 const PROFIT_INTERVAL = 24 * 60 * 60 * 1000;
@@ -53,6 +54,7 @@ function bankViewRow(userId) {
 async function bankCreateCmd(message) {
     checkEconUser(message.author.id);
     const ec = econData[message.author.id];
+    const ownerDisplayName = await getDisplayName(message.client, message.guild, message.author.id, message.author);
     if (ec.personalBank)
         return message.reply(`🏦 Bank account horay baad u lahayd! ID: \`${ec.personalBank.bankId}\` — \`?bv\` si aad u aragto.`);
 
@@ -64,7 +66,7 @@ async function bankCreateCmd(message) {
     return message.reply(
         `✅ **Bank account la abuuray!**\n\n` +
         `🏦 **Bank ID:** \`${bank.bankId}\`\n` +
-        `👤 **Owner:** ${message.author.username}\n\n` +
+        `👤 **Owner:** ${ownerDisplayName}\n\n` +
         `📌 Password dhig: \`?bp <password>\`\n` +
         `📌 Bangigaaga arag: \`?bv\``
     );
@@ -387,8 +389,9 @@ async function jbCmd(message) {
     }
     if (!persBank && !deposits.length) desc += `\n_Wax bank ah kuma dhigin._`;
 
+    const viewerName = await getDisplayName(message.client, message.guild, message.author.id, message.author);
     return message.reply({ embeds: [new EmbedBuilder()
-        .setTitle(`💰 ${message.author.username} — Bank Balances`)
+        .setTitle(`💰 ${viewerName} — Bank Balances`)
         .setColor('#2ecc71')
         .setDescription(desc)
     ]});
