@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
-const { fmt } = require('../../../src/utils/helpers');
+const { fmt, getDisplayName } = require('../../../src/utils/helpers');
 
 const ASSET_LABELS = { btc: '₿ BTC', gold: '🥇 Gold' };
 
@@ -95,10 +95,13 @@ module.exports = async function giveCmd(message, args) {
     receiver[asset] = (receiver[asset] || 0) + amount;
     saveEcon();
 
+    const senderName   = await getDisplayName(message.client, message.guild, userId, message.author);
+    const receiverName = await getDisplayName(message.client, message.guild, target.id, target);
+
     return message.reply({ embeds: [new EmbedBuilder()
         .setTitle('💸 Lacagta Waa La Diray!')
         .setColor('#2ecc71')
-        .setDescription(`**${message.author.username}** → **${target.username}**`)
+        .setDescription(`**${senderName}** → **${receiverName}**`)
         .addFields(
             { name: '💰 Lacagta',        value: `**${fmt(amount)} ${ASSET_LABELS[asset]}**`,     inline: true },
             { name: '👛 Wallet-kaaga',   value: `**${fmt(sender[asset])} ${ASSET_LABELS[asset]}**`,   inline: true },
