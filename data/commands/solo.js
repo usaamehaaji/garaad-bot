@@ -33,12 +33,12 @@ function soloIntroEmbed() {
         .setTitle('📘 Macallin — Solo')
         .setDescription(
             '**Sida loo ciyaaro:**\n' +
-            '• Jawaab **sax** ah → **dhibcood + 10 BTC** 💰\n' +
-            '• Jawaab **qalad** ama **waqti dhammaaday** → **−1 IQ** + **10 BTC** (waqti awgeed)\n' +
-            '• Dhibcahaagu **≥ 80** yihiin game dhammaadkiisa → **IQ heli** ✅\n' +
-            '• Dhibcahaagu **< 80** yihiin → IQ laguma siin (waxaad helaa BTC kaliya)\n\n' +
+            '• Jawaab **sax** ah - **dhibcood + 10 BTC** 💰\n' +
+            '• Jawaab **qalad** ama **waqti dhammaaday** - **−1 IQ** + **10 BTC** (waqti awgeed)\n' +
+            '• Dhibcahaagu **≥ 80** yahay game dhammaadkiisa - **IQ heli** ✅\n' +
+            '• Dhibcahaagu **< 80** yahay - IQ laguma siin (waxaad heshaa BTC kaliya)\n\n' +
             '**90%+ sax** = 🌟 Aad u fiican! | **80-89%** = ✨ Wanaagsan!\n\n' +
-            'Dhammaan su'aalaha marka aad aragto → game si toos ah ayuu dib u bilaabmaa, laakiin IQ ma heli doontid.'
+            'Markaad jawaabto dhammaan su\'aalooyinka, ciyaarta si otomaatig ah ayay dib u bilaabataa, laakiin IQ lama siin doono.'
         )
         .setColor('#3498db');
 }
