@@ -1,1 +1,992 @@
-[{"id":1199,"question":"Martin Luther King goorma ayaa la dilay?","options":["1968","1965","1963","1970"],"correct":"1968","category":"taariikhda"},{"id":451,"question":"Surah An-Nuur waxay leedahay immisa aayad?","options":["40","78","78","64"],"correct":"64","category":"diinta"},{"id":987,"question":"Af-Ingiriisiga \"Dabayl\" waxaa la yiraahdaa?","options":["Desert","Cat","Wind","Elephant"],"correct":"Wind","category":"luqadda"},{"id":567,"question":"Surah Al-Infitaar waxay leedahay immisa aayad?","options":["22","19","111","3"],"correct":"19","category":"diinta"},{"id":690,"question":"Calaamadda kimikada \"Be\" waxay u taagan tahay?","options":["Nickel","Beryllium","Silicon","Uranium"],"correct":"Beryllium","category":"sayniska"},{"id":1186,"question":"Dagaalkii Adduunka ee 2aad goorma ayuu bilowday?","options":["1939","1940","1938","1941"],"correct":"1939","category":"taariikhda"},{"id":350,"question":"Caasimadda Dublin waxay ku taallaa wadanka?","options":["Libya","Zimbabwe","Ireland","Kuuba"],"correct":"Ireland","category":"juqraafi"},{"id":478,"question":"Surah As-Saaffaat waa surahda aad ee Qur'aanka?","options":["86","13","96","37"],"correct":"37","category":"diinta"},{"id":885,"question":"Af-Ingiriisiga \"Awoowe\" waxaa la yiraahdaa?","options":["Grandfather","Father","Sea","Cow"],"correct":"Grandfather","category":"luqadda"},{"id":605,"question":"Surah Al-Qaari'a waxay leedahay immisa aayad?","options":["11","75","3","42"],"correct":"11","category":"diinta"},{"id":176,"question":"Caasimadda Sucre waxay ku taallaa wadanka?","options":["Hindiya","Bolivia","Fiilibiin","Shiinaha"],"correct":"Bolivia","category":"juqraafi"},{"id":1191,"question":"USSR goorma ayay kala baraysa?","options":["1991","1989","1992","1993"],"correct":"1991","category":"taariikhda"},{"id":217,"question":"Magaalada caasimadda Malaiziya waa?","options":["Helsinki","Kuala Lumpur","Seoul","Niamey"],"correct":"Kuala Lumpur","category":"juqraafi"},{"id":693,"question":"Lambarka atomiga Boron (B) waa?","options":["47","30","5","13"],"correct":"5","category":"sayniska"},{"id":958,"question":"Af-Soomaaliga \"Cat\" waxaa la yiraahdaa?","options":["Socodsii","Kabo","Bisad","Cagaar"],"correct":"Bisad","category":"luqadda"},{"id":154,"question":"Magaalada caasimadda Birasiil waa?","options":["Buenos Aires","Bamako","Brasília","Yaoundé"],"correct":"Brasília","category":"juqraafi"},{"id":1064,"question":"Af-Soomaaliga \"Sad\" waxaa la yiraahdaa?","options":["Murugo","Labaatan","Guri","Dugsi"],"correct":"Murugo","category":"luqadda"},{"id":619,"question":"Surah Al-Kawthar waxay leedahay immisa aayad?","options":["25","64","3","118"],"correct":"3","category":"diinta"},{"id":898,"question":"Af-Soomaaliga \"Red\" waxaa la yiraahdaa?","options":["Siddeed","Cas","Akhri","Biyo"],"correct":"Cas","category":"luqadda"},{"id":937,"question":"Af-Ingiriisiga \"Labaatan\" waxaa la yiraahdaa?","options":["Paper","Twenty","Yellow","Speak"],"correct":"Twenty","category":"luqadda"},{"id":901,"question":"Af-Ingiriisiga \"Buluug\" waxaa la yiraahdaa?","options":["Run","Fever","Bad","Blue"],"correct":"Blue","category":"luqadda"},{"id":1200,"question":"Boqortooyadii Cusmaaniyiinta goorma ayay dhammaatay?","options":["1922","1918","1924","1920"],"correct":"1922","category":"taariikhda"},{"id":453,"question":"Surah Al-Furqaan waxay leedahay immisa aayad?","options":["19","88","60","77"],"correct":"77","category":"diinta"},{"id":260,"question":"Caasimadda Damascus waxay ku taallaa wadanka?","options":["Maroko","Suuriya","Senegal","Jarmalka"],"correct":"Suuriya","category":"juqraafi"},{"id":362,"question":"Caasimadda Port Moresby waxay ku taallaa wadanka?","options":["Malaiziya","Papua New Guinea","Bulgaria","Togo"],"correct":"Papua New Guinea","category":"juqraafi"},{"id":86,"question":"Caasimadda Niamey waxay ku taallaa wadanka?","options":["Benin","Haiti","Beruuh","Niger"],"correct":"Niger","category":"juqraafi"},{"id":1180,"question":"Maxamed Siyaad Barre goorma ayuu xilka ka tegay?","options":["1991","1989","1993","1987"],"correct":"1991","category":"taariikhda"},{"id":324,"question":"Wadanka Bolaan ku yaalaa xaddiga?","options":["Aasiya","Waqooyi Amerika","Yurub","Oceania"],"correct":"Yurub","category":"juqraafi"},{"id":1142,"question":"Af-Soomaaliga \"Ship\" waxaa la yiraahdaa?","options":["Markab","Samir","Bukaan","Walaal dheddig"],"correct":"Markab","category":"luqadda"},{"id":975,"question":"Af-Ingiriisiga \"Webi\" waxaa la yiraahdaa?","options":["Monkey","Six","Fever","River"],"correct":"River","category":"luqadda"},{"id":247,"question":"Magaalada caasimadda Cumaan waa?","options":["Warsaw","Luanda","Buenos Aires","Muscat"],"correct":"Muscat","category":"juqraafi"},{"id":579,"question":"Surah Al-Gaashiya waxay leedahay immisa aayad?","options":["8","28","26","22"],"correct":"26","category":"diinta"},{"id":702,"question":"Calaamadda kimikada \"Ne\" waxay u taagan tahay?","options":["Calcium","Magnesium","Hydrogen","Neon"],"correct":"Neon","category":"sayniska"},{"id":531,"question":"Surah At-Tagaabun waxay leedahay immisa aayad?","options":["5","78","18","8"],"correct":"18","category":"diinta"},{"id":140,"question":"Caasimadda Tegucigalpa waxay ku taallaa wadanka?","options":["Honduras","Jazaa'ir","Liberia","Pakistaan"],"correct":"Honduras","category":"juqraafi"},{"id":418,"question":"Surah Al-A'araaf waa surahda aad ee Qur'aanka?","options":["7","18","23","22"],"correct":"7","category":"diinta"},{"id":767,"question":"Ballon d'Or ugu badan yaa qaatay (taariikhda)?","options":["Lionel Messi","Cristiano Ronaldo","Ronaldinho","Zinedine Zidane"],"correct":"Lionel Messi","category":"ciyaaraha"},{"id":111,"question":"Wadanka Congo ku yaalaa xaddiga?","options":["Afrika","Oceania","Koonfur Amerika","Yurub"],"correct":"Afrika","category":"juqraafi"},{"id":1017,"question":"Af-Ingiriisiga \"Sii\" waxaa la yiraahdaa?","options":["Lion","Hundred","Good","Give"],"correct":"Give","category":"luqadda"},{"id":645,"question":"Nabiga \"Fircoon la tacaalay\" yaa uu ahaa?","options":["Muxammad","Haaruun","Muusa","Yacquub"],"correct":"Muusa","category":"diinta"},{"id":905,"question":"Af-Ingiriisiga \"Jaalle\" waxaa la yiraahdaa?","options":["Foot","Yellow","Horse","Patience"],"correct":"Yellow","category":"luqadda"},{"id":1019,"question":"Af-Ingiriisiga \"Qaado\" waxaa la yiraahdaa?","options":["Grandmother","Today","Science","Take"],"correct":"Take","category":"luqadda"},{"id":153,"question":"Wadanka Dominican Republic ku yaalaa xaddiga?","options":["Yurub","Oceania","Aasiya","Waqooyi Amerika"],"correct":"Waqooyi Amerika","category":"juqraafi"},{"id":822,"question":"Af-Soomaaliga \"Book\" waxaa la yiraahdaa?","options":["Maanta","Faraxsan","Buug","Buluug"],"correct":"Buug","category":"luqadda"},{"id":647,"question":"Nabiga \"Jeefka Jaaluud\" yaa uu ahaa?","options":["Is-xaaq","Daa'uud","Yuusuf","Idriis"],"correct":"Daa'uud","category":"diinta"},{"id":1195,"question":"Dalxiiska Moon ee koowaad goorma ayuu dhacay?","options":["1969","1968","1970","1967"],"correct":"1969","category":"taariikhda"},{"id":309,"question":"Wadanka Beljiyam ku yaalaa xaddiga?","options":["Koonfur Amerika","Aasiya","Waqooyi Amerika","Yurub"],"correct":"Yurub","category":"juqraafi"},{"id":734,"question":"Calaamadda kimikada \"Pb\" waxay u taagan tahay?","options":["Silver","Potassium","Phosphorus","Lead"],"correct":"Lead","category":"sayniska"},{"id":57,"question":"Wadanka Angola ku yaalaa xaddiga?","options":["Aasiya","Afrika","Koonfur Amerika","Oceania"],"correct":"Afrika","category":"juqraafi"},{"id":791,"question":"Cricket wuxuu aad ugu caansan yahay wadanka?","options":["India","England","Australia","South Africa"],"correct":"India","category":"ciyaaraha"},{"id":160,"question":"Magaalada caasimadda Koolombia waa?","options":["Kyiv","Moscow","Santiago","Bogotá"],"correct":"Bogotá","category":"juqraafi"},{"id":881,"question":"Af-Ingiriisiga \"Wiil\" waxaa la yiraahdaa?","options":["Son","Forest","Speak","Win"],"correct":"Son","category":"luqadda"},{"id":660,"question":"Ramadaan waa bisha aad ee sannadka?","options":["9aad","8aad","10aad","7aad"],"correct":"9aad","category":"diinta"},{"id":315,"question":"Wadanka Noorweeka ku yaalaa xaddiga?","options":["Waqooyi Amerika","Yurub","Koonfur Amerika","Aasiya"],"correct":"Yurub","category":"juqraafi"},{"id":228,"question":"Wadanka Iiraan ku yaalaa xaddiga?","options":["Yurub","Waqooyi Amerika","Oceania","Aasiya"],"correct":"Aasiya","category":"juqraafi"},{"id":795,"question":"Olombikada 2028 magaaladeey ku dhacday doontaa?","options":["Los Angeles","Brisbane","Paris","Rome"],"correct":"Los Angeles","category":"ciyaaraha"},{"id":1169,"question":"Af-Ingiriisiga \"Farax\" waxaa la yiraahdaa?","options":["Joy","Give","Hope","Now"],"correct":"Joy","category":"luqadda"},{"id":578,"question":"Surah Al-A'laa waa surahda aad ee Qur'aanka?","options":["9","87","2","65"],"correct":"87","category":"diinta"},{"id":279,"question":"Wadanka Armaniya ku yaalaa xaddiga?","options":["Oceania","Aasiya","Waqooyi Amerika","Afrika"],"correct":"Aasiya","category":"juqraafi"},{"id":657,"question":"Islaamka tiirka 4aad waa?","options":["Siyaamka","Zakadda","Xajka","Salaadda"],"correct":"Siyaamka","category":"diinta"},{"id":481,"question":"Surah Az-Zumar waxay leedahay immisa aayad?","options":["75","5","12","176"],"correct":"75","category":"diinta"},{"id":524,"question":"Surah Al-Mumtaxana waa surahda aad ee Qur'aanka?","options":["97","17","51","60"],"correct":"60","category":"diinta"},{"id":461,"question":"Surah Al-'Ankabuut waxay leedahay immisa aayad?","options":["8","54","69","8"],"correct":"69","category":"diinta"},{"id":1204,"question":"Boqortooyadii Ajuuraan xilligeedii waxay ahayd?","options":["1300-1700 CE","1100-1400 CE","1500-1800 CE","1000-1300 CE"],"correct":"1300-1700 CE","category":"taariikhda"},{"id":1154,"question":"Af-Soomaaliga \"Shoes\" waxaa la yiraahdaa?","options":["Kabo","Lo","Yar","Qaado"],"correct":"Kabo","category":"luqadda"},{"id":19,"question":"Magaalada caasimadda Gana waa?","options":["Nairobi","Kabul","Accra","Manila"],"correct":"Accra","category":"juqraafi"},{"id":1075,"question":"Af-Ingiriisiga \"Subax\" waxaa la yiraahdaa?","options":["Rich","Snake","Ship","Morning"],"correct":"Morning","category":"luqadda"},{"id":319,"question":"Magaalada caasimadda Findland waa?","options":["Havana","Baghdad","Harare","Helsinki"],"correct":"Helsinki","category":"juqraafi"},{"id":13,"question":"Magaalada caasimadda Nijayriya waa?","options":["Manama","Suva","Abuja","Caracas"],"correct":"Abuja","category":"juqraafi"},{"id":970,"question":"Af-Soomaaliga \"Giraffe\" waxaa la yiraahdaa?","options":["Geri","Qurux badan","Doon","Afar"],"correct":"Geri","category":"luqadda"},{"id":407,"question":"Surah Al-Baqara waxay leedahay immisa aayad?","options":["75","9","286","96"],"correct":"286","category":"diinta"},{"id":197,"question":"Caasimadda Pyongyang waxay ku taallaa wadanka?","options":["Nijayriya","Congo","Kameruun","Kuuriyada Waqooyi"],"correct":"Kuuriyada Waqooyi","category":"juqraafi"},{"id":327,"question":"Wadanka Ukrayn ku yaalaa xaddiga?","options":["Yurub","Waqooyi Amerika","Aasiya","Oceania"],"correct":"Yurub","category":"juqraafi"},{"id":152,"question":"Caasimadda Santo Domingo waxay ku taallaa wadanka?","options":["Rwanda","Siri Lanka","Dominican Republic","Indonesiiya"],"correct":"Dominican Republic","category":"juqraafi"},{"id":329,"question":"Caasimadda Bucharest waxay ku taallaa wadanka?","options":["Guatemala","Faransiiska","Malawi","Romaaniya"],"correct":"Romaaniya","category":"juqraafi"},{"id":687,"question":"Lambarka atomiga Helium (He) waa?","options":["78","47","18","2"],"correct":"2","category":"sayniska"},{"id":559,"question":"Surah An-Naba waxay leedahay immisa aayad?","options":["21","20","11","40"],"correct":"40","category":"diinta"},{"id":230,"question":"Caasimadda Baghdad waxay ku taallaa wadanka?","options":["Ciraaq","Danmaark","Kuweyt","Dominican Republic"],"correct":"Ciraaq","category":"juqraafi"},{"id":163,"question":"Magaalada caasimadda Chile waa?","options":["Quito","Reykjavík","Baku","Santiago"],"correct":"Santiago","category":"juqraafi"},{"id":553,"question":"Surah Al-Qiyaama waxay leedahay immisa aayad?","options":["129","40","44","98"],"correct":"40","category":"diinta"},{"id":1202,"question":"Napoleon Bonaparte waddankuu ka soo jeedaa?","options":["Faransiiska","Ingiriiska","Jarmalka","Talyaaniga"],"correct":"Faransiiska","category":"taariikhda"},{"id":923,"question":"Af-Ingiriisiga \"Afar\" waxaa la yiraahdaa?","options":["Love","Study","Four","Brain"],"correct":"Four","category":"luqadda"},{"id":1174,"question":"Af-Soomaaliga \"Courage\" waxaa la yiraahdaa?","options":["Geesinimo","Seexo","Ciddi","Faraxsan"],"correct":"Geesinimo","category":"luqadda"},{"id":305,"question":"Caasimadda Amsterdam waxay ku taallaa wadanka?","options":["Niderlaandka","Sierra Leone","Ciraaq","Hungary"],"correct":"Niderlaandka","category":"juqraafi"},{"id":523,"question":"Surah Al-Mumtaxana waxay leedahay immisa aayad?","options":["13","6","53","3"],"correct":"13","category":"diinta"},{"id":1124,"question":"Af-Soomaaliga \"Test\" waxaa la yiraahdaa?","options":["Imtixaan","Gaaban","Kaalay","Cad"],"correct":"Imtixaan","category":"luqadda"},{"id":1040,"question":"Af-Soomaaliga \"Short\" waxaa la yiraahdaa?","options":["Garoonka diyaaradaha","Bariis","Gaaban","Samaa"],"correct":"Gaaban","category":"luqadda"},{"id":318,"question":"Wadanka Danmaark ku yaalaa xaddiga?","options":["Yurub","Afrika","Aasiya","Oceania"],"correct":"Yurub","category":"juqraafi"},{"id":929,"question":"Af-Ingiriisiga \"Toddoba\" waxaa la yiraahdaa?","options":["Seven","Giraffe","Rain","Hand"],"correct":"Seven","category":"luqadda"},{"id":807,"question":"Af-Ingiriisiga \"Dhul\" waxaa la yiraahdaa?","options":["Science","Earth","Eight","Nose"],"correct":"Earth","category":"luqadda"},{"id":505,"question":"Surah Adh-Dhaariyaat waxay leedahay immisa aayad?","options":["3","60","40","227"],"correct":"60","category":"diinta"},{"id":88,"question":"Magaalada caasimadda Chad waa?","options":["N'Djamena","Accra","Rome","Riyadh"],"correct":"N'Djamena","category":"juqraafi"},{"id":243,"question":"Wadanka Kuweyt ku yaalaa xaddiga?","options":["Aasiya","Koonfur Amerika","Yurub","Afrika"],"correct":"Aasiya","category":"juqraafi"},{"id":379,"question":"Magaalada xarunta gobolka Shabeellaha Hoose waa?","options":["Garoowe","Marka","Garbahaarrey","Boosaaso"],"correct":"Marka","category":"juqraafi"},{"id":1138,"question":"Af-Soomaaliga \"Pain\" waxaa la yiraahdaa?","options":["Basal","Doon","Xanuun","Kabo"],"correct":"Xanuun","category":"luqadda"},{"id":203,"question":"Caasimadda Islamabad waxay ku taallaa wadanka?","options":["Eritrea","Yaman","Guinea","Pakistaan"],"correct":"Pakistaan","category":"juqraafi"},{"id":1042,"question":"Af-Soomaaliga \"Hot\" waxaa la yiraahdaa?","options":["Samaa","Caafimaad","Kulul","Dameer"],"correct":"Kulul","category":"luqadda"},{"id":234,"question":"Wadanka Sacuudi Carabiya ku yaalaa xaddiga?","options":["Aasiya","Koonfur Amerika","Afrika","Waqooyi Amerika"],"correct":"Aasiya","category":"juqraafi"},{"id":814,"question":"Af-Soomaaliga \"Star\" waxaa la yiraahdaa?","options":["Cab","Faras","Doon","Xiddig"],"correct":"Xiddig","category":"luqadda"},{"id":952,"question":"Af-Soomaaliga \"Goat\" waxaa la yiraahdaa?","options":["Oraanj","Ido","Hooyo","Weyn"],"correct":"Ido","category":"luqadda"},{"id":846,"question":"Af-Soomaaliga \"Head\" waxaa la yiraahdaa?","options":["Geed","Suuq","Madax","Maktabad"],"correct":"Madax","category":"luqadda"},{"id":257,"question":"Caasimadda Beirut waxay ku taallaa wadanka?","options":["Lubnaan","Congo","Fiilibiin","Cumaan"],"correct":"Lubnaan","category":"juqraafi"},{"id":1041,"question":"Af-Ingiriisiga \"Gaaban\" waxaa la yiraahdaa?","options":["Wisdom","Short","Month","Doctor"],"correct":"Short","category":"luqadda"},{"id":1201,"question":"Nelson Mandela waddankuu ka soo jeedaa?","options":["Koonfur Afrika","Zimbabwe","Kenya","Nigeria"],"correct":"Koonfur Afrika","category":"taariikhda"},{"id":922,"question":"Af-Soomaaliga \"Four\" waxaa la yiraahdaa?","options":["Afar","Qaado","Faraxsan","Dhiig"],"correct":"Afar","category":"luqadda"},{"id":904,"question":"Af-Soomaaliga \"Yellow\" waxaa la yiraahdaa?","options":["Miskiin","Sagaal","Rajada","Jaalle"],"correct":"Jaalle","category":"luqadda"},{"id":400,"question":"Magaalada Burco waa xarunta gobolka?","options":["Bay","Awdal","Togdheer","Jubba Dhexe"],"correct":"Togdheer","category":"juqraafi"},{"id":69,"question":"Wadanka Namibia ku yaalaa xaddiga?","options":["Oceania","Yurub","Afrika","Waqooyi Amerika"],"correct":"Afrika","category":"juqraafi"},{"id":1173,"question":"Af-Ingiriisiga \"Samir\" waxaa la yiraahdaa?","options":["Come","Grandfather","Mouth","Patience"],"correct":"Patience","category":"luqadda"},{"id":1022,"question":"Af-Soomaaliga \"Go\" waxaa la yiraahdaa?","options":["Tag","Awoowe","Caawin","Baabuur"],"correct":"Tag","category":"luqadda"},{"id":503,"question":"Surah Qaaf waxay leedahay immisa aayad?","options":["88","12","45","69"],"correct":"45","category":"diinta"},{"id":29,"question":"Caasimadda Rabat waxay ku taallaa wadanka?","options":["Bolaan","Ingiriiska","Burtugaalka","Maroko"],"correct":"Maroko","category":"juqraafi"},{"id":1050,"question":"Af-Soomaaliga \"Good\" waxaa la yiraahdaa?","options":["Caafimaad","Wanaagsan","Arday","Sayniska"],"correct":"Wanaagsan","category":"luqadda"},{"id":1184,"question":"Dagaalkii Adduunka ee 1aad goorma ayuu bilowday?","options":["1914","1915","1916","1913"],"correct":"1914","category":"taariikhda"},{"id":158,"question":"Caasimadda Buenos Aires waxay ku taallaa wadanka?","options":["Suuriya","Imaaraatka","Arjantiina","Koolombia"],"correct":"Arjantiina","category":"juqraafi"},{"id":1190,"question":"Gidaarka Berlin goorma ayuu jabay?","options":["1989","1991","1987","1993"],"correct":"1989","category":"taariikhda"},{"id":250,"question":"Magaalada caasimadda Yaman waa?","options":["Sanaa","Gitega","Kuwait City","Sofia"],"correct":"Sanaa","category":"juqraafi"},{"id":45,"question":"Wadanka Eritrea ku yaalaa xaddiga?","options":["Waqooyi Amerika","Koonfur Amerika","Oceania","Afrika"],"correct":"Afrika","category":"juqraafi"},{"id":864,"question":"Af-Soomaaliga \"Blood\" waxaa la yiraahdaa?","options":["Faraxsan","Saddex","Dhiig","Dameer"],"correct":"Dhiig","category":"luqadda"},{"id":893,"question":"Af-Ingiriisiga \"Nin\" waxaa la yiraahdaa?","options":["Tooth","Husband","White","Fever"],"correct":"Husband","category":"luqadda"},{"id":1024,"question":"Af-Soomaaliga \"Open\" waxaa la yiraahdaa?","options":["Gacmaha","Edde","Fur","Labo"],"correct":"Fur","category":"luqadda"},{"id":587,"question":"Surah Al-Layl waxay leedahay immisa aayad?","options":["36","29","21","45"],"correct":"21","category":"diinta"},{"id":1078,"question":"Af-Soomaaliga \"Week\" waxaa la yiraahdaa?","options":["Isbuuc","Kalluun","Hooyo","Dhiig"],"correct":"Isbuuc","category":"luqadda"},{"id":638,"question":"Nabiga \"Khaliilullaah\" yaa uu ahaa?","options":["Ibraahim","Ismaaciil","Yahya","Is-xaaq"],"correct":"Ibraahim","category":"diinta"},{"id":740,"question":"Calaamadda kimikada \"U\" waxay u taagan tahay?","options":["Sodium","Oxygen","Platinum","Uranium"],"correct":"Uranium","category":"sayniska"},{"id":199,"question":"Magaalada caasimadda Indonesiiya waa?","options":["Jakarta","Yamoussoukro","Gitega","Panama City"],"correct":"Jakarta","category":"juqraafi"},{"id":946,"question":"Af-Soomaaliga \"Camel\" waxaa la yiraahdaa?","options":["Maskax","Wanaagsan","Dhagayso","Geel"],"correct":"Geel","category":"luqadda"},{"id":541,"question":"Surah Al-Xaaqqah waxay leedahay immisa aayad?","options":["52","54","40","11"],"correct":"52","category":"diinta"},{"id":935,"question":"Af-Ingiriisiga \"Toban\" waxaa la yiraahdaa?","options":["Train","Son","Ten","River"],"correct":"Ten","category":"luqadda"},{"id":704,"question":"Calaamadda kimikada \"Na\" waxay u taagan tahay?","options":["Lead","Argon","Neon","Sodium"],"correct":"Sodium","category":"sayniska"},{"id":1127,"question":"Af-Ingiriisiga \"Cilmi\" waxaa la yiraahdaa?","options":["Knowledge","Uncle","Sun","Geography"],"correct":"Knowledge","category":"luqadda"},{"id":22,"question":"Magaalada caasimadda Tanzaniya waa?","options":["Port-au-Prince","Stockholm","Bucharest","Dodoma"],"correct":"Dodoma","category":"juqraafi"},{"id":947,"question":"Af-Ingiriisiga \"Geel\" waxaa la yiraahdaa?","options":["Run","Camel","Wind","Daughter"],"correct":"Camel","category":"luqadda"},{"id":526,"question":"Surah As-Saff waa surahda aad ee Qur'aanka?","options":["98","30","61","92"],"correct":"61","category":"diinta"},{"id":32,"question":"Caasimadda Algiers waxay ku taallaa wadanka?","options":["Kenya","Jazaa'ir","Guinea","Isbaanishka"],"correct":"Jazaa'ir","category":"juqraafi"},{"id":490,"question":"Surah Az-Zukhruf waa surahda aad ee Qur'aanka?","options":["22","12","61","43"],"correct":"43","category":"diinta"},{"id":1116,"question":"Af-Soomaaliga \"Teacher\" waxaa la yiraahdaa?","options":["Diyaarad","Orod","Macalin","Baanka"],"correct":"Macalin","category":"luqadda"},{"id":396,"question":"Magaalada Cerigaavo waa xarunta gobolka?","options":["Sanaag","Hiiraan","Bari","Jubba Dhexe"],"correct":"Sanaag","category":"juqraafi"},{"id":138,"question":"Wadanka Guatemala ku yaalaa xaddiga?","options":["Yurub","Waqooyi Amerika","Afrika","Koonfur Amerika"],"correct":"Waqooyi Amerika","category":"juqraafi"},{"id":44,"question":"Caasimadda Asmara waxay ku taallaa wadanka?","options":["Iiraan","Ukrayn","Fiilibiin","Eritrea"],"correct":"Eritrea","category":"juqraafi"},{"id":843,"question":"Af-Ingiriisiga \"Sonkor\" waxaa la yiraahdaa?","options":["Four","Hospital","Open","Sugar"],"correct":"Sugar","category":"luqadda"},{"id":93,"question":"Wadanka Malagasy ku yaalaa xaddiga?","options":["Aasiya","Oceania","Yurub","Afrika"],"correct":"Afrika","category":"juqraafi"},{"id":180,"question":"Wadanka Paraguay ku yaalaa xaddiga?","options":["Koonfur Amerika","Aasiya","Waqooyi Amerika","Oceania"],"correct":"Koonfur Amerika","category":"juqraafi"},{"id":216,"question":"Wadanka Taaylaand ku yaalaa xaddiga?","options":["Koonfur Amerika","Afrika","Aasiya","Yurub"],"correct":"Aasiya","category":"juqraafi"},{"id":422,"question":"Surah At-Tawba waa surahda aad ee Qur'aanka?","options":["58","15","9","6"],"correct":"9","category":"diinta"},{"id":777,"question":"Koobkii Adduunka 2010 yaa guulaystay?","options":["Spain","Netherlands","Germany","Uruguay"],"correct":"Spain","category":"ciyaaraha"},{"id":955,"question":"Af-Ingiriisiga \"Ari\" waxaa la yiraahdaa?","options":["Sheep","Write","Phone","Donkey"],"correct":"Sheep","category":"luqadda"},{"id":556,"question":"Surah Al-Insaan waa surahda aad ee Qur'aanka?","options":["100","76","57","33"],"correct":"76","category":"diinta"},{"id":1128,"question":"Af-Soomaaliga \"Wisdom\" waxaa la yiraahdaa?","options":["Gacmaha","Gabadh","Toban","Xigmad"],"correct":"Xigmad","category":"luqadda"},{"id":116,"question":"Caasimadda Gitega waxay ku taallaa wadanka?","options":["Burundi","Fenisuweela","Panama","Pakistaan"],"correct":"Burundi","category":"juqraafi"},{"id":195,"question":"Wadanka Kuuriyada Koonfureed ku yaalaa xaddiga?","options":["Koonfur Amerika","Afrika","Yurub","Aasiya"],"correct":"Aasiya","category":"juqraafi"},{"id":721,"question":"Lambarka atomiga Potassium (K) waa?","options":["28","10","17","19"],"correct":"19","category":"sayniska"},{"id":159,"question":"Wadanka Arjantiina ku yaalaa xaddiga?","options":["Afrika","Koonfur Amerika","Waqooyi Amerika","Yurub"],"correct":"Koonfur Amerika","category":"juqraafi"},{"id":853,"question":"Af-Ingiriisiga \"San\" waxaa la yiraahdaa?","options":["Now","Nose","Goat","Leopard"],"correct":"Nose","category":"luqadda"},{"id":794,"question":"Koobkii Adduunka Uruguay goorma ayay qabtay (koowaad)?","options":["1930","1934","1938","1950"],"correct":"1930","category":"ciyaaraha"},{"id":114,"question":"Wadanka Gabon ku yaalaa xaddiga?","options":["Oceania","Yurub","Afrika","Koonfur Amerika"],"correct":"Afrika","category":"juqraafi"},{"id":372,"question":"Magaalada Bu'aale waa xarunta gobolka?","options":["Jubba Dhexe","Togdheer","Bari","Bakool"],"correct":"Jubba Dhexe","category":"juqraafi"},{"id":165,"question":"Wadanka Chile ku yaalaa xaddiga?","options":["Afrika","Oceania","Koonfur Amerika","Aasiya"],"correct":"Koonfur Amerika","category":"juqraafi"},{"id":936,"question":"Af-Soomaaliga \"Twenty\" waxaa la yiraahdaa?","options":["Siddeed","Il","Carrab","Labaatan"],"correct":"Labaatan","category":"luqadda"},{"id":1189,"question":"Nelson Mandela goorma ayuu madaxweyne noqday?","options":["1994","1990","1992","1996"],"correct":"1994","category":"taariikhda"},{"id":788,"question":"FIFA-da xarunteeda xididka waa magaalada?","options":["Zurich","Geneva","Paris","London"],"correct":"Zurich","category":"ciyaaraha"},{"id":1032,"question":"Af-Soomaaliga \"Love\" waxaa la yiraahdaa?","options":["Geel","Jeclaan","Toddoba","Kabo"],"correct":"Jeclaan","category":"luqadda"},{"id":934,"question":"Af-Soomaaliga \"Ten\" waxaa la yiraahdaa?","options":["Faraxsan","Baabuur","Akhri","Toban"],"correct":"Toban","category":"luqadda"},{"id":871,"question":"Af-Ingiriisiga \"Carrab\" waxaa la yiraahdaa?","options":["Tongue","Tomorrow","Wife","Now"],"correct":"Tongue","category":"luqadda"},{"id":636,"question":"Nabiga \"Qurmiga Caad\" yaa uu ahaa?","options":["Ismaaciil","Daa'uud","Huud","Nuux"],"correct":"Huud","category":"diinta"},{"id":994,"question":"Af-Soomaaliga \"Run\" waxaa la yiraahdaa?","options":["Cadho","Orod","Qurux badan","Dugsi"],"correct":"Orod","category":"luqadda"},{"id":574,"question":"Surah Al-Buruuj waa surahda aad ee Qur'aanka?","options":["77","97","85","113"],"correct":"85","category":"diinta"},{"id":820,"question":"Af-Soomaaliga \"Car\" waxaa la yiraahdaa?","options":["Xiddig","Yar","Baabuur","Dawo"],"correct":"Baabuur","category":"luqadda"},{"id":1125,"question":"Af-Ingiriisiga \"Imtixaan\" waxaa la yiraahdaa?","options":["Leopard","Close","Bread","Test"],"correct":"Test","category":"luqadda"},{"id":566,"question":"Surah At-Takwiir waa surahda aad ee Qur'aanka?","options":["81","44","60","17"],"correct":"81","category":"diinta"},{"id":655,"question":"Shahada waa tiirka koowaad. Tiirka 2aad waa?","options":["Salaadda","Zakadda","Siyaamka","Xajka"],"correct":"Salaadda","category":"diinta"},{"id":942,"question":"Af-Soomaaliga \"Lion\" waxaa la yiraahdaa?","options":["Miskiin","Libaax","Bariis","Cagta"],"correct":"Libaax","category":"luqadda"},{"id":1099,"question":"Af-Ingiriisiga \"Hudheel\" waxaa la yiraahdaa?","options":["Bad","Hotel","Train","Car"],"correct":"Hotel","category":"luqadda"},{"id":1203,"question":"Soomaaliya goorma ayay xubin ka noqotay Umadda Midoobay (UN)?","options":["1960","1963","1965","1958"],"correct":"1960","category":"taariikhda"},{"id":395,"question":"Magaalada xarunta gobolka Sanaag waa?","options":["Cerigaavo","Berbera","Baydhabo","Burco"],"correct":"Cerigaavo","category":"juqraafi"},{"id":177,"question":"Wadanka Bolivia ku yaalaa xaddiga?","options":["Aasiya","Koonfur Amerika","Waqooyi Amerika","Afrika"],"correct":"Koonfur Amerika","category":"juqraafi"},{"id":1072,"question":"Af-Soomaaliga \"Night\" waxaa la yiraahdaa?","options":["Dawo","Doon","Habeenkii","Shalay"],"correct":"Habeenkii","category":"luqadda"},{"id":916,"question":"Af-Soomaaliga \"One\" waxaa la yiraahdaa?","options":["Dheer","Kow","Bukaan","Geel"],"correct":"Kow","category":"luqadda"},{"id":221,"question":"Caasimadda Singaboor waxay ku taallaa wadanka?","options":["Bolaan","Jamayka","Singaboor","Suuriya"],"correct":"Singaboor","category":"juqraafi"},{"id":1182,"question":"Somaliland goorma ayay xornimada ku dhawaaqday?","options":["1991","1993","1989","2000"],"correct":"1991","category":"taariikhda"},{"id":825,"question":"Af-Ingiriisiga \"Dugsi\" waxaa la yiraahdaa?","options":["School","Head","Fear","Eat"],"correct":"School","category":"luqadda"},{"id":640,"question":"Nabiga \"Aabaha Carabta\" yaa uu ahaa?","options":["Ibraahim","Huud","Ismaaciil","Sulaymaan"],"correct":"Ismaaciil","category":"diinta"},{"id":328,"question":"Magaalada caasimadda Romaaniya waa?","options":["Guatemala City","Vienna","Bucharest","Lilongwe"],"correct":"Bucharest","category":"juqraafi"},{"id":818,"question":"Af-Soomaaliga \"House\" waxaa la yiraahdaa?","options":["Ciid","Buur","Guri","Cagta"],"correct":"Guri","category":"luqadda"},{"id":3,"question":"Wadanka Soomaaliya ku yaalaa xaddiga?","options":["Koonfur Amerika","Afrika","Waqooyi Amerika","Aasiya"],"correct":"Afrika","category":"juqraafi"},{"id":519,"question":"Surah Al-Mujaadila waxay leedahay immisa aayad?","options":["29","22","60","19"],"correct":"22","category":"diinta"},{"id":907,"question":"Af-Ingiriisiga \"Cad\" waxaa la yiraahdaa?","options":["White","Leopard","Fear","Today"],"correct":"White","category":"luqadda"},{"id":632,"question":"Surah An-Naas waa surahda aad ee Qur'aanka?","options":["67","1","114","98"],"correct":"114","category":"diinta"},{"id":338,"question":"Caasimadda Vienna waxay ku taallaa wadanka?","options":["Austria","Awstraaliya","Urdun","Namibia"],"correct":"Austria","category":"juqraafi"},{"id":968,"question":"Af-Soomaaliga \"Donkey\" waxaa la yiraahdaa?","options":["Shaqee","Koofiyad","Bil","Dameer"],"correct":"Dameer","category":"luqadda"},{"id":450,"question":"Surah Al-Mu'minuun waa surahda aad ee Qur'aanka?","options":["30","59","86","23"],"correct":"23","category":"diinta"},{"id":590,"question":"Surah Ad-Duxaa waa surahda aad ee Qur'aanka?","options":["41","21","51","93"],"correct":"93","category":"diinta"},{"id":751,"question":"Kooxda dhiigga la yiraahda \"Universal Donor\" waa?","options":["O-","O+","AB-","AB+"],"correct":"O-","category":"sayniska"},{"id":380,"question":"Magaalada Marka waa xarunta gobolka?","options":["Nugaal","Shabeellaha Hoose","Jubba Dhexe","Hiiraan"],"correct":"Shabeellaha Hoose","category":"juqraafi"},{"id":227,"question":"Caasimadda Tehran waxay ku taallaa wadanka?","options":["Zimbabwe","Maraykanka","Sacuudi Carabiya","Iiraan"],"correct":"Iiraan","category":"juqraafi"},{"id":12,"question":"Wadanka Masar ku yaalaa xaddiga?","options":["Aasiya","Afrika","Koonfur Amerika","Yurub"],"correct":"Afrika","category":"juqraafi"},{"id":1156,"question":"Af-Soomaaliga \"Hat\" waxaa la yiraahdaa?","options":["Ilin","Shalay","Koofiyad","Garoonka diyaaradaha"],"correct":"Koofiyad","category":"luqadda"},{"id":206,"question":"Caasimadda Dhaka waxay ku taallaa wadanka?","options":["Iceland","Dominican Republic","Bangaladesh","Ecuador"],"correct":"Bangaladesh","category":"juqraafi"},{"id":337,"question":"Magaalada caasimadda Austria waa?","options":["Lusaka","Vienna","Kinshasa","Santiago"],"correct":"Vienna","category":"juqraafi"},{"id":653,"question":"Nabiga \"Khaatamul Anbiyaa\" yaa uu ahaa?","options":["Idriis","Yahya","Muxammad","Yacquub"],"correct":"Muxammad","category":"diinta"},{"id":173,"question":"Caasimadda Quito waxay ku taallaa wadanka?","options":["Ecuador","Maraykanka","Kanada","Talyaaniga"],"correct":"Ecuador","category":"juqraafi"},{"id":157,"question":"Magaalada caasimadda Arjantiina waa?","options":["Dakar","Gitega","Buenos Aires","Dhaka"],"correct":"Buenos Aires","category":"juqraafi"},{"id":555,"question":"Surah Al-Insaan waxay leedahay immisa aayad?","options":["25","8","11","31"],"correct":"31","category":"diinta"},{"id":830,"question":"Af-Soomaaliga \"Meat\" waxaa la yiraahdaa?","options":["Hilib","Kun","Lix","Fiid"],"correct":"Hilib","category":"luqadda"},{"id":616,"question":"Surah Quraysh waa surahda aad ee Qur'aanka?","options":["22","106","41","55"],"correct":"106","category":"diinta"},{"id":546,"question":"Surah Nuux waa surahda aad ee Qur'aanka?","options":["91","98","71","81"],"correct":"71","category":"diinta"},{"id":92,"question":"Caasimadda Antananarivo waxay ku taallaa wadanka?","options":["Malagasy","Soomaaliya","Tunis","Ingiriiska"],"correct":"Malagasy","category":"juqraafi"},{"id":576,"question":"Surah At-Taariq waa surahda aad ee Qur'aanka?","options":["92","86","24","101"],"correct":"86","category":"diinta"},{"id":713,"question":"Lambarka atomiga Phosphorus (P) waa?","options":["10","79","20","15"],"correct":"15","category":"sayniska"},{"id":712,"question":"Calaamadda kimikada \"P\" waxay u taagan tahay?","options":["Silicon","Magnesium","Copper","Phosphorus"],"correct":"Phosphorus","category":"sayniska"},{"id":364,"question":"Magaalada caasimadda Fiji waa?","options":["Bogotá","Islamabad","Port-au-Prince","Suva"],"correct":"Suva","category":"juqraafi"},{"id":530,"question":"Surah Al-Munaafiquun waa surahda aad ee Qur'aanka?","options":["36","63","78","92"],"correct":"63","category":"diinta"},{"id":26,"question":"Caasimadda Kampala waxay ku taallaa wadanka?","options":["Tunis","Uganda","Taaylaand","Benin"],"correct":"Uganda","category":"juqraafi"},{"id":667,"question":"Nabiga Muxammad (NNKH) goorma ayuu dhashay?","options":["571 CE","570 CE","572 CE","580 CE"],"correct":"571 CE","category":"diinta"},{"id":516,"question":"Surah Al-Waaqi'a waa surahda aad ee Qur'aanka?","options":["15","54","56","44"],"correct":"56","category":"diinta"},{"id":1053,"question":"Af-Ingiriisiga \"Xun\" waxaa la yiraahdaa?","options":["River","Listen","Bad","Nose"],"correct":"Bad","category":"luqadda"},{"id":366,"question":"Wadanka Fiji ku yaalaa xaddiga?","options":["Waqooyi Amerika","Oceania","Koonfur Amerika","Yurub"],"correct":"Oceania","category":"juqraafi"},{"id":610,"question":"Surah Al-'Asr waa surahda aad ee Qur'aanka?","options":["94","56","103","37"],"correct":"103","category":"diinta"},{"id":378,"question":"Magaalada Xuddur waa xarunta gobolka?","options":["Bari","Mudug","Saaxil","Bakool"],"correct":"Bakool","category":"juqraafi"},{"id":895,"question":"Af-Ingiriisiga \"Xaas\" waxaa la yiraahdaa?","options":["Wife","Mosque","Close","Bread"],"correct":"Wife","category":"luqadda"},{"id":497,"question":"Surah Muxammad waxay leedahay immisa aayad?","options":["3","38","6","30"],"correct":"38","category":"diinta"},{"id":528,"question":"Surah Al-Jumu'a waa surahda aad ee Qur'aanka?","options":["47","62","18","52"],"correct":"62","category":"diinta"},{"id":554,"question":"Surah Al-Qiyaama waa surahda aad ee Qur'aanka?","options":["27","10","108","75"],"correct":"75","category":"diinta"},{"id":1001,"question":"Af-Ingiriisiga \"Cab\" waxaa la yiraahdaa?","options":["Daughter","Night","Drink","Five"],"correct":"Drink","category":"luqadda"},{"id":1043,"question":"Af-Ingiriisiga \"Kulul\" waxaa la yiraahdaa?","options":["Blood","Strong","Hot","Blue"],"correct":"Hot","category":"luqadda"},{"id":141,"question":"Wadanka Honduras ku yaalaa xaddiga?","options":["Afrika","Koonfur Amerika","Waqooyi Amerika","Aasiya"],"correct":"Waqooyi Amerika","category":"juqraafi"},{"id":654,"question":"Immisa tiir ayaa Islaamka ku yaalaa?","options":["5","6","4","7"],"correct":"5","category":"diinta"},{"id":1021,"question":"Af-Ingiriisiga \"Kaalay\" waxaa la yiraahdaa?","options":["Come","Write","Son","Tea"],"correct":"Come","category":"luqadda"},{"id":959,"question":"Af-Ingiriisiga \"Bisad\" waxaa la yiraahdaa?","options":["Purple","Food","Love","Cat"],"correct":"Cat","category":"luqadda"},{"id":473,"question":"Surah Faatir waxay leedahay immisa aayad?","options":["3","45","7","52"],"correct":"45","category":"diinta"},{"id":56,"question":"Caasimadda Luanda waxay ku taallaa wadanka?","options":["Malawi","Kenya","Angola","Bahreen"],"correct":"Angola","category":"juqraafi"},{"id":909,"question":"Af-Ingiriisiga \"Madow\" waxaa la yiraahdaa?","options":["Father","Desert","Black","Fish"],"correct":"Black","category":"luqadda"},{"id":304,"question":"Magaalada caasimadda Niderlaandka waa?","options":["Dodoma","Windhoek","Amsterdam","Kyiv"],"correct":"Amsterdam","category":"juqraafi"},{"id":24,"question":"Wadanka Tanzaniya ku yaalaa xaddiga?","options":["Oceania","Aasiya","Afrika","Koonfur Amerika"],"correct":"Afrika","category":"juqraafi"},{"id":1108,"question":"Af-Soomaaliga \"Computer\" waxaa la yiraahdaa?","options":["Madow","Dayax","Kombiyuutar","Samir"],"correct":"Kombiyuutar","category":"luqadda"},{"id":1159,"question":"Af-Ingiriisiga \"Sayniska\" waxaa la yiraahdaa?","options":["Fish","Phone","Science","Old"],"correct":"Science","category":"luqadda"},{"id":156,"question":"Wadanka Birasiil ku yaalaa xaddiga?","options":["Waqooyi Amerika","Aasiya","Yurub","Koonfur Amerika"],"correct":"Koonfur Amerika","category":"juqraafi"},{"id":543,"question":"Surah Al-Ma'aarij waxay leedahay immisa aayad?","options":["182","44","3","25"],"correct":"44","category":"diinta"},{"id":678,"question":"Sheyga oo Iblays u baxaa wuxuu ka samaysan yahay?","options":["Naarta","Dhoobada","Biyaha","Hawo"],"correct":"Naarta","category":"diinta"},{"id":672,"question":"Nabiga Ibraahim waxaa lagu magacaabi jiray?","options":["Khaliilullaah","Kabiirullaah","Xabiibullaah","Safiiyullaah"],"correct":"Khaliilullaah","category":"diinta"},{"id":621,"question":"Surah Al-Kaafuruun waxay leedahay immisa aayad?","options":["6","20","8","5"],"correct":"6","category":"diinta"},{"id":65,"question":"Caasimadda Gaborone waxay ku taallaa wadanka?","options":["Sudaan","Botswana","Danmaark","Kanada"],"correct":"Botswana","category":"juqraafi"},{"id":429,"question":"Surah Ar-Ra'd waxay leedahay immisa aayad?","options":["28","8","43","54"],"correct":"43","category":"diinta"},{"id":289,"question":"Magaalada caasimadda Faransiiska waa?","options":["Damascus","Beijing","Paris","Havana"],"correct":"Paris","category":"juqraafi"},{"id":1009,"question":"Af-Ingiriisiga \"Qor\" waxaa la yiraahdaa?","options":["Doctor","Write","Five","Salt"],"correct":"Write","category":"luqadda"},{"id":1147,"question":"Af-Ingiriisiga \"Tareen\" waxaa la yiraahdaa?","options":["Train","Run","House","Fever"],"correct":"Train","category":"luqadda"},{"id":758,"question":"Vaccineka koowaad (smallpox) yaa sameeyay?","options":["Edward Jenner","Louis Pasteur","Alexander Fleming","Marie Curie"],"correct":"Edward Jenner","category":"sayniska"},{"id":828,"question":"Af-Soomaaliga \"Bread\" waxaa la yiraahdaa?","options":["Kibis","Maanta","Bariis","Shaah"],"correct":"Kibis","category":"luqadda"},{"id":1101,"question":"Af-Ingiriisiga \"Garoonka diyaaradaha\" waxaa la yiraahdaa?","options":["Work","Wind","Airport","Bank"],"correct":"Airport","category":"luqadda"},{"id":809,"question":"Af-Ingiriisiga \"Samaa\" waxaa la yiraahdaa?","options":["Bank","Fire","Long","Sky"],"correct":"Sky","category":"luqadda"},{"id":1164,"question":"Af-Soomaaliga \"Fear\" waxaa la yiraahdaa?","options":["Sonkor","Qorrax","Bas","Cabsi"],"correct":"Cabsi","category":"luqadda"},{"id":1131,"question":"Af-Ingiriisiga \"Ereyga\" waxaa la yiraahdaa?","options":["Short","Run","Word","Brother"],"correct":"Word","category":"luqadda"},{"id":148,"question":"Magaalada caasimadda Haiti waa?","options":["Port-au-Prince","Islamabad","Pretoria","Yaoundé"],"correct":"Port-au-Prince","category":"juqraafi"},{"id":119,"question":"Caasimadda Lilongwe waxay ku taallaa wadanka?","options":["Mongolia","Tunis","Malawi","Indonesiiya"],"correct":"Malawi","category":"juqraafi"},{"id":20,"question":"Caasimadda Accra waxay ku taallaa wadanka?","options":["Filistiin","Ecuador","Gana","Jazaa'ir"],"correct":"Gana","category":"juqraafi"},{"id":118,"question":"Magaalada caasimadda Malawi waa?","options":["Berlin","Lilongwe","Ouagadougou","Paris"],"correct":"Lilongwe","category":"juqraafi"},{"id":376,"question":"Magaalada Baydhabo waa xarunta gobolka?","options":["Togdheer","Hiiraan","Bay","Gedo"],"correct":"Bay","category":"juqraafi"},{"id":1193,"question":"Colombus goorma ayuu Ameerika ogaaday?","options":["1492","1490","1500","1488"],"correct":"1492","category":"taariikhda"},{"id":685,"question":"Lambarka atomiga Hydrogen (H) waa?","options":["30","7","14","1"],"correct":"1","category":"sayniska"},{"id":55,"question":"Magaalada caasimadda Angola waa?","options":["Lusaka","Kuala Lumpur","Jakarta","Luanda"],"correct":"Luanda","category":"juqraafi"},{"id":457,"question":"Surah An-Naml waxay leedahay immisa aayad?","options":["200","44","30","93"],"correct":"93","category":"diinta"},{"id":834,"question":"Af-Soomaaliga \"Fish\" waxaa la yiraahdaa?","options":["Kalluun","Maktabad","Roob","Duqow"],"correct":"Kalluun","category":"luqadda"},{"id":477,"question":"Surah As-Saaffaat waxay leedahay immisa aayad?","options":["88","123","182","206"],"correct":"182","category":"diinta"},{"id":737,"question":"Lambarka atomiga Mercury (Hg) waa?","options":["17","80","28","47"],"correct":"80","category":"sayniska"},{"id":956,"question":"Af-Soomaaliga \"Dog\" waxaa la yiraahdaa?","options":["Ey","Hadal","Webi","Sonkor"],"correct":"Ey","category":"luqadda"},{"id":502,"question":"Surah Al-Xujuraat waa surahda aad ee Qur'aanka?","options":["49","81","108","91"],"correct":"49","category":"diinta"},{"id":950,"question":"Af-Soomaaliga \"Cow\" waxaa la yiraahdaa?","options":["Xiddig","Lo","Sano","Sagaal"],"correct":"Lo","category":"luqadda"},{"id":128,"question":"Caasimadda Mexico City waxay ku taallaa wadanka?","options":["Koolombia","Meksiko","Kuuba","Qadar"],"correct":"Meksiko","category":"juqraafi"},{"id":1149,"question":"Af-Ingiriisiga \"Baaskiil\" waxaa la yiraahdaa?","options":["Night","Medicine","Bicycle","Star"],"correct":"Bicycle","category":"luqadda"},{"id":817,"question":"Af-Ingiriisiga \"Geed\" waxaa la yiraahdaa?","options":["Tea","Student","Wife","Tree"],"correct":"Tree","category":"luqadda"},{"id":875,"question":"Af-Ingiriisiga \"Hooyo\" waxaa la yiraahdaa?","options":["Water","Hospital","Mother","Walk"],"correct":"Mother","category":"luqadda"},{"id":356,"question":"Caasimadda Canberra waxay ku taallaa wadanka?","options":["Jabuuti","Awstraaliya","Filistiin","Uganda"],"correct":"Awstraaliya","category":"juqraafi"},{"id":861,"question":"Af-Ingiriisiga \"Wadne\" waxaa la yiraahdaa?","options":["Heart","Month","Computer","Now"],"correct":"Heart","category":"luqadda"},{"id":169,"question":"Magaalada caasimadda Fenisuweela waa?","options":["Lusaka","Caracas","Prague","Tegucigalpa"],"correct":"Caracas","category":"juqraafi"},{"id":36,"question":"Wadanka Libya ku yaalaa xaddiga?","options":["Aasiya","Afrika","Oceania","Koonfur Amerika"],"correct":"Afrika","category":"juqraafi"},{"id":716,"question":"Calaamadda kimikada \"Cl\" waxay u taagan tahay?","options":["Sodium","Carbon","Magnesium","Chlorine"],"correct":"Chlorine","category":"sayniska"},{"id":557,"question":"Surah Al-Mursalaat waxay leedahay immisa aayad?","options":["77","73","60","50"],"correct":"50","category":"diinta"},{"id":220,"question":"Magaalada caasimadda Singaboor waa?","options":["Yamoussoukro","Singaboor","Wellington","Rabat"],"correct":"Singaboor","category":"juqraafi"},{"id":1067,"question":"Af-Ingiriisiga \"Bukaan\" waxaa la yiraahdaa?","options":["Moon","Hat","Sick","Tree"],"correct":"Sick","category":"luqadda"},{"id":774,"question":"Koobkii Adduunka 2022 yaa guulaystay?","options":["Argentina","France","Morocco","Croatia"],"correct":"Argentina","category":"ciyaaraha"},{"id":889,"question":"Af-Ingiriisiga \"Adeer\" waxaa la yiraahdaa?","options":["Work","Uncle","Wind","White"],"correct":"Uncle","category":"luqadda"},{"id":16,"question":"Magaalada caasimadda Koonfur Afrika waa?","options":["New Delhi","Ouagadougou","Berlin","Pretoria"],"correct":"Pretoria","category":"juqraafi"},{"id":664,"question":"Surahda Faatixa waxay leedahay immisa aayad?","options":["7","5","6","8"],"correct":"7","category":"diinta"},{"id":342,"question":"Wadanka Iswiisarka ku yaalaa xaddiga?","options":["Yurub","Waqooyi Amerika","Koonfur Amerika","Oceania"],"correct":"Yurub","category":"juqraafi"},{"id":1012,"question":"Af-Soomaaliga \"Speak\" waxaa la yiraahdaa?","options":["Hadal","Telefoon","Fur","Duqow"],"correct":"Hadal","category":"luqadda"},{"id":1007,"question":"Af-Ingiriisiga \"Baaro\" waxaa la yiraahdaa?","options":["Big","Study","Night","Yesterday"],"correct":"Study","category":"luqadda"},{"id":122,"question":"Caasimadda Washington D.C. waxay ku taallaa wadanka?","options":["Angola","Koolombia","Jabuuti","Maraykanka"],"correct":"Maraykanka","category":"juqraafi"},{"id":52,"question":"Magaalada caasimadda Mozambique waa?","options":["Oslo","Maputo","Ouagadougou","Muqdisho"],"correct":"Maputo","category":"juqraafi"},{"id":171,"question":"Wadanka Fenisuweela ku yaalaa xaddiga?","options":["Koonfur Amerika","Afrika","Yurub","Oceania"],"correct":"Koonfur Amerika","category":"juqraafi"},{"id":725,"question":"Lambarka atomiga Iron (Fe) waa?","options":["18","17","6","26"],"correct":"26","category":"sayniska"},{"id":1000,"question":"Af-Soomaaliga \"Drink\" waxaa la yiraahdaa?","options":["Caafimaad","Murugo","Cab","Dawo"],"correct":"Cab","category":"luqadda"},{"id":626,"question":"Surah Al-Masad waa surahda aad ee Qur'aanka?","options":["13","111","36","30"],"correct":"111","category":"diinta"},{"id":288,"question":"Wadanka Jarmalka ku yaalaa xaddiga?","options":["Afrika","Yurub","Koonfur Amerika","Aasiya"],"correct":"Yurub","category":"juqraafi"},{"id":710,"question":"Calaamadda kimikada \"Si\" waxay u taagan tahay?","options":["Argon","Silicon","Zinc","Boron"],"correct":"Silicon","category":"sayniska"},{"id":310,"question":"Magaalada caasimadda Swiidhanka waa?","options":["Lisbon","Stockholm","Muscat","Bamako"],"correct":"Stockholm","category":"juqraafi"},{"id":458,"question":"Surah An-Naml waa surahda aad ee Qur'aanka?","options":["76","59","114","27"],"correct":"27","category":"diinta"},{"id":351,"question":"Wadanka Ireland ku yaalaa xaddiga?","options":["Koonfur Amerika","Oceania","Yurub","Waqooyi Amerika"],"correct":"Yurub","category":"juqraafi"},{"id":1106,"question":"Af-Soomaaliga \"Phone\" waxaa la yiraahdaa?","options":["Telefoon","Dheer","Kulul","Libaax"],"correct":"Telefoon","category":"luqadda"},{"id":449,"question":"Surah Al-Mu'minuun waxay leedahay immisa aayad?","options":["286","206","19","118"],"correct":"118","category":"diinta"}]
+[
+  {
+    "question": "Xogga iftiinka (Speed of Light) waa imisa km/s?",
+    "options": [
+      "200,000",
+      "300,000",
+      "400,000",
+      "500,000"
+    ],
+    "correct": "300,000"
+  },
+  {
+    "question": "Caasimadda Russia waa?",
+    "options": [
+      "Saint Petersburg",
+      "Novosibirsk",
+      "Yekaterinburg",
+      "Moscow"
+    ],
+    "correct": "Moscow"
+  },
+  {
+    "question": "Meeraheeda Saturn waxay leedahay imisa dayax?",
+    "options": [
+      "50+",
+      "60+",
+      "80+",
+      "100+"
+    ],
+    "correct": "80+"
+  },
+  {
+    "question": "Heshiiskii Carta wuxuu dhacay waddankee?",
+    "options": [
+      "Kenya",
+      "Djibouti",
+      "Ethiopia",
+      "Sudan"
+    ],
+    "correct": "Djibouti"
+  },
+  {
+    "question": "Caasimadda Indonesia waa?",
+    "options": [
+      "Surabaya",
+      "Bandung",
+      "Medan",
+      "Jakarta"
+    ],
+    "correct": "Jakarta"
+  },
+  {
+    "question": "Alexander Fleming wuxuu helay?",
+    "options": [
+      "Penicillin",
+      "Aspirin",
+      "Insulin",
+      "Morphine"
+    ],
+    "correct": "Penicillin"
+  },
+  {
+    "question": "Caasimadda Thailand waa?",
+    "options": [
+      "Chiang Mai",
+      "Phuket",
+      "Pattaya",
+      "Bangkok"
+    ],
+    "correct": "Bangkok"
+  },
+  {
+    "question": "Caasimadda Vietnam waa?",
+    "options": [
+      "Ho Chi Minh City",
+      "Da Nang",
+      "Haiphong",
+      "Hanoi"
+    ],
+    "correct": "Hanoi"
+  },
+  {
+    "question": "Haddii 2x - 4 = 10, x = ?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Caasimadda Philippines waa?",
+    "options": [
+      "Cebu City",
+      "Davao",
+      "Quezon City",
+      "Manila"
+    ],
+    "correct": "Manila"
+  },
+  {
+    "question": "Darwin wuxuu caan ka ahaa?",
+    "options": [
+      "Tiyooriga Gravity",
+      "Tiyooriga Kobcidda (Evolution)",
+      "DNA",
+      "Korontada"
+    ],
+    "correct": "Tiyooriga Kobcidda (Evolution)"
+  },
+  {
+    "question": "Caasimadda Malaysia waa?",
+    "options": [
+      "Penang",
+      "Johor Bahru",
+      "Ipoh",
+      "Kuala Lumpur"
+    ],
+    "correct": "Kuala Lumpur"
+  },
+  {
+    "question": "Caasimadda New Zealand waa?",
+    "options": [
+      "Auckland",
+      "Christchurch",
+      "Wellington",
+      "Hamilton"
+    ],
+    "correct": "Wellington"
+  },
+  {
+    "question": "Caasimadda Syria waa?",
+    "options": [
+      "Aleppo",
+      "Homs",
+      "Hama",
+      "Damascus"
+    ],
+    "correct": "Damascus"
+  },
+  {
+    "question": "Caasimadda Lebanon waa?",
+    "options": [
+      "Tripoli",
+      "Sidon",
+      "Tyre",
+      "Beirut"
+    ],
+    "correct": "Beirut"
+  },
+  {
+    "question": "Caasimadda Jordan waa?",
+    "options": [
+      "Zarqa",
+      "Irbid",
+      "Aqaba",
+      "Amman"
+    ],
+    "correct": "Amman"
+  },
+  {
+    "question": "Caasimadda Kuwait waa?",
+    "options": [
+      "Salmiya",
+      "Hawalli",
+      "Jahra",
+      "Kuwait City"
+    ],
+    "correct": "Kuwait City"
+  },
+  {
+    "question": "Caasimadda Qatar waa?",
+    "options": [
+      "Al-Wakrah",
+      "Al-Rayyan",
+      "Al-Khor",
+      "Doha"
+    ],
+    "correct": "Doha"
+  },
+  {
+    "question": "Caasimadda Oman waa?",
+    "options": [
+      "Salalah",
+      "Sohar",
+      "Nizwa",
+      "Muscat"
+    ],
+    "correct": "Muscat"
+  },
+  {
+    "question": "Caasimadda Yemen waa?",
+    "options": [
+      "Aden",
+      "Taiz",
+      "Hodeidah",
+      "Sanaa"
+    ],
+    "correct": "Sanaa"
+  },
+  {
+    "question": "Caasimadda Uganda waa?",
+    "options": [
+      "Entebbe",
+      "Jinja",
+      "Gulu",
+      "Kampala"
+    ],
+    "correct": "Kampala"
+  },
+  {
+    "question": "Caasimadda Rwanda waa?",
+    "options": [
+      "Butare",
+      "Gisenyi",
+      "Gitarama",
+      "Kigali"
+    ],
+    "correct": "Kigali"
+  },
+  {
+    "question": "Caasimadda DRC waa?",
+    "options": [
+      "Lubumbashi",
+      "Goma",
+      "Kisangani",
+      "Kinshasa"
+    ],
+    "correct": "Kinshasa"
+  },
+  {
+    "question": "Caasimadda Angola waa?",
+    "options": [
+      "Lubango",
+      "Huambo",
+      "Benguela",
+      "Luanda"
+    ],
+    "correct": "Luanda"
+  },
+  {
+    "question": "Caasimadda Zimbabwe waa?",
+    "options": [
+      "Bulawayo",
+      "Mutare",
+      "Gweru",
+      "Harare"
+    ],
+    "correct": "Harare"
+  },
+  {
+    "question": "Caasimadda Zambia waa?",
+    "options": [
+      "Kitwe",
+      "Ndola",
+      "Livingstone",
+      "Lusaka"
+    ],
+    "correct": "Lusaka"
+  },
+  {
+    "question": "Caasimadda Ghana waa?",
+    "options": [
+      "Kumasi",
+      "Tamale",
+      "Cape Coast",
+      "Accra"
+    ],
+    "correct": "Accra"
+  },
+  {
+    "question": "Caasimadda Senegal waa?",
+    "options": [
+      "Thies",
+      "Kaolack",
+      "Saint-Louis",
+      "Dakar"
+    ],
+    "correct": "Dakar"
+  },
+  {
+    "question": "Caasimadda Algeria waa?",
+    "options": [
+      "Oran",
+      "Constantine",
+      "Annaba",
+      "Algiers"
+    ],
+    "correct": "Algiers"
+  },
+  {
+    "question": "Caasimadda Libya waa?",
+    "options": [
+      "Benghazi",
+      "Misrata",
+      "Tobruk",
+      "Tripoli"
+    ],
+    "correct": "Tripoli"
+  },
+  {
+    "question": "Caasimadda Colombia waa?",
+    "options": [
+      "Medellin",
+      "Cali",
+      "Barranquilla",
+      "Bogota"
+    ],
+    "correct": "Bogota"
+  },
+  {
+    "question": "Caasimadda Peru waa?",
+    "options": [
+      "Arequipa",
+      "Trujillo",
+      "Callao",
+      "Lima"
+    ],
+    "correct": "Lima"
+  },
+  {
+    "question": "Caasimadda Chile waa?",
+    "options": [
+      "Valparaiso",
+      "Concepcion",
+      "Antofagasta",
+      "Santiago"
+    ],
+    "correct": "Santiago"
+  },
+  {
+    "question": "Caasimadda Greece waa?",
+    "options": [
+      "Thessaloniki",
+      "Patras",
+      "Larissa",
+      "Athens"
+    ],
+    "correct": "Athens"
+  },
+  {
+    "question": "Caasimadda Portugal waa?",
+    "options": [
+      "Porto",
+      "Braga",
+      "Coimbra",
+      "Lisbon"
+    ],
+    "correct": "Lisbon"
+  },
+  {
+    "question": "Caasimadda Poland waa?",
+    "options": [
+      "Krakow",
+      "Lodz",
+      "Wroclaw",
+      "Warsaw"
+    ],
+    "correct": "Warsaw"
+  },
+  {
+    "question": "Caasimadda Netherlands waa?",
+    "options": [
+      "Rotterdam",
+      "Amsterdam",
+      "Hague",
+      "Utrecht"
+    ],
+    "correct": "Amsterdam"
+  },
+  {
+    "question": "Caasimadda Sweden waa?",
+    "options": [
+      "Gothenburg",
+      "Malmo",
+      "Uppsala",
+      "Stockholm"
+    ],
+    "correct": "Stockholm"
+  },
+  {
+    "question": "Caasimadda Norway waa?",
+    "options": [
+      "Bergen",
+      "Trondheim",
+      "Stavanger",
+      "Oslo"
+    ],
+    "correct": "Oslo"
+  },
+  {
+    "question": "Caasimadda Denmark waa?",
+    "options": [
+      "Aarhus",
+      "Odense",
+      "Aalborg",
+      "Copenhagen"
+    ],
+    "correct": "Copenhagen"
+  },
+  {
+    "question": "Caasimadda Finland waa?",
+    "options": [
+      "Tampere",
+      "Turku",
+      "Espoo",
+      "Helsinki"
+    ],
+    "correct": "Helsinki"
+  },
+  {
+    "question": "Caasimadda Austria waa?",
+    "options": [
+      "Graz",
+      "Linz",
+      "Salzburg",
+      "Vienna"
+    ],
+    "correct": "Vienna"
+  },
+  {
+    "question": "Caasimadda Hungary waa?",
+    "options": [
+      "Debrecen",
+      "Miskolc",
+      "Pecs",
+      "Budapest"
+    ],
+    "correct": "Budapest"
+  },
+  {
+    "question": "Caasimadda Ukraine waa?",
+    "options": [
+      "Kharkiv",
+      "Odessa",
+      "Lviv",
+      "Kyiv"
+    ],
+    "correct": "Kyiv"
+  },
+  {
+    "question": "Caasimadda Kazakhstan waa?",
+    "options": [
+      "Almaty",
+      "Shymkent",
+      "Karaganda",
+      "Astana"
+    ],
+    "correct": "Astana"
+  },
+  {
+    "question": "Caasimadda North Korea waa?",
+    "options": [
+      "Hamhung",
+      "Chongjin",
+      "Wonsan",
+      "Pyongyang"
+    ],
+    "correct": "Pyongyang"
+  },
+  {
+    "question": "Caasimadda Nepal waa?",
+    "options": [
+      "Pokhara",
+      "Biratnagar",
+      "Lalitpur",
+      "Kathmandu"
+    ],
+    "correct": "Kathmandu"
+  },
+  {
+    "question": "Caasimadda Sri Lanka waa?",
+    "options": [
+      "Colombo",
+      "Galle",
+      "Jaffna",
+      "Sri Jayawardenepura Kotte"
+    ],
+    "correct": "Sri Jayawardenepura Kotte"
+  },
+  {
+    "question": "Caasimadda Myanmar waa?",
+    "options": [
+      "Yangon",
+      "Mandalay",
+      "Bago",
+      "Naypyidaw"
+    ],
+    "correct": "Naypyidaw"
+  },
+  {
+    "question": "Caasimadda Mozambique waa?",
+    "options": [
+      "Beira",
+      "Nampula",
+      "Matola",
+      "Maputo"
+    ],
+    "correct": "Maputo"
+  },
+  {
+    "question": "Caasimadda Madagascar waa?",
+    "options": [
+      "Toamasina",
+      "Mahajanga",
+      "Fianarantsoa",
+      "Antananarivo"
+    ],
+    "correct": "Antananarivo"
+  },
+  {
+    "question": "Caasimadda Tanzania waa?",
+    "options": [
+      "Zanzibar",
+      "Dar es Salaam",
+      "Dodoma",
+      "Arusha"
+    ],
+    "correct": "Dodoma"
+  },
+  {
+    "question": "Caasimadda Sudan waa?",
+    "options": [
+      "Port Sudan",
+      "Omdurman",
+      "Khartoum",
+      "Kassala"
+    ],
+    "correct": "Khartoum"
+  },
+  {
+    "question": "Caasimadda Eritrea waa?",
+    "options": [
+      "Keren",
+      "Massawa",
+      "Mendefera",
+      "Asmara"
+    ],
+    "correct": "Asmara"
+  },
+  {
+    "question": "Caasimadda Somalia waa?",
+    "options": [
+      "Berbera",
+      "Kismayo",
+      "Bossaso",
+      "Mogadishu"
+    ],
+    "correct": "Mogadishu"
+  },
+  {
+    "question": "Caasimadda Djibouti waa?",
+    "options": [
+      "Dikhil",
+      "Ali Sabieh",
+      "Tadjourah",
+      "Djibouti City"
+    ],
+    "correct": "Djibouti City"
+  },
+  {
+    "question": "Caasimadda Belgium waa?",
+    "options": [
+      "Antwerp",
+      "Ghent",
+      "Bruges",
+      "Brussels"
+    ],
+    "correct": "Brussels"
+  },
+  {
+    "question": "Caasimadda Switzerland waa?",
+    "options": [
+      "Zurich",
+      "Geneva",
+      "Basel",
+      "Bern"
+    ],
+    "correct": "Bern"
+  },
+  {
+    "question": "Caasimadda Romania waa?",
+    "options": [
+      "Cluj-Napoca",
+      "Timisoara",
+      "Iasi",
+      "Bucharest"
+    ],
+    "correct": "Bucharest"
+  },
+  {
+    "question": "Caasimadda Bahrain waa?",
+    "options": [
+      "Muharraq",
+      "Riffa",
+      "Hamad Town",
+      "Manama"
+    ],
+    "correct": "Manama"
+  },
+  {
+    "question": "Caasimadda Cameroon waa?",
+    "options": [
+      "Douala",
+      "Kano",
+      "Garoua",
+      "Yaounde"
+    ],
+    "correct": "Yaounde"
+  },
+  {
+    "question": "Roger Federer wuxuu guuleystay imisa Grand Slam?",
+    "options": [
+      "18",
+      "19",
+      "20",
+      "21"
+    ],
+    "correct": "20"
+  },
+  {
+    "question": "Serena Williams waxay guuleystay imisa Grand Slam?",
+    "options": [
+      "20",
+      "22",
+      "23",
+      "24"
+    ],
+    "correct": "23"
+  },
+  {
+    "question": "Formula 1 2023 waxaa guuleystay?",
+    "options": [
+      "Lewis Hamilton",
+      "Max Verstappen",
+      "Leclerc",
+      "Alonso"
+    ],
+    "correct": "Max Verstappen"
+  },
+  {
+    "question": "Marathon-ka dhererkiisu waa imisa km?",
+    "options": [
+      "40km",
+      "41km",
+      "42.195km",
+      "43km"
+    ],
+    "correct": "42.195km"
+  },
+  {
+    "question": "FIFA World Cup 2026 waxay ka dhacaysaa?",
+    "options": [
+      "USA, Canada iyo Mexico",
+      "Brazil iyo Argentina",
+      "Germany iyo France",
+      "Spain iyo Portugal"
+    ],
+    "correct": "USA, Canada iyo Mexico"
+  },
+  {
+    "question": "Ciyaarta Golf waxaa abuurtay?",
+    "options": [
+      "England",
+      "France",
+      "Scotland",
+      "Ireland"
+    ],
+    "correct": "Scotland"
+  },
+  {
+    "question": "Olympics 2024 waxay ka dhacday?",
+    "options": [
+      "London",
+      "Tokyo",
+      "Paris",
+      "Los Angeles"
+    ],
+    "correct": "Paris"
+  },
+  {
+    "question": "Super Bowl waxay joogaa ciyaarta?",
+    "options": [
+      "Basketball",
+      "Football (American)",
+      "Rugby",
+      "Baseball"
+    ],
+    "correct": "Football (American)"
+  },
+  {
+    "question": "Champions League 2023 waxaa guuleystay?",
+    "options": [
+      "Real Madrid",
+      "PSG",
+      "Manchester City",
+      "Bayern Munich"
+    ],
+    "correct": "Manchester City"
+  },
+  {
+    "question": "NBA Finals 2023 waxaa guuleystay?",
+    "options": [
+      "Lakers",
+      "Celtics",
+      "Heat",
+      "Nuggets"
+    ],
+    "correct": "Nuggets"
+  },
+  {
+    "question": "Marie Curie waxay caan ka ahayd?",
+    "options": [
+      "Caafimaadka",
+      "Shucaaca Radioactive",
+      "Korontada",
+      "Bakteeriyada"
+    ],
+    "correct": "Shucaaca Radioactive"
+  },
+  {
+    "question": "Telescope-ka ugu horeeyay waxaa sameeyay?",
+    "options": [
+      "Newton",
+      "Galileo",
+      "Kepler",
+      "Hubble"
+    ],
+    "correct": "Galileo"
+  },
+  {
+    "question": "Nitrogen waxay ku jirtaa hawada imisa boqolkiiba?",
+    "options": [
+      "68%",
+      "71%",
+      "75%",
+      "78%"
+    ],
+    "correct": "78%"
+  },
+  {
+    "question": "Birta (Iron) astaamigeeda (symbol) waa?",
+    "options": [
+      "Ir",
+      "Fe",
+      "In",
+      "Io"
+    ],
+    "correct": "Fe"
+  },
+  {
+    "question": "Dahab (Gold) astaamigeeda (symbol) waa?",
+    "options": [
+      "Gd",
+      "Go",
+      "Au",
+      "Ag"
+    ],
+    "correct": "Au"
+  },
+  {
+    "question": "Aasidka (Acid) wuxuu leeyahay pH?",
+    "options": [
+      "pH > 7",
+      "pH = 7",
+      "pH < 7",
+      "pH = 14"
+    ],
+    "correct": "pH < 7"
+  },
+  {
+    "question": "H2SO4 waa?",
+    "options": [
+      "Hydrochloric Acid",
+      "Sulfuric Acid",
+      "Nitric Acid",
+      "Carbonic Acid"
+    ],
+    "correct": "Sulfuric Acid"
+  },
+  {
+    "question": "Newton sharciga 1aad wuxuu sheegaa in jirku?",
+    "options": [
+      "Iska caabiyaa isbedelka",
+      "Xooga la tartibi karo",
+      "Falcelinta sinnaanta",
+      "Tamarta la ilaaliyaa"
+    ],
+    "correct": "Iska caabiyaa isbedelka"
+  },
+  {
+    "question": "Tamarta (Energy) waxaa lagu cabiraa?",
+    "options": [
+      "Newton",
+      "Joule",
+      "Pascal",
+      "Watt"
+    ],
+    "correct": "Joule"
+  },
+  {
+    "question": "Madaxweyne Cabdullaahi Yuusuf wuxuu xilka qabtay sanadkee?",
+    "options": [
+      "2000",
+      "2002",
+      "2004",
+      "2006"
+    ],
+    "correct": "2004"
+  },
+  {
+    "question": "Puntland waxaa la aasaasay sanadkee?",
+    "options": [
+      "1996",
+      "1998",
+      "2000",
+      "2002"
+    ],
+    "correct": "1998"
+  },
+  {
+    "question": "Dawladda Federaalka Soomaaliya (FGS) waxaa la aasaasay sanadkee?",
+    "options": [
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "correct": "2012"
+  },
+  {
+    "question": "Madaxweyne Hassan Sheikh wuxuu markii ugu horeysay xilka qabtay sanadkee?",
+    "options": [
+      "2010",
+      "2012",
+      "2014",
+      "2016"
+    ],
+    "correct": "2012"
+  },
+  {
+    "question": "Doorashada 2017 madaxweyne waxaa noqday?",
+    "options": [
+      "Hassan Sheikh",
+      "Mohamed Farmaajo",
+      "Sharif Sheikh",
+      "Omar Sharmarke"
+    ],
+    "correct": "Mohamed Farmaajo"
+  },
+  {
+    "question": "Webiga ugu dheer Soomaaliya waa?",
+    "options": [
+      "Shabeelle",
+      "Jubba",
+      "Dawa",
+      "Tana"
+    ],
+    "correct": "Jubba"
+  },
+  {
+    "question": "Caasimadda Puntland waa?",
+    "options": [
+      "Gaalkacayo",
+      "Boosaaso",
+      "Qardho",
+      "Galkayo"
+    ],
+    "correct": "Boosaaso"
+  },
+  {
+    "question": "Dekedda ugu weyn Soomaaliya waa?",
+    "options": [
+      "Kismaayo",
+      "Berbera",
+      "Muqdisho",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Gobolka ugu weyn Soomaaliya waa?",
+    "options": [
+      "Bari",
+      "Mudug",
+      "Togdheer",
+      "Gedo"
+    ],
+    "correct": "Mudug"
+  },
+  {
+    "question": "Calanka Soomaaliya midabkiisu waa?",
+    "options": [
+      "Cas iyo cad",
+      "Buluug iyo cad xiddig leh",
+      "Cagaaran iyo cad",
+      "Huruud iyo cas"
+    ],
+    "correct": "Buluug iyo cad xiddig leh"
+  },
+  {
+    "question": "Xeerka Soomaalida ee Mag la xiiriiraa?",
+    "options": [
+      "Ganacsiga",
+      "Diyafadda",
+      "Diyaarkii la bixiyo cid la diilay",
+      "Colaadda"
+    ],
+    "correct": "Diyaarkii la bixiyo cid la diilay"
+  },
+  {
+    "question": "Soomaalida ereyga Nabad iyo Caano macnaheeda waa?",
+    "options": [
+      "Guul iyo dakhli",
+      "Nabad iyo nixmo",
+      "Raalli-gelinta",
+      "Salaan dhaqameed"
+    ],
+    "correct": "Salaan dhaqameed"
+  },
+  {
+    "question": "Luuqadda Af-Soomaali waxaa loo tixgeliyaa?",
+    "options": [
+      "Tonal language",
+      "Non-tonal language",
+      "Sign language",
+      "Written only"
+    ],
+    "correct": "Non-tonal language"
+  },
+  {
+    "question": "Suugaanta Soomaalida nooca Geeraar waa gabay?",
+    "options": [
+      "Jacaylka",
+      "Geesinnimada",
+      "Munaasabadaha",
+      "Diinta"
+    ],
+    "correct": "Geesinnimada"
+  },
+  {
+    "question": "Caano geel faaiidadeeda ugu muhiimsan waa?",
+    "options": [
+      "Kolyaraha badan",
+      "Antibodies iyo nafaqo badan",
+      "Protein badan",
+      "Vitamins badan"
+    ],
+    "correct": "Antibodies iyo nafaqo badan"
+  },
+  {
+    "question": "Soomaalida magacyada dumarka ee ugu badan waxaa ka mid ah?",
+    "options": [
+      "Faadumo",
+      "Xaawo",
+      "Caasha",
+      "Dhammaan"
+    ],
+    "correct": "Faadumo"
+  },
+  {
+    "question": "Af-Soomaali ereyga Geel macnaheeda Ingiriisiga waa?",
+    "options": [
+      "Horse",
+      "Camel",
+      "Donkey",
+      "Cow"
+    ],
+    "correct": "Camel"
+  },
+  {
+    "question": "Ramadaan waa bishee ee sanadka Islaamiga?",
+    "options": [
+      "8aad",
+      "9aad",
+      "10aad",
+      "11aad"
+    ],
+    "correct": "9aad"
+  },
+  {
+    "question": "Nebiga SCW wuxuu xilka nubuwadda helay isagoo da'diisu ahayd?",
+    "options": [
+      "35",
+      "38",
+      "40",
+      "45"
+    ],
+    "correct": "40"
+  }
+]
