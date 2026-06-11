@@ -12,14 +12,33 @@ const { sendQuestion } = require('../../src/games/solo');
 const { checkUser } = require('../../src/utils/helpers');
 const { PREFIX, SOLO_MIN_QUESTIONS, SOLO_MAX_QUESTIONS, SOLO_DEFAULT_QUESTIONS } = require('../../src/config');
 
+// Dib u cusboonaysii (reset) su'aalaha la arky si ciyaarayaashu dib u ciyaari karaan
+// Markay dhammaan su'aalaha arkaan, automaticly ayaa dib loo bilaabaa
+// Laakiin game-ka cusub IQ looma siin (isticmaalaha flag-ka soloReplaying)
+function resetSeenSoloQuestions(userId) {
+    checkUser(userId);
+    const d = userData[userId];
+    if (d.seenByGame && d.seenByGame.solo) d.seenByGame.solo = {};
+    if (d.seenTexts) {
+        // Kaliya tirtir kuwa solo-ka la xidhiidha (dhammaan seenTexts si aanay ugu dhicin ciyaaryada kale)
+        // Halkaan waxaan u tirtirno dhammaan si fudud (solo ayaa leh)
+        d.seenTexts = {};
+    }
+    d.soloReplaying = true;
+    saveData();
+}
+
 function soloIntroEmbed() {
     return new EmbedBuilder()
         .setTitle('📘 Macallin — Solo')
         .setDescription(
             '**Sida loo ciyaaro:**\n' +
-            '• Jawaab **sax** ah → **+3 IQ**\n' +
-            '• Jawaab **qalad** ama **waqti dhammaaday** → **−1 IQ**\n\n' +
-            'Haddii IQ-gu uu hooseeyo, isticmaal `?today` (maalin kasta) ama ka qayb gal `?quiz` si aad u hesho dhibco aad u badasho `?exchange`.'
+            '• Jawaab **sax** ah → **dhibcood + 10 BTC** 💰\n' +
+            '• Jawaab **qalad** ama **waqti dhammaaday** → **−1 IQ** + **10 BTC** (waqti awgeed)\n' +
+            '• Dhibcahaagu **≥ 80** yihiin game dhammaadkiisa → **IQ heli** ✅\n' +
+            '• Dhibcahaagu **< 80** yihiin → IQ laguma siin (waxaad helaa BTC kaliya)\n\n' +
+            '**90%+ sax** = 🌟 Aad u fiican! | **80-89%** = ✨ Wanaagsan!\n\n' +
+            'Dhammaan su'aalaha marka aad aragto → game si toos ah ayuu dib u bilaabmaa, laakiin IQ ma heli doontid.'
         )
         .setColor('#3498db');
 }
@@ -63,9 +82,25 @@ async function startSoloGame(message, count) {
         return message.reply(`⚠️ Waxaad mar hore ku jirtaa ciyaar **${busy}**! Sug ilaa ay dhammaato.`);
     }
 
-    const picked = pickQuestionsForGame(userId, 'solo', count);
+    let picked = pickQuestionsForGame(userId, 'solo', count);
+
+    // Haddii su'aalo dhammaan (user-ku wuu arkey dhammaan) → dib u bilow
     if (!picked || picked.length === 0) {
-        return message.reply({ embeds: [noQuestionsLeftEmbed(message.author.username)] });
+        resetSeenSoloQuestions(userId);
+        await message.reply(
+            `🔄 **${message.author.username}**, dhammaan su'aalaha ayaad arkey — si toos ah ayaa dib loo bilaabay!\n` +
+            `⚠️ **Xasuusnow:** Ciyaarka cusub IQ kuma heli doonto (waxaad heshaa BTC kaliya su'aal kasta).\n` +
+            `💰 **+10 BTC** ayaad heshaysaa su'aal walba waqti aad galiso.`
+        );
+        picked = pickQuestionsForGame(userId, 'solo', count);
+        if (!picked || picked.length === 0) {
+            return message.reply({ embeds: [noQuestionsLeftEmbed(message.author.username)] });
+        }
+    } else {
+        // Game cusub — flag-ka reset
+        checkUser(userId);
+        userData[userId].soloReplaying = false;
+        saveData();
     }
 
     // ⭐ Haddii su'aalo cusub ka yar yihiin tirada la codsaday → ka warbixi
@@ -73,7 +108,7 @@ async function startSoloGame(message, count) {
     if (actualCount < count) {
         await message.reply(
             `📚 **${message.author.username}**, waxaa kuu hadhay **${actualCount}** su'aalood oo aanad weligaa arkin (adigoo codsaday ${count}).\n` +
-            `Ciyaartu waxay socon doontaa **${actualCount}** su'aalood — su'aalo cusub ayaa kuu furmaya marka muddada laba toddobaad ee hore ka dhammaato.`
+            `Ciyaartu waxay socon doontaa **${actualCount}** su'aalood.`
         );
     }
 

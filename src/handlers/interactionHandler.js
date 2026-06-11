@@ -2536,6 +2536,8 @@ module.exports = function setupInteractionHandler(client) {
             d.pendingProposal = null;
 
             if (id.startsWith('rel_dp_')) {
+                // Cancel 2-min timer — proposal already answered (declined)
+                try { const { clearProposalTimer } = require('../../data/commands/relationship'); clearProposalTimer(fromId); } catch {}
                 saveData();
                 await interaction.message.edit({ components: [] }).catch(() => {});
                 return interaction.reply({ content: '💔 Codsiga guurka waa la diiday.', flags: MessageFlags.Ephemeral });
@@ -2550,8 +2552,10 @@ module.exports = function setupInteractionHandler(client) {
             try { const u = await client.users.fetch(fromId); fromName = u.username; } catch {}
 
             const now = Date.now();
-            d.relationship    = { partnerId: fromId, partnerUsername: fromName,          ringType, since: now };
-            fromD.relationship = { partnerId: userId, partnerUsername: interaction.user.username, ringType, since: now };
+            d.relationship    = { partnerId: fromId, partnerUsername: fromName,          ringType, since: now, proposerId: fromId };
+            fromD.relationship = { partnerId: userId, partnerUsername: interaction.user.username, ringType, since: now, proposerId: fromId };
+            // Cancel 2-min timer — proposal already answered
+            try { const { clearProposalTimer } = require('../../data/commands/relationship'); clearProposalTimer(fromId); } catch {}
 
             // Award badges
             const awardBadge = (uid, badge) => {

@@ -35,6 +35,7 @@ const jeebCmd         = require('../../data/commands/economy/jeeb');
 const tradeCmd        = require('../../data/commands/economy/trade');
 const robCmd          = require('../../data/commands/economy/rob');
 const cashflipCmd     = require('../../data/commands/economy/cashflip');
+const investCmd       = require('../../data/commands/economy/invest');
 const giveCmd         = require('../../data/commands/economy/give');
 const richCmd         = require('../../data/commands/economy/rich');
 const treasuryCmdFn   = require('../../data/commands/economy/treasuryCmd');
@@ -50,6 +51,8 @@ const shopCmd         = require('../../data/commands/shopCmd');
 const { inventoryCmd, equipCmd, sellCmd } = require('../../data/commands/inventory');
 const { friendCmd, unfriendCmd, friendsListCmd, proposeCmd, partnerCmd, breakupCmd } = require('../../data/commands/relationship');
 const personalCmd = require('../../data/commands/personal');
+const qCmd        = require('../../data/commands/q');
+const qcCmd       = require('../../data/commands/qc');
 const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, withdrawAnyCmd, allBanksCmd, jbCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd } = require('../../data/commands/economy/publicBank');
 const { getDisTube } = require('../music/disTubeSetup');
@@ -127,6 +130,13 @@ module.exports = function setupMessageHandler(client) {
             case 'p':
                 return profileCmd(message);
 
+            case 'q':
+                return qCmd(message);
+
+            case 'qc':
+            case 'quiz_category':
+                return qcCmd(message, args);
+
 
 
             case 'top':
@@ -158,6 +168,11 @@ module.exports = function setupMessageHandler(client) {
                 return duelCmd(message, args);
 
             case 'quiz':
+                // ?quiz category <cat> → redirect to qcCmd
+                if (args[0] && args[0].toLowerCase() === 'category') {
+                    return qcCmd(message, args.slice(1));
+                }
+                return quizCmd(message, args);
             case 'team':
                 return quizCmd(message, args);
 
@@ -179,6 +194,9 @@ module.exports = function setupMessageHandler(client) {
             case 'ecoflip':
             case 'ef':
                 return cashflipCmd(message, args);
+
+            case 'invest':
+                return investCmd(message, args);
 
             case 'give':
                 return giveCmd(message, args);
@@ -378,16 +396,16 @@ module.exports = function setupMessageHandler(client) {
             case 'reminder':
             case 'xusuusin': {
                 checkUser(userId);
-                const d   = require('../../src/store').userData[userId];
+                const d   = require('../store').userData[userId];
                 const sub = (args[0] || '').toLowerCase();
                 if (sub === 'off' || sub === 'jooji') {
                     d.reminderOptOut = true;
-                    require('../../src/store').saveData();
+                    require('../store').saveData();
                     return message.reply('🔕 **Xusuusinta waa la joojiyay.** Dib u fur: `?reminder on`');
                 }
                 if (sub === 'on' || sub === 'fur') {
                     d.reminderOptOut = false;
-                    require('../../src/store').saveData();
+                    require('../store').saveData();
                     return message.reply('🔔 **Xusuusinta waa la furay.** DM ayaa la soo diri doonaa haddaad maqnaato.');
                 }
                 const status = d.reminderOptOut ? '🔕 Joojisan' : '🔔 Firfircoon';

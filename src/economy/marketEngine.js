@@ -1,42 +1,30 @@
 // =====================================================================
-// MARKET ENGINE — Dynamic time-based market states for ?ef
-// 6 states · auto-transitions · MongoDB persistence
+// MARKET ENGINE — Simple UP / DOWN only
 // =====================================================================
 
 const STATES = {
-    UP:       { baseWin: 0.65, label: 'Rising',   icon: '📈', desc: 'Market rising',      minDur: 30,  maxDur: 90  },
-    DOWN:     { baseWin: 0.30, label: 'Falling',  icon: '📉', desc: 'Market falling',     minDur: 30,  maxDur: 90  },
-    SPIKE:    { baseWin: 0.80, label: 'Spike',    icon: '🚀', desc: 'Price spike!',       minDur: 10,  maxDur: 25  },
-    CRASH:    { baseWin: 0.10, label: 'Crash',    icon: '⚠️', desc: 'Market crash!',     minDur: 10,  maxDur: 25  },
-    STABLE:   { baseWin: 0.50, label: 'Stable',   icon: '⬜', desc: 'Tight range',        minDur: 60,  maxDur: 120 },
-    RECOVERY: { baseWin: 0.55, label: 'Recovery', icon: '🔄', desc: 'Recovering',         minDur: 45,  maxDur: 90  },
+    UP:   { baseWin: 0.62, label: 'Up',   icon: '⬆️', desc: 'Suuqa kor u socda', minDur: 30, maxDur: 90 },
+    DOWN: { baseWin: 0.35, label: 'Down', icon: '⬇️', desc: 'Suuqa hoos u socda', minDur: 30, maxDur: 90 },
 };
 
-// Natural weighted transitions — SPIKE/CRASH are brief and non-repeating
 const TRANSITIONS = {
-    UP:       { DOWN: 2, SPIKE: 2, STABLE: 2, RECOVERY: 1 },
-    DOWN:     { UP: 1, CRASH: 2, STABLE: 2, RECOVERY: 2 },
-    SPIKE:    { DOWN: 3, STABLE: 2, CRASH: 1 },
-    CRASH:    { RECOVERY: 4, STABLE: 2 },
-    STABLE:   { UP: 2, DOWN: 2, SPIKE: 0.5, CRASH: 0.5, RECOVERY: 1 },
-    RECOVERY: { UP: 3, STABLE: 2, DOWN: 1 },
+    UP:   { DOWN: 1, UP: 1 },
+    DOWN: { UP: 1, DOWN: 1 },
 };
 
-let currentState   = 'STABLE';
+let currentState   = 'UP';
 let stateChangedAt = Date.now();
 let _timer         = null;
 
-// ── Transitions ──────────────────────────────────────────────────────
-
 function pickNextState() {
-    const weights = TRANSITIONS[currentState] || TRANSITIONS.STABLE;
+    const weights = TRANSITIONS[currentState] || TRANSITIONS.UP;
     const total   = Object.values(weights).reduce((a, b) => a + b, 0);
     let rand = Math.random() * total;
     for (const [state, w] of Object.entries(weights)) {
         rand -= w;
         if (rand <= 0) return state;
     }
-    return 'STABLE';
+    return 'DOWN';
 }
 
 function transitionState() {
@@ -49,7 +37,7 @@ function transitionState() {
 
 function scheduleTransition() {
     if (_timer) clearTimeout(_timer);
-    const s = STATES[currentState] || STATES.STABLE;
+    const s = STATES[currentState] || STATES.UP;
     const delay = (s.minDur + Math.random() * (s.maxDur - s.minDur)) * 1000;
     _timer = setTimeout(() => {
         transitionState();
@@ -87,6 +75,9 @@ async function loadMarketState() {
             currentState   = doc.state;
             stateChangedAt = doc.changedAt || Date.now();
             console.log(`[Market] ✅ Restored state: ${currentState} (${STATES[currentState].label})`);
+        } else {
+            // reset to UP if old state not valid
+            currentState = 'UP';
         }
     } catch (e) { console.error('[Market] Load error:', e.message); }
 }
@@ -94,8 +85,8 @@ async function loadMarketState() {
 // ── State query ──────────────────────────────────────────────────────
 
 function getMarketState() {
-    const s        = STATES[currentState] || STATES.STABLE;
-    const elapsed  = Math.floor((Date.now() - stateChangedAt) / 1000);
+    const s       = STATES[currentState] || STATES.UP;
+    const elapsed = Math.floor((Date.now() - stateChangedAt) / 1000);
     return { name: currentState, ...s, elapsed };
 }
 
@@ -116,9 +107,9 @@ function streakModifier(d) {
 function recoveryModifier(d) {
     const recent = d.efRecentBets || [];
     if (recent.length < 5) return 0;
-    const last10   = recent.slice(-10);
-    const lost     = last10.filter(b => !b.win).reduce((s, b) => s + b.amount, 0);
-    const wagered  = last10.reduce((s, b) => s + b.amount, 0);
+    const last10  = recent.slice(-10);
+    const lost    = last10.filter(b => !b.win).reduce((s, b) => s + b.amount, 0);
+    const wagered = last10.reduce((s, b) => s + b.amount, 0);
     return wagered > 0 && lost / wagered > 0.30 ? +0.08 : 0;
 }
 
@@ -130,22 +121,28 @@ function antiFarmModifier(d) {
 
 // ── Main outcome calculation ─────────────────────────────────────────
 
-function calculateOutcome(userId, betAmount) {
+function calculateOutcome(userId, betAmount, direction) {
     const { econData, checkEconUser } = require('./econStore');
     checkEconUser(userId);
     const d = econData[userId];
 
-    let prob = (STATES[currentState] || STATES.STABLE).baseWin;
-    prob += streakModifier(d);
-    prob += recoveryModifier(d);
-    prob += antiFarmModifier(d);
-    prob = Math.max(0.08, Math.min(0.85, prob));
+    // Qofka doorashada la barbardhig suuqa si toos ah
+    const marketIsUp     = currentState === 'UP';
+    const playerPickedUp = direction === 'u';
+
+    // Haddii labaduba isku mid yihiin = WIN, haddii kala duwan yihiin = LOSS
+    const correctGuess = (playerPickedUp === marketIsUp);
+
+    // Win = 100% haddii sax, Loss = 100% haddii khalad
+    // Small random (5%) khalad dhici kara
+    const rand = Math.random();
+    const win  = correctGuess ? rand < 0.95 : rand < 0.05;
 
     return {
-        win:         Math.random() < prob,
-        probability: prob,
+        win,
+        probability: correctGuess ? 0.95 : 0.05,
         stateName:   currentState,
-        stateInfo:   STATES[currentState] || STATES.STABLE,
+        stateInfo:   STATES[currentState] || STATES.UP,
     };
 }
 

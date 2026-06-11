@@ -13,7 +13,11 @@ module.exports = async function richCmd(message) {
 
     const lines = await Promise.all(entries.map(async ({ uid, btc }, i) => {
         let name = `<@${uid}>`;
-        try { const u = await message.client.users.fetch(uid); name = `@${u.username}`; } catch {}
+        try {
+            const member = await message.guild?.members.fetch(uid);
+            const user   = member?.user || await message.client.users.fetch(uid);
+            name = member?.nickname || user?.globalName || user?.username || name;
+        } catch {}
         const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `**${i + 1}.**`;
         return `${medal} **${name}** — ₿ **${fmt(btc)}**`;
     }));

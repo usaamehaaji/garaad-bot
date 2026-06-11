@@ -8,6 +8,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData, saveData, activeGames } = require('../store');
 const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
+const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 
 const { markSeenForGame } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
@@ -112,12 +113,15 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         const streak     = game ? (game.bestStreak  || 0) : 0;
         const correct    = game ? (game.correctCount || 0) : 0;
         const wrong      = total - correct;
-        // 3 sax = 1 IQ, xad 30 IQ maalintiiba solo
+        // IQ: kaliya marka dhibcaha guud ay >= 80 yihiin, xad 30 IQ maalintiiba solo
         const dayKey = new Date().toISOString().slice(0, 10);
         const dd = userData[userId];
         if (dd.soloIqDayKey !== dayKey) { dd.soloIqDayKey = dayKey; dd.soloIqToday = 0; }
         const soloLeft   = Math.max(0, 30 - (dd.soloIqToday || 0));
-        const rawIqGain  = Math.floor(correct / 3);
+        // IQ kaliya hadii dhibcaha >= 80 (heerka wanaagsan) + user-ku ma dib u ciyaaraynin
+        const isReplaying = !!(userData[userId].soloReplaying);
+        const qualifiesForIq = !isReplaying && totalPts >= 80;
+        const rawIqGain  = qualifiesForIq ? Math.max(1, Math.floor(totalPts / 80)) : 0;
         const iqGain     = Math.min(rawIqGain, soloLeft);
         if (iqGain > 0) {
             userData[userId].iq = (userData[userId].iq || 0) + iqGain;
@@ -126,18 +130,26 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         }
         const dayUsed = dd.soloIqToday || 0;
 
+        // Xukun: wanaagsan 90+, fiican 80-89, hoos 80
+        let gradeText = '';
+        const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+        if (pct >= 90)      gradeText = '🌟 **Aad u fiican!** (90%+) — Tayada su\'aalaha waa hagaag!';
+        else if (pct >= 80) gradeText = '✨ **Wanaagsan!** (80%+) — IQ aad u heeshay!';
+        else                gradeText = `📈 **${pct}%** — IQ luma, wax ka baadi.`;
+
         const finishEmbed = new EmbedBuilder()
             .setTitle('🏁 Ciyaarta Waa Dhamaaday!')
             .setDescription(
                 `### 📊 Natiijadaada — <@${userId}>\n\n` +
-                `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}**\n` +
+                `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}** (${pct}%)\n` +
                 `🎯 Dhibco guud: **${totalPts}** pts\n` +
                 `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
-                `🧠 IQ aad heshay game kan waa: **+${iqGain} IQ** _(${correct} sax ÷ 3)_\n` +
+                `${gradeText}\n` +
+                `🧠 IQ aad heshay game kan waa: **+${iqGain} IQ** _(80+ dhibcood = IQ)_\n` +
                 `📅 Maanta solo IQ: **${dayUsed}/30**\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | ⭐ XP: **${d.xp || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
-            .setColor('#2ecc71');
+            .setColor(pct >= 90 ? '#f39c12' : pct >= 80 ? '#2ecc71' : '#e74c3c');
 
         const row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
@@ -299,6 +311,12 @@ async function handleSoloAnswer(interaction) {
     const timeTaken = Date.now() - (interaction.message.createdTimestamp || Date.now());
     let   msg       = '';
 
+    // ── BTC reward yar su'aal kasta (waqtiga la galiyay awgeed) ──
+    const BTC_PER_QUESTION = 10;
+    checkEconUser(ownerId);
+    econData[ownerId].btc = (econData[ownerId].btc || 0) + BTC_PER_QUESTION;
+    saveEcon();
+
     if (result === 'true') {
         // ── Sax ──
         const pts      = calcTimedScore(Math.min(timeTaken, GLOBAL_WAIT_MS));
@@ -312,13 +330,13 @@ async function handleSoloAnswer(interaction) {
         game.correctCount  = (game.correctCount || 0) + 1;
 
         userData[ownerId].stats.soloCorrect++;
-        msg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTaken/1000).toFixed(1)}s`;
+        msg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTaken/1000).toFixed(1)}s | 💰 **+${BTC_PER_QUESTION} BTC**`;
     } else {
         // ── Qalad ──
         game.currentStreak = 0;
         userData[ownerId].stats.soloWrong++;
         userData[ownerId].iq = Math.max(0, (userData[ownerId].iq || 0) - 1);
-        msg = '❌ **QALAD** — **−1 IQ** · Streak: 0🔥';
+        msg = `❌ **QALAD** — **−1 IQ** · Streak: 0🔥 | 💰 **+${BTC_PER_QUESTION} BTC** (waqti awgeed)`;
     }
 
     userData[ownerId].stats.soloPlayed++;

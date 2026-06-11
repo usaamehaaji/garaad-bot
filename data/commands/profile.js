@@ -29,6 +29,11 @@ module.exports = async function profileCommand(message) {
     checkEconUser(target.id);
     checkAndAwardBadges(target.id);
 
+    // Get display name: server nickname > globalName > username
+    let targetMember = null;
+    try { targetMember = await message.guild?.members.fetch(target.id); } catch {}
+    const displayName = targetMember?.nickname || target.globalName || target.displayName || target.username;
+
     const data = userData[target.id];
     const econ = econData[target.id] || {};
 
@@ -72,16 +77,13 @@ module.exports = async function profileCommand(message) {
 
     const tierColor = tier.color || '#9b59b6';
 
-    // Bank & Company
-    const { getPersonalBank, getAllPublicBanks, getUserOwnedCompany, getCompanyLevel } = require('../../src/economy/bankStore');
+
+
+    // Bank only (no company)
+    const { getPersonalBank, getAllPublicBanks } = require('../../src/economy/bankStore');
     const myBank    = getPersonalBank(econData, target.id);
     const ownedBank = Object.values(getAllPublicBanks()).find(b => b.ownerId === target.id);
-    const company   = (() => { try { const { getAllCompanies } = require('../../src/economy/bankStore'); return Object.values(getAllCompanies()).find(c => c.ownerId === target.id || c.employees?.[target.id]) || null; } catch { return null; } })();
-
-    const bankTxt    = ownedBank ? `🏛️ **${ownedBank.name}** (Owner)` : myBank ? `🏦 Account: \`${myBank.bankId}\`` : '*None*';
-    const companyTxt = company
-        ? `🏢 **${company.name}** · ${company.employees?.[target.id]?.role || (company.ownerId === target.id ? 'Founder' : 'Employee')}`
-        : '*None*';
+    const bankTxt   = ownedBank ? `🏛️ **${ownedBank.name}** (Owner)` : myBank ? `🏦 Account: \`${myBank.bankId}\`` : '*None*';
 
     // Relationship
     const { RING_NAMES } = require('./relationship');
@@ -92,11 +94,11 @@ module.exports = async function profileCommand(message) {
         try { const pu = await message.client.users.fetch(rel.partnerId); pName = pu.username; } catch {}
         const days    = rel.since ? Math.floor((Date.now() - rel.since) / 86400000) : 0;
         const ringTxt = RING_NAMES[rel.ringType] || '💍 Ring';
-        relTxt = `💕 **Partner:** ${pName} ❤️ ${target.username} · 📅 ${days} Days · ${ringTxt}`;
+        relTxt = `💕 **Partner:** ${pName} ❤️ ${displayName} · 📅 ${days} Days · ${ringTxt}`;
     }
 
     const desc =
-        `# 👤 ${target.username}${titlePart}\n` +
+        `# 👤 ${displayName}${titlePart}\n` +
         `\n` +
         `${tier.emoji} **${tier.name}** Tier  •  🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
         `\`${progressBar(pct)}\` ${pct}%` + (needed > 0 ? `  *(${needed} IQ → next tier)*` : ' *(MAX TIER)*') + `\n` +
@@ -112,8 +114,8 @@ module.exports = async function profileCommand(message) {
         `\n` +
         `${relTxt}\n` +
         `\n` +
+
         `🏦 **Bank:** ${bankTxt}\n` +
-        `🏢 **Company:** ${companyTxt}\n` +
         `\n` +
         `🖼️ **Frame:** ${frameTxt}\n` +
         `🏅 **Badges:** ${badgeStr}` +

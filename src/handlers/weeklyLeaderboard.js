@@ -198,5 +198,5 @@ module.exports = function setupWeeklyLeaderboard(client) {
     }
 
     setTimeout(() => scheduleNext(), FIRST_TICK_MS);
-    console.log('[WeeklyLB] ✅ Weekly leaderboard scheduler started');
+    console.log('[WeeklyLB] ✅ Weekly leaderboard scheduler started — Sunday 19:00 EAT');
 };

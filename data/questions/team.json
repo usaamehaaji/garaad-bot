@@ -1,1423 +1,43 @@
 [
   {
-    "question": "Caasimadda dalka Soomaaliya waa?",
+    "question": "Xogga iftiinka (Speed of Light) waa imisa km/s?",
     "options": [
-      "Hargeysa",
-      "Muqdisho",
-      "Kismaayo",
-      "Beledweyne"
+      "200,000",
+      "300,000",
+      "400,000",
+      "500,000"
     ],
-    "correct": "Muqdisho"
+    "correct": "300,000"
   },
   {
-    "question": "Gobollada Soomaaliya waa imisa?",
+    "question": "Caasimadda Russia waa?",
     "options": [
-      "15",
-      "18",
-      "21",
-      "24"
-    ],
-    "correct": "18"
-  },
-  {
-    "question": "Webiga ugu dhaadheer Soomaaliya waa?",
-    "options": [
-      "Shabelle",
-      "Juba",
-      "Dawa",
-      "Lag Dera"
-    ],
-    "correct": "Juba"
-  },
-  {
-    "question": "Madaxweynihii ugu horreeyay Soomaaliya waa?",
-    "options": [
-      "Maxamed Siyaad",
-      "Aadan Cadde",
-      "Cabdiqaasim",
-      "Xasan Sheekh"
-    ],
-    "correct": "Aadan Cadde"
-  },
-  {
-    "question": "Maalin Xorriyadda Koonfurta Soomaaliya waa?",
-    "options": [
-      "26 Juun",
-      "1 Luulyo",
-      "21 Oktoobar",
-      "15 Ogosto"
-    ],
-    "correct": "1 Luulyo"
-  },
-  {
-    "question": "Maalin Xorriyadda Waqooyi (Somaliland) waa?",
-    "options": [
-      "1 Luulyo",
-      "26 Juun",
-      "21 Oktoobar",
-      "10 Agosto"
-    ],
-    "correct": "26 Juun"
-  },
-  {
-    "question": "Caasimadda Puntland waa?",
-    "options": [
-      "Boosaaso",
-      "Qardho",
-      "Garoowe",
-      "Eyl"
-    ],
-    "correct": "Garoowe"
-  },
-  {
-    "question": "Magaalada ugu weyn gobolka Puntland waa?",
-    "options": [
-      "Garoowe",
-      "Qardho",
-      "Eyl",
-      "Boosaaso"
-    ],
-    "correct": "Boosaaso"
-  },
-  {
-    "question": "Gobolka ugu weyn Soomaaliya dhulkiisa waa?",
-    "options": [
-      "Hiiraan",
-      "Bakool",
-      "Mudug",
-      "Galgaduud"
-    ],
-    "correct": "Mudug"
-  },
-  {
-    "question": "Magaalada ugu weyn gobolka Hiiraan waa?",
-    "options": [
-      "Bulo Burde",
-      "Jalalaqsi",
-      "Beledweyne",
-      "Maxaas"
-    ],
-    "correct": "Beledweyne"
-  },
-  {
-    "question": "Caasimadda gobolka Gedo waa?",
-    "options": [
-      "Luuq",
-      "Baraawe",
-      "Garbahaareey",
-      "Baidoa"
-    ],
-    "correct": "Garbahaareey"
-  },
-  {
-    "question": "Magaalada Kismaayo waxay ku taal gobolka?",
-    "options": [
-      "Jubbada Dhexe",
-      "Jubbada Hoose",
-      "Jubbada Sare",
-      "Gedo"
-    ],
-    "correct": "Jubbada Hoose"
-  },
-  {
-    "question": "Biyaha Soomaaliya waxay ka soo bixi jireen meesha loo yaqaan?",
-    "options": [
-      "Golis",
-      "Dhameer",
-      "Ogo",
-      "Xoogiga"
-    ],
-    "correct": "Golis"
-  },
-  {
-    "question": "Caasimadda gobolka Woqooyi Galbeed waa?",
-    "options": [
-      "Berbera",
-      "Hargeysa",
-      "Burco",
-      "Ceerigaavo"
-    ],
-    "correct": "Hargeysa"
-  },
-  {
-    "question": "Caasimadda gobolka Sanaag waa?",
-    "options": [
-      "Hargeysa",
-      "Burco",
-      "Ceerigaavo",
-      "Laascaanood"
-    ],
-    "correct": "Ceerigaavo"
-  },
-  {
-    "question": "Tirada Suurtada Qur'aanka waa?",
-    "options": [
-      "100",
-      "110",
-      "114",
-      "120"
-    ],
-    "correct": "114"
-  },
-  {
-    "question": "Suuradda ugu dheer ee Qur'aanka waa?",
-    "options": [
-      "Al-Faatixa",
-      "Al-Baqara",
-      "Aali Cimraan",
-      "An-Nisaa"
-    ],
-    "correct": "Al-Baqara"
-  },
-  {
-    "question": "Tirada fariidhyada Islaamka waa?",
-    "options": [
-      "3",
-      "4",
-      "5",
-      "6"
-    ],
-    "correct": "5"
-  },
-  {
-    "question": "Halqabihii Islaamkii ugu horreeyay waa?",
-    "options": [
-      "Cumar",
-      "Cali",
-      "Cismaan",
-      "Abuu Bakr"
-    ],
-    "correct": "Abuu Bakr"
-  },
-  {
-    "question": "Sannadkii Hijriga bilaabatay waa?",
-    "options": [
-      "610 M",
-      "615 M",
-      "622 M",
-      "632 M"
-    ],
-    "correct": "622 M"
-  },
-  {
-    "question": "Tirada halqabihii Raashidiin waa?",
-    "options": [
-      "3",
-      "4",
-      "5",
-      "6"
-    ],
-    "correct": "4"
-  },
-  {
-    "question": "Suuradda ugu gaaban ee Qur'aanka waa?",
-    "options": [
-      "Al-Ikhlaas",
-      "Al-Kawthar",
-      "Al-Faatixa",
-      "Al-Nasr"
-    ],
-    "correct": "Al-Kawthar"
-  },
-  {
-    "question": "Meesha Nabi Muxamed (CSW) ku dhashay waa?",
-    "options": [
-      "Madiina",
-      "Taif",
-      "Shaam",
-      "Makka"
-    ],
-    "correct": "Makka"
-  },
-  {
-    "question": "Kitaabka Tawraadda waxaa lagu soo dejiyay?",
-    "options": [
-      "Nabi Ciise",
-      "Nabi Ibraahim",
-      "Nabi Daawuud",
-      "Nabi Muuse"
-    ],
-    "correct": "Nabi Muuse"
-  },
-  {
-    "question": "Kitaabka Injiilka waxaa lagu soo dejiyay?",
-    "options": [
-      "Nabi Muuse",
-      "Nabi Ibraahim",
-      "Nabi Daawuud",
-      "Nabi Ciise"
-    ],
-    "correct": "Nabi Ciise"
-  },
-  {
-    "question": "Kitaabka Sabuura waxaa lagu soo dejiyay?",
-    "options": [
-      "Nabi Muuse",
-      "Nabi Ciise",
-      "Nabi Ibraahim",
-      "Nabi Daawuud"
-    ],
-    "correct": "Nabi Daawuud"
-  },
-  {
-    "question": "Tirada Nebiyada Islaamka ee la xusay Qur'aanka waa?",
-    "options": [
-      "20",
-      "25",
-      "30",
-      "35"
-    ],
-    "correct": "25"
-  },
-  {
-    "question": "Waa maxay 15 × 15?",
-    "options": [
-      "200",
-      "215",
-      "225",
-      "235"
-    ],
-    "correct": "225"
-  },
-  {
-    "question": "Waa maxay natiijada √144?",
-    "options": [
-      "10",
-      "11",
-      "12",
-      "14"
-    ],
-    "correct": "12"
-  },
-  {
-    "question": "Waa maxay 20% of 500?",
-    "options": [
-      "50",
-      "75",
-      "100",
-      "125"
-    ],
-    "correct": "100"
-  },
-  {
-    "question": "Waa maxay natiijada 1000 ÷ 25?",
-    "options": [
-      "20",
-      "30",
-      "40",
-      "50"
-    ],
-    "correct": "40"
-  },
-  {
-    "question": "Waa maxay 2⁸?",
-    "options": [
-      "64",
-      "128",
-      "256",
-      "512"
-    ],
-    "correct": "256"
-  },
-  {
-    "question": "Waa maxay 7 × 8?",
-    "options": [
-      "49",
-      "54",
-      "56",
-      "63"
-    ],
-    "correct": "56"
-  },
-  {
-    "question": "Waa maxay tirada π ilaa labo meelood?",
-    "options": [
-      "3.12",
-      "3.14",
-      "3.16",
-      "3.18"
-    ],
-    "correct": "3.14"
-  },
-  {
-    "question": "Waa maxay 12²?",
-    "options": [
-      "132",
-      "144",
-      "156",
-      "168"
-    ],
-    "correct": "144"
-  },
-  {
-    "question": "Tirada xagasha saddex-xagalka waa imisa dib-u-celin?",
-    "options": [
-      "90°",
-      "180°",
-      "270°",
-      "360°"
-    ],
-    "correct": "180°"
-  },
-  {
-    "question": "Tirada xagasha afar-xagalka waa imisa dib-u-celin?",
-    "options": [
-      "180°",
-      "270°",
-      "360°",
-      "450°"
-    ],
-    "correct": "360°"
-  },
-  {
-    "question": "Waa maxay natiijada 8 × 9?",
-    "options": [
-      "63",
-      "72",
-      "81",
-      "90"
-    ],
-    "correct": "72"
-  },
-  {
-    "question": "Waa maxay natiijada 25 × 4?",
-    "options": [
-      "80",
-      "90",
-      "100",
-      "110"
-    ],
-    "correct": "100"
-  },
-  {
-    "question": "Waa maxay natiijada 144 ÷ 12?",
-    "options": [
-      "10",
-      "11",
-      "12",
-      "13"
-    ],
-    "correct": "12"
-  },
-  {
-    "question": "Waa maxay natiijada 50% of 200?",
-    "options": [
-      "50",
-      "75",
-      "100",
-      "125"
-    ],
-    "correct": "100"
-  },
-  {
-    "question": "Waa maxay natiijada 3³?",
-    "options": [
-      "9",
-      "18",
-      "27",
-      "36"
-    ],
-    "correct": "27"
-  },
-  {
-    "question": "Waa maxay natiijada 5! (5 factorial)?",
-    "options": [
-      "25",
-      "60",
-      "100",
-      "120"
-    ],
-    "correct": "120"
-  },
-  {
-    "question": "Xubinta jirka u qaabilsan nuujinta dhiigga waa?",
-    "options": [
-      "Beerka",
-      "Kelyaha",
-      "Wadnaha",
-      "Sambabbada"
-    ],
-    "correct": "Wadnaha"
-  },
-  {
-    "question": "Tirada lafahaa jirka bini'aadamka waa?",
-    "options": [
-      "196",
-      "206",
-      "216",
-      "226"
-    ],
-    "correct": "206"
-  },
-  {
-    "question": "Nooca dhiigga ugu guud ee adduunka waa?",
-    "options": [
-      "A+",
-      "B+",
-      "O+",
-      "AB+"
-    ],
-    "correct": "O+"
-  },
-  {
-    "question": "Xubinta jirka ee nuujinta oksijiinta waa?",
-    "options": [
-      "Wadnaha",
-      "Beerka",
-      "Maskaxda",
-      "Sambabbada"
-    ],
-    "correct": "Sambabbada"
-  },
-  {
-    "question": "Heerkulka jirka bini'aadamka caadiga ah waa?",
-    "options": [
-      "35°C",
-      "37°C",
-      "39°C",
-      "41°C"
-    ],
-    "correct": "37°C"
-  },
-  {
-    "question": "Tirada cabirada (senses) bini'aadamka waa?",
-    "options": [
-      "3",
-      "4",
-      "6",
-      "5"
-    ],
-    "correct": "5"
-  },
-  {
-    "question": "Dhibcaha ay biyuhu ku karkaraan (Celsius) waa?",
-    "options": [
-      "80°C",
-      "90°C",
-      "110°C",
-      "100°C"
-    ],
-    "correct": "100°C"
-  },
-  {
-    "question": "Tirada carboonka (Carbon) ee jadwalka howleedka waa?",
-    "options": [
-      "4",
-      "6",
-      "8",
-      "12"
-    ],
-    "correct": "6"
-  },
-  {
-    "question": "Cunto kasta oo cagaaran waxay samaysan tahay?",
-    "options": [
-      "Mitokondria",
-      "Klorofiil",
-      "Seelaad",
-      "Nukliyaas"
-    ],
-    "correct": "Klorofiil"
-  },
-  {
-    "question": "Tirada garaaca wadnaha daqiiqadda caadiga ah waa?",
-    "options": [
-      "40-50",
-      "60-100",
-      "110-130",
-      "130-150"
-    ],
-    "correct": "60-100"
-  },
-  {
-    "question": "Webiga ugu dhaadheer adduunka waa?",
-    "options": [
-      "Amazon",
-      "Congo",
-      "Mississippi",
-      "Niil"
-    ],
-    "correct": "Niil"
-  },
-  {
-    "question": "Buurta ugu sarreysa adduunka waa?",
-    "options": [
-      "K2",
-      "Kilimanjaro",
-      "Mont Blanc",
-      "Everest"
-    ],
-    "correct": "Everest"
-  },
-  {
-    "question": "Badda ugu weyn adduunka waa?",
-    "options": [
-      "Atlantik",
-      "Hindiya",
-      "Artikiga",
-      "Baasifig"
-    ],
-    "correct": "Baasifig"
-  },
-  {
-    "question": "Caasimadda dalka Masar waa?",
-    "options": [
-      "Alexandria",
-      "Luxor",
-      "Aswan",
-      "Cairo"
-    ],
-    "correct": "Cairo"
-  },
-  {
-    "question": "Caasimadda dalka Imaaraatka waa?",
-    "options": [
-      "Dubai",
-      "Sharjah",
-      "Fujairah",
-      "Abu Dhabi"
-    ],
-    "correct": "Abu Dhabi"
-  },
-  {
-    "question": "Caasimadda dalka Shiinaha waa?",
-    "options": [
-      "Shanghai",
-      "Guangzhou",
-      "Shenzhen",
-      "Beijing"
-    ],
-    "correct": "Beijing"
-  },
-  {
-    "question": "Caasimadda dalka Hindiya waa?",
-    "options": [
-      "Mumbai",
-      "Kolkata",
-      "Chennai",
-      "New Delhi"
-    ],
-    "correct": "New Delhi"
-  },
-  {
-    "question": "Caasimadda dalka Turkiga waa?",
-    "options": [
-      "Istanbul",
-      "Izmir",
-      "Antalya",
-      "Ankara"
-    ],
-    "correct": "Ankara"
-  },
-  {
-    "question": "Caasimadda dalka Qadar waa?",
-    "options": [
-      "Dubai",
-      "Riyadh",
-      "Kuwait City",
-      "Doha"
-    ],
-    "correct": "Doha"
-  },
-  {
-    "question": "Caasimadda dalka Kanada waa?",
-    "options": [
-      "Toronto",
-      "Vancouver",
-      "Montreal",
-      "Ottawa"
-    ],
-    "correct": "Ottawa"
-  },
-  {
-    "question": "Caasimadda dalka Ruushka waa?",
-    "options": [
-      "St. Petersburg",
-      "Kyiv",
-      "Minsk",
+      "Saint Petersburg",
+      "Novosibirsk",
+      "Yekaterinburg",
       "Moscow"
     ],
     "correct": "Moscow"
   },
   {
-    "question": "Caasimadda dalka Sacuudiga waa?",
+    "question": "Meeraheeda Saturn waxay leedahay imisa dayax?",
     "options": [
-      "Makka",
-      "Madiina",
-      "Jidda",
-      "Riyadh"
+      "50+",
+      "60+",
+      "80+",
+      "100+"
     ],
-    "correct": "Riyadh"
+    "correct": "80+"
   },
   {
-    "question": "Caasimadda dalka Kenya waa?",
+    "question": "Heshiiskii Carta wuxuu dhacay waddankee?",
     "options": [
-      "Mombasa",
-      "Nakuru",
-      "Kisumu",
-      "Nairobi"
-    ],
-    "correct": "Nairobi"
-  },
-  {
-    "question": "Caasimadda dalka Itoobiya waa?",
-    "options": [
-      "Dire Dawa",
-      "Harar",
-      "Gondar",
-      "Addis Ababa"
-    ],
-    "correct": "Addis Ababa"
-  },
-  {
-    "question": "Caasimadda dalka Jabuuti waa?",
-    "options": [
-      "Ali Sabieh",
-      "Obock",
-      "Tadjourah",
-      "Djibouti"
+      "Kenya",
+      "Djibouti",
+      "Ethiopia",
+      "Sudan"
     ],
     "correct": "Djibouti"
-  },
-  {
-    "question": "Caasimadda dalka Faransiiska waa?",
-    "options": [
-      "Lyon",
-      "Marseille",
-      "Nice",
-      "Paris"
-    ],
-    "correct": "Paris"
-  },
-  {
-    "question": "Caasimadda dalka Ingiriiska waa?",
-    "options": [
-      "Manchester",
-      "Liverpool",
-      "Birmingham",
-      "London"
-    ],
-    "correct": "London"
-  },
-  {
-    "question": "Caasimadda dalka Jarmalka waa?",
-    "options": [
-      "Hamburg",
-      "Munich",
-      "Frankfurt",
-      "Berlin"
-    ],
-    "correct": "Berlin"
-  },
-  {
-    "question": "Waa maxay the past tense of 'go'?",
-    "options": [
-      "goed",
-      "gone",
-      "goes",
-      "went"
-    ],
-    "correct": "went"
-  },
-  {
-    "question": "What is the plural of 'child'?",
-    "options": [
-      "childs",
-      "childes",
-      "childrens",
-      "children"
-    ],
-    "correct": "children"
-  },
-  {
-    "question": "They ___ playing football right now.",
-    "options": [
-      "is",
-      "am",
-      "was",
-      "are"
-    ],
-    "correct": "are"
-  },
-  {
-    "question": "What is the opposite of 'Ancient'?",
-    "options": [
-      "Old",
-      "Future",
-      "Past",
-      "Modern"
-    ],
-    "correct": "Modern"
-  },
-  {
-    "question": "She is the ___ student in the class.",
-    "options": [
-      "smart",
-      "smarter",
-      "more smart",
-      "smartest"
-    ],
-    "correct": "smartest"
-  },
-  {
-    "question": "I ___ to school yesterday.",
-    "options": [
-      "go",
-      "goes",
-      "going",
-      "went"
-    ],
-    "correct": "went"
-  },
-  {
-    "question": "What is the plural of 'mouse'?",
-    "options": [
-      "mouses",
-      "mices",
-      "mouse",
-      "mice"
-    ],
-    "correct": "mice"
-  },
-  {
-    "question": "What is the opposite of 'Empty'?",
-    "options": [
-      "Hollow",
-      "Open",
-      "Vacant",
-      "Full"
-    ],
-    "correct": "Full"
-  },
-  {
-    "question": "The sun ___ in the east.",
-    "options": [
-      "set",
-      "rise",
-      "rising",
-      "rises"
-    ],
-    "correct": "rises"
-  },
-  {
-    "question": "What is the past tense of 'eat'?",
-    "options": [
-      "eated",
-      "eaten",
-      "eats",
-      "ate"
-    ],
-    "correct": "ate"
-  },
-  {
-    "question": "CPU waxaa loola jeedaa?",
-    "options": [
-      "Core Power Usage",
-      "Computer Power Unit",
-      "Core Processing Unit",
-      "Central Processing Unit"
-    ],
-    "correct": "Central Processing Unit"
-  },
-  {
-    "question": "Tirada saacadaha maalinta waa?",
-    "options": [
-      "20",
-      "22",
-      "26",
-      "24"
-    ],
-    "correct": "24"
-  },
-  {
-    "question": "Tirada bilaha sanadka waa?",
-    "options": [
-      "10",
-      "11",
-      "13",
-      "12"
-    ],
-    "correct": "12"
-  },
-  {
-    "question": "Hantida ugu qaali badan adduunka waa?",
-    "options": [
-      "Siilver",
-      "Dahabka",
-      "Platinum",
-      "Damaantiirka"
-    ],
-    "correct": "Damaantiirka"
-  },
-  {
-    "question": "Tirada maalinta toddobaadka waa?",
-    "options": [
-      "5",
-      "6",
-      "8",
-      "7"
-    ],
-    "correct": "7"
-  },
-  {
-    "question": "Tirada sanadaha qarnigu leeyahay waa?",
-    "options": [
-      "50",
-      "75",
-      "100",
-      "150"
-    ],
-    "correct": "100"
-  },
-  {
-    "question": "Koobka adduunka kubadda cagta (FIFA World Cup) waxaa ugu badnaa ku guulaystay?",
-    "options": [
-      "Jarmalka",
-      "Argentina",
-      "Faransiiska",
-      "Brazil"
-    ],
-    "correct": "Brazil"
-  },
-  {
-    "question": "Xiddigta ugu dhowaanta qorraxda waa?",
-    "options": [
-      "Betelgeuse",
-      "Sirius",
-      "Vega",
-      "Proxima Centauri"
-    ],
-    "correct": "Proxima Centauri"
-  },
-  {
-    "question": "Dalkii ugu horreeyay ee gaadhay dayaxa waa?",
-    "options": [
-      "Ruushka",
-      "Faransiiska",
-      "Jarmalka",
-      "Ameerika"
-    ],
-    "correct": "Ameerika"
-  },
-  {
-    "question": "Tirada caleemaha bandhiga (periodic table) ah ee ogaalka ah waa?",
-    "options": [
-      "98",
-      "108",
-      "118",
-      "128"
-    ],
-    "correct": "118"
-  },
-  {
-    "question": "Dalka ugu weyn adduunka (dhulkiisa) waa?",
-    "options": [
-      "Kanada",
-      "Ameerika",
-      "Shiinaha",
-      "Ruushka"
-    ],
-    "correct": "Ruushka"
-  },
-  {
-    "question": "Luuqadda Soomaaliga si rasmi ah loo qoray sanadkii?",
-    "options": [
-      "1960",
-      "1969",
-      "1972",
-      "1979"
-    ],
-    "correct": "1972"
-  },
-  {
-    "question": "Caasimadda gobolka Galmudug waa?",
-    "options": [
-      "Gaalkacyo",
-      "Dhuusamarreeb",
-      "Hobyo",
-      "Cadaado"
-    ],
-    "correct": "Dhuusamarreeb"
-  },
-  {
-    "question": "Caasimadda gobolka Bay waa?",
-    "options": [
-      "Baraawe",
-      "Afgooye",
-      "Jawhar",
-      "Baidoa"
-    ],
-    "correct": "Baidoa"
-  },
-  {
-    "question": "Gobolka Shabeellaha Dhexe caasimaddiisu waa?",
-    "options": [
-      "Marka",
-      "Afgooye",
-      "Jawhar",
-      "Balcad"
-    ],
-    "correct": "Jawhar"
-  },
-  {
-    "question": "Caasimadda gobolka Jubbada Sare waa?",
-    "options": [
-      "Kismaayo",
-      "Luuq",
-      "Bu'aale",
-      "Baraawe"
-    ],
-    "correct": "Bu'aale"
-  },
-  {
-    "question": "Caasimadda gobolka Galgaduud waa?",
-    "options": [
-      "Gaalkacyo",
-      "Dhuusamarreeb",
-      "Ceel Buur",
-      "Baardheere"
-    ],
-    "correct": "Dhuusamarreeb"
-  },
-  {
-    "question": "Caasimadda gobolka Mudug waa?",
-    "options": [
-      "Dhuusamarreeb",
-      "Hobyo",
-      "Gaalkacyo",
-      "Ceel Buur"
-    ],
-    "correct": "Gaalkacyo"
-  },
-  {
-    "question": "Caasimadda gobolka Nugaal waa?",
-    "options": [
-      "Boosaaso",
-      "Eyl",
-      "Qardho",
-      "Garoowe"
-    ],
-    "correct": "Garoowe"
-  },
-  {
-    "question": "Caasimadda gobolka Bari waa?",
-    "options": [
-      "Garoowe",
-      "Eyl",
-      "Qardho",
-      "Boosaaso"
-    ],
-    "correct": "Boosaaso"
-  },
-  {
-    "question": "Caasimadda gobolka Shabeellaha Hoose waa?",
-    "options": [
-      "Afgooye",
-      "Jawhar",
-      "Marka",
-      "Baraawe"
-    ],
-    "correct": "Marka"
-  },
-  {
-    "question": "Tirada juz'yada Qur'aanka waa?",
-    "options": [
-      "25",
-      "28",
-      "30",
-      "32"
-    ],
-    "correct": "30"
-  },
-  {
-    "question": "Bisha Ramadaan waa bisha?",
-    "options": [
-      "7aad",
-      "8aad",
-      "9aad",
-      "10aad"
-    ],
-    "correct": "9aad"
-  },
-  {
-    "question": "Nabi Ibraahim (AS) wuxuu dhisay?",
-    "options": [
-      "Masjidka Aqsaa",
-      "Kacbada",
-      "Masjidka Nabiga",
-      "Masjidka Qubaa"
-    ],
-    "correct": "Kacbada"
-  },
-  {
-    "question": "Suuradda 36 ee Qur'aanka magaceedu waa?",
-    "options": [
-      "Al-Kahf",
-      "Maryam",
-      "Luqmaan",
-      "Yaasiin"
-    ],
-    "correct": "Yaasiin"
-  },
-  {
-    "question": "Nabi Yuusuf (AS) wuxuu ku noolaa?",
-    "options": [
-      "Shaam",
-      "Ciraaq",
-      "Masar",
-      "Xijaasku"
-    ],
-    "correct": "Masar"
-  },
-  {
-    "question": "Tirada sujuudda saladadda Fajriga waa?",
-    "options": [
-      "2",
-      "3",
-      "4",
-      "6"
-    ],
-    "correct": "4"
-  },
-  {
-    "question": "Kitaabka Zabuura waxaa lagu soo dejiyay?",
-    "options": [
-      "Nabi Muuse",
-      "Nabi Ciise",
-      "Nabi Ibraahim",
-      "Nabi Daawuud"
-    ],
-    "correct": "Nabi Daawuud"
-  },
-  {
-    "question": "Tirada Nebiyada Ulul-Cazm waa?",
-    "options": [
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "correct": "5"
-  },
-  {
-    "question": "Ciida Xajka waxay ku beegan tahay bisha?",
-    "options": [
-      "Ramadaan",
-      "Shawwaal",
-      "Dhul-Qacda",
-      "Dhul-Xijjah"
-    ],
-    "correct": "Dhul-Xijjah"
-  },
-  {
-    "question": "Nabi Muuse (AS) meesha uu ka yimid waa?",
-    "options": [
-      "Shaam",
-      "Ciraaq",
-      "Masar",
-      "Xijaasku"
-    ],
-    "correct": "Masar"
-  },
-  {
-    "question": "Waa maxay √225?",
-    "options": [
-      "13",
-      "14",
-      "15",
-      "16"
-    ],
-    "correct": "15"
-  },
-  {
-    "question": "Waa maxay 9²?",
-    "options": [
-      "72",
-      "81",
-      "91",
-      "99"
-    ],
-    "correct": "81"
-  },
-  {
-    "question": "Waa maxay 2¹⁰?",
-    "options": [
-      "512",
-      "1024",
-      "2048",
-      "4096"
-    ],
-    "correct": "1024"
-  },
-  {
-    "question": "Waa maxay 15% of 200?",
-    "options": [
-      "25",
-      "30",
-      "35",
-      "40"
-    ],
-    "correct": "30"
-  },
-  {
-    "question": "Waa maxay 17 × 17?",
-    "options": [
-      "279",
-      "289",
-      "299",
-      "309"
-    ],
-    "correct": "289"
-  },
-  {
-    "question": "Waa maxay 4!?",
-    "options": [
-      "12",
-      "16",
-      "20",
-      "24"
-    ],
-    "correct": "24"
-  },
-  {
-    "question": "Waa maxay 0.5 × 0.5?",
-    "options": [
-      "0.1",
-      "0.25",
-      "0.5",
-      "1"
-    ],
-    "correct": "0.25"
-  },
-  {
-    "question": "Tirada xagasha hexagon (shax) waa?",
-    "options": [
-      "5",
-      "6",
-      "7",
-      "8"
-    ],
-    "correct": "6"
-  },
-  {
-    "question": "Waa maxay 50% of 300?",
-    "options": [
-      "100",
-      "125",
-      "150",
-      "175"
-    ],
-    "correct": "150"
-  },
-  {
-    "question": "Waa maxay √49?",
-    "options": [
-      "5",
-      "6",
-      "7",
-      "8"
-    ],
-    "correct": "7"
-  },
-  {
-    "question": "Meeraha ugu dhow qorraxda waa?",
-    "options": [
-      "Venus",
-      "Earth",
-      "Mars",
-      "Mercury"
-    ],
-    "correct": "Mercury"
-  },
-  {
-    "question": "Tirada meeraha nidaamka qorraxeed waa?",
-    "options": [
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "correct": "8"
-  },
-  {
-    "question": "Xayawaanka ugu dheer adduunka waa?",
-    "options": [
-      "Giraffe",
-      "Elephant",
-      "Camel",
-      "Ostrich"
-    ],
-    "correct": "Giraffe"
-  },
-  {
-    "question": "Xayawaanka ugu weyn adduunka waa?",
-    "options": [
-      "Elephant",
-      "Whale Shark",
-      "Blue Whale",
-      "Sperm Whale"
-    ],
-    "correct": "Blue Whale"
-  },
-  {
-    "question": "Tirada chromosomes bini'aadamka waa?",
-    "options": [
-      "23",
-      "44",
-      "46",
-      "48"
-    ],
-    "correct": "46"
-  },
-  {
-    "question": "Oksijiinta lambarka atoomiga waa?",
-    "options": [
-      "6",
-      "7",
-      "8",
-      "9"
-    ],
-    "correct": "8"
-  },
-  {
-    "question": "Dheriska iftiinka (km/s) waa?",
-    "options": [
-      "100,000",
-      "200,000",
-      "300,000",
-      "400,000"
-    ],
-    "correct": "300,000"
-  },
-  {
-    "question": "Xubinta jirka ugu weyn waa?",
-    "options": [
-      "Beerka",
-      "Maskaxda",
-      "Maqaarka",
-      "Wadnaha"
-    ],
-    "correct": "Maqaarka"
-  },
-  {
-    "question": "Meeraha ugu weyn nidaamka qorraxeed waa?",
-    "options": [
-      "Saturn",
-      "Neptune",
-      "Uranus",
-      "Jupiter"
-    ],
-    "correct": "Jupiter"
-  },
-  {
-    "question": "Meeraha ugu fog qorraxda waa?",
-    "options": [
-      "Uranus",
-      "Saturn",
-      "Jupiter",
-      "Neptune"
-    ],
-    "correct": "Neptune"
-  },
-  {
-    "question": "Caasimadda Australia waa?",
-    "options": [
-      "Sydney",
-      "Melbourne",
-      "Brisbane",
-      "Canberra"
-    ],
-    "correct": "Canberra"
-  },
-  {
-    "question": "Caasimadda Brazil waa?",
-    "options": [
-      "Rio de Janeiro",
-      "São Paulo",
-      "Salvador",
-      "Brasília"
-    ],
-    "correct": "Brasília"
-  },
-  {
-    "question": "Caasimadda Argentina waa?",
-    "options": [
-      "Córdoba",
-      "Rosario",
-      "Mendoza",
-      "Buenos Aires"
-    ],
-    "correct": "Buenos Aires"
-  },
-  {
-    "question": "Caasimadda Mexico waa?",
-    "options": [
-      "Guadalajara",
-      "Monterrey",
-      "Puebla",
-      "Mexico City"
-    ],
-    "correct": "Mexico City"
-  },
-  {
-    "question": "Webiga ugu dhaadheer Yurub waa?",
-    "options": [
-      "Rhine",
-      "Danube",
-      "Thames",
-      "Volga"
-    ],
-    "correct": "Volga"
-  },
-  {
-    "question": "Buurta ugu sarreysa Aafrika waa?",
-    "options": [
-      "Mt. Kenya",
-      "Atlas",
-      "Rwenzori",
-      "Kilimanjaro"
-    ],
-    "correct": "Kilimanjaro"
-  },
-  {
-    "question": "Dalka ugu yar adduunka waa?",
-    "options": [
-      "Monaco",
-      "San Marino",
-      "Liechtenstein",
-      "Vatican City"
-    ],
-    "correct": "Vatican City"
-  },
-  {
-    "question": "Caasimadda Pakistan waa?",
-    "options": [
-      "Karachi",
-      "Lahore",
-      "Quetta",
-      "Islamabad"
-    ],
-    "correct": "Islamabad"
-  },
-  {
-    "question": "Caasimadda Japan waa?",
-    "options": [
-      "Osaka",
-      "Kyoto",
-      "Nagoya",
-      "Tokyo"
-    ],
-    "correct": "Tokyo"
-  },
-  {
-    "question": "Caasimadda South Korea waa?",
-    "options": [
-      "Busan",
-      "Incheon",
-      "Daegu",
-      "Seoul"
-    ],
-    "correct": "Seoul"
   },
   {
     "question": "Caasimadda Indonesia waa?",
@@ -1430,24 +50,234 @@
     "correct": "Jakarta"
   },
   {
-    "question": "Caasimadda Nigeria waa?",
+    "question": "Alexander Fleming wuxuu helay?",
     "options": [
-      "Lagos",
-      "Kano",
-      "Ibadan",
-      "Abuja"
+      "Penicillin",
+      "Aspirin",
+      "Insulin",
+      "Morphine"
     ],
-    "correct": "Abuja"
+    "correct": "Penicillin"
   },
   {
-    "question": "Caasimadda Morocco waa?",
+    "question": "Caasimadda Thailand waa?",
     "options": [
-      "Casablanca",
-      "Fes",
-      "Marrakech",
-      "Rabat"
+      "Chiang Mai",
+      "Phuket",
+      "Pattaya",
+      "Bangkok"
     ],
-    "correct": "Rabat"
+    "correct": "Bangkok"
+  },
+  {
+    "question": "Caasimadda Vietnam waa?",
+    "options": [
+      "Ho Chi Minh City",
+      "Da Nang",
+      "Haiphong",
+      "Hanoi"
+    ],
+    "correct": "Hanoi"
+  },
+  {
+    "question": "Haddii 2x - 4 = 10, x = ?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": "7"
+  },
+  {
+    "question": "Caasimadda Philippines waa?",
+    "options": [
+      "Cebu City",
+      "Davao",
+      "Quezon City",
+      "Manila"
+    ],
+    "correct": "Manila"
+  },
+  {
+    "question": "Darwin wuxuu caan ka ahaa?",
+    "options": [
+      "Tiyooriga Gravity",
+      "Tiyooriga Kobcidda (Evolution)",
+      "DNA",
+      "Korontada"
+    ],
+    "correct": "Tiyooriga Kobcidda (Evolution)"
+  },
+  {
+    "question": "Caasimadda Malaysia waa?",
+    "options": [
+      "Penang",
+      "Johor Bahru",
+      "Ipoh",
+      "Kuala Lumpur"
+    ],
+    "correct": "Kuala Lumpur"
+  },
+  {
+    "question": "Caasimadda New Zealand waa?",
+    "options": [
+      "Auckland",
+      "Christchurch",
+      "Wellington",
+      "Hamilton"
+    ],
+    "correct": "Wellington"
+  },
+  {
+    "question": "Caasimadda Syria waa?",
+    "options": [
+      "Aleppo",
+      "Homs",
+      "Hama",
+      "Damascus"
+    ],
+    "correct": "Damascus"
+  },
+  {
+    "question": "Caasimadda Lebanon waa?",
+    "options": [
+      "Tripoli",
+      "Sidon",
+      "Tyre",
+      "Beirut"
+    ],
+    "correct": "Beirut"
+  },
+  {
+    "question": "Caasimadda Jordan waa?",
+    "options": [
+      "Zarqa",
+      "Irbid",
+      "Aqaba",
+      "Amman"
+    ],
+    "correct": "Amman"
+  },
+  {
+    "question": "Caasimadda Kuwait waa?",
+    "options": [
+      "Salmiya",
+      "Hawalli",
+      "Jahra",
+      "Kuwait City"
+    ],
+    "correct": "Kuwait City"
+  },
+  {
+    "question": "Caasimadda Qatar waa?",
+    "options": [
+      "Al-Wakrah",
+      "Al-Rayyan",
+      "Al-Khor",
+      "Doha"
+    ],
+    "correct": "Doha"
+  },
+  {
+    "question": "Caasimadda Oman waa?",
+    "options": [
+      "Salalah",
+      "Sohar",
+      "Nizwa",
+      "Muscat"
+    ],
+    "correct": "Muscat"
+  },
+  {
+    "question": "Caasimadda Yemen waa?",
+    "options": [
+      "Aden",
+      "Taiz",
+      "Hodeidah",
+      "Sanaa"
+    ],
+    "correct": "Sanaa"
+  },
+  {
+    "question": "Caasimadda Uganda waa?",
+    "options": [
+      "Entebbe",
+      "Jinja",
+      "Gulu",
+      "Kampala"
+    ],
+    "correct": "Kampala"
+  },
+  {
+    "question": "Caasimadda Rwanda waa?",
+    "options": [
+      "Butare",
+      "Gisenyi",
+      "Gitarama",
+      "Kigali"
+    ],
+    "correct": "Kigali"
+  },
+  {
+    "question": "Caasimadda DRC waa?",
+    "options": [
+      "Lubumbashi",
+      "Goma",
+      "Kisangani",
+      "Kinshasa"
+    ],
+    "correct": "Kinshasa"
+  },
+  {
+    "question": "Caasimadda Angola waa?",
+    "options": [
+      "Lubango",
+      "Huambo",
+      "Benguela",
+      "Luanda"
+    ],
+    "correct": "Luanda"
+  },
+  {
+    "question": "Caasimadda Zimbabwe waa?",
+    "options": [
+      "Bulawayo",
+      "Mutare",
+      "Gweru",
+      "Harare"
+    ],
+    "correct": "Harare"
+  },
+  {
+    "question": "Caasimadda Zambia waa?",
+    "options": [
+      "Kitwe",
+      "Ndola",
+      "Livingstone",
+      "Lusaka"
+    ],
+    "correct": "Lusaka"
+  },
+  {
+    "question": "Caasimadda Ghana waa?",
+    "options": [
+      "Kumasi",
+      "Tamale",
+      "Cape Coast",
+      "Accra"
+    ],
+    "correct": "Accra"
+  },
+  {
+    "question": "Caasimadda Senegal waa?",
+    "options": [
+      "Thies",
+      "Kaolack",
+      "Saint-Louis",
+      "Dakar"
+    ],
+    "correct": "Dakar"
   },
   {
     "question": "Caasimadda Algeria waa?",
@@ -1460,10 +290,90 @@
     "correct": "Algiers"
   },
   {
+    "question": "Caasimadda Libya waa?",
+    "options": [
+      "Benghazi",
+      "Misrata",
+      "Tobruk",
+      "Tripoli"
+    ],
+    "correct": "Tripoli"
+  },
+  {
+    "question": "Caasimadda Colombia waa?",
+    "options": [
+      "Medellin",
+      "Cali",
+      "Barranquilla",
+      "Bogota"
+    ],
+    "correct": "Bogota"
+  },
+  {
+    "question": "Caasimadda Peru waa?",
+    "options": [
+      "Arequipa",
+      "Trujillo",
+      "Callao",
+      "Lima"
+    ],
+    "correct": "Lima"
+  },
+  {
+    "question": "Caasimadda Chile waa?",
+    "options": [
+      "Valparaiso",
+      "Concepcion",
+      "Antofagasta",
+      "Santiago"
+    ],
+    "correct": "Santiago"
+  },
+  {
+    "question": "Caasimadda Greece waa?",
+    "options": [
+      "Thessaloniki",
+      "Patras",
+      "Larissa",
+      "Athens"
+    ],
+    "correct": "Athens"
+  },
+  {
+    "question": "Caasimadda Portugal waa?",
+    "options": [
+      "Porto",
+      "Braga",
+      "Coimbra",
+      "Lisbon"
+    ],
+    "correct": "Lisbon"
+  },
+  {
+    "question": "Caasimadda Poland waa?",
+    "options": [
+      "Krakow",
+      "Lodz",
+      "Wroclaw",
+      "Warsaw"
+    ],
+    "correct": "Warsaw"
+  },
+  {
+    "question": "Caasimadda Netherlands waa?",
+    "options": [
+      "Rotterdam",
+      "Amsterdam",
+      "Hague",
+      "Utrecht"
+    ],
+    "correct": "Amsterdam"
+  },
+  {
     "question": "Caasimadda Sweden waa?",
     "options": [
       "Gothenburg",
-      "Malmö",
+      "Malmo",
       "Uppsala",
       "Stockholm"
     ],
@@ -1480,14 +390,44 @@
     "correct": "Oslo"
   },
   {
-    "question": "Caasimadda Poland waa?",
+    "question": "Caasimadda Denmark waa?",
     "options": [
-      "Kraków",
-      "Łódź",
-      "Wrocław",
-      "Warsaw"
+      "Aarhus",
+      "Odense",
+      "Aalborg",
+      "Copenhagen"
     ],
-    "correct": "Warsaw"
+    "correct": "Copenhagen"
+  },
+  {
+    "question": "Caasimadda Finland waa?",
+    "options": [
+      "Tampere",
+      "Turku",
+      "Espoo",
+      "Helsinki"
+    ],
+    "correct": "Helsinki"
+  },
+  {
+    "question": "Caasimadda Austria waa?",
+    "options": [
+      "Graz",
+      "Linz",
+      "Salzburg",
+      "Vienna"
+    ],
+    "correct": "Vienna"
+  },
+  {
+    "question": "Caasimadda Hungary waa?",
+    "options": [
+      "Debrecen",
+      "Miskolc",
+      "Pecs",
+      "Budapest"
+    ],
+    "correct": "Budapest"
   },
   {
     "question": "Caasimadda Ukraine waa?",
@@ -1500,371 +440,131 @@
     "correct": "Kyiv"
   },
   {
-    "question": "Caasimadda Iran waa?",
+    "question": "Caasimadda Kazakhstan waa?",
     "options": [
-      "Mashhad",
-      "Isfahan",
-      "Shiraz",
-      "Tehran"
+      "Almaty",
+      "Shymkent",
+      "Karaganda",
+      "Astana"
     ],
-    "correct": "Tehran"
+    "correct": "Astana"
   },
   {
-    "question": "Caasimadda Libya waa?",
+    "question": "Caasimadda North Korea waa?",
     "options": [
-      "Benghazi",
-      "Misrata",
-      "Tobruk",
-      "Tripoli"
+      "Hamhung",
+      "Chongjin",
+      "Wonsan",
+      "Pyongyang"
     ],
-    "correct": "Tripoli"
+    "correct": "Pyongyang"
   },
   {
-    "question": "RAM waxay u dhigan tahay?",
+    "question": "Caasimadda Nepal waa?",
     "options": [
-      "Read Access Memory",
-      "Remote Access Memory",
-      "Regular Access Memory",
-      "Random Access Memory"
+      "Pokhara",
+      "Biratnagar",
+      "Lalitpur",
+      "Kathmandu"
     ],
-    "correct": "Random Access Memory"
+    "correct": "Kathmandu"
   },
   {
-    "question": "HTML waxay u dhigan tahay?",
+    "question": "Caasimadda Sri Lanka waa?",
     "options": [
-      "HyperText Media Language",
-      "HyperText Markup Language",
-      "HighText Markup Language",
-      "HyperTool Markup Language"
+      "Colombo",
+      "Galle",
+      "Jaffna",
+      "Sri Jayawardenepura Kotte"
     ],
-    "correct": "HyperText Markup Language"
+    "correct": "Sri Jayawardenepura Kotte"
   },
   {
-    "question": "Python waxaa sameeyay?",
+    "question": "Caasimadda Myanmar waa?",
     "options": [
-      "Dennis Ritchie",
-      "James Gosling",
-      "Linus Torvalds",
-      "Guido van Rossum"
+      "Yangon",
+      "Mandalay",
+      "Bago",
+      "Naypyidaw"
     ],
-    "correct": "Guido van Rossum"
+    "correct": "Naypyidaw"
   },
   {
-    "question": "Facebook waxaa la aasaasay sanadkii?",
+    "question": "Caasimadda Mozambique waa?",
     "options": [
-      "2002",
-      "2003",
-      "2004",
-      "2005"
+      "Beira",
+      "Nampula",
+      "Matola",
+      "Maputo"
     ],
-    "correct": "2004"
+    "correct": "Maputo"
   },
   {
-    "question": "iPhone-ka ugu horreeyay waxaa la soo saaray sanadkii?",
+    "question": "Caasimadda Madagascar waa?",
     "options": [
-      "2005",
-      "2006",
-      "2007",
-      "2008"
+      "Toamasina",
+      "Mahajanga",
+      "Fianarantsoa",
+      "Antananarivo"
     ],
-    "correct": "2007"
+    "correct": "Antananarivo"
   },
   {
-    "question": "Linux kernel waxaa sameeyay?",
+    "question": "Caasimadda Tanzania waa?",
     "options": [
-      "Bill Gates",
-      "Dennis Ritchie",
-      "Steve Jobs",
-      "Linus Torvalds"
+      "Zanzibar",
+      "Dar es Salaam",
+      "Dodoma",
+      "Arusha"
     ],
-    "correct": "Linus Torvalds"
+    "correct": "Dodoma"
   },
   {
-    "question": "URL waxay u dhigan tahay?",
+    "question": "Caasimadda Sudan waa?",
     "options": [
-      "Uniform Resource Locator",
-      "Universal Resource Link",
-      "Unique Reference Locator",
-      "Unified Resource Language"
+      "Port Sudan",
+      "Omdurman",
+      "Khartoum",
+      "Kassala"
     ],
-    "correct": "Uniform Resource Locator"
+    "correct": "Khartoum"
   },
   {
-    "question": "OS-ka Apple iPhoneyaasha waa?",
+    "question": "Caasimadda Eritrea waa?",
     "options": [
-      "Android",
-      "Windows",
-      "HarmonyOS",
-      "iOS"
+      "Keren",
+      "Massawa",
+      "Mendefera",
+      "Asmara"
     ],
-    "correct": "iOS"
+    "correct": "Asmara"
   },
   {
-    "question": "Google waxaa la aasaasay sanadkii?",
+    "question": "Caasimadda Somalia waa?",
     "options": [
-      "1996",
-      "1997",
-      "1998",
-      "1999"
+      "Berbera",
+      "Kismayo",
+      "Bossaso",
+      "Mogadishu"
     ],
-    "correct": "1998"
+    "correct": "Mogadishu"
   },
   {
-    "question": "USB waxay u dhigan tahay?",
+    "question": "Caasimadda Djibouti waa?",
     "options": [
-      "Universal System Bus",
-      "Universal Serial Bus",
-      "Unified Serial Bus",
-      "Unique Serial Bus"
+      "Dikhil",
+      "Ali Sabieh",
+      "Tadjourah",
+      "Djibouti City"
     ],
-    "correct": "Universal Serial Bus"
-  },
-  {
-    "question": "What is the past tense of 'write'?",
-    "options": [
-      "writed",
-      "written",
-      "wroted",
-      "wrote"
-    ],
-    "correct": "wrote"
-  },
-  {
-    "question": "What is the plural of 'tooth'?",
-    "options": [
-      "tooths",
-      "toothes",
-      "teeths",
-      "teeth"
-    ],
-    "correct": "teeth"
-  },
-  {
-    "question": "What is the plural of 'foot'?",
-    "options": [
-      "foots",
-      "footes",
-      "feets",
-      "feet"
-    ],
-    "correct": "feet"
-  },
-  {
-    "question": "What does 'rapid' mean?",
-    "options": [
-      "Slow",
-      "Careful",
-      "Heavy",
-      "Fast"
-    ],
-    "correct": "Fast"
-  },
-  {
-    "question": "What is the past tense of 'fly'?",
-    "options": [
-      "flied",
-      "flyed",
-      "flown",
-      "flew"
-    ],
-    "correct": "flew"
-  },
-  {
-    "question": "What is the past tense of 'run'?",
-    "options": [
-      "runned",
-      "raned",
-      "ranned",
-      "ran"
-    ],
-    "correct": "ran"
-  },
-  {
-    "question": "What is the past tense of 'swim'?",
-    "options": [
-      "swimmed",
-      "swammed",
-      "swum",
-      "swam"
-    ],
-    "correct": "swam"
-  },
-  {
-    "question": "What is the opposite of 'arrive'?",
-    "options": [
-      "Come",
-      "Go",
-      "Stay",
-      "Depart"
-    ],
-    "correct": "Depart"
-  },
-  {
-    "question": "What does 'enormous' mean?",
-    "options": [
-      "Tiny",
-      "Ordinary",
-      "Dangerous",
-      "Very large"
-    ],
-    "correct": "Very large"
-  },
-  {
-    "question": "What is the plural of 'man'?",
-    "options": [
-      "mans",
-      "manes",
-      "manses",
-      "men"
-    ],
-    "correct": "men"
-  },
-  {
-    "question": "Dagaalkii Labaad ee Adduunka wuxuu billaaday sanadkii?",
-    "options": [
-      "1937",
-      "1938",
-      "1939",
-      "1940"
-    ],
-    "correct": "1939"
-  },
-  {
-    "question": "WWII wuxuu dhammaaday sanadkii?",
-    "options": [
-      "1943",
-      "1944",
-      "1945",
-      "1946"
-    ],
-    "correct": "1945"
-  },
-  {
-    "question": "Neil Armstrong dayaxa ku dhuftay sanadkii?",
-    "options": [
-      "1967",
-      "1968",
-      "1969",
-      "1970"
-    ],
-    "correct": "1969"
-  },
-  {
-    "question": "Suez Canal waxaa la furay sanadkii?",
-    "options": [
-      "1859",
-      "1869",
-      "1879",
-      "1889"
-    ],
-    "correct": "1869"
-  },
-  {
-    "question": "WWI wuxuu billaaday sanadkii?",
-    "options": [
-      "1912",
-      "1913",
-      "1914",
-      "1915"
-    ],
-    "correct": "1914"
-  },
-  {
-    "question": "Madaxweynihii ugu horreeyay USA waa?",
-    "options": [
-      "Thomas Jefferson",
-      "John Adams",
-      "Benjamin Franklin",
-      "George Washington"
-    ],
-    "correct": "George Washington"
-  },
-  {
-    "question": "Nelson Mandela madaxweyne noqday sanadkii?",
-    "options": [
-      "1990",
-      "1992",
-      "1994",
-      "1996"
-    ],
-    "correct": "1994"
-  },
-  {
-    "question": "Titanic gashay biyaha sanadkii?",
-    "options": [
-      "1910",
-      "1911",
-      "1912",
-      "1913"
-    ],
-    "correct": "1912"
-  },
-  {
-    "question": "Columbus gaadhay Ameerika sanadkii?",
-    "options": [
-      "1488",
-      "1490",
-      "1492",
-      "1494"
-    ],
-    "correct": "1492"
-  },
-  {
-    "question": "WWI wuxuu dhammaaday sanadkii?",
-    "options": [
-      "1916",
-      "1917",
-      "1918",
-      "1919"
-    ],
-    "correct": "1918"
-  },
-  {
-    "question": "Caasimadda Spain waa?",
-    "options": [
-      "Barcelona",
-      "Seville",
-      "Valencia",
-      "Madrid"
-    ],
-    "correct": "Madrid"
-  },
-  {
-    "question": "Caasimadda Italy waa?",
-    "options": [
-      "Milan",
-      "Naples",
-      "Florence",
-      "Rome"
-    ],
-    "correct": "Rome"
-  },
-  {
-    "question": "Caasimadda Portugal waa?",
-    "options": [
-      "Porto",
-      "Faro",
-      "Braga",
-      "Lisbon"
-    ],
-    "correct": "Lisbon"
-  },
-  {
-    "question": "Caasimadda Netherlands waa?",
-    "options": [
-      "Rotterdam",
-      "The Hague",
-      "Utrecht",
-      "Amsterdam"
-    ],
-    "correct": "Amsterdam"
+    "correct": "Djibouti City"
   },
   {
     "question": "Caasimadda Belgium waa?",
     "options": [
       "Antwerp",
       "Ghent",
-      "Liège",
+      "Bruges",
       "Brussels"
     ],
     "correct": "Brussels"
@@ -1880,6681 +580,413 @@
     "correct": "Bern"
   },
   {
-    "question": "Caasimadda Austria waa?",
-    "options": [
-      "Graz",
-      "Salzburg",
-      "Linz",
-      "Vienna"
-    ],
-    "correct": "Vienna"
-  },
-  {
-    "question": "Caasimadda Greece waa?",
-    "options": [
-      "Thessaloniki",
-      "Patras",
-      "Heraklion",
-      "Athens"
-    ],
-    "correct": "Athens"
-  },
-  {
-    "question": "Caasimadda Hungary waa?",
-    "options": [
-      "Debrecen",
-      "Miskolc",
-      "Pécs",
-      "Budapest"
-    ],
-    "correct": "Budapest"
-  },
-  {
     "question": "Caasimadda Romania waa?",
     "options": [
       "Cluj-Napoca",
-      "Timișoara",
-      "Iași",
+      "Timisoara",
+      "Iasi",
       "Bucharest"
     ],
     "correct": "Bucharest"
   },
   {
-    "question": "Caasimadda Serbia waa?",
+    "question": "Caasimadda Bahrain waa?",
     "options": [
-      "Novi Sad",
-      "Niš",
-      "Kragujevac",
-      "Belgrade"
+      "Muharraq",
+      "Riffa",
+      "Hamad Town",
+      "Manama"
     ],
-    "correct": "Belgrade"
+    "correct": "Manama"
   },
   {
-    "question": "Caasimadda Croatia waa?",
+    "question": "Caasimadda Cameroon waa?",
     "options": [
-      "Split",
-      "Rijeka",
-      "Osijek",
-      "Zagreb"
+      "Douala",
+      "Kano",
+      "Garoua",
+      "Yaounde"
     ],
-    "correct": "Zagreb"
+    "correct": "Yaounde"
   },
   {
-    "question": "Caasimadda Czech Republic waa?",
+    "question": "Roger Federer wuxuu guuleystay imisa Grand Slam?",
     "options": [
-      "Brno",
-      "Ostrava",
-      "Plzeň",
-      "Prague"
+      "18",
+      "19",
+      "20",
+      "21"
     ],
-    "correct": "Prague"
+    "correct": "20"
   },
   {
-    "question": "Caasimadda Denmark waa?",
+    "question": "Serena Williams waxay guuleystay imisa Grand Slam?",
     "options": [
-      "Aarhus",
-      "Odense",
-      "Aalborg",
-      "Copenhagen"
+      "20",
+      "22",
+      "23",
+      "24"
     ],
-    "correct": "Copenhagen"
+    "correct": "23"
   },
   {
-    "question": "Caasimadda Finland waa?",
+    "question": "Formula 1 2023 waxaa guuleystay?",
     "options": [
-      "Tampere",
-      "Turku",
-      "Oulu",
-      "Helsinki"
+      "Lewis Hamilton",
+      "Max Verstappen",
+      "Leclerc",
+      "Alonso"
     ],
-    "correct": "Helsinki"
+    "correct": "Max Verstappen"
   },
   {
-    "question": "Tirada caloosha bini'aadamka ee weyn waa?",
+    "question": "Marathon-ka dhererkiisu waa imisa km?",
     "options": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "40km",
+      "41km",
+      "42.195km",
+      "43km"
     ],
-    "correct": "1"
+    "correct": "42.195km"
   },
   {
-    "question": "Xubinta jirka ee samaysa hormoonada waa?",
+    "question": "FIFA World Cup 2026 waxay ka dhacaysaa?",
     "options": [
-      "Sambabbada",
-      "Beerka",
-      "Kelyaha",
-      "Glandka"
+      "USA, Canada iyo Mexico",
+      "Brazil iyo Argentina",
+      "Germany iyo France",
+      "Spain iyo Portugal"
     ],
-    "correct": "Glandka"
+    "correct": "USA, Canada iyo Mexico"
   },
   {
-    "question": "Tirada ilkaha weynta bini'aadamka waa?",
+    "question": "Ciyaarta Golf waxaa abuurtay?",
     "options": [
-      "28",
-      "30",
-      "32",
-      "34"
-    ],
-    "correct": "32"
-  },
-  {
-    "question": "Nooca xayndaabka (virus) ugu habboon waa?",
-    "options": [
-      "Antibiotics",
-      "Vaccine",
-      "Surgery",
-      "Herbs"
-    ],
-    "correct": "Vaccine"
-  },
-  {
-    "question": "Meeraha ugu kulul adduunka waa?",
-    "options": [
-      "Earth",
-      "Venus",
-      "Mars",
-      "Mercury"
-    ],
-    "correct": "Venus"
-  },
-  {
-    "question": "Tirada caleemaha dayaxa (moons) Jupiter leeyahay ee ugu weyn waa?",
-    "options": [
-      "2",
-      "4",
-      "8",
-      "16"
-    ],
-    "correct": "4"
-  },
-  {
-    "question": "Xayawaanka keliya ee diirada isa-leh ayaa jira — noocyaada gaaridda (fastest land animal)?",
-    "options": [
-      "Lion",
-      "Horse",
-      "Cheetah",
-      "Ostrich"
-    ],
-    "correct": "Cheetah"
-  },
-  {
-    "question": "Tirada caloosha lo'da waa?",
-    "options": [
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "correct": "4"
-  },
-  {
-    "question": "Dareenka ugu dhow elektrisite-ka (element) waa?",
-    "options": [
-      "Iron",
-      "Copper",
-      "Gold",
-      "Silver"
-    ],
-    "correct": "Silver"
-  },
-  {
-    "question": "Meeraha ugu qabow nidaamka qorraxeed waa?",
-    "options": [
-      "Uranus",
-      "Saturn",
-      "Mars",
-      "Neptune"
-    ],
-    "correct": "Neptune"
-  },
-  {
-    "question": "Tirada ciyaaryahanada basketball koox waa?",
-    "options": [
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "correct": "5"
-  },
-  {
-    "question": "Tirada ciyaaryahanada rugby union koox waa?",
-    "options": [
-      "11",
-      "13",
-      "15",
-      "17"
-    ],
-    "correct": "15"
-  },
-  {
-    "question": "Tirada ciyaaryahanada hockey (field) koox waa?",
-    "options": [
-      "9",
-      "10",
-      "11",
-      "12"
-    ],
-    "correct": "11"
-  },
-  {
-    "question": "Tirada ciyaaryahanada American football koox waa?",
-    "options": [
-      "9",
-      "11",
-      "13",
-      "15"
-    ],
-    "correct": "11"
-  },
-  {
-    "question": "World Cup 2026 waxay dhici doontaa?",
-    "options": [
-      "Yurub",
-      "Aasiya",
-      "Koonfur Ameerika",
-      "USA/Canada/Mexico"
-    ],
-    "correct": "USA/Canada/Mexico"
-  },
-  {
-    "question": "Tennis-ka Grand Slam-ka kowaad ee sanadka waa?",
-    "options": [
-      "Wimbledon",
-      "US Open",
-      "French Open",
-      "Australian Open"
-    ],
-    "correct": "Australian Open"
-  },
-  {
-    "question": "Usain Bolt wuxuu ku caan baxay ciyaaraha?",
-    "options": [
-      "Boxing",
-      "Swimming",
-      "Athletics (sprint)",
-      "Cycling"
-    ],
-    "correct": "Athletics (sprint)"
-  },
-  {
-    "question": "Dalka kubadda cagta FIFA ranking-ka koowaad (2022) ku jiray waa?",
-    "options": [
-      "Brazil",
-      "Argentina",
+      "England",
       "France",
-      "Spain"
+      "Scotland",
+      "Ireland"
     ],
-    "correct": "Brazil"
+    "correct": "Scotland"
   },
   {
-    "question": "FIFA World Cup 2018 waxay dhacday?",
+    "question": "Olympics 2024 waxay ka dhacday?",
     "options": [
-      "Brazil",
-      "Qatar",
-      "Germany",
-      "Russia"
+      "London",
+      "Tokyo",
+      "Paris",
+      "Los Angeles"
     ],
-    "correct": "Russia"
+    "correct": "Paris"
   },
   {
-    "question": "FIFA World Cup 2014 waxay dhacday?",
+    "question": "Super Bowl waxay joogaa ciyaarta?",
     "options": [
-      "Russia",
-      "Germany",
-      "Brazil",
-      "Argentina"
+      "Basketball",
+      "Football (American)",
+      "Rugby",
+      "Baseball"
     ],
-    "correct": "Brazil"
+    "correct": "Football (American)"
   },
   {
-    "question": "AI waxay u dhigan tahay?",
+    "question": "Champions League 2023 waxaa guuleystay?",
     "options": [
-      "Automated Input",
-      "Artificial Intelligence",
-      "Advanced Internet",
-      "Automated Integration"
+      "Real Madrid",
+      "PSG",
+      "Manchester City",
+      "Bayern Munich"
     ],
-    "correct": "Artificial Intelligence"
+    "correct": "Manchester City"
   },
   {
-    "question": "Wi-Fi waxay u dhigan tahay?",
+    "question": "NBA Finals 2023 waxaa guuleystay?",
     "options": [
-      "Wireless Fidelity",
-      "Wireless Frequency",
-      "Wide Fidelity",
-      "World Internet"
+      "Lakers",
+      "Celtics",
+      "Heat",
+      "Nuggets"
     ],
-    "correct": "Wireless Fidelity"
+    "correct": "Nuggets"
   },
   {
-    "question": "GPS waxay u dhigan tahay?",
+    "question": "Marie Curie waxay caan ka ahayd?",
     "options": [
-      "General Positioning System",
-      "Global Placement System",
-      "Global Positioning System",
-      "Guided Positioning System"
+      "Caafimaadka",
+      "Shucaaca Radioactive",
+      "Korontada",
+      "Bakteeriyada"
     ],
-    "correct": "Global Positioning System"
+    "correct": "Shucaaca Radioactive"
   },
   {
-    "question": "PDF waxay u dhigan tahay?",
+    "question": "Telescope-ka ugu horeeyay waxaa sameeyay?",
     "options": [
-      "Portable Document Format",
-      "Printed Document File",
-      "Personal Data Format",
-      "Portable Data File"
+      "Newton",
+      "Galileo",
+      "Kepler",
+      "Hubble"
     ],
-    "correct": "Portable Document Format"
+    "correct": "Galileo"
   },
   {
-    "question": "GB waxay u dhigan tahay (xogta)?",
+    "question": "Nitrogen waxay ku jirtaa hawada imisa boqolkiiba?",
     "options": [
-      "General Bytes",
-      "Gigabytes",
-      "Global Bits",
-      "Gated Bytes"
+      "68%",
+      "71%",
+      "75%",
+      "78%"
     ],
-    "correct": "Gigabytes"
+    "correct": "78%"
   },
   {
-    "question": "MB waxay u dhigan tahay (xogta)?",
+    "question": "Birta (Iron) astaamigeeda (symbol) waa?",
     "options": [
-      "Megabytes",
-      "Multibit",
-      "Managed Bytes",
-      "Mapped Bytes"
+      "Ir",
+      "Fe",
+      "In",
+      "Io"
     ],
-    "correct": "Megabytes"
+    "correct": "Fe"
   },
   {
-    "question": "Luuqadda barnaamijka ee websites-ka front-end ugu badan isticmaala waa?",
+    "question": "Dahab (Gold) astaamigeeda (symbol) waa?",
     "options": [
-      "Python",
-      "Java",
-      "C++",
-      "JavaScript"
+      "Gd",
+      "Go",
+      "Au",
+      "Ag"
     ],
-    "correct": "JavaScript"
+    "correct": "Au"
   },
   {
-    "question": "IP waxay u dhigan tahay (networking)?",
+    "question": "Aasidka (Acid) wuxuu leeyahay pH?",
     "options": [
-      "Internet Processor",
-      "Internal Protocol",
-      "Internet Protocol",
-      "Integrated Process"
+      "pH > 7",
+      "pH = 7",
+      "pH < 7",
+      "pH = 14"
     ],
-    "correct": "Internet Protocol"
+    "correct": "pH < 7"
   },
   {
-    "question": "SSD waxay u dhigan tahay?",
+    "question": "H2SO4 waa?",
     "options": [
-      "Super Speed Drive",
-      "Solid State Drive",
-      "Single Storage Device",
-      "System Storage Disk"
+      "Hydrochloric Acid",
+      "Sulfuric Acid",
+      "Nitric Acid",
+      "Carbonic Acid"
     ],
-    "correct": "Solid State Drive"
+    "correct": "Sulfuric Acid"
   },
   {
-    "question": "API waxay u dhigan tahay?",
+    "question": "Newton sharciga 1aad wuxuu sheegaa in jirku?",
     "options": [
-      "Application Processing Interface",
-      "Automated Program Integration",
-      "Application Programming Interface",
-      "Advanced Protocol Interface"
+      "Iska caabiyaa isbedelka",
+      "Xooga la tartibi karo",
+      "Falcelinta sinnaanta",
+      "Tamarta la ilaaliyaa"
     ],
-    "correct": "Application Programming Interface"
+    "correct": "Iska caabiyaa isbedelka"
   },
   {
-    "question": "Caasimadda maamul-goboleedka Hirshabeelle waa?",
+    "question": "Tamarta (Energy) waxaa lagu cabiraa?",
     "options": [
-      "Beledweyne",
-      "Jawhar",
-      "Balcad",
-      "Jowhar"
+      "Newton",
+      "Joule",
+      "Pascal",
+      "Watt"
     ],
-    "correct": "Jowhar"
+    "correct": "Joule"
   },
   {
-    "question": "Caasimadda maamul-goboleedka Jubbaland waa?",
+    "question": "Madaxweyne Cabdullaahi Yuusuf wuxuu xilka qabtay sanadkee?",
     "options": [
-      "Baraawe",
-      "Bu'aale",
-      "Baardheere",
-      "Kismaayo"
+      "2000",
+      "2002",
+      "2004",
+      "2006"
     ],
-    "correct": "Kismaayo"
+    "correct": "2004"
   },
   {
-    "question": "Caasimadda maamul-goboleedka Koonfur Galbeed waa?",
+    "question": "Puntland waxaa la aasaasay sanadkee?",
     "options": [
-      "Baardheere",
-      "Luuq",
-      "Wajid",
-      "Baidoa"
+      "1996",
+      "1998",
+      "2000",
+      "2002"
     ],
-    "correct": "Baidoa"
+    "correct": "1998"
   },
   {
-    "question": "Caasimadda maamul-goboleedka SSC-Khaatumo waa?",
+    "question": "Dawladda Federaalka Soomaaliya (FGS) waxaa la aasaasay sanadkee?",
     "options": [
-      "Ceerigaavo",
-      "Laascaanood",
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "correct": "2012"
+  },
+  {
+    "question": "Madaxweyne Hassan Sheikh wuxuu markii ugu horeysay xilka qabtay sanadkee?",
+    "options": [
+      "2010",
+      "2012",
+      "2014",
+      "2016"
+    ],
+    "correct": "2012"
+  },
+  {
+    "question": "Doorashada 2017 madaxweyne waxaa noqday?",
+    "options": [
+      "Hassan Sheikh",
+      "Mohamed Farmaajo",
+      "Sharif Sheikh",
+      "Omar Sharmarke"
+    ],
+    "correct": "Mohamed Farmaajo"
+  },
+  {
+    "question": "Webiga ugu dheer Soomaaliya waa?",
+    "options": [
+      "Shabeelle",
+      "Jubba",
+      "Dawa",
+      "Tana"
+    ],
+    "correct": "Jubba"
+  },
+  {
+    "question": "Caasimadda Puntland waa?",
+    "options": [
+      "Gaalkacayo",
+      "Boosaaso",
       "Qardho",
-      "Taleex"
+      "Galkayo"
     ],
-    "correct": "Laascaanood"
+    "correct": "Boosaaso"
   },
   {
-    "question": "Magaalada ugu weyn Somaliland waa?",
+    "question": "Dekedda ugu weyn Soomaaliya waa?",
     "options": [
-      "Burco",
+      "Kismaayo",
       "Berbera",
-      "Ceerigaavo",
-      "Hargeysa"
+      "Muqdisho",
+      "Boosaaso"
     ],
-    "correct": "Hargeysa"
+    "correct": "Muqdisho"
   },
   {
-    "question": "Ciida gaadhitaanka Koonfurta Soomaaliya sanadkiisa waa?",
+    "question": "Gobolka ugu weyn Soomaaliya waa?",
     "options": [
-      "1959",
-      "1960",
-      "1961",
-      "1962"
+      "Bari",
+      "Mudug",
+      "Togdheer",
+      "Gedo"
     ],
-    "correct": "1960"
+    "correct": "Mudug"
   },
   {
-    "question": "Koonfurta iyo Waqooyi Soomaaliya waxay midoobeen?",
+    "question": "Calanka Soomaaliya midabkiisu waa?",
     "options": [
-      "26 Juun 1960",
-      "1 Luulyo 1960",
-      "21 Oktoobar 1969",
-      "26 Juun 1961"
+      "Cas iyo cad",
+      "Buluug iyo cad xiddig leh",
+      "Cagaaran iyo cad",
+      "Huruud iyo cas"
     ],
-    "correct": "1 Luulyo 1960"
+    "correct": "Buluug iyo cad xiddig leh"
   },
   {
-    "question": "Doorashadii Soomaaliya ee 2021-2022 madaxweynaha lagu doortay waa?",
+    "question": "Xeerka Soomaalida ee Mag la xiiriiraa?",
     "options": [
-      "Farmaajo",
-      "Xasan Sheekh",
-      "Xassan Cali",
-      "Cabdiweli"
+      "Ganacsiga",
+      "Diyafadda",
+      "Diyaarkii la bixiyo cid la diilay",
+      "Colaadda"
     ],
-    "correct": "Xasan Sheekh"
+    "correct": "Diyaarkii la bixiyo cid la diilay"
   },
   {
-    "question": "Gobolka ay ku taallo magaalada Baardheere waa?",
+    "question": "Soomaalida ereyga Nabad iyo Caano macnaheeda waa?",
     "options": [
-      "Bay",
-      "Gedo",
-      "Bakool",
-      "Jubbada Dhexe"
+      "Guul iyo dakhli",
+      "Nabad iyo nixmo",
+      "Raalli-gelinta",
+      "Salaan dhaqameed"
     ],
-    "correct": "Gedo"
+    "correct": "Salaan dhaqameed"
   },
   {
-    "question": "Webiga Juba wuxuu galaa badda?",
+    "question": "Luuqadda Af-Soomaali waxaa loo tixgeliyaa?",
     "options": [
-      "Badda Cas",
-      "Badda Hindiya",
-      "Gacanka Cadmeed",
-      "Badda Mediterranean"
+      "Tonal language",
+      "Non-tonal language",
+      "Sign language",
+      "Written only"
     ],
-    "correct": "Badda Hindiya"
+    "correct": "Non-tonal language"
   },
   {
-    "question": "Suuradda Al-Kahf waxaa loo akhristaa?",
+    "question": "Suugaanta Soomaalida nooca Geeraar waa gabay?",
     "options": [
-      "Isniinta",
-      "Talaadada",
-      "Arbacada",
-      "Jimcaha"
+      "Jacaylka",
+      "Geesinnimada",
+      "Munaasabadaha",
+      "Diinta"
     ],
-    "correct": "Jimcaha"
+    "correct": "Geesinnimada"
   },
   {
-    "question": "Tirada aayada suuradda Al-Faatixa waa?",
+    "question": "Caano geel faaiidadeeda ugu muhiimsan waa?",
     "options": [
-      "5",
-      "6",
-      "7",
-      "8"
+      "Kolyaraha badan",
+      "Antibodies iyo nafaqo badan",
+      "Protein badan",
+      "Vitamins badan"
     ],
-    "correct": "7"
+    "correct": "Antibodies iyo nafaqo badan"
   },
   {
-    "question": "Nabi Ibraahim (AS) wuxuu dhistay Kacbada kuma?",
+    "question": "Soomaalida magacyada dumarka ee ugu badan waxaa ka mid ah?",
     "options": [
-      "Xagga Madiina",
-      "Makkadda Mukarrama",
-      "Kudus",
-      "Shaam"
+      "Faadumo",
+      "Xaawo",
+      "Caasha",
+      "Dhammaan"
     ],
-    "correct": "Makkadda Mukarrama"
+    "correct": "Faadumo"
   },
   {
-    "question": "Xajigu wuxuu ku beeganyahay bisha?",
+    "question": "Af-Soomaali ereyga Geel macnaheeda Ingiriisiga waa?",
     "options": [
-      "Ramadaan",
-      "Shawwaal",
-      "Dhul-Qacda",
-      "Dhul-Xijjah"
+      "Horse",
+      "Camel",
+      "Donkey",
+      "Cow"
     ],
-    "correct": "Dhul-Xijjah"
+    "correct": "Camel"
   },
   {
-    "question": "Aadan (AS) wuxuu ka sameysan yahay?",
+    "question": "Ramadaan waa bishee ee sanadka Islaamiga?",
     "options": [
-      "Dhuxusha",
-      "Biyaha",
-      "Doogga",
-      "Ciidda"
+      "8aad",
+      "9aad",
+      "10aad",
+      "11aad"
     ],
-    "correct": "Ciidda"
+    "correct": "9aad"
   },
   {
-    "question": "Xiddigta ugu dhow qorraxda (solar system) waa?",
+    "question": "Nebiga SCW wuxuu xilka nubuwadda helay isagoo da'diisu ahayd?",
     "options": [
-      "Sirius",
-      "Vega",
-      "Alpha Centauri",
-      "Proxima Centauri"
+      "35",
+      "38",
+      "40",
+      "45"
     ],
-    "correct": "Proxima Centauri"
-  },
-  {
-    "question": "Suuradda Al-Baqarah waa suurad? ",
-    "options": [
-      "Makkiyya",
-      "Madaniyya",
-      "Labadaba",
-      "Midna ma aha"
-    ],
-    "correct": "Madaniyya"
-  },
-  {
-    "question": "Tirada Suurtada Makkiyya ee Qur'aanka waa?",
-    "options": [
-      "66",
-      "86",
-      "92",
-      "96"
-    ],
-    "correct": "86"
-  },
-  {
-    "question": "Maqaamka ugu sarreeya ee Jannadda waa?",
-    "options": [
-      "Jannadda Cadn",
-      "Jannadda Firdaws",
-      "Jannadda Naciim",
-      "Jannadda Khuld"
-    ],
-    "correct": "Jannadda Firdaws"
-  },
-  {
-    "question": "Ismiil oo ka mid ah asmaa'ul-xusna macnahiisu waa?",
-    "options": [
-      "Ogaanshaha",
-      "Daawashada",
-      "Maqalka",
-      "Gacanka"
-    ],
-    "correct": "Daawashada"
-  },
-  {
-    "question": "Dagaalkii Badr wuxuu dhacay sanadkii Hijriga?",
-    "options": [
-      "1 H",
-      "2 H",
-      "3 H",
-      "4 H"
-    ],
-    "correct": "2 H"
-  },
-  {
-    "question": "Fataxul Makka wuxuu dhacay sanadkii Hijriga?",
-    "options": [
-      "6 H",
-      "7 H",
-      "8 H",
-      "9 H"
-    ],
-    "correct": "8 H"
-  },
-  {
-    "question": "Halqabihii ugu dambeeyay (4aad) Raashidiin waa?",
-    "options": [
-      "Cumar",
-      "Cali",
-      "Cismaan",
-      "Muaawiya"
-    ],
-    "correct": "Cali"
-  },
-  {
-    "question": "Sida uu tahay Imaam Bukhaari wuxuu dhalay sanadkii Milaadig?",
-    "options": [
-      "184",
-      "194",
-      "204",
-      "214"
-    ],
-    "correct": "194"
-  },
-  {
-    "question": "Nabi Muxamed (CSW) wuxuu u guuray Madiina sanadkii?",
-    "options": [
-      "610",
-      "615",
-      "620",
-      "622"
-    ],
-    "correct": "622"
-  },
-  {
-    "question": "Badda ugu qaarkiis (qoto dheer) adduunka waa?",
-    "options": [
-      "Atlantic",
-      "Arctic",
-      "Indian",
-      "Pacific"
-    ],
-    "correct": "Pacific"
-  },
-  {
-    "question": "Buurta ugu sarreysa Yurub waa?",
-    "options": [
-      "Mont Blanc",
-      "Matterhorn",
-      "Elbrus",
-      "Ben Nevis"
-    ],
-    "correct": "Elbrus"
-  },
-  {
-    "question": "Webiga ugu dhaadheer Aasiya waa?",
-    "options": [
-      "Ganges",
-      "Mekong",
-      "Yangtze",
-      "Yellow River"
-    ],
-    "correct": "Yangtze"
-  },
-  {
-    "question": "Dalka adduunka ugu fog xeebta (landlocked) waa?",
-    "options": [
-      "Switzerland",
-      "Kazakhstan",
-      "Mongolia",
-      "Liechtenstein"
-    ],
-    "correct": "Kazakhstan"
-  },
-  {
-    "question": "Jasiiradda ugu weyn adduunka waa?",
-    "options": [
-      "Borneo",
-      "Madagascar",
-      "New Guinea",
-      "Greenland"
-    ],
-    "correct": "Greenland"
-  },
-  {
-    "question": "Badda ugu cusub adduunka waa?",
-    "options": [
-      "Red Sea",
-      "Caspian Sea",
-      "Baltic Sea",
-      "Arabian Sea"
-    ],
-    "correct": "Baltic Sea"
-  },
-  {
-    "question": "Wabiga Amazon wuxuu maraa?",
-    "options": [
-      "Kolombiya",
-      "Venezuela",
-      "Ecuador",
-      "Brazil"
-    ],
-    "correct": "Brazil"
-  },
-  {
-    "question": "Duleedka ugu kulul adduunka (hottest place) waa?",
-    "options": [
-      "Sahara",
-      "Death Valley",
-      "Lut Desert",
-      "Atacama"
-    ],
-    "correct": "Lut Desert"
-  },
-  {
-    "question": "Duleedka ugu qabow adduunka waa?",
-    "options": [
-      "Alaska",
-      "Greenland",
-      "Siberia",
-      "Antarctica"
-    ],
-    "correct": "Antarctica"
-  },
-  {
-    "question": "Danta adduunka ee biyo-macaanka ugu weyn waa?",
-    "options": [
-      "Amazon",
-      "Congo",
-      "Nile",
-      "Lake Baikal"
-    ],
-    "correct": "Lake Baikal"
-  },
-  {
-    "question": "Gabayga ugu heer sarreeya Soomaalida waxaa loo yaqaan?",
-    "options": [
-      "Geeraar",
-      "Jiifto",
-      "Buraanbur",
-      "Maanso"
-    ],
-    "correct": "Maanso"
-  },
-  {
-    "question": "Dharka dhaqanka Soomaalida ee haweenka waa?",
-    "options": [
-      "Gambar",
-      "Diraa",
-      "Guntiino",
-      "Dhaadheer"
-    ],
-    "correct": "Guntiino"
-  },
-  {
-    "question": "Cayaarta dhaqanka Soomaalida ee ugu caan baxday caalamka waa?",
-    "options": [
-      "Qulqul",
-      "Buraanbur",
-      "Dhaanto",
-      "Biyasheeg"
-    ],
-    "correct": "Dhaanto"
-  },
-  {
-    "question": "Hiddaha Soomaalida ee aad loola xidha carruurnimada waa?",
-    "options": [
-      "Subagsasho",
-      "Magacaynta",
-      "Guursiga",
-      "Wiilasha"
-    ],
-    "correct": "Magacaynta"
-  },
-  {
-    "question": "Xoolaha ugu muhiimsan dhaqaalaha Soomaalida dhaqanka ahaan waa?",
-    "options": [
-      "Lo'da",
-      "Adiga",
-      "Geela",
-      "Idaha"
-    ],
-    "correct": "Geela"
-  },
-  {
-    "question": "Caasimadda Koonfur Afrika waa?",
-    "options": [
-      "Johannesburg",
-      "Cape Town",
-      "Durban",
-      "Pretoria"
-    ],
-    "correct": "Pretoria"
-  },
-  {
-    "question": "Caasimadda Thailand waa?",
-    "options": [
-      "Phuket",
-      "Chiang Mai",
-      "Pattaya",
-      "Bangkok"
-    ],
-    "correct": "Bangkok"
-  },
-  {
-    "question": "Caasimadda Philippines waa?",
-    "options": [
-      "Cebu",
-      "Davao",
-      "Quezon City",
-      "Manila"
-    ],
-    "correct": "Manila"
-  },
-  {
-    "question": "Caasimadda Malaysia waa?",
-    "options": [
-      "Penang",
-      "Johor",
-      "Kuching",
-      "Kuala Lumpur"
-    ],
-    "correct": "Kuala Lumpur"
-  },
-  {
-    "question": "Caasimadda Vietnam waa?",
-    "options": [
-      "Ho Chi Minh City",
-      "Da Nang",
-      "Hue",
-      "Hanoi"
-    ],
-    "correct": "Hanoi"
-  },
-  {
-    "question": "Tirada xagasha triangle waa?",
-    "options": [
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "correct": "3"
-  },
-  {
-    "question": "Tirada dhinacyada cube waa?",
-    "options": [
-      "4",
-      "5",
-      "6",
-      "8"
-    ],
-    "correct": "6"
-  },
-  {
-    "question": "1 kilometer waxay la mid tahay immisa mitir?",
-    "options": [
-      "10",
-      "100",
-      "500",
-      "1000"
-    ],
-    "correct": "1000"
-  },
-  {
-    "question": "Past tense of bring waa?",
-    "options": [
-      "bringed",
-      "brung",
-      "brought",
-      "brang"
-    ],
-    "correct": "brought"
-  },
-  {
-    "question": "Past tense of drive waa?",
-    "options": [
-      "drived",
-      "droven",
-      "driven",
-      "drove"
-    ],
-    "correct": "drove"
-  },
-  {
-    "question": "Plural of ox waa?",
-    "options": [
-      "oxes",
-      "ox",
-      "oxen",
-      "oxs"
-    ],
-    "correct": "oxen"
-  },
-  {
-    "question": "Plural of goose waa?",
-    "options": [
-      "gooses",
-      "gooses",
-      "goosen",
-      "geese"
-    ],
-    "correct": "geese"
-  },
-  {
-    "question": "Caasimadda Soomaaliya waa Hargeysa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Webiga ugu dhaadheer adduunka waa Amazon.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Turkiga waa Istanbul.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada gobollada Soomaaliya waa 21.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Imaaraatka waa Dubai.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Ciise (AS) ayaa ahaa nebiga ugu danbeeyay.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Buurta ugu sarreysa adduunka waa K2.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Masar waa Alexandria.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada Suurtada Qur'aanka waa 120.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Shiinaha waa Shanghai.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xubinta jirka ee nuujinta oksijiinta waa wadnaha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada lafahaa jirka bini'aadamka waa 196.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Hindiya waa Mumbai.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Sannadkii Hijriga bilaabatay waa 610 Miilad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nooca dhiigga ugu guud adduunka waa AB+.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "20% of 500 waa 75.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada xagasha saddex-xagalka waa 360°.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Kanada waa Toronto.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Halqabihii Islaamkii ugu horreeyay waa Cumar.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Heerkulka jirka bini'aadamka caadiga ah waa 39°C.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "π ilaa labo meelood waa 3.12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Badda ugu weyn adduunka waa Atlantik.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dhibcaha ay biyuhu ku karkaraan waa 90°C.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Qadar waa Riyadh.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "The past tense of 'go' waa 'goed'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Plural of 'child' waa 'childs'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "2⁸ = 128.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Maalin Xorriyadda Koonfurta Soomaaliya waa 26 Juun.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Gobolka ugu weyn dhulkiisa Soomaaliya waa Hiiraan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Puntland waa Boosaaso.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada halqabihii Raashidiin waa 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suuradda ugu gaaban Qur'aanka waa Al-Ikhlaas.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Sacuudiga waa Makka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Itoobiya waa Harar.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dalka ugu weyn adduunka waa Kanada.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada fariidhyada Islaamka waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Kenya waa Mombasa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Ruushka waa St. Petersburg.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada Nebiyada ee la xusay Qur'aanka waa 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Jabuuti waa Ali Sabieh.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Ingiriiska waa Manchester.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada sanadaha qarnigu leeyahay waa 50.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "CPU waxaa loola jeedaa 'Computer Power Unit'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada carboonka (Carbon) jadwalka waa 8.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Garaaca wadnaha daqiiqadda caadiga ah waa 110-130.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dalkii ugu horreeyay ee gaadhay dayaxa waa Ruushka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada caleemaha bandhiga (periodic table) waa 108.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "The plural of 'mouse' waa 'mouses'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada xagasha afar-xagalka waa 270°.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Faransiiska waa Lyon.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Jarmalka waa Hamburg.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Brazil ayaa ugu badan FIFA World Cup ku guulaystay — BEEN, Jarmalka baa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Muxamed (CSW) wuxuu ku dhashay Madiina.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Kitaabka Tawraadda waxaa lagu soo dejiyay Nabi Ciise.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "7 × 8 = 63.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√144 = 14.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada maalinta toddobaadka waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Hantida ugu qaali badan adduunka waa Dahabka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "She is the 'smarter' student in the class (superlative).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "The sun rises in the west.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'eat' waa 'eated'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "12² = 156.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada saacadaha maalinta waa 22.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Sanaag waa Burco.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Webiga Shabelle waa kan ugu dhaadheer Soomaaliya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Gedo waa Luuq.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Kismaayo waxay ku taal gobolka Jubbada Sare.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Madaxweynihii ugu horreeyay Soomaaliya waa Maxamed Siyaad Barre.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada bilaha sanadka waa 11.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nooca dhiigga ugu nadir adduunka waa O+.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Cunto kasta oo cagaaran waxay samaysan tahay mitokondria.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "1000 ÷ 25 = 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "5! (5 factorial) waa 60.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "3³ = 36.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Geedka xiddigada ugu dhowaanta qorraxda waa Sirius.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Woqooyi Galbeed waa Berbera.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Maalin Xorriyadda Waqooyi Soomaaliya waa 1 Luulyo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada caleemaha Periodic Table waa 98.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "50% of 200 waa 75.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Buurta K2 waa tan ugu sarreysa adduunka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "8 × 9 = 81.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada Nebiyada Qur'aanka waa 20.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suuradda Al-Baqara waa tan ugu gaaban Qur'aanka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Muuse ayaa lagu soo dejiyay Injiilka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Daawuud ayaa lagu soo dejiyay Tawraadda.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Woqooyi Galbeed waa Burco.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xubinta jirka nuujinta dhiigga waa Sambabbada.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "15 × 15 = 215.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "25 × 4 = 90.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Badweynta Atlantik waa tan ugu weyn adduunka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada cabirada bini'aadamka waa 3.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "12 × 12 = 156.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Cunto cagaaran waxay samaysan tahay nukliyaas.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada carboonka jadwalka howleedka waa 12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "The sun rises waa 'guba qorraxda'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "8 × 9 = 63.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Webiga Juba waa ka gaabis Shabelle.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suuradda Al-Ikhlaas waa tan ugu dheer Qur'aanka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "50% of 200 waa 50.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Australia waa Sydney.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Brazil waa Rio de Janeiro.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Argentina waa Córdoba.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Mexico waa Guadalajara.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Meeraha ugu dhow qorraxda waa Venus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Meeraha ugu weyn qorraxeed waa Saturn.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Meeraha ugu fog qorraxda waa Uranus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada chromosomes bini'aadamka waa 44.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xubinta jirka ugu weyn waa Beerka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Pakistan waa Karachi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Japan waa Osaka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda South Korea waa Busan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Indonesia waa Surabaya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Nigeria waa Lagos.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Morocco waa Casablanca.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Algeria waa Oran.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Libya waa Benghazi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Sweden waa Gothenburg.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Norway waa Bergen.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Poland waa Kraków.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Ukraine waa Kharkiv.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Iran waa Mashhad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "9² = 72.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "2¹⁰ = 512.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√225 = 14.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "4! = 16.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "0.5 × 0.5 = 1.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "50% of 300 waa 125.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√49 = 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada xagasha hexagon waa 7.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "17 × 17 = 279.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "15% of 200 waa 25.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "WWII wuxuu billaaday 1940.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "WWII wuxuu dhammaaday 1946.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Neil Armstrong dayaxa ku dhuftay 1971.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "WWI wuxuu billaaday 1916.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "WWI wuxuu dhammaaday 1920.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nelson Mandela madaxweyne noqday 1990.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Titanic gashay biyaha 1915.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Columbus gaadhay Ameerika 1502.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Facebook waxaa la aasaasay 2006.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "iPhone-ka ugu horreeyay waxaa la soo saaray 2008.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "HTML waxay u dhigan tahay HyperText Media Language.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Python waxaa sameeyay Dennis Ritchie.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Linux waxaa sameeyay Bill Gates.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Google waxaa la aasaasay 2001.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "USB waxay u dhigan tahay Universal System Bus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "RAM waxay u dhigan tahay Read Access Memory.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "URL waxay u dhigan tahay Universal Resource Link.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "OS-ka Apple waa Android.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Plural of 'tooth' waa 'tooths'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Plural of 'foot' waa 'foots'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'fly' waa 'flied'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'run' waa 'runned'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'swim' waa 'swimmed'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'write' waa 'written'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Plural of 'man' waa 'mans'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "'Rapid' macnaheedu waa 'Slow'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada juz'yada Qur'aanka waa 28.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Ramadaan waa bisha 8-aad ee Islaamka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Ibraahim wuxuu dhisay Masjidka Aqsaa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suuradda 36 waa Maryam.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Yuusuf (AS) wuxuu ku noolaa Shaam.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada Nebiyada Ulul-Cazm waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Kitaabka Zabuura waxaa lagu soo dejiyay Nabi Ciise.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada sujuudda Fajriga waa 2.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Ciida Xajka waxay ku beegan tahay bisha Ramadaan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Bay waa Afgooye.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Mudug waa Dhuusamarreeb.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Nugaal waa Qardho.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Luuqadda Soomaaliga si rasmi ah loo qoray 1980.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Gobolka ugu weyn Soomaaliya dhulkiisa waa Gedo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Jubbada Sare waa Kismaayo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Oksijiinta lambarka atoomiga waa 10.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xayawaanka ugu dheer adduunka waa Elephant.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada meeraha nidaamka qorraxeed waa 9.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dheriska iftiinka waa 200,000 km/s.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xayawaanka ugu weyn adduunka waa Whale Shark.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda gobolka Hiiraan waa Bulo Burde.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dalka ugu yar adduunka waa Monaco.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Sacuudiga waa Jidda.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Imaaraatka waa Dubai.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Qadar waa Riyadh.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Hindiya waa Mumbai.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Shiinaha waa Shanghai.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Ruushka waa St. Petersburg.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Kanada waa Toronto.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Turkiga waa Istanbul.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Faransiiska waa Lyon.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Jarmalka waa Munich.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Ingiriiska waa Manchester.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Itoobiya waa Dire Dawa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Kenya waa Mombasa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda dalka Masar waa Alexandria.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√144 = 13.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "5! = 60.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada garaaca wadnaha caadiga waa 110-130.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dhibcaha biyuhu karkaraan waa 90°C.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada sambabbada bini'aadamka waa 3.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xiddigta ugu dhowaanta qorraxda waa Sirius.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Brazil wuxuu FIFA World Cup 6 jeer ku guulaystay.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada ciyaaryahanada volleyball koox waa 7.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada innings baseball waa 12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Olympics-ka sanadkii laba jeer ayuu dhacaa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "World Cup 2022 ku guulaystay kooxda Faransiiska.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "World Cup 2018 ku guulaystay kooxda Germany.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "World Cup ugu horreeyay waxay dhacday 1934.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Kooxda kubadda cagta FIFA WC ugu badan guulaystay waa Germany.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "9 × 8 = 63.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "7 × 9 = 56.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "6 × 8 = 42.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "9 × 9 = 80.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "6 × 7 = 48.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "8 × 8 = 72.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "5 × 6 = 35.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada bilaha Febraayo ee sanadka caadiga ah waa 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada daqiiqadaha saacadda waa 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Carboonka lambarka atoomiga waa 8.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suez Canal waxaa la furay 1880.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Spain waa Barcelona.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Italy waa Milan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Portugal waa Porto.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Netherlands waa Rotterdam.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Belgium waa Antwerp.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Switzerland waa Zurich.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Austria waa Salzburg.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Greece waa Thessaloniki.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Hungary waa Debrecen.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Romania waa Cluj-Napoca.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Czech Republic waa Brno.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Denmark waa Aarhus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Finland waa Tampere.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Serbia waa Novi Sad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Croatia waa Split.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Meeraha ugu kulul adduunka waa Mercury.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xayawaanka ugu dhaqso badan dhulka waa Lion.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada ilkaha weynta bini'aadamka waa 28.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Meeraha ugu qabow nidaamka qorraxeed waa Uranus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "AI waxay u dhigan tahay Automated Input.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Wi-Fi waxay u dhigan tahay Wide Fidelity.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "GPS waxay u dhigan tahay General Positioning System.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "PDF waxay u dhigan tahay Printed Document File.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "SSD waxay u dhigan tahay Super Speed Drive.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "API waxay u dhigan tahay Application Processing Interface.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "IP waxay u dhigan tahay Internet Processor.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "JavaScript waa luuqadda Python-ka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "World Cup 2026 waxay dhici doontaa Yurub.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "World Cup 2018 waxay dhacday Brazil.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "World Cup 2014 waxay dhacday Russia.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tennis Australian Open waa Grand Slam-ka ugu dambeeyay sanadka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Jubbaland waa Baraawe.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Koonfur Galbeed waa Baardheere.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Koonfurta iyo Waqooyi Soomaaliya waxay midoobeen 26 Juun 1960.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Webiga Juba wuxuu galaa Badda Cas.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Gobolka Baardheere ku taallo waa Bay.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "5 × 5 = 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "6 × 6 = 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "7 × 7 = 42.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "10 × 10 = 90.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "4 × 6 = 20.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "3 × 8 = 21.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "9 × 4 = 32.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "12 × 8 = 88.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "11 × 9 = 90.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "6 × 9 = 52.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√81 = 7.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√100 = 11.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√36 = 7.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "√16 = 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "2⁵ = 16.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "2⁶ = 32.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "3² = 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "4² = 20.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "5² = 20.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "10² = 1000.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "25% of 400 waa 75.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "10% of 500 waa 60.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "75% of 200 waa 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "30% of 100 waa 25.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada xagasha pentagon waa 4.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada xagasha octagon waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada xagasha triangle waa 4.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada dhinacyada cube waa 4.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada dhinacyada pyramid (4-sided base) waa 3.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "1 kilometer waxay la mid tahay 10 mitir.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'see' waa 'seed'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'break' waa 'breaked'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'bring' waa 'bringed'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'buy' waa 'buyed'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'drive' waa 'drived'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'fall' waa 'falled'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of 'fight' waa 'fighted'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Plural of 'ox' waa 'oxes'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Plural of 'goose' waa 'gooses'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Plural of 'leaf' waa 'leafs'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "'Enormous' waa opposite-ka 'large'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "'Ancient' means 'future'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "'Rapid' means 'heavy'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "'Depart' means 'arrive'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "'Full' is the opposite of 'open'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suuradda Al-Faatixa waxay leedahay 6 aayad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dagaalkii Badr wuxuu dhacay sanadkii 3 H.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Fataxul Makka wuxuu dhacay sanadkii 7 H.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Halqabihii ugu dambeeyay Raashidiin waa Cismaan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Jasiiradda ugu weyn adduunka waa Borneo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Duleedka ugu kulul adduunka waa Sahara.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Duleedka ugu qabow adduunka waa Siberia.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Webiga Amazon wuxuu maraa Venezuela.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Badda ugu qaarkiis adduunka waa Atlantic.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Danta adduunka ee biyo-macaanka ugu weyn waa Amazon.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dharka dhaqanka Soomaalida ee haweenka waa Diraa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xoolaha ugu muhiimsan dhaqaalaha Soomaalida waa Lo'da.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Gabayga ugu heer sarreeya Soomaalida waa Buraanbur.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Cayaarta dhaqanka Soomaalida ee caan baxday waa Buraanbur.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Aadan (AS) wuxuu ka sameysan yahay biyaha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada Suurtada Makkiyya waa 66.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Maqaamka ugu sarreeya Jannadda waa Jannadda Cadn.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Jasiiradda Greenland waxay ka mid tahay Yurub.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dalka Kazakhstan waa ugu fog xeebta (smallest landlocked).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Webiga Yangtze waxuu maraa Hindiya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada aayada suuradda Al-Faatixa waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suuradda Al-Kahf waxaa loo akhristaa Isniinta.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xajigu wuxuu ku beeganyahay bisha Ramadaan.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Thailand waa Phuket.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Philippines waa Cebu.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Malaysia waa Penang.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Vietnam waa Ho Chi Minh City.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of bring waa bringed.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of drive waa drived.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Koonfur Afrika waa Johannesburg.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Suuradda Al-Ikhlaas waxay leedahay 3 aayad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Ibraahim (AS) wuxuu ku dhashay Masar.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada Nabiyada ee Qur'aanka lagu xusay waa 20.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Dagaalkii Uxud wuxuu dhacay sanadkii 1 H.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "4 × 4 = 12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "7 × 8 = 54.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "9 × 9 = 82.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada ciyaaryahanada cricket koox waa 10.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Olympics-ka 2 sannadba mar ayuu dhacaa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Xiddiga ugu weyn nidaamka qorraxeed waa Jupiter.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Soomaaliya waxay heysataa badda Hindiya oo kaliya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Koonfurta iyo Waqooyi Soomaaliya waxay midoobeen 1 Luulyo 1961.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Luuqadda rasmiga ah ee Soomaaliya waa Ingiriisi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada dhinacyada dodecahedron waa 10.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Past tense of fly waa flown.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada maalmaha October waa 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda New Zealand waa Auckland.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada saacadaha maalinta waa 12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada daqiiqadaha saacadda waa 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada jilbaha bini'aadamka waa 4.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Geyiga ugu weyn adduunka waa Africa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada labista (sides) dodecagon waa 10.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada luqadaha rasmiga ee Qaramada Midoobay waa 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Laanta Biology waxay daraasaysaa Aadmiga keliya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada dhinacyada tetrahedron waa 3.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada laf-dhabarta bini'aadamka waa 32.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada aayada suuradda Al-Baqarah waa 184.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada aayada suuradda Al-Imran waa 175.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada suurtada Qur'aanka waa 113.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Nabi Ciise (AS) wuxuu ku dhashay Makkadda.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Tirada rukuuca salaadda Fajar waa 4.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Been"
-  },
-  {
-    "question": "Caasimadda Norway waa Oslo — Been.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Sweden waa Stockholm — Been, waa Run.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Libya waa Tripoli — Been.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2010 waxay dhacday South Africa — Been.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada kalluunka deegaanka badda 'clownfish' waa dhibic jaalle ah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Webiga Jubba wuxuu bilaabmaa Ethiopia.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada gobolada Soomaaliya waa 18.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "HTTP waxay u dhigan tahay HyperText Transfer Protocol — Been.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "RAM waxay u dhigan tahay Random Access Memory — Been.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of swim waa swam — Been.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada maalmaha February sanadka bisleeyaha waa 29.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dalka weyn ee Afrika waa Algeria — Been, waa Run.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Itoobiya waa Addis Ababa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Muqdisho waa caasimadda Soomaaliya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Nabi Muxamed (CSW) wuxuu ku dhashay Makka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Buurta ugu sarreysa adduunka waa Everest.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada fariidhyada Islaamka waa 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada bilaha sanadka waa 12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Ruushka waa Moscow.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Webiga ugu dhaadheer adduunka waa Niil.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Heerkulka jirka bini'aadamka caadiga ah waa 37°C.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Turkiga waa Ankara.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "7 × 8 = 56.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada lafahaa jirka bini'aadamka waa 206.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Shiinaha waa Beijing.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dhibcaha biyuhu karkaraan (Celsius) waa 100°C.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Halqabihii Islaamkii ugu horreeyay waa Abuu Bakr.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Sannadkii Hijriga bilaabatay waa 622 Miilad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada saacadaha maalinta waa 24.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Qadar waa Doha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "12² = 144.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Hindiya waa New Delhi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha afar-xagalka waa 360°.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Sacuudiga waa Riyadh.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Kenya waa Nairobi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Kanada waa Ottawa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada carboonka (Carbon) jadwalka waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada Nebiyada Qur'aanka waa 25.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Faransiiska waa Paris.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Ingiriiska waa London.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Jarmalka waa Berlin.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada halqabihii Raashidiin waa 4.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Suuradda Al-Kawthar waa tan ugu gaaban Qur'aanka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada caleemaha bandhiga (periodic table) waa 118.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dalkii ugu horreeyay ee gaadhay dayaxa waa Ameerika.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dalka ugu weyn adduunka (dhulkiisa) waa Ruushka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada maalinta toddobaadka waa 7.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Kitaabka Injiilka waxaa lagu soo dejiyay Nabi Ciise.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Imaaraatka waa Abu Dhabi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Jabuuti waa Djibouti.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada sanadaha qarnigu leeyahay waa 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha saddex-xagalka waa 180°.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Masar waa Cairo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Puntland waa Garoowe.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Nooca dhiigga ugu guud adduunka waa O+.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Maalin Xorriyadda Koonfurta Soomaaliya waa 1 Luulyo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "8 × 9 = 72.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada gobollada Soomaaliya waa 18.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada Suurtada Qur'aanka waa 114.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Badda ugu weyn adduunka waa Baasifig.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Geedka xiddigada ugu dhowaanta qorraxda waa Proxima Centauri.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "The past tense of 'go' waa 'went'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "The plural of 'child' waa 'children'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Woqooyi Galbeed waa Hargeysa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada cabirada (senses) bini'aadamka waa 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "π ilaa labo meelood waa 3.14.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Cunto cagaaran waxay samaysan tahay klorofiil.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda gobolka Sanaag waa Ceerigaavo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada bilaha sanadka waa 12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Sacuudiga waa Riyadh (Run).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Hantida ugu qaali badan adduunka waa Damaantiirka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "The sun rises in the east.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Kitaabka Sabuura waxaa lagu soo dejiyay Nabi Daawuud.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "50% of 200 waa 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "2⁸ = 256.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Maalin Xorriyadda Waqooyi Soomaaliya waa 26 Juun.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Jabuuti waa Djibouti (Run).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada halqabihii Raashidiin waa 4 (Run).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Shiinaha waa Beijing (Run).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "CPU = Central Processing Unit (Run).",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Australia waa Canberra.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Brazil waa Brasília.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Argentina waa Buenos Aires.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Meeraha ugu dhow qorraxda waa Mercury.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada meeraha nidaamka qorraxeed waa 8.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xayawaanka ugu dheer adduunka waa Giraffe.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada chromosomes bini'aadamka waa 46.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Oksijiinta lambarka atoomiga waa 8.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Meeraha ugu weyn nidaamka qorraxeed waa Jupiter.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Meeraha ugu fog qorraxda waa Neptune.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "9² = 81.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "2¹⁰ = 1024.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "√225 = 15.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "4! = 24.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "50% of 300 waa 150.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha hexagon waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "WWII wuxuu billaaday 1939.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "WWII wuxuu dhammaaday 1945.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Neil Armstrong dayaxa ku dhuftay 1969.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "WWI wuxuu billaaday 1914.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "WWI wuxuu dhammaaday 1918.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Titanic gashay biyaha 1912.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Columbus gaadhay Ameerika 1492.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Madaxweynihii ugu horreeyay USA waa George Washington.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Facebook waxaa la aasaasay 2004.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "iPhone-ka ugu horreeyay waxaa la soo saaray 2007.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Python waxaa sameeyay Guido van Rossum.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Linux waxaa sameeyay Linus Torvalds.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "RAM waxay u dhigan tahay Random Access Memory.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "HTML waxay u dhigan tahay HyperText Markup Language.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "URL waxay u dhigan tahay Uniform Resource Locator.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "USB waxay u dhigan tahay Universal Serial Bus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Pakistan waa Islamabad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Japan waa Tokyo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda South Korea waa Seoul.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Indonesia waa Jakarta.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Nigeria waa Abuja.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Morocco waa Rabat.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Algeria waa Algiers.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Libya waa Tripoli.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Sweden waa Stockholm.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Norway waa Oslo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Poland waa Warsaw.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Ukraine waa Kyiv.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Iran waa Tehran.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada juz'yada Qur'aanka waa 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Nabi Ibraahim (AS) wuxuu dhisay Kacbada.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Suuradda 36 ee Qur'aanka waa Yaasiin.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada Nebiyada Ulul-Cazm waa 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Luuqadda Soomaaliga si rasmi ah loo qoray 1972.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda gobolka Bay waa Baidoa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda gobolka Mudug waa Gaalkacyo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda gobolka Bari waa Boosaaso.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Heerkulka jirka bini'aadamka caadiga waa 37°C.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dhibcaha biyuhu karkaraan waa 100°C.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "17 × 17 = 289.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "15% of 200 = 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "√49 = 7.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "0.5 × 0.5 = 0.25.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Suez Canal waxaa la furay 1869.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Nelson Mandela madaxweyne noqday 1994.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Google waxaa la aasaasay 1998.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "OS-ka Apple iPhoneyaasha waa iOS.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda gobolka Jubbada Sare waa Bu'aale.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2022 ku guulaystay kooxda Argentina.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Brazil wuxuu FIFA World Cup 5 jeer ku guulaystay.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada ciyaaryahanada volleyball koox waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada innings baseball waa 9.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Olympics-ka 4 sannadba mar ayuu dhacaa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of 'tooth' waa 'teeth'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of 'foot' waa 'feet'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'fly' waa 'flew'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'run' waa 'ran'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'swim' waa 'swam'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'write' waa 'wrote'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of 'man' waa 'men'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "3 × 3 = 9.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "4 × 4 = 16.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "11 × 11 = 121.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xubinta jirka nuujinta oksijiinta waa Sambabbada.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dheriska iftiinka saniyaddii waa 300,000 km/s.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xayawaanka ugu weyn adduunka waa Blue Whale.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xubinta jirka nuujinta dhiigga waa Wadnaha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada garaaca wadnaha daqiiqadda caadiga waa 60-100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "CPU waxaa loola jeedaa Central Processing Unit.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Madaxweynihii ugu horreeyay Soomaaliya waa Aadan Cadde.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda gobolka Hiiraan waa Beledweyne.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Webiga ugu dhaadheer Soomaaliya waa Juba.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada sanadaha qarni waa 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada caleemaha bandhiga waa 118.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dalka ugu weyn adduunka waa Ruushka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Sannadkii Hijriga bilaabatay waa 622 M.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda gobolka Gedo waa Garbahaareey.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Carboonka (Carbon) lambarka atoomiga waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xiddigta ugu dhowaanta qorraxda waa Proxima Centauri.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "OS-ka Android waxaa sameeyay Google.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Spain waa Madrid.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Italy waa Rome.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Portugal waa Lisbon.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Netherlands waa Amsterdam.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Belgium waa Brussels.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Switzerland waa Bern.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Austria waa Vienna.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Greece waa Athens.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Czech Republic waa Prague.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Denmark waa Copenhagen.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Finland waa Helsinki.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Meeraha ugu kulul nidaamka qorraxeed waa Venus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xayawaanka ugu dhaqso badan dhulka waa Cheetah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada ciyaaryahanada basketball koox waa 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada ciyaaryahanada rugby union koox waa 15.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "AI waxay u dhigan tahay Artificial Intelligence.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Wi-Fi waxay u dhigan tahay Wireless Fidelity.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "GPS waxay u dhigan tahay Global Positioning System.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "PDF waxay u dhigan tahay Portable Document Format.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "SSD waxay u dhigan tahay Solid State Drive.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "API waxay u dhigan tahay Application Programming Interface.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2026 waxay dhici doontaa USA/Canada/Mexico.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2018 waxay dhacday Russia.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2014 waxay dhacday Brazil.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Jubbaland waa Kismaayo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Koonfur Galbeed waa Baidoa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Koonfurta iyo Waqooyi Soomaaliya waxay midoobeen 1 Luulyo 1960.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Webiga Juba wuxuu galaa Badda Hindiya.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "5 × 5 = 25.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "6 × 6 = 36.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "7 × 7 = 49.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "10 × 10 = 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "√81 = 9.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "√100 = 10.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "√36 = 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "2⁵ = 32.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "2⁶ = 64.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "10² = 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "25% of 400 waa 100.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "10% of 500 waa 50.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha pentagon waa 5.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha octagon waa 8.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "1 kilometer waxay la mid tahay 1000 mitir.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'see' waa 'saw'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'break' waa 'broke'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'buy' waa 'bought'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of 'fall' waa 'fell'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of 'ox' waa 'oxen'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of 'goose' waa 'geese'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of 'leaf' waa 'leaves'.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada maalinta Febraayo ee sanadka caadiga ah waa 28.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada daqiiqadaha saacadda waa 60.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada ilkaha weynta bini'aadamka waa 32.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Hirshabeelle waa Jowhar.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda SSC-Khaatumo waa Laascaanood.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Magaalada ugu weyn Somaliland waa Hargeysa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Romania waa Bucharest — Been, waa Run.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Suuradda Al-Faatixa waxay leedahay 7 aayad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dagaalkii Badr wuxuu dhacay sanadkii 2 H.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Fataxul Makka wuxuu dhacay sanadkii 8 H.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Halqabihii ugu dambeeyay Raashidiin waa Cali.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Buurta ugu sarreysa Yurub waa Elbrus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Jasiiradda ugu weyn adduunka waa Greenland.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Duleedka ugu kulul adduunka waa Lut Desert.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Duleedka ugu qabow adduunka waa Antarctica.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Webiga Amazon wuxuu maraa Brazil.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Badda ugu qaarkiis adduunka waa Pacific.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Danta adduunka ee biyo-macaanka ugu weyn waa Lake Baikal.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dharka dhaqanka Soomaalida ee haweenka waa Guntiino.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xoolaha ugu muhiimsan dhaqaalaha Soomaalida waa Geela.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Gabayga ugu heer sarreeya Soomaalida waa Maanso.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Cayaarta dhaqanka Soomaalida ee caan baxday caalamka waa Dhaanto.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Nabi Muxamed (CSW) wuxuu u guuray Madiina 622.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Aadan (AS) wuxuu ka sameysan yahay ciidda.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada Suurtada Makkiyya waa 86.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Maqaamka ugu sarreeya Jannadda waa Jannadda Firdaws.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Webiga ugu dhaadheer Aasiya waa Yangtze.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Serbia waa Belgrade.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Croatia waa Zagreb.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Hungary waa Budapest.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Romania waa Bucharest.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Suuradda Al-Kahf waxaa loo akhristaa Jimcaha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xajigu wuxuu ku beeganyahay bisha Dhul-Xijjah.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Thailand waa Bangkok.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Philippines waa Manila.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Malaysia waa Kuala Lumpur.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Vietnam waa Hanoi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Koonfur Afrika (executive) waa Pretoria.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "4 × 6 = 24.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "3 × 8 = 24.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "9 × 4 = 36.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "12 × 8 = 96.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "11 × 9 = 99.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "6 × 9 = 54.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "√16 = 4.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "3² = 9.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "4² = 16.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "5² = 25.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "75% of 200 waa 150.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "30% of 100 waa 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada dhinacyada cube waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha triangle waa 3.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada maalinta Febraayo ee sanadka caadiga waa 28.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of see waa saw.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of break waa broke.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of buy waa bought.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of fall waa fell.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of bring waa brought.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of drive waa drove.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of fight waa fought.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of ox waa oxen.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of goose waa geese.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Plural of leaf waa leaves.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Badda ugu qoto dheer adduunka waa Pacific.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Danta biyo-macaanka ugu weyn adduunka waa Lake Baikal.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tennis Australian Open waa Grand Slam-ka koowaad ee sanadka.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada ciyaaryahanada American football koox waa 11.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada ciyaaryahanada hockey (field) koox waa 11.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Turkey waa Ankara.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Iraq waa Baghdad.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Jordan waa Amman.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Lebanon waa Beirut.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Syria waa Damascus.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Tunisia waa Tunis.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Sudan waa Khartoum.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Ethiopia waa Addis Ababa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Tanzania waa Dodoma.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Uganda waa Kampala.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Rwanda waa Kigali.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda South Africa waa Pretoria.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Egypt waa Cairo.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Saudi Arabia waa Riyadh.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda UAE waa Abu Dhabi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Qatar waa Doha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Kuwait waa Kuwait City.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Oman waa Muscat.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Bahrain waa Manama.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Afghanistan waa Kabul.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda India waa New Delhi.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda China waa Beijing.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Canada waa Ottawa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Brazil waa Brasilia.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Mexico waa Mexico City.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda New Zealand waa Wellington.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "9 × 9 = 81.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "12 × 12 = 144.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "8 × 7 = 56.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "6 × 7 = 42.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "9 × 8 = 72.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada ciyaaryahanada cricket koox waa 11.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Olympics-ka 4 sannadba mar ayuu dhacaa — Run.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xiddiga ugu dhow qorraxda waa Proxima Centauri.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada dhinacyada cube waa 6 — Run.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of swim waa swam.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of fly waa flew.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of grow waa grew.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of know waa knew.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Past tense of throw waa threw.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada maalmaha October waa 31.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada maalmaha November waa 30.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada maalmaha December waa 31.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "HTTP waxay u dhigan tahay HyperText Transfer Protocol.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "CPU waxay u dhigan tahay Central Processing Unit.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada gobolada Soomaaliya waa 18.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Luuqadda rasmiga ah ee Soomaaliya waa Soomaali.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2010 waxay dhacday South Africa.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2006 waxay dhacday Germany.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "World Cup 2002 waxay dhacday Japan iyo South Korea.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dalka weyn ee Afrika waa Algeria.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dadka badan ugu jira adduunka waa India.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha heptagon waa 7.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada xagasha nonagon waa 9.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Xiddigga ugu caan badan caalamka waa Polaris.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Colombia waa Bogota — Been, waa Run.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Chile waa Santiago — Been.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Laanta Physics waxay daraasaysaa Sayniska xawaaraha.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dareeraha bini'aadamka ee dhiiga waa cas.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada daqiiqadaha saacadda waa 60 — Run.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada jilbaha bini'aadamka waa 2.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Geyiga ugu weyn adduunka waa Asia.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Dalka ugu yar adduunka waa Vatican City.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada labista (sides) dodecagon waa 12.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Colombia waa Bogota.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Caasimadda Chile waa Santiago.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
-  },
-  {
-    "question": "Tirada luqadaha rasmiga ee Qaramada Midoobay waa 6.",
-    "options": [
-      "Run",
-      "Been"
-    ],
-    "correct": "Run"
+    "correct": "40"
   }
 ]

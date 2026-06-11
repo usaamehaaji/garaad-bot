@@ -201,3 +201,19 @@ function stripQuestionNumber(text) {
 }
 
 module.exports = { todayKey, checkUser, getLevel, addXp, applyIqChange, checkAndAwardBadges, shuffleArray, getDisplayTitle, saveData, fmt, stripQuestionNumber };
+
+
+// ── Display Name Helper ──────────────────────────────────────────────
+// Priority: server nickname > global display name > username
+async function getDisplayName(client, guild, userId, fallbackUser = null) {
+    try {
+        const member = guild ? await guild.members.fetch(userId).catch(() => null) : null;
+        if (member?.nickname) return member.nickname;
+        const user = member?.user || fallbackUser || await client.users.fetch(userId).catch(() => null);
+        return user?.globalName || user?.username || `User ${userId}`;
+    } catch {
+        return fallbackUser?.globalName || fallbackUser?.username || `User ${userId}`;
+    }
+}
+
+module.exports.getDisplayName = getDisplayName;

@@ -4,7 +4,7 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData } = require('../../src/store');
-const { getLevel, getDisplayTitle, checkUser } = require('../../src/utils/helpers');
+const { getLevel, getDisplayTitle, checkUser, getDisplayName } = require('../../src/utils/helpers');
 
 const TOP_N   = 15;
 const MEDALS  = ['🥇', '🥈', '🥉'];
@@ -15,7 +15,7 @@ function cleanTitle(disp) {
     return disp;
 }
 
-async function buildIqLines(top, client) {
+async function buildIqLines(top, client, guild) {
     const lines = await Promise.all(top.map(async ([id, data], i) => {
         const s          = data.stats || {};
         const disp       = cleanTitle(getDisplayTitle(id));
@@ -24,8 +24,7 @@ async function buildIqLines(top, client) {
         const totalGames = (s.soloPlayed || 0) + (s.duelWins || 0) + (s.duelLosses || 0) + (s.duelDraws || 0);
         const medal      = i < 3 ? `${MEDALS[i]} ` : '';
 
-        let name = `<@${id}>`;
-        try { const u = await client.users.fetch(id); name = `@${u.username}`; } catch {}
+        let name = await getDisplayName(client, guild, id);
 
         return (
             `${medal}${CIRCLES[i]} **${name}**${titlePart}\n` +
@@ -44,8 +43,7 @@ async function buildTopEmbed(message, title, color, entries, lineBuilder) {
     const top   = entries.slice(0, 10);
     const lines = await Promise.all(top.map(async (e, i) => {
         const medal = i < 3 ? MEDALS[i] : `**${i + 1}.**`;
-        let name = `<@${e[0]}>`;
-        try { const u = await message.client.users.fetch(e[0]); name = `@${u.username}`; } catch {}
+        let name = await getDisplayName(message.client, message.guild, e[0]);
         return `${medal} ${lineBuilder(e, i, name)}`;
     }));
     const embed = new EmbedBuilder()
@@ -126,7 +124,7 @@ module.exports = async function topCommand(message) {
         .sort(([, a], [, b]) => (b.iq || 0) - (a.iq || 0));
 
     const top      = allIq.slice(0, TOP_N);
-    const lines    = await buildIqLines(top, message.client);
+    const lines    = await buildIqLines(top, message.client, message.guild);
     const userRank = allIq.findIndex(([id]) => id === userId) + 1;
     const inTop    = userRank > 0 && userRank <= TOP_N;
 

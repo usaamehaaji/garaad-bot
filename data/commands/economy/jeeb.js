@@ -61,14 +61,24 @@ function jeebRow(authorId, targetId) {
     );
 }
 
+function getDisplayName(user, member) {
+    // Priority: server nickname > global display name > username
+    return member?.nickname || user?.globalName || user?.displayName || user?.username || 'Unknown';
+}
+
 module.exports = async function jeebCmd(message) {
     const authorId = message.author.id;
     const target   = message.mentions.users.first();
-    const userId   = target ? target.id       : authorId;
-    const username = target ? target.username : message.author.username;
+    const userId   = target ? target.id : authorId;
+
+    // Get member for server nickname
+    let member = null;
+    try { member = await message.guild?.members.fetch(userId); } catch {}
+    const user        = target || message.author;
+    const displayName = getDisplayName(user, member);
 
     return message.reply({
-        embeds:     [buildJeebEmbed(userId, username)],
+        embeds:     [buildJeebEmbed(userId, displayName)],
         components: [jeebRow(authorId, userId)],
     });
 };
