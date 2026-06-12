@@ -69,6 +69,8 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0, originMsg = null) {
 
     if (activeDuels.has(channel.id)) return;
 
+    let isReplay = !!(userData[p1Id].duelReplaying || userData[p2Id].duelReplaying);
+
     if (!isReplay && (userData[p1Id].iq < DUEL_STAKE_IQ || userData[p2Id].iq < DUEL_STAKE_IQ)) {
         return channel.send(
             `⚠️ Duel wuxuu u baahan yahay **${DUEL_STAKE_IQ} IQ** dhig ah labadaba.\n` +
@@ -77,7 +79,6 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0, originMsg = null) {
     }
 
     let picked = pickQuestionsForGame(p1Id, 'duel', count);
-    let isReplay = !!(userData[p1Id].duelReplaying || userData[p2Id].duelReplaying);
     if (!picked || picked.length === 0) {
         resetSeenDuelQuestions(p1Id);
         resetSeenDuelQuestions(p2Id);
