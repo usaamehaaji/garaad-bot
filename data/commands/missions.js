@@ -12,10 +12,7 @@ const MISSION_POOL = [
     { id: 'solo_3',    desc: '🎮 Solo quiz 3 games ku ciyaar',          type: 'soloPlayed',  target: 3,  reward: { btc: 350,  xp: 35  } },
     { id: 'correct_10',desc: '✅ 10 su\'aal si sax ah u jaawab',        type: 'soloCorrect', target: 10, reward: { btc: 500,  xp: 50  } },
     { id: 'correct_5', desc: '✅ 5 su\'aal si sax ah u jaawab',         type: 'soloCorrect', target: 5,  reward: { btc: 250,  xp: 25  } },
-    { id: 'duel_win_2',desc: '⚔️ Duel 2 jeer ku guulayso',              type: 'duelWins',    target: 2,  reward: { btc: 500,  xp: 50,  loot: 'common' } },
-    { id: 'duel_win_1',desc: '⚔️ Duel hal jeer ku guulayso',            type: 'duelWins',    target: 1,  reward: { btc: 250,  xp: 30  } },
     { id: 'quiz_play', desc: '🏆 Quiz hal mar ka qayb qaado',           type: 'quizPlayed',  target: 1,  reward: { btc: 300,  xp: 30  } },
-    { id: 'duel_play', desc: '⚔️ Duel hal mar ku ciyaar (qasab ma aha guulayso)', type: 'duelTotal', target: 1, reward: { btc: 200, xp: 20 } },
 ];
 
 function pickMissions() {
