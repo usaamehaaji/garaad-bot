@@ -79,6 +79,7 @@ const { restoreDuelGames }      = require('./src/games/duel');
 const { connectDB }             = require('./src/db');
 const { loadData, loadConfig }  = require('./src/store');
 const { loadEcon }              = require('./src/economy/econStore');
+const { loadHagbad }            = require('./src/economy/hagbadStore');
 const { restorePredictions }    = require('./src/economy/prediction');
 const { tickMarket }            = require('./src/economy/market');
 const { loadMarketState, startMarketEngine } = require('./src/economy/marketEngine');
@@ -192,6 +193,7 @@ if (!token) {
     await loadData();
     loadConfig();
     await loadEcon();
+    await loadHagbad();
     loadBanks();
     loadCompanies();
     await loadMarketState();

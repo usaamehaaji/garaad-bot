@@ -16,6 +16,7 @@ const profileCmd      = require('../../data/commands/profile');
 const topCmd          = require('../../data/commands/top');
 const { topIqCmd, topBtcCmd, topMissionsCmd, topStreakCmd, topFlipsCmd, topDuelsCmd } = require('../../data/commands/top');
 const todayCmd        = require('../../data/commands/today');
+const levelCmd        = require('../../data/commands/level');
 const showCmd         = require('../../data/commands/show');
 
 const buyCmd          = require('../../data/commands/buy');
@@ -39,6 +40,7 @@ const investCmd       = require('../../data/commands/economy/invest');
 const giveCmd         = require('../../data/commands/economy/give');
 const richCmd         = require('../../data/commands/economy/rich');
 const treasuryCmdFn   = require('../../data/commands/economy/treasuryCmd');
+const hagbadCmd       = require('../../data/commands/economy/hagbad');
 
 const shaqoCmd        = require('../../data/commands/economy/shaqo');
 const bankListCmd     = require('../../data/commands/economy/bankList');
@@ -152,6 +154,9 @@ module.exports = function setupMessageHandler(client) {
             case 'today':
                 return todayCmd(message);
 
+            case 'level':
+                return levelCmd(message);
+
             case 'show':
             case 'cooldown':
             case 'cooldowns':
@@ -180,6 +185,9 @@ module.exports = function setupMessageHandler(client) {
             case 'shaqo':
             case 'work':
                 return shaqoCmd(message);
+
+            case 'hagbad':
+                return hagbadCmd(message, args);
 
             case 'jeeb':
                 return jeebCmd(message, args);

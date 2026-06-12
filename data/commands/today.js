@@ -4,7 +4,7 @@ const { checkUser }                         = require('../../src/utils/helpers')
 const { econData, checkEconUser, saveEcon, trackEarning } = require('../../src/economy/econStore');
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;
-const DAILY_BTC   = 250;
+const DAILY_BTC   = 1000;
 const TOPGG_URL   = 'https://top.gg/bot/1495341089266073705';
 
 module.exports = async function todayCommand(message) {
