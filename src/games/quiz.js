@@ -22,7 +22,10 @@ const {
     pickQuestionsForUsers,
     markSeenForUsersInGame,
     noQuestionsLeftEmbed,
+    resetSeenQuizQuestions,
+    clearReplayFlag,
 } = require('../utils/questions');
+const { checkEconUser, econData, saveEcon } = require('../economy/econStore');
 const { markUserPlayed }   = require('../utils/reminders');
 const { getAnswerOptions } = require('../utils/questionOptions');
 const {
@@ -32,7 +35,7 @@ const {
     QUIZ_LOBBY_MS, GLOBAL_WAIT_MS, SOLO_FAST_MS,
     SOLO_MAX_SCORE, SOLO_MIN_SCORE,
     HOST_DAILY_LIMIT,
-    QUIZ_POINTS_TO_XP, QUIZ_POINTS_PER_IQ,
+    QUIZ_POINTS_TO_XP, QUIZ_POINTS_PER_IQ, QUIZ_REPLAY_BTC_PER_IQ,
 } = require('../config');
 const { saveQuizState, loadAllQuizStates, deleteQuizState } = require('../utils/gamePersist');
 
@@ -101,10 +104,21 @@ async function startQuizLobby(message, args) {
         }
     }
 
-    // Hubi su'aalo cusub
-    const available = pickQuestionsForGame(userId, 'quiz', questionCount);
+    // Hubi su'aalo cusub — haddii dhammaadeen, dib u bilow (replay)
+    let available = pickQuestionsForGame(userId, 'quiz', questionCount);
     if (!available || available.length === 0) {
-        return message.reply({ embeds: [noQuestionsLeftEmbed(message.author.username)] });
+        resetSeenQuizQuestions(userId);
+        await message.reply(
+            `🔄 **${message.author.username}**, dhammaan su'aalaha quiz waad arkey — si toos ah ayaa dib loo bilaabay!\n` +
+            `⚠️ **Xasuusnow:** Ciyaarkan cusub **IQ laguma siin doono** — waxaad heshaa **BTC yar** halkii IQ.\n` +
+            `💰 Top 3: **${QUIZ_REPLAY_BTC_PER_IQ} BTC** halkii 90 dhibcood.`
+        );
+        available = pickQuestionsForGame(userId, 'quiz', questionCount);
+        if (!available || available.length === 0) {
+            return message.reply({ embeds: [noQuestionsLeftEmbed(message.author.username)] });
+        }
+    } else {
+        clearReplayFlag(userId, 'quizReplaying');
     }
     if (available.length < questionCount) {
         await message.reply(
@@ -210,13 +224,18 @@ async function beginQuizGame(state) {
     saveData();
 
     let totalQ  = state.questionCount || QUIZ_QUESTION_COUNT;
-    const picked = pickQuestionsForUsers([...state.players], 'quiz', totalQ);
+    let picked = pickQuestionsForUsers([...state.players], 'quiz', totalQ);
     if (!picked || picked.length === 0) {
-        activeQuiz.delete(state.channelId);
-        if (state.message) {
-            await state.message.edit({ embeds: [noQuestionsLeftEmbed('Dhammaan ciyaartoyda')], components: [] }).catch(() => {});
+        for (const pid of state.players) resetSeenQuizQuestions(pid);
+        picked = pickQuestionsForUsers([...state.players], 'quiz', totalQ);
+        if (!picked || picked.length === 0) {
+            activeQuiz.delete(state.channelId);
+            if (state.message) {
+                await state.message.edit({ embeds: [noQuestionsLeftEmbed('Dhammaan ciyaartoyda')], components: [] }).catch(() => {});
+            }
+            return;
         }
-        return;
+        state.quizReplaying = true;
     }
     if (picked.length < totalQ) {
         totalQ = picked.length;
@@ -400,25 +419,40 @@ async function finishQuiz(state) {
     const sorted      = Object.entries(state.scores).sort(([, a], [, b]) => b - a);
     const playerCount = state.players.size;
 
-    // Kayd dhibcaha + stats + IQ for top 3 + XP for all
+    const isReplay = !!state.quizReplaying;
+
     sorted.forEach(([id, sc], i) => {
         checkUser(id);
         userData[id].stats.quizPlayed++;
+        const replaying = isReplay || userData[id].quizReplaying;
         if (i < 3 && sc > 0) {
-            const iq = Math.floor(sc / QUIZ_POINTS_PER_IQ);
-            if (iq > 0) userData[id].iq = (userData[id].iq || 0) + iq;
+            if (replaying) {
+                const btc = Math.floor(sc / QUIZ_POINTS_PER_IQ) * QUIZ_REPLAY_BTC_PER_IQ;
+                if (btc > 0) {
+                    checkEconUser(id);
+                    econData[id].btc = (econData[id].btc || 0) + btc;
+                    saveEcon();
+                }
+            } else {
+                const iq = Math.floor(sc / QUIZ_POINTS_PER_IQ);
+                if (iq > 0) userData[id].iq = (userData[id].iq || 0) + iq;
+            }
         }
         if (sc > 0) {
             userData[id].xp = (userData[id].xp || 0) + Math.floor(sc * QUIZ_POINTS_TO_XP);
         }
         if (i === 0 && sc > 0) userData[id].stats.quizWins++;
+        if (replaying) userData[id].quizReplaying = false;
     });
     saveData();
 
     const medalMap = ['🥇', '🥈', '🥉'];
+    const rewardLabel = isReplay ? 'BTC' : 'IQ';
     const top3Lines = sorted.slice(0, Math.min(3, sorted.length)).map(([id, sc], i) => {
-        const iq = Math.floor(sc / QUIZ_POINTS_PER_IQ);
-        return `${medalMap[i]} <@${id}> — **${sc}** pts → **+${iq} IQ**`;
+        const units = Math.floor(sc / QUIZ_POINTS_PER_IQ);
+        const reward = isReplay ? units * QUIZ_REPLAY_BTC_PER_IQ : units;
+        const sym = isReplay ? 'BTC' : 'IQ';
+        return `${medalMap[i]} <@${id}> — **${sc}** pts → **+${reward} ${sym}**`;
     }).join('\n') || '—';
 
     const restLines = sorted.slice(3).map(([id, sc], i) =>
@@ -437,10 +471,12 @@ async function finishQuiz(state) {
             `${winnerLine}\n\n` +
             `**Hostka:** <@${state.hostId}> · **Ciyaartoy:** ${playerCount}\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `**🏆 Top 3 — IQ Abaalmarinta:**\n${top3Lines}\n` +
+            `**🏆 Top 3 — ${rewardLabel} Abaalmarinta:**\n${top3Lines}\n` +
             (restLines ? `\n**Kale:**\n${restLines}\n` : '') +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `🧠 **${QUIZ_POINTS_PER_IQ} dhibcood = 1 IQ** · ⭐ Dhammaan ciyaartoydu XP helaan`
+            (isReplay
+                ? `💰 **${QUIZ_POINTS_PER_IQ} dhibcood = ${QUIZ_REPLAY_BTC_PER_IQ} BTC** (dib-u-ciyaar) · ⭐ XP weli la helaa`
+                : `🧠 **${QUIZ_POINTS_PER_IQ} dhibcood = 1 IQ** · ⭐ Dhammaan ciyaartoydu XP helaan`)
         )
         .setFooter({ text: `Garaad Quiz • ${PREFIX}profile — arag dhibcahaaga` });
 

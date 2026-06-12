@@ -7,22 +7,43 @@
 const fs   = require('fs');
 const path = require('path');
 const { EmbedBuilder }            = require('discord.js');
-const { userData }                = require('../store');
+const { userData, saveData }      = require('../store');
 const { checkUser, shuffleArray } = require('./helpers');
 const { TWO_WEEKS_MS, PREFIX }    = require('../config');
 
-// ───── Soo akhri su'aalaha game kasta ─────
+const QUESTIONS_DIR = path.join(__dirname, '..', '..', 'data', 'questions');
 const GAMES = ['solo', 'duel', 'quiz', 'tournament', 'team'];
 const questionsByGame = {};
 
-for (const game of GAMES) {
-    try {
-        const file = path.join(__dirname, '..', '..', 'data', 'questions', `${game}.json`);
-        questionsByGame[game] = JSON.parse(fs.readFileSync(file, 'utf8'));
-    } catch (e) {
-        console.warn(`[Questions] Faylka ${game}.json lama helin — poolka madhan yahay`);
-        questionsByGame[game] = [];
+function loadQuestionsFromDisk() {
+    for (const game of GAMES) {
+        try {
+            const file = path.join(QUESTIONS_DIR, `${game}.json`);
+            questionsByGame[game] = JSON.parse(fs.readFileSync(file, 'utf8'));
+        } catch (e) {
+            console.warn(`[Questions] Faylka ${game}.json lama helin — poolka madhan yahay`);
+            questionsByGame[game] = [];
+        }
     }
+}
+
+loadQuestionsFromDisk();
+
+function reloadQuestions() {
+    loadQuestionsFromDisk();
+    try {
+        const qc = require('../../data/commands/qc');
+        if (typeof qc.invalidatePoolCache === 'function') qc.invalidatePoolCache();
+    } catch { /* qc optional */ }
+    const counts = GAMES.map(g => `${g}:${(questionsByGame[g] || []).length}`).join(', ');
+    console.log(`[Questions] ✅ Reloaded — ${counts}`);
+    return questionsByGame;
+}
+
+function getQuestionCounts() {
+    const out = {};
+    for (const g of GAMES) out[g] = (questionsByGame[g] || []).length;
+    return out;
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -60,6 +81,36 @@ function cleanExpiredSeenTexts(userId) {
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Dib u cusboonaysii su'aalaha la arkay (replay mode)
+// ─────────────────────────────────────────────────────────────────────
+function resetSeenForGame(userId, game, replayFlag) {
+    checkUser(userId);
+    const d = userData[userId];
+    if (d.seenByGame && d.seenByGame[game]) d.seenByGame[game] = {};
+
+    const pool     = questionsByGame[game] || [];
+    const poolTexts = new Set(pool.map(q => q.question));
+    if (d.seenTexts) {
+        for (const txt of Object.keys(d.seenTexts)) {
+            if (poolTexts.has(txt)) delete d.seenTexts[txt];
+        }
+    }
+
+    if (replayFlag) d[replayFlag] = true;
+    saveData();
+}
+
+function resetSeenSoloQuestions(userId)  { resetSeenForGame(userId, 'solo',  'soloReplaying'); }
+function resetSeenQuizQuestions(userId) { resetSeenForGame(userId, 'quiz',  'quizReplaying'); }
+function resetSeenDuelQuestions(userId) { resetSeenForGame(userId, 'duel', 'duelReplaying'); }
+
+function clearReplayFlag(userId, flag) {
+    checkUser(userId);
+    userData[userId][flag] = false;
+    saveData();
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Dooro su'aalo aan WELIGOOD la arkin (per-game + global text)
 // Su'aal la arkay weligeed dib looma soo celin
 // ─────────────────────────────────────────────────────────────────────
@@ -68,7 +119,7 @@ function pickQuestionsForGame(userId, game, count) {
     const seenIdx     = getSeenForGame(userId, game);
     const seenTxt     = getSeenTexts(userId);
     const unseenIdx   = [];
-    const pickedTxts  = new Set(); // prevent same text appearing twice in one pick
+    const pickedTxts  = new Set();
 
     for (let i = 0; i < pool.length; i++) {
         const q = pool[i];
@@ -86,14 +137,9 @@ function pickQuestionsForGame(userId, game, count) {
         .map(i => ({ ...pool[i], _idx: i, _game: game }));
 }
 
-// ─────────────────────────────────────────────────────────────────────
-// Dooro su'aalo aan WELIGOOD la arkin — koox (dhammaan players)
-// Su'aal player kasta arkay waxaa laga saara pool-ka
-// ─────────────────────────────────────────────────────────────────────
 function pickQuestionsForUsers(userIds, game, count) {
     const pool = questionsByGame[game] || [];
 
-    // Isku dar seen-ka dhammaan players-ka
     const combinedSeenIdx = new Set();
     const combinedSeenTxt = new Set();
     for (const uid of userIds) {
@@ -122,9 +168,6 @@ function pickQuestionsForUsers(userIds, game, count) {
         .map(i => ({ ...pool[i], _idx: i, _game: game }));
 }
 
-// ─────────────────────────────────────────────────────────────────────
-// Calaamadee su'aal la arkay (per-game index + global text)
-// ─────────────────────────────────────────────────────────────────────
 function markSeenForGame(userId, game, idx) {
     if (idx === undefined || idx === null) return;
     const seen = getSeenForGame(userId, game);
@@ -142,16 +185,15 @@ function markSeenForUsersInGame(userIds, game, idx) {
     for (const uid of userIds) markSeenForGame(uid, game, idx);
 }
 
-// ───── Embed: su'aalo ma haray ─────
 function noQuestionsLeftEmbed(username) {
     return new EmbedBuilder()
         .setTitle("📚 Su'aalihii waa dhammaadeen")
         .setDescription(
             `**${username}**, su'aalaha aad u baahnayd waad dhameystay.\n\n` +
-            `⏳ Su'aalahaas oo dhan waad ka jawaabeen. Sugga adminka inuu su'aalo cusub ku daro.\n\n` +
+            `🔄 **Dib u ciyaar:** Qor \`${PREFIX}quiz 10\` ama \`${PREFIX}solo 10\` — si toos ah ayaa dib loo bilaabayaa!\n` +
+            `💰 Dib-u-ciyaarta: **BTC yar** ayaad heshaa (IQ ma heli doontid).\n\n` +
             `🎮 Weli waxaad ciyaari kartaa:\n` +
             `• \`${PREFIX}duel @ciyaaryahan\` — tartan labo qof ah\n` +
-            `• \`${PREFIX}quiz\` — tartanka kooxda\n` +
             `• \`${PREFIX}today\` — abaalmarinta maalinlaha ah`
         )
         .setColor('#95a5a6');
@@ -178,4 +220,10 @@ module.exports = {
     markSeenForUsers,
     noQuestionsLeftEmbed,
     getAllQuestionsForGame,
+    reloadQuestions,
+    getQuestionCounts,
+    resetSeenSoloQuestions,
+    resetSeenQuizQuestions,
+    resetSeenDuelQuestions,
+    clearReplayFlag,
 };

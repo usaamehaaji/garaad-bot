@@ -70,6 +70,7 @@ const setupBankChargeScheduler  = require('./src/handlers/bankChargeScheduler');
 const setupWeeklyLeaderboard    = require('./src/handlers/weeklyLeaderboard');
 const setupBroadcastScheduler   = require('./src/handlers/broadcastScheduler');
 const setupBackupScheduler      = require('./src/handlers/backupScheduler');
+const setupQuestionSync         = require('./src/handlers/questionSyncScheduler');
 const setupAutoUpdate           = require('./src/handlers/autoUpdateScheduler');
 const { restoreTournaments }    = require('./src/games/tournament');
 const { restoreSoloGames }      = require('./src/games/solo');
@@ -116,6 +117,7 @@ client.once('ready', () => {
     // setupBroadcastScheduler(client); // disabled
     setupAutoUpdate();
     setupBackupScheduler();
+    setupQuestionSync();
     restorePredictions(client);
     restoreTournaments(client).catch(e => console.error('[Tournament] Restore failed:', e.message));
     restoreSoloGames(client).catch(e => console.error('[Solo] Restore failed:', e.message));

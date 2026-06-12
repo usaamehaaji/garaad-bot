@@ -7,7 +7,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags
 const { userData, saveData, activeDuels } = require('../store');
 
 const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
-const { pickQuestionsForGame, markSeenForUsersInGame, noQuestionsLeftEmbed } = require('../utils/questions');
+const { pickQuestionsForGame, markSeenForUsersInGame, noQuestionsLeftEmbed, resetSeenDuelQuestions, clearReplayFlag } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
 const {
     GLOBAL_WAIT_MS,
@@ -17,6 +17,8 @@ const {
     DUEL_WIN_IQ,
 } = require('../config');
 const { getAnswerOptions } = require('../utils/questionOptions');
+const { checkEconUser, econData, saveEcon } = require('../economy/econStore');
+const DUEL_REPLAY_BTC = 50;
 const { saveDuelState, loadAllDuelStates, deleteDuelState } = require('../utils/gamePersist');
 
 function persistDuel(channelId, state) {
@@ -67,16 +69,30 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0, originMsg = null) {
 
     if (activeDuels.has(channel.id)) return;
 
-    if (userData[p1Id].iq < DUEL_STAKE_IQ || userData[p2Id].iq < DUEL_STAKE_IQ) {
+    if (!isReplay && (userData[p1Id].iq < DUEL_STAKE_IQ || userData[p2Id].iq < DUEL_STAKE_IQ)) {
         return channel.send(
             `⚠️ Duel wuxuu u baahan yahay **${DUEL_STAKE_IQ} IQ** dhig ah labadaba.\n` +
             `<@${p1Id}> **${userData[p1Id].iq} IQ** | <@${p2Id}> **${userData[p2Id].iq} IQ**`
         );
     }
 
-    const picked = pickQuestionsForGame(p1Id, 'duel', count);
+    let picked = pickQuestionsForGame(p1Id, 'duel', count);
+    let isReplay = !!(userData[p1Id].duelReplaying || userData[p2Id].duelReplaying);
     if (!picked || picked.length === 0) {
-        return channel.send({ embeds: [noQuestionsLeftEmbed('Hostka')] });
+        resetSeenDuelQuestions(p1Id);
+        resetSeenDuelQuestions(p2Id);
+        isReplay = true;
+        await channel.send(
+            `🔄 Dhammaan su'aalaha duel waad arkey — dib loo bilaabay!\n` +
+            `⚠️ Dib-u-ciyaarta: IQ dhig ma jiro, guuleystaha **BTC yar** ayuu helaa.`
+        );
+        picked = pickQuestionsForGame(p1Id, 'duel', count);
+        if (!picked || picked.length === 0) {
+            return channel.send({ embeds: [noQuestionsLeftEmbed('Hostka')] });
+        }
+    } else {
+        clearReplayFlag(p1Id, 'duelReplaying');
+        clearReplayFlag(p2Id, 'duelReplaying');
     }
 
     let actualCount = picked.length;
@@ -87,9 +103,11 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0, originMsg = null) {
         );
     }
 
-    userData[p1Id].iq -= DUEL_STAKE_IQ;
-    userData[p2Id].iq -= DUEL_STAKE_IQ;
-    saveData();
+    if (!isReplay) {
+        userData[p1Id].iq -= DUEL_STAKE_IQ;
+        userData[p2Id].iq -= DUEL_STAKE_IQ;
+        saveData();
+    }
 
     const duelState = {
         p1: p1Id,
@@ -100,6 +118,7 @@ async function startDuelGame(channel, p1Id, p2Id, count = 0, originMsg = null) {
         currentQ: 0,
         answeredBy: new Set(),
         correctAnswerer: null,
+        isReplay,
         message: null,
         stakesTaken: true,
         originMsg,
@@ -258,12 +277,14 @@ async function finishDuel(channel) {
     const s2 = state.scores[state.p2];
     let resultEmbed;
 
+    const isReplay = !!state.isReplay;
+
     if (s1 === s2) {
         checkUser(state.p1);
         checkUser(state.p2);
         userData[state.p1].stats.duelDraws++;
         userData[state.p2].stats.duelDraws++;
-        if (state.stakesTaken) {
+        if (state.stakesTaken && !isReplay) {
             userData[state.p1].iq += DUEL_STAKE_IQ;
             userData[state.p2].iq += DUEL_STAKE_IQ;
         }
@@ -272,7 +293,7 @@ async function finishDuel(channel) {
             .setTitle('🤝 Dagaalku wuu iskumid noqday!')
             .setDescription(
                 `<@${state.p1}> **${s1}** — **${s2}** <@${state.p2}>\n\n` +
-                `Dhigga **${DUEL_STAKE_IQ} IQ** waa la soo celiyay labadaba.`
+                (isReplay ? 'Dib-u-ciyaar — abaalmarin ma jirto.' : `Dhigga **${DUEL_STAKE_IQ} IQ** waa la soo celiyay labadaba.`)
             )
             .setColor('#f1c40f');
     } else {
@@ -281,7 +302,15 @@ async function finishDuel(channel) {
         checkUser(winnerId);
         checkUser(loserId);
 
-        userData[winnerId].iq += DUEL_WIN_IQ;
+        if (isReplay) {
+            checkEconUser(winnerId);
+            econData[winnerId].btc = (econData[winnerId].btc || 0) + DUEL_REPLAY_BTC;
+            saveEcon();
+            userData[winnerId].duelReplaying = false;
+            userData[loserId].duelReplaying = false;
+        } else {
+            userData[winnerId].iq += DUEL_WIN_IQ;
+        }
         userData[winnerId].stats.duelWins++;
         userData[loserId].stats.duelLosses++;
 
@@ -289,10 +318,12 @@ async function finishDuel(channel) {
             .setTitle('🏆 Dagaalku wuu dhamaaday!')
             .setDescription(
                 `<@${state.p1}> **${s1}** — **${s2}** <@${state.p2}>\n\n` +
-                `🥇 Guulaystay: <@${winnerId}> (**+${DUEL_WIN_IQ} IQ**)\n` +
-                `💀 Lumiyay: <@${loserId}> (wuxuu lumay dhigii **${DUEL_STAKE_IQ} IQ**)\n\n` +
-                `IQ hadda: <@${winnerId}> **${userData[winnerId].iq}** | <@${loserId}> **${userData[loserId].iq}** ` +
-                `(Level ${getLevel(userData[winnerId].iq)} / ${getLevel(userData[loserId].iq)})`
+                (isReplay
+                    ? `🥇 Guulaystay: <@${winnerId}> (**+${DUEL_REPLAY_BTC} BTC** — dib-u-ciyaar)\n💀 Lumiyay: <@${loserId}>`
+                    : `🥇 Guulaystay: <@${winnerId}> (**+${DUEL_WIN_IQ} IQ**)\n` +
+                      `💀 Lumiyay: <@${loserId}> (wuxuu lumay dhigii **${DUEL_STAKE_IQ} IQ**)\n\n` +
+                      `IQ hadda: <@${winnerId}> **${userData[winnerId].iq}** | <@${loserId}> **${userData[loserId].iq}** ` +
+                      `(Level ${getLevel(userData[winnerId].iq)} / ${getLevel(userData[loserId].iq)})`)
             )
             .setColor('#2ecc71');
     }

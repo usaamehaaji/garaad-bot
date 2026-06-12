@@ -7,26 +7,10 @@
 
 const { EmbedBuilder } = require('discord.js');
 const { isUserBusy, activeGames, userData, saveData } = require('../../src/store');
-const { pickQuestionsForGame, noQuestionsLeftEmbed } = require('../../src/utils/questions');
+const { pickQuestionsForGame, noQuestionsLeftEmbed, resetSeenSoloQuestions, clearReplayFlag } = require('../../src/utils/questions');
 const { sendQuestion } = require('../../src/games/solo');
 const { checkUser } = require('../../src/utils/helpers');
-const { PREFIX, SOLO_MIN_QUESTIONS, SOLO_MAX_QUESTIONS, SOLO_DEFAULT_QUESTIONS } = require('../../src/config');
-
-// Dib u cusboonaysii (reset) su'aalaha la arky si ciyaarayaashu dib u ciyaari karaan
-// Markay dhammaan su'aalaha arkaan, automaticly ayaa dib loo bilaabaa
-// Laakiin game-ka cusub IQ looma siin (isticmaalaha flag-ka soloReplaying)
-function resetSeenSoloQuestions(userId) {
-    checkUser(userId);
-    const d = userData[userId];
-    if (d.seenByGame && d.seenByGame.solo) d.seenByGame.solo = {};
-    if (d.seenTexts) {
-        // Kaliya tirtir kuwa solo-ka la xidhiidha (dhammaan seenTexts si aanay ugu dhicin ciyaaryada kale)
-        // Halkaan waxaan u tirtirno dhammaan si fudud (solo ayaa leh)
-        d.seenTexts = {};
-    }
-    d.soloReplaying = true;
-    saveData();
-}
+const { PREFIX, SOLO_MIN_QUESTIONS, SOLO_MAX_QUESTIONS } = require('../../src/config');
 
 function soloIntroEmbed() {
     return new EmbedBuilder()
@@ -97,10 +81,7 @@ async function startSoloGame(message, count) {
             return message.reply({ embeds: [noQuestionsLeftEmbed(message.author.username)] });
         }
     } else {
-        // Game cusub — flag-ka reset
-        checkUser(userId);
-        userData[userId].soloReplaying = false;
-        saveData();
+        clearReplayFlag(userId, 'soloReplaying');
     }
 
     // ⭐ Haddii su'aalo cusub ka yar yihiin tirada la codsaday → ka warbixi

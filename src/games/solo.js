@@ -10,7 +10,7 @@ const { userData, saveData, activeGames } = require('../store');
 const { checkUser, getLevel, stripQuestionNumber } = require('../utils/helpers');
 const { econData, checkEconUser, saveEcon } = require('../economy/econStore');
 
-const { markSeenForGame } = require('../utils/questions');
+const { markSeenForGame, resetSeenSoloQuestions, pickQuestionsForGame } = require('../utils/questions');
 const { markUserPlayed } = require('../utils/reminders');
 const {
     GLOBAL_WAIT_MS,
@@ -423,4 +423,46 @@ async function restoreSoloGames(client) {
     if (restored > 0) console.log(`[Solo] ✅ ${restored} solo game(s) restored from database`);
 }
 
-module.exports = { sendQuestion, handleSoloAnswer, handleSoloLeaderboard, restoreSoloGames };
+async function handleSoloReplay(interaction) {
+    const userId = interaction.customId.replace('solo_replay_', '');
+    if (interaction.user.id !== userId) {
+        return interaction.reply({ content: 'Ciyaartaada qoro!', flags: 64 });
+    }
+    const busy = require('../store').isUserBusy(userId);
+    if (busy) {
+        return interaction.reply({ content: `⚠️ Waxaad ku jirtaa ciyaar **${busy}**!`, flags: 64 });
+    }
+
+    resetSeenSoloQuestions(userId);
+    const count = SOLO_DEFAULT_QUESTIONS;
+    const picked = pickQuestionsForGame(userId, 'solo', count);
+    if (!picked || picked.length === 0) {
+        return interaction.reply({
+            content: '⚠️ Su\'aalo ma jiraan — sug admin inuu ku daro.',
+            flags: 64,
+        });
+    }
+
+    const { activeGames } = require('../store');
+    activeGames.set(userId, {
+        questions: picked,
+        total: picked.length,
+        originMsg: null,
+        channelId: interaction.channel.id,
+    });
+
+    await interaction.update({ components: [] }).catch(() => {});
+    await interaction.followUp({
+        content: `🔄 **Dib-u-ciyaar** bilaabatay — **${picked.length}** su'aalood. IQ ma heli doontid, BTC kaliya! 💰`,
+    }).catch(() => {});
+
+    const fakeMsg = {
+        channel: interaction.channel,
+        author:  { id: userId },
+        isButton: () => false,
+        reply:   async (opts) => interaction.channel.send(opts),
+    };
+    sendQuestion(fakeMsg, 1);
+}
+
+module.exports = { sendQuestion, handleSoloAnswer, handleSoloLeaderboard, handleSoloReplay, restoreSoloGames };

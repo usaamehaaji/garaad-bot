@@ -28,6 +28,8 @@ module.exports = {
     QUIZ_POINTS_TO_XP: 5,
     /** Inta dhibcood ee 1 IQ loogu baahdo (90 dhibcood = 1 IQ) */
     QUIZ_POINTS_PER_IQ: 90,
+    /** Dib-u-ciyaar: 90 dhibcood = inta BTC ee la siiyo (halkii IQ) */
+    QUIZ_REPLAY_BTC_PER_IQ: 25,
 
     SOLO_MIN_QUESTIONS:     3,
     SOLO_MAX_QUESTIONS:     25,

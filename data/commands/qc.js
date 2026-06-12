@@ -251,7 +251,11 @@ async function finishCatQuiz(message, userId, score, total) {
 }
 
 // ── Entry point ──────────────────────────────────────────────────────
-module.exports = async function qcCommand(message, args) {
+function invalidatePoolCache() {
+    _allPool = null;
+}
+
+async function qcCommand(message, args) {
     try {
         const catRaw = args.join(' ').trim();
         if (!catRaw) return showCategoryList(message);
@@ -271,3 +275,6 @@ module.exports = async function qcCommand(message, args) {
         return message.reply('❌ Khalad ayaa dhacay. Isku day mar kale.').catch(() => {});
     }
 };
+
+qcCommand.invalidatePoolCache = invalidatePoolCache;
+module.exports = qcCommand;
