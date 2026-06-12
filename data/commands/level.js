@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const { userData } = require('../../src/store');
 const { checkUser } = require('../../src/utils/helpers');
+const { LEVEL_STEP } = require('../../src/config');
 
 module.exports = async function levelCommand(message) {
     const userId = message.author.id;
@@ -8,11 +9,10 @@ module.exports = async function levelCommand(message) {
 
     const iq = userData[userId].iq || 0;
     
-    // Level 1 = 30 IQ, Level 2 = 60 IQ, etc.
-    const level = Math.floor(iq / 30);
-    const nextLevelIq = (level + 1) * 30;
-    const progressIq = iq % 30;
-    const progressPercent = Math.floor((progressIq / 30) * 100);
+    const level = Math.floor(iq / LEVEL_STEP);
+    const nextLevelIq = (level + 1) * LEVEL_STEP;
+    const progressIq = iq % LEVEL_STEP;
+    const progressPercent = Math.floor((progressIq / LEVEL_STEP) * 100);
     
     // Create a simple progress bar
     const filledBlocks = Math.floor(progressPercent / 10);
@@ -25,9 +25,9 @@ module.exports = async function levelCommand(message) {
         .addFields(
             { name: '🧠 Current IQ', value: `${iq}`, inline: true },
             { name: '🎖️ Current Level', value: `${level}`, inline: true },
-            { name: `📈 Progress to Level ${level + 1}`, value: `${progressBar} ${progressPercent}%\n(${progressIq}/30 IQ needed for next level)`, inline: false }
+            { name: `📈 Progress to Level ${level + 1}`, value: `${progressBar} ${progressPercent}%\n(${progressIq}/${LEVEL_STEP} IQ needed for next level)`, inline: false }
         )
-        .setFooter({ text: 'Every 30 IQ = 1 Level!' });
+        .setFooter({ text: `Every ${LEVEL_STEP} IQ = 1 Level!` });
 
     return message.reply({ embeds: [embed] });
 };

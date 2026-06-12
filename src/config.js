@@ -22,7 +22,7 @@ module.exports = {
     QUIZ_MAX_QUESTIONS:  25,
     QUIZ_MIN_PLAYERS:    3,
     QUIZ_MAX_PLAYERS:    100,
-    LEVEL_STEP:          200,
+    LEVEL_STEP:          30,
 
     /** 1 dhibic tartan = inta XP ee la siiyo marka la badalo */
     QUIZ_POINTS_TO_XP: 5,
