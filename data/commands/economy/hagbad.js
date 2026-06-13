@@ -1,162 +1,265 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { hagbadData, saveHagbad } = require('../../../src/economy/hagbadStore');
 const { econData, saveEcon, checkEconUser } = require('../../../src/economy/econStore');
 
 const DAILY_CONTRIBUTION = 1000;
+
+function fmt(n) { return Math.floor(n || 0).toLocaleString(); }
+
+function buildGroupPanel(groupName, group, userId) {
+    const now = Date.now();
+    const memberLines = group.members.map(id => {
+        const mPay = group.payments[id] || 0;
+        const hasPaid = (now - mPay < 20 * 60 * 60 * 1000);
+        return `${hasPaid ? '✅' : '❌'} <@${id}>`;
+    }).join('\n');
+
+    const turnUserId = group.payoutQueue[group.currentTurn];
+    const myPaid = (now - (group.payments[userId] || 0)) < 20 * 60 * 60 * 1000;
+    const inGroup = group.members.includes(userId);
+
+    const paidCount = group.members.filter(id => (now - (group.payments[id] || 0)) < 20 * 60 * 60 * 1000).length;
+
+    const embed = new EmbedBuilder()
+        .setTitle(`💰 HAGBAD — ${groupName.toUpperCase()}`)
+        .setColor('#f39c12')
+        .setDescription(
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `🏦 **XAALADDA KOOXDA**\n\n` +
+            `👥 Members: **${group.members.length}**\n` +
+            `💵 Xaddiga Maalinle: **₿${fmt(DAILY_CONTRIBUTION)}**\n` +
+            `🏺 Pot Hadda: **₿${fmt(group.pot)}**\n` +
+            `🎯 Kii Xiga: ${turnUserId ? `<@${turnUserId}>` : 'N/A'}\n` +
+            `📊 Bixiyay: **${paidCount}/${group.members.length}**\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `👤 **XUBNAHA**\n\n${memberLines || 'Xubno ma jiraan'}\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+            (inGroup
+                ? (myPaid
+                    ? `✅ **Maanta waad bixisay!** Berri ku bix.\n`
+                    : `⚠️ **Maad bixin!** ₿${fmt(DAILY_CONTRIBUTION)} bix si aad u gacan gasho.\n`)
+                : `🚫 Ma xubin kooxdan kuma jirtid.\n`) +
+            `\n━━━━━━━━━━━━━━━━━━━━━━━━━━`
+        )
+        .setFooter({ text: `Garaad Economy • ?hagbad` });
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`hag_pay_${userId}_${groupName}`)
+            .setLabel('💰 Bixi')
+            .setStyle(ButtonStyle.Success)
+            .setDisabled(!inGroup || myPaid),
+        new ButtonBuilder()
+            .setCustomId(`hag_leave_${userId}_${groupName}`)
+            .setLabel('🚪 Ka Bax')
+            .setStyle(ButtonStyle.Danger)
+            .setDisabled(!inGroup),
+        new ButtonBuilder()
+            .setCustomId(`hag_refresh_${userId}_${groupName}`)
+            .setLabel('🔄 Cusboonaysii')
+            .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder()
+            .setCustomId(`close_hag_${userId}`)
+            .setLabel('✖ Xir')
+            .setStyle(ButtonStyle.Secondary),
+    );
+
+    return { embed, row };
+}
 
 module.exports = async function hagbadCommand(message, args) {
     const userId = message.author.id;
     checkEconUser(userId);
 
     const subCommand = args[0] ? args[0].toLowerCase() : '';
-    const groupName = args[1] ? args[1].toLowerCase() : '';
+    const groupName  = args[1] ? args[1].toLowerCase() : '';
 
-    if (!subCommand || !['create', 'join', 'leave', 'pay', 'status'].includes(subCommand)) {
-        return message.reply('📝 **Hagbad Commands:**\n`?hagbad create <name>`\n`?hagbad join <name>`\n`?hagbad leave <name>`\n`?hagbad pay <name>`\n`?hagbad status <name>`');
-    }
-
-    if (!groupName) {
-        return message.reply('⚠️ Please provide a group name. Example: `?hagbad join saxibada`');
-    }
-
-    // CREATE
-    if (subCommand === 'create') {
-        if (hagbadData[groupName]) {
-            return message.reply(`⚠️ Hagbad group **${groupName}** already exists!`);
+    // ── No args: show all user's groups ──
+    if (!subCommand) {
+        const myGroups = Object.entries(hagbadData).filter(([, g]) => g.members.includes(userId));
+        if (!myGroups.length) {
+            return message.reply({
+                embeds: [new EmbedBuilder()
+                    .setTitle('💰 Hagbad')
+                    .setColor('#f39c12')
+                    .setDescription(
+                        `Weli koox ku jirtid ma jirto.\n\n` +
+                        `**Commands:**\n` +
+                        `\`?hagbad create <magac>\` — Koox fur\n` +
+                        `\`?hagbad join <magac>\` — Koox ku biir\n` +
+                        `\`?hagbad <magac>\` — Koox arag`
+                    )
+                ],
+            });
         }
+        const lines = myGroups.map(([name, g]) => {
+            const now = Date.now();
+            const myPaid = (now - (g.payments[userId] || 0)) < 20 * 60 * 60 * 1000;
+            return `🏦 **${name}** — ${myPaid ? '✅ Bixisay' : '❌ Ma bixin'} · 👥 ${g.members.length} xubno · 🏺 ₿${fmt(g.pot)}`;
+        }).join('\n');
+        return message.reply({
+            embeds: [new EmbedBuilder()
+                .setTitle('💰 Kooxahaaga Hagbad')
+                .setColor('#f39c12')
+                .setDescription(lines + '\n\n`?hagbad <magac>` si aad u furtid.')
+            ],
+        });
+    }
+
+    // ── ?hagbad create <name> ──
+    if (subCommand === 'create') {
+        if (!groupName) return message.reply('⚠️ Magac geli. Tusaale: `?hagbad create saxibada`');
+        if (hagbadData[groupName]) return message.reply(`⚠️ Koox **${groupName}** horay ayaa u jirtay!`);
         hagbadData[groupName] = {
             creator: userId,
             members: [userId],
-            payments: {}, // userId -> lastPaymentTimestamp
+            payments: {},
             payoutQueue: [userId],
-            currentTurn: 0, // index in payoutQueue
-            pot: 0
+            currentTurn: 0,
+            pot: 0,
         };
         saveHagbad();
-        return message.reply(`✅ Hagbad group **${groupName}** created! You are the first member. Others can join using \`?hagbad join ${groupName}\`.`);
+        const { embed, row } = buildGroupPanel(groupName, hagbadData[groupName], userId);
+        return message.reply({ content: `✅ Koox **${groupName}** la abuurtay!`, embeds: [embed], components: [row] });
     }
 
-    // Ensure group exists for other commands
-    const group = hagbadData[groupName];
-    if (!group) {
-        return message.reply(`⚠️ Hagbad group **${groupName}** does not exist.`);
-    }
-
-    // JOIN
+    // ── ?hagbad join <name> ──
     if (subCommand === 'join') {
-        if (group.members.includes(userId)) {
-            return message.reply(`⚠️ You are already in **${groupName}**!`);
-        }
+        if (!groupName) return message.reply('⚠️ Magac geli. Tusaale: `?hagbad join saxibada`');
+        const group = hagbadData[groupName];
+        if (!group) return message.reply(`⚠️ Koox **${groupName}** lama helin.`);
+        if (group.members.includes(userId)) return message.reply(`⚠️ Horay baa koox **${groupName}** ku jiray!`);
         group.members.push(userId);
         group.payoutQueue.push(userId);
         saveHagbad();
-        return message.reply(`✅ You have successfully joined the hagbad group **${groupName}**! Remember to pay ${DAILY_CONTRIBUTION} BTC daily.`);
+        const { embed, row } = buildGroupPanel(groupName, group, userId);
+        return message.reply({ content: `✅ Koox **${groupName}** ku birtay!`, embeds: [embed], components: [row] });
     }
 
-    // LEAVE
+    // ── ?hagbad leave <name> ──
     if (subCommand === 'leave') {
-        if (!group.members.includes(userId)) {
-            return message.reply(`⚠️ You are not in **${groupName}**.`);
-        }
-        if (group.creator === userId && group.members.length > 1) {
-            return message.reply('⚠️ The creator cannot leave unless they are the only member. Pass ownership first or dissolve the group.');
-        }
+        if (!groupName) return message.reply('⚠️ Magac geli. Tusaale: `?hagbad leave saxibada`');
+        const group = hagbadData[groupName];
+        if (!group) return message.reply(`⚠️ Koox **${groupName}** lama helin.`);
+        if (!group.members.includes(userId)) return message.reply(`⚠️ Koox **${groupName}** kuma jirtid.`);
+        if (group.creator === userId && group.members.length > 1)
+            return message.reply('⚠️ Abuure ma baxo hadii xubnaha kale jiraan. Kooxda u wareejiso ama keligaa ka tag.');
         group.members = group.members.filter(id => id !== userId);
         group.payoutQueue = group.payoutQueue.filter(id => id !== userId);
-        
-        // Reset currentTurn if it goes out of bounds
-        if (group.currentTurn >= group.payoutQueue.length) {
-            group.currentTurn = 0;
-        }
-
+        if (group.currentTurn >= group.payoutQueue.length) group.currentTurn = 0;
         if (group.members.length === 0) {
             delete hagbadData[groupName];
             saveHagbad();
-            return message.reply(`🗑️ Hagbad group **${groupName}** has been deleted because it has no members left.`);
+            return message.reply(`🗑️ Koox **${groupName}** la tirtiray (xubno la'aan).`);
         }
-        
         saveHagbad();
-        return message.reply(`✅ You have left **${groupName}**.`);
+        return message.reply(`✅ Koox **${groupName}** ka baxday.`);
     }
 
-    // PAY
+    // ── ?hagbad pay <name> ──
     if (subCommand === 'pay') {
-        if (!group.members.includes(userId)) {
-            return message.reply(`⚠️ You must join **${groupName}** first before paying.`);
-        }
-
-        const lastPayment = group.payments[userId] || 0;
-        const now = Date.now();
-        
-        // Ensure they haven't paid today (using a 20 hour cooldown to be safe for daily)
-        if (now - lastPayment < 20 * 60 * 60 * 1000) {
-            return message.reply(`⏳ You already paid your contribution for today. Next payment is available tomorrow.`);
-        }
-
-        const userBtc = econData[userId].btc || 0;
-        if (userBtc < DAILY_CONTRIBUTION) {
-            return message.reply(`❌ You need **${DAILY_CONTRIBUTION} BTC** to pay the hagbad, but you only have **${userBtc} BTC**.`);
-        }
-
-        // Deduct BTC and add to pot
-        econData[userId].btc -= DAILY_CONTRIBUTION;
-        saveEcon();
-
-        group.payments[userId] = now;
-        group.pot += DAILY_CONTRIBUTION;
-
-        // Check if everyone has paid today (simplified check: has everyone paid in the last 20 hours?)
-        let allPaid = true;
-        for (const memberId of group.members) {
-            const mPay = group.payments[memberId] || 0;
-            if (now - mPay > 24 * 60 * 60 * 1000) { // If someone hasn't paid in last 24h
-                allPaid = false;
-                break;
-            }
-        }
-
-        // Rotate payout if everyone paid
-        let payoutMsg = '';
-        if (allPaid && group.members.length > 1) {
-            const winnerId = group.payoutQueue[group.currentTurn];
-            const potAmount = group.pot;
-            
-            // Give pot to winner
-            checkEconUser(winnerId);
-            econData[winnerId].btc = (econData[winnerId].btc || 0) + potAmount;
-            saveEcon();
-
-            payoutMsg = `\n🎉 **PAYOUT TIME!** Everyone has paid. <@${winnerId}> receives the pot of **${potAmount} BTC**!`;
-
-            // Reset pot and advance turn
-            group.pot = 0;
-            group.currentTurn = (group.currentTurn + 1) % group.payoutQueue.length;
-            
-            // Reset payments so they can pay again next cycle
-            group.payments = {};
-        }
-
-        saveHagbad();
-        return message.reply(`✅ You successfully paid **${DAILY_CONTRIBUTION} BTC** to the **${groupName}** pot. The pot is now **${group.pot} BTC**.${payoutMsg}`);
+        if (!groupName) return message.reply('⚠️ Magac geli. Tusaale: `?hagbad pay saxibada`');
+        const group = hagbadData[groupName];
+        if (!group) return message.reply(`⚠️ Koox **${groupName}** lama helin.`);
+        if (!group.members.includes(userId)) return message.reply(`⚠️ Koox **${groupName}** ku biir marka hore.`);
+        return _doPay(message, userId, groupName, group);
     }
 
-    // STATUS
+    // ── ?hagbad status <name> ──
     if (subCommand === 'status') {
-        const turnUserId = group.payoutQueue[group.currentTurn];
-        const memberTags = group.members.map(id => {
-            const mPay = group.payments[id] || 0;
-            const hasPaid = (Date.now() - mPay < 20 * 60 * 60 * 1000);
-            return `<@${id}> - ${hasPaid ? '✅ Paid' : '❌ Unpaid'}`;
-        }).join('\n');
-
-        const embed = new EmbedBuilder()
-            .setTitle(`💰 Hagbad: ${groupName.toUpperCase()}`)
-            .setColor('#f1c40f')
-            .addFields(
-                { name: '👥 Members', value: memberTags || 'None', inline: false },
-                { name: '🏦 Current Pot', value: `${group.pot} BTC`, inline: true },
-                { name: '🔄 Next Payout To', value: turnUserId ? `<@${turnUserId}>` : 'None', inline: true }
-            );
-        return message.reply({ embeds: [embed] });
+        if (!groupName) return message.reply('⚠️ Magac geli.');
+        const group = hagbadData[groupName];
+        if (!group) return message.reply(`⚠️ Koox **${groupName}** lama helin.`);
+        const { embed, row } = buildGroupPanel(groupName, group, userId);
+        return message.reply({ embeds: [embed], components: [row] });
     }
+
+    // ── ?hagbad <groupname> ── (shortcut: just show the panel)
+    const directGroup = hagbadData[subCommand];
+    if (directGroup) {
+        const { embed, row } = buildGroupPanel(subCommand, directGroup, userId);
+        return message.reply({ embeds: [embed], components: [row] });
+    }
+
+    return message.reply(
+        `📝 **Hagbad Commands:**\n` +
+        `\`?hagbad\` — Kooxahaaga arag\n` +
+        `\`?hagbad <magac>\` — Koox fur\n` +
+        `\`?hagbad create <magac>\` — Koox abuuri\n` +
+        `\`?hagbad join <magac>\` — Koox ku biir\n` +
+        `\`?hagbad leave <magac>\` — Koox ka bax\n` +
+        `\`?hagbad pay <magac>\` — Lacag bixi\n` +
+        `\`?hagbad status <magac>\` — Xaaladda arag`
+    );
 };
+
+// ── Pay logic (shared by command + button) ──
+async function _doPay(context, userId, groupName, group) {
+    const lastPayment = group.payments[userId] || 0;
+    const now = Date.now();
+
+    if (now - lastPayment < 20 * 60 * 60 * 1000) {
+        const { embed, row } = buildGroupPanel(groupName, group, userId);
+        const reply = { content: `⏳ Maanta waad bixisay. Berri ku soo bixi.`, embeds: [embed], components: [row] };
+        if (context.update) return context.update(reply);
+        return context.reply(reply);
+    }
+
+    checkEconUser(userId);
+    const userBtc = econData[userId].btc || 0;
+
+    if (userBtc <= 0) {
+        const reply = { content: `❌ Jeebkaagu madhan yahay. Lacag kuma haysatid.`, flags: 64 };
+        if (context.reply) return context.reply(reply);
+        return context.reply(reply);
+    }
+
+    // Auto-deduct: deduct whatever they have (up to DAILY_CONTRIBUTION)
+    const toPay = Math.min(userBtc, DAILY_CONTRIBUTION);
+    const isPartial = toPay < DAILY_CONTRIBUTION;
+
+    econData[userId].btc = userBtc - toPay;
+    saveEcon();
+
+    group.payments[userId] = now;
+    group.pot += toPay;
+
+    // Check if everyone paid
+    let allPaid = true;
+    for (const memberId of group.members) {
+        const mPay = group.payments[memberId] || 0;
+        if (now - mPay > 24 * 60 * 60 * 1000) { allPaid = false; break; }
+    }
+
+    let payoutMsg = '';
+    if (allPaid && group.members.length > 1) {
+        const winnerId = group.payoutQueue[group.currentTurn];
+        const potAmount = group.pot;
+        checkEconUser(winnerId);
+        econData[winnerId].btc = (econData[winnerId].btc || 0) + potAmount;
+        saveEcon();
+        payoutMsg = `\n\n🎉 **PAYOUT!** <@${winnerId}> helay **₿${fmt(potAmount)}**!`;
+        group.pot = 0;
+        group.currentTurn = (group.currentTurn + 1) % group.payoutQueue.length;
+        group.payments = {};
+    }
+
+    saveHagbad();
+
+    const partialNote = isPartial
+        ? `\n⚠️ Aad ugu filan ma lihid (**₿${fmt(DAILY_CONTRIBUTION)}**). **₿${fmt(toPay)}** ayaa laga jaray.`
+        : '';
+
+    const { embed, row } = buildGroupPanel(groupName, group, userId);
+    const reply = {
+        content: `✅ **₿${fmt(toPay)}** koox **${groupName}** pot-keeda ku dartay.${partialNote}${payoutMsg}`,
+        embeds: [embed],
+        components: [row],
+    };
+
+    if (context.update) return context.update(reply);
+    return context.reply(reply);
+}
+
+module.exports._doPay = _doPay;
+module.exports.buildGroupPanel = buildGroupPanel;

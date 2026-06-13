@@ -1010,13 +1010,19 @@ module.exports = function setupInteractionHandler(client) {
                 const myRec = bank.customers?.[userId];
                 if (!myRec || (myRec.balance || 0) <= 0) return interaction.reply({ content: `⚠️ **${bank.name}** lacag kuma dhigin.`, flags: MessageFlags.Ephemeral });
                 if (amount > myRec.balance) return interaction.reply({ content: `⚠️ Haysataa: ₿${myRec.balance.toLocaleString()} kaliya.`, flags: MessageFlags.Ephemeral });
+                const wdFee      = Math.floor(amount * 0.01);
+                const wdReceived = amount - wdFee;
+                if (wdFee > 0) {
+                    bank.ownerProfit = (bank.ownerProfit || 0) + wdFee;
+                    if (bank.ownerId) { const { checkEconUser: ceu2, econData: eD2 } = require('../economy/econStore'); ceu2(bank.ownerId); eD2[bank.ownerId].btc = (eD2[bank.ownerId].btc || 0) + wdFee; }
+                }
                 myRec.balance      -= amount;
                 bank.balance        = Math.max(0, (bank.balance || 0) - amount);
-                ec.btc              = (ec.btc || 0) + amount;
+                ec.btc              = (ec.btc || 0) + wdReceived;
                 saveBanks(); saveEcon();
                 const { embed, components } = buildPubBankPanel(bank, userId);
                 return interaction.update({ embeds: [embed], components,
-                    content: `📤 **₿${amount.toLocaleString()}** ← 🏛️ **${bank.name}**` });
+                    content: `📤 **₿${wdReceived.toLocaleString()}** ← 🏛️ **${bank.name}** (1% fee: ₿${wdFee.toLocaleString()})` });
             }
 
             // ── Withdraw: Personal Bank modal ──
@@ -1106,15 +1112,27 @@ module.exports = function setupInteractionHandler(client) {
                 const pubBank = getAllPublicBanks()[bankId.toUpperCase()] || getAllPublicBanks()[bankId];
                 if (!pubBank) return interaction.reply({ content: `⚠️ Bank \`${bankId}\` lama helin.`, flags: MessageFlags.Ephemeral });
                 if ((ec.btc || 0) < amount) return interaction.reply({ content: `⚠️ Jeebkaagu ma filna. Haysataa: ₿${Math.floor(ec.btc || 0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                const isOwnerDep = pubBank.ownerId === userId;
                 ec.btc = (ec.btc || 0) - amount;
                 pubBank.balance       = (pubBank.balance || 0) + amount;
                 pubBank.totalDeposits = (pubBank.totalDeposits || 0) + amount;
                 pubBank.lastActivity  = Date.now();
-                pubBank.customers     = pubBank.customers || {};
-                pubBank.customers[userId] ??= { balance: 0, username: interaction.user.username, joinedAt: Date.now() };
-                pubBank.customers[userId].balance += amount;
+                let depFeeNote = '';
+                if (isOwnerDep) {
+                    pubBank.ownerFund = (pubBank.ownerFund || 0) + amount;
+                } else {
+                    const depFee = Math.floor(amount * 0.02);
+                    if (depFee > 0) {
+                        pubBank.ownerProfit = (pubBank.ownerProfit || 0) + depFee;
+                        if (pubBank.ownerId) { const { checkEconUser: ceu, econData: eD, saveEcon: sE } = require('../economy/econStore'); ceu(pubBank.ownerId); eD[pubBank.ownerId].btc = (eD[pubBank.ownerId].btc || 0) + depFee; }
+                        depFeeNote = `\n💸 Faa'iido owner: ₿${depFee.toLocaleString()}`;
+                    }
+                    pubBank.customers = pubBank.customers || {};
+                    pubBank.customers[userId] ??= { balance: 0, username: interaction.user.username, joinedAt: Date.now() };
+                    pubBank.customers[userId].balance += amount;
+                }
                 saveBanks(); saveEcon();
-                return interaction.reply({ content: `📥 **₿${amount.toLocaleString()}** → 🏛️ **${pubBank.name}**\n💼 Haysataa: ₿${pubBank.customers[userId].balance.toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                return interaction.reply({ content: `📥 **₿${amount.toLocaleString()}** → 🏛️ **${pubBank.name}**\n💼 Haysataa: ₿${(pubBank.customers?.[userId]?.balance || 0).toLocaleString()}${depFeeNote}`, flags: MessageFlags.Ephemeral });
             }
 
             // ── Deposit: Personal Bank modal ──
@@ -1549,6 +1567,74 @@ module.exports = function setupInteractionHandler(client) {
         if (!interaction.isButton()) return;
 
         const id = interaction.customId;
+
+        // ── Hagbad: Pay button ──
+        if (id.startsWith('hag_pay_')) {
+            const rest      = id.replace('hag_pay_', '');
+            const firstUnd  = rest.indexOf('_');
+            const userId    = rest.substring(0, firstUnd);
+            const groupName = rest.substring(firstUnd + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { hagbadData, saveHagbad } = require('../../data/commands/economy/hagbadStore');
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            const { _doPay } = require('../../data/commands/economy/hagbad');
+            const group = hagbadData[groupName];
+            if (!group) return interaction.reply({ content: `⚠️ Koox **${groupName}** lama helin.`, flags: MessageFlags.Ephemeral });
+            return _doPay(interaction, userId, groupName, group);
+        }
+
+        // ── Hagbad: Leave button ──
+        if (id.startsWith('hag_leave_')) {
+            const rest      = id.replace('hag_leave_', '');
+            const firstUnd  = rest.indexOf('_');
+            const userId    = rest.substring(0, firstUnd);
+            const groupName = rest.substring(firstUnd + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { hagbadData, saveHagbad } = require('../../data/commands/economy/hagbadStore');
+            const { buildGroupPanel } = require('../../data/commands/economy/hagbad');
+            const group = hagbadData[groupName];
+            if (!group) return interaction.reply({ content: `⚠️ Koox lama helin.`, flags: MessageFlags.Ephemeral });
+            if (!group.members.includes(userId)) return interaction.reply({ content: `⚠️ Kooxdan kuma jirtid.`, flags: MessageFlags.Ephemeral });
+            if (group.creator === userId && group.members.length > 1)
+                return interaction.reply({ content: '⚠️ Abuure ma baxo hadii xubnaha kale jiraan.', flags: MessageFlags.Ephemeral });
+            group.members      = group.members.filter(mid => mid !== userId);
+            group.payoutQueue  = group.payoutQueue.filter(mid => mid !== userId);
+            if (group.currentTurn >= group.payoutQueue.length) group.currentTurn = 0;
+            if (group.members.length === 0) {
+                delete hagbadData[groupName];
+                saveHagbad();
+                return interaction.update({ content: `🗑️ Koox **${groupName}** la tirtiray (xubno la'aan).`, embeds: [], components: [] });
+            }
+            saveHagbad();
+            const { embed, row } = buildGroupPanel(groupName, group, userId);
+            return interaction.update({ content: `✅ Koox **${groupName}** ka baxday.`, embeds: [embed], components: [row] });
+        }
+
+        // ── Hagbad: Refresh button ──
+        if (id.startsWith('hag_refresh_')) {
+            const rest      = id.replace('hag_refresh_', '');
+            const firstUnd  = rest.indexOf('_');
+            const userId    = rest.substring(0, firstUnd);
+            const groupName = rest.substring(firstUnd + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { hagbadData } = require('../../data/commands/economy/hagbadStore');
+            const { buildGroupPanel } = require('../../data/commands/economy/hagbad');
+            const group = hagbadData[groupName];
+            if (!group) return interaction.update({ content: `⚠️ Koox **${groupName}** lama helin.`, embeds: [], components: [] });
+            const { embed, row } = buildGroupPanel(groupName, group, userId);
+            return interaction.update({ embeds: [embed], components: [row] });
+        }
+
+        // ── Hagbad: Close button ──
+        if (id.startsWith('close_hag_')) {
+            const userId = id.replace('close_hag_', '');
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            return interaction.update({ content: '✅ La xiray.', embeds: [], components: [] });
+        }
 
         function buildPlayersPageRow(page, totalPages, ownerId) {
             return new ActionRowBuilder().addComponents(
