@@ -58,8 +58,7 @@ function ensureMissions(userId) {
 function rewardText(r) {
     const parts = [];
     if (r.btc)  parts.push(`₿${r.btc.toLocaleString()}`);
-    if (r.xp)   parts.push(`${r.xp} XP`);
-    if (r.loot) parts.push(`📦 Common Box`);
+        if (r.loot) parts.push(`📦 Common Box`);
     return parts.join(' + ');
 }
 
