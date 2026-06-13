@@ -105,7 +105,6 @@ module.exports = async function profileCommand(message) {
         `\n` +
         `🏆 **Rank:** #${rank ?? '—'} / ${total}\n` +
         `💰 **BTC:** ₿${(econ.btc || 0).toLocaleString()}\n` +
-        `⭐ **XP:** ${(data.xp || 0).toLocaleString()}\n` +
         `🎮 **Games:** ${totalGames}\n` +
         `⚔️ **Duel Wins:** ${s.duelWins || 0}\n` +
         `🎲 **Flips:** ${s.flipsPlayed || 0}\n` +
