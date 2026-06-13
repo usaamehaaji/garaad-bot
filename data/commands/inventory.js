@@ -42,8 +42,6 @@ async function inventoryCmd(message) {
     const now = Date.now();
     const boostLines = [];
     const bo = d.boosters || {};
-    if (bo.doubleIq  > now) boostLines.push(`🧠 Double IQ — ${Math.ceil((bo.doubleIq - now) / 60000)} min haray`);
-    if (bo.doubleXp  > now) boostLines.push(`⭐ Double XP — ${Math.ceil((bo.doubleXp - now) / 60000)} min haray`);
     if (bo.doubleBtc > now) boostLines.push(`₿ Double BTC — ${Math.ceil((bo.doubleBtc - now) / 60000)} min haray`);
     if (bo.iqShields > 0)   boostLines.push(`🛡️ IQ Shield × ${bo.iqShields}`);
 
