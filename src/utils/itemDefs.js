@@ -46,10 +46,8 @@ const BADGES = {
 };
 
 const BOOSTERS = {
-    double_iq:  { name: 'Double IQ',   emoji: '🧠', duration: 60 * 60 * 1000, price: 3000, desc: '2x IQ gains for 1 hour',         sellFor: 1000 },
-    double_xp:  { name: 'Double XP',   emoji: '⭐', duration: 60 * 60 * 1000, price: 2000, desc: '2x XP gains for 1 hour',         sellFor: 700  },
     double_btc: { name: 'Double BTC',  emoji: '₿',  duration: 60 * 60 * 1000, price: 2500, desc: '2x BTC earnings for 1 hour',     sellFor: 800  },
-    iq_shield:  { name: 'IQ Shield',   emoji: '🛡️', duration: 0,              price: 1500, desc: 'Block next IQ loss (1 use)',      sellFor: 500  },
+    safety_shield: { name: 'Safety Shield', emoji: '🛡️', duration: 24 * 60 * 60 * 1000, price: 300, desc: 'Rob-ka kaaga ilaaliya 24h', sellFor: 100 },
 };
 
 const LOOT_BOXES = {
