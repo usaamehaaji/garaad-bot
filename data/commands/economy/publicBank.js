@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 const { userData } = require('../../../src/store');
 const {
@@ -17,15 +17,54 @@ function fmtDate(ts)  { return new Date(ts).toLocaleDateString('en-US', { year:'
 function daysLeft(bank) { return Math.max(0, Math.floor((EXPIRY_MS - (Date.now() - (bank.lastActivity || bank.createdAt))) / 86400000)); }
 function isExpired(bank) { return (Date.now() - (bank.lastActivity || bank.createdAt)) >= EXPIRY_MS; }
 
-// Apply owner profit to bank and credit it to owner's wallet
+// Accumulate owner profit — owner must click Claim to receive
 function creditOwnerProfit(bank, amount) {
     if (!amount || amount <= 0) return;
     bank.ownerProfit = (bank.ownerProfit || 0) + amount;
-    // Credit profit directly to owner's wallet
-    if (bank.ownerId) {
-        checkEconUser(bank.ownerId);
-        econData[bank.ownerId].btc = (econData[bank.ownerId].btc || 0) + amount;
-    }
+}
+
+// ── Owner Panel embed + buttons ───────────────────────
+function buildOwnerPanel(bank, userId) {
+    const custCount = Object.keys(bank.customers || {}).length;
+    const profit    = bank.ownerProfit || 0;
+    const left      = daysLeft(bank);
+    const totalDep  = Object.values(bank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
+
+    const embed = new EmbedBuilder()
+        .setTitle(`👑 ${bank.name} — Owner Panel`)
+        .setColor('#f39c12')
+        .setDescription(
+            profit > 0
+                ? `💸 **${fmtBtc(profit)}** faa'iido la soo ururiyay!\n🔘 **Claim** riix si lacagtu jeebkaaga u gasho.`
+                : `📊 Weli faa'iido la'aan. Dadka lacag ha ku dhigaan!`
+        )
+        .addFields(
+            { name: '💰 Bangiga Haraagga',  value: fmtBtc(bank.balance || 0),     inline: true },
+            { name: '👥 Macaamiil',          value: `**${custCount}**`,             inline: true },
+            { name: '⏳ Muda Hadhay',        value: `**${left} maalin**`,           inline: true },
+            { name: '💸 Faa\'iido Pending', value: `**${fmtBtc(profit)}**`,        inline: true },
+            { name: '🏦 Capital ku Shubay', value: fmtBtc(bank.ownerFund || 0),    inline: true },
+            { name: '📥 Wadarta Deposits',  value: fmtBtc(totalDep),               inline: true },
+        )
+        .setFooter({ text: `2% deposit fee + 1% withdraw fee → faa'iido • ID: ${bank.id}` });
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`pubbank_claim_${bank.id}_${userId}`)
+            .setLabel('💰 Claim Faa\'iido')
+            .setStyle(ButtonStyle.Success)
+            .setDisabled(profit <= 0),
+        new ButtonBuilder()
+            .setCustomId(`pubbank_fund_btn_${bank.id}_${userId}`)
+            .setLabel('🏦 Fund Bank')
+            .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+            .setCustomId(`close_ebank_${userId}`)
+            .setLabel('✖ Xir')
+            .setStyle(ButtonStyle.Danger),
+    );
+
+    return { embed, components: [row] };
 }
 
 // ── ?createbank ───────────────────────────────────────
@@ -212,20 +251,33 @@ async function bankWithdrawCmd(message, args) {
     );
 }
 
-// ── ?bankfund <id> <amount> — Owner adds capital ──────
+// ── ?bankfund [id] [amount] — Owner panel / add capital ──
 async function bankFundCmd(message, args) {
-    const id     = (args[0] || '').toUpperCase();
-    const amount = Math.floor(Number(args[1]));
-    const bank   = getPublicBank(id);
+    checkEconUser(message.author.id);
 
-    if (!bank)              return message.reply(`⚠️ Bank \`${id}\` lama helin.`);
-    if (!amount || amount <= 0) return message.reply('⚠️ Isticmaal: `?bankfund <ID> <xadad>`');
+    // No args: auto-find owner's bank and show panel
+    if (!args[0]) {
+        const ownBank = Object.values(getAllPublicBanks()).find(b => b.ownerId === message.author.id);
+        if (!ownBank) return message.reply('⚠️ Public bank ma lihid. `?createbank <magac>` bilow.');
+        const { embed, components } = buildOwnerPanel(ownBank, message.author.id);
+        return message.reply({ embeds: [embed], components });
+    }
+
+    const id   = args[0].toUpperCase();
+    const bank = getPublicBank(id);
+
+    if (!bank) return message.reply(`⚠️ Bank \`${id}\` lama helin. \`?bankfund\` (args la'aan) si aad bangigaaga u aragto.`);
     if (bank.ownerId !== message.author.id) return message.reply('⚠️ Bangigan owner-kiisa oo keliya ayaa capital ku dari kara.');
 
-    checkEconUser(message.author.id);
+    // ID only, no amount: show panel
+    const amount = Math.floor(Number(args[1]));
+    if (!amount || amount <= 0) {
+        const { embed, components } = buildOwnerPanel(bank, message.author.id);
+        return message.reply({ embeds: [embed], components });
+    }
+
     const ec = econData[message.author.id];
     if ((ec.btc || 0) < amount) return message.reply(`⚠️ Jeebkaagu ma filna. Haysataa: ${fmtBtc(ec.btc || 0)}`);
-
     if (isExpired(bank)) return message.reply(`⚠️ **${bank.name}** waa la xiray.`);
 
     ec.btc            -= amount;
@@ -235,18 +287,11 @@ async function bankFundCmd(message, args) {
     saveBanks();
     saveEcon();
 
+    const { embed, components } = buildOwnerPanel(bank, message.author.id);
     return message.reply({
-        embeds: [new EmbedBuilder()
-            .setTitle(`🏦 ${bank.name} — Capital`)
-            .setColor('#27ae60')
-            .addFields(
-                { name: '📥 La Daray',           value: `**${fmtBtc(amount)}**`,              inline: true },
-                { name: '💰 Bangiga Balance',     value: `**${fmtBtc(bank.balance)}**`,        inline: true },
-                { name: '🏦 Adigu ku Shubday',    value: `**${fmtBtc(bank.ownerFund || 0)}**`, inline: true },
-                { name: '💸 Faa\'iido la Helay',  value: `**${fmtBtc(bank.ownerProfit || 0)}**`, inline: true },
-            )
-            .setFooter({ text: 'Capital-ka kuma bixiso fee. Faa\'iido waad ka helaysaa deposits/withdrawals.' })
-        ],
+        content: `✅ **${fmtBtc(amount)}** bangiga capital u daray!`,
+        embeds: [embed],
+        components,
     });
 }
 
@@ -327,5 +372,6 @@ module.exports = {
     createPublicBankCmd, listPublicBanksCmd, bankInfoCmd,
     bankDepositCmd, bankWithdrawCmd, bankPasswordCmd, topBanksCmd,
     bankFundCmd, checkAndCloseExpiredBanks,
+    buildOwnerPanel,
     DEPOSIT_FEE_RATE, WITHDRAW_FEE_RATE, creditOwnerProfit,
 };

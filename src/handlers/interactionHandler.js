@@ -1014,7 +1014,6 @@ module.exports = function setupInteractionHandler(client) {
                 const wdReceived = amount - wdFee;
                 if (wdFee > 0) {
                     bank.ownerProfit = (bank.ownerProfit || 0) + wdFee;
-                    if (bank.ownerId) { const { checkEconUser: ceu2, econData: eD2 } = require('../economy/econStore'); ceu2(bank.ownerId); eD2[bank.ownerId].btc = (eD2[bank.ownerId].btc || 0) + wdFee; }
                 }
                 myRec.balance      -= amount;
                 bank.balance        = Math.max(0, (bank.balance || 0) - amount);
@@ -1124,8 +1123,7 @@ module.exports = function setupInteractionHandler(client) {
                     const depFee = Math.floor(amount * 0.02);
                     if (depFee > 0) {
                         pubBank.ownerProfit = (pubBank.ownerProfit || 0) + depFee;
-                        if (pubBank.ownerId) { const { checkEconUser: ceu, econData: eD, saveEcon: sE } = require('../economy/econStore'); ceu(pubBank.ownerId); eD[pubBank.ownerId].btc = (eD[pubBank.ownerId].btc || 0) + depFee; }
-                        depFeeNote = `\n💸 Faa'iido owner: ₿${depFee.toLocaleString()}`;
+                        depFeeNote = `\n💸 Faa'iido owner: ₿${depFee.toLocaleString()} (claim: ?bankfund)`;
                     }
                     pubBank.customers = pubBank.customers || {};
                     pubBank.customers[userId] ??= { balance: 0, username: interaction.user.username, joinedAt: Date.now() };
@@ -1133,6 +1131,39 @@ module.exports = function setupInteractionHandler(client) {
                 }
                 saveBanks(); saveEcon();
                 return interaction.reply({ content: `📥 **₿${amount.toLocaleString()}** → 🏛️ **${pubBank.name}**\n💼 Haysataa: ₿${(pubBank.customers?.[userId]?.balance || 0).toLocaleString()}${depFeeNote}`, flags: MessageFlags.Ephemeral });
+            }
+
+            // ── Fund Public Bank modal submit ──
+            if (interaction.customId.startsWith('pubbank_fund_modal_')) {
+                const rest   = interaction.customId.replace('pubbank_fund_modal_', '');
+                const lastU  = rest.lastIndexOf('_');
+                const bankId = rest.substring(0, lastU);
+                const userId = rest.substring(lastU + 1);
+                if (interaction.user.id !== userId)
+                    return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+                const amount = Math.floor(Number(interaction.fields.getTextInputValue('fund_amount')));
+                if (!amount || amount <= 0)
+                    return interaction.reply({ content: '⚠️ Xaddad sax ah geli.', flags: MessageFlags.Ephemeral });
+                const { getAllPublicBanks, saveBanks } = require('../economy/bankStore');
+                const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+                const { buildOwnerPanel } = require('../../data/commands/economy/publicBank');
+                checkEconUser(userId);
+                const ec   = eData[userId];
+                const bank = Object.values(getAllPublicBanks()).find(b => b.id === bankId || b.id === bankId.toUpperCase());
+                if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin.', flags: MessageFlags.Ephemeral });
+                if (bank.ownerId !== userId) return interaction.reply({ content: '⚠️ Owner kaliya.', flags: MessageFlags.Ephemeral });
+                if ((ec.btc || 0) < amount)
+                    return interaction.reply({ content: `⚠️ Jeebkaagu ma filna. Haysataa: ₿${Math.floor(ec.btc || 0).toLocaleString()}`, flags: MessageFlags.Ephemeral });
+                ec.btc            -= amount;
+                bank.balance      += amount;
+                bank.ownerFund     = (bank.ownerFund || 0) + amount;
+                bank.lastActivity  = Date.now();
+                saveBanks(); saveEcon();
+                const { embed, components } = buildOwnerPanel(bank, userId);
+                return interaction.update({
+                    content: `✅ **₿${amount.toLocaleString()}** bangiga capital u daray!`,
+                    embeds: [embed], components,
+                });
             }
 
             // ── Deposit: Personal Bank modal ──
@@ -2863,6 +2894,57 @@ module.exports = function setupInteractionHandler(client) {
                 .setTitle(`🏛️ ${bankId} — Deposit`);
             modal.addComponents(new ActionRowBuilder().addComponents(
                 new TextInputBuilder().setCustomId('dep_amount').setLabel('Xaddadka BTC').setPlaceholder('Tusaale: 5000').setStyle(TextInputStyle.Short).setRequired(true)
+            ));
+            return interaction.showModal(modal);
+        }
+
+        // ── Claim owner profit from public bank ──
+        if (id.startsWith('pubbank_claim_')) {
+            const rest   = id.replace('pubbank_claim_', '');
+            const lastU  = rest.lastIndexOf('_');
+            const bankId = rest.substring(0, lastU);
+            const userId = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { getAllPublicBanks, saveBanks } = require('../economy/bankStore');
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            const { buildOwnerPanel } = require('../../data/commands/economy/publicBank');
+            const bank = Object.values(getAllPublicBanks()).find(b => b.id === bankId || b.id === bankId.toUpperCase());
+            if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin.', flags: MessageFlags.Ephemeral });
+            if (bank.ownerId !== userId) return interaction.reply({ content: '⚠️ Owner kaliya.', flags: MessageFlags.Ephemeral });
+            const profit = bank.ownerProfit || 0;
+            if (profit <= 0) return interaction.reply({ content: '⚠️ Faa\'iido la\'aan hadda.', flags: MessageFlags.Ephemeral });
+            checkEconUser(userId);
+            eData[userId].btc  = (eData[userId].btc || 0) + profit;
+            bank.ownerProfit   = 0;
+            saveBanks(); saveEcon();
+            const { embed, components } = buildOwnerPanel(bank, userId);
+            return interaction.update({
+                content: `✅ **₿${Math.floor(profit).toLocaleString()}** faa'iido jeebkaaga la geeyay!`,
+                embeds: [embed], components,
+            });
+        }
+
+        // ── Fund public bank button → show modal ──
+        if (id.startsWith('pubbank_fund_btn_')) {
+            const rest   = id.replace('pubbank_fund_btn_', '');
+            const lastU  = rest.lastIndexOf('_');
+            const bankId = rest.substring(0, lastU);
+            const userId = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { getAllPublicBanks } = require('../economy/bankStore');
+            const bank = Object.values(getAllPublicBanks()).find(b => b.id === bankId || b.id === bankId.toUpperCase());
+            const modal = new ModalBuilder()
+                .setCustomId(`pubbank_fund_modal_${bankId}_${userId}`)
+                .setTitle(`🏦 ${bank?.name || bankId} — Capital Dar`);
+            modal.addComponents(new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('fund_amount')
+                    .setLabel('Xaddadka BTC ee bangiga ku dari')
+                    .setPlaceholder('Tusaale: 10000')
+                    .setStyle(TextInputStyle.Short)
+                    .setRequired(true)
             ));
             return interaction.showModal(modal);
         }
