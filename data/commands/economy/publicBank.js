@@ -10,7 +10,7 @@ const { checkRequirements, reqFailMessage } = require('../../../src/utils/requir
 const CREATE_FEE        = 200_000;
 const EXPIRY_MS         = 14 * 24 * 60 * 60 * 1000;
 const DEPOSIT_FEE_RATE  = 0.02;   // 2% → owner profit
-const WITHDRAW_FEE_RATE = 0.01;   // 1% → owner profit
+const WITHDRAW_FEE_RATE = 0.02;   // 2% → owner profit
 
 function fmtBtc(n)   { return `₿${Math.floor(n || 0).toLocaleString()}`; }
 function fmtDate(ts)  { return new Date(ts).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
@@ -46,7 +46,7 @@ function buildOwnerPanel(bank, userId) {
             { name: '🏦 Capital ku Shubay', value: fmtBtc(bank.ownerFund || 0),    inline: true },
             { name: '📥 Wadarta Deposits',  value: fmtBtc(totalDep),               inline: true },
         )
-        .setFooter({ text: `2% deposit fee + 1% withdraw fee → faa'iido • ID: ${bank.id}` });
+        .setFooter({ text: `2% deposit fee + 2% withdraw fee → faa'iido • ID: ${bank.id}` });
 
     const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -100,7 +100,7 @@ async function createPublicBankCmd(message, args) {
         `🆔 **Bank ID:** \`${bank.id}\`\n` +
         `👤 **Owner:** ${message.author.username}\n` +
         `💸 **Kharash:** ${fmtBtc(CREATE_FEE)} (Treasury u tagay)\n` +
-        `📈 **Faa'iidada:** 2% marka la deposit + 1% marka la withdraw\n` +
+        `📈 **Faa'iidada:** 2% marka la deposit + 2% marka la withdraw\n` +
         `⏳ **Mudada:** 2 toddobaad — haddaan shaqo lahayn wuu xirmaa\n\n` +
         `💡 \`?bankfund ${bank.id} <xadad>\` — Lacagta bankiga ku shub\n` +
         `📌 Dadka lacag ku dhigi karaan: \`?bank\``
@@ -151,7 +151,7 @@ async function bankInfoCmd(message, args) {
         ? `\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
           `👑 **OWNER PANEL**\n\n` +
           `💸 **Faa'iido la Helay:** ${fmtBtc(bank.ownerProfit || 0)}\n` +
-          `  └ 2% deposit + 1% withdraw\n` +
+          `  └ 2% deposit + 2% withdraw\n` +
           `🏦 **Lacag Aad Ku Shubday:** ${fmtBtc(bank.ownerFund || 0)}\n` +
           `📤 **Si Lacag Ku Shubi:** \`?bankfund ${bank.id} <xadad>\`\n`
         : '';
