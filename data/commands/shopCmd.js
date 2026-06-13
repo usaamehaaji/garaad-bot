@@ -40,9 +40,16 @@ function shopEmbed(section, userId) {
     if (section === 'boosters') {
         const lines = Object.entries(BOOSTERS).map(([k, b]) => {
             const now = Date.now();
-            const active = (k === 'iq_shield')
-                ? (d.boosters?.iqShields > 0 ? ` (×${d.boosters.iqShields} owned)` : '')
-                : ((d.boosters?.[k.replace('_', '')] || 0) > now ? ' ✅ Active' : '');
+            let active = '';
+            if (k === 'safety_shield') {
+                const expiry = ec.inventory?.safetyExpiry || 0;
+                if (expiry > now) {
+                    const hrs = Math.ceil((expiry - now) / 3600000);
+                    active = ` ✅ Active — ${hrs}h haray`;
+                }
+            } else {
+                active = ((d.boosters?.[k.replace('_', '')] || 0) > now ? ' ✅ Active' : '');
+            }
             return `${b.emoji} **${b.name}** — ${fmtBtc(b.price)}\n  ↳ ${b.desc}${active}`;
         });
         return new EmbedBuilder()
@@ -64,20 +71,6 @@ function shopEmbed(section, userId) {
             .setDescription(lines.join('\n\n'))
             .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
             .setFooter({ text: 'Iibso: ?buy loot <common|rare|legendary>  •  Fur: ?open <type>' });
-    }
-
-    if (section === 'economy') {
-        const inv = ec.inventory || {};
-        const shieldActive = (inv.safetyExpiry || 0) > Date.now();
-        const shieldHours  = shieldActive ? Math.ceil((inv.safetyExpiry - Date.now()) / 3600000) : 0;
-        return new EmbedBuilder()
-            .setTitle('💰 Economy Shop')
-            .setColor('#e67e22')
-            .setDescription(
-                `🛡️ **Safety Shield** — ₿300\n  ↳ Rob-ka kaaga ilaaliya 24h\n  ${shieldActive ? `✅ Active — ${shieldHours}h haray` : '❌ Active ma aha'}`
-            )
-            .addFields({ name: '💰 Haraagaaga', value: `₿ ${balance.toLocaleString()}`, inline: true })
-            .setFooter({ text: 'Iibso: ?buy safety_shield' });
     }
 
     if (section === 'rings') {
