@@ -1607,7 +1607,7 @@ module.exports = function setupInteractionHandler(client) {
             const groupName = rest.substring(firstUnd + 1);
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { hagbadData, saveHagbad } = require('../../data/commands/economy/hagbadStore');
+            const { hagbadData, saveHagbad } = require('../economy/hagbadStore');
             const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
             const { _doPay } = require('../../data/commands/economy/hagbad');
             const group = hagbadData[groupName];
@@ -1623,7 +1623,7 @@ module.exports = function setupInteractionHandler(client) {
             const groupName = rest.substring(firstUnd + 1);
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { hagbadData, saveHagbad } = require('../../data/commands/economy/hagbadStore');
+            const { hagbadData, saveHagbad } = require('../economy/hagbadStore');
             const { buildGroupPanel } = require('../../data/commands/economy/hagbad');
             const group = hagbadData[groupName];
             if (!group) return interaction.reply({ content: `⚠️ Koox lama helin.`, flags: MessageFlags.Ephemeral });
@@ -1651,7 +1651,7 @@ module.exports = function setupInteractionHandler(client) {
             const groupName = rest.substring(firstUnd + 1);
             if (interaction.user.id !== userId)
                 return interaction.reply({ content: '⚠️ Farriintaas adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
-            const { hagbadData } = require('../../data/commands/economy/hagbadStore');
+            const { hagbadData } = require('../economy/hagbadStore');
             const { buildGroupPanel } = require('../../data/commands/economy/hagbad');
             const group = hagbadData[groupName];
             if (!group) return interaction.update({ content: `⚠️ Koox **${groupName}** lama helin.`, embeds: [], components: [] });

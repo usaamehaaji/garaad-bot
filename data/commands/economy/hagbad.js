@@ -74,36 +74,57 @@ module.exports = async function hagbadCommand(message, args) {
     const subCommand = args[0] ? args[0].toLowerCase() : '';
     const groupName  = args[1] ? args[1].toLowerCase() : '';
 
-    // ── No args: show all user's groups ──
+    // ── No args: show help panel + user's groups ──
     if (!subCommand) {
         const myGroups = Object.entries(hagbadData).filter(([, g]) => g.members.includes(userId));
-        if (!myGroups.length) {
-            return message.reply({
-                embeds: [new EmbedBuilder()
-                    .setTitle('💰 Hagbad')
-                    .setColor('#f39c12')
-                    .setDescription(
-                        `Weli koox ku jirtid ma jirto.\n\n` +
-                        `**Commands:**\n` +
-                        `\`?hagbad create <magac>\` — Koox fur\n` +
-                        `\`?hagbad join <magac>\` — Koox ku biir\n` +
-                        `\`?hagbad <magac>\` — Koox arag`
-                    )
-                ],
-            });
-        }
-        const lines = myGroups.map(([name, g]) => {
-            const now = Date.now();
-            const myPaid = (now - (g.payments[userId] || 0)) < 20 * 60 * 60 * 1000;
-            return `🏦 **${name}** — ${myPaid ? '✅ Bixisay' : '❌ Ma bixin'} · 👥 ${g.members.length} xubno · 🏺 ₿${fmt(g.pot)}`;
-        }).join('\n');
-        return message.reply({
-            embeds: [new EmbedBuilder()
-                .setTitle('💰 Kooxahaaga Hagbad')
-                .setColor('#f39c12')
-                .setDescription(lines + '\n\n`?hagbad <magac>` si aad u furtid.')
-            ],
-        });
+        const now = Date.now();
+
+        const groupLines = myGroups.length
+            ? myGroups.map(([name, g]) => {
+                const myPaid = (now - (g.payments[userId] || 0)) < 20 * 60 * 60 * 1000;
+                const paidCount = g.members.filter(id => (now - (g.payments[id] || 0)) < 20 * 60 * 60 * 1000).length;
+                return `${myPaid ? '✅' : '❌'} **${name}** · 👥 ${g.members.length} xubno · 🏺 ₿${fmt(g.pot)} · ${paidCount}/${g.members.length} bixiyay`;
+            }).join('\n')
+            : `_Weli koox ku jirtid ma jiro._`;
+
+        const embed = new EmbedBuilder()
+            .setTitle('💰 HAGBAD — Nidaamka')
+            .setColor('#f39c12')
+            .setDescription(
+                `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                `**📋 AMARRADA**\n\n` +
+                `**\`?hagbad create <magac>\`** — Koox cusub abuur\n` +
+                `**\`?hagbad join <magac>\`** — Koox ku biir\n` +
+                `**\`?hagbad <magac>\`** — Koox fur (panel)\n` +
+                `**\`?hagbad pay <magac>\`** — Lacag bixi\n` +
+                `**\`?hagbad leave <magac>\`** — Koox ka bax\n` +
+                `**\`?hagbad status <magac>\`** — Xaaladda arag\n\n` +
+                `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                `**👤 KOOXAHAAGA**\n\n` +
+                groupLines +
+                `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━`
+            )
+            .addFields(
+                { name: '💵 Xaddiga Maalinle', value: `**₿${fmt(DAILY_CONTRIBUTION)}**`, inline: true },
+                { name: '⏰ Reset Waqti',      value: `**20 saacadood**`,                  inline: true },
+                { name: '🏆 Payout',            value: `**Dhamaan bixiyaan → Kii xiga**`,  inline: true },
+            )
+            .setFooter({ text: 'Garaad Economy • ?hagbad <magac> si aad koox u furtid' });
+
+        const row = new ActionRowBuilder().addComponents(
+            ...(myGroups.slice(0, 4).map(([name]) =>
+                new ButtonBuilder()
+                    .setCustomId(`hag_refresh_${userId}_${name}`)
+                    .setLabel(`📂 ${name}`)
+                    .setStyle(ButtonStyle.Secondary)
+            )),
+            new ButtonBuilder()
+                .setCustomId(`close_hag_${userId}`)
+                .setLabel('✖ Xir')
+                .setStyle(ButtonStyle.Secondary),
+        );
+
+        return message.reply({ embeds: [embed], components: myGroups.length ? [row] : [] });
     }
 
     // ── ?hagbad create <name> ──
