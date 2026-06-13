@@ -47,6 +47,8 @@ function shopEmbed(section, userId) {
                     const hrs = Math.ceil((expiry - now) / 3600000);
                     active = ` ✅ Active — ${hrs}h haray`;
                 }
+            } else if (k === 'iq_shield') {
+                active = (d.boosters?.iqShields > 0 ? ` (×${d.boosters.iqShields} owned)` : '');
             } else {
                 active = ((d.boosters?.[k.replace('_', '')] || 0) > now ? ' ✅ Active' : '');
             }
