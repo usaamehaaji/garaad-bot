@@ -478,12 +478,62 @@ async function bankOwnerCmd(message, args) {
             .setLabel('🏦 Fund Bank')
             .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
+            .setCustomId(`pubbank_close_btn_${bank.id}_${userId}`)
+            .setLabel('🔴 Close Bank')
+            .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder()
             .setCustomId(`close_ebank_${userId}`)
             .setLabel('✖ Xir')
-            .setStyle(ButtonStyle.Danger),
+            .setStyle(ButtonStyle.Secondary),
     );
 
     return message.reply({ embeds: [embed], components: [row] });
+}
+
+// ── Close confirmation panel (shared by cmd + button) ─
+function buildCloseConfirmPanel(bank, userId) {
+    const custCount = Object.keys(bank.customers || {}).length;
+    const refundTotal = Object.values(bank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
+    const profit = bank.ownerProfit || 0;
+    const embed = new EmbedBuilder()
+        .setTitle('🔴 Bank Xirnaanshaha — Xaqiiji')
+        .setColor('#e74c3c')
+        .setDescription(
+            `⚠️ **Hubin:** Bangiga **${bank.name}** si joogto ah ayaa la xirnayaa!\n\n` +
+            `Tani waxay macnaheedahay:\n` +
+            `• 👥 **${custCount}** macaamiil waxaa loo celin lacagtooda\n` +
+            `• 💸 Faa'iidadaada **${fmtBtc(profit)}** jeebkaaga u tegi\n` +
+            `• 🗑️ Bangiga data oo dhan waa la tirtirayaa\n\n` +
+            `**Ma hubtaa?**`
+        )
+        .addFields(
+            { name: '💰 Lacag La Celin',  value: fmtBtc(refundTotal), inline: true },
+            { name: '💸 Faa\'iidadaada',  value: fmtBtc(profit),      inline: true },
+            { name: '👥 Macaamiil',       value: `**${custCount}**`,  inline: true },
+        )
+        .setFooter({ text: 'Tani ma soo noqon karto!' });
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`pubbank_close_confirm_${bank.id}_${userId}`)
+            .setLabel('✅ Haa, Xir Bangiga')
+            .setStyle(ButtonStyle.Danger),
+        new ButtonBuilder()
+            .setCustomId(`close_ebank_${userId}`)
+            .setLabel('❌ Jooji')
+            .setStyle(ButtonStyle.Secondary),
+    );
+    return { embed, components: [row] };
+}
+
+// ── ?bankclose — owner closes their bank ─────────────
+async function bankCloseCmd(message) {
+    const userId = message.author.id;
+    checkEconUser(userId);
+    const bank = Object.values(getAllPublicBanks()).find(b => b.ownerId === userId);
+    if (!bank) return message.reply('⚠️ Adigu bank ku gaar ah ma lihid.');
+    const { embed, components } = buildCloseConfirmPanel(bank, userId);
+    return message.reply({ embeds: [embed], components });
 }
 
 // ── ?bankhistory <id> ─────────────────────────────────
@@ -543,6 +593,7 @@ module.exports = {
     createPublicBankCmd, listPublicBanksCmd, bankInfoCmd,
     bankDepositCmd, bankWithdrawCmd, bankPasswordCmd, topBanksCmd,
     bankFundCmd, bankOwnerCmd, bankHistoryCmd, checkAndCloseExpiredBanks,
-    buildOwnerPanel,
+    buildOwnerPanel, buildCloseConfirmPanel,
+    bankCloseCmd,
     DEPOSIT_FEE_RATE, WITHDRAW_FEE_RATE, creditOwnerProfit,
 };

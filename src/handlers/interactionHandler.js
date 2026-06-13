@@ -2949,6 +2949,73 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.showModal(modal);
         }
 
+        // ── Close public bank button → show confirmation ──
+        if (id.startsWith('pubbank_close_btn_')) {
+            const rest   = id.replace('pubbank_close_btn_', '');
+            const lastU  = rest.lastIndexOf('_');
+            const bankId = rest.substring(0, lastU);
+            const userId = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { getAllPublicBanks } = require('../economy/bankStore');
+            const { buildCloseConfirmPanel } = require('../../data/commands/economy/publicBank');
+            const bank = Object.values(getAllPublicBanks()).find(b => b.id === bankId);
+            if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin.', flags: MessageFlags.Ephemeral });
+            if (bank.ownerId !== userId) return interaction.reply({ content: '⚠️ Owner kaliya ayaa tirtiri kara.', flags: MessageFlags.Ephemeral });
+            const { embed, components } = buildCloseConfirmPanel(bank, userId);
+            return interaction.update({ embeds: [embed], components });
+        }
+
+        // ── Close public bank CONFIRM → refund + delete ──
+        if (id.startsWith('pubbank_close_confirm_')) {
+            const rest   = id.replace('pubbank_close_confirm_', '');
+            const lastU  = rest.lastIndexOf('_');
+            const bankId = rest.substring(0, lastU);
+            const userId = rest.substring(lastU + 1);
+            if (interaction.user.id !== userId)
+                return interaction.reply({ content: '⚠️ Adiga kuma codsanin.', flags: MessageFlags.Ephemeral });
+            const { getAllPublicBanks, saveBanks } = require('../economy/bankStore');
+            const { econData: eData, checkEconUser, saveEcon } = require('../economy/econStore');
+            const allBanks = getAllPublicBanks();
+            const bank = Object.values(allBanks).find(b => b.id === bankId);
+            if (!bank) return interaction.reply({ content: '⚠️ Bank lama helin ama horaan la xiray.', flags: MessageFlags.Ephemeral });
+            if (bank.ownerId !== userId) return interaction.reply({ content: '⚠️ Owner kaliya ayaa tirtiri kara.', flags: MessageFlags.Ephemeral });
+
+            const bankName = bank.name;
+            let refunded = 0;
+            // Refund all customer deposits
+            for (const [custId, cust] of Object.entries(bank.customers || {})) {
+                if (!cust.balance || cust.balance <= 0) continue;
+                checkEconUser(custId);
+                eData[custId].btc = (eData[custId].btc || 0) + cust.balance;
+                refunded += cust.balance;
+            }
+            // Give owner their pending profit
+            const profit = bank.ownerProfit || 0;
+            if (profit > 0) {
+                checkEconUser(userId);
+                eData[userId].btc = (eData[userId].btc || 0) + profit;
+            }
+            // Delete bank
+            delete allBanks[bankId];
+            saveBanks();
+            saveEcon();
+
+            return interaction.update({
+                embeds: [new EmbedBuilder()
+                    .setTitle('🗑️ Bank La Xiray')
+                    .setColor('#e74c3c')
+                    .setDescription(
+                        `✅ **${bankName}** si guul leh ayaa la xiray.\n\n` +
+                        `💰 Macaamiil waxaa loo celiyay: **₿${Math.floor(refunded).toLocaleString()}**\n` +
+                        (profit > 0 ? `💸 Faa'iidadaadii: **₿${Math.floor(profit).toLocaleString()}** ayaa jeebkaaga u galay.\n` : '') +
+                        `\n_Mahadsanid isticmaalka Garaad Economy._`
+                    )
+                ],
+                components: [],
+            });
+        }
+
         // ── Deposit into Personal Bank (from directory) ──
         if (id.startsWith('dep_pers_') && !id.includes('modal')) {
             const rest    = id.replace('dep_pers_', '');
