@@ -486,10 +486,63 @@ async function bankOwnerCmd(message, args) {
     return message.reply({ embeds: [embed], components: [row] });
 }
 
+// ── ?bankhistory <id> ─────────────────────────────────
+async function bankHistoryCmd(message, args) {
+    const ref  = (args[0] || '').toUpperCase();
+    if (!ref) return message.reply('⚠️ Isticmaal: `?bankhistory <Bank ID ama magac>`');
+
+    const bank = getPublicBank(ref)
+        || Object.values(getAllPublicBanks()).find(b =>
+            (b.name || '').toLowerCase() === args.join(' ').trim().toLowerCase()
+        );
+    if (!bank) return message.reply(`⚠️ Bank **"${args.join(' ')}"** lama helin. \`?banks\` ka eeg.`);
+
+    const txs = (bank.transactions || []).slice(0, 10);
+    const dId = computeDisplayId(bank);
+
+    const TYPE_ICON = {
+        deposit:           '📥',
+        withdraw:          '📤',
+        profit:            '💹',
+        customer_deposit:  '👥📥',
+        customer_withdraw: '👥📤',
+        transfer:          '↔️',
+        received:          '↔️',
+        fund:              '🏦',
+    };
+
+    const lines = txs.length
+        ? txs.map((tx, i) => {
+            const icon  = TYPE_ICON[tx.type] || '🔹';
+            const sign  = tx.type.includes('withdraw') ? '−' : '+';
+            const date  = new Date(tx.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            const note  = tx.note ? ` · _${tx.note}_` : '';
+            return `**${i + 1}.** ${icon} \`${sign}${fmtBtc(tx.amount)}\`${note}\n   ⏰ ${date}`;
+        }).join('\n\n')
+        : '_Weli transaction ma jiro._';
+
+    const isOwner   = bank.ownerId === message.author.id;
+    const custCount = Object.keys(bank.customers || {}).length;
+
+    return message.reply({
+        embeds: [new EmbedBuilder()
+            .setTitle(`📋 ${bank.name} — Taariikhda Lacagaha`)
+            .setColor(isOwner ? '#f39c12' : '#3498db')
+            .setDescription(lines)
+            .addFields(
+                { name: '🆔 Bank ID',    value: `\`${dId}\``,          inline: true },
+                { name: '💰 Haraagga',   value: fmtBtc(bank.balance),  inline: true },
+                { name: '👥 Macaamiil',  value: `**${custCount}**`,    inline: true },
+            )
+            .setFooter({ text: `Ugu dambeyntii 10 transaction · ?bankhistory ${dId}` })
+        ],
+    });
+}
+
 module.exports = {
     createPublicBankCmd, listPublicBanksCmd, bankInfoCmd,
     bankDepositCmd, bankWithdrawCmd, bankPasswordCmd, topBanksCmd,
-    bankFundCmd, bankOwnerCmd, checkAndCloseExpiredBanks,
+    bankFundCmd, bankOwnerCmd, bankHistoryCmd, checkAndCloseExpiredBanks,
     buildOwnerPanel,
     DEPOSIT_FEE_RATE, WITHDRAW_FEE_RATE, creditOwnerProfit,
 };
