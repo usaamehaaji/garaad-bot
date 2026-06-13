@@ -439,7 +439,6 @@ async function finishQuiz(state) {
             }
         }
         if (sc > 0) {
-            userData[id].xp = (userData[id].xp || 0) + Math.floor(sc * QUIZ_POINTS_TO_XP);
         }
         if (i === 0 && sc > 0) userData[id].stats.quizWins++;
         if (replaying) userData[id].quizReplaying = false;
@@ -475,8 +474,8 @@ async function finishQuiz(state) {
             (restLines ? `\n**Kale:**\n${restLines}\n` : '') +
             `━━━━━━━━━━━━━━━━━━━━\n` +
             (isReplay
-                ? `💰 **${QUIZ_POINTS_PER_IQ} dhibcood = ${QUIZ_REPLAY_BTC_PER_IQ} BTC** (dib-u-ciyaar) · ⭐ XP weli la helaa`
-                : `🧠 **${QUIZ_POINTS_PER_IQ} dhibcood = 1 IQ** · ⭐ Dhammaan ciyaartoydu XP helaan`)
+                ? `💰 **${QUIZ_POINTS_PER_IQ} dhibcood = ${QUIZ_REPLAY_BTC_PER_IQ} BTC** (dib-u-ciyaar)`
+                : `🧠 **${QUIZ_POINTS_PER_IQ} dhibcood = 1 IQ**`)
         )
         .setFooter({ text: `Garaad Quiz • ${PREFIX}profile — arag dhibcahaaga` });
 
