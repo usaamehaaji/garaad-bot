@@ -90,7 +90,15 @@ function addTx(bank, type, amount, note) {
 }
 
 // ── Public bank helpers ────────────────────────────────
-function getPublicBank(id) { return banksData[id] || null; }
+function getPublicBank(id) {
+    if (banksData[id]) return banksData[id];
+    // Also accept display IDs like "KB:72957" that match stored "GB-72957"
+    const up = (id || '').toUpperCase();
+    return Object.values(banksData).find(b => {
+        const num = (b.id || '').replace(/[^0-9]/g, '');
+        return `${namePrefix(b.name)}:${num}`.toUpperCase() === up;
+    }) || null;
+}
 function getAllPublicBanks() { return banksData; }
 
 function createPublicBank(ownerId, ownerUsername, name) {

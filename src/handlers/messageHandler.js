@@ -56,7 +56,7 @@ const personalCmd = require('../../data/commands/personal');
 const qCmd        = require('../../data/commands/q');
 const qcCmd       = require('../../data/commands/qc');
 const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, withdrawAnyCmd, allBanksCmd, jbCmd } = require('../../data/commands/economy/personalBank');
-const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd, bankFundCmd, bankDepositCmd, bankWithdrawCmd, bankInfoCmd } = require('../../data/commands/economy/publicBank');
+const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd, bankFundCmd, bankDepositCmd, bankWithdrawCmd, bankInfoCmd, bankOwnerCmd } = require('../../data/commands/economy/publicBank');
 const { getDisTube } = require('../music/disTubeSetup');
 const werewolfCmd     = require('../../data/commands/werewolf');
 const { joinCmd, leaveCmd: vcLeaveCmd } = require('../../data/commands/join');
@@ -264,6 +264,9 @@ module.exports = function setupMessageHandler(client) {
             case 'bankfund':
             case 'bf':
                 return bankFundCmd(message, args);
+
+            case 'owner':
+                return bankOwnerCmd(message, args);
 
             case 'topbanks':
                 return topBanksCmd(message);

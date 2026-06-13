@@ -1,7 +1,12 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econStore');
 const { userData } = require('../../../src/store');
-const { createPersonalBank, addTx, hashPass, getAllPublicBanks } = require('../../../src/economy/bankStore');
+const { createPersonalBank, addTx, hashPass, getAllPublicBanks, namePrefix } = require('../../../src/economy/bankStore');
+
+function computePubDisplayId(bank) {
+    const num = (bank.id || '').replace(/[^0-9]/g, '');
+    return `${namePrefix(bank.name)}:${num}`;
+}
 
 const PUB_EXPIRY_MS = 14 * 24 * 60 * 60 * 1000;
 const { checkRequirements, reqFailMessage } = require('../../../src/utils/requirements');
@@ -644,7 +649,7 @@ async function allBanksCmd(message) {
     if (pubBanks.length) {
         desc += `\n**🏛️ Public Banks:**\n`;
         desc += pubBanks.map((b, i) =>
-            `**${i + 1}.** 🏛️ **${b.name}** · \`${b.id}\` · ${fmtBtc(b.balance || 0)}`
+            `**${i + 1}.** 🏛️ **${b.name}** · \`${computePubDisplayId(b)}\` · ${fmtBtc(b.balance || 0)}`
         ).join('\n');
     }
 

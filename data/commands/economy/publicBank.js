@@ -3,8 +3,13 @@ const { econData, checkEconUser, saveEcon } = require('../../../src/economy/econ
 const { userData } = require('../../../src/store');
 const {
     getAllPublicBanks, getPublicBank, createPublicBank,
-    saveBanks, hashPass, checkPass,
+    saveBanks, hashPass, checkPass, namePrefix,
 } = require('../../../src/economy/bankStore');
+
+function computeDisplayId(bank) {
+    const num = (bank.id || '').replace(/[^0-9]/g, '');
+    return `${namePrefix(bank.name)}:${num}`;
+}
 const { checkRequirements, reqFailMessage } = require('../../../src/utils/requirements');
 
 const CREATE_FEE        = 200_000;
@@ -113,7 +118,7 @@ async function listPublicBanksCmd(message) {
     if (!all.length) return message.reply('📭 Wali bank la abuuri waayay. `?createbank <name>` bilow.');
 
     const lines = all.slice(0, 10).map((b, i) =>
-        `**${i + 1}.** 🏛️ **${b.name}** (\`${b.id}\`)\n` +
+        `**${i + 1}.** 🏛️ **${b.name}** (\`${computeDisplayId(b)}\`)\n` +
         `   👤 ${b.ownerUsername} · 💰 ${fmtBtc(b.balance)} · ⭐ ${b.reputation || 0} rep`
     );
 
@@ -137,8 +142,10 @@ async function bankInfoCmd(message, args) {
     const myRec     = bank.customers?.[message.author.id];
     const myBal     = myRec ? myRec.balance || 0 : 0;
 
+    const dId = computeDisplayId(bank);
+
     const baseDesc =
-        `🆔 **ID:** \`${bank.id}\`\n` +
+        `🆔 **ID:** \`${dId}\`\n` +
         `👤 **Owner:** ${bank.ownerUsername}\n` +
         `📅 **La abuurtay:** ${fmtDate(bank.createdAt)}\n\n` +
         `💰 **Haraagga bangi:** ${fmtBtc(bank.balance)}\n` +
@@ -149,11 +156,11 @@ async function bankInfoCmd(message, args) {
 
     const ownerPanel = isOwner
         ? `\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-          `👑 **OWNER PANEL**\n\n` +
+          `👑 **OWNER PANEL** — \`?owner\` isticmaal\n\n` +
           `💸 **Faa'iido la Helay:** ${fmtBtc(bank.ownerProfit || 0)}\n` +
           `  └ 2% deposit + 2% withdraw\n` +
           `🏦 **Lacag Aad Ku Shubday:** ${fmtBtc(bank.ownerFund || 0)}\n` +
-          `📤 **Si Lacag Ku Shubi:** \`?bankfund ${bank.id} <xadad>\`\n`
+          `📤 **Si Lacag Ku Shubi:** \`?owner fund <xadad>\`\n`
         : '';
 
     return message.reply({
@@ -161,7 +168,7 @@ async function bankInfoCmd(message, args) {
             .setTitle(`🏛️ ${bank.name}`)
             .setColor(isOwner ? '#f39c12' : '#3498db')
             .setDescription(baseDesc + ownerPanel)
-            .setFooter({ text: `?bankdeposit ${bank.id} <amount>  |  ?bankwithdraw ${bank.id} <amount>` })],
+            .setFooter({ text: `?d ${bank.name} <amount>  |  ?w ${bank.name} <amount>  •  ID: ${dId}` })],
     });
 }
 
@@ -368,10 +375,121 @@ async function checkAndCloseExpiredBanks(client) {
     return closed;
 }
 
+// ── ?owner — Bank owner management panel ─────────────
+async function bankOwnerCmd(message, args) {
+    const userId = message.author.id;
+    checkEconUser(userId);
+
+    const bank = Object.values(getAllPublicBanks()).find(b => b.ownerId === userId);
+    if (!bank) {
+        return message.reply(
+            '⚠️ Adiga bank ku gaar ah ma lihid.\n' +
+            '`?createbank <magac>` isticmaal si aad bank u abuurto.'
+        );
+    }
+
+    const sub = (args[0] || '').toLowerCase();
+
+    // ?owner rename <new name>
+    if (sub === 'rename' || sub === 'magac') {
+        const newName = args.slice(1).join(' ').trim();
+        if (!newName || newName.length < 3)
+            return message.reply('⚠️ Isticmaal: `?owner rename <magac cusub>`\nTusaale: `?owner rename Hormuud Bank`');
+        if (newName.length > 30)
+            return message.reply('⚠️ Magaca aad u dheer. Max 30 xaraf.');
+        const oldName = bank.name;
+        bank.name = newName;
+        saveBanks();
+        return message.reply(
+            `✅ Bangiga waa la magac beddelay!\n` +
+            `📝 **${oldName}** → **${newName}**\n` +
+            `🆔 ID cusub: \`${computeDisplayId(bank)}\``
+        );
+    }
+
+    // ?owner pass <new password>
+    if (sub === 'pass' || sub === 'password' || sub === 'furaha') {
+        const pw = args[1];
+        if (!pw)
+            return message.reply('⚠️ Isticmaal: `?owner pass <password>`\nTusaale: `?owner pass sirta123`');
+        bank.passwordHash = hashPass(pw);
+        saveBanks();
+        return message.reply('✅ Furaha bangi waa la beddelay. 🔐');
+    }
+
+    // ?owner claim → claim profits
+    if (sub === 'claim' || sub === 'qaado') {
+        const profit = bank.ownerProfit || 0;
+        if (profit <= 0)
+            return message.reply('⚠️ Weli faa\'iido la\'aan. Dadka ha ku dhigaan!');
+        checkEconUser(userId);
+        econData[userId].btc   = (econData[userId].btc || 0) + profit;
+        bank.ownerProfit = 0;
+        saveBanks();
+        saveEcon();
+        return message.reply(
+            `💰 **${fmtBtc(profit)}** jeebkaaga u galay!\n` +
+            `💼 Haysataa: **${fmtBtc(econData[userId].btc)}**`
+        );
+    }
+
+    // ?owner fund <amount>
+    if (sub === 'fund' || sub === 'shub') {
+        return bankFundCmd(message, [bank.id, ...args.slice(1)]);
+    }
+
+    // ?owner (no args) → show management panel
+    const dId       = computeDisplayId(bank);
+    const profit    = bank.ownerProfit || 0;
+    const custCount = Object.keys(bank.customers || {}).length;
+    const totalDep  = Object.values(bank.customers || {}).reduce((s, c) => s + (c.balance || 0), 0);
+    const left      = daysLeft(bank);
+
+    const embed = new EmbedBuilder()
+        .setTitle(`👑 ${bank.name} — Owner Panel`)
+        .setColor('#f39c12')
+        .setDescription(
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `**🛠️ MANAGEMENT COMMANDS**\n\n` +
+            `\`?owner rename <magac>\` — Bangiga magac bedel\n` +
+            `\`?owner pass <password>\` — Furaha bedel\n` +
+            `\`?owner fund <xadad>\` — Lacag ku shub\n` +
+            `\`?owner claim\` — Faa'iido qaado\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━`
+        )
+        .addFields(
+            { name: '🆔 Bank ID',           value: `\`${dId}\``,          inline: true },
+            { name: '💰 Haraagga',           value: fmtBtc(bank.balance), inline: true },
+            { name: '👥 Macaamiil',          value: `**${custCount}**`,   inline: true },
+            { name: '💸 Faa\'iido Pending',  value: fmtBtc(profit),       inline: true },
+            { name: '📥 Wadarta Deposits',   value: fmtBtc(totalDep),     inline: true },
+            { name: '⏳ Muda Hadhay',        value: `**${left} maalin**`, inline: true },
+        )
+        .setFooter({ text: `2% deposit + 2% withdraw → faa'iido • ID: ${dId}` });
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId(`pubbank_claim_${bank.id}_${userId}`)
+            .setLabel('💰 Claim Faa\'iido')
+            .setStyle(ButtonStyle.Success)
+            .setDisabled(profit <= 0),
+        new ButtonBuilder()
+            .setCustomId(`pubbank_fund_btn_${bank.id}_${userId}`)
+            .setLabel('🏦 Fund Bank')
+            .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+            .setCustomId(`close_ebank_${userId}`)
+            .setLabel('✖ Xir')
+            .setStyle(ButtonStyle.Danger),
+    );
+
+    return message.reply({ embeds: [embed], components: [row] });
+}
+
 module.exports = {
     createPublicBankCmd, listPublicBanksCmd, bankInfoCmd,
     bankDepositCmd, bankWithdrawCmd, bankPasswordCmd, topBanksCmd,
-    bankFundCmd, checkAndCloseExpiredBanks,
+    bankFundCmd, bankOwnerCmd, checkAndCloseExpiredBanks,
     buildOwnerPanel,
     DEPOSIT_FEE_RATE, WITHDRAW_FEE_RATE, creditOwnerProfit,
 };
