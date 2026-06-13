@@ -147,7 +147,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 `${gradeText}\n` +
                 `🧠 IQ aad heshay game kan waa: **+${iqGain} IQ** _(80+ dhibcood = IQ)_\n` +
                 `📅 Maanta solo IQ: **${dayUsed}/30**\n\n` +
-                `🧠 IQ hadda: **${d.iq || 0}** | ⭐ XP: **${d.xp || 0}** | Heer **${getLevel(d.iq || 0)}**`
+                `🧠 IQ hadda: **${d.iq || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
             .setColor(pct >= 90 ? '#f39c12' : pct >= 80 ? '#2ecc71' : '#e74c3c');
 
