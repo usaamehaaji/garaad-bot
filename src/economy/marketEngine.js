@@ -122,27 +122,36 @@ function antiFarmModifier(d) {
 // ── Main outcome calculation ─────────────────────────────────────────
 
 function calculateOutcome(userId, betAmount, direction) {
-    const { econData, checkEconUser } = require('./econStore');
+    const { econData, checkEconUser, getTreasury } = require('./econStore');
     checkEconUser(userId);
     const d = econData[userId];
 
-    // Qofka doorashada la barbardhig suuqa si toos ah
-    const marketIsUp     = currentState === 'UP';
-    const playerPickedUp = direction === 'u';
+    // Win Rate: 45% (Fursadda Guusha)
+    let win = Math.random() < 0.45;
 
-    // Haddii labaduba isku mid yihiin = WIN, haddii kala duwan yihiin = LOSS
-    const correctGuess = (playerPickedUp === marketIsUp);
+    // Faa'iidada (PROFIT_RATE = 0.95)
+    const profit = Math.floor(betAmount * 0.95);
+    const treasury = getTreasury();
 
-    // Win = 100% haddii sax, Loss = 100% haddii khalad
-    // Small random (5%) khalad dhici kara
-    const rand = Math.random();
-    const win  = correctGuess ? rand < 0.95 : rand < 0.05;
+    // Haddi khaznada lacagteedu yar tahay, player-ka loss ha qaato
+    if (win && (treasury.balance || 0) < profit) {
+        win = false;
+    }
+
+    // Jihada suuqa: Haddi uu guulaysto ha isla ekaadaan (u -> UP, d -> DOWN)
+    // Haddi uu guuldaraysto ha kala duwanaadaan (u -> DOWN, d -> UP)
+    let resolvedStateName;
+    if (win) {
+        resolvedStateName = direction === 'u' ? 'UP' : 'DOWN';
+    } else {
+        resolvedStateName = direction === 'u' ? 'DOWN' : 'UP';
+    }
 
     return {
         win,
-        probability: correctGuess ? 0.95 : 0.05,
-        stateName:   currentState,
-        stateInfo:   STATES[currentState] || STATES.UP,
+        probability: 0.45,
+        stateName:   resolvedStateName,
+        stateInfo:   STATES[resolvedStateName] || STATES.UP,
     };
 }
 

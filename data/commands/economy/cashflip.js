@@ -98,11 +98,19 @@ module.exports = async function cashflipCmd(message, args) {
 
     // ── Parse args ──
     let amount, direction;
-    const numIdx = isNaN(parseFloat(args[0])) ? 1 : 0;
-    amount       = parseFloat(args[numIdx]);
-    direction    = (args[numIdx + 1] || '').toLowerCase();
-    if (direction === 'up')   direction = 'u';
-    if (direction === 'down') direction = 'd';
+    for (const arg of args) {
+        const cleaned = arg.toLowerCase();
+        if (cleaned === 'u' || cleaned === 'up') {
+            direction = 'u';
+        } else if (cleaned === 'd' || cleaned === 'down') {
+            direction = 'd';
+        } else {
+            const num = parseFloat(arg);
+            if (!isNaN(num) && num > 0) {
+                amount = num;
+            }
+        }
+    }
 
     if (!amount || isNaN(amount) || amount <= 0 || (direction !== 'u' && direction !== 'd'))
         return message.reply(`⚠️ Isticmaal: \`?ef 500 u\`  ama  \`?ef 500 d\`\n👛 Wallet: **₿ ${fmt(d.btc || 0)}**`);
@@ -125,14 +133,10 @@ module.exports = async function cashflipCmd(message, args) {
 
     const dirLabel = direction === 'u' ? '⬆️ UP' : '⬇️ DOWN';
 
-    const { win } = calculateOutcome(userId, amount, direction);
+    const outcome = calculateOutcome(userId, amount, direction);
+    const win = outcome.win;
     const profit   = Math.floor(amount * PROFIT_RATE);
-    const treasury = getTreasury();
 
-    if (win && (treasury.balance || 0) < profit) {
-        flipCooldowns.delete(userId);
-        return message.reply(`⚠️ Treasury funds low — market temporarily closed. Balance: **₿ ${fmt(treasury.balance || 0)}**`);
-    }
 
     const walletBefore = d.btc || 0;
     d.btc = walletBefore - amount;
@@ -161,8 +165,8 @@ module.exports = async function cashflipCmd(message, args) {
     } catch {}
     saveEcon();
 
-    const freshState = getMarketState();
-    return message.reply({ embeds: [buildResultEmbed(win, dirLabel, amount, profit, d.btc, freshState)] });
+    const calcState = { name: outcome.stateName, ...outcome.stateInfo };
+    return message.reply({ embeds: [buildResultEmbed(win, dirLabel, amount, profit, d.btc, calcState)] });
 };
 
 module.exports.PROFIT_RATE = PROFIT_RATE;
