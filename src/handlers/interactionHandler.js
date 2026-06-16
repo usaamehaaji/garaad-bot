@@ -4303,6 +4303,12 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.reply({ content: `📤 **₿${amount.toLocaleString()}** ka soo baxday **${tName}**'s bank — jeebkaaga!`, flags: MessageFlags.Ephemeral });
         }
 
+        // ── Game reward claim buttons ────────────────────────────────────
+        if (id.startsWith('gr_')) {
+            const { handleGameRewardChoice } = require('../utils/gameRewards');
+            return handleGameRewardChoice(interaction);
+        }
+
         // ── Mafia ─────────────────────────────────────────────────────────
         if (id.startsWith('ww_')) {
             const {

@@ -20,6 +20,7 @@ const { getAnswerOptions } = require('../utils/questionOptions');
 const { checkEconUser, econData, saveEcon } = require('../economy/econStore');
 const DUEL_REPLAY_BTC = 50;
 const { saveDuelState, loadAllDuelStates, deleteDuelState } = require('../utils/gamePersist');
+const { createRewardSession, rewardRow, rewardSummary, POINTS_PER_REWARD, IQ_PER_REWARD, BTC_PER_REWARD } = require('../utils/gameRewards');
 
 function persistDuel(channelId, state) {
     saveDuelState(channelId, state).catch(() => {});
@@ -332,6 +333,20 @@ async function finishDuel(channel) {
     saveData();
     activeDuels.delete(channel.id);
 
+    const rewardPoints = {
+        [state.p1]: (state.scores[state.p1] || 0) * POINTS_PER_REWARD,
+        [state.p2]: (state.scores[state.p2] || 0) * POINTS_PER_REWARD,
+    };
+    const rewardSessionId = createRewardSession('Duel', rewardPoints);
+
+    resultEmbed.addFields({
+        name: '🎁 Abaalmarin points',
+        value:
+            `<@${state.p1}> — ${rewardSummary(rewardPoints[state.p1])}\n` +
+            `<@${state.p2}> — ${rewardSummary(rewardPoints[state.p2])}\n` +
+            `Dooro IQ ama BTC. (${POINTS_PER_REWARD} pts = ${IQ_PER_REWARD} IQ ama ${BTC_PER_REWARD} BTC)`,
+    });
+
     const closeRow = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(`close_duel_${state.p1}`)
@@ -339,7 +354,7 @@ async function finishDuel(channel) {
             .setStyle(ButtonStyle.Danger),
     );
 
-    await channel.send({ embeds: [resultEmbed], components: [closeRow] });
+    await channel.send({ embeds: [resultEmbed], components: [rewardRow(rewardSessionId), closeRow] });
 }
 
 // ── Startup restore: reload all saved duels and resend current question ──

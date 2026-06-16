@@ -28,6 +28,7 @@ const {
 const { checkEconUser, econData, saveEcon } = require('../economy/econStore');
 const { markUserPlayed }   = require('../utils/reminders');
 const { getAnswerOptions } = require('../utils/questionOptions');
+const { createRewardSession, rewardRow, rewardSummary, POINTS_PER_REWARD, IQ_PER_REWARD, BTC_PER_REWARD } = require('../utils/gameRewards');
 const {
     PREFIX,
     QUIZ_MIN_PLAYERS, QUIZ_MAX_PLAYERS,
@@ -424,34 +425,18 @@ async function finishQuiz(state) {
     sorted.forEach(([id, sc], i) => {
         checkUser(id);
         userData[id].stats.quizPlayed++;
-        const replaying = isReplay || userData[id].quizReplaying;
-        if (i < 3 && sc > 0) {
-            if (replaying) {
-                const btc = Math.floor(sc / QUIZ_POINTS_PER_IQ) * QUIZ_REPLAY_BTC_PER_IQ;
-                if (btc > 0) {
-                    checkEconUser(id);
-                    econData[id].btc = (econData[id].btc || 0) + btc;
-                    saveEcon();
-                }
-            } else {
-                const iq = Math.floor(sc / QUIZ_POINTS_PER_IQ);
-                if (iq > 0) userData[id].iq = (userData[id].iq || 0) + iq;
-            }
-        }
         if (sc > 0) {
         }
         if (i === 0 && sc > 0) userData[id].stats.quizWins++;
+        const replaying = isReplay || userData[id].quizReplaying;
         if (replaying) userData[id].quizReplaying = false;
     });
     saveData();
 
     const medalMap = ['🥇', '🥈', '🥉'];
-    const rewardLabel = isReplay ? 'BTC' : 'IQ';
+    const rewardSessionId = createRewardSession('Quiz', Object.fromEntries(sorted.map(([id, sc]) => [id, sc])));
     const top3Lines = sorted.slice(0, Math.min(3, sorted.length)).map(([id, sc], i) => {
-        const units = Math.floor(sc / QUIZ_POINTS_PER_IQ);
-        const reward = isReplay ? units * QUIZ_REPLAY_BTC_PER_IQ : units;
-        const sym = isReplay ? 'BTC' : 'IQ';
-        return `${medalMap[i]} <@${id}> — **${sc}** pts → **+${reward} ${sym}**`;
+        return `${medalMap[i]} <@${id}> — **${rewardSummary(sc)}**`;
     }).join('\n') || '—';
 
     const restLines = sorted.slice(3).map(([id, sc], i) =>
@@ -470,12 +455,11 @@ async function finishQuiz(state) {
             `${winnerLine}\n\n` +
             `**Hostka:** <@${state.hostId}> · **Ciyaartoy:** ${playerCount}\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            `**🏆 Top 3 — ${rewardLabel} Abaalmarinta:**\n${top3Lines}\n` +
+            `**🏆 Top 3 — Abaalmarinta:**\n${top3Lines}\n` +
             (restLines ? `\n**Kale:**\n${restLines}\n` : '') +
             `━━━━━━━━━━━━━━━━━━━━\n` +
-            (isReplay
-                ? `💰 **${QUIZ_POINTS_PER_IQ} dhibcood = ${QUIZ_REPLAY_BTC_PER_IQ} BTC** (dib-u-ciyaar)`
-                : `🧠 **${QUIZ_POINTS_PER_IQ} dhibcood = 1 IQ**`)
+            `🎁 Doorasho: **IQ** ama **BTC**\n` +
+            `**${POINTS_PER_REWARD} dhibcood = ${IQ_PER_REWARD} IQ ama ${BTC_PER_REWARD} BTC**`
         )
         .setFooter({ text: `Garaad Quiz • ${PREFIX}profile — arag dhibcahaaga` });
 
@@ -487,7 +471,7 @@ async function finishQuiz(state) {
     );
 
     const fOpt = state.originMsg ? { reply: { messageReference: state.originMsg.id, failIfNotExists: false } } : {};
-    await channel.send({ embeds: [embed], components: [exchRow], ...fOpt });
+    await channel.send({ embeds: [embed], components: [rewardRow(rewardSessionId), exchRow], ...fOpt });
 }
 
 // ── Startup restore: reload all saved quiz games and resend current question ──

@@ -9,6 +9,7 @@ const { ECON_TITLES } = require('./economy/econShop');
 const { checkUser, getLevel, checkAndAwardBadges } = require('../../src/utils/helpers');
 const { getTier, getTierProgress } = require('../../src/utils/ranks');
 const { FRAMES, BADGES } = require('../../src/utils/itemDefs');
+const { LEVEL_STEP } = require('../../src/config');
 
 function getIQRank(userId) {
     const entries = Object.entries(userData).filter(([k, v]) => /^\d{17,19}$/.test(k) && typeof v.iq === 'number');
@@ -40,6 +41,9 @@ module.exports = async function profileCommand(message) {
     const level     = getLevel(data.iq);
     const { rank, total } = getIQRank(target.id);
     const { tier, pct, needed } = getTierProgress(data.iq);
+    const currentLevelIq = (data.iq || 0) % LEVEL_STEP;
+    const nextLevelNeed  = LEVEL_STEP - currentLevelIq;
+    const levelPct       = Math.floor((currentLevelIq / LEVEL_STEP) * 100);
 
     // Active frame
     const frameKey = data.activeFrame;
@@ -100,8 +104,10 @@ module.exports = async function profileCommand(message) {
     const desc =
         `# 👤 ${displayName}${titlePart}\n` +
         `\n` +
-        `${tier.emoji} **${tier.name}** Tier  •  🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
-        `\`${progressBar(pct)}\` ${pct}%` + (needed > 0 ? `  *(${needed} IQ → next tier)*` : ' *(MAX TIER)*') + `\n` +
+        `🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
+        `\`${progressBar(levelPct)}\` ${levelPct}%  *(${currentLevelIq}/${LEVEL_STEP} IQ → Level ${level + 1}, ${nextLevelNeed} IQ hadhay)*\n` +
+        `${tier.emoji} **${tier.name} Tier**\n` +
+        `\`${progressBar(pct)}\` ${pct}%` + (needed > 0 ? `  *(${needed} IQ → tier-ka xiga)*` : ' *(MAX TIER)*') + `\n` +
         `\n` +
         `🏆 **Rank:** #${rank ?? '—'} / ${total}\n` +
         `💰 **BTC:** ₿${(econ.btc || 0).toLocaleString()}\n` +

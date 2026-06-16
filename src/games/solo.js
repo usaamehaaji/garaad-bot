@@ -23,6 +23,7 @@ const {
     STREAK_BONUS_10,
 } = require('../config');
 const { getAnswerOptions } = require('../utils/questionOptions');
+const { createRewardSession, rewardRow, rewardSummary, POINTS_PER_REWARD, IQ_PER_REWARD, BTC_PER_REWARD } = require('../utils/gameRewards');
 const {
     saveSoloState,
     loadSoloState,
@@ -113,22 +114,7 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         const streak     = game ? (game.bestStreak  || 0) : 0;
         const correct    = game ? (game.correctCount || 0) : 0;
         const wrong      = total - correct;
-        // IQ: kaliya marka dhibcaha guud ay >= 80 yihiin, xad 30 IQ maalintiiba solo
-        const dayKey = new Date().toISOString().slice(0, 10);
-        const dd = userData[userId];
-        if (dd.soloIqDayKey !== dayKey) { dd.soloIqDayKey = dayKey; dd.soloIqToday = 0; }
-        const soloLeft   = Math.max(0, 30 - (dd.soloIqToday || 0));
-        // IQ kaliya hadii dhibcaha >= 80 (heerka wanaagsan) + user-ku ma dib u ciyaaraynin
-        const isReplaying = !!(userData[userId].soloReplaying);
-        const qualifiesForIq = !isReplaying && totalPts >= 80;
-        const rawIqGain  = qualifiesForIq ? Math.max(1, Math.floor(totalPts / 80)) : 0;
-        const iqGain     = Math.min(rawIqGain, soloLeft);
-        if (iqGain > 0) {
-            userData[userId].iq = (userData[userId].iq || 0) + iqGain;
-            dd.soloIqToday = (dd.soloIqToday || 0) + iqGain;
-            saveData();
-        }
-        const dayUsed = dd.soloIqToday || 0;
+        const rewardSessionId = createRewardSession('Solo', { [userId]: totalPts });
 
         // Xukun: wanaagsan 90+, fiican 80-89, hoos 80
         let gradeText = '';
@@ -145,8 +131,9 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 `🎯 Dhibco guud: **${totalPts}** pts\n` +
                 `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
                 `${gradeText}\n` +
-                `🧠 IQ aad heshay game kan waa: **+${iqGain} IQ** _(80+ dhibcood = IQ)_\n` +
-                `📅 Maanta solo IQ: **${dayUsed}/30**\n\n` +
+                `🎁 Abaalmarin: **${rewardSummary(totalPts)}**\n` +
+                `Dooro **IQ** ama **BTC** buttons-ka hoose.\n` +
+                `_${POINTS_PER_REWARD} pts = ${IQ_PER_REWARD} IQ ama ${BTC_PER_REWARD} BTC_\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
             .setColor(pct >= 90 ? '#f39c12' : pct >= 80 ? '#2ecc71' : '#e74c3c');
@@ -165,14 +152,15 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 .setLabel('Iska xir')
                 .setStyle(ButtonStyle.Danger),
         );
+        const claimRow = rewardRow(rewardSessionId);
 
         if (currentMsg) await currentMsg.delete().catch(() => {});
         const fc = messageOrInteraction.channel;
         const finishReply = originMsg ? { reply: { messageReference: originMsg.id, failIfNotExists: false } } : {};
         if (fc) {
-            await fc.send({ embeds: [finishEmbed], components: [row], ...finishReply });
+            await fc.send({ embeds: [finishEmbed], components: [claimRow, row], ...finishReply });
         } else {
-            await messageOrInteraction.reply({ embeds: [finishEmbed], components: [row] });
+            await messageOrInteraction.reply({ embeds: [finishEmbed], components: [claimRow, row] });
         }
 
         return;

@@ -14,6 +14,7 @@ const {
 } = require('../utils/questions');
 const { getAnswerOptions } = require('../utils/questionOptions');
 const { GLOBAL_WAIT_MS, SOLO_FAST_MS, SOLO_MAX_SCORE, SOLO_MIN_SCORE } = require('../config');
+const { createRewardSession, rewardRow, rewardSummary, POINTS_PER_REWARD, IQ_PER_REWARD, BTC_PER_REWARD } = require('../utils/gameRewards');
 
 // channelId → state
 const activeTeamDuels = new Map();
@@ -456,7 +457,19 @@ async function finishTeamDuel(channel, channelId) {
 
     saveEcon();
     activeTeamDuels.delete(channelId);
-    await channel.send({ embeds: [resultEmbed] });
+
+    const rewardPoints = Object.fromEntries(players.map(uid => [uid, state.scores[uid] || 0]));
+    const rewardSessionId = createRewardSession(state.mode.toUpperCase(), rewardPoints);
+    const rewardLines = players
+        .map(uid => `<@${uid}> — ${rewardSummary(rewardPoints[uid])}`)
+        .join('\n');
+
+    resultEmbed.addFields({
+        name: '🎁 Abaalmarin points',
+        value: `${rewardLines}\nDooro IQ ama BTC. (${POINTS_PER_REWARD} pts = ${IQ_PER_REWARD} IQ ama ${BTC_PER_REWARD} BTC)`,
+    });
+
+    await channel.send({ embeds: [resultEmbed], components: [rewardRow(rewardSessionId)] });
 }
 
 async function handleNonParticipantAnswer(interaction, channelId) {
