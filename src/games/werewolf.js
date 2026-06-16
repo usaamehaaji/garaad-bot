@@ -339,6 +339,8 @@ async function resolveVote(game, client) {
     for (const targetId of game.votes.values()) tally.set(targetId, (tally.get(targetId) || 0) + 1);
 
     const alive = alivePlayers(game);
+    const mafiaCount = alive.filter(([, player]) => isMafia(player.role)).length;
+    const citizenCount = alive.length - mafiaCount;
     const isFinalRound = alive.length <= 3;
 
     let desc = '🤷 Cidna ma codeyn. Wareeg kale ayaa bilaabanaya.';
@@ -347,10 +349,7 @@ async function resolveVote(game, client) {
         if (sorted.length > 1 && sorted[0][1] === sorted[1][1]) {
             desc = '🤝 Codadku way isku dhaceen. Qof lama saarin.';
             if (isFinalRound) {
-                const mafiaCount = alive.filter(([, player]) => isMafia(player.role)).length;
-                const citizenCount = alive.length - mafiaCount;
                 const winner = mafiaCount >= citizenCount ? 'mafia' : 'citizens';
-
                 desc += `
 
 ⚖️ Maadaama ay tahay codeynta ugu dambeysa, guuleystaha waxa uu noqonayaa **${winner === 'mafia' ? 'Mafia' : 'Shacab'}**.`;
@@ -381,6 +380,15 @@ async function resolveVote(game, client) {
                 return endGame(game, client, result);
             }
         }
+    } else if (isFinalRound) {
+        const winner = mafiaCount >= citizenCount ? 'mafia' : 'citizens';
+        desc = '🤷 Cidna ma codeyn. Maaddaama ay ku haray 3 ciyaaryahan ama ka yar, guusha waxaa lagu go’aaminayaa tirada labada dhinac.';
+        desc += `\n\n⚖️ Guuleystaha ugu dambeysa waa **${winner === 'mafia' ? 'Mafia' : 'Shacab'}**.`;
+        await game.textChannel.send({ embeds: [new EmbedBuilder()
+            .setColor('#9b59b6')
+            .setTitle('📊 Natiijada Codaynta')
+            .setDescription(desc)]});
+        return endGame(game, client, winner);
     }
 
     await game.textChannel.send({ embeds: [new EmbedBuilder()
