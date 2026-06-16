@@ -4303,20 +4303,31 @@ module.exports = function setupInteractionHandler(client) {
             return interaction.reply({ content: `📤 **₿${amount.toLocaleString()}** ka soo baxday **${tName}**'s bank — jeebkaaga!`, flags: MessageFlags.Ephemeral });
         }
 
-        // ── Werewolf ──────────────────────────────────────────────────────
+        // ── Mafia ─────────────────────────────────────────────────────────
         if (id.startsWith('ww_')) {
-            const { games: wwGames, lobbyEmbed, lobbyRow, startGame, endGame } = require('../games/werewolf');
+            const {
+                games: wwGames,
+                lobbyEmbed,
+                lobbyRow,
+                startGame,
+                beginVoting,
+                targetRows,
+                alivePlayers,
+                isMafia,
+                MIN_PLAYERS,
+                MAX_PLAYERS,
+            } = require('../games/werewolf');
 
             // Lobby: Join
             if (id.startsWith('ww_join_')) {
                 const hostId  = id.replace('ww_join_', '');
                 const game    = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
                 if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
-                if (game.players.size >= 12) return interaction.reply({ content: '⚠️ Lobby buuxday (max 12).', flags: MessageFlags.Ephemeral });
+                if (game.players.size >= MAX_PLAYERS) return interaction.reply({ content: `⚠️ Lobby buuxday (max ${MAX_PLAYERS}).`, flags: MessageFlags.Ephemeral });
                 if (game.players.has(interaction.user.id)) return interaction.reply({ content: '⚠️ Horay ayaad ku jirtay.', flags: MessageFlags.Ephemeral });
                 game.players.set(interaction.user.id, null);
                 const embed = await lobbyEmbed(game, interaction.client);
-                const row   = lobbyRow(hostId, game.players.size >= 5);
+                const row   = lobbyRow(hostId, game.players.size >= MIN_PLAYERS);
                 await interaction.update({ embeds: [embed], components: [row] });
                 return;
             }
@@ -4329,7 +4340,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (interaction.user.id === hostId) return interaction.reply({ content: '⚠️ Host ma bixin karo. Jooji haddaad rabto.', flags: MessageFlags.Ephemeral });
                 game.players.delete(interaction.user.id);
                 const embed = await lobbyEmbed(game, interaction.client);
-                const row   = lobbyRow(hostId, game.players.size >= 5);
+                const row   = lobbyRow(hostId, game.players.size >= MIN_PLAYERS);
                 await interaction.update({ embeds: [embed], components: [row] });
                 return;
             }
@@ -4340,8 +4351,8 @@ module.exports = function setupInteractionHandler(client) {
                 if (interaction.user.id !== hostId) return interaction.reply({ content: '⚠️ Host kaliya ayaa bilaabi kara.', flags: MessageFlags.Ephemeral });
                 const game = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
                 if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
-                if (game.players.size < 5) return interaction.reply({ content: '⚠️ Ugu yaraan 5 qof ayaa loo baahanyahay.', flags: MessageFlags.Ephemeral });
-                await interaction.update({ embeds: [{ title: '🐺 Werewolf — Bilaabanaya...', description: 'Doorarka DM-ka ayaa loo diraysaa. Sugso!' }], components: [] });
+                if (game.players.size < MIN_PLAYERS) return interaction.reply({ content: `⚠️ Ugu yaraan ${MIN_PLAYERS} qof ayaa loo baahanyahay.`, flags: MessageFlags.Ephemeral });
+                await interaction.update({ embeds: [{ title: '🔪 Mafia — Bilaabanaya...', description: 'Doorarka DM-ka ayaa loo dirayaa. Sugso!' }], components: [] });
                 await startGame(game, interaction.client);
                 return;
             }
@@ -4353,92 +4364,72 @@ module.exports = function setupInteractionHandler(client) {
                 const game = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
                 if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
                 wwGames.delete(game.guildId);
-                await interaction.update({ embeds: [{ title: '🐺 Werewolf — La joojiyay', description: 'Ciyaarta waa la joojiyay.' }], components: [] });
+                await interaction.update({ embeds: [{ title: '🔪 Mafia — La joojiyay', description: 'Ciyaarta waa la joojiyay.' }], components: [] });
                 return;
             }
 
-            // Night action: wolf/seer/doctor (from DM)
+            // Page navigation for large Mafia games
+            if (id.startsWith('ww_page_')) {
+                const parts = id.split('_'); // ww_page_kind_guildId_page
+                const kind = parts[2];
+                const guildId = parts[3];
+                const page = parseInt(parts[4], 10) || 0;
+                const game = wwGames.get(guildId);
+                if (!game) return interaction.reply({ content: '⚠️ Ciyaar lama helin.', flags: MessageFlags.Ephemeral });
+
+                if (kind === 'vote') {
+                    if (game.phase !== 'vote') return interaction.reply({ content: '⚠️ Codayn ma jirto.', flags: MessageFlags.Ephemeral });
+                    await beginVoting(game, interaction.client, page);
+                    return interaction.deferUpdate();
+                }
+
+                if (kind === 'night') {
+                    if (game.phase !== 'night') return interaction.reply({ content: '⚠️ Habeenka ciyaar ma jirto.', flags: MessageFlags.Ephemeral });
+                    const player = game.players.get(interaction.user.id);
+                    if (!player || !player.alive || !isMafia(player.role)) {
+                        return interaction.reply({ content: '⚠️ Mafia ma tihid.', flags: MessageFlags.Ephemeral });
+                    }
+
+                    const targets = alivePlayers(game).filter(([, targetPlayer]) => !isMafia(targetPlayer.role));
+                    const { rows, page: safePage, pages } = await targetRows(
+                        targets,
+                        interaction.client,
+                        `ww_night_mafia_${game.guildId}`,
+                        `ww_page_night_${game.guildId}`,
+                        page
+                    );
+                    return interaction.update({
+                        embeds: [new EmbedBuilder()
+                            .setColor('#c0392b')
+                            .setTitle('🔪 Killer Mafia')
+                            .setDescription(`Qof aad dilaysaan dooro.\nBogga **${safePage + 1}/${pages}**`)],
+                        components: rows,
+                    });
+                }
+            }
+
+            // Night action: Mafia kill (from DM)
             if (id.startsWith('ww_night_')) {
-                const parts  = id.split('_'); // ww_night_role_guildId_targetId
-                const role   = parts[2];
+                const parts  = id.split('_'); // ww_night_mafia_guildId_targetId
                 const guildId = parts[3];
                 const targetId = parts[4];
                 const game   = wwGames.get(guildId);
                 if (!game || game.phase !== 'night') return interaction.reply({ content: '⚠️ Habeenka ciyaar ma jirto.', flags: MessageFlags.Ephemeral });
                 const player = game.players.get(interaction.user.id);
-                const validRole = player?.role === role || (role === 'wolf' && player?.role === 'wolfSeer') || (role === 'wolfSeer' && player?.role === 'wolfSeer');
-                if (!player || !validRole || !player.alive) return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
+                const target = game.players.get(targetId);
+                if (!player || !player.alive || !isMafia(player.role)) return interaction.reply({ content: '⚠️ Mafia ma tihid.', flags: MessageFlags.Ephemeral });
+                if (!target || !target.alive || isMafia(target.role)) return interaction.reply({ content: '⚠️ Qofkaas lama dooran karo.', flags: MessageFlags.Ephemeral });
 
                 const na = game.nightActions;
                 let tn = targetId;
                 try { const u = await interaction.client.users.fetch(targetId); tn = u.username; } catch {}
 
-                const confirmMap = {
-                    wolf:     `🐍 Doortay inaad dilid: **${tn}**. Natiijada habeenka sugid...`,
-                    wolfSeer: `🐍👁️ Doortay inaad barato: **${tn}**. Natiijada habeenka sugid...`,
-                    seer:     `👁️ Doortay inaad barato: **${tn}**. Natiijada habeenka sugid...`,
-                    doctor:   `🏅 Doortay inaad badbaadiso: **${tn}**. Natiijada habeenka sugid...`,
-                    druid:    `🌿 Doortay inaad badbaadiso: **${tn}**. Natiijada habeenka sugid...`,
-                    necro:    `💀 Doortay inaad soo celiso: **${tn}**. Natiijada habeenka sugid...`,
-                };
-
-                if (role === 'wolf' || role === 'wolfSeer') {
-                    if (role === 'wolf') na.wolfVotes.set(interaction.user.id, targetId);
-                    else na.wolfSeerTarget = targetId;
-                } else if (role === 'seer')   { na.seerTarget   = targetId; }
-                  else if (role === 'doctor')  { na.doctorTarget = targetId; }
-                  else if (role === 'druid')   { na.druidTarget  = targetId; }
-                  else if (role === 'necro')   { na.necroTarget  = targetId; }
+                na.mafiaVotes.set(interaction.user.id, targetId);
 
                 await interaction.update({
-                    embeds: [{ description: confirmMap[role] || `✅ Doorashada la xaqiijiyay: **${tn}**` }],
+                    embeds: [{ description: `🔪 Doortay inaad dilaan: **${tn}**. Natiijada habeenka sug...` }],
                     components: [],
                 });
-                return;
-            }
-
-            // Elin revenge kill
-            if (id.startsWith('ww_elin_')) {
-                const parts    = id.split('_');
-                const guildId  = parts[2];
-                const targetId = parts[3];
-                const game     = wwGames.get(guildId);
-                if (!game || !game.elinPending || game.elinPending !== interaction.user.id)
-                    return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
-                clearTimeout(game.elinTimer);
-                game.elinPending = null;
-                if (game.players.has(targetId) && game.players.get(targetId).alive) {
-                    game.players.get(targetId).alive = false;
-                    const tn = await interaction.client.users.fetch(targetId).then(u => u.username).catch(() => targetId);
-                    await game.textChannel.send({ embeds: [{ color: 0xe74c3c, description: `🏹 **Elin** — aakhir baan ku dilay: **@${tn}**!` }] });
-                    try { const u = await interaction.client.users.fetch(targetId); await u.send('🏹 Elin-ku aakhirkii buu kugu dilay!').catch(() => {}); } catch {}
-                }
-                await interaction.update({ embeds: [{ description: '✅ Ammaanka aad dooratay!' }], components: [] });
-                const { continueAfterSpecial } = require('../games/werewolf');
-                await continueAfterSpecial(game, interaction.client);
-                return;
-            }
-
-            // King succession
-            if (id.startsWith('ww_king_')) {
-                const parts    = id.split('_');
-                const guildId  = parts[2];
-                const targetId = parts[3];
-                const game     = wwGames.get(guildId);
-                if (!game || !game.kingPending || game.kingPending !== interaction.user.id)
-                    return interaction.reply({ content: '⚠️ Awood ma lihid.', flags: MessageFlags.Ephemeral });
-                clearTimeout(game.kingTimer);
-                game.kingPending = null;
-                if (game.players.has(targetId)) {
-                    game.players.get(targetId).kingSeer = true;
-                    const tn = await interaction.client.users.fetch(targetId).then(u => u.username).catch(() => targetId);
-                    await game.textChannel.send({ embeds: [{ color: 0xf1c40f, description: `👑 King-ku wuxuu dooraday **@${tn}** — awood cusub wuu helay!` }] });
-                    try { const u = await interaction.client.users.fetch(targetId); await u.send('👑 **King awooda ayuu ku wareejiyay!** Habeenka dambe qof baran kartaa (Seer awood).').catch(() => {}); } catch {}
-                }
-                await interaction.update({ embeds: [{ description: '✅ Doorashada la xaqiijiyay!' }], components: [] });
-                const result = require('../games/werewolf').games.get(guildId) ? require('../games/werewolf').checkWin?.(game) : null;
-                if (result) { const { endGame } = require('../games/werewolf'); return endGame(game, interaction.client, result); }
-                await require('../games/werewolf').beginDay?.(game, interaction.client);
                 return;
             }
 

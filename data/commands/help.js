@@ -143,38 +143,30 @@ function buildShopEmbed() {
 
 function buildWwEmbed() {
     return new EmbedBuilder()
-        .setTitle('🐺 Werewolf — Ciyaarta')
+        .setTitle('🔪 Mafia — Ciyaarta')
         .setColor('#c0392b')
         .setDescription(
             `**🎮 Bilow**\n` +
-            `**\`${PREFIX}ww\`** — Lobby fur (5–12 qof)\n` +
-            `**\`${PREFIX}ww stop\`** — ⚙️ Admin: game jooji\n\n` +
+            `**\`${PREFIX}mafia\`** — Lobby fur (5–100 qof)\n` +
+            `**\`${PREFIX}mafia stop\`** — ⚙️ Admin: game jooji\n\n` +
 
             `**⏱️ Wareegyada**\n` +
-            `🌙 **Habeenka** (60s) — Roles DM ayaa loo diraa\n` +
+            `🌙 **Habeenka** (60s) — Killer Mafia DM ayuu qof ku doortaa\n` +
             `☀️ **Maalinta** (45s) — Ku hadla channel-ka\n` +
-            `🗳️ **Codeynta** (60s) — Dilaaga codeey\n\n` +
+            `🗳️ **Codeynta** (60s) — Qofka Mafia ah codeeya\n\n` +
 
-            `**🐍 Wolf Team**\n` +
-            `**🐍 Dilaaga** — Habeenki qof dil\n` +
-            `**🐍👁️ Dilaaga Aragti** — Dil + qof card arag\n\n` +
+            `**🔪 Killer Mafia**\n` +
+            `5 qof kasta waxaa ku jira **1 Killer Mafia**: 5=1, 10=2, 15=3.\n` +
+            `Habeenkii Mafia waxay doortaan qof Shacab ah oo la dilo.\n\n` +
 
-            `**👥 Village Team**\n` +
-            `**👁️ Aragti** — Dilaaga garo (habeenki)\n` +
-            `**🏅 Dhaqtar** — Qof badbaadi (habeenki)\n` +
-            `**🎖️ Mayor** — Codadaadu = 2 vote\n` +
-            `**👸 Princess** — Wolf dilo → wolf dhintaa\n` +
-            `**🏹 Elin** — La dilo → qof aad doorato dhintaa\n` +
-            `**👑 King** — La dilo → successor awood\n` +
-            `**🌿 Duruid** — Qof kasta badbaadi (habeenki)\n` +
-            `**💀 Necro** — Qof dhintay dib u soo celi (1×)\n` +
-            `**🔥 Dad Caadi** — Codayn kaliya\n\n` +
+            `**👥 Shacab**\n` +
+            `Shacabku maalintii way doodaan, kadibna way codeeyaan qofka ay u malaynayaan inuu Mafia yahay.\n\n` +
 
             `**🏆 Guusha**\n` +
-            `🐍 Wolves: Wolves ≥ Villagers tirada\n` +
-            `🔥 Villagers: Dhammaan wolves la saaro`
+            `🔪 Mafia: Mafia ≥ Shacab tirada\n` +
+            `👥 Shacab: Dhammaan Mafia la saaro`
         )
-        .setFooter({ text: 'Garaad Bot • Werewolf • ?ww bilow' });
+        .setFooter({ text: 'Garaad Bot • Mafia • ?mafia bilow' });
 }
 
 module.exports = async function helpCommand(message) {

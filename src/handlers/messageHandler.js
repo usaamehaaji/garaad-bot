@@ -58,7 +58,7 @@ const qcCmd       = require('../../data/commands/qc');
 const { bankCreateCmd, bankPasswordCmd, bankViewCmd, bankDirectoryCmd, depositAnyCmd, withdrawAnyCmd, allBanksCmd, jbCmd } = require('../../data/commands/economy/personalBank');
 const { createPublicBankCmd, listPublicBanksCmd, topBanksCmd, bankFundCmd, bankDepositCmd, bankWithdrawCmd, bankInfoCmd, bankOwnerCmd, bankHistoryCmd, bankCloseCmd } = require('../../data/commands/economy/publicBank');
 const { getDisTube } = require('../music/disTubeSetup');
-const werewolfCmd     = require('../../data/commands/werewolf');
+const mafiaCmd        = require('../../data/commands/werewolf');
 const { joinCmd, leaveCmd: vcLeaveCmd } = require('../../data/commands/join');
 const adminBankCmd    = require('../../data/commands/admin/adminBank');
 
@@ -458,18 +458,16 @@ module.exports = function setupMessageHandler(client) {
             case 'vleave':
                 return vcLeaveCmd(message);
 
-            // ── Werewolf ──
-            case 'werewolf':
-            case 'ww':
-            case 'wwolf': {
+            // ── Mafia ──
+            case 'mafia': {
                 if (args[0] === 'stop' && isAdmin(userId)) {
                     const { games: wwG, cancelGame } = require('../games/werewolf');
                     const g = wwG.get(message.guild.id);
                     if (!g) return message.reply('⚠️ Ciyaar ma jirto.');
                     cancelGame(message.guild.id);
-                    return message.reply('🛑 Werewolf game la joojiyay.');
+                    return message.reply('🛑 Mafia game la joojiyay.');
                 }
-                return werewolfCmd(message);
+                return mafiaCmd(message);
             }
         }
     });
