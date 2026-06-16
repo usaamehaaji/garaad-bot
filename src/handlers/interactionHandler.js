@@ -4332,6 +4332,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (game.players.size >= MAX_PLAYERS) return interaction.reply({ content: `⚠️ Lobby buuxday (max ${MAX_PLAYERS}).`, flags: MessageFlags.Ephemeral });
                 if (game.players.has(interaction.user.id)) return interaction.reply({ content: '⚠️ Horay ayaad ku jirtay.', flags: MessageFlags.Ephemeral });
                 game.players.set(interaction.user.id, null);
+                game.lobbyMsg = interaction.message;
                 const embed = await lobbyEmbed(game, interaction.client);
                 const row   = lobbyRow(hostId, game.players.size >= MIN_PLAYERS);
                 await interaction.update({ embeds: [embed], components: [row] });
@@ -4345,6 +4346,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
                 if (interaction.user.id === hostId) return interaction.reply({ content: '⚠️ Host ma bixin karo. Jooji haddaad rabto.', flags: MessageFlags.Ephemeral });
                 game.players.delete(interaction.user.id);
+                game.lobbyMsg = interaction.message;
                 const embed = await lobbyEmbed(game, interaction.client);
                 const row   = lobbyRow(hostId, game.players.size >= MIN_PLAYERS);
                 await interaction.update({ embeds: [embed], components: [row] });
@@ -4369,6 +4371,7 @@ module.exports = function setupInteractionHandler(client) {
                 if (interaction.user.id !== hostId) return interaction.reply({ content: '⚠️ Host kaliya ayaa joojin kara.', flags: MessageFlags.Ephemeral });
                 const game = [...wwGames.values()].find(g => g.hostId === hostId && g.phase === 'lobby');
                 if (!game) return interaction.reply({ content: '⚠️ Lobby lama helin.', flags: MessageFlags.Ephemeral });
+                clearTimeout(game.lobbyTimer);
                 wwGames.delete(game.guildId);
                 await interaction.update({ embeds: [{ title: '🔪 Mafia — La joojiyay', description: 'Ciyaarta waa la joojiyay.' }], components: [] });
                 return;

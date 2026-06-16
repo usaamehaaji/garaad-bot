@@ -2,7 +2,8 @@
 // AMARKA: ?mafia
 // =====================================================================
 
-const { games, lobbyEmbed, lobbyRow } = require('../../src/games/werewolf');
+const { EmbedBuilder } = require('discord.js');
+const { games, lobbyEmbed, lobbyRow, startGame, MIN_PLAYERS, LOBBY_SECONDS } = require('../../src/games/werewolf');
 
 module.exports = async function mafiaCmd(message) {
     const guildId = message.guild.id;
@@ -21,8 +22,10 @@ module.exports = async function mafiaCmd(message) {
         votes:        new Map(),
         nightActions: null,
         nightTimer:   null,
+        lobbyTimer:   null,
         dayTimer:     null,
         voteTimer:    null,
+        lobbyMsg:     null,
         voteMsg:      null,
     };
 
@@ -31,5 +34,34 @@ module.exports = async function mafiaCmd(message) {
     const embed = await lobbyEmbed(game, message.client);
     const row   = lobbyRow(message.author.id, false);
 
-    return message.reply({ embeds: [embed], components: [row] });
+    const lobbyMsg = await message.reply({ embeds: [embed], components: [row] });
+    game.lobbyMsg = lobbyMsg;
+
+    game.lobbyTimer = setTimeout(async () => {
+        const current = games.get(guildId);
+        if (!current || current.phase !== 'lobby') return;
+
+        if (current.players.size < MIN_PLAYERS) {
+            games.delete(guildId);
+            await lobbyMsg.edit({
+                embeds: [new EmbedBuilder()
+                    .setColor('#7f8c8d')
+                    .setTitle('🔪 Mafia — Lobby waa la xidhay')
+                    .setDescription(`Ugu yaraan **${MIN_PLAYERS} qof** ayaa loo baahnaa. Ciyaarta lama bilaabin.`)],
+                components: [],
+            }).catch(() => {});
+            return;
+        }
+
+        await lobbyMsg.edit({
+            embeds: [new EmbedBuilder()
+                .setColor('#c0392b')
+                .setTitle('🔪 Mafia — Bilaabanaya...')
+                .setDescription('Lobby-ga waa xirmay. Doorarka DM-ka ayaa loo dirayaa. Sugso!')],
+            components: [],
+        }).catch(() => {});
+        await startGame(current, message.client);
+    }, LOBBY_SECONDS * 1000);
+
+    return lobbyMsg;
 };

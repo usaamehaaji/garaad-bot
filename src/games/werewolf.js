@@ -10,6 +10,7 @@ const MIN_PLAYERS = 5;
 const MAX_PLAYERS = 100;
 const PLAYERS_PER_MAFIA = 5;
 const TARGETS_PER_PAGE = 20;
+const LOBBY_SECONDS = 60;
 const NIGHT_SECONDS = 60;
 const DAY_SECONDS = 45;
 const VOTE_SECONDS = 60;
@@ -128,6 +129,7 @@ async function lobbyEmbed(game, client) {
             `**Ciyaaryahanada (${game.players.size}/${MAX_PLAYERS}):**\n` +
             `${names.join('\n') || '_Cidna ma jirto_'}${more}\n\n` +
             `Min: **${MIN_PLAYERS} qof**\n` +
+            `⏳ Lobby wuxuu xirmayaa **${LOBBY_SECONDS} seconds** kadib.\n` +
             `Killer Mafia: **1 qof 5 ciyaaryahan kasta** (5=1, 10=2, 15=3).`
         );
 }
@@ -144,6 +146,7 @@ function lobbyRow(hostId, canStart) {
 // ── Game start ────────────────────────────────────────────────────────
 
 async function startGame(game, client) {
+    clearTimeout(game.lobbyTimer);
     const playerIds = [...game.players.keys()];
     const roles = assignRoles(playerIds.length);
     const mafiaIds = [];
@@ -369,6 +372,7 @@ async function resolveVote(game, client) {
 // ── End ───────────────────────────────────────────────────────────────
 
 async function endGame(game, client, winner) {
+    clearTimeout(game.lobbyTimer);
     clearTimeout(game.nightTimer);
     clearTimeout(game.dayTimer);
     clearTimeout(game.voteTimer);
@@ -399,6 +403,7 @@ async function endGame(game, client, winner) {
 function cancelGame(guildId) {
     const game = games.get(guildId);
     if (!game) return;
+    clearTimeout(game.lobbyTimer);
     clearTimeout(game.nightTimer);
     clearTimeout(game.dayTimer);
     clearTimeout(game.voteTimer);
@@ -422,4 +427,5 @@ module.exports = {
     isMafia,
     MIN_PLAYERS,
     MAX_PLAYERS,
+    LOBBY_SECONDS,
 };
