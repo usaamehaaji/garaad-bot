@@ -61,6 +61,7 @@ const { getDisTube } = require('../music/disTubeSetup');
 const mafiaCmd        = require('../../data/commands/werewolf');
 const { joinCmd, leaveCmd: vcLeaveCmd } = require('../../data/commands/join');
 const adminBankCmd    = require('../../data/commands/admin/adminBank');
+const saversCmd       = require('../../data/commands/savers');
 
 
 let _music = null;
@@ -364,6 +365,15 @@ module.exports = function setupMessageHandler(client) {
                     return message.reply('⛔ **Adigu admin maaha.**');
                 }
                 return broadcast(message, args);
+            }
+
+            case 'savers':
+            case 'servers':
+            case 'serverlist': {
+                if (!isAdmin(userId)) {
+                    return message.reply('⛔ Admin kaliya ayaa arki kara servers-ka bot-ku ku jiro.');
+                }
+                return saversCmd(message);
             }
 
             // ── Tartan (Tournament) ──

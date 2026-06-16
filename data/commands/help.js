@@ -66,6 +66,7 @@ function buildEduEmbed(userId) {
 
 
             `**💬 Kale**\n` +
+            `**\`${PREFIX}savers\`** — ⚙️ Admin: servers-ka bot-ku ku jiro\n` +
             `**\`${PREFIX}cilada [fariin]\`** — Cilad soo sheeg\n` +
             `**\`${PREFIX}champion\`** — Champion-ka eeg`
         )
