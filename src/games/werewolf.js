@@ -338,11 +338,28 @@ async function resolveVote(game, client) {
     const tally = new Map();
     for (const targetId of game.votes.values()) tally.set(targetId, (tally.get(targetId) || 0) + 1);
 
+    const alive = alivePlayers(game);
+    const isFinalRound = alive.length <= 3;
+
     let desc = '🤷 Cidna ma codeyn. Wareeg kale ayaa bilaabanaya.';
     if (tally.size) {
         const sorted = [...tally.entries()].sort((a, b) => b[1] - a[1]);
         if (sorted.length > 1 && sorted[0][1] === sorted[1][1]) {
             desc = '🤝 Codadku way isku dhaceen. Qof lama saarin.';
+            if (isFinalRound) {
+                const mafiaCount = alive.filter(([, player]) => isMafia(player.role)).length;
+                const citizenCount = alive.length - mafiaCount;
+                const winner = mafiaCount >= citizenCount ? 'mafia' : 'citizens';
+
+                desc += `
+
+⚖️ Maadaama ay tahay codeynta ugu dambeysa, guuleystaha waxa uu noqonayaa **${winner === 'mafia' ? 'Mafia' : 'Shacab'}**.`;
+                await game.textChannel.send({ embeds: [new EmbedBuilder()
+                    .setColor('#9b59b6')
+                    .setTitle('📊 Natiijada Codaynta')
+                    .setDescription(desc)]});
+                return endGame(game, client, winner);
+            }
         } else {
             const eliminated = sorted[0][0];
             const player = game.players.get(eliminated);
@@ -354,6 +371,15 @@ async function resolveVote(game, client) {
                 const user = await client.users.fetch(eliminated);
                 await user.send(`🪓 Codayn ayaa lagugu saaray. Waxaad ahayd ${ROLES[player.role].name}.`).catch(() => {});
             } catch {}
+
+            const result = checkWin(game);
+            if (result) {
+                await game.textChannel.send({ embeds: [new EmbedBuilder()
+                    .setColor('#9b59b6')
+                    .setTitle('📊 Natiijada Codaynta')
+                    .setDescription(desc)]});
+                return endGame(game, client, result);
+            }
         }
     }
 
