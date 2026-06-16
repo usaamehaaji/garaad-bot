@@ -104,10 +104,9 @@ module.exports = async function profileCommand(message) {
     const desc =
         `# 👤 ${displayName}${titlePart}\n` +
         `\n` +
-        `🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
+        `${tier.emoji} **${tier.name} Tier**  •  🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
         `\`${progressBar(levelPct)}\` ${levelPct}%  *(${currentLevelIq}/${LEVEL_STEP} IQ → Level ${level + 1}, ${nextLevelNeed} IQ hadhay)*\n` +
-        `${tier.emoji} **${tier.name} Tier**\n` +
-        `\`${progressBar(pct)}\` ${pct}%` + (needed > 0 ? `  *(${needed} IQ → tier-ka xiga)*` : ' *(MAX TIER)*') + `\n` +
+        (needed > 0 ? `_${needed} IQ → tier-ka xiga_\n` : `_MAX TIER_\n`) +
         `\n` +
         `🏆 **Rank:** #${rank ?? '—'} / ${total}\n` +
         `💰 **BTC:** ₿${(econ.btc || 0).toLocaleString()}\n` +
