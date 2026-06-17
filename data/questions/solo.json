@@ -2100,46 +2100,6 @@
     "correct": "Dhammaadka Ramadan"
   },
   {
-    "question": "Qabuuraha (Burial) Soomaalida dhaqameedka ah waxaa lagu xusaa?",
-    "options": [
-      "Qodob",
-      "Siday Islaamku amar ku siiye",
-      "Guri dhis",
-      "Xaflad"
-    ],
-    "correct": "Siday Islaamku amar ku siiye"
-  },
-  {
-    "question": "Xaalada carruurta Soomaaliyeed ee waxbarashada waxaa kobciyo?",
-    "options": [
-      "Dugsiga rasmiga ah",
-      "Dugsiyada Islaamiga (Dugsi Quraan)",
-      "Guri",
-      "Cidna"
-    ],
-    "correct": "Dugsiyada Islaamiga (Dugsi Quraan)"
-  },
-  {
-    "question": "Xilliga ugu muhimsan ee ganacsiga Soomaalida waa?",
-    "options": [
-      "Janaayo",
-      "Ciidaha",
-      "Ramadaan",
-      "Xagaa"
-    ],
-    "correct": "Ciidaha"
-  },
-  {
-    "question": "Soomaalida xilliga Ramadaan waxay u badan yihiin inay cuntada siiyaan?",
-    "options": [
-      "Masaakiinta",
-      "Dariska",
-      "Saaxiibka",
-      "Naftooda"
-    ],
-    "correct": "Masaakiinta"
-  },
-  {
     "question": "Magaaladii Constantinople ee caasimadda u ahayd Booqortooyadii Bizantium, magacay u bedeshay Khilafadii Cusmaaniyiintu markay qabsadeen?",
     "options": [
       "Ankara",
@@ -2148,16 +2108,6 @@
       "Izmir"
     ],
     "correct": "Istanbul (Islaambool)"
-  },
-  {
-    "question": "Kumaa ahaa geesigii Soomaaliyeed ee hoggaaminayay dhalinyaradii u halgantay xorriyadda dalka ee SYL sannadkii 1943?",
-    "options": [
-      "Cabdullaahi Ciise Maxamud",
-      "Aadan Cabdulle Cusmaan",
-      "Yaasiin Xaji Cusmaan",
-      "Maxamed Cabdille Xasan"
-    ],
-    "correct": "Yaasiin Xaji Cusmaan"
   },
   {
     "question": "Magaaladii Constantinople ee caasimadda u ahayd Bizantium, magacay u bedeshay Khilafadii Cusmaaniyiintu markay qabsadeen?",
