@@ -1,5 +1,5 @@
 [
-{
+  {
     "question": "Caasimadda Somalia waa?",
     "options": [
       "Berbera",
@@ -9,7 +9,7 @@
     ],
     "correct": "Mogadishu"
   },
-{
+  {
     "question": "Soomaaliya waxay ka mid noqotay UN sanadkee?",
     "options": [
       "1958",
@@ -19,7 +19,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Madaxweynaha Soomaaliya ee 1st waa?",
     "options": [
       "Cabdirashiid Sharmaarke",
@@ -29,7 +29,7 @@
     ],
     "correct": "Aadan Cadde"
   },
-{
+  {
     "question": "Doorashada madaxweynaha 1967 waxaa guuleystay?",
     "options": [
       "Aadan Cadde",
@@ -39,7 +39,7 @@
     ],
     "correct": "Cabdirashiid Sharmaarke"
   },
-{
+  {
     "question": "Ciidanka Soomaaliya 1977-1978 waxay la dagaallameen?",
     "options": [
       "Kenya",
@@ -49,7 +49,7 @@
     ],
     "correct": "Ethiopia"
   },
-{
+  {
     "question": "Heshiiskii Carta (2000) wuxuu dhacay waddankee?",
     "options": [
       "Kenya",
@@ -59,7 +59,7 @@
     ],
     "correct": "Djibouti"
   },
-{
+  {
     "question": "Magaalada Gaalkacayo waxay ku taallaa gobolka?",
     "options": [
       "Mudug",
@@ -69,7 +69,7 @@
     ],
     "correct": "Mudug"
   },
-{
+  {
     "question": "Gobolka ugu weyn Soomaaliya waa?",
     "options": [
       "Bari",
@@ -79,7 +79,7 @@
     ],
     "correct": "Mudug"
   },
-{
+  {
     "question": "Dekedda ugu weyn Soomaaliya waa?",
     "options": [
       "Kismaayo",
@@ -89,7 +89,7 @@
     ],
     "correct": "Muqdisho"
   },
-{
+  {
     "question": "Golaha Sharciyeynta Soomaaliya waxaa loo magacaabaa?",
     "options": [
       "Senate",
@@ -99,7 +99,7 @@
     ],
     "correct": "Majliska Shacabka"
   },
-{
+  {
     "question": "Sanadkee ayaa Soomaaliya la mid-gurtay (Wirshadaha iyo Koonfurta)?",
     "options": [
       "1956",
@@ -109,7 +109,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Nairobi Heshiiskii 2004 wuxuu aasaasay?",
     "options": [
       "TFG",
@@ -119,7 +119,7 @@
     ],
     "correct": "TFG"
   },
-{
+  {
     "question": "Magaalada ugu weyn Somaliland waa?",
     "options": [
       "Berbera",
@@ -129,7 +129,7 @@
     ],
     "correct": "Hargeisa"
   },
-{
+  {
     "question": "Puntland waxaa la aasaasay sanadkee?",
     "options": [
       "1996",
@@ -139,7 +139,7 @@
     ],
     "correct": "1998"
   },
-{
+  {
     "question": "Sanadkee ayaa Soomaaliya loo xornimadaystay Talyaaniga (Koonfurta)?",
     "options": [
       "1958",
@@ -149,7 +149,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Soomaalidii xorriyaddeeda qaadday Ingiriiska (Somaliland) waxaa dhacay sanadkee?",
     "options": [
       "1958",
@@ -159,7 +159,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Caasimadda Puntland waa?",
     "options": [
       "Gaalkacayo",
@@ -169,7 +169,7 @@
     ],
     "correct": "Boosaaso"
   },
-{
+  {
     "question": "Dawladda Federaalka Soomaaliya (FGS) waxaa la aasaasay sanadkee?",
     "options": [
       "2010",
@@ -179,7 +179,7 @@
     ],
     "correct": "2012"
   },
-{
+  {
     "question": "Magaalada Kismaayo waxay ku taallaa gobolka?",
     "options": [
       "Jubba Dhexe",
@@ -189,7 +189,7 @@
     ],
     "correct": "Jubba Hoose"
   },
-{
+  {
     "question": "Webiga ugu dheer Soomaaliya waa?",
     "options": [
       "Shabeelle",
@@ -199,7 +199,7 @@
     ],
     "correct": "Jubba"
   },
-{
+  {
     "question": "Badda Soomaaliya ee waqooyiga waxaa loo yaqaan?",
     "options": [
       "Badda Cas",
@@ -209,7 +209,7 @@
     ],
     "correct": "Gacanka Cadmeed"
   },
-{
+  {
     "question": "Warqadda Soomaaliya ee ugu horeysay waa?",
     "options": [
       "Xiddigta Oktoobar",
@@ -219,7 +219,7 @@
     ],
     "correct": "Xiddigta Oktoobar"
   },
-{
+  {
     "question": "Magaalada Berbera waxay ku taallaa gobolka?",
     "options": [
       "Woqooyi Galbeed",
@@ -229,7 +229,7 @@
     ],
     "correct": "Woqooyi Galbeed"
   },
-{
+  {
     "question": "Sanadkee ay Soomaaliya xukumaadka ka xorowday?",
     "options": [
       "1956",
@@ -239,7 +239,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Geeraar waa nooc gabay Soomaali ah oo?",
     "options": [
       "Jacaylka",
@@ -249,7 +249,7 @@
     ],
     "correct": "Geesinnimada"
   },
-{
+  {
     "question": "Heesta Soomaali Hanoolaato waxaa tiryay?",
     "options": [
       "Hadraawi",
@@ -259,7 +259,7 @@
     ],
     "correct": "Cali Sugulle"
   },
-{
+  {
     "question": "Suugaanta Soomaalida nooca Buraanbur waxaa gabayadiisa tiriya?",
     "options": [
       "Ragga",
@@ -269,7 +269,7 @@
     ],
     "correct": "Dumarka"
   },
-{
+  {
     "question": "Doorka Xeer ee bulshada Soomaalida waa?",
     "options": [
       "Diinta",
@@ -279,7 +279,7 @@
     ],
     "correct": "Sharciga hiddaha"
   },
-{
+  {
     "question": "Luuqadda Af-Soomaali waxaa loo qoray alifbeeto rasmi sanadkee?",
     "options": [
       "1962",
@@ -289,7 +289,7 @@
     ],
     "correct": "1972"
   },
-{
+  {
     "question": "Aqalka Soomaalida qaybta muhiimka ah ee la dhisaa waa?",
     "options": [
       "Alwaax",
@@ -299,7 +299,7 @@
     ],
     "correct": "Dhajis iyo cawo"
   },
-{
+  {
     "question": "Caanaha Soomaalida ee Suusa waa?",
     "options": [
       "Caano dhanaan",
@@ -309,7 +309,7 @@
     ],
     "correct": "Caano dhanaan"
   },
-{
+  {
     "question": "Cuntada Soomaalida ee aad looga helaa Ciidda waa?",
     "options": [
       "Cambuulo",
@@ -319,7 +319,7 @@
     ],
     "correct": "Hilib geela"
   },
-{
+  {
     "question": "Maahmaahda Soomaali: Aqoon la'aani waa iftiin la'aan, macneheedu waa?",
     "options": [
       "Lacagtu waa xoogga",
@@ -329,7 +329,7 @@
     ],
     "correct": "Waxbarashadu waa nuurka nolosha"
   },
-{
+  {
     "question": "Ciyaarta Soomaalida ee Shax waa?",
     "options": [
       "Ciyaar xiddig",
@@ -339,7 +339,7 @@
     ],
     "correct": "Ciyaar goobta"
   },
-{
+  {
     "question": "Qofka Xeer-beegta ah bulshada Soomaalida waxa uu qabtaa shaqada?",
     "options": [
       "Xukumid",
@@ -349,7 +349,7 @@
     ],
     "correct": "Dhexdhexaadinta khilaafaadka"
   },
-{
+  {
     "question": "Xilliga Hagaa waa goorma sanadka Soomaalida?",
     "options": [
       "Janaayo-Febraayo",
@@ -359,7 +359,7 @@
     ],
     "correct": "Juun-Setembar"
   },
-{
+  {
     "question": "Macawiista (Soomaali wraparound) dhaqanka Soomaalida waxaa xidhata?",
     "options": [
       "Ragga kaliya",
@@ -369,7 +369,7 @@
     ],
     "correct": "Labada jinsiba"
   },
-{
+  {
     "question": "Ciyaarta Soomaalida ee Xiisow waxaa ciyaara?",
     "options": [
       "Ragga kaliya",
@@ -379,7 +379,7 @@
     ],
     "correct": "Carruurta"
   },
-{
+  {
     "question": "Heesta Soomaalida ee caan ka ah jacaylka waxaa tiray Hadraawi?",
     "options": [
       "Ubax",
@@ -389,7 +389,7 @@
     ],
     "correct": "Hoobaale"
   },
-{
+  {
     "question": "Guri-guurka (nomadic lifestyle) Soomaalida ay hore u guri-guuraan waxaa sababay?",
     "options": [
       "Biyaha iyo daaqsinta",
@@ -399,7 +399,7 @@
     ],
     "correct": "Biyaha iyo daaqsinta"
   },
-{
+  {
     "question": "Qabiilka Soomaalida uu ka kooban yahay qaybood oo muhiim ah waa imisa?",
     "options": [
       "2",
@@ -409,7 +409,7 @@
     ],
     "correct": "4"
   },
-{
+  {
     "question": "Caasimadda Bangladesh waa?",
     "options": [
       "Chittagong",
@@ -419,7 +419,7 @@
     ],
     "correct": "Dhaka"
   },
-{
+  {
     "question": "Caasimadda Somalia (dhulka) waa?",
     "options": [
       "Berbera",
@@ -429,7 +429,7 @@
     ],
     "correct": "Mogadishu"
   },
-{
+  {
     "question": "Caasimadda Somaliland (gaar ahaan) waa?",
     "options": [
       "Berbera",
@@ -439,7 +439,7 @@
     ],
     "correct": "Hargeisa"
   },
-{
+  {
     "question": "Heesta Soomaalida ee qadiimiga ah ee caanka ah ee geesinnimada ku saabsan waa?",
     "options": [
       "Geeraar",
@@ -449,7 +449,7 @@
     ],
     "correct": "Geeraar"
   },
-{
+  {
     "question": "Xasan Sheekh Muumin wuxuu caan ka ahaa?",
     "options": [
       "Heesaha",
@@ -459,7 +459,7 @@
     ],
     "correct": "Masraxiyada Soomaalida"
   },
-{
+  {
     "question": "Maamulaha Radiyo Muqdisho ee hore ee suugaanta caanka ah waa?",
     "options": [
       "Axmed Naaji",
@@ -469,7 +469,7 @@
     ],
     "correct": "Axmed Naaji"
   },
-{
+  {
     "question": "Kubadda cagta Soomaaliya ee caan ah ee league-ka waa?",
     "options": [
       "SFL",
@@ -479,7 +479,7 @@
     ],
     "correct": "SFL"
   },
-{
+  {
     "question": "Ciyaaryaha kubadda cagta Soomaalida ee ugu caansan adduunka waa?",
     "options": [
       "Abubakar Abdi",
@@ -489,7 +489,7 @@
     ],
     "correct": "Abdisamad Sheikh"
   },
-{
+  {
     "question": "Af-Soomaali qoraalkiisu wuxuu la mid yahay?",
     "options": [
       "Carabi",
@@ -499,7 +499,7 @@
     ],
     "correct": "Latn oo xuluf cusub leh"
   },
-{
+  {
     "question": "Af-Soomaali waxaa ku hadla imisa qof adduunka (approximate)?",
     "options": [
       "5 milyan",
@@ -509,7 +509,7 @@
     ],
     "correct": "20 milyan"
   },
-{
+  {
     "question": "Ereyga Af-Soomaali ee Ingiriisiga ah 'Water' waa?",
     "options": [
       "Biyo",
@@ -519,7 +519,7 @@
     ],
     "correct": "Biyo"
   },
-{
+  {
     "question": "Ereyga Af-Soomaali ee 'Peace' ahow waa?",
     "options": [
       "Xoog",
@@ -529,7 +529,7 @@
     ],
     "correct": "Nabad"
   },
-{
+  {
     "question": "Magac Soomaalidu ku yidhaahdo 'Knowledge' waa?",
     "options": [
       "Aqoon",
@@ -539,7 +539,7 @@
     ],
     "correct": "Aqoon"
   },
-{
+  {
     "question": "Ereyga Soomaalida ee 'Freedom' ahow waa?",
     "options": [
       "Dhibaato",
@@ -549,7 +549,7 @@
     ],
     "correct": "Xorriyad"
   },
-{
+  {
     "question": "Af-Soomaaliga waxaa loo qoray iskuul ay ku bartaan carruurtu sanadkee?",
     "options": [
       "1970",
@@ -559,7 +559,7 @@
     ],
     "correct": "1972"
   },
-{
+  {
     "question": "Luuqadda Soomaalida waxay la xiriirtaa reer luuqadaha?",
     "options": [
       "Afro-Asiatic (Cushitic)",
@@ -569,7 +569,7 @@
     ],
     "correct": "Afro-Asiatic (Cushitic)"
   },
-{
+  {
     "question": "Ereyga Af-Soomaali ee macnaheedu yahay 'Brother' waa?",
     "options": [
       "Walaashood",
@@ -579,7 +579,7 @@
     ],
     "correct": "Walaalaha"
   },
-{
+  {
     "question": "Xarfaha Af-Soomaaliga waa imisa?",
     "options": [
       "18",
@@ -589,7 +589,7 @@
     ],
     "correct": "21"
   },
-{
+  {
     "question": "Xeerka Soomaalida ee 'Mag' waxa uu la xiiriiraa?",
     "options": [
       "Ganacsiga",
@@ -599,7 +599,7 @@
     ],
     "correct": "Diyaarkii la bixiyo cid la diilay"
   },
-{
+  {
     "question": "Talo-guud ee Soomaalida ee Beel-xeer waxay ka hadlaysaa?",
     "options": [
       "Ganacsiga",
@@ -609,7 +609,7 @@
     ],
     "correct": "Sharciga qabiilka"
   },
-{
+  {
     "question": "Garoonkii kubadda ee Muqdisho ee caan ahaa ee taariikh ahayd waa?",
     "options": [
       "Horseed Stadium",
@@ -619,7 +619,7 @@
     ],
     "correct": "General Keynan Stadium"
   },
-{
+  {
     "question": "Farshaxanka (art) Soomaalida dhaqanka ah ugu caansan waa?",
     "options": [
       "Rinjiga",
@@ -629,7 +629,7 @@
     ],
     "correct": "Dharka iyo xulufaha daruuriga ah"
   },
-{
+  {
     "question": "Guri-guuristii Soomaalida waxay isticmaali jireen?",
     "options": [
       "Gaadhi",
@@ -639,7 +639,7 @@
     ],
     "correct": "Geel iyo Fardood"
   },
-{
+  {
     "question": "Magaca Muqdisho (Mogadishu) asalkiisu waxaa loo sheegaa inuu ka yimid?",
     "options": [
       "Af-Soomaali",
@@ -649,7 +649,7 @@
     ],
     "correct": "Af-Faaris"
   },
-{
+  {
     "question": "Caasimadda Soomaaliya ee hore (xilligii Talyaaniga) waxaa ahayd?",
     "options": [
       "Kismaayo",
@@ -659,7 +659,7 @@
     ],
     "correct": "Muqdisho"
   },
-{
+  {
     "question": "Libaax Soomaali (Somali Lion) waxaa gobolka?",
     "options": [
       "Jubbooyinka",
@@ -669,7 +669,7 @@
     ],
     "correct": "Jubbooyinka"
   },
-{
+  {
     "question": "Hooyada Soomaalida waxay noqotay sanadkee (Hooyo State)?",
     "options": [
       "1950",
@@ -679,7 +679,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Wan la magac-yadaa Soomaalida 1 ee dhalashada?",
     "options": [
       "Sharafaddiis",
@@ -689,7 +689,7 @@
     ],
     "correct": "Dhalasho-maalmeed"
   },
-{
+  {
     "question": "Wan la magac-yadaa Soomaalida ee guurka laga xuso?",
     "options": [
       "Aroos",
@@ -699,7 +699,7 @@
     ],
     "correct": "Aroos"
   },
-{
+  {
     "question": "Dhaqanka Soomaalida ee 'Qurba-joog' waxay tilmaamaysaa?",
     "options": [
       "Ganacsade",
@@ -709,7 +709,7 @@
     ],
     "correct": "Qof waddankiisa ka maqan"
   },
-{
+  {
     "question": "Cuntada Soomaalida ee xilliga arooska badan la samaynaa waa?",
     "options": [
       "Muqmad",
@@ -719,7 +719,7 @@
     ],
     "correct": "Bariis iyo Hilib"
   },
-{
+  {
     "question": "Af-Soomaali ereyga 'Mahadsanid' macnaheeda waa?",
     "options": [
       "Maalin wanaagsan",
@@ -729,7 +729,7 @@
     ],
     "correct": "Mahad nabi"
   },
-{
+  {
     "question": "Eray Af-Soomaali 'Nabadgelyo' macnaheeda waa?",
     "options": [
       "Nabadgelyo",
@@ -739,7 +739,7 @@
     ],
     "correct": "Nabadgelyo"
   },
-{
+  {
     "question": "Soomaalida waxay caado u leeyihiin inay martida usoo jeediyaan?",
     "options": [
       "Biyo",
@@ -749,7 +749,7 @@
     ],
     "correct": "Shaah (tea)"
   },
-{
+  {
     "question": "Gabayga Soomaalida noocooda ugu weyn xaga dhererka waa?",
     "options": [
       "Geeraar",
@@ -759,7 +759,7 @@
     ],
     "correct": "Masafo"
   },
-{
+  {
     "question": "Maanso Soomaaliyeed ee Gabay-Cayaar waxay yihiin?",
     "options": [
       "Gabayada gaagaaban ee ciyaarta",
@@ -769,7 +769,7 @@
     ],
     "correct": "Gabayada gaagaaban ee ciyaarta"
   },
-{
+  {
     "question": "Doorka Abwaanku bulshada Soomaalida wuxuu ku hakaday?",
     "options": [
       "Ganacsiga",
@@ -779,7 +779,7 @@
     ],
     "correct": "Taariikhda iyo aragtida bulshada"
   },
-{
+  {
     "question": "Ciyaaraha masraxiga Soomaalida ee ugu horeeyay waxaa aasaasay?",
     "options": [
       "Hadraawi",
@@ -789,7 +789,7 @@
     ],
     "correct": "Xasan Sheekh Muumin"
   },
-{
+  {
     "question": "Soomaalida diiwaanka taariikhda waxay adeegsadeen inta badan?",
     "options": [
       "Qoraalo",
@@ -799,7 +799,7 @@
     ],
     "correct": "Afka iyo suugaanta afka ah"
   },
-{
+  {
     "question": "Gabayga Soomaalida Buraanbur waxaa lagu ciyaaraa?",
     "options": [
       "Munaasabadaha guud",
@@ -809,7 +809,7 @@
     ],
     "correct": "Aroosyada iyo munaasabadaha dumarka"
   },
-{
+  {
     "question": "Soomaalida ereyga 'Guuryo' macnaheedu waa?",
     "options": [
       "Guri",
@@ -819,7 +819,7 @@
     ],
     "correct": "Guriyo badan"
   },
-{
+  {
     "question": "Af-Soomaali ereyga 'Geel' macnaheeda Ingiriisiga waa?",
     "options": [
       "Horse",
@@ -829,7 +829,7 @@
     ],
     "correct": "Camel"
   },
-{
+  {
     "question": "Af-Soomaali 'Hilib' macnaheeda Ingiriisiga waa?",
     "options": [
       "Fish",
@@ -839,7 +839,7 @@
     ],
     "correct": "Meat"
   },
-{
+  {
     "question": "Maahmaahda Soomaalida: Nin baa ninkii u xishe oo aqoon u siiyey macnaheedu waa?",
     "options": [
       "Xasaasiyad",
@@ -849,7 +849,7 @@
     ],
     "correct": "Garasho iyo mahadnaq"
   },
-{
+  {
     "question": "Caado Soomaalid ee 'Beer-qabe' waxay tilmaamaysaa?",
     "options": [
       "Dhexdhexaadiye",
@@ -859,7 +859,7 @@
     ],
     "correct": "Qof beeraha tumaya"
   },
-{
+  {
     "question": "Guri-dhiska Soomaalida dhaqameedka 'Aqal' waxa uu u badan yahay?",
     "options": [
       "Joogto",
@@ -869,7 +869,7 @@
     ],
     "correct": "Guryo guri-guur ah"
   },
-{
+  {
     "question": "Luuqadda Af-Soomaali waxaa loo tixgeliyaa?",
     "options": [
       "Tonal language",
@@ -879,7 +879,7 @@
     ],
     "correct": "Non-tonal language"
   },
-{
+  {
     "question": "Soomaalida magacyada dumarka ee ugu badan waxaa ka mid ah?",
     "options": [
       "Faadumo",
@@ -889,7 +889,7 @@
     ],
     "correct": "Faadumo"
   },
-{
+  {
     "question": "Af-Soomaali ereyga 'Samatar' macnaheedu waa?",
     "options": [
       "Qof aad u nacayb",
@@ -899,7 +899,7 @@
     ],
     "correct": "Magac lab"
   },
-{
+  {
     "question": "Calanka Soomaaliya midabkiisu waa?",
     "options": [
       "Cas iyo cad",
@@ -909,7 +909,7 @@
     ],
     "correct": "Buluug iyo cadaan xiddig leh"
   },
-{
+  {
     "question": "Xiddigta calanka Soomaaliya tirsigeedu waa imisa?",
     "options": [
       "4",
@@ -919,7 +919,7 @@
     ],
     "correct": "5"
   },
-{
+  {
     "question": "Kooxda ciyaarta kubadda cagta Soomaaliya ee caalamiga ah magaceeda waa?",
     "options": [
       "Ducks",
@@ -929,7 +929,7 @@
     ],
     "correct": "Ocean Stars"
   },
-{
+  {
     "question": "Afka rasmiga ah ee Soomaaliya waa?",
     "options": [
       "Af-Carabi oo kaliya",
@@ -939,7 +939,7 @@
     ],
     "correct": "Af-Soomaali iyo Af-Carabi"
   },
-{
+  {
     "question": "Khutbadda Jum'ah Soomaaliya waxaa lagu qaadaa?",
     "options": [
       "Af-Ingiriis",
@@ -949,7 +949,7 @@
     ],
     "correct": "Af-Soomaali iyo Af-Carabi"
   },
-{
+  {
     "question": "Dirirka Soomaalida ee caadiga ah ee hiddaha waa?",
     "options": [
       "Boxing",
@@ -959,7 +959,7 @@
     ],
     "correct": "Gulays (Wrestling)"
   },
-{
+  {
     "question": "Deegaanka Soomaalida ugu badan geela leh waa?",
     "options": [
       "Mudug",
@@ -969,7 +969,7 @@
     ],
     "correct": "Mudug"
   },
-{
+  {
     "question": "Qabuuraha (Burial) Soomaalida dhaqameedka ah waxaa lagu xusaa?",
     "options": [
       "Qodob",
@@ -979,7 +979,7 @@
     ],
     "correct": "Siday Islaamku amar ku siiye"
   },
-{
+  {
     "question": "Magaca Soomaalida ee 'Duco' macnaheeda waa?",
     "options": [
       "Ducayn",
@@ -989,7 +989,7 @@
     ],
     "correct": "Baryo"
   },
-{
+  {
     "question": "Soomaalida maalin caabuqa dumarka waxaa la xusaa?",
     "options": [
       "Maarso 8",
@@ -999,7 +999,7 @@
     ],
     "correct": "Maarso 8"
   },
-{
+  {
     "question": "Wariyaha caanka ah ee Soomaalida ee taariikhda ah waa?",
     "options": [
       "Gacaliye",
@@ -1009,7 +1009,7 @@
     ],
     "correct": "Axmed Gurey (Ahmed Gran)"
   },
-{
+  {
     "question": "Soomaaliya waxay xaddidan tahay xagga woqooyi waa?",
     "options": [
       "Kenya",
@@ -1019,7 +1019,7 @@
     ],
     "correct": "Djibouti"
   },
-{
+  {
     "question": "Soomaaliya waxay xaddidan tahay xagga galbeed waa?",
     "options": [
       "Kenya",
@@ -1029,7 +1029,7 @@
     ],
     "correct": "Ethiopia"
   },
-{
+  {
     "question": "Soomaaliya waxay xaddidan tahay xagga koonfur-galbeed waa?",
     "options": [
       "Ethiopia",
@@ -1039,7 +1039,7 @@
     ],
     "correct": "Kenya"
   },
-{
+  {
     "question": "Soomaaliya badda u dhexeysa waxaa loo yaqaan?",
     "options": [
       "Badda Cas",
@@ -1049,7 +1049,7 @@
     ],
     "correct": "Gacanka Cadmeed"
   },
-{
+  {
     "question": "Dekedda Berbera waxay u muhimsan tahay?",
     "options": [
       "Soomaaliya oo kaliya",
@@ -1059,7 +1059,7 @@
     ],
     "correct": "Ethiopia ee loo isticmaalaa"
   },
-{
+  {
     "question": "Magaalada Muqdisho waxay ku taallaa xagga?",
     "options": [
       "Woqooyi",
@@ -1069,7 +1069,7 @@
     ],
     "correct": "Koonfur"
   },
-{
+  {
     "question": "Gobolada Soomaaliya ee maamulka federaalka waa imisa?",
     "options": [
       "16",
@@ -1079,7 +1079,7 @@
     ],
     "correct": "18"
   },
-{
+  {
     "question": "Dastuurka Soomaaliya ee hadda jira waxaa la aqbalay sanadkee?",
     "options": [
       "2010",
@@ -1089,7 +1089,7 @@
     ],
     "correct": "2012"
   },
-{
+  {
     "question": "Madaxweynaha Soomaaliya xilkiisu waxa uu le yahay imisa sano?",
     "options": [
       "3",
@@ -1099,7 +1099,7 @@
     ],
     "correct": "4"
   },
-{
+  {
     "question": "Soomaaliya waxaa loo qaybiyaa imisa xukuumadood oo federaal ah?",
     "options": [
       "4",
@@ -1109,7 +1109,7 @@
     ],
     "correct": "5"
   },
-{
+  {
     "question": "Sinimada Soomaalida ee caanka ah ee hore waa?",
     "options": [
       "Somali Cinema",
@@ -1119,7 +1119,7 @@
     ],
     "correct": "Daljir"
   },
-{
+  {
     "question": "Ganacsiga Soomaalida ee ugu caansan adduunka waa?",
     "options": [
       "Shidaalka",
@@ -1129,7 +1129,7 @@
     ],
     "correct": "Hawilaadda (Money Transfer)"
   },
-{
+  {
     "question": "Soomaalida diaspora ee ugu badan waxay ku nool yihiin?",
     "options": [
       "Kenya",
@@ -1139,7 +1139,7 @@
     ],
     "correct": "USA"
   },
-{
+  {
     "question": "Xaalada carruurta Soomaaliyeed ee waxbarashada waxaa kobciyo?",
     "options": [
       "Dugsiga rasmiga ah",
@@ -1149,7 +1149,7 @@
     ],
     "correct": "Dugsiyada Islaamiga (Dugsi Quraan)"
   },
-{
+  {
     "question": "Soomaalida ereyga 'Nabad iyo Caano' macnaheeda waa?",
     "options": [
       "Guul iyo dakhli",
@@ -1159,7 +1159,7 @@
     ],
     "correct": "Salaan dhaqameed"
   },
-{
+  {
     "question": "Xilliga ugu muhimsan ee ganacsiga Soomaalida waa?",
     "options": [
       "Janaayo",
@@ -1169,7 +1169,7 @@
     ],
     "correct": "Ciidaha"
   },
-{
+  {
     "question": "Qaaraan Soomaalida ee dhaqameedka waxa uu ka samaysan yahay?",
     "options": [
       "Bir",
@@ -1179,7 +1179,7 @@
     ],
     "correct": "Dhalo"
   },
-{
+  {
     "question": "Soomaalida xilliga Ramadaan waxay u badan yihiin inay cuntada siiyaan?",
     "options": [
       "Masaakiinta",
@@ -1189,7 +1189,7 @@
     ],
     "correct": "Masaakiinta"
   },
-{
+  {
     "question": "Duco Soomaalida ee caanka ah ee bilowga maalinta waa?",
     "options": [
       "Bismillah",
@@ -1199,7 +1199,7 @@
     ],
     "correct": "Bismillah"
   },
-{
+  {
     "question": "Soomaaliya remittances-keeda waxay ahayd imisa $ sanadkiiba?",
     "options": [
       "500 million",
@@ -1209,7 +1209,7 @@
     ],
     "correct": "2 billion"
   },
-{
+  {
     "question": "Lacagta la dirito AMISOM (AU Mission Somalia) waxaa ka bixiyay?",
     "options": [
       "UN",
@@ -1219,7 +1219,7 @@
     ],
     "correct": "EU iyo AU"
   },
-{
+  {
     "question": "AMISOM waxay noqotay ATMIS sanadkee?",
     "options": [
       "2020",
@@ -1229,7 +1229,7 @@
     ],
     "correct": "2022"
   },
-{
+  {
     "question": "Dawladnimadii Ajuuraan waxay xukumaydeen gobolka?",
     "options": [
       "Jubba",
@@ -1239,7 +1239,7 @@
     ],
     "correct": "Shabeelle iyo Bay"
   },
-{
+  {
     "question": "Dawladnimadii Geledi waxay xukumaydeen?",
     "options": [
       "Woqooyi",
@@ -1249,7 +1249,7 @@
     ],
     "correct": "Koonfurta (Jubba iyo Shabeelle)"
   },
-{
+  {
     "question": "Garbaha (Heart) Soomaalida ereyga loo yaqaan?",
     "options": [
       "Wadne",
@@ -1259,7 +1259,7 @@
     ],
     "correct": "Wadne"
   },
-{
+  {
     "question": "Af-Soomaali ereyga 'Xariir' macnaheeda waa?",
     "options": [
       "Dharka",
@@ -1269,7 +1269,7 @@
     ],
     "correct": "Silk (Harag silk ah)"
   },
-{
+  {
     "question": "Calanka Soomaalida waxaa ku yaal?",
     "options": [
       "Xiddig 6 oo dhan",
@@ -1279,7 +1279,7 @@
     ],
     "correct": "Xiddig 5"
   },
-{
+  {
     "question": "Dastuurka hore ee Soomaaliya ee 1960 waxaa la aqbalay?",
     "options": [
       "London",
@@ -1289,7 +1289,7 @@
     ],
     "correct": "Mogadishu"
   },
-{
+  {
     "question": "Arrimaha ugu horreysa ee UN ee Soomaaliya marka la eego waa?",
     "options": [
       "Beeraha",
@@ -1299,7 +1299,7 @@
     ],
     "correct": "Colaadda iyo gargaarka"
   },
-{
+  {
     "question": "Xeerka Aasaasiga ah ee Federaalka Soomaaliya (Provisional Constitution) waxaa la aqbalay sanadkee?",
     "options": [
       "2010",
@@ -1309,7 +1309,7 @@
     ],
     "correct": "2012"
   },
-{
+  {
     "question": "Madaxweynaha Soomaaliya ee 2022 doorashada wuxuu noqday?",
     "options": [
       "Ahmed Madobe",
@@ -1319,7 +1319,7 @@
     ],
     "correct": "Hassan Sheikh Mohamud"
   },
-{
+  {
     "question": "Baarlamaan Federaalka Soomaaliya wuxuu ka kooban yahay imisa golood?",
     "options": [
       "1",
@@ -1329,7 +1329,7 @@
     ],
     "correct": "2"
   },
-{
+  {
     "question": "Golaha Sare ee Baarlamanka Soomaaliya xubnaheeda waa imisa?",
     "options": [
       "50",
@@ -1339,7 +1339,7 @@
     ],
     "correct": "54"
   },
-{
+  {
     "question": "Golaha Shacabka ee Baarlamanka Soomaaliya xubnaheeda waa imisa?",
     "options": [
       "250",
@@ -1349,7 +1349,7 @@
     ],
     "correct": "275"
   },
-{
+  {
     "question": "Sannadkee ayay Khilafadii Cusmaaniyiintu si rasmi ah ula wareegtay maamulka magaalada Saylac ee dalka Soomaaliya?",
     "options": [
       "1453",
@@ -1359,7 +1359,7 @@
     ],
     "correct": "1548"
   },
-{
+  {
     "question": "Maxaa loo yaqaanaa aqalka hiddaha iyo dhaqanka Soomaalida ee laga sameeyo dhajiska iyo cawska la dhuftay?",
     "options": [
       "Aqalka Somal",
@@ -1369,7 +1369,7 @@
     ],
     "correct": "Aqalka Somal"
   },
-{
+  {
     "question": "Maahmaahda Soomaaliyeed ee dhiiri-gelisa midnimada waxay tirahdaa: 'Far keliya ______ ee ma dhaqdo'. Maxaa ka dhiman?",
     "options": [
       "Waxba ma qaaddo",
@@ -1379,7 +1379,7 @@
     ],
     "correct": "Weji ma dhaqdo"
   },
-{
+  {
     "question": "Maxaa loola jeedaa ereyga dhaqanka Soomaalida ee 'Guri-guri' marka laga hadlayo ciyaaraha carruurta?",
     "options": [
       "Ciyaar astaan u ah dhismaha guriga dhabta ah iyo barashada nolosha",
@@ -1389,7 +1389,7 @@
     ],
     "correct": "Ciyaar astaan u ah dhismaha guriga dhabta ah iyo barashada nolosha"
   },
-{
+  {
     "question": "Dhaqanka Soomaalida, marka Geela la rabo in biyo looga soo saaro ceel aad u dheer, maxaa la qaadaa si geelu si dhib yar ugu cabo?",
     "options": [
       "Heeso-ceel (Alloole)",
@@ -1399,7 +1399,7 @@
     ],
     "correct": "Heeso-ceel (Alloole)"
   },
-{
+  {
     "question": "Dhaqanka Soomaalida, maxaa loo yaqaanaa caanaha dhowrka maalmood laga sakhraamay ee dhanaan, ee weelka dhoobada ama dhiisha lagu keydiyo?",
     "options": [
       "Garoor",
@@ -1409,7 +1409,7 @@
     ],
     "correct": "Ciir"
   },
-{
+  {
     "question": "Sannadkee ayay si rasmi ah u dhalatay dawladdii ugu horraysay ee Soomaaliyeed ee xor ah, yeelatana calan iyo madaxbannaani sugan?",
     "options": [
       "1954",
@@ -1419,7 +1419,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Maxaa loo yaqaanaa hab-dhaqanka Soomaalida ee ah in qof dhibaataysan ama xoolo beelay lagu caawiyo xoolo nool si uu dib ugu soo kabto?",
     "options": [
       "Qaaran",
@@ -1429,7 +1429,7 @@
     ],
     "correct": "Qaaran"
   },
-{
+  {
     "question": "Maahmaahda Soomaaliyeed ee ka hadasha aqoonta waxay tirahdaa: 'Aqooon la'aan waa ______'. Maxaa ka dhiman?",
     "options": [
       "Iftiin la'aan",
@@ -1439,7 +1439,7 @@
     ],
     "correct": "Arag la'aan"
   },
-{
+  {
     "question": "Dhaqanka iyo hiddaha Soomaalida, maxaa loo yaqaanaa qalabka ka samaysan maqaarka ama hargaha ee raga reer miyiga ah ay ku qaataan biyaha marka ay safarka yihiin?",
     "options": [
       "Dhiil",
@@ -1449,7 +1449,7 @@
     ],
     "correct": "Sibraar"
   },
-{
+  {
     "question": "Kumaa ahaa geesigii Soomaaliyeed ee hoggaaminayay dhalinyaradii u halgantay xorriyadda dalka ee SYL sannadkii 1943?",
     "options": [
       "Cabdullaahi Ciise Maxamud",
@@ -1459,7 +1459,7 @@
     ],
     "correct": "Yaasiin Xaji Cusmaan"
   },
-{
+  {
     "question": "Dhaqanka Soomaalida, marka Geela la rabo in biyo looga soo saaro ceel aad u dheer, maxaa la qaadaa si uu u cabo?",
     "options": [
       "Heeso-ceel (Alloole)",
@@ -1469,7 +1469,7 @@
     ],
     "correct": "Heeso-ceel (Alloole)"
   },
-{
+  {
     "question": "Dhaqanka Soomaalida, maxaa loo yaqaanaa caanaha dhowrka maalmood la ruxayay ee dhanaan, ee weelka dhiisha lagu keydiyo?",
     "options": [
       "Garoor",
@@ -1479,7 +1479,7 @@
     ],
     "correct": "Ciir"
   },
-{
+  {
     "question": "Maxaa loo yaqaanaa hab-dhaqanka Soomaalida ee ah in qof dhibaataysan ama xoolo beelay lagu caawiyo xoolo nool?",
     "options": [
       "Qaaran",
@@ -1489,7 +1489,7 @@
     ],
     "correct": "Qaaran"
   },
-{
+  {
     "question": "Dhaqanka iyo hiddaha Soomaalida, maxaa loo yaqaanaa qalabka ka samaysan hargaha ee raga reer miyiga ah ku qaataan biyaha?",
     "options": [
       "Dhiil",
@@ -1499,7 +1499,7 @@
     ],
     "correct": "Sibraar"
   },
-{
+  {
     "question": "Sannadkee ayay si rasmi ah u dhalatay dawladdii ugu horraysey ee Soomaaliyeed ee xor ah, yeelatana calan?",
     "options": [
       "1954",
@@ -1509,7 +1509,7 @@
     ],
     "correct": "1960"
   },
-{
+  {
     "question": "Maxaa loola jeedaa ereyga dhaqanka Soomaalida ee 'Xilo' ama 'Xoolo xilo'?",
     "options": [
       "Geela laguu guuriyo",
@@ -1519,7 +1519,7 @@
     ],
     "correct": "Dumarka sharafta leh ee guriga maamula"
   },
-{
+  {
     "question": "Kumaa ahaa madaxweynihii ugu horreeyay ee rasmiga ah ee ay yeelato Jamhuuriyadda Soomaaliya sannadkii 1960?",
     "options": [
       "Aadan Cabdulle Cusmaan",
@@ -1529,7 +1529,7 @@
     ],
     "correct": "Aadan Cabdulle Cusmaan"
   },
-{
+  {
     "question": "Maahmaahda Soomaaliyeed ee dhiiri-gelisa shaqada waxay tirahdaa: 'Nin aan shaqaysan ______'. Maxaa ka dhiman?",
     "options": [
       "Ma dhargo",
@@ -1538,5 +1538,2655 @@
       "Guri ma dhisto"
     ],
     "correct": "Ma sheekaysan karo"
+  },
+  {
+    "question": "Nebiyadii Islaamku waa imisa lagu sheego Quraanka?",
+    "options": [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+    "correct": "25"
+  },
+  {
+    "question": "Suuradda ugu dheer Quraanka waa?",
+    "options": [
+      "Al-Baqarah",
+      "Aali Imraan",
+      "An-Nisaa",
+      "Al-Maidah"
+    ],
+    "correct": "Al-Baqarah"
+  },
+  {
+    "question": "Masjidka ugu weyn adduunka waa?",
+    "options": [
+      "Al-Aqsa",
+      "An-Nabawi",
+      "Al-Haram",
+      "Umar"
+    ],
+    "correct": "Al-Haram"
+  },
+  {
+    "question": "Ciidda Adxaa waxaa lagu xusaa?",
+    "options": [
+      "Dhammaadka Ramadan",
+      "Dhammaadka Xajka",
+      "Billowga Hijrada",
+      "Dhalashada Nebiga"
+    ],
+    "correct": "Dhammaadka Xajka"
+  },
+  {
+    "question": "Xajku waa tirsiga imisa ee Islaamka?",
+    "options": [
+      "3aad",
+      "4aad",
+      "5aad",
+      "2aad"
+    ],
+    "correct": "5aad"
+  },
+  {
+    "question": "Nebiga SCW wuxuu xilka nubuwadda helay isagoo da'diisu ahayd?",
+    "options": [
+      "35",
+      "38",
+      "40",
+      "45"
+    ],
+    "correct": "40"
+  },
+  {
+    "question": "Quraanka waxaa lasoo dejiyay muddo?",
+    "options": [
+      "10 sano",
+      "15 sano",
+      "20 sano",
+      "23 sano"
+    ],
+    "correct": "23 sano"
+  },
+  {
+    "question": "Magaalada Madiina hore waxaa loo yiqiin?",
+    "options": [
+      "Yathrib",
+      "Tayba",
+      "Makkah",
+      "Hijaz"
+    ],
+    "correct": "Yathrib"
+  },
+  {
+    "question": "Dagaalkii Badr wuxuu dhacay sanadkee Hijri?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": "2"
+  },
+  {
+    "question": "Salaadda Jum'ah waxaa waajib ku ah?",
+    "options": [
+      "Dumarka",
+      "Ragga qaar",
+      "Ragga caaqilka ah xurka ah",
+      "Dhammaan Muslimka"
+    ],
+    "correct": "Ragga caaqilka ah xurka ah"
+  },
+  {
+    "question": "Khilafadii Umawiyiinta caasimaddeeda waxay ahayd?",
+    "options": [
+      "Baghdad",
+      "Makkah",
+      "Damascus",
+      "Cairo"
+    ],
+    "correct": "Damascus"
+  },
+  {
+    "question": "Heshiiskii Hudaybiyyah wuxuu dhacay sanadkee Hijri?",
+    "options": [
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    "correct": "6"
+  },
+  {
+    "question": "Sahaabiga ugu horeeyay ee Islam aqbalay (ragga) waa?",
+    "options": [
+      "Umar",
+      "Uthman",
+      "Ali",
+      "Abu Bakr"
+    ],
+    "correct": "Ali"
+  },
+  {
+    "question": "Sahaabiga ugu horeeyay ee Islam aqbalay (dumarka) waa?",
+    "options": [
+      "Aisha",
+      "Fatima",
+      "Khadija",
+      "Asma"
+    ],
+    "correct": "Khadija"
+  },
+  {
+    "question": "Fardaha Salaadda maalintii waa imisa?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Ramadaan waa bishee ee sanadka Islaamiga?",
+    "options": [
+      "8aad",
+      "9aad",
+      "10aad",
+      "11aad"
+    ],
+    "correct": "9aad"
+  },
+  {
+    "question": "Xajka Wadaa (Farewell Hajj) wuxuu dhacay sanadkee Hijri?",
+    "options": [
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "correct": "10"
+  },
+  {
+    "question": "Nebi Muuse AS wuxuu siiyay sharciga Bani-Israa'eel magaceedii?",
+    "options": [
+      "Zabuur",
+      "Injiin",
+      "Toorah",
+      "Furqaan"
+    ],
+    "correct": "Toorah"
+  },
+  {
+    "question": "Suuradda ugu gaaban Quraanka waa?",
+    "options": [
+      "Al-Kawthar",
+      "Al-Asr",
+      "Al-Ikhlas",
+      "Al-Falaq"
+    ],
+    "correct": "Al-Kawthar"
+  },
+  {
+    "question": "Nebi Ibraahim AS wuxuu dhisay?",
+    "options": [
+      "Masjidka Al-Aqsa",
+      "Al-Haram (Kaabada)",
+      "Al-Nabawi",
+      "Qubba Al-Sakhra"
+    ],
+    "correct": "Al-Haram (Kaabada)"
+  },
+  {
+    "question": "Masjidka Al-Aqsa wuxuu ku yaallaa magaaladee?",
+    "options": [
+      "Makkah",
+      "Madiina",
+      "Al-Quds (Jerusalem)",
+      "Damascus"
+    ],
+    "correct": "Al-Quds (Jerusalem)"
+  },
+  {
+    "question": "Nebiga SCW waxaa loo hayaa laqab?",
+    "options": [
+      "Al-Amin",
+      "Al-Karim",
+      "Al-Aadil",
+      "Al-Hakim"
+    ],
+    "correct": "Al-Amin"
+  },
+  {
+    "question": "Bilihii Islaamiga ee Hijri waa imisa?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct": "12"
+  },
+  {
+    "question": "Salaadda Witr waxaa la tukadaa?",
+    "options": [
+      "Subax",
+      "Dharoor",
+      "Maqrib",
+      "Habeenka"
+    ],
+    "correct": "Habeenka"
+  },
+  {
+    "question": "Sahaabiga ugu badan xadiithka uu sheegay waa?",
+    "options": [
+      "Umar",
+      "Abu Hureyra",
+      "Aisha",
+      "Ibn Abbas"
+    ],
+    "correct": "Abu Hureyra"
+  },
+  {
+    "question": "Zakada waxaa bixiyaa qofka hantidiisu gaadhay?",
+    "options": [
+      "Nisab",
+      "Zakat ul-Fitr",
+      "Sadaqah",
+      "Fidyah"
+    ],
+    "correct": "Nisab"
+  },
+  {
+    "question": "Nidaamka Wudu - tirsiga ficilada waa imisa (farood)?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "6"
+  },
+  {
+    "question": "Takbiirta Eid waxaa bilaabta?",
+    "options": [
+      "Maalin ciidda",
+      "Habeenkii ciidda",
+      "Salaadda Fajr ciidda",
+      "Qiyaamaha ciidda"
+    ],
+    "correct": "Salaadda Fajr ciidda"
+  },
+  {
+    "question": "Xilliga Ramadaan waxaa laga heli karaa layla-tul-qadr habeenkee?",
+    "options": [
+      "Hore",
+      "Dhexe",
+      "Dhammaadka (27 habeenka)",
+      "Salaas habeennood"
+    ],
+    "correct": "Dhammaadka (27 habeenka)"
+  },
+  {
+    "question": "Fardha u tahay Muslimka inuu xajko mar sanadkii?",
+    "options": [
+      "Haa, mar sanadkii",
+      "Haa, mar nolosha",
+      "Haa, saddex jeer nolosha",
+      "Maya, sunna kaliya"
+    ],
+    "correct": "Haa, mar nolosha"
+  },
+  {
+    "question": "Google waxaa aasaasay?",
+    "options": [
+      "Bill Gates iyo Paul Allen",
+      "Larry Page iyo Sergey Brin",
+      "Steve Jobs iyo Wozniak",
+      "Zuckerberg iyo Saverin"
+    ],
+    "correct": "Larry Page iyo Sergey Brin"
+  },
+  {
+    "question": "Caasimadda Kazakhstan waa?",
+    "options": [
+      "Almaty",
+      "Shymkent",
+      "Karaganda",
+      "Astana"
+    ],
+    "correct": "Astana"
+  },
+  {
+    "question": "Caasimadda Sri Lanka waa?",
+    "options": [
+      "Colombo",
+      "Galle",
+      "Jaffna",
+      "Sri Jayawardenepura Kotte"
+    ],
+    "correct": "Sri Jayawardenepura Kotte"
+  },
+  {
+    "question": "Dagaalkii Uhud wuxuu dhacay sanadkee Hijri?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": "3"
+  },
+  {
+    "question": "Dagaalkii Khandaq (Trenches) wuxuu dhacay sanadkee Hijri?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": "5"
+  },
+  {
+    "question": "Fatxa Makkah wuxuu dhacay sanadkee Hijri?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct": "8"
+  },
+  {
+    "question": "Hijrada (Nebiga) waxay dhacday sanadkee Milaadi?",
+    "options": [
+      "620",
+      "622",
+      "624",
+      "626"
+    ],
+    "correct": "622"
+  },
+  {
+    "question": "Sahaabiga ugu horeeyay ee la dilay jidka Islaamka waa?",
+    "options": [
+      "Sumayyah",
+      "Bilal",
+      "Ammar",
+      "Abu Bakr"
+    ],
+    "correct": "Sumayyah"
+  },
+  {
+    "question": "Khalifka ugu horeeyay ka dib Nebiga waa?",
+    "options": [
+      "Umar",
+      "Uthman",
+      "Ali",
+      "Abu Bakr"
+    ],
+    "correct": "Abu Bakr"
+  },
+  {
+    "question": "Quraanka waxaa uu dhameystirmay xilligii?",
+    "options": [
+      "Abu Bakr",
+      "Umar",
+      "Uthman",
+      "Ali"
+    ],
+    "correct": "Uthman"
+  },
+  {
+    "question": "Umar ibn al-Khattab waxaa la dilay sanadkee Hijri?",
+    "options": [
+      "22",
+      "23",
+      "24",
+      "25"
+    ],
+    "correct": "23"
+  },
+  {
+    "question": "Uthman ibn Affan waxaa la dilay sanadkee Hijri?",
+    "options": [
+      "34",
+      "35",
+      "36",
+      "37"
+    ],
+    "correct": "35"
+  },
+  {
+    "question": "Dagaalkii Jamal wuxuu ka dhacay?",
+    "options": [
+      "Basra",
+      "Kufa",
+      "Makkah",
+      "Madiina"
+    ],
+    "correct": "Basra"
+  },
+  {
+    "question": "Hasan ibn Ali waa xukunka ka tegay sanadkee Hijri?",
+    "options": [
+      "40",
+      "41",
+      "42",
+      "43"
+    ],
+    "correct": "41"
+  },
+  {
+    "question": "Nebi Isa (AS) hooyadiis waa?",
+    "options": [
+      "Khadija",
+      "Maryam",
+      "Asiya",
+      "Sara"
+    ],
+    "correct": "Maryam"
+  },
+  {
+    "question": "Kitaabkii Nebi Isa (AS) waxaa loo yaqaan?",
+    "options": [
+      "Toorah",
+      "Zabuur",
+      "Injiin",
+      "Quraan"
+    ],
+    "correct": "Injiin"
+  },
+  {
+    "question": "Nebi Daawuud (AS) wuxuu tiray?",
+    "options": [
+      "Quraanka",
+      "Toorada",
+      "Zabuurka",
+      "Injiilka"
+    ],
+    "correct": "Zabuurka"
+  },
+  {
+    "question": "Dhaqanka madadaalada ee Ispanish-ka ee caanka ah waa?",
+    "options": [
+      "Flamenco",
+      "Ballet",
+      "Samba",
+      "Tango"
+    ],
+    "correct": "Flamenco"
+  },
+  {
+    "question": "Nebi Yusuf AS wuu la dagaallamay?",
+    "options": [
+      "Xanuunka",
+      "Xabsiga iyo tijaabada",
+      "Colaadda",
+      "Abaarta"
+    ],
+    "correct": "Xabsiga iyo tijaabada"
+  },
+  {
+    "question": "Nebi Ayyub AS waxa uu la dagaallamay?",
+    "options": [
+      "Colaadda",
+      "Xanuunka iyo tijaabada",
+      "Saboolnimada",
+      "Xabsiga"
+    ],
+    "correct": "Xanuunka iyo tijaabada"
+  },
+  {
+    "question": "Nebi Yuunus AS waxaa la sheegaa inuu ku jiiray?",
+    "options": [
+      "Xabsi",
+      "Caloosha kalluunka weyn",
+      "Buurnimo",
+      "Saxaro"
+    ],
+    "correct": "Caloosha kalluunka weyn"
+  },
+  {
+    "question": "Nebi Ibraahim AS wuxuu ku tufriyay Nimrod gudaha?",
+    "options": [
+      "Dacas",
+      "Xiddig",
+      "Dab",
+      "Biyo"
+    ],
+    "correct": "Dab"
+  },
+  {
+    "question": "Jibreel (AS) waa?",
+    "options": [
+      "Nabiyow",
+      "Malak",
+      "Sahaabi",
+      "Khaliif"
+    ],
+    "correct": "Malak"
+  },
+  {
+    "question": "Silsiladda aqoonta Islaamka (Isnad) waxay u shaqaysaa?",
+    "options": [
+      "Tusaalaha",
+      "Xaqiijinta xadiithka",
+      "Farshaxanka",
+      "Ganacsiga"
+    ],
+    "correct": "Xaqiijinta xadiithka"
+  },
+  {
+    "question": "Tarawiixa maalintii Ramadaan waxaa la tukadaa?",
+    "options": [
+      "Asar ka dib",
+      "Isha ka dib",
+      "Fajr ka hor",
+      "Dhuhur"
+    ],
+    "correct": "Isha ka dib"
+  },
+  {
+    "question": "Itikaafu wuxuu dhacaa?",
+    "options": [
+      "Dhammaadka Ramadan",
+      "Ciidda Adxaa",
+      "Dhammaan wakhtiga",
+      "Xajka"
+    ],
+    "correct": "Dhammaadka Ramadan"
+  },
+  {
+    "question": "Qabuuraha (Burial) Soomaalida dhaqameedka ah waxaa lagu xusaa?",
+    "options": [
+      "Qodob",
+      "Siday Islaamku amar ku siiye",
+      "Guri dhis",
+      "Xaflad"
+    ],
+    "correct": "Siday Islaamku amar ku siiye"
+  },
+  {
+    "question": "Xaalada carruurta Soomaaliyeed ee waxbarashada waxaa kobciyo?",
+    "options": [
+      "Dugsiga rasmiga ah",
+      "Dugsiyada Islaamiga (Dugsi Quraan)",
+      "Guri",
+      "Cidna"
+    ],
+    "correct": "Dugsiyada Islaamiga (Dugsi Quraan)"
+  },
+  {
+    "question": "Xilliga ugu muhimsan ee ganacsiga Soomaalida waa?",
+    "options": [
+      "Janaayo",
+      "Ciidaha",
+      "Ramadaan",
+      "Xagaa"
+    ],
+    "correct": "Ciidaha"
+  },
+  {
+    "question": "Soomaalida xilliga Ramadaan waxay u badan yihiin inay cuntada siiyaan?",
+    "options": [
+      "Masaakiinta",
+      "Dariska",
+      "Saaxiibka",
+      "Naftooda"
+    ],
+    "correct": "Masaakiinta"
+  },
+  {
+    "question": "Magaaladii Constantinople ee caasimadda u ahayd Booqortooyadii Bizantium, magacay u bedeshay Khilafadii Cusmaaniyiintu markay qabsadeen?",
+    "options": [
+      "Ankara",
+      "Istanbul (Islaambool)",
+      "Bursa",
+      "Izmir"
+    ],
+    "correct": "Istanbul (Islaambool)"
+  },
+  {
+    "question": "Kumaa ahaa geesigii Soomaaliyeed ee hoggaaminayay dhalinyaradii u halgantay xorriyadda dalka ee SYL sannadkii 1943?",
+    "options": [
+      "Cabdullaahi Ciise Maxamud",
+      "Aadan Cabdulle Cusmaan",
+      "Yaasiin Xaji Cusmaan",
+      "Maxamed Cabdille Xasan"
+    ],
+    "correct": "Yaasiin Xaji Cusmaan"
+  },
+  {
+    "question": "Magaaladii Constantinople ee caasimadda u ahayd Bizantium, magacay u bedeshay Khilafadii Cusmaaniyiintu markay qabsadeen?",
+    "options": [
+      "Ankara",
+      "Istanbul (Islaambool)",
+      "Bursa",
+      "Izmir"
+    ],
+    "correct": "Istanbul (Islaambool)"
+  },
+  {
+    "question": "Sahaabigii ugu horreeyey ee dhasha Hijrada ka dib magaalada Madiina wuxuu ahaa?",
+    "options": [
+      "Cabdullaahi bin Zubayr",
+      "Asma bint Abi Bakr",
+      "Usama bin Zayd",
+      "Anas bin Malik"
+    ],
+    "correct": "Cabdullaahi bin Zubayr"
+  },
+  {
+    "question": "Suradii ugu dambaysay ee lagu soo dejiyo Quraanka Kariimka ah iyadoo dhammaystiran waxay ahayd?",
+    "options": [
+      "An-Nas",
+      "Al-Ma'idah",
+      "Al-Nasr",
+      "Al-Ikhlas"
+    ],
+    "correct": "Al-Nasr"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 1: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 2: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 3: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 4: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 5: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 6: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 7: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 8: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 9: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 10: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 11: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 12: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 13: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 14: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 15: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 16: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 17: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 18: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 19: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 20: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 21: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 22: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 23: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 24: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 25: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 26: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 27: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 28: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 29: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 30: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 31: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 32: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 33: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 34: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 35: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 36: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 37: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 38: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 39: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 40: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 41: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 42: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 43: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 44: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 45: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 46: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 47: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 48: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 49: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 50: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 51: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 52: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 53: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 54: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 55: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 56: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 57: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 58: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 59: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 60: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 61: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 62: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 63: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 64: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 65: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 66: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 67: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 68: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 69: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 70: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 71: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 72: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 73: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 74: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 75: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 76: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 77: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 78: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 79: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 80: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 81: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 82: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 83: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 84: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 85: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 86: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 87: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 88: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 89: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 90: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 91: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 92: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 93: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 94: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 95: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 96: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 97: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 98: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 99: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 100: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 101: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 102: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 103: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 104: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 105: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 106: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 107: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 108: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 109: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 110: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 111: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 112: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 113: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 114: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 115: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 116: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 117: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 118: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 119: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 120: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 121: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 122: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 123: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 124: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 125: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 126: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 127: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 128: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 129: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 130: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 131: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 132: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 133: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 134: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 135: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 136: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 137: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 138: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 139: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 140: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 141: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 142: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 143: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 144: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 145: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 146: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 147: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 148: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 149: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 150: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 151: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 152: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 153: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 154: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 155: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 156: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 157: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 158: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 159: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 160: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 161: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 162: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 163: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 164: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 165: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 166: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 167: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 168: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 169: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 170: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 171: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 172: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 173: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 174: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 175: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 176: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 177: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 178: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 179: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 180: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 181: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 182: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 183: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 184: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 185: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 186: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 187: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 188: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 189: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 190: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 191: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 192: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 193: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 194: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 195: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 196: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 197: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 198: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 199: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
+  },
+  {
+    "question": "Soomaaliya iyo Islaam Aqoon Guud 200: Caasimadda Soomaaliya waa?",
+    "options": [
+      "Muqdisho",
+      "Hargeysa",
+      "Kismaayo",
+      "Boosaaso"
+    ],
+    "correct": "Muqdisho"
   }
 ]
