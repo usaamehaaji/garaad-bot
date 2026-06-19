@@ -94,6 +94,41 @@ module.exports = function setupMessageHandler(client) {
 
     client.on('messageCreate', async (message) => {
         if (message.author.bot)                  return;
+
+        // ── Mafia Night Chat: DM relay between alive mafia members ──
+        if (!message.guild && !message.content.startsWith(PREFIX)) {
+            try {
+                const { games: wwGames, isMafia, alivePlayers } = require('../games/werewolf');
+                for (const game of wwGames.values()) {
+                    if (game.phase !== 'night') continue;
+                    const player = game.players.get(message.author.id);
+                    if (!player || !player.alive || !isMafia(player.role)) continue;
+
+                    // Relay to all other alive mafia
+                    const mafiaTeam = alivePlayers(game).filter(([, p]) => isMafia(p.role) && p !== player);
+                    if (!mafiaTeam.length) {
+                        await message.reply('🔪 Adiga kaligaa ah Mafia Killer-ka nool — cidna kuma jiro chat-ka.').catch(() => {});
+                        return;
+                    }
+
+                    let senderName = message.author.username;
+                    try {
+                        const member = await game.guild?.members.fetch(message.author.id);
+                        senderName = member?.nickname || message.author.globalName || message.author.username;
+                    } catch {}
+
+                    for (const [uid] of mafiaTeam) {
+                        try {
+                            const user = await client.users.fetch(uid);
+                            await user.send(`🔪 **${senderName}:** ${message.content}`).catch(() => {});
+                        } catch {}
+                    }
+                    await message.react('✅').catch(() => {});
+                    return;
+                }
+            } catch (e) { console.error('[MafiaChat] Error:', e.message); }
+        }
+
         if (!message.content.startsWith(PREFIX)) return;
         if (disabledChannels.has(message.channel.id) && !isAdmin(message.author.id))
             return message.reply('🔕 **Channel-kan bot waa la joojiyay.** Admin kala xiriir.').catch(() => {});
