@@ -14,6 +14,7 @@ module.exports = async function mafiaCmd(message) {
 
     const game = {
         guildId,
+        guild:        message.guild,
         hostId:       message.author.id,
         phase:        'lobby',
         players:      new Map([[message.author.id, null]]),
