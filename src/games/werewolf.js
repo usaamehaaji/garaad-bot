@@ -13,20 +13,21 @@ const TARGETS_PER_PAGE = 20;
 const LOBBY_SECONDS = 60;
 const NIGHT_SECONDS = 30;
 const DAY_SECONDS = 45;
-const VOTE_SECONDS = 60;
+const VOTE_SECONDS = 30;
+const BOMB_MIN_PLAYERS = 10;
 
 const ROLES = {
     mafia: {
         emoji: '🔪',
-        name: 'Killer Mafia',
+        name: 'Mafia Killer',
         color: '#c0392b',
         dm: 'Habeenkii qof dooro oo dil. Mafia kale way kula jiraan, laakiin sirta ha bixin.',
     },
     citizen: {
-        emoji: '👥',
+        emoji: '👭',
         name: 'Shacab',
         color: '#2980b9',
-        dm: 'Maalintii la hadal dadka, kadib codee qofka aad u malaynayso inuu Mafia yahay.',
+        dm: 'Maalintii la hadal dadka, kadib codee qofka aad u malaynayso inuu Mafia Killer yahay.',
     },
 };
 
@@ -130,7 +131,8 @@ async function lobbyEmbed(game, client) {
             `${names.join('\n') || '_Cidna ma jirto_'}${more}\n\n` +
             `Min: **${MIN_PLAYERS} qof**\n` +
             `⏳ Lobby wuxuu xirmayaa **${LOBBY_SECONDS} seconds** kadib.\n` +
-            `Killer Mafia: **1 qof 5 ciyaaryahan kasta** (5=1, 10=2, 15=3).`
+            `Mafia Killer: **1 qof 5 ciyaaryahan kasta** (5=1, 10=2, 15=3).\n` +
+            `💣 Haddii ${BOMB_MIN_PLAYERS}+ qof jiraan, Shacabku waxay leeyihiin Bomb — haddii Mafia ay dilaan qof shacab ah, hal Mafia Killer random ah ayaa dhimanaya!`
         );
 }
 
@@ -156,6 +158,9 @@ async function startGame(game, client) {
         if (roles[index] === 'mafia') mafiaIds.push(uid);
     });
 
+    // Bomb system active if enough players
+    game.bombActive = playerIds.length >= BOMB_MIN_PLAYERS;
+
     const playerList = await Promise.all(playerIds.slice(0, 40).map(async uid => `• ${await fetchName(uid, client)}`));
     const extra = playerIds.length > playerList.length ? `\n...iyo ${playerIds.length - playerList.length} kale` : '';
 
@@ -167,8 +172,9 @@ async function startGame(game, client) {
             .setDescription(
                 `${playerIds.length} qof ayaa ciyaaraya.\n\n` +
                 `${playerList.join('\n')}${extra}\n\n` +
-                `🔪 Killer Mafia: **${mafiaIds.length}**\n` +
-                `👥 Shacab: **${playerIds.length - mafiaIds.length}**\n\n` +
+                `🔪 Mafia Killer: **${mafiaIds.length}**\n` +
+                `👭 Shacab: **${playerIds.length - mafiaIds.length}**\n\n` +
+                (game.bombActive ? `💣 **Bomb System Active!** Haddii Mafia ay dilaan qof Shacab ah, hal Mafia Killer random ah ayaa la dilayaa!\n\n` : '') +
                 `Qof kasta DM ayuu ka helayaa doorkiisa.`
             )],
     });
@@ -183,7 +189,7 @@ async function startGame(game, client) {
             const user = await client.users.fetch(uid);
             await user.send({ embeds: [new EmbedBuilder()
                 .setColor(roleInfo.color)
-                .setTitle(`${roleInfo.emoji} Doorkaaga`)
+                .setTitle(`${roleInfo.emoji} Doorkaaga: ${role === 'mafia' ? 'Mafia Killer 🔪' : 'Shacab 👭'}`)
                 .setDescription(
                     `Waxaad tahay **${roleInfo.name}**.\n\n` +
                     `${roleInfo.dm}${mafiaTeam}\n\n` +
@@ -206,7 +212,7 @@ async function beginNight(game, client) {
         .setTitle(`🌙 Habeenka ${game.round}`)
         .setDescription(
             `Dadku way seexdeen.\n\n` +
-            `🔪 Mafia waxay DM ku dooranayaan qof ay dilaan.\n` +
+            `🔪 Mafia Killer waxay DM ku dooranayaan qof ay dilaan.\n` +
             `⏳ **${NIGHT_SECONDS} seconds**`
         )]});
 
@@ -228,7 +234,7 @@ async function beginNight(game, client) {
             await user.send({
                 embeds: [new EmbedBuilder()
                     .setColor('#c0392b')
-                    .setTitle('🔪 Killer Mafia')
+                    .setTitle('🔪 Mafia Killer')
                     .setDescription(`Qof aad dilaysaan dooro.\nBogga **${page + 1}/${pages}**`)],
                 components: rows,
             }).catch(() => {});
@@ -255,20 +261,37 @@ async function resolveNight(game, client) {
     }
 
     let desc = '🛡️ Habeenka cidna ma dhiman.';
+    let bombDesc = '';
+
     if (killed && game.players.get(killed)?.alive) {
         game.players.get(killed).alive = false;
         const name = await fetchName(killed, client);
-        desc = `☠️ **${name}** habeenkii waa la dilay. Wuxuu ahaa **👥 Shacab**.`;
+        desc = `☠️ **${name}** habeenkii waa la dilay. Wuxuu ahaa **👭 Shacab**.`;
         try {
             const user = await client.users.fetch(killed);
-            await user.send('☠️ Habeenka waxaa ku dilay Mafia. Ciyaarta waad ka baxday.').catch(() => {});
+            await user.send('☠️ Habeenka waxaa ku dilay Mafia Killer. Ciyaarta waad ka baxday.').catch(() => {});
         } catch {}
+
+        // 💣 BOMB SYSTEM — killing a citizen triggers a random mafia death
+        if (game.bombActive) {
+            const aliveMafia = alivePlayers(game).filter(([, p]) => isMafia(p.role));
+            if (aliveMafia.length) {
+                const [bombedId] = aliveMafia[Math.floor(Math.random() * aliveMafia.length)];
+                game.players.get(bombedId).alive = false;
+                const bombedName = await fetchName(bombedId, client);
+                bombDesc = `\n\n💣 **BOMB!** Shacabku gacan ka qaaday — **${bombedName}** (🔪 Mafia Killer) sidoo kale wuu dhintay!`;
+                try {
+                    const user = await client.users.fetch(bombedId);
+                    await user.send('💣 Bomb-ku wuu kugu dhacay! Ciyaarta waad ka baxday.').catch(() => {});
+                } catch {}
+            }
+        }
     }
 
     await game.textChannel.send({ embeds: [new EmbedBuilder()
         .setColor('#e67e22')
         .setTitle('🌅 Subaxdii')
-        .setDescription(desc)]});
+        .setDescription(desc + bombDesc)]});
 
     const result = checkWin(game);
     if (result) return endGame(game, client, result);
@@ -290,7 +313,7 @@ async function beginDay(game, client) {
         .setColor('#f39c12')
         .setTitle(`☀️ Maalinta ${game.round}`)
         .setDescription(
-            `Dadku way tooseen. Ka dooda cidda Mafia ah.\n\n` +
+            `Dadku way tooseen. Ka dooda cidda Mafia Killer ah.\n\n` +
             `**Kuwa nool (${alive.length}):**\n${names.join('\n')}${extra}\n\n` +
             `💬 **${DAY_SECONDS} seconds** kadib codayn ayaa bilaabanaysa.`
         )]});
@@ -316,7 +339,7 @@ async function beginVoting(game, client, page = 0) {
             .setColor('#f39c12')
             .setTitle(`🗳️ Codeynta — Maalinta ${game.round}`)
             .setDescription(
-                `Yaa Killer Mafia ah?\n\n` +
+                `Yaa Mafia Killer ah?\n\n` +
                 `Bogga **${safePage + 1}/${pages}**\n` +
                 `⏳ **${VOTE_SECONDS} seconds**`
             )],
@@ -339,8 +362,8 @@ async function resolveVote(game, client) {
     for (const targetId of game.votes.values()) tally.set(targetId, (tally.get(targetId) || 0) + 1);
 
     const alive = alivePlayers(game);
-    const mafiaCount = alive.filter(([, player]) => isMafia(player.role)).length;
-    const citizenCount = alive.length - mafiaCount;
+    const mafiaCnt = alive.filter(([, player]) => isMafia(player.role)).length;
+    const citizenCnt = alive.length - mafiaCnt;
     const isFinalRound = alive.length <= 3;
 
     let desc = '🤷 Cidna ma codeyn. Wareeg kale ayaa bilaabanaya.';
@@ -349,10 +372,8 @@ async function resolveVote(game, client) {
         if (sorted.length > 1 && sorted[0][1] === sorted[1][1]) {
             desc = '🤝 Codadku way isku dhaceen. Qof lama saarin.';
             if (isFinalRound) {
-                const winner = mafiaCount >= citizenCount ? 'mafia' : 'citizens';
-                desc += `
-
-⚖️ Maadaama ay tahay codeynta ugu dambeysa, guuleystaha waxa uu noqonayaa **${winner === 'mafia' ? 'Mafia' : 'Shacab'}**.`;
+                const winner = mafiaCnt >= citizenCnt ? 'mafia' : 'citizens';
+                desc += `\n\n⚖️ Maadaama ay tahay codeynta ugu dambeysa ee ${alive.length} qof haray, guuleystaha waxa uu noqonayaa **${winner === 'mafia' ? 'Mafia Killer 🔪' : 'Shacab 👭'}**.`;
                 await game.textChannel.send({ embeds: [new EmbedBuilder()
                     .setColor('#9b59b6')
                     .setTitle('📊 Natiijada Codaynta')
@@ -381,9 +402,9 @@ async function resolveVote(game, client) {
             }
         }
     } else if (isFinalRound) {
-        const winner = mafiaCount >= citizenCount ? 'mafia' : 'citizens';
-        desc = '🤷 Cidna ma codeyn. Maaddaama ay ku haray 3 ciyaaryahan ama ka yar, guusha waxaa lagu go’aaminayaa tirada labada dhinac.';
-        desc += `\n\n⚖️ Guuleystaha ugu dambeysa waa **${winner === 'mafia' ? 'Mafia' : 'Shacab'}**.`;
+        const winner = mafiaCnt >= citizenCnt ? 'mafia' : 'citizens';
+        desc = `🤷 Cidna ma codeyn. Maaddaama ay ku haray ${alive.length} ciyaaryahan ama ka yar, guusha waxaa lagu go'aaminayaa tirada labada dhinac.`;
+        desc += `\n\n⚖️ Guuleystaha ugu dambeysa waa **${winner === 'mafia' ? 'Mafia Killer 🔪' : 'Shacab 👭'}**.`;
         await game.textChannel.send({ embeds: [new EmbedBuilder()
             .setColor('#9b59b6')
             .setTitle('📊 Natiijada Codaynta')
@@ -426,9 +447,9 @@ async function endGame(game, client, winner) {
     const citizensWon = winner === 'citizens';
     await game.textChannel.send({ embeds: [new EmbedBuilder()
         .setColor(citizensWon ? '#27ae60' : '#c0392b')
-        .setTitle(citizensWon ? '🎉 Shacabkii way guuleysteen!' : '🔪 Killer Mafia way guuleysteen!')
+        .setTitle(citizensWon ? '🎉 Shacabkii 👭 way guuleysteen!' : '🔪 Mafia Killer way guuleysteen!')
         .setDescription(
-            `${citizensWon ? 'Mafia oo dhan waa la saaray.' : 'Mafia waxay la wareegtay magaalada.'}\n\n` +
+            `${citizensWon ? 'Mafia Killer oo dhan waa la saaray.' : 'Mafia Killer waxay la wareegtay magaalada.'}\n\n` +
             `**Doorarka oo dhan:**\n${safeReveal}`
         )
         .setFooter({ text: 'Garaad Bot • Mafia' })]});
