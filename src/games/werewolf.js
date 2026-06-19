@@ -11,7 +11,7 @@ const MAX_PLAYERS = 100;
 const PLAYERS_PER_MAFIA = 5;
 const TARGETS_PER_PAGE = 20;
 const LOBBY_SECONDS = 60;
-const NIGHT_SECONDS = 60;
+const NIGHT_SECONDS = 30;
 const DAY_SECONDS = 45;
 const VOTE_SECONDS = 60;
 
