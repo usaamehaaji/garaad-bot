@@ -153,7 +153,7 @@ function buildAnnounceEmbed(deadline, regCount, closed, state) {
             `🥈 **Kaalinta 2aad** — **$10**\n` +
             `🥉 **Kaalinta 3aad** — **$5**\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n\n` +
-            `🎙️ **Voice Channel:** <#${vcChId}>\n\n` +
+            
             `${regStatus}\n\n` +
             `━━━━━━━━━━━━━━━━━━━━\n\n` +
             `# 📝 Is Diiwaan Geli Hadda ⬇️\n\n` +
@@ -200,7 +200,7 @@ function buildAdminPanelEmbed(state) {
             `━━━━━━━━━━━━━━━━━━━━\n` +
             `📢 Announcement: <#${annChId}>\n` +
             `🎮 Game channel: <#${gameChId}>\n` +
-            `🎙️ VC: <#${vcChId}>`
+            ``
         )
         .setFooter({ text: 'Garaad Quiz — Admin Control Panel' });
 }
@@ -428,7 +428,7 @@ async function openGamePhase(client, adminId, state) {
                 `Haddaad code-kaaga hayso, hadda ayaad gasho:\n\n` +
                 `➡️ Qor: \`${PREFIX}gal CODE-KAAGA\`\n\n` +
                 `Code-kaagu DM-kaaga ayuu ku jiraa — fur oo eeg.\n\n` +
-                `🎙️ Voice Channel: <#${vcChId}>\n\n` +
+                
                 `━━━━━━━━━━━━━━━━━━━━\n` +
                 `_Marka dadku diyaar yihiin, admin ayaa su'aalaha bilaabi doona._`
             )
@@ -1030,7 +1030,7 @@ async function endRoundPause(state) {
                     : '') +
                 `**Wareega soo socda — ${nextRoundName}:**\n${remainingList}\n\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `🎙️ <#${vcChId}> — kala hadla, nafta soo qaado!\n\n` +
+                
                 `⏰ Wareegga xiga wuxuu bilaabmayaa **1 daqiiqad gudahood** — ha moodin!`
             )
             .setFooter({ text: 'Toos ayuu bilaabmayaa' })],
