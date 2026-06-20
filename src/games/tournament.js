@@ -487,24 +487,11 @@ async function cmdAnnounce(message) {
     }
     await q2.delete().catch(() => {});
 
-    // Step 3 — VC channel ID
-    const q3 = await message.channel.send('🎙️ **Gali ID VC Tournament channel-ka:**');
-    let vcChId;
-    try {
-        const col = await message.channel.awaitMessages(colOpts);
-        vcChId    = col.first().content.trim().replace(/[<#>]/g, '');
-        await col.first().delete().catch(() => {});
-    } catch {
-        return q3.edit('⏰ Waqtiga ayaa dhamaaday. Isku day mar kale.').catch(() => {});
-    }
-    await q3.delete().catch(() => {});
-
     // Confirm
     const ok = await message.channel.send(
         `✅ **Ok!**\n` +
         `📢 Announcement: <#${annChId}>\n` +
-        `🎮 Tournament chat: <#${gameChId}>\n` +
-        `🎙️ VC: <#${vcChId}>\n\n` +
+        `🎮 Tournament chat: <#${gameChId}>\n\n` +
         `_Shaqada waa bilaabatay..._`
     );
     setTimeout(() => ok.delete().catch(() => {}), 5000);
@@ -513,7 +500,6 @@ async function cmdAnnounce(message) {
         guildId,
         announceChannelId:    annChId,
         gameChannelId:        gameChId,
-        vcChannelId:          vcChId,
         adminId:              message.author.id,
         client:               message.client,
         stage:                'initial',
