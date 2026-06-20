@@ -42,12 +42,6 @@ function buildEduEmbed(userId) {
             `**\`${PREFIX}deul 2v2\`** — Team duel (1v1 / 2v2 / 3v3)\n` +
             `**\`${PREFIX}quiz\`** — Koox la ciyaar, tartam\n\n` +
 
-            `**🏆 Tartan**\n` +
-            `**\`${PREFIX}tartan\`** — ⚙️ Admin: Bilow tartan cusub\n` +
-            `**\`${PREFIX}isdiiwaangeli\`** — Ku diiwaangeli tartanka\n` +
-            `**\`${PREFIX}tartan_status\`** — Xaaladda tartanka\n` +
-            `**\`${PREFIX}gal CODE\`** — Game ku biir (code DM)\n\n` +
-
             `**👤 Profile & Standings**\n` +
             `**\`${PREFIX}profile\`** — IQ, level, stats, frame\n` +
             `**\`${PREFIX}top\`** — Top 15 IQ ranking\n` +
@@ -62,7 +56,6 @@ function buildEduEmbed(userId) {
 
 
             `**💬 Kale**\n` +
-            `**\`${PREFIX}savers\`** — ⚙️ Admin: servers-ka bot-ku ku jiro\n` +
             `**\`${PREFIX}cilada [fariin]\`** — Cilad soo sheeg\n` +
             `**\`${PREFIX}champion\`** — Champion-ka eeg`
         )
