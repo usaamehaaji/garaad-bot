@@ -580,7 +580,6 @@ async function sendRegistrationCode(user, replyTarget, gameChId, vcChId) {
             `**Sidee u gasho:**\n` +
             `**1.** Marka admin game furo, tag <#${gCh}>\n` +
             `**2.** Qor: \`${PREFIX}gal ${code}\`\n\n` +
-            `🎙️ Voice Channel: <#${vCh}>\n\n` +
             `⚠️ Code-kan qof kale ha siinin — adiga oo keliya ayuu u shaqeeyaa!`
         );
     }
