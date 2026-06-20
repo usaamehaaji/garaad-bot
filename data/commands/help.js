@@ -17,10 +17,6 @@ function helpRow(userId, active) {
             .setLabel('💰 Economy')
             .setStyle(active === 'eco' ? ButtonStyle.Success : ButtonStyle.Secondary),
         new ButtonBuilder()
-            .setCustomId(`help_shop_${userId}`)
-            .setLabel('🛒 Shop')
-            .setStyle(active === 'shop' ? ButtonStyle.Primary : ButtonStyle.Secondary),
-        new ButtonBuilder()
             .setCustomId(`close_help_${userId}`)
             .setLabel('✖ Xir')
             .setStyle(ButtonStyle.Danger),
