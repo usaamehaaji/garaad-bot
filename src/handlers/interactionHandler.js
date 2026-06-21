@@ -3772,6 +3772,16 @@ module.exports = function setupInteractionHandler(client) {
             return handleSoloLeaderboard(interaction);
         }
 
+        // ── Minno Challenge buttons ──
+        if (id.startsWith('minno_accept_')) {
+            const { handleMinnoAccept } = require('../../data/commands/minno');
+            return handleMinnoAccept(interaction);
+        }
+        if (id.startsWith('minno_decline_')) {
+            const { handleMinnoDecline } = require('../../data/commands/minno');
+            return handleMinnoDecline(interaction);
+        }
+
         // ── Aqoon Register button (from ?aqoon / ?tartan panels) ──
         if (id.startsWith('aqoon_register_')) {
             const uid  = interaction.user.id;
