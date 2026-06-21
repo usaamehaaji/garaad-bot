@@ -306,7 +306,7 @@ async function handleSoloAnswer(interaction) {
     saveEcon();
 
     if (result === 'true') {
-        // ── Sax ──
+        // ── Sax: +1 IQ toos ah ──
         const pts      = calcTimedScore(Math.min(timeTaken, GLOBAL_WAIT_MS));
         const streak   = (game.currentStreak || 0) + 1;
         const bonus    = getStreakBonus(streak);
@@ -318,13 +318,22 @@ async function handleSoloAnswer(interaction) {
         game.correctCount  = (game.correctCount || 0) + 1;
 
         userData[ownerId].stats.soloCorrect++;
-        msg = `✅ **SAX!** ${pointsDisplay(pts, bonus, streak)}\n⏱️ ${(timeTaken/1000).toFixed(1)}s | 💰 **+${BTC_PER_QUESTION} BTC**`;
+        userData[ownerId].iq = (userData[ownerId].iq || 0) + 1;
+        msg = `✅ **SAX!** +1 IQ\n⏱️ ${(timeTaken/1000).toFixed(1)}s | 💰 **+${BTC_PER_QUESTION} BTC**`;
     } else {
-        // ── Qalad ──
+        // ── Qalad: 2 qalad = -1 IQ ──
         game.currentStreak = 0;
+        game.wrongCount    = (game.wrongCount || 0) + 1;
         userData[ownerId].stats.soloWrong++;
-        userData[ownerId].iq = Math.max(0, (userData[ownerId].iq || 0) - 1);
-        msg = `❌ **QALAD** — **−1 IQ** · Streak: 0🔥 | 💰 **+${BTC_PER_QUESTION} BTC** (waqti awgeed)`;
+
+        let iqMsg = '';
+        if (game.wrongCount % 2 === 0) {
+            userData[ownerId].iq = Math.max(0, (userData[ownerId].iq || 0) - 1);
+            iqMsg = '**−1 IQ**';
+        } else {
+            iqMsg = `_1/2 qalad — ${2 - (game.wrongCount % 2)} kale 1 IQ kaa jari doona_`;
+        }
+        msg = `❌ **QALAD** — ${iqMsg} | 💰 **+${BTC_PER_QUESTION} BTC** (waqti awgeed)`;
     }
 
     userData[ownerId].stats.soloPlayed++;
