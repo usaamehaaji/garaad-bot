@@ -64,6 +64,7 @@ const { joinCmd, leaveCmd: vcLeaveCmd } = require('../../data/commands/join');
 const adminBankCmd    = require('../../data/commands/admin/adminBank');
 const saversCmd       = require('../../data/commands/savers');
 const setupTempVc     = require('../../data/commands/admin/tempVc');
+const { vcSetupCmd, vcRemoveCmd } = require('../handlers/voiceMaster');
 
 
 let _music = null;
@@ -514,6 +515,17 @@ module.exports = function setupMessageHandler(client) {
             case 'tempvc': {
                 if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
                 return tempVcCmd(message, args);
+            }
+
+            case 'vcsetup': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
+                return vcSetupCmd(message, args);
+            }
+
+            case 'vcremove':
+            case 'vcstop': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
+                return vcRemoveCmd(message);
             }
 
             // ── Mafia ──
