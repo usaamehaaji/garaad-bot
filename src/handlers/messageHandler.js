@@ -63,6 +63,7 @@ const mafiaCmd        = require('../../data/commands/werewolf');
 const { joinCmd, leaveCmd: vcLeaveCmd } = require('../../data/commands/join');
 const adminBankCmd    = require('../../data/commands/admin/adminBank');
 const saversCmd       = require('../../data/commands/savers');
+const setupTempVc     = require('../../data/commands/admin/tempVc');
 
 
 let _music = null;
@@ -81,6 +82,8 @@ function getMusic() {
 }
 
 module.exports = function setupMessageHandler(client) {
+    const { tempVcCmd } = setupTempVc(client);
+
     // ── Rate limiter: max 6 economy commands per 10s per user ──
     const _econRateMap = new Map();
     const ECON_CMDS    = new Set(['shaqo','work','jeeb','trade','ecoflip','ef','give','rich','ebank','bank','etitle']);
@@ -506,6 +509,12 @@ module.exports = function setupMessageHandler(client) {
             case 'vcleave':
             case 'vleave':
                 return vcLeaveCmd(message);
+
+            case 'tvc':
+            case 'tempvc': {
+                if (!isAdmin(userId)) return message.reply('⛔ Admin maahan.');
+                return tempVcCmd(message, args);
+            }
 
             // ── Mafia ──
             case 'mafia': {
