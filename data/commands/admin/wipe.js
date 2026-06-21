@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { isAdmin } = require('../utils/admin');
+const { isAdmin } = require('../../../src/utils/admin');
 
 const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000;
 const THIRTY_DAYS_MS   = 30 * 24 * 60 * 60 * 1000;
