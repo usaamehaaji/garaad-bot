@@ -114,8 +114,6 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
         const streak     = game ? (game.bestStreak  || 0) : 0;
         const correct    = game ? (game.correctCount || 0) : 0;
         const wrong      = total - correct;
-        const rewardSessionId = createRewardSession('Solo', { [userId]: totalPts });
-
         // Xukun: wanaagsan 90+, fiican 80-89, hoos 80
         let gradeText = '';
         const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
@@ -128,12 +126,8 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
             .setDescription(
                 `### 📊 Natiijadaada — <@${userId}>\n\n` +
                 `✅ Sax: **${correct}** | ❌ Qalad: **${wrong}** | Su'aalo: **${total}** (${pct}%)\n` +
-                `🎯 Dhibco guud: **${totalPts}** pts\n` +
                 `🔥 Streak ugu dheer: **${streak}** sax oo isku xigta\n` +
-                `${gradeText}\n` +
-                `🎁 Abaalmarin: **${rewardSummary(totalPts)}**\n` +
-                `Dooro **IQ** ama **BTC** buttons-ka hoose.\n` +
-                `_${POINTS_PER_REWARD} pts = ${IQ_PER_REWARD} IQ ama ${BTC_PER_REWARD} BTC_\n\n` +
+                `${gradeText}\n\n` +
                 `🧠 IQ hadda: **${d.iq || 0}** | Heer **${getLevel(d.iq || 0)}**`
             )
             .setColor(pct >= 90 ? '#f39c12' : pct >= 80 ? '#2ecc71' : '#e74c3c');
@@ -152,15 +146,13 @@ async function sendQuestion(messageOrInteraction, qNumber, currentMsg = null) {
                 .setLabel('Iska xir')
                 .setStyle(ButtonStyle.Danger),
         );
-        const claimRow = rewardRow(rewardSessionId);
-
         if (currentMsg) await currentMsg.delete().catch(() => {});
         const fc = messageOrInteraction.channel;
         const finishReply = originMsg ? { reply: { messageReference: originMsg.id, failIfNotExists: false } } : {};
         if (fc) {
-            await fc.send({ embeds: [finishEmbed], components: [claimRow, row], ...finishReply });
+            await fc.send({ embeds: [finishEmbed], components: [row], ...finishReply });
         } else {
-            await messageOrInteraction.reply({ embeds: [finishEmbed], components: [claimRow, row] });
+            await messageOrInteraction.reply({ embeds: [finishEmbed], components: [row] });
         }
 
         return;
