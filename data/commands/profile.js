@@ -101,6 +101,12 @@ module.exports = async function profileCommand(message) {
         relTxt = `💕 **Partner:** ${pName} ❤️ ${displayName} · 📅 ${days} Days · ${ringTxt}`;
     }
 
+    // Minno level
+    const { getMinnoLevel, minnoWinsNeeded } = require('./minno');
+    const minnoWins  = data.minnoWins || 0;
+    const minnoLevel = getMinnoLevel(minnoWins);
+    const minnoProg  = minnoWins % minnoWinsNeeded();
+
     const desc =
         `# 👤 ${displayName}${titlePart}\n` +
         `\n` +
@@ -113,6 +119,7 @@ module.exports = async function profileCommand(message) {
         `🎮 **Games:** ${totalGames}\n` +
         `⚔️ **Duel Wins:** ${s.duelWins || 0}\n` +
         `🎲 **Flips:** ${s.flipsPlayed || 0}\n` +
+        `🎲 **Minno Level:** ${minnoLevel} (${minnoWins} guul — ${minnoProg}/${minnoWinsNeeded()})\n` +
         `📋 **Missions:** ${s.missionsCompleted || 0}\n` +
         `🔥 **Streak:** ${econ.streak || 0} days\n` +
         `\n` +
