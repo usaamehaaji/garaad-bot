@@ -2,9 +2,8 @@ const { EmbedBuilder } = require('discord.js');
 const { isAdmin } = require('../../../src/utils/admin');
 
 const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000;
-const THIRTY_DAYS_MS   = 30 * 24 * 60 * 60 * 1000;
 const MAX_FETCH        = 1000;
-const DELETE_DELAY_MS  = 1200; // avoid Discord rate limits on single deletes
+const OLD_DELETE_DELAY = 300; // ms between old-message deletes (reduced from 1200)
 
 module.exports = async function wipeCmd(message, args) {
     if (!isAdmin(message.author.id)) {
@@ -20,65 +19,79 @@ module.exports = async function wipeCmd(message, args) {
         return message.reply('⚠️ Isticmaal: `?wipe 1000` (ugu badan 1000 fariin)');
     }
 
-    const status = await message.reply(`🔍 Raadinaya fariimo **30+ maalmood** ka duugsan oo gaaraya **${limit}**...`);
+    const status = await message.reply(`🔍 Raadinaya fariimaha **${limit}** ee ugu dambeeyay...`);
 
-    const now       = Date.now();
-    const cutoffOld = now - THIRTY_DAYS_MS;
-    const channel   = message.channel;
+    const now    = Date.now();
+    const cutoff = now - FOURTEEN_DAYS_MS;
+    const channel = message.channel;
 
-    let lastId       = message.id;
-    let scanned      = 0;
-    let toDelete     = [];
-    let keepScanning = true;
+    let lastId    = message.id;
+    let scanned   = 0;
+    let recentMsgs = []; // < 14 days → bulkDelete
+    let oldMsgs    = []; // ≥ 14 days → one by one
 
-    // Step 1: collect message IDs older than 30 days
-    while (keepScanning && toDelete.length < limit) {
+    // Collect messages
+    while (recentMsgs.length + oldMsgs.length < limit) {
         let batch;
         try {
             batch = await channel.messages.fetch({ limit: 100, before: lastId });
-        } catch (e) {
-            break;
-        }
+        } catch { break; }
         if (!batch || batch.size === 0) break;
 
         for (const msg of batch.values()) {
             scanned++;
-            if (msg.createdTimestamp < cutoffOld) {
-                toDelete.push(msg);
-                if (toDelete.length >= limit) break;
+            if (msg.createdTimestamp >= cutoff) {
+                recentMsgs.push(msg);
+            } else {
+                oldMsgs.push(msg);
             }
             lastId = msg.id;
+            if (recentMsgs.length + oldMsgs.length >= limit) break;
         }
 
-        if (batch.size < 100) keepScanning = false;
-        if (scanned > 5000) break; // safety cap on scan depth
+        if (batch.size < 100) break;
+        if (scanned > 5000) break;
     }
 
-    if (toDelete.length === 0) {
-        return status.edit(`✅ Wax fariimo ah oo **30+ maalmood** ka duugsan lama helin (waxaa la baadhay ${scanned} fariin).`);
+    const total = recentMsgs.length + oldMsgs.length;
+    if (total === 0) {
+        return status.edit(`✅ Wax fariimo ah lama helin (waxaa la baadhay ${scanned} fariin).`);
     }
 
     await status.edit(
-        `🗑️ Waa la helay **${toDelete.length}** fariin oo 30+ maalmood ah.\n` +
-        `⏳ Tirtirka wuu socdaa — ${(toDelete.length * DELETE_DELAY_MS / 1000).toFixed(0)}s qiyaastii...`
+        `🗑️ Waa la helay **${total}** fariin.\n` +
+        `⚡ Cusub (bulk): **${recentMsgs.length}** | 🐢 Duug: **${oldMsgs.length}**\n` +
+        `⏳ Tirtirka wuu socdaa...`
     );
 
-    // Step 2: delete one-by-one (Discord API requires this for messages older than 14 days)
     let deleted = 0;
     let failed  = 0;
 
-    for (const msg of toDelete) {
+    // --- BULK DELETE (messages < 14 days) ---
+    for (let i = 0; i < recentMsgs.length; i += 100) {
+        const batch = recentMsgs.slice(i, i + 100);
+        try {
+            const result = await channel.bulkDelete(batch, true);
+            deleted += result.size;
+        } catch {
+            // If bulkDelete fails, try one by one
+            for (const msg of batch) {
+                try { await msg.delete(); deleted++; } catch { failed++; }
+            }
+        }
+    }
+
+    // --- ONE BY ONE (messages ≥ 14 days, Discord API limit) ---
+    for (const msg of oldMsgs) {
         try {
             await msg.delete();
             deleted++;
-        } catch {
-            failed++;
+        } catch { failed++; }
+        if (oldMsgs.length > 10) {
+            await new Promise(r => setTimeout(r, OLD_DELETE_DELAY));
         }
-        await new Promise(r => setTimeout(r, DELETE_DELAY_MS));
-
-        // Progress update every 50 messages
         if (deleted % 50 === 0 && deleted > 0) {
-            await status.edit(`⏳ La tirtiray **${deleted}/${toDelete.length}**...`).catch(() => {});
+            await status.edit(`⏳ La tirtiray **${deleted}/${total}**...`).catch(() => {});
         }
     }
 
@@ -86,8 +99,9 @@ module.exports = async function wipeCmd(message, args) {
         .setTitle('🗑️ Wipe Dhammaaday')
         .setColor('#2ecc71')
         .setDescription(
-            `✅ **${deleted}** fariin oo 30+ maalmood ah ayaa la tirtiray.\n` +
-            (failed > 0 ? `⚠️ **${failed}** fariin lama tirtirin (perm error ama already deleted).\n` : '') +
+            `✅ **${deleted}** fariin oo la tirtiray.\n` +
+            `⚡ Bulk delete: **${recentMsgs.length}** | 🐢 Keli-keli: **${oldMsgs.length}**\n` +
+            (failed > 0 ? `⚠️ **${failed}** fariin lama tirtirin (permissions ama already deleted).\n` : '') +
             `🔍 Wadarta la baadhay: ${scanned} fariin`
         )
         .setFooter({ text: `Garaad Admin • ${message.author.username}` });
