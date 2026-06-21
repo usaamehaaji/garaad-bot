@@ -346,12 +346,23 @@ async function sendQuizQuestion(state) {
             state.scores[uid] = (state.scores[uid] || 0) + pts;
             correctMap[uid]   = { pts, timeTakenMs };
             const secs = (timeTakenMs / 1000).toFixed(1);
-            await interaction.reply({ content: `✅ **Sax!** +**${pts}** dhibcood · ⏱️ ${secs}s`, flags: MessageFlags.Ephemeral }).catch(() => {});
+            checkUser(uid);
+            userData[uid].iq = (userData[uid].iq || 0) + 1;
+            userData[uid].wrongStreak = 0;
+            saveData();
+            await interaction.reply({ content: `✅ **Sax!** +**${pts}** dhibcood · **+1 IQ** · ⏱️ ${secs}s`, flags: MessageFlags.Ephemeral }).catch(() => {});
         } else {
             checkUser(uid);
-            userData[uid].iq = Math.max(0, (userData[uid].iq || 0) - 1);
+            userData[uid].wrongStreak = (userData[uid].wrongStreak || 0) + 1;
+            let iqMsg = '';
+            if (userData[uid].wrongStreak % 2 === 0) {
+                userData[uid].iq = Math.max(0, (userData[uid].iq || 0) - 1);
+                iqMsg = '**−1 IQ**';
+            } else {
+                iqMsg = '_1/2 qalad_';
+            }
             saveData();
-            await interaction.reply({ content: '❌ **Khalad.** Jawaabta sax ma ahayn · **−1 IQ** · 0 dhibcood', flags: MessageFlags.Ephemeral }).catch(() => {});
+            await interaction.reply({ content: `❌ **Khalad.** Jawaabta sax ma ahayn · ${iqMsg} · 0 dhibcood`, flags: MessageFlags.Ephemeral }).catch(() => {});
         }
 
         if (answeredBy.size >= state.players.size) collector.stop('all_answered');
@@ -361,7 +372,10 @@ async function sendQuizQuestion(state) {
         const timedOut = [...state.players].filter(id => !answeredBy.has(id));
         for (const id of timedOut) {
             checkUser(id);
-            userData[id].iq = Math.max(0, (userData[id].iq || 0) - 1);
+            userData[id].wrongStreak = (userData[id].wrongStreak || 0) + 1;
+            if (userData[id].wrongStreak % 2 === 0) {
+                userData[id].iq = Math.max(0, (userData[id].iq || 0) - 1);
+            }
         }
         if (timedOut.length > 0) saveData();
 
