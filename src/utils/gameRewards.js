@@ -49,10 +49,6 @@ function rewardRow(sessionId) {
             .setCustomId(`gr_iq_${sessionId}`)
             .setLabel(`🧠 IQ qaado`)
             .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-            .setCustomId(`gr_btc_${sessionId}`)
-            .setLabel(`₿ BTC qaado`)
-            .setStyle(ButtonStyle.Success),
     );
 }
 
