@@ -44,7 +44,8 @@ module.exports = async function minnoCmd(message, args) {
         return message.reply('⚠️ Bot-ka kuma sharadayn kartid!');
 
     // args: ['@mention', '500'] or ['<@123>', '500']
-    const amount = parseInt(args.filter(a => !a.startsWith('<@'))[0], 10);
+    const nonMentionArgs = args.filter(a => !a.startsWith('<@') && !a.startsWith('@'));
+    const amount = parseInt(nonMentionArgs[0], 10);
     if (!amount || isNaN(amount) || amount < MIN_BET)
         return message.reply(`⚠️ Ugu yar **₿${MIN_BET}** ayaad sharadi kartaa.`);
     if (amount > MAX_BET)
