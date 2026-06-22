@@ -17,7 +17,7 @@ const FRAMES = {
     legend_aura:    { name: 'Legend Aura',      emoji: '✨', rarity: 'Mythic',    price: 0,     sellFor: 10000, lootOnly: true },
     garaad_crown:   { name: 'Garaad Crown',     emoji: '👑', rarity: 'Mythic',    price: 0,     sellFor: 12000, lootOnly: true },
     // ── Buyable ──
-    somali_flag:    { name: 'Somali 🇸🇴',        emoji: '🇸🇴', rarity: 'Legendary', price: 12000, sellFor: 5000 },
+    somali_flag:    { name: 'Somali',            emoji: '⭐', rarity: 'Legendary', price: 12000, sellFor: 5000 },
 };
 
 const BADGES = {
