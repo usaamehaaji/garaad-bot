@@ -56,6 +56,7 @@ function buildEduEmbed(userId) {
 
 
             `**💬 Kale**\n` +
+            `**\`${PREFIX}minno @user <amount>\`** — 🎲 Coinflip BTC challenge\n` +
             `**\`${PREFIX}cilada [fariin]\`** — Cilad soo sheeg\n` +
             `**\`${PREFIX}champion\`** — Champion-ka eeg`
         )
