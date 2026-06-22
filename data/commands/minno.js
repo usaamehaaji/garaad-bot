@@ -4,121 +4,128 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { userData, saveData } = require('../../src/store');
-const { checkUser } = require('../../src/utils/helpers');
+const { checkUser, fmt } = require('../../src/utils/helpers');
 const { econData, checkEconUser, saveEcon } = require('../../src/economy/econStore');
-const { fmt } = require('../../src/utils/helpers');
 
-const MIN_BET     = 50;
-const MAX_BET     = 50_000;
-const CHALLENGE_TIMEOUT_MS = 60_000;
+const MIN_BET            = 50;
+const MAX_BET            = 50_000;
+const CHALLENGE_TIMEOUT  = 60_000;
+const WINS_PER_LEVEL     = 10;
 
-const pendingChallenges = new Map(); // key: targetId -> { challengerId, amount, messageId, channelId }
+const pending = new Map(); // targetId → { challengerId, amount, msgId }
 
-function minnoWinsNeeded() { return 10; }
+function getMinnoLevel(wins) { return Math.floor((wins || 0) / WINS_PER_LEVEL); }
+function minnoWinsNeeded()   { return WINS_PER_LEVEL; }
 
-function getMinnoLevel(wins) {
-    return Math.floor((wins || 0) / minnoWinsNeeded());
-}
-
-module.exports = async function minnoCmd(message, args) {
-    const challengerId = message.author.id;
-    checkUser(challengerId);
-    checkEconUser(challengerId);
+// ── ?minno or ?minno @user <amount> ──────────────────────────────────
+async function minnoCmd(message, args) {
+    const cId = message.author.id;
+    checkUser(cId);
+    checkEconUser(cId);
 
     const target = message.mentions.users.first();
+
+    // No target → show help
     if (!target) {
         return message.reply({ embeds: [new EmbedBuilder()
             .setTitle('🎲 Minno — Coinflip Challenge')
             .setColor('#9b59b6')
             .setDescription(
-                `Isticmaal: \`?minno @user <amount>\`\n\n` +
-                `🪙 Labada qof BTC isku mid ah ayay dhigaan, kii guulaystaa wuxuu qaataa labadaba.\n` +
-                `🏆 **${minnoWinsNeeded()} guul = Level Up** (Minno Level-kaaga)\n\n` +
-                `Tusaale: \`?minno @Cali 500\``
+                '**Isticmaal:** `?minno @user <amount>`\n\n' +
+                '🪙 Labada qof waxay dhigaan BTC isku mid ah.\n' +
+                'Coinflip 50/50 — kii guulaystaa wuxuu qaataa labadaba.\n\n' +
+                `🏆 **${WINS_PER_LEVEL} guul = Minno Level Up**\n\n` +
+                '**Tusaale:** `?minno @Cali 500`'
             )] });
     }
 
-    if (target.id === challengerId)
-        return message.reply('⚠️ Nafta kuma sharadayn kartid!');
-    if (target.bot)
-        return message.reply('⚠️ Bot-ka kuma sharadayn kartid!');
+    if (target.id === cId)  return message.reply('⚠️ Nafta kuma sharadayn kartid!');
+    if (target.bot)         return message.reply('⚠️ Bot-ka kuma sharadayn kartid!');
 
-    // args: ['@mention', '500'] or ['<@123>', '500']
-    const nonMentionArgs = args.filter(a => !a.startsWith('<@') && !a.startsWith('@'));
-    const amount = parseInt(nonMentionArgs[0], 10);
-    if (!amount || isNaN(amount) || amount < MIN_BET)
+    const numArg = args.find(a => /^\d+$/.test(a));
+    const amount = parseInt(numArg, 10);
+
+    if (!amount || amount < MIN_BET)
         return message.reply(`⚠️ Ugu yar **₿${MIN_BET}** ayaad sharadi kartaa.`);
     if (amount > MAX_BET)
         return message.reply(`⚠️ Ugu badan **₿${MAX_BET.toLocaleString()}** ayaad sharadi kartaa.`);
 
     checkEconUser(target.id);
 
-    if ((econData[challengerId].btc || 0) < amount)
-        return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿${fmt(econData[challengerId].btc || 0)}**`);
+    if ((econData[cId].btc || 0) < amount)
+        return message.reply(`⚠️ BTC kugu filna ma lihid. Wallet: **₿${fmt(econData[cId].btc || 0)}**`);
     if ((econData[target.id].btc || 0) < amount)
         return message.reply(`⚠️ **${target.username}** BTC kugu filan ma laha sharadkan.`);
-
-    if (pendingChallenges.has(target.id))
-        return message.reply(`⚠️ **${target.username}** hore ayuu challenge u haystaa. Sug.`);
+    if (pending.has(target.id))
+        return message.reply(`⚠️ **${target.username}** challenge kale ayuu haystaa. Sug.`);
 
     const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId(`minno_accept_${challengerId}_${target.id}_${amount}`).setLabel('✅ Aqbal').setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId(`minno_decline_${challengerId}_${target.id}`).setLabel('❌ Diid').setStyle(ButtonStyle.Danger),
+        new ButtonBuilder()
+            .setCustomId(`minno_accept_${cId}_${target.id}_${amount}`)
+            .setLabel('✅ Aqbal')
+            .setStyle(ButtonStyle.Success),
+        new ButtonBuilder()
+            .setCustomId(`minno_decline_${cId}_${target.id}`)
+            .setLabel('❌ Diid')
+            .setStyle(ButtonStyle.Danger),
     );
 
-    const challengeMsg = await message.reply({
+    const msg = await message.reply({
         content: `${target}`,
         embeds: [new EmbedBuilder()
             .setTitle('🎲 Minno Challenge!')
             .setColor('#f39c12')
             .setDescription(
                 `**${message.author.username}** wuxuu kugu sharaday **₿${fmt(amount)}**!\n\n` +
-                `🪙 Coinflip 50/50 — kii guulaystaa wuxuu qaataa **₿${fmt(amount * 2)}**.\n\n` +
-                `⏳ ${CHALLENGE_TIMEOUT_MS / 1000} seconds kugu jawaab.`
+                `🪙 Coinflip 50/50 — kii guulaystaa wuxuu qaataa **₿${fmt(amount * 2)}**\n\n` +
+                `⏳ ${CHALLENGE_TIMEOUT / 1000}s gudahood jawaab.`
             )],
         components: [row],
     });
 
-    pendingChallenges.set(target.id, {
-        challengerId, amount,
-        messageId: challengeMsg.id, channelId: message.channel.id,
-    });
+    pending.set(target.id, { challengerId: cId, amount, msgId: msg.id });
 
     setTimeout(async () => {
-        if (pendingChallenges.has(target.id) && pendingChallenges.get(target.id).messageId === challengeMsg.id) {
-            pendingChallenges.delete(target.id);
-            await challengeMsg.edit({
+        const p = pending.get(target.id);
+        if (p && p.msgId === msg.id) {
+            pending.delete(target.id);
+            await msg.edit({
                 embeds: [new EmbedBuilder()
-                    .setTitle('⏰ Minno Challenge — Waqtigu wuu dhammaaday')
+                    .setTitle('⏰ Minno — Waqtigu wuu dhammaaday')
                     .setColor('#7f8c8d')
-                    .setDescription(`**${target.username}** kama jawaabin sharadka.`)],
+                    .setDescription(`**${target.username}** kama jawaabin.`)],
                 components: [],
             }).catch(() => {});
         }
-    }, CHALLENGE_TIMEOUT_MS);
-};
+    }, CHALLENGE_TIMEOUT);
+}
 
+// ── Accept button ─────────────────────────────────────────────────────
 async function handleMinnoAccept(interaction) {
-    const [, , challengerId, targetId, amountStr] = interaction.customId.split('_');
-    const amount = parseInt(amountStr, 10);
+    const parts = interaction.customId.split('_');
+    // format: minno_accept_<cId>_<tId>_<amount>
+    const cId    = parts[2];
+    const tId    = parts[3];
+    const amount = parseInt(parts[4], 10);
 
-    if (interaction.user.id !== targetId) {
+    if (interaction.user.id !== tId)
         return interaction.reply({ content: '⚠️ Adiga kuuma ahan challenge-kan.', flags: 64 });
-    }
 
-    const pending = pendingChallenges.get(targetId);
-    if (!pending || pending.challengerId !== challengerId) {
-        return interaction.reply({ content: '⚠️ Challenge-kan waa dhacay.', flags: 64 });
-    }
-    pendingChallenges.delete(targetId);
+    const p = pending.get(tId);
+    if (!p || p.challengerId !== cId)
+        return interaction.reply({ content: '⚠️ Challenge-kan waa dhacay ama wuu xidmay.', flags: 64 });
 
-    checkUser(challengerId); checkUser(targetId);
-    checkEconUser(challengerId); checkEconUser(targetId);
+    pending.delete(tId);
 
-    if ((econData[challengerId].btc || 0) < amount || (econData[targetId].btc || 0) < amount) {
+    checkUser(cId); checkUser(tId);
+    checkEconUser(cId); checkEconUser(tId);
+
+    if ((econData[cId].btc || 0) < amount || (econData[tId].btc || 0) < amount) {
         return interaction.update({
-            embeds: [new EmbedBuilder().setTitle('⚠️ BTC kugu filna ma jiro').setColor('#e74c3c')
-                .setDescription('Mid ka mid ah labada qof BTC kugu filan ma haysto hadda.')],
+            embeds: [new EmbedBuilder()
+                .setTitle('⚠️ BTC kugu filna ma jiro')
+                .setColor('#e74c3c')
+                .setDescription('Mid ka mid ah labada qof BTC kugu filan ma haysto.')],
             components: [],
         }).catch(() => {});
     }
@@ -126,34 +133,41 @@ async function handleMinnoAccept(interaction) {
     await interaction.deferUpdate().catch(() => {});
 
     // 50/50 coinflip
-    const challengerWins = Math.random() < 0.5;
-    const winnerId  = challengerWins ? challengerId : targetId;
-    const loserId   = challengerWins ? targetId : challengerId;
-    const winnerName = challengerWins ? interaction.message.mentions?.users?.first()?.username : interaction.user.username;
+    const cWins   = Math.random() < 0.5;
+    const winnerId = cWins ? cId : tId;
+    const loserId  = cWins ? tId : cId;
 
-    econData[winnerId].btc = (econData[winnerId].btc || 0) - amount + (amount * 2);
+    // BTC: loser loses amount, winner gains amount (net)
+    econData[winnerId].btc = (econData[winnerId].btc || 0) + amount;
     econData[loserId].btc  = (econData[loserId].btc  || 0) - amount;
     saveEcon();
 
-    userData[winnerId].minnoWins   = (userData[winnerId].minnoWins   || 0) + 1;
-    userData[loserId].minnoLosses  = (userData[loserId].minnoLosses  || 0) + 1;
+    // Wins tracking
+    checkUser(winnerId); checkUser(loserId);
+    userData[winnerId].minnoWins  = (userData[winnerId].minnoWins  || 0) + 1;
+    userData[loserId].minnoLosses = (userData[loserId].minnoLosses || 0) + 1;
 
-    const oldLevel = getMinnoLevel((userData[winnerId].minnoWins || 1) - 1);
-    const newLevel = getMinnoLevel(userData[winnerId].minnoWins || 1);
-    const leveledUp = newLevel > oldLevel;
-
+    const prevLevel = getMinnoLevel(userData[winnerId].minnoWins - 1);
+    const newLevel  = getMinnoLevel(userData[winnerId].minnoWins);
+    const leveledUp = newLevel > prevLevel;
     saveData();
 
-    let winnerUser, loserUser;
-    try { winnerUser = await interaction.client.users.fetch(winnerId); } catch {}
-    try { loserUser  = await interaction.client.users.fetch(loserId); } catch {}
+    let wUser, lUser;
+    try { wUser = await interaction.client.users.fetch(winnerId); } catch {}
+    try { lUser = await interaction.client.users.fetch(loserId);  } catch {}
+
+    const wName = wUser?.globalName || wUser?.username || 'Winner';
+    const lName = lUser?.globalName || lUser?.username || 'Loser';
+    const wBal  = fmt(econData[winnerId].btc || 0);
+    const lBal  = fmt(econData[loserId].btc  || 0);
 
     const desc =
-        `🪙 **${winnerUser?.username || 'Winner'}** ayaa guulaystay!\n\n` +
-        `💰 **${winnerUser?.username}** wuxuu heshay: **₿${fmt(amount * 2)}**\n` +
-        `📉 **${loserUser?.username}** wuxuu lumiyay: **₿${fmt(amount)}**\n\n` +
-        `🏆 Minno Wins: **${userData[winnerId].minnoWins}** (${userData[winnerId].minnoWins % minnoWinsNeeded()}/${minnoWinsNeeded()} → Level ${newLevel + 1})` +
-        (leveledUp ? `\n\n🎉 **LEVEL UP!** ${winnerUser?.username} hadda waa **Minno Level ${newLevel}**!` : '');
+        `🪙 **${wName}** ayaa guulaystay!\n\n` +
+        `💰 **${wName}** +₿${fmt(amount)} → Wallet: ₿${wBal}\n` +
+        `📉 **${lName}** -₿${fmt(amount)} → Wallet: ₿${lBal}\n\n` +
+        `🏆 Minno Wins: **${userData[winnerId].minnoWins}** ` +
+        `(${userData[winnerId].minnoWins % WINS_PER_LEVEL}/${WINS_PER_LEVEL} → Level ${newLevel})` +
+        (leveledUp ? `\n\n🎉 **LEVEL UP! ${wName} waa Minno Level ${newLevel}!**` : '');
 
     return interaction.editReply({
         content: '',
@@ -165,20 +179,30 @@ async function handleMinnoAccept(interaction) {
     }).catch(() => {});
 }
 
+// ── Decline button ────────────────────────────────────────────────────
 async function handleMinnoDecline(interaction) {
-    const [, , challengerId, targetId] = interaction.customId.split('_');
-    if (interaction.user.id !== targetId) {
+    const parts = interaction.customId.split('_');
+    const cId = parts[2];
+    const tId = parts[3];
+
+    if (interaction.user.id !== tId)
         return interaction.reply({ content: '⚠️ Adiga kuuma ahan challenge-kan.', flags: 64 });
-    }
-    pendingChallenges.delete(targetId);
+
+    pending.delete(tId);
+
     return interaction.update({
-        embeds: [new EmbedBuilder().setTitle('❌ Minno Challenge — La Diiday').setColor('#e74c3c')
-            .setDescription(`<@${targetId}> wuu diiday sharadka.`)],
+        embeds: [new EmbedBuilder()
+            .setTitle('❌ Minno — La Diiday')
+            .setColor('#e74c3c')
+            .setDescription(`<@${tId}> wuu diiday sharadka.`)],
         components: [],
     }).catch(() => {});
 }
 
-module.exports.handleMinnoAccept  = handleMinnoAccept;
-module.exports.handleMinnoDecline = handleMinnoDecline;
-module.exports.getMinnoLevel      = getMinnoLevel;
-module.exports.minnoWinsNeeded    = minnoWinsNeeded;
+module.exports = {
+    minnoCmd,
+    handleMinnoAccept,
+    handleMinnoDecline,
+    getMinnoLevel,
+    minnoWinsNeeded,
+};
