@@ -3,7 +3,8 @@
 // =====================================================================
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { userData, checkUser } = require('../../src/store');
+const { userData, saveData } = require('../../src/store');
+const { checkUser } = require('../../src/utils/helpers');
 const { econData, checkEconUser, saveEcon } = require('../../src/economy/econStore');
 const { fmt } = require('../../src/utils/helpers');
 
@@ -42,7 +43,8 @@ module.exports = async function minnoCmd(message, args) {
     if (target.bot)
         return message.reply('⚠️ Bot-ka kuma sharadayn kartid!');
 
-    const amount = parseInt(args.find(a => !a.startsWith('<@')) || args[1], 10);
+    // args: ['@mention', '500'] or ['<@123>', '500']
+    const amount = parseInt(args.filter(a => !a.startsWith('<@'))[0], 10);
     if (!amount || isNaN(amount) || amount < MIN_BET)
         return message.reply(`⚠️ Ugu yar **₿${MIN_BET}** ayaad sharadi kartaa.`);
     if (amount > MAX_BET)
@@ -139,7 +141,6 @@ async function handleMinnoAccept(interaction) {
     const newLevel = getMinnoLevel(userData[winnerId].minnoWins || 1);
     const leveledUp = newLevel > oldLevel;
 
-    const { saveData } = require('../../src/store');
     saveData();
 
     let winnerUser, loserUser;
