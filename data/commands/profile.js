@@ -101,34 +101,23 @@ module.exports = async function profileCommand(message) {
         relTxt = `💕 **Partner:** ${pName} ❤️ ${displayName} · 📅 ${days} Days · ${ringTxt}`;
     }
 
-    // Minno level
-    const { getMinnoLevel, minnoWinsNeeded } = require('./minno');
-    const minnoWins  = data.minnoWins || 0;
-    const minnoLevel = getMinnoLevel(minnoWins);
-    const minnoProg  = minnoWins % minnoWinsNeeded();
-
     const desc =
         `# 👤 ${displayName}${titlePart}\n` +
         `\n` +
         `${tier.emoji} **${tier.name} Tier**  •  🧠 **IQ:** ${data.iq}  •  📈 **Level:** ${level}\n` +
-        `\`${progressBar(levelPct)}\` ${levelPct}%  *(${currentLevelIq}/${LEVEL_STEP} IQ → Level ${level + 1}, ${nextLevelNeed} IQ hadhay)*\n` +
-        (needed > 0 ? `_${needed} IQ → tier-ka xiga_\n` : `_MAX TIER_\n`) +
+        `\`${progressBar(levelPct)}\` ${levelPct}%  *(${currentLevelIq}/${LEVEL_STEP} → Lvl ${level + 1})*\n` +
         `\n` +
         `🏆 **Rank:** #${rank ?? '—'} / ${total}\n` +
         `💰 **BTC:** ₿${(econ.btc || 0).toLocaleString()}\n` +
         `🎮 **Games:** ${totalGames}\n` +
         `⚔️ **Duel Wins:** ${s.duelWins || 0}\n` +
         `🎲 **Flips:** ${s.flipsPlayed || 0}\n` +
-        `🎲 **Minno Level:** ${minnoLevel} (${minnoWins} guul — ${minnoProg}/${minnoWinsNeeded()})\n` +
         `📋 **Missions:** ${s.missionsCompleted || 0}\n` +
         `🔥 **Streak:** ${econ.streak || 0} days\n` +
         `\n` +
         `${relTxt}\n` +
         `\n` +
-
         `🏦 **Bank:** ${bankTxt}\n` +
-        `\n` +
-        `🖼️ **Frame:** ${frameTxt}\n` +
         `🏅 **Badges:** ${badgeStr}` +
         (boostLines.length ? `\n⚡ **Boosters:** ${boostLines.join(' • ')}` : '');
 
