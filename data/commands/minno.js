@@ -26,10 +26,10 @@ function buildResultEmbed(winnerId, loserId, amount, leveledUp, newLevel, econDa
     const prog = wins % WINS_PER_LEVEL;
 
     return new EmbedBuilder()
-        .setTitle('🎲 Minno — Natiijada!')
+        .setTitle('⭕ 💣 Minno — Natiijada!')
         .setColor(leveledUp ? '#f1c40f' : '#2ecc71')
         .setDescription(
-            `🪙 **${wName}** ayaa guulaystay!\n\n` +
+            `💣 **${wName}** ayaa bomb-ka qaatay — GUUL!\n\n` +
             `💰 **${wName}** +₿${fmt(amount)} → Wallet: ₿${wBal}\n` +
             `📉 **${lName}** -₿${fmt(amount)} → Wallet: ₿${lBal}\n\n` +
             `🏆 Minno Wins: **${wins}** (${prog}/${WINS_PER_LEVEL} → Level ${newLevel})` +
@@ -67,14 +67,14 @@ async function minnoCmd(message, args) {
     // No args → help
     if (!numArg) {
         return message.reply({ embeds: [new EmbedBuilder()
-            .setTitle('🎲 Minno — Coinflip')
+            .setTitle('⭕ 💣 Minno')
             .setColor('#9b59b6')
             .setDescription(
                 '**Qaabka:**\n' +
                 '`?minno <amount>` — Kaligaa vs Bot\n' +
                 '`?minno @user <amount>` — Challenge qof kale\n\n' +
-                '🪙 50/50 coinflip — kii guulaystaa wuxuu qaataa BTC-da laba jibaaran.\n' +
-                `🏆 **${WINS_PER_LEVEL} guul = Minno Level Up**\n\n` +
+                '💣 50/50 bomb game — kii guulaystaa wuxuu qaataa BTC-da laba jibaaran.\n' +
+                `⭕ **${WINS_PER_LEVEL} guul = Minno Level Up**\n\n` +
                 '**Tusaale:**\n`?minno 500`\n`?minno @Cali 500`'
             )] });
     }
@@ -105,11 +105,11 @@ async function minnoCmd(message, args) {
             const wins = userData[cId].minnoWins;
 
             return message.reply({ embeds: [new EmbedBuilder()
-                .setTitle('🎲 Minno vs Bot — GUUL! ✅')
+                .setTitle('⭕ Minno — GUUL! ✅')
                 .setColor(lvlUp ? '#f1c40f' : '#2ecc71')
                 .setDescription(
-                    `🪙 Gacantaada ayaa soo baxday!\n\n` +
-                    `💰 +₿${fmt(amount)} → Wallet: **₿${fmt(econData[cId].btc || 0)}**\n\n` +
+                    `💣 Bomb-ka gacantaada ayay ku jirtay!\n\n` +
+                    `⭕ +₿${fmt(amount)} → Wallet: **₿${fmt(econData[cId].btc || 0)}**\n\n` +
                     `🏆 Minno Wins: **${wins}** (${wins % WINS_PER_LEVEL}/${WINS_PER_LEVEL} → Level ${newLvl})` +
                     (lvlUp ? `\n\n🎉 **LEVEL UP! Waa Minno Level ${newLvl}!**` : '')
                 )] });
@@ -121,11 +121,11 @@ async function minnoCmd(message, args) {
             saveData();
 
             return message.reply({ embeds: [new EmbedBuilder()
-                .setTitle('🎲 Minno vs Bot — GUUL-DARRO! ❌')
+                .setTitle('⭕ Minno — GUUL-DARRO! ❌')
                 .setColor('#e74c3c')
                 .setDescription(
-                    `🪙 Bot-ka ayaa guulaystay!\n\n` +
-                    `📉 -₿${fmt(amount)} → Wallet: **₿${fmt(econData[cId].btc || 0)}**`
+                    `💣 Bomb-ka bot-ka ayuu qaatay!\n\n` +
+                    `⭕ -₿${fmt(amount)} → Wallet: **₿${fmt(econData[cId].btc || 0)}**`
                 )] });
         }
     }
@@ -157,11 +157,11 @@ async function minnoCmd(message, args) {
     const msg = await message.reply({
         content: `${target}`,
         embeds: [new EmbedBuilder()
-            .setTitle('🎲 Minno Challenge!')
+            .setTitle('⭕ 💣 Minno Challenge!')
             .setColor('#f39c12')
             .setDescription(
                 `**${message.author.username}** wuxuu kugu sharaday **₿${fmt(amount)}**!\n\n` +
-                `🪙 50/50 coinflip — kii guulaystaa wuxuu qaataa **₿${fmt(amount * 2)}**\n\n` +
+                `💣 50/50 — kii guulaystaa bomb-ka wuxuu qaataa **₿${fmt(amount * 2)}**\n\n` +
                 `⏳ ${CHALLENGE_TIMEOUT / 1000}s gudahood jawaab.`
             )],
         components: [row],
