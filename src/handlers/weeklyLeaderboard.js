@@ -182,21 +182,6 @@ function getNextLeaderboardTime() {
 }
 
 module.exports = function setupWeeklyLeaderboard(client) {
-    function scheduleNext() {
-        const nextMs  = getNextLeaderboardTime();
-        const delayMs = Math.max(0, nextMs - Date.now());
-        const days    = Math.floor(delayMs / 86400000);
-        const hours   = Math.floor((delayMs % 86400000) / 3600000);
-        console.log(`[WeeklyLB] Next: 19:00 EAT (~${days}d ${hours}h)`);
-
-        setTimeout(async () => {
-            await sendLeaderboard(client);
-            setInterval(async () => {
-                await sendLeaderboard(client);
-            }, WEEK_MS);
-        }, delayMs);
-    }
-
-    setTimeout(() => scheduleNext(), FIRST_TICK_MS);
-    console.log('[WeeklyLB] ✅ Weekly leaderboard scheduler started — Sunday 19:00 EAT');
+    // ⛔ Weekly leaderboard waa la joojiyay
+    console.log('[WeeklyLB] ⛔ Disabled');
 };
